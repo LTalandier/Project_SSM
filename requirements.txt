@@ -1,0 +1,6 @@
+# photonic_ssm package runtime: torch-only (verified by
+# tests/test_no_equalization_coupling.py::test_package_runtime_is_torch_only)
+torch>=2.0
+
+# test-only
+pytest>=7.0
