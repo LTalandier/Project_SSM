@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Experiment outputs (raw data stays out of git; results_log.md carries pointers)
+results/
+data/
+
+# Editor / OS
+.DS_Store
+*.swp
