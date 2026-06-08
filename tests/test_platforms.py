@@ -1,11 +1,10 @@
 # tests salvaged/extended from pnn-multilayer @ e2eec80 :
 #   tests/test_mrr_primitives.py::test_platform_fsr_consistency
 # Extended for Project_SSM: the two new SiN entries enter the
-# parameterized consistency test automatically; added qi_from_loss
-# cross-checks for the entries whose Qi is derived/literature-anchored.
-"""Platform-registry tests (S0.0 smoke-test deliverable (iii))."""
-
-import math
+# parameterized consistency test automatically; S0.1/F13.1 added the
+# loss<->Q self-consistency test alongside the FSR check.
+"""Platform-registry tests (S0.0 smoke-test deliverable (iii) +
+S0.1/F13.1 loss<->Q self-consistency)."""
 
 import pytest
 
@@ -14,6 +13,9 @@ from photonic_ssm.platforms import (
     fsr_consistency_error_GHz,
     get_platform,
     qi_from_loss,
+    loss_dB_per_cm_from_qi,
+    loss_q_consistency_error,
+    loss_q_ceiling_ok,
 )
 
 
@@ -58,21 +60,50 @@ def test_new_sin_entries_present():
     assert uhq.Qi / corner.Qi > 100
 
 
-def test_qi_from_loss_cross_checks():
-    """Qi <-> loss textbook relation backs the new entries:
+@pytest.mark.parametrize("platform_name", list(PLATFORM_REGISTRY))
+def test_loss_q_ceiling_invariant(platform_name):
+    """F13.1: the universal Q/loss invariant — intrinsic Q cannot exceed
+    the propagation-loss-limited ceiling Qi <= qi_from_loss(loss). Holds
+    for EVERY entry (loss-limited SiN sits on the ceiling; bend/coupling-
+    limited Si/InP sit below it)."""
+    p = PLATFORM_REGISTRY[platform_name]
+    assert loss_q_ceiling_ok(p), (
+        f"{platform_name}: Qi={p.Qi:.3e} exceeds loss ceiling "
+        f"{qi_from_loss(p.loss_dB_per_cm, p.n_g):.3e}")
 
-    - CORNERSTONE Qi is DERIVED from its loss (no published ring Q):
-      tabulated must match qi_from_loss to ~3%.
-    - damascene UHQ: published loss (0.01 dB/cm) and published Q (3e7)
-      must be mutually consistent within ~25% (1.0 dB/m <-> Qi~3.7e7).
-    """
-    corner = get_platform("SiN_CORNERSTONE_300")
-    qi_derived = qi_from_loss(corner.loss_dB_per_cm, corner.n_g)
-    assert abs(corner.Qi - qi_derived) / qi_derived < 0.03, (
-        f"CORNERSTONE tabulated Qi={corner.Qi:.3e} vs derived "
-        f"{qi_derived:.3e}")
 
-    uhq = get_platform("SiN_damascene_UHQ")
-    qi_derived = qi_from_loss(uhq.loss_dB_per_cm, uhq.n_g)
-    assert abs(uhq.Qi - qi_derived) / qi_derived < 0.25, (
-        f"UHQ tabulated Qi={uhq.Qi:.3e} vs loss-derived {qi_derived:.3e}")
+@pytest.mark.parametrize("platform_name", [
+    n for n, p in PLATFORM_REGISTRY.items() if p.q_basis in ("Qi", "loss")])
+def test_loss_q_mutually_consistent_for_derived_entries(platform_name):
+    """F13.1: where one of (Qi, loss) is primary and the other DERIVED
+    (q_basis in {Qi, loss} — the SiN entries), the two must be mutually
+    consistent (loss_q_consistency_error ~ 0, float round-off only)."""
+    p = PLATFORM_REGISTRY[platform_name]
+    err = loss_q_consistency_error(p)
+    assert err < 1e-3, (
+        f"{platform_name} (q_basis={p.q_basis}): Qi={p.Qi:.4e} vs "
+        f"loss-implied {qi_from_loss(p.loss_dB_per_cm, p.n_g):.4e}, "
+        f"rel err {err:.2e}")
+
+
+def test_AN800_q_loss_reconciled():
+    """F13.1 reconciliation: SiN_LIGENTEC_AN800 previously tabulated
+    Qi=2e6 AND 0.03 dB/cm, which disagree ~5.7x (0.03 dB/cm implies
+    Qi~1.14e7). Qi=2e6 is now the registered primary (foundry corner) and
+    loss is derived consistently (~0.172 dB/cm)."""
+    p = get_platform("SiN_LIGENTEC_AN800")
+    assert p.q_basis == "Qi" and p.Qi == 2e6
+    expected_loss = loss_dB_per_cm_from_qi(2e6, p.n_g)
+    assert abs(p.loss_dB_per_cm - expected_loss) < 1e-4
+    # the OLD value (0.03) would have implied a ~5.7x-too-high Qi
+    assert qi_from_loss(0.03, p.n_g) / p.Qi > 5.0
+
+
+def test_non_sin_entries_below_ceiling():
+    """The bend-/coupling-limited Si/InP entries (q_basis='independent')
+    sit strictly BELOW the propagation ceiling (Qi < qi_from_loss),
+    which is physical — only SiN is propagation-limited here."""
+    for name in ("Si_AIM_low_loss", "Si_NEC", "InP_IMEC_Generic"):
+        p = get_platform(name)
+        assert p.q_basis == "independent"
+        assert p.Qi < qi_from_loss(p.loss_dB_per_cm, p.n_g)

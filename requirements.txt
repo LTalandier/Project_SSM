@@ -4,3 +4,8 @@ torch>=2.0
 
 # test-only
 pytest>=7.0
+
+# analysis-only (the analysis/ scripts, NOT the package — kept out of
+# photonic_ssm/ so the torch-only package invariant holds). Used by
+# analysis/s0_1_pole_region.py to render the pole-region/B2/B3 figures.
+matplotlib>=3.5

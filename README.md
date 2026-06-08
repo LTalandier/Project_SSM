@@ -11,9 +11,18 @@ Multi-agent coordination state lives in `shared/` (see `CLAUDE.md`).
 
 ## Status
 
-**S0.0 complete** — repo skeleton + selective salvage (decision
-D-2026-06-05-1 → (a), Lucas 2026-06-08). The package contains the
-salvaged *periphery* only; the SSM core does not exist yet (S0.1+).
+**S0.1 complete** — the first *new* dynamical core: the temporal-CMT
+single-ring model + the coupled-ring → N-oscillator LinOSS forward model
+(`photonic_ssm/dynamics/`), the realizable pole region, and the
+scope-(B) deliverables (B1 actuation map, B2 backscatter bound, B3 κ_ext
+trade) under `docs/s0_1/`. The CW limit recovers the S0.0 static
+references (the gate). Both architecture constraints are honored in the
+new dynamical model (not just inherited). *Still NOT here:* the LinOSS
+digital baseline (S0.2), the dissipative substrate + ASE (S0.3), and the
+four estimators (S0.4).
+
+**S0.0** — repo skeleton + selective salvage (decision D-2026-06-05-1 →
+(a), Lucas 2026-06-08): the salvaged *periphery*.
 
 ## Layout: salvaged vs new
 
@@ -31,13 +40,23 @@ read-only upstream.
 | `photonic_ssm/estimators/spsa.py` | salvaged `adaptation/perturbation_gradient.py` | S0.4a SPSA + FD/autograd diagnostic + forward-pass accounting (bake-off primary-metric bookkeeping) |
 | `photonic_ssm/baselines/ridge_readout.py` | salvaged `equalization_mrr_rc.py` (readout only) | §5.3 reservoir-readout baseline |
 | `photonic_ssm/runner/` | pattern-salvaged `sweep_phase4a_mrr1_ringbank.py` + `evaluate.py` JSONL | resume-safe pre-registered-grid sweep scaffold |
-| `tests/` | ported + extended from `tests/test_mrr_primitives.py` et al. | 60 tests, all passing |
+| `tests/` | ported + extended from `tests/test_mrr_primitives.py` et al. | 99 tests, all passing |
 
-**NOT here (new code, S0.1+):** the temporal-CMT dynamical ring model
-(pole-as-recurrence), the LinOSS/D-LinOSS layer + oscillator↔ring
-mapping, the S0.3 integrated substrate (incl. per-round-trip ASE
-accumulation), PAT, the recurrent adjoint, RHEL + the concrete χ³-FWM
-echo sub-model, and the bake-off evaluator/protocol.
+### New in S0.1 (the dynamical core — not salvage)
+
+| Path | Role |
+|---|---|
+| `photonic_ssm/dynamics/single_ring.py` | temporal-CMT single ring; pole = recurrence; CW transfers (the gate's reference) |
+| `photonic_ssm/dynamics/coupled_rings.py` | `CoupledRingLinOSS` N-oscillator forward model; `a_j=-e^{α_j}+iβ_j`; (3a)/(3b) honored; ZOH matrix-exp; checkpointed unroll |
+| `photonic_ssm/dynamics/pole_region.py` | loss/gain→\|λ\| memory bound, κ_ext trade (B3), backscatter crossover (B2) |
+| `analysis/s0_1_pole_region.py` | renders pole-region/B2/B3 figures + data → `results/s0_1/` (matplotlib; outside the package) |
+| `docs/s0_1/*.md` | mapping notes + B1 actuation map + B2 backscatter bound + B3 κ_ext trade (feed the Supervisor's write-up, PR-2, PR-4) |
+
+**NOT here (new code, S0.2+):** the LinOSS/D-LinOSS *digital* baseline
+layer (S0.2), the S0.3 integrated dissipative substrate (incl.
+per-round-trip ASE accumulation + the optional B2 splitting knob), PAT,
+the recurrent adjoint, RHEL + the concrete χ³-FWM echo sub-model, and the
+bake-off evaluator/protocol.
 
 ## The two architecture constraints (binding on all S0.1+ core code)
 
