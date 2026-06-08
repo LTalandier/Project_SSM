@@ -72,11 +72,16 @@ offline-deploy and reservoir baselines.
 
 ## Codebase plan (Stage 0)
 
-**New project = new repository** (do not modify previous projects). The Executor forks the relevant
-pieces from `pnn-multilayer` — now *more* on-point under v0.5, since SiN relies on trench-isolated
-thermo-optic tuning and SPSA's crosstalk-robustness, matching that project's thermal-crosstalk and
-perturbation-tolerance findings:
-- ring / MRR forward models; differentiable + batched training engine; gain/SOA + crosstalk tooling.
+**New project = new repository** (do not modify previous projects). The Executor **selectively salvages**
+(copy + adapt with provenance headers — *not* a git fork) the **estimator/infrastructure layer** of
+`pnn-multilayer`, on-point under v0.5 (SiN relies on trench-isolated thermo-optic tuning + SPSA's
+crosstalk-robustness — that project's thermal-crosstalk + perturbation-tolerance findings). **The S0.0a
+recon (`shared/tooling_recon.md`) overturned the original assumption:** `pnn-multilayer`'s ring/MRR code
+is **static/CW transfer functions** and its training engine is **structurally MZI-specific** — *neither
+is liftable*, so the dynamical SSM core is new code regardless.
+- **Salvaged (7-asset manifest, S0.0 ✅):** SPSA + forward-pass accounting; gain/ASE functions; the
+  rate-equation dynamic-gain SOA (autograd-checkpointed); the SiN platform registry; static Lorentzians
+  (as CW-limit *test references*) + drift; ridge readout (the reservoir baseline); the sweep/JSONL runner.
 
 New Stage-0 code (Executor builds, per roadmap): the LinOSS/D-LinOSS oscillator + coupled-ring
 realization; the **shared dissipative ring substrate** (finite $Q$, gain saturation, ASE); the **four

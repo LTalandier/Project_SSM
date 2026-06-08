@@ -6,6 +6,44 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-08 (later still) — Lucas signed off ("accept all, scope (B) blessed"); roadmap v3 issued; S0.1 ACTIVE
+
+Folded the entire Critic review into **`stage0_roadmap.md` v3** (changelog block at top maps each phase
+edit to its finding) and fixed the stale "fork ring model + training engine" line in **CLAUDE.md** (F17).
+`preregistration.md` is adopted — 14 entries, structure locked, all UNSET, freezing per-phase. **S0.1 is
+ACTIVE** (`task_queue.md`) with the scope-(B) deliverables: the dynamical temporal-CMT core + LinOSS
+forward model + pole region, the trainable-parameter/actuation map (B1, → PR-2 + the white-space wording),
+the literature-sourced backscatter/mode-splitting bound (B2/F19), the memory-vs-readout-SNR
+$\kappa_\text{ext}$ trade (B3, → PR-4), and the registry Q/loss self-consistency fix (F13.1). Role
+boundary held: Executor builds the model + plots + data; **I** write the mapping result + white-space
+sentence from them.
+
+**Next Supervisor actions:** (1) when S0.1 reports → the Critic reviews S0.1 results before S0.2 (gate
+model); (2) write the mapping result; (3) spec S0.2 — which freezes PR-1 (Gate-i margin), PR-2 (bake-off
+task + architecture + partition), and PR-10 (S0.7-lite, due *before* the task choice), all to Lucas first.
+The standing per-phase pre-registration touchpoints are tracked in `escalate_to_human.md`.
+
+## 2026-06-08 (later) — Both parallel tracks back: S0.0 DONE (green), Critic APPROVE-WITH-EDITS
+
+S0.0 closed clean — all gates green (60/60 tests; SPSA FD-vs-autograd anchor RMS 1.1e-7; both architecture
+constraints enforced by tests; operating $Q$ correctly left unchosen). Honest flags are all the right
+ones; notably the Executor independently surfaced the same `SiN_LIGENTEC_AN800` Q/loss inconsistency the
+Critic re-derived in F13.1 — two sessions, one defect → real.
+
+Critic filed **APPROVE-WITH-EDITS** (1 CRITICAL · 9 HIGH · 11 MEDIUM · 1 LOW). I concur **in full** — a
+model review; no phase moves; every defect is a pre-registration entry or a text edit. Load-bearing:
+**F7** (fairness contract — twin==substrate makes PAT trivially win), **F10.1** (Gate-ii corner case lets
+a failed PAT/SPSA still walk onto hardware), **F2** (score vs the BPTT-on-substrate ceiling), **F12** (the
+pre-registration ledger).
+
+**Actioned now (decision-free):** S0.0 → DONE in `task_queue`; created `shared/preregistration.md` (the
+F12 ledger, 14 entries, all UNSET); banner on the roadmap flagging the v3 fold + the F17 stale-S0.0 text;
+escalation updated with the decision surface. **Held for Lucas** (`escalate_to_human.md` E-2026-06-05-1):
+accept-in-full sign-off; the consequential gate/metric/$Q$ framings; the F2/F13/F19 expansion of S0.1's
+scope. **Roadmap v3 + the CLAUDE.md "Codebase plan" fix (F17) happen in one pass once Lucas signs off** —
+deliberately not front-running his adjudication of a CRITICAL methodology finding by silently rewriting
+the gates.
+
 ## 2026-06-08 — Rulings in; S0.0 ACTIVE; Critic dispatched on the roadmap (parallel)
 
 Evaluated the S0.0a recon (`tooling_recon.md`) — high quality; its central correction stands: the

@@ -8,11 +8,85 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.0: Repo init + selective salvage + smoke test
+## 🟢 ACTIVE — S0.1: Oscillator↔SiN-ring mapping + realizable pole region
 
 **Assigned:** 2026-06-08
 **Supervisor:** Claude Opus 4.8
 **Status:** ACTIVE
+**Roadmap:** `stage0_roadmap.md` v3 §S0.1 (scope (B) Lucas-blessed 2026-06-08). **Prereqs:**
+`photonic-ssm-proposal-v0_5.md` §3 (mapping) + §4 (pole region); the salvaged `static_rings.py` (the
+**CW-limit reference** — S0.0); `preregistration.md` (this phase *feeds* **PR-2** task-sizing and **PR-4**
+$Q$/$\kappa_\text{ext}$ — it does **not** freeze them); `results_log.md` (S0.0).
+
+### Goal
+Build the **first new dynamical core**: the temporal-CMT single-ring model and the coupled-ring →
+$N$-oscillator LinOSS forward model (the recon established this is new code — `pnn-multilayer`'s ring code
+is static/CW). Bound the realizable pole region, and deliver the three scope-(B) results that the headline
+claim and the downstream pre-registration depend on. **This is simulation + model-building + a literature-
+sourced physics bound; the formal mapping write-up + white-space wording are the Supervisor's** (role
+boundary) — you produce the verified model, the plots, and the data/tables those will cite.
+
+### Deliverables
+1. **Dynamical single-ring temporal-CMT model** — $\dot a = (-\kappa_\text{tot}+i\Delta\omega)\,a +
+   \sqrt{\kappa_\text{ext}}\,s_\text{in}(t)$, pole $s=-\kappa_\text{tot}+i\omega_\text{res}$ (with
+   $\kappa_\text{tot}=\kappa_i+\kappa_\text{ext}$). **Not** the salvaged static transfer function. Verify
+   the **CW limit recovers the S0.0 salvaged Lorentzian + the analytic add-drop reference** within a
+   stated tolerance (this is the S0.1 gate).
+2. **Coupled-ring → $N$-oscillator LinOSS forward model** — map to the eigenvalue form
+   $a_i=-e^{\alpha_i}+i\beta_i$; integrate in time. **Honor both architecture constraints (now roadmap
+   gates, F18): (3a)** gradients flow through the optical state (checkpointed unroll — the
+   `TrainingAwareDynamicSOAPerMode` pattern, no `no_grad`/detach); **(3b)** expose **full state
+   trajectories** in the API (adjoint/RHEL will need them at S0.4).
+3. **Realizable pole-region bound (§4)** — stability is free; memory is **loss-limited**; $\beta_i$ is
+   **FSR-bounded**; poles placed by drift-stable thermo-optic trim. Plot the pole region with the
+   **loss/gain → $|\lambda|$ (memory-length) relation** across the registry's $Q$ span (foundry
+   $2\times10^6$ → class-leading $3\times10^7$).
+4. **(B1) Trainable-parameter set + actuation map** — a table: which physical parameters are
+   in-situ-trainable and by what actuator — detunings $\beta_i$ (heaters); pole **real** parts (tunable
+   bus–ring coupling, e.g. MZI-assisted couplers, and/or per-ring gain); inter-ring coupling topology
+   (direct photonic-molecule vs bus-mediated). Flag the device-complexity cost of each. *(Load-bearing for
+   the white-space sentence — feeds PR-2; the Supervisor writes the claim wording from this.)*
+5. **(B2 / F19) Backscatter / CW–CCW mode-splitting bound** — literature-sourced: plug cited
+   surface-roughness backscatter splitting-rate figures into splitting-rate-vs-$\kappa_\text{tot}$ across
+   the registered $Q$ range; state **where "one ring = one complex pole" breaks down** (expected
+   negligible at foundry $Q\approx2\times10^6$, *not* at $\sim10^7$). **Recommend** whether S0.3 needs an
+   optional mode-splitting knob. Cite sources (this is the physics input; framing is Supervisor/S0.L).
+6. **(B3 / F13.3) Memory-vs-readout-SNR ($\kappa_\text{ext}$) trade** — derive/plot it: deep undercoupling
+   maximizes memory ($|\lambda|$) but collapses I/O residues + detector SNR. Show the realizable region as
+   a function of the $\kappa_\text{ext}$ policy. *(Feeds PR-4 — you characterize the trade; you do **not**
+   pick the operating point.)*
+7. **(F13.1) Registry Q/loss self-consistency fix** — each SiN entry must be internally consistent:
+   register one of $(\alpha, Q_i)$ as primary and **derive** the other ($Q_i=\omega n_g/(c\,\alpha)$); add
+   a **loss↔Q self-consistency test** alongside the existing FSR check; reconcile `SiN_LIGENTEC_AN800`
+   (currently $Q_i=2\times10^6$ *and* 0.03 dB/cm, which disagree ~5.7×). **Do NOT pick the operating $Q$**
+   — that is PR-4 at S0.3 (foundry-gated). Keep all registry entries; just make each self-consistent.
+
+### Key gates and questions
+- **Gate:** dynamical poles match a coupled-mode/transfer-function reference within a stated tolerance,
+  **and** the CW limit recovers the S0.0 static reference. Report the tolerance you pre-state.
+- Confirm (3a)/(3b) are honored in the new dynamical model (not just inherited from the salvaged layer) —
+  a test that a loss at time $T$ receives gradient through the ring state from an input at $t\ll T$.
+- B2: if the literature says splitting bites *within* the registered $Q$ range, say so loudly — it
+  threatens the core one-ring-one-pole abstraction and changes S0.3.
+- Flag anything that makes the §3 mapping less clean than the proposal assumes (e.g. dispersion, TPA/FCA
+  at the powers gain requires, thermal nonlinearity) → `decisions_needed.md`.
+
+### Deployment
+Local CPU; model-building + analysis + a focused literature pull for B2. Minutes-to-~1–2 days. No cloud.
+
+> **Next:** Executor stops at completion and reports to `results_log.md`. Per the gate model, the **Critic
+> reviews S0.1 results before S0.2 starts**. The Supervisor then writes the mapping result + white-space
+> wording, and specs S0.2 (which freezes PR-1/PR-2/PR-10).
+
+---
+
+---
+
+## ✅ DONE — S0.0: Repo init + selective salvage + smoke test
+
+**Assigned:** 2026-06-08 · **Closed:** 2026-06-08
+**Supervisor:** Claude Opus 4.8
+**Status:** ✅ COMPLETED 2026-06-08 — all S0.0 gates passed (7/7 assets ported + tested; SPSA anchor reproduced; both architecture constraints honored; smoke i–iii green). Results in `results_log.md`.
 **Rulings:** D-1 → **(a) selective salvage** (Lucas, 2026-06-08); D-2 → **`git init`** (Lucas, 2026-06-08).
 **Prereqs:** read `shared/tooling_recon.md` (**the salvage manifest, §4** — authoritative for this task);
 `shared/stage0_roadmap.md` (S0.0, S0.1, S0.3); `photonic-ssm-proposal-v0_5.md` §3. Reference repo
