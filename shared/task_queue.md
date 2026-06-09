@@ -8,11 +8,31 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.7L-1: S0.7-lite envelope (PR-10 🔒 FROZEN) + WS-F11/F12 rider
+## ⏸️ NO ACTIVE TASK — pipeline holds at the pre-S0.2 continuation gate
 
-**Assigned:** 2026-06-10
+Both gate inputs are in hand (PR-15 provisional PASS + S0.7-lite conditional positive). The
+go/no-go on S0.2–S0.5 is with Lucas (`escalate_to_human.md` **E-2026-06-10-3**). A Critic audit
+of the envelope is **commissioned** (spec: `critic_instructions_s07lite-envelope.md`; **Lucas
+launches** the Critic session — sessions are launched by Lucas, not spawned by the Supervisor).
+Next Executor task (S0.2 spec, if GO) will be posted here after the ruling.
+
+---
+
+## ✅ DONE — S0.7L-1: S0.7-lite envelope (PR-10 🔒 FROZEN) + WS-F11/F12 rider
+
+**Assigned:** 2026-06-10 · **Closed:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
-**Status:** ACTIVE
+**Status:** ✅ COMPLETED 2026-06-10 — Supervisor **ACCEPT**. All gates met: every number traces to a
+frozen PR-10 row (memo §1 table; the 4 excluded legacy anchors verified absent); all four
+corner×heater scenarios reported with full clearance matrices; explicit niche statement (memo §6);
+§10 clause checked — **does NOT fire** (16 OPT cells clear ≥1 named baseline). Supervisor
+spot-checked 5 cells by hand (conversion sums, control power, Brainwave/Jetson mapping, crossover
+rates) — all reproduce; the class-A negative survives even a P_π/2 duty-credit relaxation, so the
+"heater class is the binding constraint" finding is robust to convention. **Verdict: conditional
+POSITIVE, assumption-driven, not outreach-load-bearing.** Two flagged frozen-row readings (C3 trim
+in all scenarios; class-A fast-τ via §4 ref) + conventions C1–C8 → queued for Critic audit
+(verdict-neutral per Executor; audit confirms). Rider (WS-F11/F12) done, no verdict changes.
+Memo `docs/s0_7/s07_lite_envelope.md`; results in `results_log.md`; commit `e88fbeb`.
 **Source:** roadmap v3.1 §S0.7-lite (F1/F16) + **PR-10 — 🔒 FROZEN 2026-06-10** (`preregistration.md`:
 read the frozen block FIRST; **every load-bearing number in the envelope must trace to a frozen PR-10
 row** — if a needed number is missing, STOP and post to `decisions_needed.md`; do NOT source new

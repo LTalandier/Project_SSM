@@ -18,6 +18,49 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 🚦 E-2026-06-10-3 — THE PRE-S0.2 CONTINUATION GATE: one go/no-go on the bake-off (S0.2–S0.5)
+**Filed:** 2026-06-10 (Supervisor). Both gate inputs are now in hand. One decision: **authorize the
+four-method training bake-off (S0.2–S0.5), or stop/reframe.**
+
+**Input 1 — "is the claim still ours?" (PR-15 kill-search): provisional one-sided PASS.**
+80+ papers / 74 candidates across two independent searches; **0 fatal** under the rule you signed
+(PR-15.1). Wu is contained by the W1 claim wording you adopted; Zhao you resolved non-fatal from
+the figures; the three unread full-texts (NTT, Fisher, Shi) all carry documented non-fatal leans
+and are re-paced to the claim-wording freeze — not this gate. Caveat by design: a clean search
+proves absence of *found* priors, not absence of priors; the dated final sweep at S0.8 stands.
+
+**Input 2 — "is it worth building?" (S0.7-lite envelope on the numbers you froze): conditional
+POSITIVE.** The §10 escalation clause does **not** fire: 16 optimistic-corner cells clear at least
+one named digital baseline (up to **14.7×** vs the Microsoft Brainwave FPGA serving anchor), and
+the latency edge vs that class is ~10⁵ (tens of ns vs <4 ms). The niche: **GS/s streaming
+signal-processing, N=32–128 states, sub-µs latency**. Three honest conditions: (1) it exists
+**only with suspended (class-B, ~1 mW/π) heaters — which the named CORNERSTONE flow does not
+offer**; this is the principal Stage-1 fab condition, carried into PR-2/PR-4; (2) rate floor
+≈0.5 GS/s (at 0.1 GS/s everything loses, on energy and on ring memory); (3) the embedded-GPU
+*peak* FoM is never beaten — that comparison survives only via the registered peak≠sustained
+caveat. Labelled assumption-driven, NOT outreach-load-bearing. A **Critic audit of the envelope is
+commissioned** (spec: `critic_instructions_s07lite-envelope.md`) — launch the Critic session when
+you want; it reports to you. You can rule now or wait for it.
+
+**GO authorizes:** S0.2 (task + architecture pre-registration, PR-1/PR-2 incl. the W1 wording +
+readout pin), S0.3 (shared dissipative substrate, PR-4: operating Q + roughness knob, D-08-1),
+S0.4 (the four estimators incl. the RHEL echo sub-model), S0.5 (the bake-off). All local
+simulation — no fab, no outreach, no cloud spend without a separate escalation. Scale reminder:
+the "first" itself is only collectible at Stage 1+ (hardware); Stage 0 alone yields a methods
+paper.
+
+**NO-GO means:** stop at an envelope/methods-survey publication, or reframe the program now,
+before bake-off effort is sunk.
+
+**Supervisor recommendation: GO.** Both kill-shots cleared at the level Stage 0 can test them; the
+downside of GO is local simulation time only; the bake-off's methods value survives even if the
+§10 niche narrows further; and the strategic window is ~one publication cycle (the Wu group is
+active in exactly this space). Conditions attached: S0.2's task sized to the niche
+(equalization-class GS/s streaming, N≈32–128 — envelope memo §6); the heater-class condition
+stated in PR-2/PR-4 framing; Critic-audit findings folded in when they land.
+
+**→ Your move: "GO" / "GO, but wait for the Critic audit" / "NO-GO" / amendments.**
+
 ### 📥 E-2026-06-10-2 — Retrievals + the continuation gate (coming next)
 - **✅ Retrieval #1 RESOLVED (2026-06-10):** **Zhao LPR 2025 → NON-FATAL.** Lucas obtained figs. 1–2
   (archived in `docs/s0_L/primaries/`); feedforward MLP with bidirectional optical BP — rings are
@@ -28,8 +71,7 @@ Escalate (don't decide autonomously):
   non-fatal leans; needed before the PR-2/S0.8 wording freeze.
 - **Wu outreach:** held per your ruling ("don't send yet — maybe later"); draft + addresses in the
   session log when wanted. W1 is the adopted default claim meanwhile.
-- **Next decision to reach you:** the **pre-S0.2 continuation gate** — one go/no-go on the bake-off —
-  once S0.7L-1 (the envelope, now running under frozen PR-10) lands.
+- **Next decision to reach you:** → **landed as E-2026-06-10-3 (above)** — S0.7L-1 is complete.
 
 ---
 
