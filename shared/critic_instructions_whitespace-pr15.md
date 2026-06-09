@@ -47,3 +47,22 @@ Executor memo concluded.
 
 **Timing:** your blind phase (item 1) can start immediately; items 2–5 need the Executor memo. The
 pre-S0.2 continuation gate waits on your review (gate model).
+
+---
+
+## Part-2 addendum (Supervisor, 2026-06-09 — after both modality outputs landed)
+
+1. The Executor memo is in (`docs/s0_L/debt1_whitespace_search.md` + E-2026-06-09-4): Part 2 (spec
+   items 2 + 5) is **green-lit now**. Part 1 received — strong work; the WS-F1 hole is real and the
+   Supervisor has recommended Lucas sign your amendment (E-2026-06-09-5).
+2. **Merge the two candidate tables into one** (the gate's verdict table) and reconcile the
+   cross-modality asymmetries **both ways** (your Fisher 1987 ↔ their Wu / Milanizadeh / Zhao): state
+   *why* each modality missed what it missed — that diagnosis directly improves the S0.8 final-sweep
+   design.
+3. If/when Lucas signs **PR-15.1** (q4 + WS-F3 rider + WS-F5 taxonomy), **re-classify the merged table
+   under the amended rule** (keep your L/A dual-column convention). If he declines, return the verdict
+   under the frozen letter and say plainly what that verdict is worth.
+4. Highest-scrutiny items for the audit, from the Supervisor's read of E-09-4: the Wu q1 evidence
+   trail (is "U is never enumerated" actually exhaustive of paper + SI?); the Milanizadeh
+   q4-boundary call; any Executor "clear" verdict resting on an abstract.
+5. Your final gate verdict goes to **Lucas**, as before. The continuation gate waits on it.

@@ -22,6 +22,14 @@ results entry in `results_log.md`. **Not for the Supervisor to adjudicate** (PR-
 Lucas; rule frozen — no in-pipeline amendment); Supervisor action = reconcile scheduling (Critic
 Part-2 audit + PR-10/S0.7-lite) around the pending ruling. Executor stopped.
 
+**Supervisor (2026-06-09) — scheduling actioned; adjudication untouched (it is Lucas's).** S0.L-1
+accepted → DONE. Critic **Part 2 green-lit** (+ addendum in `critic_instructions_whitespace-pr15.md`:
+merge both candidate tables, reconcile the asymmetries both ways, re-classify under PR-15.1 once
+signed). Executor re-tasked to **S0.7L-0** (PR-10 assumption sourcing — the gate's other input advances
+while the ruling pends; envelope itself waits for the PR-10 freeze). Synthesis + recommendations on the
+four rulings (amendment / Wu / Böhm / retrievals): **E-2026-06-09-5**. Gate closes on: Lucas's rulings +
+Critic Part 2 + the lite envelope.
+
 ### D-2026-06-08-1 (parked) — SiN operating $Q$ for the substrate (pre-registration)
 **Raised by:** Supervisor (from the S0.0a recon). **Blocks:** nothing yet; **due at S0.2/S0.3.**
 The salvaged platform registry ships SiN `Qi=2×10⁶` (foundry-conservative corner), but the proposal

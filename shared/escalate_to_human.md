@@ -18,6 +18,55 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 🎯 E-2026-06-09-5 (Supervisor) — PR-15 synthesis: **four rulings needed**; recommendations attached; pipeline re-tasked around your ruling
+**Read this first; E-09-4 (Executor) + E-09-3 (Critic) below are the underlying modality reports.**
+
+**State.** Modality-1 sweep + blind adversarial pass both complete: **no confirmed FATAL**. The
+two-modality design worked — each pass found what the other missed (Executor: Wu, Milanizadeh, Zhao ↔
+Critic: Fisher 1987 + the criterion defect itself). The gate stays **OPEN**; nothing below was
+adjudicated in-pipeline, per the frozen disposition.
+
+**Your four rulings — Supervisor recommendation attached to each; adjudication is yours:**
+1. **PR-15.1 amendment** (q4 task-objective + weight-tied-recurrence rider + q3 taxonomy — Critic
+   WS-F1/F3/F5). **RECOMMEND: SIGN.** All three roles converged independently (the Critic derived it
+   blind; the Executor hit the same wall as its A3 boundary class; and it matches what the proposal
+   always meant — a *trained* SSM is task-training). Consequences: servo + laser-regime classes become
+   citable lineage; the claim sentence gains "**on a computational task**"; logged as a dated amendment
+   with v1 kept (supersession discipline); Critic Part 2 re-classifies the merged table under it.
+2. **A1 — Wu et al., eLight 5:7 (2025)** (potentially-fatal; q1 unresolved — trained voltage set U never
+   enumerated). **RECOMMEND: paths (a)+(b) in parallel.** (a) You send the author/code query now (their
+   data-availability statement invites it; this needs your name, not the pipeline's). (b) I draft
+   re-scoped wording variants at PR-2 regardless — the natural hedge **W1**: *first **continuous-time
+   dissipative-resonator** recurrence (pole positions + inter-resonator couplings) trained in situ by
+   gradient-based/-estimating methods on a computational task* — true under **both** Wu readings (their
+   routing MRRs are calibrate-once-static; the trained U is relay/mesh voltages, not resonator
+   poles/couplings), with Wu cited loudly as the nearest neighbor. The gate need not block on their
+   reply: it can close on "PASS-under-amendment + Wu carried as potentially-pre-empting + W1 hedge" if
+   you judge that sufficient — exactly the program-level call the gate exists for.
+3. **A2 — Böhm 2022** (hybrid-digital recurrence; found by both modalities). **RECOMMEND: adopt the
+   Critic's parameter-physicality qualifier** (trained params = physical/analog degrees of freedom of a
+   photonic recurrence; recurrent state carried photonically) **+ cite Böhm by name** as the hybrid
+   boundary case. Under it Böhm is non-fatal (its J_ij live as digital numbers in the in-loop FPGA).
+   Note: Wu does **not** die by this qualifier (its loop is analog O/E/O) — A1 stands or falls on
+   q1/W1, independently of this ruling.
+4. **A4 — retrievals (human-access asks):** **Zhao LPR 2025 is the priority** (Wiley-paywalled; title
+   claims "in-situ trained microring-based neural networks" with optical backprop physically updating
+   MRR parameters — must be read before any claim freezes; most MRR-NN work is feedforward weight
+   banks, but *verify, don't assume*). Also: NTT Compute-in-Wire ADI 2025, Fisher 1987, Shi LPR 2025.
+   Paths: library access / author email / ResearchGate request — these need a human identity.
+
+**Strategic note (Executor's, Supervisor-concurred):** the adjacent capability lines are converging on
+this result from several directions; if the claim survives adjudication, the window looks like **order
+one publication cycle**. That feeds your continuation calculus both ways — the first is worth less if
+it can't be defended long, and worth moving on fast if you want it.
+
+**Pipeline (Supervisor-actioned, decision-free):** S0.L-1 → **DONE** (accepted — protocol followed
+exactly: stopped, escalated, nothing adjudicated in-pipeline). Critic **Part 2 green-lit** (audit +
+merged verdict table; re-classification under PR-15.1 once you sign). Executor re-tasked to
+**S0.7L-0** (source the PR-10 assumption table with primaries → I draft PR-10 → you freeze → the lite
+envelope runs) so the gate's *other* input advances while you rule. **The gate closes on:** your
+rulings + Critic Part 2 + the lite envelope.
+
 ### ⚠ E-2026-06-09-4 (Executor) — PR-15 systematic sweep done: 0 FATAL confirmed, **1 potentially-FATAL AMBIGUOUS (Wu eLight 2025)** + boundary class + retrievals — adjudication needed
 **Filed 2026-06-09 by the Executor** (modality 1 — systematic sweep, written **before** reading the
 Critic's blind-pass entry below; cross-references added after). Memo:

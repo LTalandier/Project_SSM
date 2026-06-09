@@ -8,11 +8,62 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.L-1: White-space existence search (debt #1, PR-15 — front-loaded pre-S0.2)
+## 🟢 ACTIVE — S0.7L-0: PR-10 assumption sourcing (S0.7-lite, step 0 of 2)
 
 **Assigned:** 2026-06-09
 **Supervisor:** Claude Opus 4.8
 **Status:** ACTIVE
+**Source:** roadmap v3.1 §S0.7-lite (F1) + **PR-10 (⬜ UNSET — this task *feeds* the freeze; it does NOT
+set values)**. The pre-S0.2 continuation gate needs the lite envelope regardless of the pending PR-15
+rulings (E-2026-06-09-5) — this keeps the pipeline moving while Lucas adjudicates.
+
+### Goal
+Source the candidate assumption set for **PR-10** with primaries, so the Supervisor can draft the PR-10
+freeze ask for Lucas. **Sourcing only — do NOT run the envelope** (that is step 1, after the freeze;
+running it now would un-preregister PR-10).
+
+### Deliverables
+1. `docs/s0_7/pr10_assumption_sources.md` — a candidate table, every row primary-sourced (vendor
+   datasheet or measured paper, load-bearing number quoted):
+   - **E/O + O/E conversion energies** (modulator drive incl. driver; PD/TIA) at the relevant rates;
+   - **DAC/ADC** energy/sample + resolution (ENOB) at GS/s-class rates (published ADC-survey data +
+     ≥1 named vendor part);
+   - **named digital-baseline class + sources** (F16): tuned FPGA and/or embedded-GPU/ASIC
+     implementations of comparable streaming SSM/FIR/RNN workloads at matched accuracy — names + cited
+     perf/W, *not* an unoptimized GPU;
+   - **thermo-optic holding power** per heater (SiN, trench-isolated) + control-electronics overhead —
+     reuse pnn-multilayer numbers where primary-sourced (with provenance);
+   - **operating scale**: N rings, line rate, λ-plan consistent with S0.1's pole region (cite
+     `docs/s0_1/mapping_result.md` §4 numbers).
+2. Where sources disagree, give **bracketing values + both sources** (the freeze registers the bracket,
+   not a midpoint).
+3. Results entry in `results_log.md`.
+
+### Gates
+Every number primary-sourced + quoted; brackets where sources disagree; **no envelope arithmetic** (one
+illustrative sanity row allowed, labelled non-load-bearing).
+
+### Out of scope
+Running the envelope (step 1, post-freeze); the PR-15 re-classification (Critic Part 2); claim wording
+(PR-2, Supervisor); A4 retrievals (human-access asks — Lucas, E-2026-06-09-5).
+
+### Deployment
+Web + datasheet reading; 1–2 days; no compute spend.
+
+---
+
+## ✅ DONE — S0.L-1: White-space existence search (debt #1, PR-15 — front-loaded pre-S0.2)
+
+**Assigned:** 2026-06-09 · **Closed:** 2026-06-09
+**Supervisor:** Claude Opus 4.8
+**Status:** ✅ COMPLETED 2026-06-09 — sweep complete per the frozen rule: ~60 candidates / all 5 lanes /
+every non-clear verdict primary-quoted / reproducible trail. **0 FATAL confirmed**; 1 potentially-FATAL
+AMBIGUOUS (**Wu eLight 2025**, q1 unresolved) + boundary class (= Critic WS-F1, found by both
+modalities) + Böhm 2022 + 8 unreachable primaries — **all escalated with primaries, nothing adjudicated
+in-pipeline** (E-2026-06-09-4 / D-2026-06-09-2). Supervisor **ACCEPT**: protocol followed exactly; the
+cross-modality asymmetry (Executor found Wu/Milanizadeh/Zhao; blind pass found Fisher 1987 + the
+criterion defect) is the two-modality design working. PASS not issued — verdict assembly pends Lucas's
+four rulings (E-2026-06-09-5) + Critic Part 2.
 **Source:** D-2026-06-09-1 (Lucas-adopted 2026-06-09, "ok go") + **PR-15, 🔒 FROZEN — read its detail
 block in `preregistration.md` FIRST and apply it as written** (the kill-rule and lanes are frozen; do not
 re-derive or reinterpret them). Roadmap v3.1 §S0.L. This is a **literature task** — no simulation code.

@@ -6,6 +6,31 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-09 (night) — PR-15 both modalities in: 0 confirmed FATAL, 4 rulings to Lucas; S0.L-1 ACCEPTED; S0.7L-0 ACTIVE
+
+Both modality outputs landed within hours of dispatch. **The two-modality protocol earned its keep on
+day one:** the Executor's sweep found **Wu eLight 2025** (the one potentially-fatal candidate — q1
+unresolved), Milanizadeh, and Zhao LPR 2025 — none in the Critic's blind list; the Critic's blind pass
+found **Fisher 1987** and, more importantly, **the criterion defect itself** (WS-F1: no task-objective
+condition → the frozen letter is satisfied by cavity-servo and laser-regime literature nobody would
+call training). Both independently hit the same calibration-boundary wall — the strongest possible
+internal evidence the q4 amendment is right.
+
+**Supervisor positions (recommendations only; adjudication is Lucas's per the frozen disposition):**
+sign **PR-15.1** (q4 + WS-F3 weight-tied rider + WS-F5 taxonomy); on **Wu**, author-query + the **W1
+dissipative-resonator wording hedge** in parallel, gate not blocked on the reply; on **Böhm**, the
+parameter-physicality qualifier + cite-by-name; **Zhao LPR 2025 retrieval is the top human ask**. Full
+packet: **E-2026-06-09-5**.
+
+**Pipeline:** S0.L-1 ACCEPTED → DONE (protocol followed exactly — stopped, escalated, adjudicated
+nothing). Critic **Part 2 green-lit** with addendum (merge tables, reconcile asymmetries both ways,
+re-classify under PR-15.1 once signed; scrutiny list included). Executor → **S0.7L-0** (PR-10
+assumption sourcing; envelope waits for the freeze). **No PASS issued by anyone** — the gate closes on
+Lucas's rulings + Part 2 + the lite envelope. My next deliverables: PR-10 draft (from S0.7L-0 output) +
+the W1/W2 wording variants for PR-2.
+
+---
+
 ## 2026-06-09 (evening) — Lucas "ok go" → all three resolutions executed; S0.L-1 (PR-15 search) ACTIVE
 
 Lucas blessed D-08-2 + D-08-3 + D-09-1 in one word. Executed, in order:
