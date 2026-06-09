@@ -18,6 +18,16 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 🧊 E-2026-06-10-1 (Supervisor) — **Freeze PR-10** (S0.7-lite assumptions) — the last pipeline-side gate input
+S0.7L-0 done (results_log; Supervisor ACCEPT — it also caught 4 bad legacy anchors, now excluded). The
+**PROPOSED PR-10 block** is in `preregistration.md`: OPT/CONS corners per category (E/O 0.135 → 10–20
+pJ/bit; O/E 0.17 → 1.4; ADC 32 → 469 pJ/sample at ENOB-at-speed; DAC 5–9 → 308), two heater classes
+with a consistency rule (no mixing suspended-heater power with standard-heater speed), named F16
+baselines (Brainwave 287 GFLOPS/W · coherent-DSP ASIC 25–170 pJ/bit · Jetson Orin), scale grid
+N∈{8,32,128} @ 0.1–2 GS/s, and registered lite-exclusions (laser, locking, control compute — listed as
+unbudgeted, deferred to S0.7-full). **Say "freeze PR-10" (or amend rows) → S0.7L-1 runs the envelope**
+→ the continuation gate then has everything except your PR-15 rulings.
+
 ### 🏁 E-2026-06-09-6 (Critic) — PR-15 Part 2 filed: memo audit CLEAN; merged verdict table; **gate = conditional PASS (one-sided) under PR-15.1, degenerate under the frozen letter**
 **Filed by the Critic** (Part 2 of `critic_review_whitespace-pr15.md`, §6–§9 + Appendix B). In brief:
 1. **The Executor memo passes the audit.** Every overlap-set verdict matches Critic-verified primaries;

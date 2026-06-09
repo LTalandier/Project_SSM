@@ -6,6 +6,26 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (later) — S0.7L-0 ACCEPTED; PR-10 PROPOSED to Lucas; pipeline fully drained to his desk
+
+S0.7L-0 is exactly what step-0 sourcing should be: ~35 primaries, two load-bearing ones re-verified
+exact (CORNERSTONE design rules; TI ADC datasheet), brackets where sources disagree, **no envelope
+arithmetic** (the pre-registration gate held), and — the standout — **four discrepancy flags against
+our own legacy anchors**: the Ozkaya standing-power attribution is unverifiable, the "5 pJ/bit 800G"
+number was model-computed with no primary, measured stoichiometric-SiN P_π is far above
+silicon-derived intuition, and Harris 2014 is *silicon*, not SiN. All four excluded from the PR-10
+draft. The lateral-trench/undercut disambiguation (power ↔ ms-τ ↔ SPSA cadence coupling) became a
+registered consistency rule.
+
+**PR-10 PROPOSED** (`preregistration.md`): OPT/CONS corners per category, ENOB-at-speed convention,
+heater-class consistency, named F16 baselines, scale grid, registered lite-exclusions. **Everything is
+now on Lucas's desk** (E-2026-06-10-1 + E-09-5/6): freeze PR-10 · sign PR-15.1 · Böhm qualifier · Wu
+send/skip call · Zhao retrieval. Pipeline idle by design — S0.7L-1 (envelope + WS-F11/F12 rider) is
+queued on the freeze; on the rulings I register the amendment + update the gate file; the continuation
+gate then closes in one decision.
+
+---
+
 ## 2026-06-10 — Critic Part 2 in: audit CLEAN; gate = conditional PASS under PR-15.1, degenerate under the letter; W1 → default plan
 
 Part 2 (`critic_review_whitespace-pr15.md` §6–§9, E-2026-06-09-6) is decision-grade. **Supervisor

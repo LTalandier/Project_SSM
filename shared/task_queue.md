@@ -8,11 +8,26 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.7L-0: PR-10 assumption sourcing (S0.7-lite, step 0 of 2)
+## ⏸ QUEUED (next ACTIVE on the PR-10 freeze) — S0.7L-1: run the S0.7-lite envelope + WS-F11/F12 rider
 
-**Assigned:** 2026-06-09
+Waits on **Lucas freezing PR-10** (PROPOSED block in `preregistration.md`, 2026-06-10). Will be specced
+fully at activation. Scope preview: run the lite envelope at the frozen OPT/CONS corners over the
+registered scale grid; verdict per roadmap v3.1 semantics; **rider (decision-free, do first):** WS-F11
+(fix the S0.L-1 memo's self-undercount ≈74 rows / 80+ papers + the N28a pointer) + WS-F12 list check.
+
+---
+
+## ✅ DONE — S0.7L-0: PR-10 assumption sourcing (S0.7-lite, step 0 of 2)
+
+**Assigned:** 2026-06-09 · **Closed:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
-**Status:** ACTIVE
+**Status:** ✅ COMPLETED 2026-06-10 — all 5 categories primary-quoted (~35 primaries; 2 load-bearing
+ones Executor-re-verified exact); 5 freeze brackets; **4 discrepancy flags vs legacy anchors caught**
+(incl. Harris-2014-is-silicon and the unverifiable Ozkaya standing-power attribution — both excluded
+from PR-10); heater-class consistency identified as load-bearing (suspended power ↔ ms-τ ↔ SPSA
+cadence). **No envelope arithmetic** (gate held). Supervisor **ACCEPT** → **PR-10 PROPOSED block
+drafted** (`preregistration.md`) — awaiting Lucas freeze; then S0.7L-1 runs. Results in
+`results_log.md`; memo `docs/s0_7/pr10_assumption_sources.md`.
 **Source:** roadmap v3.1 §S0.7-lite (F1) + **PR-10 (⬜ UNSET — this task *feeds* the freeze; it does NOT
 set values)**. The pre-S0.2 continuation gate needs the lite envelope regardless of the pending PR-15
 rulings (E-2026-06-09-5) — this keeps the pipeline moving while Lucas adjudicates.
