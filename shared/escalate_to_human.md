@@ -18,7 +18,19 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-_No blocking escalation._ **Standing per-phase touchpoints** — pre-registered values come to Lucas before
+### E-2026-06-09-1 — Steer the two S0.1 architecture decisions (low-risk; Supervisor + Critic aligned)
+S0.1 done (gate passed); Critic reviewed → **APPROVE-WITH-EDITS** (`critic_review_s0-1-results.md`); S0.2
+can proceed after four decision-free edits (now ACTIVE as **S0.1.1**). **Your steer is needed on the two
+decisions** — both now carry *converged* Supervisor + Critic recommendations (`decisions_needed.md`):
+- **D-08-2 (mapping class):** simulate the **diagonal complex-pole SSM (S4D/DSS)**, with LinOSS as its
+  conjugate-pair special case; soften the "oscillatory LinOSS" branding; benchmark-transfer becomes
+  **debt #2**; pin the readout (coherent-quadrature vs intensity) at PR-2. *(The Critic corrected the
+  Supervisor's "it is LinOSS" framing — adopted in full.)*
+- **D-08-3 (backscatter):** optional roughness-gated splitting knob + PR-4 sub-parameter; evaluate at the
+  operating κ_ext; default-ON off the clean-damascene corner; verify B2 numbers before the paper.
+Bless these (or redirect) → I write the mapping result + spec S0.2 (freezing PR-1 / PR-2 / PR-10).
+
+**Standing per-phase touchpoints** — pre-registered values come to Lucas before
 the run that tests them (`preregistration.md`):
 - **S0.2:** PR-1 (Gate-i margin) · PR-2 (bake-off task + architecture + parameter partition) · PR-10
   (S0.7-lite assumptions, *before* the task choice).

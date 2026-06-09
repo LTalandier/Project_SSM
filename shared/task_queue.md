@@ -8,11 +8,68 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.1: Oscillator↔SiN-ring mapping + realizable pole region
+## 🟢 ACTIVE — S0.1.1: S0.1 closeout (decision-free Critic edits before S0.2)
 
-**Assigned:** 2026-06-08
+**Assigned:** 2026-06-09
 **Supervisor:** Claude Opus 4.8
 **Status:** ACTIVE
+**Source:** `critic_review_s0-1-results.md` (APPROVE-WITH-EDITS) — the four **decision-free** items the
+Critic wants landed before PR-1/PR-2 freeze. The two *framing* items (F2 mapping-class, F6 gain-free κ_ext)
+are Supervisor/PR-2 work and wait on Lucas's D-08-2/D-08-3 steer — **not** in this task.
+
+### Goal
+Close the validation/hygiene gaps the Critic raised. **Do not touch the architecture framing** (that is the
+Supervisor's mapping write-up + PR-2). Small code/prose/test edits only.
+
+### Deliverables
+1. **(S0.1-F1, HIGH) Transient-dynamics validation.** The gate currently proves the mapping by
+   *construction* (van Loan exact; steady-state + pole algebra) but never integrates the ODE forward and
+   compares the *transient* to an independent reference. Add: (i) single-ring **ringdown + step response**
+   vs the closed form `a(t)=a₀e^{(iδ−κ)t}` **and** vs an independent integrator (scipy/torchdiffeq RK45 on
+   `da/dt=Ma+Bu`), asserting decay rate κ **and** oscillation frequency δ *in the time domain*; (ii) a
+   **2-ring μ≠0** case whose hybridized **beat frequency** matches Im(eig(M)) splitting. The contribution
+   *is* the dynamical mapping — it deserves a positive time-domain check.
+2. **(S0.1-F3, MEDIUM) Fix the 2× memory-units slip** (results-log finding 4 + `mapping_notes` §4). "329
+   round trips" pairs with **3.29 ns** (amplitude/state memory `1/κ_i`), not 1.65 ns (photon lifetime
+   `Qi/ω₀=1/2κ_i`). The **code already distinguishes them**; fix the **prose** to report the
+   **amplitude/state-memory convention consistently** (3.29 ns / 329 rt; **49.4 ns** / 4937 rt at Qi=3e7) —
+   this is what PR-2 sizes the task against.
+3. **(S0.1-F4, MEDIUM) Fix the B2 high-roughness row + state the criterion band.** The row mixes a
+   160-MHz-based `Q_cross=3.0e5` with 125-MHz-based ratios (tabulated 5.2/77.6 vs the consistent 6.6/99).
+   Recompute to **one γ**. Add that the criterion is `2γ≳κ_tot` (HWHM, the *conservative* choice) and that
+   the FWHM `2γ≳2κ_tot` shifts every `Q_cross` ×2 — carry the ~2× band. (Conclusion unchanged under both.)
+4. **(S0.1-F7, MEDIUM) Fix the registry mislabel.** The conservative corner (Qi=2e6 / 0.172 dB/cm) must not
+   be attributed to the named foundry product. **Rename it `SiN_foundry_conservative`** (no foundry
+   attribution) **and** add a separate `SiN_LIGENTEC_AN800` with the **actual** demonstrated numbers
+   (≈0.05 dB/cm, Qi≈6.8e6 derived, primary-sourced). Keep the conservative corner as the Gate-ii candidate
+   cell (F13); only the name/citation changes. Re-run loss↔Q + FSR tests over the updated registry.
+
+### Out of scope (Supervisor / later)
+- **F2** (mapping-class reframing → diagonal/S4D, LinOSS as special case) — Supervisor mapping write-up +
+  PR-1/PR-2, pending the D-08-2 steer. **F6** (gain-free κ_ext actuation vs readout independence) — PR-2.
+- **F5** (B2 primary-source verification) — S0.L, before-paper. **F8** (thermal self-heating; pole-region
+  realizability completeness — state-dim/placement) — register for the S0.3 substrate + PR-2 sizing.
+
+### Gates
+Transient tests pass (decay rate + frequency in the time domain; 2-ring beat matches eig splitting); full
+suite green; memory prose one (amplitude) convention; B2 row internally consistent + criterion band stated;
+registry relabeled + tests green.
+
+### Deployment
+Local CPU; hours. No cloud.
+
+> **Parallel:** Lucas is steering D-08-2/D-08-3 (low-risk — Supervisor + Critic aligned). This closeout is
+> decision-free and upstream of the framing, so it runs safely alongside that steer.
+
+---
+
+---
+
+## ✅ DONE — S0.1: Oscillator↔SiN-ring mapping + realizable pole region
+
+**Assigned:** 2026-06-08 · **Closed:** 2026-06-09
+**Supervisor:** Claude Opus 4.8
+**Status:** ✅ COMPLETED 2026-06-09 — gate PASSED; two architecture decisions surfaced (D-08-2 mapping fork, D-08-3 backscatter) → Critic + Lucas. Results in `results_log.md`.
 **Roadmap:** `stage0_roadmap.md` v3 §S0.1 (scope (B) Lucas-blessed 2026-06-08). **Prereqs:**
 `photonic-ssm-proposal-v0_5.md` §3 (mapping) + §4 (pole region); the salvaged `static_rings.py` (the
 **CW-limit reference** — S0.0); `preregistration.md` (this phase *feeds* **PR-2** task-sizing and **PR-4**

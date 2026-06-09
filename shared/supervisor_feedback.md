@@ -6,6 +6,62 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-09 (later) — Critic reviewed S0.1 → APPROVE-WITH-EDITS; closeout ACTIVE; decisions ready for Lucas
+
+Strong independent review (re-derived every load-bearing number — most reproduce to the digit). 2 HIGH ·
+7 MEDIUM · 1 LOW; **S0.2 can proceed** after four before-PR-freeze edits. I concur with the whole review;
+the one that matters most is a correction to **my own** framing:
+- **F2 (HIGH) — I over-claimed.** The ring bank is a **diagonal complex-pole SSM (S4D/DSS class)**, not
+  "diagonalized LinOSS" flatly; LinOSS is the **conjugate-pair special case** (uncoupled + real-I/O), and
+  trainable inter-ring μ is a *generalization beyond* standard diagonal-A LinOSS. Benchmark transfer is
+  open debt #2, not a given. **Adopting in full** — honest framing, pre-empts "you said LinOSS but trained
+  a coupled S4D." Reshapes the mapping write-up + PR-1/PR-2.
+- **F1 (HIGH)** — the gate proves the mapping by *construction* (van Loan), never validates the transient
+  vs an independent integrator. Real gap for a *dynamical*-mapping contribution → closeout.
+- **F3** units slip (329 rt = 3.29 ns *state* memory, not 1.65 ns photon lifetime — matters for PR-2
+  sizing); **F4** B2 row arithmetic + criterion band; **F6** gain-free κ_ext is *both* damping actuator and
+  readout knob (muddies the reservoir-baseline contrast → PR-2 + the F7 fairness contract); **F7** registry
+  mislabel (conservative corner ≠ named AN800); **F8** thermal self-heating + realizability completeness
+  (state-dim / pole-placement precision) → **register for S0.3 substrate + PR-2 sizing.**
+
+Both decisions now have **converged Supervisor + Critic** recommendations (Critic sharpened both;
+`decisions_needed.md`): **D-08-2** → diagonal/S4D class with LinOSS as special case, pin the readout;
+**D-08-3** → roughness-gated knob, evaluate at the operating κ_ext, default-ON off the clean corner.
+
+**Actioned:** S0.1.1 closeout ACTIVE (F1 transient test, F3 units, F4 B2 row, F7 registry relabel — all
+decision-free). **Held for Lucas:** the D-08-2/D-08-3 steer (low-risk — aligned). **Next once steered:** I
+write the mapping result with the corrected diagonal/S4D framing, fold F6/F8 into PR-2, spec S0.2 (freezing
+PR-1/PR-2/PR-10).
+
+## 2026-06-09 — S0.1 DONE (gate passed); two architecture decisions surfaced; Critic dispatched on S0.1 results
+
+S0.1 is a strong result — gate genuinely passed (poles match the CMT ref: uncoupled <1e-3, ZOH exact for
+PWC; CW limit recovers the S0.0 static at $O(1/\text{finesse})$, <1% at the $F\approx1000$–15000 SiN rings
+sit at; both architecture constraints verified in the **new** model, checkpointed==plain to 0.0 grads;
+99 tests). It did what good S0.1 work should: surfaced two findings that move the downstream plan.
+
+**Two decisions (both → Lucas, recommendations in `decisions_needed.md`; both routed to the Critic):**
+- **D-08-2 mapping fork** — one optical ring = one *complex* pole (complex-diagonal SSM / S4D-like), not a
+  real-LinOSS conjugate pair. **My rec: (a) complex-diagonal, framed as the *diagonalized* LinOSS/D-LinOSS**
+  (hardware-minimal — 1 ring = 1 trainable complex pole; damping = pole real part = κ_tot = the proposal's
+  loss=damping story; white-space claim intact). Caveat → debt #2: confirm equivalence + benchmark
+  transfer; real-valued I/O handled at the readout. Freezes at PR-2.
+- **D-08-3 backscatter** — splitting is **roughness-limited, not Q-gated**, and bites at foundry Q for
+  rough subtractive processes (the roadmap's F19-derived "negligible at foundry Q" assumption is wrong for
+  rough SiN). **My rec: accept the optional roughness-gated splitting knob in S0.3; promote
+  roughness/splitting to a PR-4 sub-parameter.** Platform tension to carry: high-Q = best memory = most
+  splitting-prone, while CORNERSTONE's low Q is splitting-safe but memory-poor (~33 rt). B2's *quantitative*
+  crossover is provisional (search-aggregated → verify-before-citing); act on the qualitative finding now,
+  confirm primary sources (S0.L) before any paper claim.
+
+Also good: **B1** — a **gain-free minimal trainable set suffices for the white-space claim** (strengthens
+it); **B3** $\kappa_\text{ext}$ trade bounded + tested; **F13.1** registry reconciled (AN800 Qi=2e6 primary
+→ loss 0.172 dB/cm). **Held my own deliverable — the mapping write-up + white-space wording — until D-08-2
+settles** (central content; writing it on an unresolved fork would be premature).
+
+**Next:** Critic reviews S0.1 results (gate before S0.2) → Lucas decides D-08-2/D-08-3 with Critic input →
+I write the mapping result + spec S0.2 (freezing PR-1 / PR-2 / PR-10).
+
 ## 2026-06-08 (later still) — Lucas signed off ("accept all, scope (B) blessed"); roadmap v3 issued; S0.1 ACTIVE
 
 Folded the entire Critic review into **`stage0_roadmap.md` v3** (changelog block at top maps each phase
