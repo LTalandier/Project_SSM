@@ -42,9 +42,12 @@ os.makedirs(OUT, exist_ok=True)
 FSR_HZ = 100e9
 DT = 1.0 / FSR_HZ                       # step = round-trip time (10 ps)
 
-# Registered SiN corners (Qi), from the F13.1-reconciled registry.
+# Registered SiN corners (Qi) spanning the roadmap Q-range, from the
+# F13.1-reconciled registry. The 2e6 foundry end is the conservative
+# corner (S0.1.1/F7 renamed it off the AN800 product name); the demonstrated
+# AN800 (Qi=6.8e6) sits between this and the damascene UHQ end.
 SIN = {n: get_platform(n).Qi for n in
-       ("SiN_CORNERSTONE_300", "SiN_LIGENTEC_AN800", "SiN_damascene_UHQ")}
+       ("SiN_CORNERSTONE_300", "SiN_foundry_conservative", "SiN_damascene_UHQ")}
 
 # Literature backscatter scenarios (docs/s0_1/B2_backscatter_bound.md);
 # value = reported splitting 2*gamma/2pi in MHz.

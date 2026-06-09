@@ -146,6 +146,10 @@ def kappa_ext_trade_sweep(Qi: float, ratios, dt: float,
 #  fabrication roughness (an absolute rate), essentially independent of
 #  kappa_tot — so as Qi rises (kappa_i falls) a fixed gamma becomes an
 #  ever larger fraction of the linewidth: splitting GROWS with Q.
+#  This is the conservative HWHM criterion (kappa_tot is the half-width);
+#  the fully-resolved FWHM criterion 2*gamma >= 2*kappa_tot needs twice
+#  gamma, so every crossover_Q shifts x2. crossover_Q() below uses the
+#  HWHM (2*gamma = kappa_tot) form; double it for the FWHM band.
 
 def gamma_rad_s_from_MHz_linear(split_MHz_2gamma: float) -> float:
     """Convert a reported *splitting* 2*gamma/2pi [MHz] (the measured

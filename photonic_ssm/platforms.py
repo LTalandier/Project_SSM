@@ -18,6 +18,13 @@
 #     and Critic (F13.1)). `loss_q_consistency_error()` +
 #     `loss_q_ceiling_ok()` back a new registry test alongside the FSR
 #     check. The operating-Q choice stays parked (D-2026-06-08-1 / PR-4).
+# Adaptations for Project_SSM (task S0.1.1, Critic F7):
+#   - Registry relabel. The Qi=2e6 conservative corner is NO LONGER
+#     attributed to a named foundry product: it is now
+#     `SiN_foundry_conservative` (the Gate-ii / F13 candidate cell). A
+#     SEPARATE `SiN_LIGENTEC_AN800` carries the actually-demonstrated AN800
+#     numbers (0.051 dB/cm primary -> Qi=6.8e6 propagation-limited,
+#     primary-sourced). Neither picks the operating Q (still parked).
 # Everything else (derived-FSR consistency check) is lifted unchanged.
 """Ring-platform constants registry for the photonic-SSM Stage-0 models.
 
@@ -54,10 +61,11 @@ propagation-loss-limited intrinsic Q, Qi = 2*pi*n_g/(lambda*alpha). Each
 entry declares which field is PRIMARY:
   * q_basis="Qi"   — Qi is the registered (published/headline) value;
                      `loss_dB_per_cm` is DERIVED from it. (The SiN entries
-                     whose Q anchors the roadmap's Q-span: AN800 2e6,
-                     damascene 3e7.)
+                     whose Q anchors the roadmap's Q-span: the
+                     foundry-conservative corner 2e6, damascene 3e7.)
   * q_basis="loss" — loss is the registered value; Qi is DERIVED. (Entries
-                     with no published ring Q, e.g. CORNERSTONE.)
+                     with no published ring Q, e.g. CORNERSTONE; and the
+                     demonstrated LIGENTEC AN800, Qi from its 0.051 dB/cm.)
   * q_basis="independent" — Qi and loss are independently published and
                      the ring is NOT propagation-limited (bend-/coupling-
                      limited), so only the physical CEILING holds:
@@ -146,16 +154,16 @@ def _radius_um_for_FSR(FSR_GHz: float, n_g: float) -> float:
 PLATFORM_REGISTRY: Mapping[str, PlatformConfig] = {
     # Radii are computed from c / (n_g * 2*pi * FSR_Hz) so that derived FSR
     # matches the tabulated value within 0.01 GHz (registry sanity test).
-    # Qi=2e6 is the registered foundry-grade corner used across the
-    # roadmap (D-2026-06-08-1's "2x10^6" end); loss is DERIVED from it
-    # (q_basis="Qi"). The salvaged entry's 0.03 dB/cm was inconsistent
-    # (it implies Qi=1.14e7, ~5.7x off) and is superseded; 0.172 dB/cm is
-    # the loss consistent with Qi=2e6 at n_g=1.95 — physically sensible
-    # for a foundry SiN ring (AN800 has separately *demonstrated* up to
-    # Qi=6.8e6 at 0.051 dB/cm; we register the conservative corner, not
-    # the best result — the operating Q stays parked, PR-4).
-    "SiN_LIGENTEC_AN800": PlatformConfig(
-        name="SiN_LIGENTEC_AN800",
+    #
+    # SiN_foundry_conservative (S0.1.1 / Critic F7): the Qi=2e6 conservative
+    # corner — the roadmap's "2x10^6" foundry end (D-2026-06-08-1) and the
+    # Gate-ii / F13 candidate cell. NOT attributed to a named product: it is
+    # a deliberately conservative cell, not a demonstrated device. loss is
+    # DERIVED from Qi=2e6 (q_basis="Qi") = 0.172 dB/cm at n_g=1.95. (The
+    # superseded salvaged entry mixed Qi=2e6 with 0.03 dB/cm, which implies
+    # Qi=1.14e7, ~5.7x off.) The operating Q stays parked (PR-4).
+    "SiN_foundry_conservative": PlatformConfig(
+        name="SiN_foundry_conservative",
         loss_dB_per_cm=0.171647,  # DERIVED from Qi=2e6 (q_basis="Qi")
         Qi=2e6,
         radius_um=244.6843671,  # FSR = 100 GHz at n_g=1.95
@@ -165,6 +173,28 @@ PLATFORM_REGISTRY: Mapping[str, PlatformConfig] = {
         dn_dT_per_K=2.45e-5,
         sigma_FC_m3=0.0,        # SiN has no measurable FCD at 1550 nm
         q_basis="Qi",
+    ),
+    # --- NEW (S0.1.1 / Critic F7): demonstrated LIGENTEC AN800 ---------- #
+    # The actually-demonstrated AN800 numbers (distinct from the
+    # conservative corner above): propagation loss 0.051 dB/cm is PRIMARY
+    # (q_basis="loss") and Qi=6.8e6 is DERIVED as the propagation-limited
+    # ceiling. n_g=1.97 is the AN800 group index for which the demonstrated
+    # 0.051 dB/cm reproduces the demonstrated Qi=6.8e6 (both primary-sourced
+    # for the same ring — the entry reproduces the measured pair). A
+    # documented mid-range corner between the foundry-conservative 2e6 and
+    # the aspirational damascene 3e7 (informational; operating Q still
+    # parked, PR-4). Source point also noted in B2_backscatter_bound.md.
+    "SiN_LIGENTEC_AN800": PlatformConfig(
+        name="SiN_LIGENTEC_AN800",
+        loss_dB_per_cm=0.051,   # PRIMARY (demonstrated; q_basis="loss")
+        Qi=6.800307e6,          # DERIVED propagation ceiling from 0.051 dB/cm
+        radius_um=242.2002619,  # FSR = 100 GHz at n_g=1.97
+        FSR_GHz=100.0,
+        n_g=1.97,
+        drift_pm_per_K=14.0,    # SiN family value
+        dn_dT_per_K=2.45e-5,
+        sigma_FC_m3=0.0,        # SiN has no measurable FCD at 1550 nm
+        q_basis="loss",
     ),
     # --- NEW (S0.0): CORNERSTONE open-MPW SiN (proposal §8 foundry) --- #
     # 300 nm stoichiometric SiN platform. Loss: ~1.5 dB/cm in the C-band

@@ -4,6 +4,11 @@ torch>=2.0
 
 # test-only
 pytest>=7.0
+# scipy (+ its numpy) is TEST-ONLY: the independent RK45 integrator and
+# spectral peak-finder for the S0.1.1 transient-dynamics validation
+# (tests/test_transient_dynamics.py). NOT a package runtime dep — the
+# photonic_ssm package stays torch-only (test_no_equalization_coupling.py).
+scipy>=1.10
 
 # analysis-only (the analysis/ scripts, NOT the package — kept out of
 # photonic_ssm/ so the torch-only package invariant holds). Used by

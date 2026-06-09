@@ -17,7 +17,12 @@ single-ring model + the coupled-ring → N-oscillator LinOSS forward model
 scope-(B) deliverables (B1 actuation map, B2 backscatter bound, B3 κ_ext
 trade) under `docs/s0_1/`. The CW limit recovers the S0.0 static
 references (the gate). Both architecture constraints are honored in the
-new dynamical model (not just inherited). *Still NOT here:* the LinOSS
+new dynamical model (not just inherited). The **S0.1.1** Critic closeout
+added a time-domain transient validation (ringdown / step / 2-ring beat vs
+an independent RK45), relabeled the registry's conservative corner off the
+AN800 product name (+ a demonstrated AN800 entry), and corrected the B2
+splitting-row arithmetic and the amplitude-memory units. *Still NOT here:*
+the LinOSS
 digital baseline (S0.2), the dissipative substrate + ASE (S0.3), and the
 four estimators (S0.4).
 
@@ -40,7 +45,7 @@ read-only upstream.
 | `photonic_ssm/estimators/spsa.py` | salvaged `adaptation/perturbation_gradient.py` | S0.4a SPSA + FD/autograd diagnostic + forward-pass accounting (bake-off primary-metric bookkeeping) |
 | `photonic_ssm/baselines/ridge_readout.py` | salvaged `equalization_mrr_rc.py` (readout only) | §5.3 reservoir-readout baseline |
 | `photonic_ssm/runner/` | pattern-salvaged `sweep_phase4a_mrr1_ringbank.py` + `evaluate.py` JSONL | resume-safe pre-registered-grid sweep scaffold |
-| `tests/` | ported + extended from `tests/test_mrr_primitives.py` et al. | 99 tests, all passing |
+| `tests/` | ported + extended from `tests/test_mrr_primitives.py` et al. | 107 tests, all passing |
 
 ### New in S0.1 (the dynamical core — not salvage)
 
@@ -50,6 +55,7 @@ read-only upstream.
 | `photonic_ssm/dynamics/coupled_rings.py` | `CoupledRingLinOSS` N-oscillator forward model; `a_j=-e^{α_j}+iβ_j`; (3a)/(3b) honored; ZOH matrix-exp; checkpointed unroll |
 | `photonic_ssm/dynamics/pole_region.py` | loss/gain→\|λ\| memory bound, κ_ext trade (B3), backscatter crossover (B2) |
 | `analysis/s0_1_pole_region.py` | renders pole-region/B2/B3 figures + data → `results/s0_1/` (matplotlib; outside the package) |
+| `tests/test_transient_dynamics.py` | S0.1.1 (F1): time-domain transient validation vs an independent scipy RK45 (ringdown / step / 2-ring beat = Im(eig) splitting) |
 | `docs/s0_1/*.md` | mapping notes + B1 actuation map + B2 backscatter bound + B3 κ_ext trade (feed the Supervisor's write-up, PR-2, PR-4) |
 
 **NOT here (new code, S0.2+):** the LinOSS/D-LinOSS *digital* baseline
@@ -74,8 +80,8 @@ bake-off evaluator/protocol.
 ## Setup & tests
 
 ```bash
-pip install -r requirements.txt   # package runtime is torch-only
-python3 -m pytest tests/ -q       # 60 tests, ~2 s on CPU
+pip install -r requirements.txt   # package runtime torch-only; scipy is test-only
+python3 -m pytest tests/ -q       # 107 tests, ~4 s on CPU
 ```
 
 ## Quality conventions

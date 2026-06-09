@@ -39,24 +39,27 @@ def test_get_platform_unknown_raises():
 
 
 def test_get_platform_known():
-    p = get_platform("SiN_LIGENTEC_AN800")
-    assert p.name == "SiN_LIGENTEC_AN800"
+    p = get_platform("SiN_foundry_conservative")
+    assert p.name == "SiN_foundry_conservative"
     assert p.Qi == 2e6
 
 
 def test_new_sin_entries_present():
-    """S0.0 added CORNERSTONE + class-leading UHQ entries; together with
-    AN800 they span the Q range for the parked operating-point decision
-    (D-2026-06-08-1). No operating Q is chosen anywhere in the package."""
+    """S0.0 added CORNERSTONE + class-leading UHQ entries; S0.1.1 (Critic F7)
+    split the Qi=2e6 conservative corner from the demonstrated LIGENTEC
+    AN800 (Qi=6.8e6). The four SiN corners span the Q range for the parked
+    operating-point decision (D-2026-06-08-1). No operating Q is chosen
+    anywhere in the package."""
     corner = get_platform("SiN_CORNERSTONE_300")
-    uhq = get_platform("SiN_damascene_UHQ")
+    foundry = get_platform("SiN_foundry_conservative")
     an800 = get_platform("SiN_LIGENTEC_AN800")
+    uhq = get_platform("SiN_damascene_UHQ")
     # All SiN: no FCD, same thermo-optic material coefficient.
-    for p in (corner, uhq, an800):
+    for p in (corner, foundry, an800, uhq):
         assert p.sigma_FC_m3 == 0.0
         assert p.dn_dT_per_K == pytest.approx(2.45e-5)
-    # The range spans > 2 orders of magnitude in Qi.
-    assert corner.Qi < an800.Qi < uhq.Qi
+    # Monotone Q span across the four SiN corners, > 2 orders of magnitude.
+    assert corner.Qi < foundry.Qi < an800.Qi < uhq.Qi
     assert uhq.Qi / corner.Qi > 100
 
 
@@ -86,17 +89,33 @@ def test_loss_q_mutually_consistent_for_derived_entries(platform_name):
         f"rel err {err:.2e}")
 
 
-def test_AN800_q_loss_reconciled():
-    """F13.1 reconciliation: SiN_LIGENTEC_AN800 previously tabulated
+def test_foundry_conservative_q_loss_reconciled():
+    """F13.1 + S0.1.1/F7: the Qi=2e6 conservative corner (renamed from the
+    mislabeled AN800 entry) registers Qi primary and derives loss
+    consistently (~0.172 dB/cm). The superseded salvaged entry tabulated
     Qi=2e6 AND 0.03 dB/cm, which disagree ~5.7x (0.03 dB/cm implies
-    Qi~1.14e7). Qi=2e6 is now the registered primary (foundry corner) and
-    loss is derived consistently (~0.172 dB/cm)."""
-    p = get_platform("SiN_LIGENTEC_AN800")
+    Qi~1.14e7)."""
+    p = get_platform("SiN_foundry_conservative")
     assert p.q_basis == "Qi" and p.Qi == 2e6
     expected_loss = loss_dB_per_cm_from_qi(2e6, p.n_g)
     assert abs(p.loss_dB_per_cm - expected_loss) < 1e-4
     # the OLD value (0.03) would have implied a ~5.7x-too-high Qi
     assert qi_from_loss(0.03, p.n_g) / p.Qi > 5.0
+
+
+def test_AN800_demonstrated_entry():
+    """S0.1.1/F7: SiN_LIGENTEC_AN800 now carries the actually-demonstrated
+    AN800 numbers (NOT the conservative corner): propagation loss
+    0.051 dB/cm primary (q_basis='loss'), Qi=6.8e6 DERIVED as the
+    propagation ceiling. Distinct from the foundry-conservative cell."""
+    p = get_platform("SiN_LIGENTEC_AN800")
+    assert p.q_basis == "loss"
+    assert p.loss_dB_per_cm == pytest.approx(0.051)
+    assert p.Qi == pytest.approx(6.8e6, rel=1e-3)
+    # Qi is exactly the propagation-limited ceiling from the demonstrated loss.
+    assert p.Qi == pytest.approx(qi_from_loss(0.051, p.n_g), rel=1e-6)
+    # genuinely distinct from (and higher Q than) the conservative corner.
+    assert p.Qi > get_platform("SiN_foundry_conservative").Qi
 
 
 def test_non_sin_entries_below_ceiling():

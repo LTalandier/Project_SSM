@@ -55,8 +55,10 @@ constant input (the discrete poles are `exp(λ*dt)` to machine precision — no 
 - **Stability is free.** Passive rings give `kappa_tot > 0` ⇒ `|z| < 1`. LinOSS is valid for any
   nonnegative-diagonal (dissipative) `A`, so the ring lattice is in-regime.
 - **Memory is loss-limited.** Min damping = intrinsic loss: `kappa_tot ≥ kappa_i = omega0/(2 Qi)`. Max
-  passive amplitude memory time `= 1/kappa_i = 2 Qi/omega0`; photon lifetime `= Qi/omega0`. Across the
-  registry: **1.65 ns / 329 round trips** (Qi=2×10⁶) → **24.7 ns / 4937 round trips** (Qi=3×10⁷) — a 15×
+  passive amplitude memory time `= 1/kappa_i = 2 Qi/omega0` (the state-memory time the recurrence sees;
+  the photon-*energy* lifetime `Qi/omega0` is **half** of it — the two were conflated in the first draft).
+  Reporting the amplitude/state-memory convention consistently, across the registry the passive memory is
+  **3.29 ns / 329 round trips** (Qi=2×10⁶) → **49.4 ns / 4937 round trips** (Qi=3×10⁷) — a 15×
   memory gain from the foundry to the class-leading corner. Gain (§7) extends it: `kappa_tot → 0`
   (lasing threshold) pushes `|z| → 1` (figure `pole_region_memory.png`).
 - **`beta` is FSR-bounded.** Detuning aliases at one free spectral range: `|beta_j| ≤ π·FSR` (rad/s),

@@ -15,6 +15,65 @@ Per result, report:
 
 ---
 
+## S0.1.1 — S0.1 closeout (Critic decision-free edits) (2026-06-09, Executor)
+
+**Goal:** land the four **decision-free** items from `critic_review_s0-1-results.md` (APPROVE-WITH-EDITS)
+before PR-1/PR-2 freeze. The two *framing* items (F2 mapping-class, F6 gain-free κ_ext) are
+Supervisor/PR-2 work and are **out of scope** here (await Lucas's D-08-2/D-08-3 steer).
+
+**Config:** local CPU, torch 2.11.0, float64; scipy 1.17.1 added **test-only** (independent RK45). Test
+count **99 → 107** (4 new transient tests; +4 from the registry growing 6→7 entries across the three
+parametrized registry tests and the split AN800-reconciliation test). No methodology/scope change.
+
+**Key findings / what landed:**
+1. **(F1, HIGH) Transient-dynamics validation** (`tests/test_transient_dynamics.py`, new). The S0.1 gate
+   proved the mapping by *construction* (van Loan exact + steady-state + pole algebra); this adds the
+   missing *time-domain forward-integration* check against an **independent** scipy RK45 of
+   `da/dt = M a + B u`: (i) single-ring **ringdown** matches the closed form `a₀e^{(iδ−κ)t}` (<1e-9) and
+   RK45 (<1e-6), with the decay rate κ **and** oscillation frequency δ **fitted from the trajectory**
+   (log|a| slope, unwrapped-phase slope) recovering the pole to <1e-5; (ii) **step response** tracks RK45
+   and settles to `a_ss=Bu/(κ−iδ)` (<2e-3); (iii) a **2-ring μ≠0** case whose population-beat angular
+   frequency (envelope-corrected FFT) **matches the Im(eig(M)) supermode splitting = 2μ** to <2%, with a
+   μ=0 no-beat contrast. *Positive time-domain confirmation of the dynamical mapping — the contribution.*
+2. **(F3, MED) Memory-units slip fixed (prose).** The code already distinguished amplitude memory
+   `1/κ_i` from the photon-energy lifetime `Qi/ω₀` (= half); only the prose conflated them. Now reported
+   in the **amplitude/state-memory** convention consistently: **3.29 ns / 329 round trips** (Qi=2e6) →
+   **49.4 ns / 4937 rt** (Qi=3e7) — what PR-2 sizes the task against. (The earlier 1.65/24.7 ns were the
+   photon lifetimes.) Fixed in `mapping_notes §4` + finding 4 below. No code change.
+3. **(F4, MED) B2 high-roughness row + criterion band.** The row mixed a 160-MHz `Q_cross=3.0e5` with
+   125-MHz ratios (5.2/77.6); recomputed to **one γ (160 MHz)** → the consistent **6.6 / 99**. Added the
+   criterion band: the registered `2γ ≳ κ_tot` is the **conservative HWHM** choice; the fully-resolved
+   **FWHM** `2γ ≳ 2κ_tot` shifts every `Q_cross` **×2** (band tabulated). **Conclusion unchanged** under
+   both (clean holds at foundry / breaks by ~4–8e6; rough splits at foundry). The analysis JSON already
+   used the consistent γ — only the doc table is corrected; JSON ↔ doc now agree.
+4. **(F7, MED) Registry mislabel fixed** (`platforms.py`). The Qi=2e6 conservative corner is **renamed
+   `SiN_foundry_conservative`** (no product attribution; still the Gate-ii/F13 candidate cell). A
+   **separate `SiN_LIGENTEC_AN800`** now carries the *demonstrated* numbers — 0.051 dB/cm **primary**
+   (q_basis="loss"), **Qi=6.80e6 derived** as the propagation ceiling at n_g=1.97 (reproduces the
+   primary-sourced pair). Registry now spans 4 SiN corners (2.3e5 → 2e6 → 6.8e6 → 3e7); loss↔Q + FSR
+   tests re-run green over all 7 entries.
+
+**Gates (all PASSED):** transient tests pass (decay rate **and** frequency in the time domain; 2-ring
+beat == eig splitting); **107/107 suite green** (~3.6 s); memory prose in one (amplitude) convention; B2
+row internally consistent + criterion band stated; registry relabeled + tests green.
+
+**Anomalies / honest flags:**
+- **Step-test scaling (not a defect):** with a unit input the steady state is ~2e-11, so model↔RK45 agree
+  to ~1e-15 *absolute* but the *relative* error is atol-floored; the test drives the state to O(1)
+  (`b=|κ−iδ|`) so the tolerance is meaningful. Documented in-test.
+- **n_g=1.97 for AN800** is chosen so the demonstrated 0.051 dB/cm reproduces the demonstrated Qi=6.8e6
+  (both primary-sourced for the same ring); a defensible AN800 group index, used only for FSR/radius
+  bookkeeping. The conservative corner keeps n_g=1.95.
+- **B2 primary-source verification (F5) is NOT done here** — it is S0.L/before-paper (out of scope); the
+  ⚠️ verify-before-citing caveats remain in the memo.
+- Framing items **F2** (diagonal/S4D mapping-class) and **F6** (gain-free κ_ext) deliberately untouched —
+  Supervisor/PR-2, pending the D-08-2/D-08-3 steer.
+
+**Data path:** code+tests in repo; `docs/s0_1/{mapping_notes,B2_backscatter_bound}.md` updated; figures +
+JSON regenerated under `results/s0_1/` (git-ignored). **Compute:** local CPU, ~3.6 s tests + <1 s analysis.
+
+---
+
 ## S0.1 — Oscillator↔SiN-ring mapping + realizable pole region (2026-06-08, Executor)
 
 **Goal:** build the first **new dynamical core** — the temporal-CMT single-ring model + the coupled-ring
@@ -47,8 +106,9 @@ white-space wording are the Supervisor's.*
    (the `TrainingAwareDynamicSOAPerMode` pattern) is **bit-identical** to the plain rollout in outputs,
    states, AND all gradients (0.0).
 4. **Realizable pole region (§4)** (`dynamics/pole_region.py` + `results/s0_1/pole_region_memory.png`):
-   stability free; memory **loss-limited** — passive amplitude memory **1.65 ns / 329 round trips**
-   (Qi=2e6) → **24.7 ns / 4937 round trips** (Qi=3e7), a **15× gain**; gain pushes `|λ|→1` (plotted at
+   stability free; memory **loss-limited** — passive amplitude memory **3.29 ns / 329 round trips**
+   (Qi=2e6) → **49.4 ns / 4937 round trips** (Qi=3e7), a **15× gain** (amplitude/state memory `1/κ_i`;
+   the photon-energy lifetime is half — 1.65/24.7 ns — corrected S0.1.1/F3); gain pushes `|λ|→1` (plotted at
    net gain 0/50/90 % of loss); `β` FSR-bounded (`|β·dt|≤π`). Coupling hybridizes poles conserving
    `Σ Re(λ) = −Σκ_tot`.
 5. **(B1) Trainable-parameter + actuation map** (`docs/s0_1/B1_actuation_map.md`): the in-situ-trainable
@@ -68,8 +128,10 @@ white-space wording are the Supervisor's.*
    (kext=0.1κ_i) → 16 rt / 0.91 (kext=10κ_i). κ_ext also couples to B2 (overcoupling hides the doublet).
    → PR-4 (I characterize; I do not pick the operating point).
 8. **(F13.1) Registry Q/loss self-consistency fix** (`platforms.py`): added `q_basis` (Qi|loss|
-   independent) — each entry registers a primary, derives the partner. **AN800 reconciled:** Qi=2e6
-   primary (foundry corner), loss 0.03→**0.172 dB/cm** (the 0.03 implied Qi=1.14e7, 5.7× off). CORNERSTONE
+   independent) — each entry registers a primary, derives the partner. **Conservative corner reconciled**
+   (then named `SiN_LIGENTEC_AN800`; **renamed `SiN_foundry_conservative` in S0.1.1/F7** — the 2e6 corner
+   is not the AN800 product): Qi=2e6 primary (foundry corner), loss 0.03→**0.172 dB/cm** (the 0.03 implied
+   Qi=1.14e7, 5.7× off). CORNERSTONE
    loss-primary (Qi=2.347e5 derived); damascene Qi=3e7 primary (loss 0.0123 dB/cm derived). New
    `loss_q_ceiling_ok` invariant (Qi ≤ propagation ceiling) holds for all 6 entries; SiN entries on the
    ceiling (err ≤2e-5). **Operating Q still NOT chosen** (D-2026-06-08-1 / PR-4).

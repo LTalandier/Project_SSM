@@ -40,17 +40,29 @@ Mechanism + mitigation reference (non-SiN): coherent backscatter suppression >30
 *Light Sci. Appl.* **9**, 41 (2020). Quantitative Si model: Li et al., *Laser Photon. Rev.* **10**, 420
 (2016).
 
-## Crossover (computed, criterion `2γ = kappa_i`)
+## Crossover (computed)
 
-| Scenario | `γ/2π` | **Q_crossover** | At foundry `Qi=2×10⁶` | At class-leading `Qi=3×10⁷` |
+**Criterion band.** A doublet becomes *visible* when the splitting reaches the half-width and *fully
+resolves* when it reaches the full width. We register the **conservative (HWHM) criterion `2γ ≳ κ_tot`**
+(`κ_tot` is the HWHM in rad/s; the power-FWHM linewidth is `2κ_tot`). The fully-resolved (FWHM) criterion
+`2γ ≳ 2κ_tot` needs twice the `γ` — equivalently half the linewidth → **twice the Q** — so **every
+`Q_crossover` below shifts ×2 under the FWHM convention** (band shown). The qualitative conclusion is
+unchanged under both. Undercoupled worst case `κ_tot → κ_i = ω0/(2 Qi)`; each row uses a **single `γ`**
+(the `2γ/κ_i` columns and `Q_crossover` are now computed from the same `γ/2π`).
+
+| Scenario | `γ/2π` (split `2γ/2π`) | **Q_crossover** (HWHM → FWHM band) | At foundry `Qi=2×10⁶` | At class-leading `Qi=3×10⁷` |
 |---|---|---|---|---|
-| damascene-clean | 11.8 MHz | **4.1×10⁶** | `2γ/κ_i = 0.49` → **single-pole OK** | `2γ/κ_i = 7.3` → **split** |
-| subtractive-low-roughness | 90 MHz | **5.4×10⁵** | `2γ/κ_i = 3.7` → **already split** | 55.8 → split |
-| subtractive-high-roughness | 160 MHz | **3.0×10⁵** | `2γ/κ_i = 5.2` → **already split** | 77.6 → split |
+| damascene-clean | 11.8 MHz (23.6) | **4.1×10⁶ → 8.2×10⁶** | `2γ/κ_i = 0.49` → **single-pole OK** | `2γ/κ_i = 7.3` → **split** |
+| subtractive-low-roughness | 90 MHz (180) | **5.4×10⁵ → 1.1×10⁶** | `2γ/κ_i = 3.7` → **already split** | `55.8` → split |
+| subtractive-high-roughness | 160 MHz (320) | **3.0×10⁵ → 6.0×10⁵** | `2γ/κ_i = 6.6` → **already split** | `99` → split |
 
-So **clean (damascene-class) process**: single-pole holds at foundry Qi, breaks by ~4×10⁶ and is firmly
-broken at the aspirational 3×10⁷. **Rough (subtractive) process**: splits a large fraction of modes
-already at foundry Qi=2×10⁶.
+(The high-roughness row previously mixed a 160-MHz `Q_crossover` with 125-MHz ratios — `5.2/77.6`; with a
+single `γ/2π = 160 MHz` the consistent ratios are **`6.6/99`**, as tabulated.)
+
+So **clean (damascene-class) process**: single-pole holds at foundry Qi, breaks by ~4×10⁶ (HWHM; ~8×10⁶
+FWHM) and is firmly broken at the aspirational 3×10⁷. **Rough (subtractive) process**: splits a large
+fraction of modes already at foundry Qi=2×10⁶ — under **either** criterion (its `Q_crossover` band, ≤1.1×10⁶,
+stays below the foundry Qi).
 
 ## Recommendation (Executor → S0.3 / F19)
 
