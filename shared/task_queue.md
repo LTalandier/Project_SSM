@@ -8,6 +8,53 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🟢 ACTIVE — S0.L-1: White-space existence search (debt #1, PR-15 — front-loaded pre-S0.2)
+
+**Assigned:** 2026-06-09
+**Supervisor:** Claude Opus 4.8
+**Status:** ACTIVE
+**Source:** D-2026-06-09-1 (Lucas-adopted 2026-06-09, "ok go") + **PR-15, 🔒 FROZEN — read its detail
+block in `preregistration.md` FIRST and apply it as written** (the kill-rule and lanes are frozen; do not
+re-derive or reinterpret them). Roadmap v3.1 §S0.L. This is a **literature task** — no simulation code.
+
+### Goal
+Run the **existence search** for verification debt #1: is there ANY prior in which *internal recurrent
+parameters of a physical photonic system were updated on the physical device by a gradient-based /
+gradient-estimating rule*? This is the project's kill-shot, deliberately front-loaded (cheap + decisive +
+potentially fatal). A single FATAL prior falsifies the scientific-first claim — surface it loudly; do
+**not** soften or adjudicate it.
+
+### Deliverables
+1. **`docs/s0_L/debt1_whitespace_search.md`** — dated memo (snapshot 2026-06):
+   - **Per-candidate verdict table:** citation · system · what was *physically* updated · q1 internal?
+     · q2 on-device-in-the-loop? · q3 update-rule class · **verdict** (FATAL / non-fatal-cite /
+     AMBIGUOUS→escalate / clear), with the **load-bearing sentence quoted from each primary source**.
+     No aggregator-snippet citations (the B2/F5 lesson) — if you can't reach the primary, the verdict is
+     AMBIGUOUS, not clear.
+   - **All five PR-15 lanes swept** (i: zeroth-order/perturbative internal updates; ii:
+     REINFORCE/policy-gradient internal updates; iii: HIL delay-reservoir feedback/internal adaptation;
+     iv: evolutionary/Boolean — non-fatal, cite; v: free search + the named-group minimum set, extended
+     as needed).
+   - **The Bueno/Brunner boundary memo** (lane ii): verify in the primary sources exactly what that line
+     physically updates (readout-only?) — the claim's most likely confuser; quote, don't paraphrase.
+   - **Reproducible search trail appendix:** queries run, databases/engines, dates, hit counts.
+2. **Any FATAL or AMBIGUOUS finding → stop and escalate**: post to `decisions_needed.md` +
+   `escalate_to_human.md` with the primary attached. Adjudication is Lucas's, per PR-15 disposition.
+3. Results entry in `results_log.md` (candidate counts per lane, verdict summary, anomalies).
+
+### Gates
+Every PR-15 lane swept + logged; every non-clear verdict grounded in a primary source with quote;
+ambiguities escalated, never resolved in-memo; memo dated 2026-06; search trail reproducible.
+
+### Out of scope
+Claim **wording** (PR-2/S0.8 — Supervisor); roadmap/ledger edits; any simulation code; the S0.7-lite
+envelope (separate task, after PR-10 freezes); debt #2/#3 memos (separate S0.L tasks, due at S0.2/S0.3).
+
+### Deployment
+Web search + primary-source reading (web access required); expected days, not hours; no compute spend.
+
+---
+
 ## ✅ DONE — S0.1.1: S0.1 closeout (decision-free Critic edits before S0.2)
 
 **Assigned:** 2026-06-09 · **Closed:** 2026-06-09

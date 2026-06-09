@@ -6,6 +6,31 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-09 (evening) — Lucas "ok go" → all three resolutions executed; S0.L-1 (PR-15 search) ACTIVE
+
+Lucas blessed D-08-2 + D-08-3 + D-09-1 in one word. Executed, in order:
+1. **PR-15 registered + 🔒 FROZEN** (`preregistration.md` — the ledger's first frozen entry): rule-form
+   kill-criterion (q1∧q2∧q3), five search lanes + named-group minimum set, two-modality protocol,
+   one-sided PASS, disposition (FATAL/AMBIGUOUS → Lucas with primaries). PR-2/PR-4 constraint notes added.
+2. **Roadmap → v3.1**: S0.2–S0.5 behind the **pre-S0.2 continuation gate** (PR-15 + S0.7-lite + Lucas's
+   program call); S0.L re-paced (#1 front-loaded; F14 pacing stands for #2/#3); dependency graph,
+   S0.2 precondition + D-08-2 architecture resolution, Lucas-gates section updated.
+3. **Decisions resolved**: D-09-1, D-08-2, D-08-3 → RESOLVED (condensed; full threads in git `954d2d2`).
+   E-09-1/E-09-2 → RESOLVED; touchpoints list updated (next asks: PR-10, then the gate).
+4. **Mapping result written** (`docs/s0_1/mapping_result.md`) — the Stage-0 objective-(a) statement with
+   the corrected S4D/DSS framing, the validated mapping table, the pole-region envelope (3.29→49.4 ns),
+   B1/B2/B3, and the claim-discipline section. Paper section drafts from this.
+5. **Dispatched**: Executor task **S0.L-1 ACTIVE** (the PR-15 existence search — apply the frozen rule,
+   primaries only, escalate FATAL/AMBIGUOUS); Critic spec `critic_instructions_whitespace-pr15.md`
+   (blind adversarial pass first, then memo audit + criterion audit + F14 reconciliation; reports to
+   Lucas; gate waits on it).
+
+**Next Supervisor deliverable:** the **PR-10 draft** (S0.7-lite assumptions: conversion energies,
+DAC/ADC rates, named digital-baseline class + sources, operating scale) → Lucas freezes → S0.7-lite runs
+as the next Executor task after S0.L-1. Then the continuation gate with both probes in hand.
+
+---
+
 ## 2026-06-09 (latest) — S0.1.1 ACCEPTED (S0.1 fully closed); D-2026-06-09-1 (front-load debt #1) → CONCUR
 
 **S0.1.1 closeout: ACCEPT, no reservations.** All four decision-free edits landed exactly to spec;

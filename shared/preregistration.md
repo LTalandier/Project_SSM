@@ -18,6 +18,11 @@ boundary before the run proceeds.
 > (APPROVE-WITH-EDITS) is adopted and folded into `stage0_roadmap.md` **v3**. This ledger's *structure* is
 > locked; **entries remain UNSET** and each freezes (date + value + Lucas approval) at its governing phase
 > boundary.
+>
+> **Update (2026-06-09, Lucas "ok go" — E-2026-06-09-2):** **PR-15 registered and 🔒 FROZEN** (the first
+> frozen entry; detail block at the end of this file). **PR-2 and PR-4 gained blessed *constraints*** from
+> the resolved D-2026-06-08-2 / D-2026-06-08-3 (see Notes) — the entries themselves remain ⬜ until their
+> own freeze.
 
 ## Ledger
 
@@ -37,6 +42,7 @@ boundary before the run proceeds.
 | **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
 | **PR-13** | S0.5 secondary task | S0.5 | ⬜ | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
+| **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (q1∧q2∧q3) + search lanes + two-modality protocol + disposition. **Full frozen detail in the block below** — the table row is a pointer only. | D-09-1, F15 |
 
 ## Notes
 
@@ -46,5 +52,71 @@ boundary before the run proceeds.
 - **Convergence note (PR-4):** the `SiN_LIGENTEC_AN800` registry Q/loss inconsistency (Q=2×10⁶ vs
   0.03 dB/cm ⇒ Q≈1.1×10⁷) was found **independently** by the Executor (S0.0 results) and the Critic
   (F13.1). Fix at S0.1: register one as primary, derive the other, add a loss↔Q self-consistency test.
+- **PR-2 constraints from resolved D-2026-06-08-2 (Lucas 2026-06-09):** the simulated layer is the
+  **diagonal complex-pole SSM (S4D/DSS class)** — one ring = one complex pole; LinOSS is the uncoupled +
+  real-I/O conjugate-pair special case; trainable inter-ring μ is a **mild generalization beyond**
+  standard diagonal-A LinOSS (benchmark transfer = **debt #2**, validated in-house via the PR-3
+  BPTT-on-substrate ceiling). At the PR-2 freeze: **pin the readout** (coherent-quadrature = real-linear,
+  LinOSS-equivalent head **vs** intensity = |·|², nonlinear head) and address the **F6 κ_ext dual-role**
+  (damping actuator vs readout knob — keep the reservoir-baseline contrast clean).
+- **PR-4 constraints from resolved D-2026-06-08-3 (Lucas 2026-06-09):** the realistic-SiN cell gains a
+  **roughness/splitting sub-parameter**; splitting is evaluated at the **operating κ_ext** (not the
+  undercoupled worst case — overcoupling suppresses the visible doublet); the S0.3 CW/CCW knob defaults
+  **ON except the clean-damascene corner**, and if the single-pole substrate relies on the clean corner
+  PR-4 must state that assumption explicitly; resolve **jointly with D-2026-06-08-1** (the (α, Q_i)
+  operating pair). B2 crossover numbers remain provisional until the F5 primary-source pass (S0.L).
 - This ledger is referenced by `stage0_roadmap.md` and `escalate_to_human.md`. When an entry freezes, log
   the date + the approved value here and cite it from the phase's `task_queue.md` spec.
+
+## PR-15 — frozen detail (registered + 🔒 FROZEN 2026-06-09; Lucas "ok go", E-2026-06-09-2)
+
+**Governs:** the white-space existence search (debt #1, front-loaded pre-S0.2 — D-2026-06-09-1) and the
+**pre-S0.2 continuation gate** it feeds. Frozen *before* the search runs, per ledger discipline.
+
+**Claim under test (existence form, sharpened):** *recurrent parameters — parameters that define the
+recurrence of a physical photonic system (pole positions / feedback / inter-node couplings) — updated on
+the physical device by gradient-based/-estimating training*: believed never demonstrated. The exact claim
+**wording** (vs the B1 trained set) is refined at PR-2/S0.8 — this gate tests **existence only**.
+
+**Kill-rule — a prior is FATAL iff q1 ∧ q2 ∧ q3:**
+- **q1 — internal to the recurrence.** The updated parameters are feedback/coupling/pole-defining (they
+  define the recurrent map). Readout-only, input-mask-only, or encoder-only training does **not** satisfy
+  q1 (that is reservoir computing).
+- **q2 — on the physical device, in the loop.** Updates are applied to the physical system inside the
+  training loop (forward passes are physical). Simulate-train-then-deploy / offline transfer does **not**
+  satisfy q2.
+- **q3 — gradient-based or gradient-estimating rule.** Backprop / in-situ adjoint / PAT-style hybrid
+  (digital backward, physical forward); zeroth-order perturbative (SPSA, finite-difference — estimates a
+  descent direction from perturbation measurements); REINFORCE/policy-gradient (reward-gradient
+  estimator). Population-selection methods (genetic/evolutionary/CMA-ES/Boolean/exhaustive search) do
+  **not** satisfy q3 — such priors are **non-fatal but MUST be cited** (they make the
+  "gradient-based/-estimating" qualifier load-bearing in the claim).
+
+**Search lanes (F15 + named groups; lanes locate, the rule decides):** (i) zeroth-order/perturbative
+updates of internal params of any recurrent photonic system; (ii) REINFORCE/policy-gradient updates of
+internal recurrent params — incl. the **Bueno/Brunner boundary memo** (verify in primary sources what that
+line physically updates); (iii) hardware-in-the-loop adaptation of delay-reservoir *feedback/internal*
+params (fatal **iff q3 also holds**); (iv) evolutionary/Boolean internal-weight training (non-fatal lane —
+cite); (v) free/forward search through the snapshot date + a **named-group minimum set** (extend, don't
+truncate): Brunner/Fischer/Bueno (photonic RNN/reservoir), Shastri/Prucnal (neuromorphic photonics),
+Wright/Onodera/McMahon (PAT), Hughes/Fan (in-situ adjoint), Englund/Bandyopadhyay/Hamerly (on-chip
+training), Psaltis/Moser, Lvovsky, Momeni/Fleury (physical local learning), Marquardt (physical learning
+theory), coupled-laser-array / optoelectronic-oscillator adaptive-control literature.
+
+**Protocol (two-modality — the B2/F5 lesson):** (1) **Executor systematic sweep** → dated memo
+`docs/s0_L/debt1_whitespace_search.md`: per-candidate verdict table (citation · system · what was
+physically updated · q1? · q2? · q3 class · verdict FATAL / non-fatal-cite / AMBIGUOUS / clear), **every
+verdict grounded in the primary source with the load-bearing sentence quoted** — no aggregator-snippet
+citations; reproducible search trail (queries, databases, dates). (2) **Critic independent adversarial
+pass** — blind search first, then audit of the Executor memo + this criterion + the F14 reconciliation
+(`critic_instructions_whitespace-pr15.md`) → reports to Lucas.
+
+**Snapshot date:** 2026-06 (the claim is dated "as of mid-2026").
+
+**Disposition:** any **FATAL** → escalate to Lucas with primaries attached **before any S0.2–S0.5
+authorization** (residual = methods-comparison-only; Lucas decides whether that justifies the bake-off).
+Any **AMBIGUOUS** (partially-internal params; hybrid digital recurrence; unclear update locus) → escalate
+with primaries; **never adjudicated in-pipeline**. **Clean → PASS is one-sided** (a found prior kills; a
+clean search does *not* certify): the gate is satisfied for S0.2 authorization — jointly with the
+S0.7-lite envelope + **Lucas's program-level continuation call** — and the claim stays provisional until
+the dated S0.8 final sweep.

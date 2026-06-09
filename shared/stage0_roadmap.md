@@ -33,6 +33,21 @@ its run (Critic F12). PR-IDs below point into it.
 > to S0.3/S0.4 gates. · **F19** backscatter/mode-splitting bound (S0.1) + optional knob (S0.3). · **F20**
 > synthetic memory-task secondary. · **F21** compute sizing. · **F22** pre-draft both RHEL conclusions.
 
+> **v3.1 changelog (2026-06-09, Lucas "ok go" — three resolutions folded in).**
+> **D-2026-06-08-2 resolved:** the simulated layer is the **diagonal complex-pole SSM (S4D/DSS class)** —
+> one ring = one complex pole; LinOSS is its uncoupled + real-I/O conjugate-pair special case; trainable
+> inter-ring μ is a mild generalization beyond diagonal-A LinOSS; "oscillatory LinOSS" branding softened;
+> benchmark transfer = **debt #2** (validated via the PR-3 BPTT-on-substrate ceiling); **readout pinned at
+> PR-2** (coherent-quadrature vs intensity, + the F6 κ_ext dual-role). · **D-2026-06-08-3 resolved:** S0.3
+> carries the **roughness-gated CW/CCW splitting knob**, default **ON except the clean-damascene corner**;
+> PR-4 gains a roughness/splitting sub-parameter, evaluated at the **operating κ_ext**, resolved jointly
+> with D-2026-06-08-1; B2 numbers provisional until F5 (S0.L). · **D-2026-06-09-1 adopted:** verification
+> **debt #1 is front-loaded** — the white-space existence search runs **now, pre-S0.2**, under frozen
+> **PR-15** (rule-form kill-criterion q1∧q2∧q3; two-modality Executor+Critic protocol; one-sided PASS);
+> S0.2–S0.5 authorization sits behind a **pre-S0.2 continuation gate** = PR-15 verdict + S0.7-lite
+> envelope + **Lucas's program-level call** (the "first" is collectible only at Stage 1+; Stage 0 alone =
+> methods paper — E-2026-06-09-2). Wording refinement stays at PR-2/S0.8; the dated S0.8 sweep stays.
+
 ## Goal of Stage 0
 
 Produce, with **no fabrication**, the deliverables that gate the program:
@@ -97,12 +112,18 @@ And clear the two gates:
   the CW limit recovering the S0.0 static reference).
 
 ### S0.2 — LinOSS / D-LinOSS digital baseline (Gate i) + bake-off setup
+- **Precondition — the continuation gate (D-2026-06-09-1):** S0.2 (and the S0.2–S0.5 chain, S0.3
+  included) is authorized only after the **PR-15 white-space verdict** + the **S0.7-lite envelope** are in
+  and **Lucas makes the program-level continuation call** (E-2026-06-09-2).
 - **Do:** implement LinOSS (stable for nonnegative-diagonal $A$) + D-LinOSS (learnable damping); reproduce
   a long-range / time-series benchmark within a **pre-registered margin** (PR-1) set *before* the run.
-  Resolve verification debt **#2** here (its S0.L memo is a *prerequisite* — F14). **Pin the bake-off**
+  Resolve verification debt **#2** here (its S0.L memo is a *prerequisite* — F14; sharpened by D-08-2:
+  published LinOSS results validate only the μ=0 diagonal reduction). **Pin the bake-off**
   (F2, → PR-2): the **task** (sized against S0.1's pole/memory bound + the S0.7-lite niche), the **hybrid
-  architecture** (what is simulated — layer/stack, encoder, head, nonlinearity), the **trainable-parameter
-  partition** (every estimator trains the *same* partition), and the **actuation map** from S0.1.
+  architecture** — *resolved D-2026-06-08-2:* the **complex-diagonal (S4D/DSS) layer**, LinOSS as its
+  special case; **pin the readout** (coherent-quadrature vs intensity) + the F6 κ_ext dual-role — the
+  **trainable-parameter partition** (every estimator trains the *same* partition), and the **actuation
+  map** from S0.1 (B1).
 - **Deliverable:** baseline accuracy table + the pre-registered margin + the pinned bake-off task/arch.
 - **Gate (= Gate i):** idealized oscillatory-SSM accuracy within the pre-registered margin (PR-1).
 
@@ -183,7 +204,8 @@ And clear the two gates:
 - **Gate:** a defensible operating point identified (or a documented "damping-insensitive" result).
 
 ### S0.7 — Systems-advantage envelope (§10 deliverable) — **lite (early) + full**
-- **S0.7-lite (runs ∥ S0.1; due *before* the S0.2 task choice — F1):** assumption-driven, no new code,
+- **S0.7-lite (runs now, ∥ the PR-15 search; due *before* the S0.2 task choice — F1; feeds the
+  pre-S0.2 continuation gate — D-09-1):** assumption-driven, no new code,
   parametric in memory length where S0.1 numbers don't exist yet. Pre-register its assumptions (PR-10:
   conversion energies, DAC/ADC rates, named digital-baseline class + sources, operating scale). **Output
   identifies the plausible low-latency niche → input to the S0.2 task choice** (so the bake-off isn't
@@ -212,7 +234,9 @@ And clear the two gates:
 ### S0.L — (parallel) Literature / verification-debt track
 - **Do:** re-verify the four debts against primary sources, dated memos with citations. **#2 and #3 are
   critical-path (F14):** **#2** (LinOSS/D-LinOSS/Mamba-3 specifics) feeds **S0.2**; **#3** (Er:Si₃N₄ NF)
-  feeds **S0.3**. **#1 and #4** are S0.8-paced.
+  feeds **S0.3**. **#1 is front-loaded pre-S0.2** (D-2026-06-09-1 — kill-shot first; existence search
+  under frozen **PR-15**, feeding the continuation gate; F14's data-dependency pacing stands for #2/#3 —
+  the two lenses are compatible). **#4** stays S0.8-paced.
   1. **white-space** — sharpened form: *recurrent parameters (pole positions + inter-ring couplings)
      updated on the physical device by gradient-based/-estimating training, never done.* Pre-empt:
      reservoir computing; the Bueno/Brunner photonic-RNN RL line; internal-param reservoir variants.
@@ -223,6 +247,11 @@ And clear the two gates:
      hardware-in-the-loop adaptation of delay-reservoir *feedback/internal* params; (iv)
      evolutionary/Boolean-search internal-weight training (claim survives via "gradient-based/-estimating"
      — say so explicitly). Date the search (mid-2026 snapshot).
+     **Operationalized (D-09-1, PR-15 🔒 FROZEN 2026-06-09):** existence search runs **now** —
+     two-modality (Executor systematic sweep, primary-source-verified — the B2/F5 lesson — + independent
+     Critic adversarial pass); FATAL iff *internal-to-recurrence* ∧ *on-device-in-the-loop* ∧
+     *gradient-based/-estimating* (lanes locate, the rule decides); (iv)-type priors non-fatal but cited;
+     ambiguous → Lucas; **PASS is one-sided** — the dated S0.8 sweep + wording refinement stay.
   2. **LinOSS / D-LinOSS / Mamba-3** benchmark specifics → S0.2.
   3. **Er:Si₃N₄ noise figure** (flagship device unmeasured) → S0.3 ASE knob.
   4. **recurrent-adjoint gap** (inferred from absence of demonstrations; confirm) → S0.8.
@@ -230,18 +259,23 @@ And clear the two gates:
 
 ## Dependency graph
 ```
-                        ┌─ S0.7-lite (∥ S0.1; due before the S0.2 task choice; → PR-2, PR-10)
-S0.0 ✅ ─▶ S0.1 ─┬─▶ S0.2 ── Gate i ──┐  (Gate i is the spend gate before S0.4/S0.5)
-                 │                     │
-                 └─▶ S0.3 ─────────────┴─▶ S0.4{a,b,c} ─▶ S0.5 ── Gate ii ──▶ S0.6 ─▶ S0.7-full ─▶ S0.8
-                     (S0.3 may run ∥ S0.2 once S0.1 lands — F4; needs S0.1's model, not Gate i's outcome)
+                     ┌─▶ PR-15 white-space search (debt #1 — D-09-1) ─┐
+S0.0 ✅ ─▶ S0.1 ✅ ──┤                                                ├─▶ ⟦pre-S0.2 continuation gate:
+                     └─▶ S0.7-lite (PR-10 freeze → run; F1) ──────────┘    PR-15 + lite envelope + Lucas⟧
+                                                                                      │
+                                             ┌────────────────────────────────────────┘
+                                             ├─▶ S0.2 ── Gate i ──┐  (Gate i = spend gate before S0.4/S0.5)
+                                             └─▶ S0.3 ────────────┴─▶ S0.4{a,b,c} ─▶ S0.5 ── Gate ii ──▶ S0.6 ─▶ S0.7-full ─▶ S0.8
+                                                 (S0.3 ∥ S0.2 — F4; needs S0.1's model, not Gate i's outcome)
 
-S0.L (literature): debt #2 → S0.2 · debt #3 → S0.3  (both critical-path) · debts #1, #4 → S0.8
+S0.L (literature): debt #1 → pre-S0.2 (PR-15, front-loaded) · debt #2 → S0.2 · debt #3 → S0.3 (critical-path) · debt #4 → S0.8
 ```
 
 ## Pre-registration (freeze before the governing run — see `preregistration.md`)
-- **S0.2:** PR-1 (Gate-i margin + benchmark), PR-2 (task + architecture + parameter partition + actuation),
-  PR-10 (S0.7-lite assumptions, *before* the task choice).
+- **pre-S0.2 (continuation gate):** **PR-15** (white-space existence gate — 🔒 **FROZEN 2026-06-09**),
+  PR-10 (S0.7-lite assumptions — freeze *before* the lite run).
+- **S0.2:** PR-1 (Gate-i margin + benchmark), PR-2 (task + architecture + parameter partition + actuation;
+  carries the blessed D-08-2/D-08-3 constraints — see ledger Notes).
 - **S0.3:** PR-4 ($(\alpha,Q_i)$ pair + $\kappa_\text{ext}$ + noise cell), PR-12 (damping cell, at close).
 - **S0.4:** PR-5 (PAT twin-mismatch), PR-6 (fairness contract, CRITICAL), PR-7 (cost accounting), PR-3
   (BPTT ceiling rule before close; ceiling frozen at close), PR-11 (RHEL echo invariants).
@@ -251,6 +285,12 @@ S0.L (literature): debt #2 → S0.2 · debt #3 → S0.3  (both critical-path) ·
 ## Decision gates owned by Lucas
 - ✅ Approved this roadmap (v3) + scope (B) — 2026-06-08. Each **pre-registered value** (PR-IDs) still
   comes to Lucas at its phase boundary before the run that tests it.
+- ✅ Adopted v3.1 ("ok go", 2026-06-09): D-08-2 (S4D/DSS framing) + D-08-3 (roughness-gated knob) +
+  D-09-1 (debt-#1 front-load, PR-15 frozen).
+- **Pre-S0.2 continuation gate (D-09-1 / E-2026-06-09-2):** with the PR-15 verdict + the S0.7-lite
+  envelope in hand, **Lucas makes the program-level continuation call** — the "first" is collectible only
+  on hardware (Stage 1+); Stage 0 alone yields a methods/feasibility paper. A FATAL PR-15 prior or a
+  hard-negative lite envelope → stop/reframe decision **before any S0.2–S0.5 spend**.
 - The parked $Q$ choice (D-2026-06-08-1) → adjudicated by F13: foundry-grade gates, class-leading sweeps;
   formalized at PR-4.
 - Gate (ii) outcome → proceed to Stage 1 on **PAT/SPSA**; whether to reserve a *later* hardware slot for
