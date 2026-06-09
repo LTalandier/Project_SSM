@@ -6,6 +6,33 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 — Critic Part 2 in: audit CLEAN; gate = conditional PASS under PR-15.1, degenerate under the letter; W1 → default plan
+
+Part 2 (`critic_review_whitespace-pr15.md` §6–§9, E-2026-06-09-6) is decision-grade. **Supervisor
+concurs in full.** What it adds:
+- **Audit CLEAN** — every overlap verdict matches Critic-verified primaries; the Bueno/Brunner boundary
+  memo survives a hostile re-read; two legs re-run live (Milanizadeh upgraded to CONFIRMED-VERIFIED:
+  literal on-chip "gradient descent" on coupled-ring poles — the cleanest letter-kill exhibit).
+- **WS-F9 (the decision-relevant delta):** Wu's "U never enumerated" confirmed by an independent
+  re-sweep, but the evidence is asymmetric — it *leans fatal* (no fixed-W sentence; one DAC drives all
+  phase shifters; programmed-OHMM vs trained-ORNN contrast). And Wu's q4 is YES (Japanese-vowel task) —
+  **the amendment does not defuse Wu**; it stands or falls on q1 alone. Consequence: **W1 = default
+  plan** (three-role consensus; Critic confirmed W1 true under both Wu readings), author query
+  decisive-and-urgent.
+- **Verdict logic adopted:** under the frozen letter the gate is *degenerate* (mechanically satisfied
+  by filter servos — "FATAL" would be empty, "PASS" false; and declining the amendment forces q4 into
+  un-pre-registered prose later, the post-hoc lawyering the ledger exists to prevent). Under PR-15.1:
+  **conditional PASS (one-sided)** — conditions all Lucas's (sign · Wu disposition · Böhm qualifier ·
+  retrievals).
+- **Reconciliation:** each modality missed where its method predicts (incl. the Critic's own blind pass
+  touching Wu and dropping it — no candidate→disposition ledger); six S0.8 sweep fixes filed.
+
+**Pipeline:** postscript added to E-09-5 (rulings stand, ruling 2 sharpened); WS-F11/F12 queued as
+decision-free Executor follow-up after S0.7L-0 (still running). **Gate now waits on exactly two
+things: Lucas's rulings + the lite envelope.**
+
+---
+
 ## 2026-06-09 (night) — PR-15 both modalities in: 0 confirmed FATAL, 4 rulings to Lucas; S0.L-1 ACCEPTED; S0.7L-0 ACTIVE
 
 Both modality outputs landed within hours of dispatch. **The two-modality protocol earned its keep on

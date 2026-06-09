@@ -18,8 +18,49 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 🏁 E-2026-06-09-6 (Critic) — PR-15 Part 2 filed: memo audit CLEAN; merged verdict table; **gate = conditional PASS (one-sided) under PR-15.1, degenerate under the frozen letter**
+**Filed by the Critic** (Part 2 of `critic_review_whitespace-pr15.md`, §6–§9 + Appendix B). In brief:
+1. **The Executor memo passes the audit.** Every overlap-set verdict matches Critic-verified primaries;
+   no verdict rests on an unreached source; the Bueno/Brunner boundary memo survives a hostile re-read;
+   the trail is reproducible (I re-ran two load-bearing legs). Two LOW bookkeeping fixes (WS-F11/F12).
+2. **Wu (M1) audit:** I re-read the full archived PDF + hostile-grepped the SI with a disjoint query
+   set — "U is never enumerated" **confirmed**. New evidence (WS-F9): the text affirmatively supports
+   only the *natural/fatal* reading (no fixed-W statement exists; one FPGA-DAC drives all phase
+   shifters; OHMM-programmed vs ORNN-trained contrast). Wu's q4 is YES — **the amendment is no
+   escape**. Recommend: author query = urgent; **W1 hedge = default plan, not contingency** (I
+   verified W1 true under both Wu readings — consistent with the Supervisor's freeze-low/reclaim-high
+   draft).
+3. **Milanizadeh upgraded AV→CV** (live fetch where both prior attempts 403'd): literal "gradient
+   descent" on coupled-ring poles, on chip — the cleanest proof the frozen letter is defective.
+   **Zhao paywall reproduced** (Wiley 402) — retrieval ask #1 is genuine.
+4. **Merged table** (§7): escalation set M1–M9 + merged must-cite list + 9-item S0.8 watchlist.
+   **Reconciliation** (§8): each modality missed where its method predicts — including that my own
+   blind pass *made contact with Wu and dropped it* (no candidate→disposition ledger); six concrete
+   S0.8 sweep fixes filed.
+5. **Verdict (§9):** under the **frozen letter — degenerate** (mechanically satisfied by filter
+   servos; "FATAL" would be true-but-empty, "PASS" would be false — the letter is worth nothing
+   without amendment). Under **PR-15.1 — conditional PASS (one-sided)**, conditions: sign PR-15.1 ·
+   disposition Wu (per 2.) · adopt the Böhm physicality qualifier · retrieve Zhao/NTT/Fisher before
+   any claim freeze. The continuation gate then closes on your rulings + the S0.7-lite envelope, per
+   E-09-5.
+
 ### 🎯 E-2026-06-09-5 (Supervisor) — PR-15 synthesis: **four rulings needed**; recommendations attached; pipeline re-tasked around your ruling
 **Read this first; E-09-4 (Executor) + E-09-3 (Critic) below are the underlying modality reports.**
+
+> **Supervisor postscript (2026-06-10, after Critic Part 2 / E-09-6 above): the four rulings stand,
+> with ruling 2 sharpened.** The Part-2 audit is CLEAN (Supervisor concurs — verdict structure is
+> right, and its strongest new argument for ruling 1 is that *declining* PR-15.1 forces the q4 content
+> into un-pre-registered prose later, exactly the post-hoc lawyering the ledger exists to prevent;
+> the letter-verdict is formally degenerate, mechanically satisfied by Milanizadeh's literal on-chip
+> "gradient descent" filter tuning). **Delta on ruling 2 (Wu):** WS-F9's hostile re-read found the
+> textual evidence *leans toward the fatal reading* (no fixed-W sentence exists; one DAC drives all
+> phase shifters; programmed-OHMM vs trained-ORNN contrast) — so **W1 is now the default plan, not the
+> contingency** (three-role consensus: Critic verified W1 true under both Wu readings — no resonator
+> pole or inter-resonator coupling is in Wu's trainable set on any reading), and the author/code query
+> is decisive-and-urgent. Rulings 1/3/4 unchanged. **Gate inputs remaining: your rulings + the
+> S0.7-lite envelope** (Executor running S0.7L-0). WS-F11/F12 (LOW bookkeeping: memo under-counts its
+> own coverage ≈74 rows/80+ papers; full-text residuals) → queued as a decision-free Executor follow-up
+> after S0.7L-0.
 
 **State.** Modality-1 sweep + blind adversarial pass both complete: **no confirmed FATAL**. The
 two-modality design worked — each pass found what the other missed (Executor: Wu, Milanizadeh, Zhao ↔

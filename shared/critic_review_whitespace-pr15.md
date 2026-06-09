@@ -1,14 +1,15 @@
 # Critic Review — PR-15 white-space gate: blind adversarial pass + criterion audit + F14 reconciliation
 
 **Reviewer:** Critic session · **Date:** 2026-06-09 · **Spec:** `critic_instructions_whitespace-pr15.md`
-**Status: PART 1 of 2.** The Executor memo (`docs/s0_L/debt1_whitespace_search.md`) **was not yet filed**
-when this pass ran, so spec items 2 (memo audit) and 5 (final gate verdict) are **PENDING**; this part
-delivers item 1 (blind adversarial search — run first, blind, as required), item 3 (criterion audit),
-and item 4 (F14 reconciliation). Part 2 will be appended when the memo lands.
+**Status: COMPLETE (Parts 1 + 2).** Part 1 (blind adversarial search + criterion audit + F14
+reconciliation) was filed before the Executor memo existed. **Part 2 (memo audit + merged verdict
+table + cross-modality reconciliation + final gate verdict) is appended below from §6**, per the
+Part-2 addendum in the spec. Lucas's PR-15.1 amendment ruling was still pending at Part-2 filing, so
+all verdicts carry the **L (frozen letter) / A (amended rule)** dual columns.
 
 > **Executor: do not read this file until your S0.L-1 memo is committed** — two-modality independence.
 > The blind pass below was completed 2026-06-09 with the full query trail in the Appendix, before any
-> Executor output existed to read.
+> Executor output existed to read. *(Memo now committed; constraint lifted.)*
 
 ---
 
@@ -287,17 +288,271 @@ human-signed amendment** rather than by silent reinterpretation during classific
 ledger doing its job. (Refinement: amendments to frozen entries should follow the ledger's own
 supersession discipline — keep v1, date the change, record the trigger — as proposed above.)
 
-## 5. PENDING — Part 2 (spec items 2 + 5)
+## 5. Part-2 plan (spec items 2 + 5) — executed below from §6
 
-When `docs/s0_L/debt1_whitespace_search.md` lands: (a) audit **every q1 call** against primaries
-(motivated-reasoning hotspot); (b) hostile re-read of every "clear" on lanes (ii)/(iii); (c) the
-Bueno/Brunner boundary memo vs my verified ground truth (greedy = selection, not gradient; recurrence
-params fixed/scanned; Hermans masks-only with loop gain pinned; Antonik teacher-forced offline ridge,
-weights constant when the loop closes); (d) flag any verdict resting on a source the Executor did not
-reach (the B2/F5 lesson); (e) symmetric-difference of the two candidate sets (above); (f) reproducibility
-of the Executor's trail. Final gate verdict then issues as: **PASS (one-sided)** iff memo audit clean ∧
-amendment signed ∧ A1–A4 dispositioned by Lucas; **FATAL** iff any candidate survives the amended rule;
-**AMBIGUOUS-escalate** otherwise.
+The audit ran exactly as pre-stated here: (a) every q1 call audited; (b) hostile re-read of lane
+(ii)/(iii) "clear"s; (c) Bueno/Brunner boundary memo vs my verified ground truth; (d) unreached-source
+flags; (e) symmetric difference of the two candidate sets; (f) trail reproducibility. Verdict formula
+unchanged: **PASS (one-sided)** iff memo audit clean ∧ amendment signed ∧ A1–A4 dispositioned by Lucas;
+**FATAL** iff any candidate survives the amended rule; **AMBIGUOUS-escalate** otherwise.
+
+---
+
+# PART 2 (filed 2026-06-09, after E-2026-06-09-4) — memo audit, merged table, final gate verdict
+
+**Inputs:** `docs/s0_L/debt1_whitespace_search.md` (Executor memo, S0.L-1) · the archived primary
+(`docs/s0_L/primaries/`) · my Part-1 verified ground truth · two fresh Critic primary fetches (Appendix
+B). **Verification labels:** **EV** = Executor-verified, **AV** = sweep-agent, **CV** = Critic-verified
+first-hand (this pass). PR-15.1 not yet signed → L/A dual columns throughout.
+
+## 6. Audit of the Executor memo (spec item 2 + Part-2 addendum item 4)
+
+**Headline: the memo passes the audit.** No contradiction was found between any Executor verdict and
+any Critic-verified primary; the highest-scrutiny items were independently re-verified; the disposition
+discipline (unreachable → AMBIGUOUS, never clear; nothing adjudicated in-pipeline) was followed with
+zero violations found. Findings WS-F9–WS-F12 below (numbering continues from Part 1).
+
+### WS-F9 (HIGH — input to Lucas's A1 ruling) — Wu q1 audit: "U is never enumerated" CONFIRMED by independent re-sweep; but the evidence is *less symmetric* than the memo conveys — it leans toward the fatal reading
+
+I re-read the **entire archived publisher PDF (all 14 pages, visually)** and hostile-grepped the
+extracted supplementary with a **different query set** than the Executor's (`U +|U −|optimiz|update|
+Adam|learning rate|W_in|W_out|feedback weight|hidden`, then `S9|S10|train|SPGD|perturbation|voltage`).
+Result: the Executor's evidentiary claims all check out — every quoted sentence is verbatim-accurate;
+S9 is iteration curves only ("Figs. S9(a–h) present the iterative curves for the in-situ training of 8
+ORNNs"); the routing-MRR calibrate-once quote is exact ("this process is performed only once. Once the
+computing begins, the bias voltages for these devices remain static", SI-S10); **no enumeration of U
+exists anywhere in paper or SI.** The exhaustiveness claim survives a hostile re-sweep. (Wu's q4, for
+the record, is **YES** — Japanese-vowel classification with a train/test split is a genuine
+computational task — so **the amendment does not defuse Wu**; it stands or falls on q1 alone. No
+motivated-reasoning escape exists, and none was attempted.)
+
+**Audit sharpening (new evidence, both directions, from my full read):** the memo presents the two
+readings of U as symmetrically consistent with the text. They are not quite:
+- *For the natural (fatal) reading:* (i) Methods 5.2 — **all** thermal phase shifters + the WRU bias
+  are driven by one FPGA-controlled DAC (LTC2688), so the training system physically addresses the
+  W-mesh; (ii) the paper internally **contrasts** the OHMM (matrices "scanned and adjusted to match
+  the desired matrices" — i.e. programmed to pre-computed values) with the ORNN (in-situ SPGD; **no
+  pre-computed target matrices are mentioned anywhere**); (iii) under the restricted reading the
+  authors would have had to *set W to something* (random? calibrated to what?) — **no sentence in
+  paper or SI describes fixing W**, while "applied to the current voltages" carries no restriction.
+- *For the restricted (reservoir-style) reading:* only the indirect antecedent argument — their SPGD
+  reference [49] (Wan et al., OEA 2024) is feedforward. Nothing in the Wu text itself.
+
+The restricted reading requires assuming an unstated protocol; the natural reading requires only the
+absence of a restriction. **Recommendation to Lucas (sharpens E-09-5 ruling 2):** treat the author/code
+query as *decisive and urgent*, and the **W1 hedge as the default plan rather than the contingency**.
+I also independently confirm the W1 hedge's validity under *both* readings: the only resonant elements
+(routing MRRs, WRU MRMs) are calibrate-once-static (SI-S10) or photocurrent-driven relay/activation —
+**no resonator pole or inter-resonator coupling is in the trainable set on any reading**, so *"first
+continuous-time dissipative-resonator recurrence (pole positions + inter-resonator couplings) trained
+in situ …"* survives Wu regardless, with Wu cited loudly as nearest neighbor.
+
+### WS-F10 (MED) — Milanizadeh A3a upgraded AV → CV: load-bearing quote verified verbatim from the live primary
+
+The Executor's strongest A3 member rested on a single sweep-agent fetch (Executor re-fetch 403). I
+fetched the ECIO 2020 PDF live (URL in Appendix B) and confirmed verbatim: *"Automatic tuning of this
+filter is done using gradient descent technique while cancelling the effect of thermal cross talk by
+thermal eigenmode decomposition (TED) in [4]. A tuneable signal with 40GHz bandwidth (to match with
+filter design) is used to find the optimum response of filter along the band."* — experimental, on a
+fabricated 4th-order SOI Vernier filter, retuned across 1520–1570 nm by "the automated algorithm".
+So: q1 ✓ (ring detunings = poles of a coupled-cavity response), q2 ✓, q3 ✓ (literal "gradient
+descent"), **q4 ✗** (objective = filter passband alignment to a target channel — no task corpus, no
+generalization). **Under L this is a mechanical kill — a cleaner letter-kill exhibit than my own S1
+(Jayatilleka), because the algorithm is literally named "gradient descent."** Under A: non-fatal-cite
+lineage. This single row is the strongest concrete proof that the frozen letter is defective (WS-F1)
+and that the Executor's A3 escalation and my q4 amendment are the same finding seen from two roles.
+
+### WS-F11 (LOW) — bookkeeping: the verdict summary under-counts its own table
+
+§0 claims 33 non-fatal-cite rows and "~60 examined candidates"; §4.2 actually contains **47 N-rows**
+(several holding 2+ papers), so the true totals are ≈74 rows / 80+ papers. The error *under*-claims
+coverage — harmless in direction, but the counts feed the gate file and the paper's search statement;
+correct them. Also: §5 references "N28a", which is not a defined row ID (N28 describes experiments (a)
+and (b) in-row) — fix the pointer.
+
+### WS-F12 (LOW) — residual abstract-resting items to full-text by S0.8
+
+The A4 unreachable-primary discipline is clean (nothing unreached was cleared). Three residual flags on
+items that *are* dispositioned but rest on abstracts: (i) **Wan et al., OEA 7:230182 (2024)** — Wu's
+ref [49] and the *entire* textual basis of Wu's restricted reading; full-text it (it anchors the A1
+ruling's alternative). (ii) **C9** compresses three distinct systems into one row; give each a one-line
+disposition (none plausibly fatal, so LOW). (iii) **Mak/Bois/Poon 2016** (my A3 row — the
+*coupling-tuning* sibling of the Executor's A3c): algorithm class still unverified from the primary;
+verify, since a dither stage would move it from "fails q3" to "q4-only exclusion".
+
+### Audit checklist results (a)–(f)
+
+- **(a) q1 calls:** all q1 verdicts on the overlap set match my Part-1 EV ground truth (Bueno N1,
+  Hermans N9/N10, Antonik N8, Böhm A2, Jayatilleka A3b, Lugnan N14, Morozko N12, Tait N17, Guo/MGD
+  N31, Skalli N4, NIPS-1987 N28, FICONN N18, Xue N24). The two judgment-call q1 rows are *correctly*
+  argued: A3e Yan (controller-RL: gradient lands on digital actor weights, EPC gets actions —
+  independently converges with my Part-1 WS-F1 secondary clarification) and N8 Antonik output-feedback
+  (trained weights become recurrence-defining only after training stops — documented as a wording
+  case, not cleared silently). N46 Zhou/DPU's q1 ✗ rests on the paper's own sentence naming *why*
+  readout-only (the recurrence prevents layerwise correction) — exactly the right evidence.
+- **(b) lane (ii)/(iii) "clear"s, hostile re-read:** C1 (PPO/Ozcan — feedforward masks, AV²), C2, C3
+  hold. No lane-(iii) candidate was cleared on secondary evidence; A4c (FiT-DNN) was correctly held
+  AMBIGUOUS despite an abstract suggesting q2 fails. Abstract-resting clears (C4, C12, N29, N30, N39)
+  are all cases where the abstract itself states the disqualifying fact (simulation-only / feedforward
+  / pre-hardware) — acceptable under the primary-source rule.
+- **(c) Bueno/Brunner boundary memo:** passes the hostile re-read. Every load-bearing quote matches my
+  independently fetched copies (greedy Boolean accept/revert = selection, not gradient; DOE coupling
+  passive; Porte W^out-only; Skalli 2025 = q2∧q3 with q1 still failing). Their §3 and my Part-1 N3/N1
+  rows are the same ground truth found twice.
+- **(d) unreached sources:** zero verdicts rest on unreached primaries (the A4 rule held). My Zhao
+  paywall reproduction (Wiley 402, Appendix B) confirms the retrieval ask is genuine, and the
+  reachable abstract material leans feedforward-weight-bank (q1 ✗) — *leaning, not verified*; it
+  remains retrieval-ask #1.
+- **(e) symmetric difference:** §8 below (the Part-1 §2 cross-check seed is fully resolved: Böhm ✓
+  found, Lugnan ✓, Morozko ✓, FiT-DNN ✓, servo class ✓ via A3a/A3b, laser-RL class partially — Yan ✓,
+  Pu-2023/Kokhanovskiy ✗; no Executor "clear" contradicts any verified Part-1 row).
+- **(f) reproducibility:** the Appendix-A trail logs queries verbatim with fetch outcomes; I reproduced
+  two of its load-bearing legs independently (Wu via the local archive — identical text; Milanizadeh
+  via live fetch — identical quote). Reproducible.
+
+## 7. Merged candidate table (the gate's verdict table — Part-2 addendum item 2)
+
+Union of both modalities. **L** = frozen letter (q1∧q2∧q3); **A** = amended rule (PR-15.1: +q4,
+weight-tied-recurrence rider, q3 taxonomy; + the WS-F2 parameter-physicality qualifier per E-09-5
+ruling 3). Found-by: **E** / **C** / **both**. Rows M1–M9 are the escalation set (→ Lucas, with
+primaries); the audited E-memo N-rows and my Part-1 N-rows stand beneath as the merged must-cite list.
+
+| # | Prior | Found by | q1/q2/q3/q4 | L | A | Verified |
+|---|-------|----------|-------------|---|---|----------|
+| **M1** | **Wu et al., eLight 5:7 (2025)** — on-chip ORNN, SPGD+Adam in-situ on voltages U | **E only** | **?**/Y/Y/**Y** | **AMBIGUOUS — potentially FATAL** | **AMBIGUOUS — potentially FATAL** (q4 holds; amendment is no escape) | EV + **CV** (full re-read; WS-F9) |
+| **M2** | Böhm 2022, Nat. Commun. 13:5847 — BM likelihood-gradient on FPGA-held couplings of optoelectronic Ising sampler | both | hybrid/Y/Y/Y | AMBIGUOUS → Lucas | non-fatal **must-cite** *iff* parameter-physicality qualifier adopted (E-09-5 r.3); else AMBIGUOUS | EV + CV (Part 1) |
+| **M3** | Zhao et al., LPR (2025), 10.1002/lpor.202501576 — "in-situ trained microring-based NNs", optical fwd+bwd physically updating MRR params | E only | ?/?Y/?Y/?Y | AMBIGUOUS (unreachable) | AMBIGUOUS — **retrieval ask #1** (leans feedforward weight-bank → q1 ✗, unverified) | paywall ×2 (EV+CV) |
+| **M4** | NTT Compute-in-Wire, ADI 6:0121 (2025) — intra-loop trained temporal modulations | both | folded-FF (rider → q1 ✗)/q2 *unverified*/Y/Y | AMBIGUOUS | AMBIGUOUS (likely dies on rider + q2) — retrieval ask | abstract ×2 |
+| **M5** | Fisher 1987, Appl. Opt. 26:5039 — Widrow-Hoff on LCLV associative hardware | **C only** | ?/Y/Y/Y? | AMBIGUOUS | AMBIGUOUS — interlibrary scan by S0.8 | abstract |
+| **M6** | **Servo / filter-alignment class:** Milanizadeh ECIO 2020 (**CV**, literal "gradient descent", 4th-order coupled rings) · Jayatilleka 2015 (EV) · Mak 2015 (E) · **Mak/Bois/Poon 2016 (C — +coupling tuning, algorithm unverified)** · Padmaraju 2014 (C) · Kaminow ~1988 (C) · Shawon 2022 | both (members differ) | Y/Y/Y(or NM ✗)/**N** | **FATAL-by-letter** (Milanizadeh, Jayatilleka mechanically) | non-fatal-cite **lineage** | CV/EV/AV mixed |
+| **M7** | **Laser-regime class:** Pu 2023 (C, 2-pt FD on intracavity waveplates, full text) · Yan 2021 (both; controller-RL locus) · Kokhanovskiy 2024 (C, SAC 45 h) · Pu 2019 (E, Rosenbrock) · Woodward GA / Andral ES (E/C, q3 ✗ anyway) | both (members differ) | Y(or controller-locus ?)/Y/Y(class-dep.)/**N** | FATAL-by-letter (FD/PG members) | non-fatal-cite lineage | full texts (C) |
+| **M8** | NUDT mutually-injected CBC, Opt. Lett. 35:950 (2010) | E only | ?/Y/?/N (phase-lock) | AMBIGUOUS (unreachable) | lean non-fatal (q4 ✗ regardless) | abstract |
+| **M9** | Historical unreachables: Farhat 1985 · Benkert/Anderson 1991 · Psaltis/Brady/Wagner 1988 · Nature 343:325 | E (+C overlap) | various | AMBIGUOUS by rule | lean non-fatal via reachable companions | abstracts |
+
+**Merged must-cite list (audited, both modalities; cite-class → exemplars):** *gap named open by the
+field:* Hermans 2015/2016 ("too costly … optimised them on a PC", masks-only physical BPTT — the
+anchor), FICONN-2024 outlook, OREO-2024 ("training (in-situ)" deferred), Buckley 2023 perspective (C
+only). *Reservoir/readout line incl. its gradient frontier:* Bueno/Andreoli/Porte/Skalli-2025 (q1 ✗
+throughout — nearest two-of-three miss), Antonik output-feedback (weights frozen on loop closure),
+Kanno/Nakajima. *Internal-params-changed without gradient:* Lugnan 2025 (GST plasticity — strongest
+kin; "gradient-based/-estimating" carries it), Montemezzani/Anderson 1994 self-organization, Feldmann
+2019. *In-loop feedback-knob adaptation under non-gradient rules:* Morozko 2025 (BO — "one swap from
+fatal"), Antonik/Marsal BO, Pérez-López 2020 (PSO on ring-bearing mesh, E only). *Programmed-not-
+trained recurrence:* Tait 2017. *Feedforward in-situ canon (q2∧q3 without q1):* Pai 2023, Xue 2024,
+Bandyopadhyay 2024, Ashtiani 2026, Guo/MGD 2025, Cheng 2024, Spall, Zhan, Wan 2024. *Evolutionary/
+Boolean internal updates (q3-lane):* Woodward 2016, Andral 2015, Cong 2022, Zhang 2021. *Offline-
+trained recurrent (q2-lane / §10 baseline):* Xu eLight 2025, Li/Marandi PNCA 2024, ROSS-NN, Hughes
+2019 wave-RNN, López-Pastor/Marquardt (RHEL basis — no experiment through 2026-06). *Non-photonic
+boundary:* Laydevant 2024 (C only — "photonic" is load-bearing).
+
+**Watchlist for the dated S0.8 sweep (merged WS-F8 + memo §6.3):** (1) Wu follow-ups / author reply;
+(2) Skalli SPSA/PEPG → internal params (one parameter-set away); (3) Guo/MGD → Tait-style recurrent
+broadcast-and-weight (one wiring change away); (4) Böhm/VUB + CIM learning-to-sample with analog
+couplings; (5) Pérez-López/Bogaerts meshes: gradient-class + ring-bearing + in-hardware are separately
+demonstrated, one recombination away; (6) Zhao LPR full text; (7) NTT FiT-DNN online tracking; (8)
+Winters 2017 optimizer class; (9) Yorke-style driven-dissipative in-situ proposals leaving simulation.
+
+## 8. Cross-modality reconciliation, both ways (Part-2 addendum item 2; feeds S0.8 design)
+
+**Why the Critic missed Wu (the embarrassing one, stated plainly).** My blind-pass Lane-E query log
+*contains* the query "eLight 2025 'monolithically integrated' asynchronous optical recurrent
+accelerator training" — my modality **made contact with Wu and dropped it**: the lane agent surfaced
+the title, but the publisher PDF was never fetched (Springer needed the curl fallback the Executor
+used) and no table row was ever written, so the candidate silently fell out between query log and
+verdict table. Root cause: my lane agents had **no candidate→disposition ledger invariant**; the
+Executor's per-candidate-table discipline structurally prevents exactly this failure. **S0.8 fix #1:
+every surfaced title naming a recurrent system + training must receive an explicit dispositioned row
+("located, not fetched, status X" at minimum) — no undispositioned contact.** Fix #2: publisher-PDF
+fetch fallback (curl) in the search harness, not just WebFetch.
+
+**Why the Critic missed Milanizadeh and Zhao.** Milanizadeh: my servo-lane queries used
+dither/lock-in/hill-climbing vocabulary and the named groups Madsen/Jayatilleka/Mak-Poon — the PoliMi
+(Melloni/Morichetti) line says "gradient descent" + "thermal eigenmode decomposition" plainly, a
+vocabulary my lane never issued. **S0.8 fix #3: the alignment/servo lane needs group-name coverage
+(add Melloni/Morichetti) and must include literal "gradient descent" in filter-tuning queries.** Zhao:
+my modern lane was arXiv/open-mirror-skewed; Zhao has no preprint and lives behind Wiley. **S0.8 fix
+#4: sweep publisher databases (Wiley/IEEE/ACS title search) directly — LPR demonstrably hosts
+claim-adjacent papers with no open mirror.**
+
+**Why the Executor missed Fisher 1987.** Their historical lane keyed on the Psaltis school +
+photorefractive + Hopfield vocabulary; Fisher's NRL line is LCLV-based "adaptive associative modules"
+— different device, different vocabulary, different institution. **S0.8 fix #5: 1980s lane needs
+device-diversity terms (LCLV, MSLM) + the NRL group name.** Why they missed Pu-2023/Kokhanovskiy-2024:
+their mode-locking coverage entered via the GA/evolutionary lane (iv) and the 2019 "human-like
+algorithm" paper; the explicit-FD and deep-RL exhibits are preprint-only or 2024-recent with
+regime-optimization vocabulary. **S0.8 fix #6: laser-regime lane must sweep "gradient algorithm
+mode-locking" + RL-on-hardware formulations, including preprint-only.** Why they missed the
+servo-*lineage* members (Padmaraju, Kaminow): their A3 entered through filter-synthesis, not
+wavelength-locking; immaterial under A (same class), but the lineage paragraph should cite the locking
+archetype.
+
+**The diagnosis in one sentence:** each modality missed exactly where its method predicts — the
+ledger-less adversarial pass dropped a made contact (Wu) and skipped venues without open mirrors
+(Zhao), while the rule-applying systematic sweep covered its lanes thoroughly but did not interrogate
+the rule itself (the q4 hole — though the Executor's A3 escalation hit the same wall honestly) and
+under-covered adjacent-field vocabularies (NRL associative line, laser FD/RL exhibits). The
+two-modality protocol earned its cost: **the union contains kill-risks that each single modality would
+have missed.**
+
+## 9. Final gate verdict (spec item 5 + Part-2 addendum items 3/5) — to Lucas
+
+**Memo audit: CLEAN** (WS-F11/F12 are bookkeeping/follow-up, not verdict-affecting). Across both
+modalities — ~80 primaries dispositioned, ~250 logged queries, two independent search designs —
+**no prior is confirmed to satisfy the kill-rule on a computational task.**
+
+**Under L (the frozen letter, if PR-15.1 is declined):** the gate **cannot return a meaningful
+verdict**. The letter is *mechanically satisfied* by Milanizadeh 2020 (CV: literal "gradient descent"
+on coupled-ring pole parameters, on chip, in the loop) and Jayatilleka 2015 — i.e., by filter-
+alignment servos nobody would accept as "training a photonic RNN" — and Wu remains AMBIGUOUS-
+potentially-FATAL on top. A letter-verdict of "FATAL" would be technically true and scientifically
+empty; a letter-verdict of "PASS" would be false. **That is what the frozen letter is worth: nothing,
+without the amendment** — and the claim sentence would then have to carry the q4 content in prose
+anyway, un-pre-registered, which is exactly the post-hoc lawyering the ledger exists to prevent.
+Signing PR-15.1 is the only path to a non-degenerate gate.
+
+**Under A (PR-15.1 as specified in E-09-5 ruling 1 + the WS-F2 qualifier in ruling 3): conditional
+PASS (one-sided)** — explicitly one-sided: a clean search bounds what two modalities could see as of
+2026-06 and certifies nothing; the dated S0.8 final sweep with the §7 watchlist stands. The conditions,
+all Lucas's:
+1. **Sign PR-15.1** (q4 + weight-tied-recurrence rider + q3 taxonomy; dated amendment, v1 retained).
+2. **Disposition M1 (Wu)** — the only candidate that is potentially fatal *under the amended rule*.
+   Per WS-F9 the textual evidence leans toward the fatal (all-voltages) reading, so I recommend
+   treating the author/code query as decisive-and-urgent and the **W1 re-scoped wording as the default
+   plan**; the gate may close on "PASS-under-amendment + Wu carried as potentially-pre-empting + W1
+   hedge" (E-09-5 ruling 2) — that is a defensible program-level call, and I confirm W1 is true under
+   both Wu readings.
+3. **Adopt the parameter-physicality qualifier and cite Böhm by name** (ruling 3) — otherwise M2 stays
+   AMBIGUOUS rather than boundary-cite.
+4. **Retrievals before any claim freeze:** Zhao LPR 2025 (#1 — title-level it claims exactly the
+   contested capability class), then NTT ADI 2025, Fisher 1987, Shi LPR 2025 (+ Wan OEA full-text per
+   WS-F12).
+
+**If conditions 1–3 are met and Zhao/NTT/Fisher resolve non-fatal, the PR-15 white-space gate is
+PASS (one-sided) and S0.2 authorization may proceed on the gate's other inputs** (S0.7-lite envelope +
+Lucas's program-level continuation call). If Wu's author reply or Zhao's full text confirms internal-
+recurrent-parameter training, the PR-15 FATAL disposition applies: residual = methods-comparison-only,
+and Lucas decides whether that justifies the bake-off — with W1 available as the honest re-scoped
+claim either way.
+
+---
+
+## Appendix B — Part-2 verification trail (Critic, 2026-06-09)
+
+1. **Wu eLight 2025**: full visual read of all 14 pages of the archived publisher PDF
+   (`docs/s0_L/primaries/wu2025_elight5-7_ornn.pdf`); hostile grep of
+   `wu2025_elight5-7_supplementary_extracted.txt` with query sets disjoint from the Executor's A.7
+   list (`U \+|U −|U-|U\(|optimiz|update|Adam|learning rate|W_?in|W_?out|feedback (weight|matrix)|
+   hidden`; `S9|S10|train|SPGD|stochastic parallel|perturbation|voltage`). Result: no U enumeration;
+   S9/S10 contents as the memo states; Methods-5.2 DAC/FPGA evidence and the OHMM-vs-ORNN programming
+   contrast newly extracted (WS-F9).
+2. **Milanizadeh ECIO 2020**: live fetch of
+   `https://www.ecio-conference.org/wp-content/uploads/2020/06/4p-Maziyar-Milanizadeh-FSR-free-coupled-microring-resonator-filter-on-extended-C-band-ECIO-2020.pdf`
+   (succeeded where the Executor's curl got 403); full 3-page read; load-bearing quote verbatim-
+   confirmed (WS-F10); CLIPP-monitored experimental retuning at 1528.5/1544.4/1570 nm confirmed.
+3. **Zhao LPR 2025**: WebSearch re-check for any open mirror (none found — Wiley only) + direct fetch
+   of `doi/10.1002/lpor.202501576` → **HTTP 402** (paywall reproduced; retrieval ask confirmed
+   genuine). Reachable abstract material describes real-valued bidirectional optical computing for
+   backprop on noncoherent MRR systems — weight-bank framing, no "recurrent" in any reachable text.
 
 ---
 

@@ -64,6 +64,10 @@ in-pipeline** (E-2026-06-09-4 / D-2026-06-09-2). Supervisor **ACCEPT**: protocol
 cross-modality asymmetry (Executor found Wu/Milanizadeh/Zhao; blind pass found Fisher 1987 + the
 criterion defect) is the two-modality design working. PASS not issued — verdict assembly pends Lucas's
 four rulings (E-2026-06-09-5) + Critic Part 2.
+**Update 2026-06-10:** Critic Part 2 filed (E-2026-06-09-6) — **memo audit CLEAN**; gate = conditional
+PASS (one-sided) under PR-15.1, degenerate under the frozen letter. **Follow-up queued (next Executor
+task after S0.7L-0, decision-free): WS-F11** (fix the memo's self-undercount: ≈74 rows / 80+ papers,
+not "~60"; fix the N28a pointer) **+ WS-F12** (full-text the residual abstract-resting items by S0.8).
 **Source:** D-2026-06-09-1 (Lucas-adopted 2026-06-09, "ok go") + **PR-15, 🔒 FROZEN — read its detail
 block in `preregistration.md` FIRST and apply it as written** (the kill-rule and lanes are frozen; do not
 re-derive or reinterpret them). Roadmap v3.1 §S0.L. This is a **literature task** — no simulation code.
