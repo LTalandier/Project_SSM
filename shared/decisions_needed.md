@@ -8,6 +8,20 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
+### D-2026-06-09-2 — PR-15 search verdicts → Lucas (pointer; adjudication is his per PR-15 disposition)
+**Raised by:** Executor, 2026-06-09. **Blocks:** the pre-S0.2 continuation gate (and hence
+S0.2–S0.5 authorization). S0.L-1 sweep complete: **0 FATAL confirmed**, but **1 potentially-FATAL
+AMBIGUOUS** (Wu et al., eLight 5:7 (2025) — on-chip optical RNN trained in-situ by SPGD; trained
+voltage set U unenumerated → q1 unresolved; q2/q3 verified verbatim), the
+**calibration-vs-training boundary class** (Milanizadeh 2020 gradient-descent ring-filter tuning
+satisfies q1∧q2∧q3 *mechanically* — same issue as the Critic's WS-F1/q4 amendment, found
+independently by both modalities), **Böhm 2022** (hybrid digital recurrence, also found by both),
+and **8 unreachable primaries** (top: Zhao LPR 2025, Wiley-paywalled). Everything filed with
+primaries at `escalate_to_human.md` **E-2026-06-09-4**; memo `docs/s0_L/debt1_whitespace_search.md`;
+results entry in `results_log.md`. **Not for the Supervisor to adjudicate** (PR-15: ambiguous →
+Lucas; rule frozen — no in-pipeline amendment); Supervisor action = reconcile scheduling (Critic
+Part-2 audit + PR-10/S0.7-lite) around the pending ruling. Executor stopped.
+
 ### D-2026-06-08-1 (parked) — SiN operating $Q$ for the substrate (pre-registration)
 **Raised by:** Supervisor (from the S0.0a recon). **Blocks:** nothing yet; **due at S0.2/S0.3.**
 The salvaged platform registry ships SiN `Qi=2×10⁶` (foundry-conservative corner), but the proposal

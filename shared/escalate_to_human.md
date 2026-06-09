@@ -18,9 +18,89 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-*(Nothing open — 2026-06-09 "ok go" resolved E-09-1 + E-09-2; both below. Next asks coming to you:
-**PR-10** (S0.7-lite assumptions — Supervisor drafting now) and then the **pre-S0.2 continuation gate**
-itself, once the PR-15 search verdict + the lite envelope are both in hand.)*
+### ⚠ E-2026-06-09-4 (Executor) — PR-15 systematic sweep done: 0 FATAL confirmed, **1 potentially-FATAL AMBIGUOUS (Wu eLight 2025)** + boundary class + retrievals — adjudication needed
+**Filed 2026-06-09 by the Executor** (modality 1 — systematic sweep, written **before** reading the
+Critic's blind-pass entry below; cross-references added after). Memo:
+`docs/s0_L/debt1_whitespace_search.md` (~60 candidates, all five frozen lanes, every non-clear
+verdict primary-quoted; reproducible trail). Results entry in `results_log.md`. Verdicts against
+the **unamended frozen rule**, ambiguity escalated not resolved, per PR-15.
+
+1. **A1 — Wu et al., "Monolithically integrated asynchronous optical recurrent accelerator,"
+   eLight 5:7 (2025). Potentially FATAL — the top adjudication item. Not in the Critic's blind
+   list (the key cross-modality asymmetry).** First monolithic optical RNN chip; recurrence
+   **physically closed on chip** (PD-driven wavelength relay, no ADC/DAC in the loop; "W is the
+   feedback weight matrix for the hidden vector"); loss "**minimized in-situ** using a stochastic
+   parallel gradient descent algorithm", two-sided SPGD + Adam on "the current voltages U ± δ" —
+   **q2 and q3 hold verbatim** (Executor-verified in the publisher PDF). **Open question = q1: U is
+   never enumerated** — main text + complete supplementary swept (S1–S11; S9 = iteration curves
+   only; routing MRRs are calibrate-once-static): nothing states whether the recurrent W-mesh
+   heaters are trained or fixed. Natural reading (no stated restriction) → q1∧q2∧q3 → **falsifies
+   the existence claim as frozen**; restricted reservoir-style reading (only W_in/W_out) also
+   consistent (their SPGD antecedent, ref. 49, is feedforward). **Primary attached:**
+   `docs/s0_L/primaries/wu2025_elight5-7_ornn.pdf` + extracted supplementary. Resolution paths
+   (your call): (a) author/code query (paper: data "available from the corresponding author upon
+   reasonable request"); (b) treat as fatal-pending-clarification and let PR-2 re-scope the wording
+   (e.g. continuous-time dissipative-resonator / pole-defining recurrence); (c) carry as loudest
+   must-cite under the restricted reading. Even on the fatal reading: recurrence is analog O/E/O
+   (optoelectronic; *not* the hybrid-digital escape).
+2. **A3 — calibration/self-optimization boundary class = the Critic's WS-F1, found independently
+   by both modalities.** Strongest member: **Milanizadeh ECIO 2020** — literal "gradient descent"
+   auto-tuning of a 4th-order coupled-ring filter on chip: **q1∧q2∧q3 hold mechanically**; only
+   the reading of "training" excludes it. Also Jayatilleka 2015 (perturb-and-observe sign rule on
+   ring detunings, Executor-verified), Mak 2015 (direct search), Pu 2019 / Yan 2021 (intracavity
+   EPC). My memo escalates the boundary; the Critic proposes the **q4 amendment** — same issue,
+   one ruling needed from you (rule is frozen; neither pipeline role may amend it).
+3. **A2 — Böhm et al., Nat. Commun. 13:5847 (2022)** — found independently by **both** modalities,
+   same diagnosis: gradient-in-the-loop training of couplings/weights held in the FPGA feedback
+   path of an optoelectronic Ising machine = the PR-15-pre-listed "hybrid digital recurrence"
+   ambiguity. Needs your reading of "parameters of a *physical photonic* system".
+4. **A4 — unreachable primaries (retrieval asks):** top: **Zhao et al., Laser Photonics Rev. 2025**
+   (10.1002/lpor.202501576, "In-situ trained microring-based neural networks…", optical backprop
+   physically updating MRR parameters; Wiley-paywalled, no arXiv mirror — must be read before the
+   claim freezes). Also Shi LPR 2025; **Nakajima Compute-in-Wire ADI 2025** (= also on the
+   Critic's list; abstract says digital-twin-trained → likely fails q2); NUDT OL 35:950 (2010);
+   4 historical 1985–1991 texts (all lean non-fatal via reachable companions; memo §4.1).
+   **Reconciliation note for the Critic's Part-2 audit:** the Critic's blind pass surfaced
+   **Fisher 1987** (Appl. Opt. 26:5039, Widrow-Hoff on LCLV associative hardware, loop topology
+   unresolved) — **my sweep missed it**; conversely my A1/A3a/A4a are not in the blind list.
+   Two-modality protocol working as designed.
+
+**Strategic context (not verdicts):** the adjacent capabilities are converging — Skalli 2025
+(SPSA/PEPG hardware-in-the-loop, one parameter-set from q1), NIST/Queen's MGD 2025 (one
+architecture from a trained Tait-style recurrent network), FICONN 2024's outlook naming
+recirculating-mesh in-situ training as future work, Pérez-López (hardware PSO on ring-bearing
+meshes + gradient synthesis in simulation), Yorke arXiv 2026 (simulation paper squarely in the
+driven-dissipative in-situ-learning space). If the claim survives adjudication, the window looks
+like **order one publication cycle** — relevant to your D-09-1 value-at-risk scheduling logic.
+
+**Process state:** Executor has **stopped** (S0.L-1 deliverables complete; PASS not issued — it is
+one-sided *and* pends your A1/A3 ruling). Critic Part-2 audit of my memo can proceed immediately.
+
+### 🔶 E-2026-06-09-3 (Critic) — PR-15 amendment required + 4 AMBIGUOUS priors with primaries
+**Filed 2026-06-09 by the Critic** (blind adversarial pass done **before** the Executor memo, which is
+still pending — full detail + reproducible trail: `critic_review_whitespace-pr15.md`, Part 1).
+**Blind-pass outcome: no prior kills the *intended* claim** (~100 logged queries, 5 lanes). But:
+1. **Amendment needed (WS-F1, CRITICAL):** the frozen q1∧q2∧q3 rule has no task-objective condition, so
+   it is satisfied *by the letter* by cavity-servo demos (dither-locked rings/FFPs, 1988→2015) and
+   laser regime-optimization (explicit finite-difference gradient on intracavity waveplates, Pu 2023;
+   deep-RL on hardware, Yan 2021 / Kokhanovskiy 2024). Proposed **q4** (loss over input→output behavior
+   on a computational task; setpoint/regime regulation excluded) + a weight-tied recurrence definition
+   (WS-F3) + q3 taxonomy enumeration (WS-F5). PR-15 is frozen → **your sign-off**; the Executor is
+   classifying against the unamended rule right now, so steer early.
+2. **AMBIGUOUS → you, with primaries (frozen disposition):** **Böhm 2022** Nat. Commun. 13:5847
+   (BM-likelihood-gradient training of optoelectronic Ising-machine couplings, hardware in loop — the
+   one prior that survives q4 and dies only on parameter physicality/hybrid-digital q1;
+   https://pmc.ncbi.nlm.nih.gov/articles/PMC9532389/) · **NTT Compute-in-Wire** ADI 2025
+   (doi 10.34133/adi.0121 — intra-loop trained modulations, "in-situ on-the-fly training" claimed, full
+   text unreached) · **Mak/Bois/Poon 2016** (+kin: ring poles AND inter-ring couplings auto-tuned on
+   chip to a target Butterworth shape; algorithm class unverified, reportedly Nelder-Mead) ·
+   **Fisher 1987** Appl. Opt. 26:5039 (Widrow-Hoff on LCLV associative hardware; loop topology
+   unresolved).
+3. **Gate:** final verdict pends the Executor memo audit (Part 2). Provisional: consistent with
+   **PASS (one-sided)** under the amended rule.
+
+*(Also coming to you per the standing list: **PR-10** (S0.7-lite assumptions — Supervisor drafting) and
+the **pre-S0.2 continuation gate** once the PR-15 verdict + lite envelope are in hand.)*
 
 **Standing per-phase touchpoints** — pre-registered values come to Lucas before
 the run that tests them (`preregistration.md`):

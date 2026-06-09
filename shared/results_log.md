@@ -15,6 +15,94 @@ Per result, report:
 
 ---
 
+## S0.L-1 — White-space existence search, debt #1 / PR-15 (2026-06-09, Executor)
+
+**Goal:** run the PR-15-frozen existence search for verification debt #1 — is there ANY prior in
+which internal recurrent parameters of a physical photonic system were updated on-device by a
+gradient-based/-estimating rule? Kill-rule q1∧q2∧q3 applied **as frozen** (lanes locate, the rule
+decides). This is modality (1) of the two-modality protocol; the Critic's independent adversarial
+pass is separate.
+
+**Config:** literature task (no simulation). Six parallel lane sweeps (PR-15 lanes i–iv + lane v
+split into named-groups / free-forward), 2026-06-09, ~150 logged queries; **~60 candidates
+examined**, ~45 primaries fetched in full or in part; Executor **first-hand re-verification of 7
+decisive primaries** (Wu eLight 2025 incl. the complete supplementary, Zhou DPU 2021, Pérez-López
+2020, Bueno 2018, Böhm 2022, Jayatilleka 2015, Yorke 2026) after WebFetch session-limited → curl.
+Full reproducible trail in the memo appendix.
+
+**Key findings:**
+1. **No FATAL prior confirmed.** Nothing was confirmed to satisfy q1 (internal) ∧ q2
+   (on-device-in-loop) ∧ q3 (gradient-based/-estimating).
+2. **One potentially-fatal AMBIGUOUS — escalated (A1): Wu et al., eLight 5:7 (2025)** — first
+   monolithic optical RNN chip; recurrence **physically closed on chip** (PD→MRM wavelength relay,
+   no ADC/DAC in loop; "W is the feedback weight matrix"); loss "**minimized in-situ** using a
+   stochastic parallel gradient descent algorithm" with Adam on "the current voltages U ± δ"
+   (q2 ✓, q3 ✓, Executor-verified verbatim). **q1 unresolved:** the trained voltage vector U is
+   never enumerated — main text and the complete supplementary (S1–S11 swept; S9 = iteration curves
+   only) never state whether the W-mesh heaters are in U. Natural reading → FATAL; restricted
+   (reservoir-style) reading also consistent. → Lucas with primary attached (archived in repo).
+3. **One potentially-fatal-under-wording AMBIGUOUS class — escalated (A3):** in-loop
+   gradient-style updates of pole-defining ring parameters / intracavity laser parameters with
+   *device-quality* objectives — **Milanizadeh ECIO 2020** ("Automatic tuning … using gradient
+   descent technique" on a 4th-order coupled-ring filter: q1∧q2∧q3 hold *mechanically*; only the
+   reading of "training" excludes it), Jayatilleka 2015 (perturb-and-observe sign rule on ring
+   detunings, Executor-verified), Mak 2015 (direct search), Pu 2019 (Rosenbrock on intracavity
+   EPC), Yan 2021 (DDPG actions on intracavity EPC). The claim wording (PR-2) must settle the
+   calibration/self-optimization boundary — escalated, not adjudicated.
+4. **Other AMBIGUOUS — escalated:** Böhm 2022 (RBM weights gradient-trained in-loop but stored in
+   the FPGA feedback path of an optoelectronic Ising machine — the PR-15-pre-listed "hybrid digital
+   recurrence" type); **8 unreachable primaries** (highest priority: Zhao et al., Laser Photon.
+   Rev. 2025 — "in-situ trained microring-based NNs" via optical backprop, Wiley-paywalled, no
+   arXiv mirror; plus Shi LPR 2025, Nakajima ADI 2025, NUDT OL 2010, and 4 historical
+   1985–1991 optical-NN texts whose reachable companions all indicate non-fatal).
+5. **The non-fatal structure is clean and makes every PR-15 qualifier load-bearing** (33
+   non-fatal-cites, 12 clears, all primary-quoted): physically recurrent photonic systems are
+   readout/encoder-trained (Bueno/Brunner line 2018→2025 — boundary memo delivered: Boolean
+   readout flips through 2021, SPSA/PEPG **on input+readout only** by 2025; Hermans physical-BP
+   2015/2016 = masks only, with the 2015 primary admitting internal-parameter training was
+   "omitted … for reasons of experimental simplicity"), or non-gradient-adapted (Lugnan 2025
+   emergent PCM plasticity; Anderson-line photorefractive self-organization 1991/94; GA/ES
+   mode-locking on intracavity params — Woodward 2016, Andral 2015), or offline-trained-deployed
+   (Tait 2017 "programmed a priori"; Xu eLight 2025 RNN chip = the §10 offline-deploy baseline;
+   Marquardt/López-Pastor RHEL = theory only, **no experiment through 2026-06**). In-situ
+   gradient(-estimating) training on photonic *hardware* is now routine — but **only feedforward**
+   (FICONN 2024 zeroth-order; Pai 2023 in-situ backprop; Xue 2024 FFM; Ashtiani Nature 2026
+   on-chip BP; MGD 2025), with FICONN's own outlook deferring "recirculating waveguide meshes …
+   trained in situ" to future work.
+6. **Negative results logged:** no adaptive recursive/IIR photonic filter with in-loop
+   feedback-tap adaptation (4 query formulations); no photonic equilibrium-propagation experiment;
+   no photonic FORCE learning; no experimental Hamiltonian-echo demonstration; no 2024–2026 paper
+   *claiming* an in-situ-trained recurrent photonic system in the claim's sense.
+7. **Strategic context (not verdicts):** the white space, if it survives A1 adjudication, is
+   visibly closing — A1's group (SPGD + on-chip recurrence), Skalli 2025 (SPSA/PEPG
+   hardware-in-the-loop, one parameter-set from q1), MGD-on-weight-banks (NIST/Queen's 2025, one
+   architecture from Tait-style recurrence), Pérez-López (hardware PSO on ring-bearing meshes +
+   gradient synthesis in simulation, one recombination away), and Yorke arXiv 2026 (simulation
+   concept paper squarely in the driven-dissipative in-situ-learning space).
+
+**Gates (task spec):** every PR-15 lane swept + logged ✓ (memo §5 + trail); every non-clear verdict
+grounded in a primary source with the load-bearing sentence quoted ✓ (unreachable ⇒ AMBIGUOUS,
+never clear ✓); ambiguities escalated, never resolved in-memo ✓ (E-2026-06-09-3 /
+D-2026-06-09-2); memo dated 2026-06 ✓; search trail reproducible ✓. **PR-15 PASS not issued — by
+design**: PASS is one-sided *and* now waits on Lucas's adjudication of A1/A3a.
+
+**Anomalies / concerns:** (a) WebFetch hit its session limit mid-verification — all Executor
+re-verification completed via curl (trail A.7); (b) the eLight supplementary that 403'd for a
+sweep agent was reachable with a referer header — fully swept; (c) ECIO server 403'd the Executor
+re-fetch of Milanizadeh (quote stands as sweep-agent primary-fetch; same-class A3b verified
+first-hand); (d) Wiley (Zhao, Shi) and SPJ (Nakajima) paywalls block three 2025 primaries — library
+retrieval recommended before claim freeze; (e) minor: Bueno node count differs between published
+abstract (2025 nodes) and arXiv v1 (2500) — memo cites the published figure.
+
+**Data path:** `docs/s0_L/debt1_whitespace_search.md` (memo: verdict table §4, Bueno/Brunner
+boundary memo §3, A1 analysis §2, reproducible trail App. A); primaries archived at
+`docs/s0_L/primaries/` (Wu 2025 publisher PDF, CC-BY + extracted supplementary text).
+
+**Compute used:** local + web only; six research subagents (~0.9 M agent tokens), ~25 min
+wall-clock for the sweeps + ~45 min Executor verification/synthesis. **No cloud spend.**
+
+---
+
 ## S0.1.1 — S0.1 closeout (Critic decision-free edits) (2026-06-09, Executor)
 
 **Goal:** land the four **decision-free** items from `critic_review_s0-1-results.md` (APPROVE-WITH-EDITS)
