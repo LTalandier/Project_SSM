@@ -15,6 +15,67 @@ Per result, report:
 
 ---
 
+## S0.7L-0 — PR-10 assumption sourcing (S0.7-lite step 0 of 2) (2026-06-10, Executor)
+
+**Goal:** source the candidate assumption set for PR-10 (S0.7-lite envelope) with primaries, so the
+Supervisor can draft the freeze ask for Lucas. **Sourcing only — the envelope was NOT run** (PR-10
+stays ⬜ UNSET; running pre-freeze would un-preregister it).
+
+**Config:** literature/datasheet task (no simulation, no compute spend). Four parallel web sweeps
+(E/O–O/E energies; DAC/ADC; named digital baselines; SiN heaters + control electronics), 2026-06-09
+→ 06-10, ~45 logged queries, ~35 primaries fetched (full text or abstract level); +1 internal
+category (operating scale) cited to `docs/s0_1/mapping_result.md` §4 and the registry. Executor
+first-hand re-verification of the two most load-bearing novel primaries (CORNERSTONE MPW#9 design
+rules PDF; TI ADC12DJ3200 datasheet pp. 13–18) — **both exact-match** vs the sweep quotes.
+
+**Key findings:**
+1. **All five PR-10 categories sourced with quoted primaries**; 5 candidate brackets registered
+   where sources disagree (E/O device vs incl.-driver spans ~2 orders: ~1 fJ/bit resonant →
+   10–20 pJ/bit system; O/E 0.17 → several pJ/bit; ADC at GS/s 32 → 469 pJ/sample
+   research-vs-vendor at 8.4–9.4 ENOB; DAC 5–9 → 308 pJ/sample; SiN P_π 60–385 mW/π standard
+   vs ~1 mW/π suspended-at-ms-τ).
+2. **Strong-baseline (F16) candidates named with author-stated perf/W:** Brainwave (batch-1 GRU on
+   Stratix 10, 287 GFLOPS/W) the published high-water mark for streaming recurrent serving; MARCA /
+   LightMamba the closest-workload SSM accelerators (LLM-decode-oriented, relative perf/W only);
+   coherent-DSP ASIC class 25–170 pJ/bit as the GS/s streaming-FIR anchor; Jetson AGX Orin (275
+   peak sparse TOPS, 15–60 W) the embedded-GPU representative.
+3. **Four discrepancy flags vs prior project anchors (memo §6):** (i) the pnn-multilayer Ozkaya
+   "20–50 mW standing power" attribution is unverifiable (verifiable record: 1.4 pJ/bit @ 64 Gb/s);
+   (ii) the "~5 pJ/bit at 800G DSP" number has no primary (it was model-computed) — sourced bracket
+   is 25–170 pJ/bit; (iii) measured stoichiometric-SiN P_π (60–385 mW/π, foundry bound <175) is far
+   above silicon-derived intuition, and the ~1 mW regime needs undercut (not offered in the
+   CORNERSTONE flow) at ms-class τ; (iv) Harris 2014 is actually 24.77±0.43 mW/π **silicon** —
+   don't carry "20 mW" into PR-10 as SiN; the 2 mW/shifter trim convention is retroactively
+   well-sourced (AD5380, 1.25–1.9 mW/ch).
+4. **Lateral-trench vs undercut disambiguation is load-bearing** for the holding-power row:
+   AN800-platform lateral trenches cut crosstalk (12%→2.5%) but barely change P_π; only
+   undercut/suspension buys the ~20×–97% power reduction, at 0.4–2.6 ms τ (couples to SPSA cadence
+   — the envelope must use one heater class consistently across its power and training-time rows).
+5. **Operating-scale candidates bounded by S0.1** (no choices made): memory 329→4937 rt
+   (3.29→49.4 ns), FSR 100 GHz registry-wide, single-carrier-one-FSR λ-plan (the validated S0.1
+   regime; WDM would be an extension), linewidth-derived line-rate class ~0.1–2 GS/s,
+   N ∈ [8…128] candidate bracket (S0.1 leaves N open — F8), ≈2–4 control channels/ring (B1).
+
+**Gates:** every load-bearing number primary-sourced + quoted ✅ (verification legend per row;
+unreachable primaries consolidated in memo §8, never presented as verified); brackets registered
+where sources disagree ✅; **no envelope arithmetic** — exactly one illustrative sanity row,
+labelled non-load-bearing (memo §7) ✅; search trail reproducible (memo §9) ✅.
+
+**Anomalies / concerns:** IEEE Xplore (HTTP 418) and Optica (anti-bot interstitial) blocked several
+full texts — abstract-level verification used and marked ◑; Analog Devices datasheets timed out
+entirely (TI parts substituted as the named-vendor rows). The published SSM-accelerator field is
+LLM-decode-centric — no GHz-sample-stream S4/Mamba hardware paper exists, so matched-accuracy
+comparability for the closest-workload class will need care at the freeze. Buckwalter 2012 abstract
+was reconstructed via OpenAlex word index (flagged in-memo for human spot-check if it becomes
+load-bearing).
+
+**Data path:** `docs/s0_7/pr10_assumption_sources.md` (candidate table + quotes + brackets + flags
++ trail).
+
+**Compute used:** local only (web fetches); zero simulation/cloud spend.
+
+---
+
 ## S0.L-1 — White-space existence search, debt #1 / PR-15 (2026-06-09, Executor)
 
 **Goal:** run the PR-15-frozen existence search for verification debt #1 — is there ANY prior in
