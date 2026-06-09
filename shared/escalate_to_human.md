@@ -18,6 +18,27 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 📥 E-2026-06-10-2 — Retrievals (the one open ask) + the continuation gate (coming next)
+- **Retrieval #1 — Zhao et al., "In-situ trained microring-based neural networks for scalable and
+  robust photonic computing," *Laser & Photonics Reviews* (2025), DOI 10.1002/lpor.202501576**
+  (Wiley; no arXiv mirror). The only item that could threaten even the adopted W1 claim (if its
+  trained MRRs form a weight-tied recurrence; secondary descriptions suggest a feedforward weight
+  bank — unverified). Then: NTT Compute-in-Wire (ADI 2025, doi 10.34133/adi.0121), Fisher 1987
+  (Appl. Opt. 26:5039), Shi LPR 2025. The PR-15 final PASS is contingent on these reading non-fatal.
+- **Wu outreach:** held per your ruling ("don't send yet — maybe later"); draft + addresses in the
+  session log when wanted. W1 is the adopted default claim meanwhile.
+- **Next decision to reach you:** the **pre-S0.2 continuation gate** — one go/no-go on the bake-off —
+  once S0.7L-1 (the envelope, now running under frozen PR-10) lands.
+
+---
+
+## ✅ RESOLVED 2026-06-10 — the PR-15 / PR-10 ruling cluster (Lucas: "1. ok · 2. ok · 3. don't send yet · 4. [title given]")
+**PR-10 🔒 FROZEN** (envelope dispatched as S0.7L-1) · **PR-15.1 SIGNED** (q4 + q1 riders + q3 positive
+definition; servo class → lineage, **Böhm → boundary-cite**) · **Wu → no outreach yet; W1 = adopted
+default claim** (W0 reclaimable on later evidence) · gate state: **provisional one-sided PASS under
+PR-15.1, contingent on the retrievals above**. Full record: `preregistration.md` (PR-15.1 block) +
+`decisions_needed.md` D-2026-06-09-2. The five entries below are kept as filed (superseded):
+
 ### 🧊 E-2026-06-10-1 (Supervisor) — **Freeze PR-10** (S0.7-lite assumptions) — the last pipeline-side gate input
 S0.7L-0 done (results_log; Supervisor ACCEPT — it also caught 4 bad legacy anchors, now excluded). The
 **PROPOSED PR-10 block** is in `preregistration.md`: OPT/CONS corners per category (E/O 0.135 → 10–20

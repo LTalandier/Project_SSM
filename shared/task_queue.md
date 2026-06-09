@@ -8,12 +8,49 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸ QUEUED (next ACTIVE on the PR-10 freeze) — S0.7L-1: run the S0.7-lite envelope + WS-F11/F12 rider
+## 🟢 ACTIVE — S0.7L-1: S0.7-lite envelope (PR-10 🔒 FROZEN) + WS-F11/F12 rider
 
-Waits on **Lucas freezing PR-10** (PROPOSED block in `preregistration.md`, 2026-06-10). Will be specced
-fully at activation. Scope preview: run the lite envelope at the frozen OPT/CONS corners over the
-registered scale grid; verdict per roadmap v3.1 semantics; **rider (decision-free, do first):** WS-F11
-(fix the S0.L-1 memo's self-undercount ≈74 rows / 80+ papers + the N28a pointer) + WS-F12 list check.
+**Assigned:** 2026-06-10
+**Supervisor:** Claude Opus 4.8
+**Status:** ACTIVE
+**Source:** roadmap v3.1 §S0.7-lite (F1/F16) + **PR-10 — 🔒 FROZEN 2026-06-10** (`preregistration.md`:
+read the frozen block FIRST; **every load-bearing number in the envelope must trace to a frozen PR-10
+row** — if a needed number is missing, STOP and post to `decisions_needed.md`; do NOT source new
+numbers, that would un-preregister the run).
+
+### Rider (do first; decision-free)
+**WS-F11:** fix the S0.L-1 memo's §0 self-undercount (count §4.2 precisely — ≈74 rows / 80+ papers, not
+"~60") + the dangling "N28a" pointer. **WS-F12:** add an "S0.8 full-text TODO" section listing the
+residual abstract-resting items per the Critic's WS-F12. No verdict changes.
+
+### Goal (main)
+Run the **S0.7-lite envelope**: end-to-end **energy/sample + latency/sample** for the photonic SSM at
+the frozen scale grid (N∈{8,32,128}; 0.1–2 GS/s; single-carrier-one-FSR), charged the **full frozen
+conversion stack**, vs the three named baselines — at **both corners (OPT/CONS) × both heater classes**
+(consistency rule: one heater class per scenario for power AND τ/SPSA-cadence). Identify the plausible
+low-latency **niche** (→ the S0.2 task choice / PR-2), or state explicitly that none exists. **Check
+the §10 escalation clause explicitly:** does even the OPT corner clear any baseline anywhere in the
+grid?
+
+### Deliverables
+1. `docs/s0_7/s07_lite_envelope.md` — assumption table (verbatim from frozen PR-10, row refs per use);
+   per-grid-point result tables; crossover/niche statement; the registered exclusions (laser, locking,
+   control compute, packaging) listed as **unbudgeted**; verdict per roadmap semantics (negative →
+   draft the Stage-1-reframing escalation; positive → labelled assumption-driven, not
+   outreach-load-bearing).
+2. `analysis/s0_7_lite_envelope.py` + JSON/plots under `results/s0_7/` — **arithmetic + plots only**;
+   no simulation; no new sourcing.
+3. Results entry in `results_log.md`; if the §10 clause fires, an `escalate_to_human.md` draft entry.
+
+### Gates
+Every number traces to a frozen PR-10 row (cited per use); all four scenario combinations reported (no
+cherry-picking); exclusions stated in the output; explicit niche-or-no-niche statement; rider done.
+
+### Out of scope
+New sourcing (PR-10 frozen); claim wording (PR-2); PR-15 retrievals (Lucas); simulation code.
+
+### Deployment
+Local, arithmetic only; hours. No web needed (numbers are frozen).
 
 ---
 

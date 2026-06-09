@@ -23,6 +23,11 @@ boundary before the run proceeds.
 > frozen entry; detail block at the end of this file). **PR-2 and PR-4 gained blessed *constraints*** from
 > the resolved D-2026-06-08-2 / D-2026-06-08-3 (see Notes) — the entries themselves remain ⬜ until their
 > own freeze.
+>
+> **Update (2026-06-10, Lucas rulings):** **PR-10 🔒 FROZEN** (S0.7-lite runs) · **PR-15 amended →
+> PR-15.1, signed** (q4 task-objective + q1 riders + q3 positive definition; servo class → lineage,
+> Böhm → boundary-cite, **Wu → W1 default claim, no outreach yet**). Gate state: **provisional one-sided
+> PASS under PR-15.1, contingent on the Zhao / NTT / Fisher retrievals** (Lucas, in progress).
 
 ## Ledger
 
@@ -37,12 +42,12 @@ boundary before the run proceeds.
 | **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
 | **PR-8** | S0.5 analysis | S0.5 | ⬜ | Statistical plan: **right-censoring** treatment (fraction-reaching-target within B + median/IQR among reachers / survival treatment); lexicographic ranking (success-fraction, then median passes); paired-by-seed bootstrap CIs; **≥8 seeds for all methods in headline cells** (4 only for exploratory grid). | F11 |
 | **PR-9** | Gate ii + promotion | S0.5 | ⬜ | **Gate-ii semantics** decomposed: (ii-a) capacity — BPTT ceiling clears the utility floor; (ii-b) trainability — **PAT or SPSA** within margin of ceiling (only-adjoint/RHEL-pass → escalate-and-redesign, *not* a pass). **Promotion criteria**: "clearly beats" quantified (e.g. ≥X% better pass-to-target w/ non-overlapping 95% CIs, or strictly-better scaling, or strictly-simpler hardware ledger at non-inferior efficiency); **"exactness" struck** from the menu (outcome metrics + F8 hardware ledger only). | F10 |
-| **PR-10** | S0.7-lite | before S0.2 task reg | ⬜ **PROPOSED 2026-06-10** (block below — awaiting Lucas freeze) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
+| **PR-10** | S0.7-lite | before S0.2 task reg | 🔒 **FROZEN 2026-06-10** (Lucas "ok"; values in the block below) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
 | **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
 | **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
 | **PR-13** | S0.5 secondary task | S0.5 | ⬜ | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
-| **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (q1∧q2∧q3) + search lanes + two-modality protocol + disposition. **Full frozen detail in the block below** — the table row is a pointer only. | D-09-1, F15 |
+| **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** · 🔁 **AMENDED → PR-15.1, signed 2026-06-10** (v1 retained below) | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (**q1∧q2∧q3∧q4** per PR-15.1) + search lanes + two-modality protocol + disposition. **Full frozen detail + the signed amendment in the blocks below** — the table row is a pointer only. | D-09-1, F15, WS-F1/2/3/5 |
 
 ## Notes
 
@@ -121,7 +126,7 @@ clean search does *not* certify): the gate is satisfied for S0.2 authorization �
 S0.7-lite envelope + **Lucas's program-level continuation call** — and the claim stays provisional until
 the dated S0.8 final sweep.
 
-## PR-10 — PROPOSED freeze values (Supervisor draft 2026-06-10; ⬜ awaiting Lucas — governs the S0.7-lite run)
+## PR-10 — 🔒 FROZEN values (proposed 2026-06-10, Supervisor; **frozen 2026-06-10, Lucas "ok"** — governs the S0.7-lite run)
 
 **Source record:** `docs/s0_7/pr10_assumption_sources.md` (S0.7L-0 — every value primary-quoted there;
 row refs below). **Conventions proposed for the freeze:**
@@ -158,3 +163,56 @@ per roadmap v3.1: negative lite → escalate as Stage-1-reframing finding (does 
 positive → labelled assumption-driven, not outreach-load-bearing before full S0.7.
 
 **Freeze action for Lucas:** "freeze PR-10" (or amend rows) → status flips 🔒, S0.7-lite (S0.7L-1) runs.
+
+## PR-15.1 — signed amendment (Lucas, 2026-06-10; PR-15 v1 above retained per supersession discipline)
+
+**Rule change: a prior is FATAL iff q1 ∧ q2 ∧ q3 ∧ q4** (q2 unchanged; q1/q3 clarified; q4 new).
+Amendment text per `critic_review_whitespace-pr15.md` WS-F1/F2/F3/F5; Supervisor + Executor + Critic
+converged independently; Lucas signed ("ok", ruling 2 of E-2026-06-09-5).
+
+> **q4 — task-objective condition.** The update minimizes a loss defined over the system's
+> **input→output behavior on a computational task** (a corpus of input–output examples, with the
+> trained system evaluated on inputs beyond the tuning set). Regulation of the device's own operating
+> point — setpoint/resonance locking, stabilization, alignment, regime attainment or maintenance (e.g.
+> mode-locking, comb states) — does **not** satisfy q4, regardless of update rule. Controller-RL
+> distinction recorded: where the policy gradient lands on a *controller network's* digital weights and
+> the physical parameters are set as *actions*, the physical parameters are not the trained weights of
+> the learning system.
+
+> **q1 rider — "recurrence" defined (WS-F3):** a **weight-tied iterated map carrying state across the
+> input sequence** (the parameters define poles/memory over the task's time axis). Time-multiplexed
+> implementations of feedforward architectures (folded-in-time DNNs; loop processors with per-pass
+> reprogrammed elements) do **not** satisfy q1, however physically recirculating the hardware is.
+
+> **q1 physicality qualifier (WS-F2; adopted with the Böhm ruling):** the updated parameters are
+> **physical (analog) degrees of freedom of a photonic recurrence, and the recurrent state is carried
+> in the photonic system**. Parameters held as digital numbers inside an in-loop processor (e.g. FPGA
+> coupling memory) do **not** satisfy q1 — such priors are boundary-cites, not kills.
+
+> **q3 defined positively (WS-F5):** q3 = *forming an explicit local gradient / descent-direction
+> estimate* (FD, SPSA, SPGD, dither/lock-in, extremum-seeking, MGD) *or an analytic/algorithmic
+> gradient* (BP, adjoint, EP, parameter-shift, policy gradient, likelihood gradient). Enumerated
+> **non-q3** (non-fatal-but-cite), in addition to v1's population-selection exclusions: Bayesian
+> optimization; comparison-based direct search (Nelder-Mead, coordinate/pattern, Rosenbrock); simulated
+> annealing; value-based RL (DQN class); greedy accept/reject Boolean flips (even when described in
+> gradient *language*); aDFA-style fixed-projection gradient surrogates.
+
+**Dispositions recorded with the signature (2026-06-10):**
+- **Servo / regime-optimization class** (Milanizadeh 2020 CV, Jayatilleka 2015, Padmaraju 2014,
+  Kaminow/PDH lineage; Pu 2023, Yan 2021, Kokhanovskiy 2024): fail q4 → **citable lineage**, named in
+  the paper's prior-art boundary paragraph.
+- **Böhm 2022** (Nat. Commun. 13:5847): fails the q1 physicality qualifier → **non-fatal,
+  boundary-cite by name** (Lucas ruling: "ok").
+- **Wu et al., eLight 5:7 (2025) — M1:** remains **AMBIGUOUS-potentially-FATAL on q1 for the W0 claim
+  only** (q2/q3/q4 verified; trained set U unenumerated; WS-F9 evidence leans fatal). **Lucas ruling:
+  no author outreach for now ("maybe later")** → **W1 is the adopted default claim** (*first
+  continuous-time dissipative-resonator recurrence — pole positions + inter-resonator couplings —
+  trained in situ by gradient-based/-estimating methods on a computational task*; verified true under
+  both Wu readings by Executor + Critic independently). Wu is carried as the **loudest must-cite**; W0
+  is reclaimable only on later evidence (author reply / code release / Zhao reading).
+- **Gate state: provisional one-sided PASS under PR-15.1, contingent on the retrievals reading
+  non-fatal** — **Zhao LPR 2025** (DOI 10.1002/lpor.202501576 — the one item that could threaten even
+  W1, if its trained MRRs form a weight-tied recurrence; secondary descriptions suggest a feedforward
+  weight bank, unverified), NTT ADI 2025, Fisher 1987. Final PASS is recorded when those resolve; the
+  dated S0.8 final sweep + the §7 watchlist stand regardless. A clean PASS certifies nothing
+  (one-sided, per v1).

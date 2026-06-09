@@ -6,6 +6,20 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (rulings executed) — PR-10 FROZEN · PR-15.1 SIGNED · Wu held (W1 default) · S0.7L-1 launched
+
+Lucas ruled: "1. ok (freeze PR-10) · 2. ok (sign PR-15.1 + Böhm qualifier) · 3. don't send the Wu
+email yet (maybe later) · 4. [Zhao title delivered]." Executed: ledger updated (PR-10 🔒; PR-15 🔁 →
+**PR-15.1** with the full amendment text — q4, q1 recurrence rider, q1 physicality qualifier, q3
+positive definition — and all dispositions recorded: servo class → lineage, Böhm → boundary-cite,
+**Wu → W1 adopted as default claim, no outreach**); gate state = **provisional one-sided PASS under
+PR-15.1, contingent on Zhao/NTT/Fisher reading non-fatal** (retrievals with Lucas). E-cluster + D-09-2
+→ RESOLVED. **S0.7L-1 ACTIVE + launched** (envelope at frozen corners ×heater classes ×scale grid +
+WS-F11/F12 rider; no-web launch — the freeze is enforced by tooling, not just instruction). On its
+return: evaluate the envelope → assemble the **continuation-gate packet** (one go/no-go for Lucas).
+
+---
+
 ## 2026-06-10 (later) — S0.7L-0 ACCEPTED; PR-10 PROPOSED to Lucas; pipeline fully drained to his desk
 
 S0.7L-0 is exactly what step-0 sourcing should be: ~35 primaries, two load-bearing ones re-verified

@@ -8,7 +8,11 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
-### D-2026-06-09-2 — PR-15 search verdicts → Lucas (pointer; adjudication is his per PR-15 disposition)
+### ✅ D-2026-06-09-2 — PR-15 search verdicts → **RESOLVED 2026-06-10 by Lucas** (rulings: PR-15.1 signed · Böhm boundary-cite · Wu no-outreach-yet, W1 default · retrievals pending)
+Resolution recorded in `preregistration.md` **PR-15.1 amendment block** (the authoritative record) +
+`escalate_to_human.md` (RESOLVED cluster). Gate state: provisional one-sided PASS under PR-15.1,
+contingent on Zhao/NTT/Fisher reading non-fatal. Original item (kept as filed):
+
 **Raised by:** Executor, 2026-06-09. **Blocks:** the pre-S0.2 continuation gate (and hence
 S0.2–S0.5 authorization). S0.L-1 sweep complete: **0 FATAL confirmed**, but **1 potentially-FATAL
 AMBIGUOUS** (Wu et al., eLight 5:7 (2025) — on-chip optical RNN trained in-situ by SPGD; trained
