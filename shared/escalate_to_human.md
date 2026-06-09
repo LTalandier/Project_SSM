@@ -43,6 +43,9 @@ adjudicated in-pipeline, per the frozen disposition.
    poles/couplings), with Wu cited loudly as the nearest neighbor. The gate need not block on their
    reply: it can close on "PASS-under-amendment + Wu carried as potentially-pre-empting + W1 hedge" if
    you judge that sufficient — exactly the program-level call the gate exists for.
+   **→ Drafted: `docs/s0_L/whitespace_claim_wording.md`** (W0/W1/W2 variants, what kills/survives each,
+   and the recommendation: **freeze low (W1), reclaim high (W0)** — retreating after outreach costs
+   credibility; reclaiming costs a wording edit).
 3. **A2 — Böhm 2022** (hybrid-digital recurrence; found by both modalities). **RECOMMEND: adopt the
    Critic's parameter-physicality qualifier** (trained params = physical/analog degrees of freedom of a
    photonic recurrence; recurrent state carried photonically) **+ cite Böhm by name** as the hybrid
