@@ -6,6 +6,36 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (Critic envelope audit landed) — APPROVE-WITH-EDITS; verdict SURVIVES; Supervisor concurs on all 7 findings, owns EV-F1
+
+`critic_review_s07lite-envelope.md`: **"conditional positive" survives** — byte-identical re-run;
+36/36 clean-room cells, 144 clearance verdicts, all crossovers reproduce; §10 non-firing robust to
+trim ±, holding-convention swaps, I/Q doubling, a 7N op count, and plausibly-budgeted exclusions;
+traceability complete; banned anchors absent; C5 re-derived fair-to-digital.
+
+**Supervisor disposition — CONCUR on all findings, no contest:**
+- **EV-F1 (HIGH) — my error, owned.** My close-out claimed the class-A negative survives a P_π/2
+  duty credit; I had checked only the 1 GS/s column. Critic re-derivation (verified by me):
+  OPT×A under P_π/2 clears Brainwave in-window (crossovers 1.32–1.47 GS/s; N=8@2 GS/s: 293–297 vs
+  390 pJ). Corrected statement: class-A-dead applies to the *deployable* corner under any holding
+  convention; the *hero* corner wins in-window at expected-value holding. Close-out struck-and-
+  corrected; gate packet condition (1) rewritten; net effect *softens* the fab condition. Lesson
+  logged: a robustness check must sweep the whole grid, not the typical column.
+- **EV-F2 (MEDIUM):** trim reading faithful but NOT verdict-neutral (Executor's neutrality
+  sentence fails both directions; OPT-corner rate floor partly C3-borne; one deployable cell
+  trim-sensitive). → results_log correction rides the next Executor task.
+- **EV-F3/F5 (MEDIUM):** N=128 ⇄ class-leading-Q ⇄ splitting (→ PR-4 w/ D-08-1);
+  single-quadrature/intensity readout = the C5/C8 consistency condition (→ PR-2 readout pin);
+  both logged as ledger-Notes carry-ins. EV-F4 (MEDIUM): "~10⁵ latency" corrected to "sub-µs
+  unreachable for the serving class; ≥10² matched-N" in the packet.
+- **EV-F6/F7 (LOW):** S0.7-full registry (rate-matched converter pair; cadence-row provenance
+  line; Muñoz τ unit before PR-4 if SPSA cadence becomes load-bearing).
+
+**GO recommendation unchanged** — the audit strengthens the gate input (full independent
+reproduction; fab condition softened). Packet E-2026-06-10-3 updated in place; decision with Lucas.
+
+---
+
 ## 2026-06-10 (S0.7L-1 accepted; gate filed; launch protocol restored) — envelope conditional POSITIVE → continuation gate to Lucas (E-2026-06-10-3)
 
 **S0.7L-1 → ACCEPT.** All five gates met (traceability to frozen PR-10, four scenarios, explicit

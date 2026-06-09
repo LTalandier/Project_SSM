@@ -30,17 +30,29 @@ and are re-paced to the claim-wording freeze — not this gate. Caveat by design
 proves absence of *found* priors, not absence of priors; the dated final sweep at S0.8 stands.
 
 **Input 2 — "is it worth building?" (S0.7-lite envelope on the numbers you froze): conditional
-POSITIVE.** The §10 escalation clause does **not** fire: 16 optimistic-corner cells clear at least
-one named digital baseline (up to **14.7×** vs the Microsoft Brainwave FPGA serving anchor), and
-the latency edge vs that class is ~10⁵ (tens of ns vs <4 ms). The niche: **GS/s streaming
-signal-processing, N=32–128 states, sub-µs latency**. Three honest conditions: (1) it exists
-**only with suspended (class-B, ~1 mW/π) heaters — which the named CORNERSTONE flow does not
-offer**; this is the principal Stage-1 fab condition, carried into PR-2/PR-4; (2) rate floor
-≈0.5 GS/s (at 0.1 GS/s everything loses, on energy and on ring memory); (3) the embedded-GPU
-*peak* FoM is never beaten — that comparison survives only via the registered peak≠sustained
-caveat. Labelled assumption-driven, NOT outreach-load-bearing. A **Critic audit of the envelope is
-commissioned** (spec: `critic_instructions_s07lite-envelope.md`) — launch the Critic session when
-you want; it reports to you. You can rule now or wait for it.
+POSITIVE — Critic-audited: APPROVE-WITH-EDITS, "conditional positive" SURVIVES**
+(`critic_review_s07lite-envelope.md`: clean-room recompute reproduces all 36 photonic cells, all
+144 clearance verdicts and all crossovers; the §10 non-firing is robust to every perturbation
+tested). The §10 escalation clause does **not** fire: 16 optimistic-corner cells clear at least
+one named digital baseline (up to **14.7×** vs the Microsoft Brainwave FPGA serving anchor);
+sub-µs latency is unreachable for that serving class (<4 ms author-stated; honest matched-N
+contrast is **≥10²**, not the ~10⁵ this packet first stated — corrected per EV-F4). The niche:
+**GS/s streaming signal-processing, N=32–128 states, sub-µs latency**. Conditions, as corrected
+by the audit:
+(1) the **deployable**-corner advantage requires suspended (class-B, ~1 mW/π) heaters — not
+offered in the named CORNERSTONE flow — under any holding convention; the **hero**-conversion
+corner clears the FPGA anchor with standard foundry heaters above ~1.3–1.5 GS/s under
+expected-value (P_π/2) holding. [EV-F1: this packet's earlier flat "only with class-B" — and a
+Supervisor robustness assurance behind it — were wrong; the corrected statement *softens* the
+Stage-1 fab condition in the program's favor.]
+(2) Rate floor ≈0.5 GS/s deployable / ≈0.13 GS/s hero, **±2× soft** pending rate-matched converter
+sourcing (EV-F6); sub-sample ring memory independently excludes 0.1 GS/s at the foundry corner.
+(3) The embedded-GPU *peak* FoM is never beaten — the comparison survives only via the registered
+peak≠sustained caveat (the single most case-threatening S0.7-full retrieval).
+(4) **New (EV-F3/F5):** the N=128 margins assume the **class-leading-Q platform corner** — exactly
+the splitting-prone one (goes to PR-4, jointly with D-08-1) — and a **single-quadrature/intensity
+readout** (goes to the PR-2 readout pin; I/Q detection kills the boundary DSP cell and pushes the
+deployable corner to N=128). Labelled assumption-driven, NOT outreach-load-bearing.
 
 **GO authorizes:** S0.2 (task + architecture pre-registration, PR-1/PR-2 incl. the W1 wording +
 readout pin), S0.3 (shared dissipative substrate, PR-4: operating Q + roughness knob, D-08-1),
@@ -56,10 +68,12 @@ before bake-off effort is sunk.
 downside of GO is local simulation time only; the bake-off's methods value survives even if the
 §10 niche narrows further; and the strategic window is ~one publication cycle (the Wu group is
 active in exactly this space). Conditions attached: S0.2's task sized to the niche
-(equalization-class GS/s streaming, N≈32–128 — envelope memo §6); the heater-class condition
-stated in PR-2/PR-4 framing; Critic-audit findings folded in when they land.
+(equalization-class GS/s streaming, N≈32–128 — envelope memo §6); the audit's PR-2/PR-4 carry-ins
+(readout pin; N=128⇄Q-corner⇄splitting; holding convention) now logged in the ledger Notes; the
+residual EV-F1/F2 wording corrections + EV-F3/F4/F5 memo sentences ride the next Executor task.
 
-**→ Your move: "GO" / "GO, but wait for the Critic audit" / "NO-GO" / amendments.**
+**→ Your move: "GO" / "NO-GO" / amendments.** (The Critic audit you launched has landed and is
+folded in above — nothing further is pending on this decision.)
 
 ### 📥 E-2026-06-10-2 — Retrievals + the continuation gate (coming next)
 - **✅ Retrieval #1 RESOLVED (2026-06-10):** **Zhao LPR 2025 → NON-FATAL.** Lucas obtained figs. 1–2

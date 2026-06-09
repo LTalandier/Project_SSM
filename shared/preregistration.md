@@ -70,6 +70,18 @@ boundary before the run proceeds.
   **ON except the clean-damascene corner**, and if the single-pole substrate relies on the clean corner
   PR-4 must state that assumption explicitly; resolve **jointly with D-2026-06-08-1** (the (α, Q_i)
   operating pair). B2 crossover numbers remain provisional until the F5 primary-source pass (S0.L).
+- **PR-2/PR-4 carry-ins from the Critic envelope audit (EV-F1/F3/F5, 2026-06-10,
+  `critic_review_s07lite-envelope.md`):** *PR-2 (readout pin):* the envelope's digital-comparison
+  consistency (C5 op count + C8 single conversion chain) holds **iff the readout is
+  single-quadrature homodyne or intensity** — I/Q detection doubles the output chain (the boundary
+  DSP cell dies; CONS×B N=32@1 GS/s vs Brainwave flips to LOSES; the deployable corner then starts
+  at N=128). D-08-2's no-conjugate-pairing choice is load-bearing for the digital side too (pairing
+  halves the op count to 7N and kills four deployable-corner CLEARs). *PR-4:* the envelope's
+  **N=128 margins assume the class-leading-Q corner** (linewidth packing: O(10–20) informationally
+  distinct poles/GHz at the foundry corner vs ~150 class-leading) — exactly the splitting-prone
+  corner; adjudicate the {N=128 ⇄ class-leading-Q ⇄ splitting} coupling jointly with D-08-1.
+  PR-4 should also eventually register a **holding/trim-statistics convention** (EV-F1: full-P_π
+  worst case vs expected P_π/2 changes the hero-corner class-A in-window verdict).
 - This ledger is referenced by `stage0_roadmap.md` and `escalate_to_human.md`. When an entry freezes, log
   the date + the approved value here and cite it from the phase's `task_queue.md` spec.
 

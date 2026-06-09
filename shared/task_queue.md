@@ -27,11 +27,20 @@ frozen PR-10 row (memo §1 table; the 4 excluded legacy anchors verified absent)
 corner×heater scenarios reported with full clearance matrices; explicit niche statement (memo §6);
 §10 clause checked — **does NOT fire** (16 OPT cells clear ≥1 named baseline). Supervisor
 spot-checked 5 cells by hand (conversion sums, control power, Brainwave/Jetson mapping, crossover
-rates) — all reproduce; the class-A negative survives even a P_π/2 duty-credit relaxation, so the
-"heater class is the binding constraint" finding is robust to convention. **Verdict: conditional
-POSITIVE, assumption-driven, not outreach-load-bearing.** Two flagged frozen-row readings (C3 trim
-in all scenarios; class-A fast-τ via §4 ref) + conventions C1–C8 → queued for Critic audit
-(verdict-neutral per Executor; audit confirms). Rider (WS-F11/F12) done, no verdict changes.
+rates) — all reproduce. ~~"the class-A negative survives even a P_π/2 duty-credit relaxation …
+robust to convention"~~ ← **struck, FALSE (Critic EV-F1; the Supervisor had tested only the
+1 GS/s column):** under expected-value (P_π/2) holding, OPT×A clears Brainwave **in-window**
+(crossovers 1.32–1.47 GS/s); only the deployable corner (CONS×A) is class-A-dead under any holding
+convention — the binding-constraint statement is **C4-conditional**. **Verdict: conditional
+POSITIVE, assumption-driven, not outreach-load-bearing — CONFIRMED by Critic audit**
+(`critic_review_s07lite-envelope.md`, APPROVE-WITH-EDITS: byte-identical re-run; 36/36 clean-room
+cells + 144 verdicts + crossovers reproduce; §10 non-firing robust to every tested perturbation).
+The two flagged frozen-row readings are **faithful to the frozen source record but NOT
+verdict-neutral** (EV-F2: the neutrality sentence fails both directions — the OPT-corner
+rate-floor negative is partly a C3 artifact; one deployable-corner cell is trim-sensitive).
+Rider (WS-F11/F12) done, no verdict changes. **Mandatory rider on the next Executor task:**
+EV-F1/F2 one-line corrections (results_log anomaly (i)) + memo §6/§4 sentences (EV-F3/F4/F5) per
+the review's fix list; EV-F6/F7 → S0.7-full registry.
 Memo `docs/s0_7/s07_lite_envelope.md`; results in `results_log.md`; commit `e88fbeb`.
 **Source:** roadmap v3.1 §S0.7-lite (F1/F16) + **PR-10 — 🔒 FROZEN 2026-06-10** (`preregistration.md`:
 read the frozen block FIRST; **every load-bearing number in the envelope must trace to a frozen PR-10
