@@ -8,11 +8,16 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.1.1: S0.1 closeout (decision-free Critic edits before S0.2)
+## ✅ DONE — S0.1.1: S0.1 closeout (decision-free Critic edits before S0.2)
 
-**Assigned:** 2026-06-09
+**Assigned:** 2026-06-09 · **Closed:** 2026-06-09
 **Supervisor:** Claude Opus 4.8
-**Status:** ACTIVE
+**Status:** ✅ COMPLETED 2026-06-09 — all four edits landed + gates PASSED (107/107; transient F1 validation
+**positive**: ringdown <1e-9 vs closed form, pole recovered from trajectory <1e-5, 2-ring beat = eig
+splitting <2%). Supervisor ACCEPT (no Critic gate needed — this *executed* the Critic's own prescribed
+edits; scope held, F2/F6 untouched). S0.1 is now **fully closed**. Results in `results_log.md`.
+**Next ACTIVE task:** pending Lucas — D-08-2/D-08-3 steer + **D-2026-06-09-1** (front-load debt #1 /
+PR-15 white-space gate; see `decisions_needed.md` + `escalate_to_human.md` E-2026-06-09-2).
 **Source:** `critic_review_s0-1-results.md` (APPROVE-WITH-EDITS) — the four **decision-free** items the
 Critic wants landed before PR-1/PR-2 freeze. The two *framing* items (F2 mapping-class, F6 gain-free κ_ext)
 are Supervisor/PR-2 work and wait on Lucas's D-08-2/D-08-3 steer — **not** in this task.

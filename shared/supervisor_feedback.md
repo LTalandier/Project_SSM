@@ -6,6 +6,35 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-09 (latest) — S0.1.1 ACCEPTED (S0.1 fully closed); D-2026-06-09-1 (front-load debt #1) → CONCUR
+
+**S0.1.1 closeout: ACCEPT, no reservations.** All four decision-free edits landed exactly to spec;
+107/107 green. The load-bearing one is **F1 positive**: the dynamical mapping now has a *time-domain*
+confirmation against an independent RK45 — ringdown <1e-9 vs closed form, pole (κ *and* δ) recovered from
+the trajectory <1e-5, 2-ring beat = Im(eig) splitting (2μ) <2%, with a μ=0 no-beat contrast. F3 (memory
+now in one amplitude convention: 3.29 ns/329 rt → 49.4 ns/4937 rt — the numbers PR-2 sizes against), F4
+(B2 one-γ row + HWHM/FWHM ×2 band; conclusion unchanged, matching the Critic's own re-derivation), F7
+(conservative corner de-attributed; real AN800 entry primary-sourced, 0.051 dB/cm primary / Qi=6.8e6
+derived). Honest flags are good practice (step-test scaling; n_g=1.97 bookkeeping choice). Scope held —
+F2/F6 untouched, as specced. No Critic gate needed: this *executed* the Critic's own prescribed edits.
+
+**D-2026-06-09-1 (cross-project: front-load the white-space kill-search): CONCUR, adopt (a)+(b)+(c)**
+with four strengthenings — rule-form kill-criterion (q1 internal-to-recurrence ∧ q2 on-device-in-the-loop
+∧ q3 gradient-based/-estimating; F15 (i)–(iv) are search *lanes*, the rule decides; (iv)-type priors
+non-fatal but cited; ambiguous → Lucas with primary sources); one-sided PASS semantics (clean search ≠
+certification; S0.8 dated sweep stays); two-modality search (Executor systematic sweep, primary-source
+verified — the B2/F5 lesson — + independent Critic adversarial pass + F14 reconciliation); and folding
+PR-15 + S0.7-lite + the value call into **one pre-S0.2 continuation gate**. Sharpening for Lucas: the
+"first" is only collectible on hardware (Stage 1+), so this gate is really the **program-level
+continuation call**. Full adjudication in `decisions_needed.md`; escalated as **E-2026-06-09-2**. Nothing
+folded into roadmap/ledger until Lucas blesses (PR-15 must be registered *before* the search it governs).
+
+**Pipeline state:** no ACTIVE task. Three items at Lucas: D-08-2 + D-08-3 (steer; Supervisor+Critic
+converged) and E-2026-06-09-2 (the reorder + strategic flag). On the steers: mapping write-up + PR-15
+registration + roadmap re-pace + S0.2 spec (PR-1/PR-2/PR-10 freeze) + Executor/Critic dispatches.
+
+---
+
 ## 2026-06-09 (later) — Critic reviewed S0.1 → APPROVE-WITH-EDITS; closeout ACTIVE; decisions ready for Lucas
 
 Strong independent review (re-derived every load-bearing number — most reproduce to the digit). 2 HIGH ·

@@ -18,9 +18,27 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-06-09-2 — Adjudicate D-2026-06-09-1: front-load the white-space kill-search (PR-15 pre-S0.2 gate) + the strategic flag
+The cross-project crosscheck you requested (pnn-multilayer Supervisor) proposes moving **verification
+debt #1** — the white-space prior-art search (F15 kill-queries) — from S0.8 to **before S0.2**, ∥
+S0.7-lite, with a pre-registered go/no-go (**PR-15**): a prior showing *internal recurrent photonic params
+updated on-device by a gradient-based/-estimating rule* falsifies the scientific-first → escalate before
+the S0.2–S0.5 spend. **Supervisor: CONCUR, adopt in full** with four strengthenings (rule-form
+kill-criterion; one-sided PASS semantics; Executor sweep + independent Critic adversarial pass, primary
+sources only; fold PR-15 + S0.7-lite + your value call into **one pre-S0.2 continuation gate**) — full
+adjudication in `decisions_needed.md` D-2026-06-09-1. It cites your sibling-project post-mortem lesson
+("β-10 should have been β-1"); I verified the citation. **The strategic flag is yours alone:** the "first"
+is only *collectible* on hardware (Stage 1+) — Stage 0 alone yields a methods/feasibility paper — so this
+gate is really the program-level continuation call (fab-someday vs methods-paper-only), taken with both
+kill-shots in hand. Both probes cost days and no compute; I recommend running them under every branch.
+**Per pre-registration discipline nothing is folded into roadmap/ledger until you bless** (PR-15 governs
+the search, so it must be registered before the search runs). On bless: register PR-15 → re-pace roadmap →
+dispatch Executor sweep + Critic adversarial/F14-reconciliation spec.
+
 ### E-2026-06-09-1 — Steer the two S0.1 architecture decisions (low-risk; Supervisor + Critic aligned)
 S0.1 done (gate passed); Critic reviewed → **APPROVE-WITH-EDITS** (`critic_review_s0-1-results.md`); S0.2
-can proceed after four decision-free edits (now ACTIVE as **S0.1.1**). **Your steer is needed on the two
+can proceed after four decision-free edits (**S0.1.1 — ✅ DONE 2026-06-09**: all four landed, 107/107
+green, F1 transient validation *positive*; S0.1 fully closed). **Your steer is needed on the two
 decisions** — both now carry *converged* Supervisor + Critic recommendations (`decisions_needed.md`):
 - **D-08-2 (mapping class):** simulate the **diagonal complex-pole SSM (S4D/DSS)**, with LinOSS as its
   conjugate-pair special case; soften the "oscillatory LinOSS" branding; benchmark-transfer becomes

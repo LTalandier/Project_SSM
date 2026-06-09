@@ -8,6 +8,118 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
+### D-2026-06-09-1 (strategic, pre-S0.2) — Front-load verification debt #1 (white-space prior-art search) from S0.8 to before S0.2, with a go/no-go kill-criterion
+**Raised by:** pnn-multilayer Supervisor session, via a cross-project "is this even worth running?"
+crosscheck Lucas requested 2026-06-09 — **not** the Project_SSM Executor/Supervisor/Critic. **Blocks:**
+proposes a **new pre-S0.2 gate**; does **not** block the S0.1-F* edits already scheduled before
+PR-1/PR-2 freeze. **Partially revisits** Critic roadmap-review **F14** (which left debt #1 S0.8-paced) —
+a different lens, not a contradiction; see below.
+
+**The decision.** Move verification debt #1 — the white-space prior-art search (the four F15
+kill-queries) — off the S0.8 critical-path tail and run it **now, in parallel with S0.7-lite, before the
+S0.2 bake-off is authorized.** Add a pre-registration entry (proposed **PR-15**) with an explicit
+go/no-go: *if the search surfaces a prior matching F15 query (i) [zeroth-order/perturbative updates of
+internal recurrent-photonic params] or (ii) [policy-gradient updates of internal recurrent params], the
+scientific-first claim is falsified → escalate to Lucas before authorizing the S0.2–S0.5 spend.*
+
+**Why (the firm argument).**
+1. **Two value legs, gated asymmetrically.** The systems-advantage leg (conceded niche-at-best,
+   likely-negative) is correctly front-loaded and gated — S0.7-lite (F1) runs before the task choice,
+   F16 sets a content floor, the escalation clause fires pre-MPW. Good. But the **scientific-first leg —
+   the *primary* contribution (proposal §10: "the scientific first stands without a systems advantage;
+   the commercial thesis does not") — has its kill-shot (the white-space claim) scheduled dead last
+   (S0.8) with no pre-registered gate.** The leg that carries the whole project is the one whose decisive
+   check is deferred.
+2. **The deferral is dependency-correct but strategy-wrong.** F14 left #1 S0.8-paced because it is not a
+   critical-path *input* to S0.2/S0.3 (unlike debts #2/#3). True. But "not a prerequisite input" ≠ "safe
+   to defer." The search is **cheap** (literature, days, no compute, no fab) and **potentially fatal**
+   (Critic's own F15: "a single such prior is **fatal**, since it is precisely our Stage-1 claim").
+   Cheap + decisive + potentially-fatal belongs *first*, independent of dependency order.
+3. **Cross-project precedent (the reason this crosscheck exists).** The sibling project (pnn-multilayer,
+   chip track) deferred its single decisive value probe — β-10, "does the chip beat DSP at deployment
+   charging every real cost?" — to the end of a ten-rung ladder, for *exactly* this reason: it wasn't a
+   prerequisite for the earlier rungs. β-10 returned a definitive NO, and the rungs before it
+   characterized a device the kill-shot then falsified. Post-mortem lesson, verbatim: **front-load the
+   kill-shot — β-10 should have been β-1.** Debt #1 is this project's β-10. (See
+   `pnn-multilayer/shared/project_postmortem.md`, 2026-06-09.)
+4. **It can run now.** The exact claim *wording* legitimately depends on S0.1's B1 actuation map (done) +
+   PR-2 — but the *existence* search (F15 i–iv) does not. Separate the existence gate (now) from the
+   wording (PR-2/S0.8).
+
+**Recommended resolution.**
+- (a) Re-pace debt #1 to **run before S0.2**, alongside S0.7-lite, on the dependency graph.
+- (b) Register **PR-15** (white-space go/no-go) with the kill-criterion above; the wording refinement
+  stays at PR-2/S0.8.
+- (c) If it clears → proceed to S0.2 with the novelty de-risked (strictly stronger than discovering a
+  prior at S0.8). If it surfaces a fatal prior → escalate; the residual contribution collapses to a
+  methods-comparison-only result (heavily discounted without the "first"), and Lucas decides whether that
+  alone justifies the bake-off.
+
+**Related strategic flag for Lucas (larger than this reorder; flagged, not folded in).** The project's
+*primary* payoff is a scientific-first / priority result — the axis Lucas has said he values least
+("paper is a human-readable trace only; cares about truth and chip engineering"). The axis he values —
+producibility / chip engineering — is the one §10 disclaims, and S0.7 is predicted negative on the *same*
+O-E-O + thermo-optic-holding-power physics that floored the β-10 chip. Most of the *truth*-value Lucas
+would actually want (does it train? would it ever pay?) is obtainable from the two cheap front-loaded
+probes (this debt #1 + S0.7-lite). Whether the expensive remainder (full bake-off → multi-year niche fab)
+is worth a scientific-first he may not intrinsically value is a Lucas-level call.
+
+**Routing.** → **Project_SSM Supervisor**: fold the re-pacing into `stage0_roadmap.md` +
+`preregistration.md`, or rebut. → **Critic**: reconcile with F14 (value-at-risk / kill-shot-ordering
+lens vs data-dependency lens — both can hold; does the go/no-go belong in the PR ledger?). → **Lucas**:
+adjudicate the reorder + the related strategic flag.
+
+**Supervisor adjudication (2026-06-09) → CONCUR; adopt (a)+(b)+(c) with four strengthenings.** Precedent
+verified (`pnn-multilayer/shared/project_postmortem.md` exists; lesson verbatim: "the kill-shot question
+came last and should have come first"). The argument also stands without it: **cheap + potentially-fatal +
+(one-sidedly) decisive ⇒ run first**; dependency order only constrains expensive or input-producing work.
+No conflict with F14 — F14 is a *data-dependency* statement (#2/#3 are inputs; #1 isn't), D-09-1 adds a
+*value-at-risk scheduling* principle on top; both hold (→ Critic to confirm).
+
+1. **State the kill-criterion in rule form, not query-indexed form.** As drafted ("matching (i) or (ii)")
+   it under-covers: F15 query (iii) — HIL adaptation of delay-reservoir *feedback/internal* params — is
+   fatal *iff the update rule is gradient-based/-estimating*. PR-15 rule: a prior is **FATAL iff all three
+   hold** — **(q1)** params *internal to the recurrence* (feedback/coupling/pole-defining; readout-only or
+   input-mask-only does **not** count), **(q2)** updated **on the physical device in the loop** (not
+   simulate-train-then-deploy), **(q3)** by a **gradient-based or gradient-estimating** rule
+   (backprop/adjoint/PAT-hybrid; SPSA/FD zeroth-order; REINFORCE/policy-gradient). F15 (i)–(iv) are the
+   *search lanes*; the rule decides. (iv)-type priors (evolutionary/Boolean) are **non-fatal but must be
+   cited** — they make the "gradient-based/-estimating" qualifier load-bearing. **Ambiguous cases**
+   (partially-internal params; hybrid digital recurrence; unclear what was physically updated) →
+   **escalate to Lucas with primary sources attached**, never adjudicated inside the pipeline.
+2. **One-sided PASS semantics.** A found prior is decisive; a clean search is *not* a certification
+   (bounded by search quality). PR-15 PASS = *no falsifying prior under the registered lanes + an
+   independent adversarial Critic pass*; the claim stays **provisional until the S0.8 dated final sweep**
+   (which stays — D-09-1's existence-now / wording-later split is right).
+3. **Two-modality search (the B2 lesson).** **Executor** runs the systematic sweep (S0.L lane; it ran the
+   B2 pull) → dated memo, every candidate prior **verified in the primary source** — no aggregator-snippet
+   citations (the F5 failure mode). **Critic** runs an *independent adversarial pass* (its brief: kill the
+   claim), plus reconciles F14 and reviews the PR-15 criterion **before the search runs**. Lucas
+   adjudicates anything found/ambiguous.
+4. **Fold into ONE pre-S0.2 continuation gate.** v3 already runs S0.7-lite before the S0.2 task choice;
+   add PR-15 alongside → the pre-S0.2 touchpoint becomes a single **continuation review**:
+   {S0.1+S0.1.1 ✅} + PR-15 verdict + S0.7-lite envelope + the strategic-flag value call — one Lucas
+   decision with both kill-shots in hand, instead of three scattered asks.
+
+**On the strategic flag — one sharpening that raises its stakes.** The "first" is **not a Stage-0
+deliverable at all**: it can only be *collected* on hardware (Stage 1+). Stage 0's standalone output is a
+methods/feasibility paper (bake-off + mapping + envelope). So PR-15 protects the value of a payoff that
+only materializes **if Lucas later commits to fab**; if he already knows he would not fab a
+niche-at-best chip, the bake-off must justify itself as **methods science alone** — and that bar should be
+set at the new gate, not discovered at S0.8. Decision tree: **PR-15 fatal** → headline gone at every stage
+→ near-certain stop (residual = methods comparison; Lucas decides). **PR-15 clear + S0.7-lite
+hard-negative** → a collectible first with no advantage story (§10 says it stands scientifically; Lucas's
+stated values discount it) → his call, at the gate. **Both clear-ish** → continue, novelty de-risked.
+Under *every* branch the two probes are worth running now: days, no compute spend, and they convert the
+continuation call from speculative to informed.
+
+**Order (pre-registration discipline).** Nothing folded into roadmap/ledger yet: PR-15 *governs* the
+search, so the criterion must be registered + Lucas-blessed **before** the search runs (else hindsight
+bias in what counts as a match). On bless: (1) register **PR-15** (rule + lanes + databases/venues +
+mid-2026 date-snapshot + disposition rule); (2) roadmap re-pace (#1 → pre-S0.2 ∥ S0.7-lite; dependency
+graph + S0.L edits; the joint continuation gate); (3) Executor search task + Critic
+adversarial/F14-reconciliation spec; (4) the gate itself. **→ Escalated as E-2026-06-09-2.**
+
 ### D-2026-06-08-2 (flag, S0.1) — Diagonal-complex-SSM vs real-LinOSS-conjugate-pair architecture
 **Raised by:** Executor (S0.1, `docs/s0_1/mapping_notes.md` §4b). **Blocks:** nothing now; **feeds PR-2**
 (S0.2 bake-off architecture). One optical ring = one **complex** pole (the field carries a carrier), so
