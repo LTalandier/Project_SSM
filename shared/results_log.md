@@ -15,6 +15,74 @@ Per result, report:
 
 ---
 
+## S0.7L-1 — S0.7-lite envelope (PR-10 🔒 FROZEN) + WS-F11/F12 rider (2026-06-10, Executor)
+
+**Goal:** run the S0.7-lite energy/latency envelope strictly from the frozen PR-10 block (every
+load-bearing number traced to a frozen row, cited per use; zero new sourcing), at both corners
+(OPT/CONS) × both heater classes (A/B), vs the named F16 baselines; check the §10 escalation
+clause explicitly. Rider first: WS-F11 count/pointer fixes + WS-F12 S0.8 full-text-TODO section
+in the S0.L-1 memo.
+
+**Config:** pure arithmetic + plots (`analysis/s0_7_lite_envelope.py`; no simulation, no seeds
+applicable, deterministic). Grid: N ∈ {8,32,128} × {0.1, 1, 2} GS/s (registered ends + interior
+point) × 4 scenarios. Frozen brackets carried as ranges (no midpoints); 8 stated mapping
+conventions (C1–C8, in script header + memo §2) per the frozen output convention; heater-class
+consistency rule honored (one class per scenario for power AND τ/SPSA cadence).
+
+**Key findings:**
+1. **§10 clause does NOT fire:** 16 OPT grid cells clear ≥1 named baseline (all OPT×B at
+   ≥1 GS/s; e.g. N=32 @1 GS/s: 229–233 pJ/sample vs Brainwave 1 561 pJ/sample = 6.7×; up to
+   14.7× at N=128 @2 GS/s). No Stage-1-reframing escalation drafted.
+2. **The binding constraint is the heater class, not the conversion stack.** Class-A (foundry,
+   60–175 mW/π) scenarios lose to every baseline everywhere inside the registered 0.1–2 GS/s
+   window — their Brainwave crossovers sit at 2.56–2.84 GS/s (OPT×A) and 16.6–29.7 GS/s or never
+   (CONS×A), all above the registered ceiling. Only class-B (~1 mW/π suspended) wins — and the
+   frozen row itself marks class B **non-CORNERSTONE** at τ = 0.4–2.6 ms (SPSA cadence floor
+   0.8–5.2 ms/iteration). The energy niche as computed is not reachable in the currently-named
+   foundry flow → Stage-1 platform constraint, flagged for PR-2/PR-4 framing.
+3. **Even the deployable corner wins at large N:** CONS×B (vendor TI converters) clears
+   Brainwave at N ≥ 32 above 0.28–0.50 GS/s and Jetson-sustained at N=128 — the C8 structural
+   effect (conversion is N-independent, digital cost ∝ N).
+4. **Rate floor:** every scenario loses everything at 0.1 GS/s (OPT×B crossover ≈ 0.12–0.14
+   GS/s); independently, foundry-corner ring memory is sub-sample at 0.1 GS/s (0.33 samples).
+   The niche lives at the 1–2 GS/s end.
+5. **Jetson-peak (4.6 TOPS/W) is never beaten anywhere by any scenario** — the embedded-GPU case
+   rests entirely on the registered peak≠sustained caveat (<13% measured batch-1-RNN util.). A
+   measured sustained embedded-GPU number on a matched streaming workload is the single most
+   case-threatening S0.7-full retrieval.
+6. **Latency:** photonic lower bound 4.3–69.4 ns/sample (ring memory + 2 sample periods;
+   converter pipeline latency is not a frozen row → reported as a registered gap) vs Brainwave
+   <4 ms batch-1 (~10⁵). Robust to any plausible pipeline adder.
+7. **Niche statement (explicit, memo §6):** plausible low-latency niche EXISTS, conditionally —
+   ≥~0.5 GS/s streaming, N=32–128, sub-µs latency relevance, class-B heaters required, vs
+   serving-class/sustained baselines only. S0.2 input: equalization-class streaming task at
+   GS/s rates, not LLM-decode. **Verdict: conditional POSITIVE — assumption-driven, NOT
+   outreach-load-bearing** (roadmap semantics); exclusions (laser, locking, control compute,
+   packaging) listed unbudgeted — they only shrink positive cells, negative findings robust.
+8. **Rider done (no verdict changes):** S0.L-1 memo counts corrected (47 non-fatal-cite rows;
+   74 rows / 80+ papers, was "~60"); N28a pointer fixed (→ N28 experiment (a)); §7 S0.8
+   full-text TODO added (Wan OEA 2024 / C9 de-compression / Mak-Bois-Poon 2016).
+
+**Gates:** every number traces to a frozen PR-10 row, cited per use ✅ (memo §1 table; adopted
+discrepancy corrections honored — no Ozkaya standing-power / "~5 pJ/bit DSP" / Harris-Si number
+used); all four scenario combinations reported ✅ (no cherry-picking; full clearance matrices);
+exclusions stated in the output ✅; explicit niche-or-no-niche statement ✅ (memo §6); §10 clause
+checked explicitly ✅ (does not fire); rider done ✅.
+
+**Anomalies / concerns:** (i) two frozen-block readings had to be fixed by stated convention and
+are flagged for Critic audit: trim electronics charged in all scenarios (C3) and class-A "fast τ"
+resolved via the row's memo-§4 reference (38–110 µs) — neither affects any clearance verdict
+(trim is ≤2/62 of class-A channel power; τ enters only the cadence note). (ii) The OPT×B-vs-DSP
+clearance at N=32 is by ~1% (233 vs 235 pJ) — treat as boundary, not margin. (iii) Converter
+pipeline latency has no frozen row — latency is a lower bound only.
+
+**Data path:** `docs/s0_7/s07_lite_envelope.md` (memo); `analysis/s0_7_lite_envelope.py`;
+`results/s0_7/` (JSON + tables.md + 2 PNGs).
+
+**Compute used:** local CPU, <1 s arithmetic; zero simulation/cloud spend.
+
+---
+
 ## S0.7L-0 — PR-10 assumption sourcing (S0.7-lite step 0 of 2) (2026-06-10, Executor)
 
 **Goal:** source the candidate assumption set for PR-10 (S0.7-lite envelope) with primaries, so the
