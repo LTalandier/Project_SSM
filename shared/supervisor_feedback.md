@@ -6,6 +6,21 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (Zhao resolved) — retrieval #1 NON-FATAL (figure-level, Lucas); main gate contingency cleared
+
+Lucas obtained Zhao LPR 2025 figs. 1–2 (paywalled full text unobtainable; figures archived in
+`docs/s0_L/primaries/`). Adjudication (Lucas: "seems feedforward"; Supervisor confirmed in detail):
+**feedforward MLP with bidirectional optical backprop** — $Z^l=W^lX^{l-1}$ forward, $(W^l)^T dL/dZ^l$
+backward through the same MRR bank; rings are static weight elements $W_{ij}$, no state across the
+input sequence → fails q1 (weight-tied-recurrence rider) → **NON-FATAL**; does not graze W1 (weight
+elements ≠ dynamical poles/couplings). Upside: sharpens **debt #4** — feedforward in-situ optical BP
+on MRRs now demonstrably exists; the *recurrent* version remains the undemonstrated gap. Zhao →
+prominent must-cite. Ledger + escalation updated; NTT/Fisher/Shi full-texts re-paced to
+claim-freeze (PR-2/S0.8), not gate-blocking. **The continuation gate now waits on exactly one input:
+the S0.7-lite envelope (S0.7L-1, running).**
+
+---
+
 ## 2026-06-10 (rulings executed) — PR-10 FROZEN · PR-15.1 SIGNED · Wu held (W1 default) · S0.7L-1 launched
 
 Lucas ruled: "1. ok (freeze PR-10) · 2. ok (sign PR-15.1 + Böhm qualifier) · 3. don't send the Wu

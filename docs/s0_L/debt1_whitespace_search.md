@@ -20,6 +20,11 @@ zeroth-order perturbative SPSA/FD/SPGD; REINFORCE/policy-gradient). Population-s
 must be cited**. AMBIGUOUS (partially-internal params; hybrid digital recurrence; unclear update
 locus; unreachable primary) → **escalate to Lucas, never adjudicated in-pipeline**.
 
+> **Edit note 2026-06-10 (S0.7L-1 rider; Critic WS-F11/WS-F12, audit CLEAN):** §0/§4.2 counts
+> corrected (47 non-fatal-cite rows, not 33; 74 candidate rows / 80+ papers total, previously
+> under-counted as "~60"); the dangling "N28a" pointer in §5 fixed (→ N28 experiment (a)); §7
+> "S0.8 full-text TODO" added. **No verdict was changed.**
+
 ---
 
 ## 0. Verdict summary
@@ -28,8 +33,12 @@ locus; unreachable primary) → **escalate to Lucas, never adjudicated in-pipeli
 |---|---|---|
 | **FATAL (confirmed)** | **0** | No prior was confirmed to satisfy q1 ∧ q2 ∧ q3. |
 | **AMBIGUOUS → escalated** | **15** (4 groups) | **A1 Wu et al. eLight 2025 — potentially FATAL** (update locus); A2 Böhm 2022 (hybrid digital recurrence); A3 calibration/self-optimization boundary class, 5 members (**A3a Milanizadeh 2020 potentially fatal under wording**); A4 unreachable primaries, 8 members. |
-| **non-fatal-cite** | 33 | Near-misses the paper must cite; each PR-15 qualifier is individually load-bearing many times over (§4.2). |
+| **non-fatal-cite** | **47** | Near-misses the paper must cite; each PR-15 qualifier is individually load-bearing many times over (§4.2). |
 | **clear (examined)** | 12 | Checked and out of scope / failing multiple q's with no cite obligation (§4.3). |
+
+**Totals (corrected 2026-06-10, WS-F11):** **74 candidate rows** (15 + 47 + 12) spanning **80+
+distinct papers** (several rows carry 2+ primaries — e.g. N8, N16, N27, N31, N35–N37, C2, C9,
+A3a, A4e–h). The original "~60" under-counted the memo's own §4.2.
 
 **Disposition:** the AMBIGUOUS set is escalated to Lucas with primaries
 (`shared/escalate_to_human.md` E-2026-06-09-3; `shared/decisions_needed.md` D-2026-06-09-2), per
@@ -37,8 +46,8 @@ PR-15. **This memo does not and cannot issue the PR-15 PASS**: PASS is one-sided
 conditional on Lucas's adjudication of A1 (and A3a). Everything else in the sweep is consistent
 with the white-space claim *as of 2026-06*.
 
-**The single load-bearing sentence of this memo:** in ~60 examined candidates across all five
-frozen lanes, every system with genuine physical recurrence is trained at the readout/encoder only,
+**The single load-bearing sentence of this memo:** in 74 examined candidate rows (80+ distinct
+papers) across all five frozen lanes, every system with genuine physical recurrence is trained at the readout/encoder only,
 or by a non-gradient rule, or offline-then-deployed — **except** one 2025 monolithic optical RNN
 trained in-situ by SPGD whose *trained-parameter set is not stated* (A1), and a class of in-loop
 gradient-style *device-calibration* loops on pole-defining ring parameters whose status turns on
@@ -283,7 +292,7 @@ computational task loss. Whether such loops are "training" is a wording question
   "Holography in artificial neural networks," Nature 343:325 (1990) (abstract; review character).
   All lean strongly non-fatal; listed for completeness per the unreachable-primary rule.
 
-### 4.2 Non-fatal-cite (33) — the priors the claim's qualifiers must carry
+### 4.2 Non-fatal-cite (47) — the priors the claim's qualifiers must carry
 
 *Readout-/encoder-only training of physically recurrent photonic systems (q1 fails — "reservoir
 computing" per the rule):*
@@ -602,7 +611,7 @@ contrast class:*
   "gradient-based/-estimating" qualifier is load-bearing** against exactly this lane — said
   explicitly, per the roadmap. Historical photorefractive era: in-loop *gradient-class* optical
   learning existed by 1987–89 but only feedforward (N28, N29); recurrent optical systems adapted
-  only by self-organization (N16) or ran fixed weights (N28a, A4e).
+  only by self-organization (N16) or ran fixed weights (N28 experiment (a), A4e).
 - **(v) Free/forward + named groups:** all ten named groups swept with one-line dispositions in
   §4 (Brunner/Fischer/Bueno → §3; Shastri/Prucnal/Tait → N17/N31; Wright/Onodera/McMahon →
   N22/N23; Hughes/Fan/Pai → N19–N21; Englund/Bandyopadhyay/Hamerly → N18 (+N45 Stiller co-auth);
@@ -628,8 +637,8 @@ contrast class:*
 ## 6. What this search does and does not establish
 
 1. **It does not certify the claim** (PR-15 PASS is one-sided): a clean sweep bounds only what
-   six search modalities + ~60 primaries could see as of 2026-06. The dated S0.8 final sweep
-   stands.
+   six search modalities + 74 candidate rows (80+ papers) could see as of 2026-06. The dated
+   S0.8 final sweep stands.
 2. **It does not issue even the one-sided PASS yet**: A1 (and the A3a wording call) must be
    adjudicated by Lucas first. If A1 resolves fatal, PR-15 disposition applies (residual =
    methods-comparison-only; Lucas decides whether that justifies the bake-off).
@@ -646,6 +655,29 @@ contrast class:*
    Executor's re-verification onto curl — all EV fetches logged in Appendix A.7; (c) paywalled
    primaries are listed in A4, never counted as clear; (d) non-English-venue literature was reached
    only where indexed in English.
+
+---
+
+## 7. S0.8 full-text TODO (WS-F12 — residual abstract-resting items; added 2026-06-10, no verdict changes)
+
+Per the Critic's WS-F12 (Part-2 audit, `critic_review_whitespace-pr15.md`): the A4
+unreachable-primary discipline held (nothing unreached was cleared), but three dispositioned items
+rest on abstracts and must be full-texted before the dated S0.8 final sweep. These are
+**bookkeeping items for the S0.8 sweep**, distinct from the Lucas-owned retrievals (Zhao LPR 2025 /
+NTT ADI 2025 / Fisher 1987 — E-2026-06-09-5, out of scope here):
+
+1. **Wan et al., Opto-Electron. Adv. 7:230182 (2024)** (row N32; Wu's ref. [49]) — currently
+   abstract-level. It is the **entire textual basis of the restricted (non-fatal) reading of A1/Wu**
+   (SPGD antecedent = feedforward 6×6 processor), i.e. it anchors the A1 ruling's alternative
+   reading and the W1 default claim's loudest-must-cite framing. Full-text by S0.8.
+2. **C9 row de-compression** — C9 currently folds three distinct systems into one row (ON-ODE
+   arXiv:2209.12898; time-bin loop processors arXiv:2404.17657; PSR variational photonics PRR
+   7:023227 (2025)). Give each its own one-line primary-grounded disposition (Critic assessment:
+   none plausibly fatal → LOW priority, but the row should not compress).
+3. **Mak, Bois, Poon (2016)** — the *coupling-tuning* sibling of A3c (Critic's A3 row, found in
+   modality 2). Algorithm class still unverified from the primary; verify, since a dither/lock-in
+   stage would move it from "fails q3" to a **q4-only exclusion** under PR-15.1 (changes which
+   qualifier the prior-art boundary paragraph hangs its exclusion on, not the verdict).
 
 ---
 

@@ -18,13 +18,14 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### 📥 E-2026-06-10-2 — Retrievals (the one open ask) + the continuation gate (coming next)
-- **Retrieval #1 — Zhao et al., "In-situ trained microring-based neural networks for scalable and
-  robust photonic computing," *Laser & Photonics Reviews* (2025), DOI 10.1002/lpor.202501576**
-  (Wiley; no arXiv mirror). The only item that could threaten even the adopted W1 claim (if its
-  trained MRRs form a weight-tied recurrence; secondary descriptions suggest a feedforward weight
-  bank — unverified). Then: NTT Compute-in-Wire (ADI 2025, doi 10.34133/adi.0121), Fisher 1987
-  (Appl. Opt. 26:5039), Shi LPR 2025. The PR-15 final PASS is contingent on these reading non-fatal.
+### 📥 E-2026-06-10-2 — Retrievals + the continuation gate (coming next)
+- **✅ Retrieval #1 RESOLVED (2026-06-10):** **Zhao LPR 2025 → NON-FATAL.** Lucas obtained figs. 1–2
+  (archived in `docs/s0_L/primaries/`); feedforward MLP with bidirectional optical BP — rings are
+  static weight elements, fails q1. Becomes a prominent must-cite; full-text check rides S0.8.
+  **The main gate contingency is cleared.**
+- **Remaining (claim-freeze-paced, NOT gate-blocking):** NTT Compute-in-Wire (ADI 2025,
+  doi 10.34133/adi.0121), Fisher 1987 (Appl. Opt. 26:5039), Shi LPR 2025 — all carry documented
+  non-fatal leans; needed before the PR-2/S0.8 wording freeze.
 - **Wu outreach:** held per your ruling ("don't send yet — maybe later"); draft + addresses in the
   session log when wanted. W1 is the adopted default claim meanwhile.
 - **Next decision to reach you:** the **pre-S0.2 continuation gate** — one go/no-go on the bake-off —

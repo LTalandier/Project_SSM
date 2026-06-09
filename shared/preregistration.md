@@ -216,3 +216,16 @@ converged independently; Lucas signed ("ok", ruling 2 of E-2026-06-09-5).
   weight bank, unverified), NTT ADI 2025, Fisher 1987. Final PASS is recorded when those resolve; the
   dated S0.8 final sweep + the §7 watchlist stand regardless. A clean PASS certifies nothing
   (one-sided, per v1).
+- **Retrieval #1 RESOLVED (2026-06-10, Lucas — figure-level primary evidence): Zhao LPR 2025 →
+  NON-FATAL.** Lucas obtained figs. 1–2 (archived: `docs/s0_L/primaries/lpor70400-fig-000{1,2}-m.jpg`);
+  adjudication (Lucas, Supervisor-confirmed): the architecture is a **feedforward MLP** — fig. 2 shows
+  $Z^l = W^l X^{l-1}$, $X^l=f(Z^l)$ forward and $(W^l)^T dL/dZ^l \odot f'$ backward through the same
+  MRR weight bank (bidirectional optical BP); each ring is a **static weight element $W_{ij}$**, no
+  state carried across the input sequence → **fails q1** (weight-tied-recurrence rider). Does not
+  graze W1 (rings are weight elements, not dynamical poles/couplings). **Becomes a prominent
+  must-cite** (nearest neighbor on the in-situ-MRR-training *method* axis; sharpens debt #4:
+  feedforward in-situ optical BP on MRRs now exists — the *recurrent* version remains the gap).
+  Residual: full-text check rides the dated S0.8 sweep (guard against an unfigured recurrent demo).
+  **Remaining full-texts (NTT ADI 2025, Fisher 1987, Shi LPR 2025): claim-freeze-paced (before
+  PR-2/S0.8 wording), NOT continuation-gate-blocking** — both carry documented non-fatal leans
+  (NTT: digital-twin-trained → q2; FiT-DNN class → q1 rider; Fisher: 1987 LCLV, topology unresolved).
