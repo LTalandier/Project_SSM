@@ -18,7 +18,13 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### 🚦 E-2026-06-10-3 — THE PRE-S0.2 CONTINUATION GATE: one go/no-go on the bake-off (S0.2–S0.5)
+### ✅ E-2026-06-10-3 — PRE-S0.2 CONTINUATION GATE → **RESOLVED 2026-06-10 by Lucas: GO**
+**Ruling:** "Go." **S0.2–S0.5 are authorized**, with the attached conditions active: task sized to
+the envelope niche (S0.2/PR-2); the audit's PR-2/PR-4 carry-ins (ledger Notes); EV fixes riding
+the next Executor task (S0.2-0, now ACTIVE). **Next to reach Lucas: the PR-1/PR-2 freeze ask**
+(Gate-i benchmark + margin; bake-off task/architecture/partition), drafted from S0.2-0's recon.
+The packet as filed (post-audit form), for the record:
+
 **Filed:** 2026-06-10 (Supervisor). Both gate inputs are now in hand. One decision: **authorize the
 four-method training bake-off (S0.2–S0.5), or stop/reframe.**
 

@@ -115,6 +115,10 @@ And clear the two gates:
 - **Precondition — the continuation gate (D-2026-06-09-1):** S0.2 (and the S0.2–S0.5 chain, S0.3
   included) is authorized only after the **PR-15 white-space verdict** + the **S0.7-lite envelope** are in
   and **Lucas makes the program-level continuation call** (E-2026-06-09-2).
+  **✅ SATISFIED 2026-06-10 — Lucas ruled GO (E-2026-06-10-3):** PR-15.1 provisional one-sided PASS +
+  Critic-audited conditional-positive lite envelope (APPROVE-WITH-EDITS, verdict survives). S0.2 runs as
+  **S0.2-0** (debt-#2 recon + task/benchmark candidates — feeds the freeze) → **PR-1/PR-2 freeze (Lucas)**
+  → **S0.2-1** (implementation + the Gate-i run), mirroring the S0.7L-0→PR-10→S0.7L-1 pattern.
 - **Do:** implement LinOSS (stable for nonnegative-diagonal $A$) + D-LinOSS (learnable damping); reproduce
   a long-range / time-series benchmark within a **pre-registered margin** (PR-1) set *before* the run.
   Resolve verification debt **#2** here (its S0.L memo is a *prerequisite* — F14; sharpened by D-08-2:
@@ -287,10 +291,10 @@ S0.L (literature): debt #1 → pre-S0.2 (PR-15, front-loaded) · debt #2 → S0.
   comes to Lucas at its phase boundary before the run that tests it.
 - ✅ Adopted v3.1 ("ok go", 2026-06-09): D-08-2 (S4D/DSS framing) + D-08-3 (roughness-gated knob) +
   D-09-1 (debt-#1 front-load, PR-15 frozen).
-- **Pre-S0.2 continuation gate (D-09-1 / E-2026-06-09-2):** with the PR-15 verdict + the S0.7-lite
-  envelope in hand, **Lucas makes the program-level continuation call** — the "first" is collectible only
-  on hardware (Stage 1+); Stage 0 alone yields a methods/feasibility paper. A FATAL PR-15 prior or a
-  hard-negative lite envelope → stop/reframe decision **before any S0.2–S0.5 spend**.
+- ✅ **Pre-S0.2 continuation gate → GO (2026-06-10, E-2026-06-10-3):** with the PR-15 verdict
+  (provisional one-sided PASS under signed PR-15.1) + the Critic-audited conditional-positive S0.7-lite
+  envelope in hand, **Lucas authorized S0.2–S0.5**. Standing frame unchanged: the "first" is collectible
+  only on hardware (Stage 1+); Stage 0 alone yields a methods/feasibility paper.
 - The parked $Q$ choice (D-2026-06-08-1) → adjudicated by F13: foundry-grade gates, class-leading sweeps;
   formalized at PR-4.
 - Gate (ii) outcome → proceed to Stage 1 on **PAT/SPSA**; whether to reserve a *later* hardware slot for

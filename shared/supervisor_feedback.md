@@ -6,6 +6,28 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (CONTINUATION GATE: GO) — Lucas authorized S0.2–S0.5; S0.2 split -0/-1 around the PR-1/PR-2 freeze; S0.2-0 ACTIVE
+
+**Lucas ruled "Go" on E-2026-06-10-3** — the bake-off arm is authorized with the attached
+conditions (niche-sized task; PR-2/PR-4 carry-ins in the ledger Notes; EV fixes as the S0.2-0
+rider). Recorded in: escalation (E-3 → RESOLVED), roadmap (S0.2 precondition ✅ + Lucas-gates
+line), ledger adoption blockquote (next freezes: PR-1+PR-2, then PR-4).
+
+**Methodology call (Supervisor): S0.2 runs in two steps mirroring S0.7-lite.** PR-1 needs a named
+published benchmark + margin frozen *before* the run that tests it, and the roadmap makes the
+debt-#2 memo a prerequisite (F14) — so **S0.2-0** (ACTIVE) is literature/design-input only: the
+debt-#2 benchmark recon, the niche-sized bake-off task menu, and the PR-2 input sheet
+(partition/actuation/readout under the EV-F5 single-quadrature condition + W1 cross-check).
+**Explicitly forbidden in S0.2-0: any LinOSS implementation or training run** — running
+benchmarks pre-freeze would let the margin be tuned to results (the F12 failure mode). From its
+memo I draft the **PR-1/PR-2 freeze ask → Lucas**; S0.2-1 then implements + runs Gate i.
+
+Sequencing note: this is the first task of the authorized arm; the Critic's next natural
+engagement is the phase-boundary review of the PR-1/PR-2 freeze draft (per ledger discipline:
+"each entry is reviewed by the Critic at the relevant phase boundary before the run proceeds").
+
+---
+
 ## 2026-06-10 (Critic envelope audit landed) — APPROVE-WITH-EDITS; verdict SURVIVES; Supervisor concurs on all 7 findings, owns EV-F1
 
 `critic_review_s07lite-envelope.md`: **"conditional positive" survives** — byte-identical re-run;

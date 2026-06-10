@@ -8,13 +8,70 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸️ NO ACTIVE TASK — pipeline holds at the pre-S0.2 continuation gate
+## 🟢 ACTIVE — S0.2-0: debt-#2 benchmark recon + bake-off task candidates (S0.2 step 0 of 2) + EV rider
 
-Both gate inputs are in hand (PR-15 provisional PASS + S0.7-lite conditional positive). The
-go/no-go on S0.2–S0.5 is with Lucas (`escalate_to_human.md` **E-2026-06-10-3**). A Critic audit
-of the envelope is **commissioned** (spec: `critic_instructions_s07lite-envelope.md`; **Lucas
-launches** the Critic session — sessions are launched by Lucas, not spawned by the Supervisor).
-Next Executor task (S0.2 spec, if GO) will be posted here after the ruling.
+**Assigned:** 2026-06-10
+**Supervisor:** Claude Opus 4.8
+**Status:** ACTIVE
+**Source:** roadmap §S0.2 (Gate i; F14 — the debt-#2 memo is a *prerequisite* of the PR-1/PR-2
+freeze) + **continuation gate GO** (E-2026-06-10-3, Lucas 2026-06-10). **PR-1/PR-2 are ⬜ UNSET —
+this task FEEDS the freeze. It does NOT set values and does NOT run anything Gate i will judge:
+no LinOSS implementation, no benchmark training runs** (that is S0.2-1, post-freeze — the
+S0.7L-0 → PR-10 → S0.7L-1 pattern). Literature/design-input only.
+
+### Rider (do first; decision-free) — Critic envelope-audit fixes
+Per the `critic_review_s07lite-envelope.md` fix list (cite EV-F numbers in the edits; no verdict
+changes):
+1. **results_log S0.7L-1 entry:** (a) replace anomaly (i)'s neutrality sentence per **EV-F2** —
+   the two flagged readings are faithful to the frozen source record but **not** verdict-neutral
+   (the OPT-corner rate-floor negative is partly C3-borne; CONS×B N=128@1 GS/s vs
+   Jetson-sustained is trim-sensitive); (b) strike-correct finding 2's class-A sentence per
+   **EV-F1** — class-A-dead is **C4-conditional**: under expected-value (P_π/2) holding, OPT×A
+   clears Brainwave in-window (1.32–1.47 GS/s); only CONS×A is dead under any holding convention.
+2. **Envelope memo §6:** one sentence per **EV-F3** — the N=128 margins assume the
+   class-leading-Q corner (linewidth packing: O(10–20) distinct poles/GHz foundry vs ~150
+   class-leading; → PR-4 with D-08-1); name the **single-quadrature/intensity readout** condition
+   on C8 per **EV-F5** (→ PR-2 readout pin).
+3. **Envelope memo §4:** restate latency per **EV-F4** ("sub-µs unreachable for the serving
+   class, <4 ms author bound; ≥10² vs any plausible matched-N FPGA pipeline") + one cadence
+   provenance line per **EV-F7**.
+
+### Goal (main) — the design-input memo for the PR-1/PR-2 freeze
+1. **Debt #2 (F14): LinOSS / D-LinOSS benchmark specifics, primary-sourced.** For each headline
+   published result (LinOSS, D-LinOSS; Mamba-3 as context only): exact task + split + metric +
+   model size/config + reported number + seed variance if reported + code availability; which
+   results validate only the **μ=0 diagonal reduction** (D-08-2) vs involve coupling; from these,
+   identify **2–4 candidate Gate-i reproduction targets** feasible at our scale (N≈32–128 states,
+   local compute) with a defensible **margin basis** for PR-1.
+2. **Bake-off task candidates sized to the niche** (envelope memo §6 + `mapping_result.md` §4):
+   2–3 candidate streaming tasks — **equalization-class GS/s family first** (rate-consistent with
+   S0.1's linewidth-derived class), plus ≥1 published-benchmark-aligned alternative — each with:
+   effective line rate vs the ≥0.5 GS/s floor; **memory depth required (samples) vs the
+   registered corners** (0.33–6.6 foundry / 4.9–98.8 class-leading over 0.1–2 GS/s); N sizing;
+   dataset/generator spec; evaluation metric; how the PR-13 synthetic memory family would
+   parametrize it.
+3. **PR-2 input sheet:** trainable-parameter-partition options (the B1 set {κ_tot,j, δ_j, μ_jk}
+   + the S0.1 actuation map); readout options under the **single-quadrature/intensity** condition
+   (EV-F5) incl. the F6 κ_ext dual-role note; W1 claim-wording cross-check (does each candidate
+   partition train pole positions AND inter-resonator couplings — the W1 set?).
+
+### Deliverables
+1. `docs/s0_2/debt2_benchmark_recon.md` — primary-quoted (verify-before-citing; the B2/F5 lesson)
+2. `docs/s0_2/bakeoff_task_candidates.md` — the menu with an explicit niche-fit table
+3. Results entry in `results_log.md`; rider edits noted there with EV-F citations
+
+### Gates
+Every load-bearing number primary-sourced + quoted; ≥2 Gate-i candidates with reproducible
+configs + a margin basis; ≥2 task candidates with explicit niche-fit arithmetic (rate, memory
+samples, N); **menu, not choice** (no values frozen); **zero training runs**; rider done.
+
+### Out of scope
+LinOSS/D-LinOSS implementation or training (S0.2-1, post-freeze); choosing the task/margin
+(Supervisor drafts the freeze ask; **Lucas freezes**); new envelope sourcing (PR-10 frozen;
+S0.7-full items live in the registry); PR-15 retrievals (Lucas, claim-freeze-paced).
+
+### Deployment
+Local; web allowed (literature task). ~1 day. No simulation, no cloud.
 
 ---
 
