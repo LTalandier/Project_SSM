@@ -15,7 +15,121 @@ Per result, report:
 
 ---
 
+## S0.3-0 — Substrate design recon + PR-4 input sheet: **debt #3 premise FALSE (flagship NF measured = 7 dB)** · menus complete (2026-06-10, Executor)
+
+**Goal:** every input the PR-4 freeze needs, as [EV]-sourced menus (menu-not-choice; zero
+substrate code; zero training runs): (1) debt #3 — Er:Si₃N₄ NF; (2) D-08-1 candidate (α,Qᵢ)
+pairs + the EV-F3 N=128 packing check; (3) D-08-3 roughness/splitting evaluated at operating
+κ_ext + knob policy; (4) gain-stage physics inventory (lifetime vs registered clocks); (5) the
+PR-4 input sheet (noise cells, κ_ext policy, EV-F1 holding convention, PF-F8f normalization).
+**Sequencing note:** per the task header, the S0.2-1 G3 gated-5 runs were launched FIRST
+(D-2026-06-10-2 ruling: local, 3-parallel; see the S0.2-1 addendum below) — this recon ran
+while they compute.
+
+**Config:** literature/design task (no simulation, no seeds). 3 parallel web subagents
+(flagship exhaustive + post-2022 scan; NF comparables ×6 classes; gain-dynamics timescales) +
+Executor first-hand fetches ×4 (arXiv 2204.02202v2, 2511.02198v1, 2412.07627v2, 2108.08044) with
+string-exact grep verification of every decisive number; arithmetic kernel
+`analysis/s0_3_0_recon_arithmetic.py` reusing the S0.1 `pole_region` conventions (**all
+registered anchors reproduced exactly**: foundry 329.1 rt / 0.33/3.29/6.58 samples; UHQ 4937 rt
+/ 4.94/49.4/98.7; B3 ladder 274→16 rt + drop efficiencies; B2 undercoupled ratios 0.49/3.7/6.6;
+EV-F3 packing 10.3 vs 155 poles/GHz).
+
+**Key findings:**
+1. **Debt #3's premise is FALSE at retrieval level [EV, three-way verified].** The flagship
+   (Liu et al., Science 376, 1309 (2022) / arXiv:2204.02202, v1≡v2 by LaTeX diff) **measures**
+   its NF: main text *"A noise figure of ca. 7 dB is measured at net gain of >20 dB, limited by
+   coupling losses"*; SI Note 13 worked example **7.1 dB** (source-subtraction method,
+   fiber-referenced, fwd 1480 nm pump). Attribution in-text: input fiber-chip coupling
+   (2.9 dB/side @1550) + 1480-pump n_sp (incomplete inversion). Corroborated by the group's own
+   2024 system paper (arXiv:2412.07627: "...demonstrated on these EDWAs so far (7.1 dB)") [EV].
+   **Post-2022 scan: no other Er:Si₃N₄ NF exists through 2026-06** (295 citing papers screened;
+   multi-lane OFC-2024 paper gain-only). The debt dies as worded; what survives: no
+   *intrinsic/on-chip* NF decomposition exists. → PR-4 NF menu anchors on a measured number.
+2. **NF comparables bracket [decisive rows EV]:** nearest measured integrated-Er hosts span
+   **4.49–6.5 dB** (Er:LNOI 4.49 [EV re-grep] and ~5 f2f; Er:Al₂O₃ 6.5/min 5.6 (OE 2025);
+   EDWA commercial 4.5; EDFA record 3.1; Caves 3 dB floor fetched). **Two draft assumptions
+   killed by the sources** (recorded in the memo): Mu et al. "NF 3–4 dB" untraceable to any
+   reachable primary; Frankis Er:TeO₂:SiN has NO NF (full-text zero occurrences). → menu cells
+   NF-A 7.0 (as-measured) / NF-B 5.0 (comparable class) / NF-C 3.0 (floor, aspirational label).
+3. **(α,Qᵢ) pairs + EV-F3 on numbers:** 4 self-consistent registry corners + 1 new candidate —
+   **Cui et al., Adv. Photon. Nexus 2(4) 046007 (2023)** identified as the probable primary of
+   the registry's AN800 pair [AV — body JS-walled, **verify at freeze**] AND itself demonstrating
+   **0.033 dB/cm / mean Qᵢ≈10.8 M on the standard AN800 open MPW** (multimode racetrack,
+   FSR 65 GHz — caveats logged). Packing: **N=128-in-band is realizable ONLY at the
+   class-leading pair at r ≲ 1** (155→52 poles/GHz) — exactly its split regime → the EV-F3
+   three-way coupling is really **two-against-one** (memo §2b; only knob-ON N=128 survives,
+   input sheet §6.1). N=8 ✓ at foundry; N=32 needs ≥AN800-class.
+4. **Splitting at operating κ_ext (D-08-3 evaluation) reorders the corners:** foundry+sub-low
+   rescued by r≈3 overcoupling (3.72→0.53); **AN800 marginal-split even clean-process
+   undercoupled (1.66)** — the blessed knob default "ON except clean-damascene" **confirmed,
+   sharpened: AN800 never qualifies for OFF**; UHQ un-splits only at r≥3 (memory 4937→705 rt =
+   14.1 samples @2 GS/s, still ≥ T-A's 7-tap). Subtractive statistics now first-hand [EV]:
+   arXiv:2511.02198v1 Table 2 read directly (splittings 180–320 MHz, prevalence 21–75 %, Qint
+   0.90(7)–2.8(2) M) — B2's row exact; its ⚠️ discharged at the numbers level (F5 stays S0.L).
+5. **Gain regime (task 4): Er is rigorously quasi-static at every registered clock.** Flagship
+   measured τ = 3.4 ms [EV]; per-symbol ripple suppression 2×10⁻⁸–5×10⁻⁷ (low-pass) AND
+   E_sym/E_sat ≈ 5×10⁻⁶–9×10⁻⁵ at 1 mW drive (E_sat ≈ 108 nJ from the measured −15 dBm
+   saturation power [EV]) — both criteria, with the Bononi&Rusch avalanche caveat handled by
+   the stationarity of the registered task streams (memo §4b). Comparables fetched: silica
+   10.5–12 ms, Al₂O₃ 7.6 ms, LNOI 2.3 ms; SOA 50 ps/0.1–1 ns contrast. **→ M1/M2/M3 gain-model
+   menu; ⚠️ METHODOLOGY FORK flagged (memo §4e): under the SiN-native M1 the in-loop physics is
+   LINEAR + static gain + ASE — the substrate's task-solving nonlinearity is the readout |·|²
+   (the PF-F1 structure). Supervisor/ledger names the registered regime (M1 vs III-V M3).**
+6. **New feasibility row — gain budget (memo §4f):** flagship gain coefficients (1.0–1.9 dB/cm
+   [EV]) × ring circumference vs per-rt loss: closes ×5.8–11 at the foundry corner (×1.9–3.7 at
+   r=1), **marginal-to-infeasible at CORNERSTONE** (×0.7–1.3 unloaded) — a CORNERSTONE cell is
+   passive-only; 50/90 % compensation conventions need P-FND or better.
+7. **PR-4 input sheet delivered** (`docs/s0_3/pr4_input_sheet.md`): 3 assembled noise cells
+   (C-1 foundry-deployable Gate-ii candidate / C-2 demonstrated-mid / C-3 aspirational) +
+   sensitivity axes; ASE conventions A1/A2 (equivalent at O(10⁻³) here; steady-state intracavity
+   ASE ≈ 23 photons at NF-7/90 %-comp, corner-independent — derivation in-sheet); κ_ext policies
+   K1–K4 with the per-cell arithmetic vs the frozen PR-2 cells (T-A 7-tap dies at foundry under
+   ANY loading — passive is already the marginal 6.58; PR-13 k-cells tabulated); splitting knob
+   policies K-pol-1/2/3; holding conventions H1/H2/H3 (EV-F1); **PF-F8f mechanisms O1
+   (bus-power budget) / O2 (intracavity-energy budget — the only K4-clean option) / O3 (bounded
+   trainable pre-gain)**; joint-adjudication notes incl. D-08-1 closure inputs.
+
+**Gates:** [EV]/[AV]/[ABS] discipline with verification trail ✅ (memo Appendix A; every
+decisive number Executor-re-grepped or carrying named fetch provenance); menu-not-choice ✅ (no
+value selected anywhere); **zero substrate code** ✅ (the kernel imports existing modules only);
+**zero training runs** ✅; every menu row carries provenance + sizing arithmetic vs registered
+values (PR-10 grid/N-grid, B1/B3, frozen PR-2 T-A/PR-13 cells) ✅; no frozen-block edits ✅.
+
+**Anomalies / concerns:** (i) **the debt-#3 premise itself was wrong** — proposal v0.5's
+verification-debt list carried a claim that dies at first full-text contact; S0.8 must reword
+debt #3 (Supervisor; suggested sharpened form in memo §1a) and this is a process datum for the
+other debts (#4 "recurrent-adjoint gap" is the same inferred-absence type); (ii) the registry's
+AN800 pair "primary-sourced" claim had **no recorded citation in-repo** — probable primary now
+identified (Cui 2023) but its body is unfetched [AV] → verify at the PR-4 freeze; (iii)
+`mapping_result.md` §4 "~33 rt" CORNERSTONE prose vs 38.6 rt registry-consistent (rounding
+legacy; non-load-bearing; frozen text untouched); (iv) Science published full text unreachable
+(403) — flagship quotes rest on arXiv v1≡v2 (submitted ms incl. SI); residual wording risk on
+the published PDF only; (v) the Er-regime fork (finding 5) — left open BY DESIGN for the
+Supervisor/ledger; S0.3-1 must not start before it's named.
+
+**Data path:** `docs/s0_3/substrate_recon.md` (tasks 1–4 + Appendix A trail);
+`docs/s0_3/pr4_input_sheet.md` (task 5); `analysis/s0_3_0_recon_arithmetic.py` +
+`results/s0_3/s0_3_0_recon_arithmetic.json` (full ladders/all corners).
+
+**Compute used:** local + web only; 3 research subagents (~300k agent tokens, 169 tool calls,
+~15 min each) + 4 Executor primary fetches; arithmetic seconds-class; **zero simulation, zero
+cloud spend**. (Machine concurrently running the S0.2-1 G3 gated-5 at 18/20 threads —
+untouched by this task beyond health checks.)
+
+---
+
 ## S0.2-1 — In-house LinOSS-IM layer + Gate-i runs: **G1 PASS (72.9032% ≥ 72.1%)** · G3 HELD on runtime flag D-2026-06-10-2 (2026-06-10, Executor)
+
+> **ADDENDUM 2026-06-10 (eve): G3 gated-5 LAUNCHED per the D-2026-06-10-2 ruling** (local,
+> gated-5 first, 3-parallel × 6 threads; cloud declined). Seeds 2345/3456/4567 in flight since
+> 18:48 (5678/6789 queued behind the wave); detached via setsid so the runs survive session
+> closure. Config records verified: param counts 133,765 / 134,279 (= published), official
+> splits 165/35/36 (N=236 post-dedup), data sha match, frozen protocol unchanged. Driver log
+> `results/s0_2/gate_i/logs/EigenWorms_gated5_driver.log`; launcher gained a `SEEDS_OVERRIDE`
+> env knob (logistics only — zero protocol content). ETA ~3–4 days; per-seed table + the joint
+> Gate-i verdict will be appended here when they land; annex-3 trails at idle after the verdict
+> (PF-F8g: non-gating).
 
 **Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
 and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):

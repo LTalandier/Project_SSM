@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# S0.2-1: run all 8 seeds (5 gated + 3 annex) for one anchor, N_PAR at a time.
+# S0.2-1: run seeds for one anchor, N_PAR at a time.
 # Usage: bash scripts/run_gate_i_all.sh <Heartbeat|EigenWorms> <N_PAR> <THREADS_PER_RUN>
+# SEEDS_OVERRIDE="2345 3456 ..." restricts the seed list (default: 5 gated + 3 annex).
+# D-2026-06-10-2 ruling: G3 runs gated-5 first (3-parallel), annex-3 trails at idle.
 set -u
 DS="$1"; NPAR="${2:-4}"; THREADS="${3:-5}"
 cd "$(dirname "$0")/.."
-SEEDS=(2345 3456 4567 5678 6789 7890 8901 9012)
+read -ra SEEDS <<< "${SEEDS_OVERRIDE:-2345 3456 4567 5678 6789 7890 8901 9012}"
 mkdir -p results/s0_2/gate_i/logs
 running=0
 for s in "${SEEDS[@]}"; do
