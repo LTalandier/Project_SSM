@@ -142,6 +142,47 @@ untouched by this task beyond health checks.)
 > state discarded — protocol-clean; nothing reused) and their config-only JSONLs removed.
 > First instance (40442878) had dead proxy-SSH, destroyed at ~$0.06 sunk. Per-seed table +
 > joint verdict + $ actuals follow when the runs land.
+>
+> **G3 MEASUREMENT COMPLETE 2026-06-10 (late eve) — GATE FAIL. Diagnosis per the frozen
+> gate-miss rule in flight; NO tuning performed or planned.**
+>
+> | seed | test-at-best-val | best val | steps | reading |
+> |---|---|---|---|---|
+> | 2345 | **0.1944444477558136** | 0.1714 | 12k | **collapsed — chance (5-class)** |
+> | 3456 | 0.8888888955116272 | 0.9143 | 15k | healthy |
+> | 4567 | 0.9444444775581360 | 0.9143 | 18k | healthy |
+> | 5678 | 0.9722222089767456 | 0.9429 | 13k | healthy |
+> | 6789 | **0.5555555820465088** | 0.4286 | 12k | **partial collapse** |
+>
+> **Unrounded gated 5-seed mean = 0.7111111223697663 = 71.1111 % < 90.6 % → G3 FAIL** (and
+> joint Gate i FAIL: G1 PASS ∧ G3 FAIL). Healthy-3 mean **93.52 %** — inside the published
+> 95.0±4.4. Per PR-1 on a miss: **stop — do not tune; divergence diagnosis vs the official
+> repo** (the sanctioned cross-check). Diagnosis so far (all on the box, GPU, deterministic):
+> 1. **Mechanism identified and reproduced bit-exactly:** the official objective
+>    `−Σ y·log(softmax + 1e-8)` (their train.py line 87, ported verbatim per the closure rule)
+>    has a **zero-gradient absorbing state** in fp32 — once softmax fully saturates on a wrong
+>    class, p_true underflows to exactly 0 and the epsilon makes the total gradient exactly
+>    0.0 forever. Step-instrumented: seed 2345 enters at **step 1** (step-0 |grad| ≈ 4×10³,
+>    then |grad| ≡ 0.0); seed 6789 at step 4 (frozen at its step-4 accuracy → the 55.6 %).
+> 2. **Incidence in our (framework-inherent, declared) RNG stream: 4 of 8 protocol seeds**
+>    trap within 600 steps (2345@1, 6789@4, 7890@7, 8901@1; 3456/4567/5678/9012 alive). The
+>    600-step diagnostic reproduces every gated outcome exactly (determinism verified).
+> 3. **Init audit clean:** every parameter group's init distribution matches the official
+>    (eqx Linear lim = 1/√in for weight+bias = our `_init_linear`; A/steps U[0,1), B ±1/√H,
+>    C ±1/√ssm, D N(0,1)) — weight-transplant parity is blind to init bugs by construction,
+>    so this was checked line-by-line against models/LinOSS.py + eqx 0.11.4 source. Only the
+>    stream BITS differ (declared framework-inherent in this entry's original config note).
+> 4. **Official-repo cross-check IN FLIGHT** (the decisive evidence): the official JAX code —
+>    pinned commit 05a8353, jax 0.4.28 / eqx 0.11.4 / optax 0.2.2 (the S0.2-1 reference-venv
+>    pins), official pickles, their own run_experiment.py, one config copy with seeds
+>    reordered [2345, 6789, 3456, 4567, 5678] — training on the same GPU. If the official
+>    stream also traps → published-anchor anomaly (escalate to Lucas). If clean → the
+>    absorbing state is a shared property of the official objective entered stochastically
+>    per-stream; the gate-semantics adjudication (PR-1, stream-sensitive anchor) goes to the
+>    Supervisor/Lucas via decisions_needed.md. Note for that reading: the official code sets
+>    no matmul-precision flags → jax default (TF32-class on Ampere GPUs) vs our strict-fp32 —
+>    rounding-noise difference only; the fp32 softmax underflow threshold is identical.
+> Spend so far ≈ $0.8 of the $7.44 ceiling (incl. all diagnosis runs).
 
 **Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
 and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):
