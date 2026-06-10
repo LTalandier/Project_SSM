@@ -61,7 +61,15 @@ def train_gate_i(
 ):
     """Returns a result dict; optionally streams eval records to JSONL."""
     g_batch = torch.Generator().manual_seed(seed + 1_000_003)
-    g_drop = torch.Generator().manual_seed(seed + 2_000_003)
+    # Dropout-mask generator is DEVICE-NATIVE (CPU MT19937 on CPU runs —
+    # bit-identical to the G1 gated record; CUDA Philox on GPU runs). The
+    # stream identity is framework-inherent and not protocol-pinned (PR-1
+    # pins the split assignment, not PRNG bits — see module docstring);
+    # distribution, batch-shared semantics, and per-run seeding are
+    # unchanged. Drawing the (L, H)-sized masks on the compute device
+    # avoids a ~950 ms/step CPU-draw+transfer stall at G3 length.
+    dev = data["X_train"].device
+    g_drop = torch.Generator(device=dev).manual_seed(seed + 2_000_003)
 
     opt = torch.optim.Adam(model.parameters(), lr=lr, betas=(0.9, 0.999), eps=1e-8)
     train_loader = OfficialLoaderPort(data["X_train"], data["y_train"])

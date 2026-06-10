@@ -98,7 +98,8 @@ def check_train_determinism(results):
         y = torch.zeros(8, 5)
         y[torch.arange(8), torch.randint(0, 5, (8,), generator=g_data)] = 1.0
         y = y.to("cuda")
-        g_drop = torch.Generator().manual_seed(101)
+        # device-native mask generator — the exact gated-run path
+        g_drop = torch.Generator(device="cuda").manual_seed(101)
         opt = torch.optim.Adam(model.parameters(), lr=1e-3,
                                betas=(0.9, 0.999), eps=1e-8)
         model.train()
