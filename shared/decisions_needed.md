@@ -85,6 +85,18 @@ pre-registered-gate territory → **Critic review of the diagnosis + the amendme
 (`critic_instructions_g3-adjudication.md`), then **Lucas signs** (E-2026-06-11-1). S0.2-1
 stays open until the adjudication lands; no Executor work exists in the meantime.
 
+**Update (2026-06-11, post-Critic — supersedes two figures above):** verdict
+**APPROVE-WITH-EDITS, "sign PR-1.1 with these edits"** — all applied (v2 in the ledger).
+Per **GA-F3**, my "P(trap-free) ≈ 0.10–0.24" above (and the entry's "P ≈ 20 %" / "Fisher
+p ≈ 0.6") are point-estimate readings only — the 95 % CIs span [0.005, 0.85], Fisher ranges
+0.15–0.61 across denominators, and the 8-vs-8 design has ~9 % power; the operative logic is
+the fallback already stated: **any material incidence voids the criterion.** Per **GA-F2**
+the operative transfer evidence is dispersion (σ 9.34 = 2.1× published) + environment
+sensitivity, not the 0.04-pp shortfall. **GA-F1:** the official fresh-8 numbers were
+console-only (unarchived; box destroyed) → demoted in v2; archived local regeneration =
+**Executor task S0.2-1R** (ACTIVE). **GA-F4** (E-5(iii) RNG deviation unrecorded)
+reconciliation rides S0.2-1R. Awaiting Lucas on E-2026-06-11-1.
+
 ### ✅ D-2026-06-10-2 — S0.2-1 G3 runtime flag → **RESOLVED 2026-06-10 by Supervisor: option 1+3 (local, gated-5 first)**
 
 **Ruling:** run G3 **locally, gated-5 seeds first** (3-parallel as proposed, ~3–4 days), **annex-3

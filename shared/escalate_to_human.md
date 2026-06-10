@@ -18,12 +18,26 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### 🔴 E-2026-06-11-1 — Gate-i adjudication: G3 FAILED as measured — and the published anchor fails its own official code. Sign (or amend) PR-1.1.
+### 🔴 E-2026-06-11-1 — Gate-i adjudication: G3 FAILED as measured — the anchor doesn't transfer. Sign (or amend) PR-1.1 **v2**.
 
-**Filed:** 2026-06-11 (Supervisor). **The decision in one line:** our EigenWorms gate run
-missed badly (71.1% vs the frozen 90.6%) — but the diagnosis proves the *anchor* is broken,
-not our code, so I'm asking you to sign an amendment that records the FAIL forever, retires
-that anchor, and lets the program proceed on the validation evidence that actually holds.
+**Filed:** 2026-06-11 (Supervisor). **Updated same day: the Critic review is in —
+APPROVE-WITH-EDITS, bottom line "sign PR-1.1 with these edits" — and all edits are applied
+(v2 in the ledger).** The Critic was explicitly instructed to make "they failed their gate
+and moved the goalposts" stick; it reports the adjudication survives, *after* repairs it
+identified: one evidentiary gap (the official fresh-seed collapse numbers were observed on
+the destroyed cloud box's console but never archived — now demoted to "indicative" in v2,
+with an archived local regeneration running as Executor task S0.2-1R, ~$0), two
+overstatement fixes (the rerun's 0.04-pp shortfall is one test-sample wide and
+environment-sensitive — the *real* evidence is the 2.1× dispersion; the collapse-incidence
+statistics get honest small-sample error bars), one process-record repair (a GPU-run RNG
+condition was deviated from for throughput without being logged — now reconciled; it never
+touched protocol content), and sharper wording ("adjudicated", not "re-registered"; plus the
+verified sentence: **this amendment changes no downstream behavior whatsoever**).
+
+**The decision in one line:** our EigenWorms gate run missed badly (71.1% vs the frozen
+90.6%) — but the diagnosis proves the *anchor* is broken, not our code, so I'm asking you to
+sign an amendment that records the FAIL forever, retires that anchor, and lets the program
+proceed on the validation evidence that actually holds.
 
 **What happened (verified by me, all statistics re-derived):**
 - Our gated 5-seed mean: **71.11% — FAIL.** Two of five seeds fell into a training collapse.
@@ -31,11 +45,15 @@ that anchor, and lets the program proceed on the validation evidence that actual
   where the gradient becomes exactly zero forever (fp32 underflow) — reproduced
   bit-deterministically, entering within the first 7 steps.
 - The decisive test: **the official code itself, rerun faithfully** (their runner, their exact
-  library versions, their data files, the 5 published seeds, same GPU) **scores 90.5556% —
-  also below the frozen 90.6 gate**, with seed-to-seed spread ~2× what the paper reports. On
-  fresh seeds the official code collapses 2/8 times (ours 4/8 — statistically the same coin,
-  p ≈ 0.6). The published 95.0 ± 4.4 sits on a seed draw that dodges a ~25%-incidence trap
-  (probability of dodging ≈ 0.10–0.24).
+  library versions, their data files, the 5 published seeds, same GPU) **scores 90.56% — at
+  the frozen gate's edge (one test-sample short), with seed-to-seed spread 2.1× what the
+  paper reports** (individual published seeds landing at 77.8 and 83.3 — archived,
+  Critic-verified from raw). Per the Critic (GA-F2): the anchor fails on **dispersion and
+  environment-sensitivity**, not on a 0.04-pp technicality. The collapse also fires in the
+  official code on fresh seeds (console-observed 2/8 vs our archived 4/8 — no detectable
+  stack difference; the samples are too small for equivalence claims and none is needed:
+  **any material incidence makes the gate a seed lottery**). The published 95.0 ± 4.4 is
+  *consistent with* a favorable draw from that collapse mode.
 - **Our implementation is exonerated** by evidence stronger than any accuracy score: with
   the same weights, our code and theirs agree to ~2×10⁻⁷ — numerically the same model. The
   init code was audited line-by-line. Our non-collapsed seeds score 93.5%, inside the
@@ -59,14 +77,20 @@ the amendment is signed by you, after independent Critic review, on evidence tha
 premise* — not our model — failed. The hostile reading is priced in and the Critic is
 explicitly instructed to attack it.
 
-**Your two steps (same pattern as the PR-1/PR-2 freeze):**
-1. **Launch the Critic** on the diagnosis + the amendment:
+**Your moves now (the Critic step is done — its verdict: "sign PR-1.1 with these edits",
+edits applied in v2):**
+1. *(Recommended but not blocking)* **Launch the Executor on S0.2-1R** — the ~2–3 h, $0
+   record-repair the Critic asked for (re-run the official code's fresh seeds *locally* so
+   the collapse-incidence numbers are archived, not console folklore; plus four small
+   results-log corrections):
    ```bash
    cd ~/Documents/Project_SSM
-   claude "Read shared/critic_instructions.md for your role, then execute the review spec in shared/critic_instructions_g3-adjudication.md."
+   claude "Read shared/launch_executor.md and follow it."
    ```
-2. **Then rule on PR-1.1** — "sign PR-1.1" / amendments / a different option from
+2. **Rule on PR-1.1 v2** — "sign PR-1.1" / amendments / a different option from
    D-2026-06-11-1 (O1 record-FAIL-only · O2 replacement anchor · O3 = the proposal above).
+   v2 is sign-ready as-is (the unarchived numbers are already demoted in the text); sign
+   before or after S0.2-1R lands — your preference.
 
 On your signature: S0.2-1 closes (G1 PASS ∧ G3 void-with-finding), and the next Supervisor
 outputs are the erbium gain-regime proposal + the PROPOSED PR-4 — the path that was queued

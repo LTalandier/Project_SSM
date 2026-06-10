@@ -90,6 +90,49 @@ the in-flight G3 runs beyond health checks.
 
 ---
 
+## 🔥 ACTIVE — S0.2-1R: G3 record repair (Critic GA-F1/F4/F7 — decision-free; ~2–3 h local, $0)
+
+**Assigned:** 2026-06-11
+**Supervisor:** Claude Opus 4.8
+**Status:** 🔥 ACTIVE.
+**Source:** `critic_review_g3-adjudication.md` (verdict **APPROVE-WITH-EDITS — "sign PR-1.1
+with these edits"**; GA-F1 was the signature-blocking item — resolved *now* by demotion in
+PR-1.1 v2, and *upgraded* by this regeneration). **Not a gated run.** Nothing here touches
+gated numbers or the frozen protocol — it repairs the *diagnostic* record under the already-
+sanctioned cross-check. Zero tuning; zero gated reruns.
+
+### Tasks
+1. **GA-F1(a) — regenerate the official fresh-seed leg, archived this time.** Pre-declare the
+   fresh-seed list (n ≥ 8; include 9012 and 22222 for continuity with the console
+   observations) **in a commit BEFORE running**; rerun the official code (pinned commit
+   05a8353; the local pinned CPU venv jax 0.4.28 / eqx 0.11.4 / optax 0.2.2; official
+   pickles; official runner) on those seeds; archive per-seed trails under
+   `results/s0_2/gate_i/xcheck_official_local/`; report k/n trap incidence + per-seed
+   outcomes with the Critic's superseding sentence ("incidence is stream- and
+   environment-dependent; the rented-box console observations (2/8) are superseded by this
+   archived local estimate"). **A different incidence than 2/8 is expected and immaterial**
+   (any material incidence voids the criterion — PR-1.1 v2 logic).
+2. **Regenerate the unarchived ours-annex 600-step trap screens** (seeds 7890, 8901 —
+   currently prose-only) locally; archive alongside.
+3. **Results-log corrections (GA-F1/F4/F7), in the S0.2-1 addenda:** (a) the data-path
+   sentence → "per-seed trails for the 5 published-seed runs (archived); fresh-8 console-only
+   (superseded by the local regeneration)"; (b) the **GA-F4 reconciliation** — insert the
+   Critic's exact sentence on the E-5(iii) deviation (dropout masks → device generator,
+   commit 087a346; init/shuffle stayed CPU; stream bits were never protocol content) and fix
+   the "original config note" pointer to cite commit 087a346; (c) GA-F7 nits: write
+   **90.56** (never "90.6 ± 9.3"); one sentence on official seed-6789's val→test gap
+   (97.14 → 77.78 on 35/36-sample sets — the published selection convention swings ~20 pp
+   here); the init-audit BN completeness note; the `solver_Heun` directory-template
+   clarification.
+4. Append a short addendum to the S0.2-1 results entry; the Supervisor then cites the
+   archived k/n in PR-1.1 v2's incidence sentence (ledger edits stay Supervisor-side).
+
+### Gates
+Pre-declared seed list committed before any run · zero gated-number changes · zero tuning ·
+all trails archived + committed · corrections cite GA-F numbers.
+
+---
+
 ## 🔴 S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS · G3 ❌ FAIL as measured (71.11 % < 90.6) · ADJUDICATION PENDING (PR-1.1 → Critic review → Lucas)**
 
 > **MEASURED OUTCOME (2026-06-11; GPU route per E-2026-06-10-5, Lucas-approved in-session,

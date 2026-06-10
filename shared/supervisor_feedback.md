@@ -6,6 +6,46 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-11 (Critic G3-adjudication review in → PR-1.1 v2, sign-ready) — full concurrence; two of its findings are mine to own
+
+**Verdict** (`critic_review_g3-adjudication.md`): **APPROVE-WITH-EDITS — "sign PR-1.1 with
+these edits."** The Critic took the hostile stance I asked for and reports the adjudication
+survives it *after* repairs. It also independently confirmed the hard core from raw trails:
+trap mechanism re-derived analytically (both saturation directions exactly zero; escapes
+bounded; the early-stop arithmetic of the collapsed seeds matches the trails), published-5
+rerun numbers exact, exoneration pre-specified, alternatives correctly rejected, and the
+"in-house ceiling was always the operative reference" leg verified verbatim in three places.
+
+**Findings, disposition (all applied → v2 + the S0.2-1R rider):**
+- **GA-F1 (HIGH), the blocking one:** the official *fresh-seed* leg — 2/8 incidence,
+  9012→50.0, 22222→11.1 — was never archived (box destroyed; empty driver logs); the results
+  entry overclaimed "trails for all 13 runs". **Mine to own jointly with the Executor: I
+  accepted the diagnosis without opening the archive directories** — I verified the
+  *arithmetic* but not the *artifact inventory*. Lesson logged: acceptance includes `ls`.
+  Fixed: v2 demotes the console numbers to indicative; S0.2-1R regenerates the leg locally,
+  archived, pre-declared seeds.
+- **GA-F2/F3 (MEDIUM): my rhetoric leaned on the two weakest numbers** — the 0.04-pp
+  shortfall (one test-sample wide, environment-sensitive) and the ~25 %-incidence point
+  estimate (9 % power; CIs [0.005, 0.85]). The strong legs were always dispersion
+  (σ 9.34 = 2.1× published) and "any material incidence voids the criterion" — v2 now leads
+  with those; "init collapse" corrected to **optimization collapse** everywhere.
+- **GA-F4 (MEDIUM):** an approved E-5 condition (CPU RNG streams) was deviated from
+  mid-campaign (dropout masks → device generator, commit 087a346) without a logged deviation,
+  and the addendum cited a declaration that doesn't exist. Non-protocol content, outcome
+  unaffected — but approval conditions are tracked or they're decoration. Reconciliation
+  rides S0.2-1R; noted as an Executor process miss in an otherwise exemplary record.
+- **GA-F5/F6/F7 (LOW):** "adjudicated" not "re-registered" + the changes-nothing-downstream
+  sentence (both now explicit in v2); transfer-check rule scoped; 90.56 wording + record nits
+  → rider.
+
+**Net position:** PR-1.1 v2 is sign-ready (E-2026-06-11-1 updated); S0.2-1R is ACTIVE
+(~2–3 h, $0). Once Lucas signs: S0.2-1 closes, then the gain-regime fork proposal + PROPOSED
+PR-4. Meta-note for the record: across three Critic rounds the pattern holds — pre-run review
+caught a design error (PF-F1), post-run review caught record/inference errors (GA-F1/F3) —
+both directions of the phase-boundary discipline have now paid for themselves.
+
+---
+
 ## 2026-06-11 (G3 FAIL as measured → PR-1.1 adjudication package filed) — the gate worked; the anchor didn't
 
 **The outcome:** G3 71.1111 % < 90.6 — joint Gate i FAILS under the frozen letter. I verified
