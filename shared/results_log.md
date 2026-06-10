@@ -130,12 +130,18 @@ untouched by this task beyond health checks.)
 > env knob (logistics only — zero protocol content). ETA ~3–4 days; per-seed table + the joint
 > Gate-i verdict will be appended here when they land; annex-3 trails at idle after the verdict
 > (PF-F8g: non-gating).
-> **PAUSED 2026-06-10 19:36 by Lucas** (~47 min in, before the first eval record): SIGSTOP to
-> driver 1412412 + workers 1412415/16/17 (state T verified). In-RAM state preserved (~GBs held
-> resident; survives session closure, **not** a reboot — a reboot/kill restarts the affected
-> seeds from step 0, which is protocol-clean: no mid-run state is reused). Resume = `kill -CONT`
-> same PIDs. Run-state question (resume local vs cloud option ~$30–60 vs stay paused) is with
-> Lucas/Supervisor.
+> **PAUSED 2026-06-10 19:36 by Lucas** (~47 min in, before the first eval record), then
+> **MOVED TO CLOUD same evening per Lucas (E-2026-06-10-5** — his own vast.ai credits, ceiling
+> $7.44; the D-2 option-2 standing offer exercised). **GPU PARITY GATE: PASS** on the rented
+> box (RTX 3090, instance 40443827, $0.245/h, torch 2.12.0+cu126, TF32 off, deterministic):
+> full-model probs GPU↔CPU **1.2–1.5e-7** (same magnitude as the CPU↔JAX record), BN stats
+> 0.0/1.5e-8, L=17,984 layer 3.8e-6, 20-step train **bit-deterministic** → the chain GPU-torch
+> ≡ CPU-torch ≡ official-JAX is closed (`scripts/parity_gpu_side.py`; box log
+> `logs/parity_gpu.log`). Gated-5 launched sequentially on cuda (same frozen protocol, CPU RNG
+> streams, identical seeds/splits/configs). The paused local workers were then killed (partial
+> state discarded — protocol-clean; nothing reused) and their config-only JSONLs removed.
+> First instance (40442878) had dead proxy-SSH, destroyed at ~$0.06 sunk. Per-seed table +
+> joint verdict + $ actuals follow when the runs land.
 
 **Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
 and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):
