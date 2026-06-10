@@ -8,6 +8,63 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
+### 🔴 D-2026-06-11-1 — Gate-i G3 adjudication: gate FAILED as measured, and the published anchor itself does not survive a faithful official-code rerun
+
+**Raised by:** Executor, 2026-06-11. **Supersedes the route question in D-2026-06-10-2's
+addendum:** Lucas chose route (a)-variant in-session same evening — his own vast.ai credits
+($7.44 ceiling, E-2026-06-10-5, RTX 3090 @ $0.245/h) — the GPU parity gate passed
+(1.2–1.5e-7, bit-deterministic), the gated-5 ran to completion, and the frozen gate-miss
+diagnosis is complete. **Blocks:** the joint Gate-i verdict / S0.2-1 closure. **No tuning;
+no gated rerun; the measurement stands as measured.** Evidence: results_log S0.2-1 addenda;
+raw `results/s0_2/gate_i/` (ours) + `results/s0_2/gate_i/xcheck_official/` (official).
+
+**Measured facts (one RTX 3090; strict-fp32 torch / pinned-version jax):**
+
+| run | per-seed (2345/3456/4567/5678/6789) | gated mean | gate ≥ 90.6 |
+|---|---|---|---|
+| published (paper) | σ = 4.4 claimed | 95.0 | (anchor) |
+| **official code, faithful rerun** (commit 05a8353; jax 0.4.28 / eqx 0.11.4 / optax 0.2.2; official pickles; their runner) | 97.22 / 83.33 / 97.22 / 97.22 / 77.78 (σ ≈ 9.3) | **90.5556** | **FAIL (−0.044 pp, unrounded per PF-F8h)** |
+| **our port** (GPU parity 1.2–1.5e-7; CPU≡JAX 2.4e-7 of record) | 19.44 / 88.89 / 94.44 / 97.22 / 55.56 | **71.1111** | FAIL |
+
+**Diagnosis (closed; neither mechanism is a port bug):**
+1. **Zero-gradient absorbing state of the official objective** (`−Σ y·log(softmax+1e-8)`,
+   their train.py L87, ported verbatim per the closure rule): fp32 softmax saturation →
+   p_true underflows to exactly 0 → total gradient exactly 0.0 forever. Step-instrumented
+   (entry at steps 1–7; step-0 |grad| ~4×10³ then ≡0); bit-deterministically reproduced.
+   **Incidence: ours 4/8 protocol seeds (2345@1, 6789@4, 7890@7, 8901@1); official code on
+   8 fresh seeds 2/8 (9012 → 50.0 %, 22222 → 11.1 %, same flat-loss signature).** Fisher
+   p ≈ 0.6 — the frameworks are statistically indistinguishable; **the trap belongs to the
+   published method at this anchor.** The published Walker set is trap-free by draw
+   (P ≈ 20 % at the observed rate).
+2. **Anchor non-transfer:** trap-free official seeds still spread σ ≈ 9.3 (incl. 77.8, 83.3)
+   ≈ 2× the published σ = 4.4, and the official rerun mean sits below the frozen gate. The
+   PF-F9d premise (published mean −1σ transfers to a faithful rerun) is empirically false
+   for G3. Port-side checks all clean: init distributions audited line-by-line vs
+   models/LinOSS.py + eqx 0.11.4 source (lim = 1/√in everywhere; A/steps U[0,1), B ±1/√H,
+   C ±1/√ssm, D N(0,1)); healthy-seed means agree (ours 93.5; official non-trap band
+   77.8–97.2, mean 90.6).
+
+**Adjudication options (Supervisor → Lucas; any PR-1 change is Lucas-only re-registration):**
+- **(O1)** Record Gate-i = **G1 PASS ∧ G3 FAIL-as-measured** with the anchor-instability
+  finding attached. The gate's *purpose* (validate the in-house layer against published
+  behavior) is arguably served — G1 passed, and for G3 the layer matches the official
+  implementation's behavior distribution while the published anchor fails its own faithful
+  rerun. Costs: the letter of the gate fails; the roadmap consequence of a Gate-i miss
+  needs naming.
+- **(O2)** **Re-register the G3 criterion** (e.g. anchor on official-as-rerun-on-named-
+  hardware; a trap-conditional statistic; or swap the anchor to the S0.2-0 menu's next
+  candidate — MotorImagery / D-LinOSS 61.1±2.0, the tightest published σ). Cleanest
+  pre-registration hygiene; costs a re-freeze round.
+- **(O3)** Both: record FAIL-as-measured + register a replacement anchor going forward.
+- **Carry regardless (debt #2 / paper record):** the LinOSS-IM EigenWorms 95.0±4.4 headline
+  rests on a seed set that avoids a ~25 %-incidence init collapse of its own objective and
+  does not reproduce under a faithful rerun (90.6 ± 9.3) — first-hand support for the
+  project's "in-house BPTT ceiling, not published numbers" anchoring philosophy (PR-3).
+
+**Executor state:** stopped on this item per PR-1 ("on a miss: stop"). Annex-3 not run
+(post-verdict idle work — moot pending adjudication). Box destroyed; spend ≈ $1.0 of $7.44
+(exact figure in the results entry).
+
 ### ✅ D-2026-06-10-2 — S0.2-1 G3 runtime flag → **RESOLVED 2026-06-10 by Supervisor: option 1+3 (local, gated-5 first)**
 
 **Ruling:** run G3 **locally, gated-5 seeds first** (3-parallel as proposed, ~3–4 days), **annex-3

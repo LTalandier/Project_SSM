@@ -183,6 +183,26 @@ untouched by this task beyond health checks.)
 >    no matmul-precision flags → jax default (TF32-class on Ampere GPUs) vs our strict-fp32 —
 >    rounding-noise difference only; the fp32 softmax underflow threshold is identical.
 > Spend so far ≈ $0.8 of the $7.44 ceiling (incl. all diagnosis runs).
+>
+> **DIAGNOSIS CLOSED 2026-06-11 (small hours) — the official-repo cross-check lands BOTH ways
+> against the anchor; our port is exonerated. → adjudication item D-2026-06-11-1.**
+> 1. **Official code, faithful rerun of the 5 published Walker seeds** (their runner, pinned
+>    commit + reference-venv versions, official pickles, same GPU): per-seed **97.22 / 83.33 /
+>    97.22 / 97.22 / 77.78**, gated mean **0.9055555462837219 = 90.5556 % — BELOW the frozen
+>    90.6 gate** (unrounded, PF-F8h), σ ≈ 9.3 pp vs the published 4.4. No traps on these 5.
+> 2. **Official code, 8 fresh seeds: 2/8 trap** (9012 → 50.0 %, 22222 → 11.1 %; same
+>    flat-loss absorbing-state signature; fresh-8 mean 73.26 %). Ours 4/8 vs official-fresh
+>    2/8: Fisher p ≈ 0.6 — statistically indistinguishable; **the absorbing state belongs to
+>    the published method at this anchor**, and the published seed set avoids it by draw.
+> 3. **Joint Gate-i verdict as measured: G1 PASS ∧ G3 FAIL → Gate i FAIL** under the frozen
+>    letter; the evidence says the G3 anchor itself does not transfer (the reference
+>    implementation fails the gate too). Adjudication (incl. any re-registration, Lucas-only)
+>    → `decisions_needed.md` D-2026-06-11-1. **Zero tuning; zero gated reruns; closure rule
+>    held throughout** (official repo used only as the sanctioned divergence cross-check).
+> 4. Official-rerun raw trail synced: `results/s0_2/gate_i/xcheck_official/` (driver logs +
+>    per-seed npy trails for all 13 official runs). Box destroyed after sync.
+> **Final compute actuals: $1.1512 of the $7.44 ceiling** (both instances + parity + gated-5
+> + all diagnosis + 13 official cross-check runs; jax ≈ 21 s/eval-cycle, torch ≈ 87 s).
 
 **Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
 and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):
