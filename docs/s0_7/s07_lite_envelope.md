@@ -144,9 +144,14 @@ registered gap for S0.7-full.
 | 1 | ≥5.3 ns | ≥51.4 ns | <4 ms |
 | 2 | ≥4.3 ns | ≥50.4 ns | <4 ms |
 
-The latency contrast vs the recurrent-serving class is ~10⁵ and survives any plausible pipeline
-adder. The coherent-DSP ASIC class operates natively at GS/s line rates (no registered latency
-row — not numerically compared). Jetson: no registered latency row.
+Restated per Critic **EV-F4** (the earlier "~10⁵" ratio paired our small-N bound against
+Brainwave's *large-model* author bound — all DeepBench layers, not a matched workload): **sub-µs
+latency is unreachable for the batch-1 FPGA serving class (<4 ms author-stated bound), and
+against any plausible matched-N FPGA pipeline (µs-class for a 14·N ≈ 450-op step on the same
+FPGA class) the photonic edge is ≥10²** — tens-of-ns photonic vs µs-class matched pipelines vs
+ms-class serving stacks; a matched-N FPGA latency row is registered for S0.7-full. The
+coherent-DSP ASIC class operates natively at GS/s line rates (no registered latency row — not
+numerically compared). Jetson: no registered latency row.
 
 **Memory-depth coupling (frozen memory corners × rate grid):** T_mem·f_s = 0.33 / 3.29 / 6.58
 samples (foundry corner at 0.1/1/2 GS/s) and 4.9 / 49.4 / 98.8 (class-leading). At 0.1 GS/s the
@@ -157,6 +162,13 @@ excluded by memory arithmetic as well as by energy (§3).
 class B: **≥0.8–5.2 ms/iteration**. Every energy-winning scenario is class B and therefore buys
 its inference-energy case at ms-class in-situ training cadence (~10⁴ SPSA iterations ≈ 8–52 s
 physical time floor) — consistent pairing, reported, decision deferred.
+
+Cadence provenance (Critic **EV-F7**): class-A "38 µs" = 0.35/9.2 kHz exactly (Muñoz bandwidth,
+carrying the source record's own unit-ambiguity caveat); "110 µs" ≈ 1/(9.2 kHz) — a full-period
+settle convention, derivable but unstated in the source. Class-B "0.4 ms" low end traces to the
+*simulation* row (Alemany BW 0.9 kHz → 0.39 ms); 2.6 ms is the unverified-body Zeng value.
+Cadence-only — no clearance impact; verify the Muñoz τ unit before PR-4 if SPSA cadence becomes
+load-bearing.
 
 ## 5. §10 escalation-clause check (explicit)
 
@@ -196,6 +208,15 @@ Three conditions, stated as sharply as the arithmetic gives them:
    lives at the 1–2 GS/s end of the registered window.
 3. **The advantage is vs serving-class and utilization-limited digital** (Brainwave,
    Jetson-sustained, DSP-band at small-mid N) — never vs peak-FoM silicon (§5.1).
+4. **Two audit-added conditions (Critic carry-ins).** The N=128 margin cells additionally assume
+   the **class-leading-Q platform corner**: linewidth packing caps the number of informationally
+   distinct poles per GHz of signal band at O(10–20) at the foundry corner (96.7 MHz intrinsic
+   linewidth) vs ~150 class-leading (6.4 MHz) — and class-leading is exactly the splitting-prone
+   corner, so this couples to the PR-4 decision jointly with D-08-1 (**EV-F3**). And C8's single
+   conversion chain holds **iff the readout is single-quadrature (homodyne) or intensity** — an
+   I/Q readout doubles the output chain, kills the boundary OPT×B-vs-DSP N=32 cell and flips
+   CONS×B N=32 vs Brainwave to LOSES — a stated input to the PR-2 readout pin (F6 thread)
+   (**EV-F5**).
 
 **S0.2 task-choice implication (input only; the choice is PR-2/Supervisor):** the bake-off task
 should be a streaming signal-processing task at an effective ≥0.5 GS/s line rate with

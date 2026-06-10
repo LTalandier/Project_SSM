@@ -15,6 +15,90 @@ Per result, report:
 
 ---
 
+## S0.2-0 — Debt-#2 benchmark recon + bake-off task candidates + PR-2 input sheet + EV rider (2026-06-10, Executor)
+
+**Goal:** design-input for the PR-1/PR-2 freeze (S0.2 step 0 of 2; continuation-gate GO
+E-2026-06-10-3): (1) debt #2 — LinOSS/D-LinOSS benchmark specifics, primary-sourced, with 2–4
+Gate-i reproduction candidates + a margin basis; (2) 2–3 bake-off task candidates sized to the
+envelope §6 niche with explicit fit arithmetic; (3) the PR-2 input sheet (partitions, readouts,
+W1 cross-check). **Menu, not choice — no values frozen, zero training runs.** Rider first: the
+Critic envelope-audit fix list (EV-F1/F2/F3/F4/F5/F7).
+
+**Config:** literature/design task (no simulation, no seeds). Three parallel web sweeps
+(LinOSS primary; D-LinOSS primary + coupled-variant guard-check; Mamba-3 context + task metadata
++ equalization-channel primary), ~94 tool calls, 2026-06-10; Executor first-hand re-verification
+of every decisive number by string-exact grep on the fetched primaries (arXiv HTML 2410.03943v3
++ 2505.12171v2; Vinckier arXiv:1501.03024 PDF→text) — all matched.
+
+**Key findings:**
+1. **Rider done (no verdict changes), citations in-place:** EV-F1 strike-correct on this log's
+   S0.7L-1 finding 2 (class-A-dead is **C4-conditional**; OPT×A clears Brainwave in-window at
+   P_π/2 holding, crossovers 1.32–1.47 GS/s; only CONS×A dead under any convention); EV-F2
+   replacement of anomaly (i)'s neutrality sentence (both flagged readings faithful but **not**
+   verdict-neutral); EV-F4 latency restatement + EV-F7 cadence-provenance lines in envelope memo
+   §4; EV-F3 (N=128 ⇒ class-leading corner) + EV-F5 (single-quadrature/intensity condition on C8)
+   added as §6 condition 4.
+2. **Debt #2 sourced.** LinOSS = ICLR 2025 **Oral** (OpenReview decision note), arXiv:2410.03943v3,
+   MIT-licensed JAX repo with per-config seeds. **D-LinOSS (arXiv:2505.12171v2) is preprint-only
+   at snapshot** — absent from NeurIPS-2025 (5,286 titles) and ICLR-2026 (5,351) accepted-list
+   scans, DBLP CoRR-only → PR-1 anchoring caveat stated.
+3. **μ=0 classification confirmed (D-08-2 vindicated):** LinOSS *"A is a diagonal matrix"* +
+   ReLU-diagonal parametrization [EV]; D-LinOSS *"uncoupled second-order system"* [EV]; dedicated
+   guard-check (citation lists + venue scans) found **no published coupled/non-diagonal
+   LinOSS-class benchmark through 2026-06** — every published number validates only the μ=0
+   reduction; the coupled-μ transfer rests on the PR-3 in-house ceiling, as registered.
+4. **Four Gate-i candidates with [EV]-verified published configs** (state dims 16–64 ↔ N
+   in/below the registered grid): Heartbeat (75.8±3.7, cheapest), MotorImagery (D-LinOSS
+   61.1±2.0 — tightest σ, state 64), EigenWorms (95.0±4.4 — the long-range flagship, state 64),
+   PPG-DaLiA (6.4±0.23 ×10⁻² MSE — the 50k headline; compute-flagged). Four margin-basis options
+   (±1σ / ±2σ / clear-best-non-oscillatory-competitor / fixed band) with per-candidate
+   arithmetic; published σ includes split-draw variance (5-seed Walker protocol).
+5. **Reproduction-relevant discrepancy caught:** the LinOSS paper states Δt=1 but the official
+   code trains a per-dimension learnable timestep (sigmoid) — PR-1 should name the **code** as
+   the reference behavior. Weather rows excluded from the menu (no σ/seed count anywhere, no
+   code — irreproducible at pre-registration grade).
+6. **Three bake-off candidates with explicit niche-fit arithmetic** (vs memory corners
+   0.33/3.29/6.58 foundry and 4.9/49.4/98.8 class-leading samples at 0.1/1/2 GS/s): **T-A**
+   Jaeger–Haas nonlinear channel equalization clocked at 1–2 GS/s (channel taps + nonlinearity
+   quoted verbatim [EV]; 10-tap/7-dominant memory; photonic-RC anchors at 0.1–0.9 MS/s; maximal
+   reservoir contrast); **T-B** band-limited IM-DD PAM-4 equalization at 1–2 GBd (pnn-multilayer
+   `imdd_timedomain.py` lineage; **CD inert at-rate** — ≈0.005 symbols per 10 km — ISI from
+   TX/RX band-limitation, span designable 2–12 symbols; generator port flagged); **T-C** the
+   PR-13 synthetic memory family (k ∈ {1,3,10,30,100} straddling every corner; k=100 = the
+   designed class-leading cliff cell; unifies the bake-off secondary with the PR-13 row).
+   Complementarity observation recorded (headline + PR-13 secondary), no choice made.
+7. **PR-2 input sheet:** partitions P1 (full B1 + gain; 4–5 ch/ring — at/above the PR-10
+   bracket, flagged) / P2 (gain-free minimal B1, ~3/ring ✓) / P3 ({δ,μ}, damping fixed) / P4
+   ({δ} only); readouts R1 single-quadrature (LinOSS-equivalent, envelope-consistent) / R2
+   intensity (consistent, nonlinear head) / R3 I/Q (**envelope-inconsistent per EV-F5** — flag);
+   F6 policy options incl. baseline-holds-κ_ext; **W1 cross-check: P1/P2 satisfy W1, P3
+   conditional (pole-positions wording call → Supervisor), P4 fails W1**; B1 topology fork
+   (photonic-molecule vs bus-mesh) carried to the freeze.
+
+**Gates:** every load-bearing number primary-sourced + quoted ✅ (markers [EV]/[AV]/[ABS];
+Executor string-exact re-verification trail in memo Appendix A.3); ≥2 Gate-i candidates with
+reproducible configs + margin basis ✅ (4 given); ≥2 task candidates with explicit niche-fit
+arithmetic ✅ (3 given: rate, memory samples, N per cell); menu-not-choice ✅ (no value frozen
+anywhere in either memo); zero training runs ✅; rider done ✅ (EV-F citations in each edit).
+
+**Anomalies / concerns:** (i) D-LinOSS venue status (preprint-only) — if PR-1 anchors on its
+numbers the freeze must say so; (ii) the Δt paper-vs-code discrepancy (finding 5) — silent
+reproduction risk if PR-1 cites the paper text; (iii) PPG-DaLiA rate bookkeeping (LinOSS "128 Hz"
+vs UCI-native 64 Hz wrist max) — irrelevant to Gate i, fatal to any claim that the published
+suite is niche-rate-relevant (native rates are Hz-class); (iv) Jaeger-channel target convention
+gap (Vinckier prose says recover d(n), canonical is d(n−2)) — the freeze states which; (v) UEA
+native wall-clock rates mostly unstated in primaries (EthanolConcentration is spectral, not
+temporal) — same niche-rate caution.
+
+**Data path:** `docs/s0_2/debt2_benchmark_recon.md` (incl. Appendix A search/verification trail);
+`docs/s0_2/bakeoff_task_candidates.md`; rider edits in this file's S0.7L-1 entry +
+`docs/s0_7/s07_lite_envelope.md` §4/§6.
+
+**Compute used:** local only — 3 research subagents (~244k agent tokens) + curl/grep
+verification; zero simulation; zero cloud spend.
+
+---
+
 ## S0.7L-1 — S0.7-lite envelope (PR-10 🔒 FROZEN) + WS-F11/F12 rider (2026-06-10, Executor)
 
 **Goal:** run the S0.7-lite energy/latency envelope strictly from the frozen PR-10 block (every
@@ -33,13 +117,17 @@ consistency rule honored (one class per scenario for power AND τ/SPSA cadence).
 1. **§10 clause does NOT fire:** 16 OPT grid cells clear ≥1 named baseline (all OPT×B at
    ≥1 GS/s; e.g. N=32 @1 GS/s: 229–233 pJ/sample vs Brainwave 1 561 pJ/sample = 6.7×; up to
    14.7× at N=128 @2 GS/s). No Stage-1-reframing escalation drafted.
-2. **The binding constraint is the heater class, not the conversion stack.** Class-A (foundry,
-   60–175 mW/π) scenarios lose to every baseline everywhere inside the registered 0.1–2 GS/s
-   window — their Brainwave crossovers sit at 2.56–2.84 GS/s (OPT×A) and 16.6–29.7 GS/s or never
-   (CONS×A), all above the registered ceiling. Only class-B (~1 mW/π suspended) wins — and the
-   frozen row itself marks class B **non-CORNERSTONE** at τ = 0.4–2.6 ms (SPSA cadence floor
-   0.8–5.2 ms/iteration). The energy niche as computed is not reachable in the currently-named
-   foundry flow → Stage-1 platform constraint, flagged for PR-2/PR-4 framing.
+2. **The binding constraint is the heater class, not the conversion stack — C4-conditional
+   (Critic EV-F1).** ~~Class-A (foundry, 60–175 mW/π) scenarios lose to every baseline everywhere
+   inside the registered 0.1–2 GS/s window~~ ← true only under the registered worst-case holding
+   convention (C4, full P_π at 100% duty): there the Brainwave crossovers sit at 2.56–2.84 GS/s
+   (OPT×A) and 16.6–29.7 GS/s or never (CONS×A), all above the registered ceiling. Under
+   expected-value holding (P_π/2 — the uniform-trim-statistics expectation), **OPT×A clears
+   Brainwave in-window (crossovers 1.32–1.47 GS/s); only the deployable corner (CONS×A) is
+   class-A-dead under any holding convention** (EV-F1). Only class-B (~1 mW/π suspended) wins
+   under C4 — and the frozen row itself marks class B **non-CORNERSTONE** at τ = 0.4–2.6 ms (SPSA
+   cadence floor 0.8–5.2 ms/iteration). The energy niche as computed is not reachable in the
+   currently-named foundry flow → Stage-1 platform constraint, flagged for PR-2/PR-4 framing.
 3. **Even the deployable corner wins at large N:** CONS×B (vendor TI converters) clears
    Brainwave at N ≥ 32 above 0.28–0.50 GS/s and Jetson-sustained at N=128 — the C8 structural
    effect (conversion is N-independent, digital cost ∝ N).
@@ -71,8 +159,13 @@ checked explicitly ✅ (does not fire); rider done ✅.
 
 **Anomalies / concerns:** (i) two frozen-block readings had to be fixed by stated convention and
 are flagged for Critic audit: trim electronics charged in all scenarios (C3) and class-A "fast τ"
-resolved via the row's memo-§4 reference (38–110 µs) — neither affects any clearance verdict
-(trim is ≤2/62 of class-A channel power; τ enters only the cadence note). (ii) The OPT×B-vs-DSP
+resolved via the row's memo-§4 reference (38–110 µs) — both faithful to the frozen source record
+but **not verdict-neutral** (Critic EV-F2; replaces the prior "neither affects any clearance
+verdict" sentence, which failed in both tested directions): the OPT-corner rate-floor negative is
+partly C3-borne (trim dropped → 15 verdicts flip favorably, incl. OPT×B clearing at 0.1 GS/s), and
+one deployable-corner niche cell (CONS×B N=128 @1 GS/s vs Jetson-sustained) is trim-sensitive
+(4 mW/ch stress → CLEARS→LOSES). The adopted charge-everywhere reading stands (provenance-faithful;
+the AD5380-class 2 mW/ch pairing is the well-sourced one for class B). (ii) The OPT×B-vs-DSP
 clearance at N=32 is by ~1% (233 vs 235 pJ) — treat as boundary, not margin. (iii) Converter
 pipeline latency has no frozen row — latency is a lower bound only.
 
