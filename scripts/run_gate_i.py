@@ -42,20 +42,41 @@ def main():
     ap.add_argument("--threads", type=int, default=0)
     ap.add_argument("--num-steps", type=int, default=100_000)
     ap.add_argument("--print-steps", type=int, default=1_000)
+    ap.add_argument("--device", default="cpu",
+                    help="cpu (default) or cuda. cuda runs true fp32 "
+                         "(TF32 off) + deterministic algorithms; all RNG "
+                         "streams stay on CPU generators (identical to the "
+                         "CPU run design). Gated by parity_gpu_side.py.")
     args = ap.parse_args()
 
     if args.threads > 0:
         torch.set_num_threads(args.threads)
 
+    device = torch.device(args.device)
+    gpu_name = None
+    if device.type == "cuda":
+        # True float32: the gated statistic must not silently move to TF32.
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        # Reproducibility of the reported number on this environment
+        # (requires CUBLAS_WORKSPACE_CONFIG=:4096:8 in the env).
+        torch.use_deterministic_algorithms(True)
+        gpu_name = torch.cuda.get_device_name(0)
+
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     cfg = CONFIGS[args.dataset]
     data = load_gate_i_dataset(root, args.dataset, args.seed)
+    for k in list(data):
+        if k.startswith(("X_", "y_")):
+            data[k] = data[k].to(device)
 
+    # init on CPU with the seeded CPU generator (identical weight bits to a
+    # CPU run), then move
     g_init = torch.Generator().manual_seed(args.seed)
     model = GateIClassifier(
         cfg["num_blocks"], data["data_dim"], cfg["ssm"], cfg["H"],
         data["n_classes"], generator=g_init,
-    )
+    ).to(device)
     trainable, published_conv = model.param_counts()
 
     out_dir = os.path.join(root, "results", "s0_2", "gate_i")
@@ -74,6 +95,10 @@ def main():
             "data_sha256": data["data_sha256"],
             "torch_version": torch.__version__,
             "threads": torch.get_num_threads(),
+            "device": str(device),
+            "gpu_name": gpu_name,
+            "tf32_disabled": device.type == "cuda",
+            "deterministic_algorithms": device.type == "cuda",
             "started_unix": time.time(),
         }) + "\n")
 

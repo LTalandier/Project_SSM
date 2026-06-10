@@ -96,13 +96,20 @@ class GLU(nn.Module):
 
 
 def _shared_dropout(x, p, training, generator):
-    """Inverted dropout with the mask SHARED across the batch dim (item 3)."""
+    """Inverted dropout with the mask SHARED across the batch dim (item 3).
+
+    The mask is drawn on the GENERATOR's device (CPU in all Gate-i runs, so
+    the random stream is identical across CPU and GPU executions) and then
+    moved to x's device. On the CPU path this is bit-identical to drawing on
+    x.device directly (the .to() is a no-op).
+    """
     if not training or p == 0.0:
         return x
     keep = 1.0 - p
+    draw_device = generator.device if generator is not None else x.device
     mask = (
-        torch.rand(x.shape[1:], device=x.device, generator=generator) < keep
-    ).to(x.dtype) / keep
+        torch.rand(x.shape[1:], device=draw_device, generator=generator) < keep
+    ).to(device=x.device, dtype=x.dtype) / keep
     return x * mask
 
 

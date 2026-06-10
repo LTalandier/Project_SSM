@@ -22,6 +22,27 @@ Escalate (don't decide autonomously):
 
 ---
 
+### ✅ E-2026-06-10-5 (Executor) — G3 cloud spend on vast.ai → **APPROVED 2026-06-10 by Lucas in-session** (record entry)
+**What:** run the S0.2-1 G3 gated-5 EigenWorms seeds on a rented vast.ai GPU instead of the
+~3–4-day local CPU run (which Lucas paused at ~47 min in, pre-first-eval). This exercises the
+**option 2 standing offer in the D-2026-06-10-2 ruling** ("if calendar time matters, say so —
+option 2 ... would then go through the spend escalation").
+**Approval basis:** Lucas, in the Executor session, 2026-06-10 eve: *"I have still a 7.44$
+credits on my vast.ai account ... the access to vast ai are in /home/lucas/Documents/
+PNN_topology_search"* + "let's pause it for now" on the local runs — initiated and funded by
+Lucas directly. **Budget ceiling = the existing credits, $7.44; zero new money.** Estimate:
+~$2–4 for the gated-5 on a 4090-class box (annex-3 only if budget clearly allows, after the
+verdict).
+**Protocol conditions honored (per the D-2 ruling):** (i) **GPU parity gate**
+(`scripts/parity_gpu_side.py`) runs on the box BEFORE any gated run and blocks on fail —
+composition: GPU-torch ≡ CPU-torch (new gate) ∘ CPU-torch ≡ official-JAX (S0.2-1 record,
+~2.4e-7); (ii) **TF32 disabled** (true fp32) + **deterministic algorithms** + bit-equal 20-step
+train self-check; (iii) all RNG streams stay on CPU generators — identical run design, only the
+fp32 arithmetic environment differs; (iv) frozen PR-1 protocol byte-identical (no truncation,
+no tuning, same seeds/splits/configs). The paused local runs are kept as fallback until parity
+passes; then killed (their partial state is discarded — protocol-clean, nothing reused).
+**Spend reporting:** actuals to the results entry (instance id, $ consumed, wall-clock).
+
 ### ✅ E-2026-06-10-4 — PR-1/PR-2 freeze → **RESOLVED 2026-06-10 by Lucas: "ok go" — FROZEN**
 **Ruling:** signed on the Critic-reviewed v2 blocks. **PR-1 + PR-2 (+ PR-13, early) are 🔒 in the
 ledger**; S0.2-1 (in-house layer + the Gate-i runs) posted to the Executor. The ask as resolved:
