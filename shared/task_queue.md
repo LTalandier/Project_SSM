@@ -90,17 +90,24 @@ the in-flight G3 runs beyond health checks.
 
 ---
 
-## ⏸️ S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS (accepted) · G3 PAUSED by Lucas mid-run (route decision on resumption)**
+## 🔴 S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS · G3 ❌ FAIL as measured (71.11 % < 90.6) · ADJUDICATION PENDING (PR-1.1 → Critic review → Lucas)**
 
-> **PAUSE STATE (2026-06-10 19:36, Lucas):** G3 gated-5 was launched per the D-2 ruling (seeds
-> 2345/3456/4567 in flight 18:48, 5678/6789 queued) and **SIGSTOPped ~47 min in, before the
-> first eval record** — driver 1412412 + workers 1412415/16/17, state T verified (~3.2 GB
-> resident). Survives session closure, **not reboot**; a reboot restarts affected seeds from
-> step 0, which is protocol-clean (no mid-run state reuse). **Resume = `kill -CONT` those PIDs**
-> (local route, ~3–4 days) — or the cloud route (~$30–60, Lucas spend approval + GPU parity
-> revalidation), or stay paused: **Lucas's call at resumption** (D-2026-06-10-2 addendum).
-> S0.2-1 closes when the G3 per-seed table + joint Gate-i verdict are appended to the results
-> entry.
+> **MEASURED OUTCOME (2026-06-11; GPU route per E-2026-06-10-5, Lucas-approved in-session,
+> $1.15 of $7.44):** GPU parity gate passed (1.2–1.5e-7) → gated-5 ran to completion →
+> **G3 FAIL 71.1111 %** (2/5 seeds in a zero-gradient absorbing state of the *official*
+> objective). Frozen miss-rule executed to the letter: stop, no tuning, sanctioned
+> divergence cross-check → **the official code itself, faithfully rerun, ALSO fails the
+> frozen gate (90.5556 % < 90.6, σ 9.3 vs published 4.4; fresh-seed trap incidence 2/8 vs
+> our 4/8, Fisher p ≈ 0.61).** Port exonerated (parity + line-by-line init audit +
+> healthy-3 = 93.52 in published band). **Supervisor verified all statistics independently
+> and accepts the diagnosis.** Adjudication: **D-2026-06-11-1** (Supervisor recommendation
+> = O3 as the PROPOSED **PR-1.1**: FAIL recorded permanently · G3 criterion void for anchor
+> instability · no replacement anchor · Gate i = G1 PASS ∧ parity dossier, purpose served ·
+> F-G3 = reportable finding + new transfer-check freeze rule) → **Critic review
+> (`critic_instructions_g3-adjudication.md`, Lucas launches) → Lucas signs** (E-2026-06-11-1).
+> **No Executor work exists until the adjudication lands.** Annex-3 EigenWorms cancelled
+> under the proposal; G1 + its annex stand untouched. S0.2-1 closes on the signed
+> adjudication.
 
 **Assigned:** 2026-06-10 · **G1 portion accepted:** 2026-06-10
 **Supervisor:** Claude Opus 4.8

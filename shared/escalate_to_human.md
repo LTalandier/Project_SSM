@@ -18,7 +18,59 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-*(nothing currently open)*
+### 🔴 E-2026-06-11-1 — Gate-i adjudication: G3 FAILED as measured — and the published anchor fails its own official code. Sign (or amend) PR-1.1.
+
+**Filed:** 2026-06-11 (Supervisor). **The decision in one line:** our EigenWorms gate run
+missed badly (71.1% vs the frozen 90.6%) — but the diagnosis proves the *anchor* is broken,
+not our code, so I'm asking you to sign an amendment that records the FAIL forever, retires
+that anchor, and lets the program proceed on the validation evidence that actually holds.
+
+**What happened (verified by me, all statistics re-derived):**
+- Our gated 5-seed mean: **71.11% — FAIL.** Two of five seeds fell into a training collapse.
+- The collapse is a property of the *published* method: their loss function can hit a state
+  where the gradient becomes exactly zero forever (fp32 underflow) — reproduced
+  bit-deterministically, entering within the first 7 steps.
+- The decisive test: **the official code itself, rerun faithfully** (their runner, their exact
+  library versions, their data files, the 5 published seeds, same GPU) **scores 90.5556% —
+  also below the frozen 90.6 gate**, with seed-to-seed spread ~2× what the paper reports. On
+  fresh seeds the official code collapses 2/8 times (ours 4/8 — statistically the same coin,
+  p ≈ 0.6). The published 95.0 ± 4.4 sits on a seed draw that dodges a ~25%-incidence trap
+  (probability of dodging ≈ 0.10–0.24).
+- **Our implementation is exonerated** by evidence stronger than any accuracy score: with
+  the same weights, our code and theirs agree to ~2×10⁻⁷ — numerically the same model. The
+  init code was audited line-by-line. Our non-collapsed seeds score 93.5%, inside the
+  published band. And the Heartbeat gate (G1) passed cleanly and is untouched.
+- Protocol integrity: zero tuning, zero reruns of gated numbers, the Executor stopped exactly
+  as the frozen miss-rule commands. Spend: $1.15 of your $7.44 ($6.29 remains).
+
+**What I propose (PROPOSED PR-1.1, in the ledger):** record the G3 FAIL permanently as
+measured · declare the G3 criterion **void for anchor instability** (the reference
+implementation fails its own threshold — the criterion measures seed luck, not our fidelity)
+· register **no replacement** published anchor (the alternates re-open registered exclusions
+or carry the same risk; our downstream reference was always the in-house BPTT ceiling, PR-3)
+· re-register Gate i as **G1 PASS + the numerical-identity dossier** → purpose served,
+proceed to S0.3 · report the anchor instability as a *finding* in the paper (it genuinely
+strengthens our "anchor in-house, not on published numbers" methodology) · new rule: before
+any future externally-anchored threshold freezes, rerun the reference implementation once
+(a ~$1 check that would have caught this pre-freeze).
+
+**Why this isn't "moving the goalposts":** the FAIL stays on the books next to the amendment;
+the amendment is signed by you, after independent Critic review, on evidence that the *gate's
+premise* — not our model — failed. The hostile reading is priced in and the Critic is
+explicitly instructed to attack it.
+
+**Your two steps (same pattern as the PR-1/PR-2 freeze):**
+1. **Launch the Critic** on the diagnosis + the amendment:
+   ```bash
+   cd ~/Documents/Project_SSM
+   claude "Read shared/critic_instructions.md for your role, then execute the review spec in shared/critic_instructions_g3-adjudication.md."
+   ```
+2. **Then rule on PR-1.1** — "sign PR-1.1" / amendments / a different option from
+   D-2026-06-11-1 (O1 record-FAIL-only · O2 replacement anchor · O3 = the proposal above).
+
+On your signature: S0.2-1 closes (G1 PASS ∧ G3 void-with-finding), and the next Supervisor
+outputs are the erbium gain-regime proposal + the PROPOSED PR-4 — the path that was queued
+before the pause.
 
 ---
 

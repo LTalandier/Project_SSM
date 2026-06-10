@@ -412,3 +412,68 @@ constraints + EV-F1/F3/F5 carry-ins), PR-10 frozen grid, PR-15.1 W1.
   linear weights — so the §5.3 contrast lands on the RC field's own configuration (PF-F1).
 - **T-B (IM-DD PAM-4 at 1–2 GBd):** labelled non-frozen extension (niche-native demo for
   S0.7-full/Stage-1; generator port deferred — not in the salvage manifest).
+
+## PR-1.1 — PROPOSED amendment (Supervisor draft 2026-06-11; ⬜ until Critic review + Lucas signature; PR-1 v2 above retained per supersession discipline)
+
+**Triggered by the measured Gate-i outcome** (results_log S0.2-1 addenda; adjudication item
+D-2026-06-11-1) — filed *after* the runs, so it is held to the amendment standard: Critic
+review + Lucas signature, with the measured record permanent and unamended.
+
+**The measured record (stands forever, no reinterpretation):**
+- **G1 Heartbeat: PASS** — unrounded gated mean 72.9032 % ≥ 72.1.
+- **G3 EigenWorms: FAIL as measured** — unrounded gated mean 71.1111 % < 90.6 (per-seed
+  19.44 / 88.89 / 94.44 / 97.22 / 55.56; two of five seeds in the absorbing state below).
+- **Joint Gate i under the frozen letter: FAIL.** Zero tuning; zero gated reruns; the
+  closure rule held throughout (Supervisor-verified).
+
+**Finding F-G3 — the G3 anchor does not transfer (evidence: `results/s0_2/gate_i/` +
+`xcheck_official/`; Supervisor re-derived the statistics independently):**
+1. The **official implementation, faithfully rerun** (pinned commit 05a8353, reference-venv
+   pins, official data pickles, the official runner, same GPU) on the 5 published Walker seeds
+   scores **90.5556 % — itself below the frozen 90.6 gate** (unrounded, per PF-F8h), with
+   per-seed σ ≈ 9.3 pp against the published 4.4.
+2. **Mechanism:** the official objective −Σ y·log(softmax + 1e-8) has a **zero-gradient
+   absorbing state in fp32** (softmax saturation → p_true underflows to exactly 0 → total
+   gradient exactly 0.0 permanently); step-instrumented, bit-deterministically reproduced.
+3. **Incidence:** 4/8 protocol seeds (our declared framework-inherent stream) vs 2/8 fresh
+   seeds (the official stream) — Fisher two-tailed **p ≈ 0.61**, statistically
+   indistinguishable. At the observed incidence the published 5-seed set is trap-free with
+   probability only ≈ 0.10–0.24: **the published 95.0 ± 4.4 sits on a favorable draw of a
+   ~25 %-incidence collapse belonging to the published method.**
+4. **The port is exonerated on independent evidence:** float32-exact cross-framework parity
+   (2.4–2.7×10⁻⁷ full-model, both anchors, incl. full L=17,984; 1.2–1.5×10⁻⁷ on the GPU),
+   line-by-line init-distribution audit vs the official source, healthy-seed mean 93.52 %
+   inside the published band.
+
+**Amendment (re-registration; Lucas-only):**
+- **The G3 criterion is declared VOID for anchor instability.** Its premise — "published
+  mean − 1σ transfers to a faithful rerun" (PF-F9d) — is empirically false at this anchor:
+  the reference implementation fails the threshold on its own published seeds. As frozen,
+  the criterion is a lottery on seed-stream trap incidence in either direction; it no longer
+  measures implementation fidelity, which is the only thing Gate i exists to measure.
+- **No replacement published anchor is registered.** (i) The S0.2-0 alternates re-open
+  registered exclusions (MotorImagery anchors on a preprint — the G2 exclusion ground);
+  (ii) any replacement carries exactly the untested-transferability risk that just fired;
+  (iii) the registered downstream reference was never the published numbers — it is the
+  in-house BPTT-on-substrate ceiling (PR-3; stated at the freeze in PF-F9d and in the
+  D-08-2 constraint).
+- **Gate i is re-registered as: G1 PASS (gated, frozen, untouched) ∧ the numerical-identity
+  dossier** (cross-framework parity ≤ 3×10⁻⁷ on full-model outputs for both anchor configs,
+  transplanted weights, train + inference modes — already on record from the pre-registered
+  cross-check harness). **Adjudication under this criterion: the gate's registered purpose —
+  "idealized model reproduces published oscillatory-SSM behavior", i.e. validate the in-house
+  implementation — is SERVED**: the layer provably *computes the reference model* to float32
+  precision, which is categorically stronger evidence than any accuracy reproduction. The
+  letter-FAIL of the frozen v2 criterion remains on record beside it. Downstream (S0.3+)
+  proceeds on the PR-3 anchoring path as registered.
+- **Binding for S0.8 / the paper:** the G3 outcome is reported as a *finding*, not buried —
+  LinOSS-IM EigenWorms 95.0 ± 4.4 does not reproduce under a faithful rerun of its own
+  implementation (90.6 ± 9.3, with a ~25 %-incidence fp32 init collapse); first-hand
+  motivation for the PR-3 in-house-ceiling anchoring philosophy. Optional upstream courtesy
+  report to the LinOSS authors = outreach, Lucas-paced, not before the S0.8 wording freeze.
+- **Annex-3 EigenWorms: cancelled** (non-gating by construction, PF-F8g; anchors nothing
+  under this amendment; G1's annex is complete and stands).
+- **Process carry-in (binding on future freezes):** any externally-anchored gate must include
+  a **reference-implementation transfer check** — rerun the official code on the gating cell
+  at small scale — *before* its threshold freezes (cost here would have been ~$1/hours and
+  would have caught F-G3 pre-freeze).

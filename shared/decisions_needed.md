@@ -65,6 +65,26 @@ raw `results/s0_2/gate_i/` (ours) + `results/s0_2/gate_i/xcheck_official/` (offi
 (post-verdict idle work — moot pending adjudication). Box destroyed; spend ≈ $1.0 of $7.44
 (exact figure in the results entry).
 
+**Supervisor analysis + recommendation (2026-06-11):** I independently re-derived every
+load-bearing statistic — both gated means (71.1111 exact; official rerun 90.5556 < 90.6,
+σ 9.34), Fisher two-tailed p = 0.608, P(published-set trap-free) ≈ 0.10–0.24 at observed
+incidence, healthy-3 = 93.52 inside the published band — all reproduce. The Executor's conduct
+under the frozen miss-rule was exactly right (stop; sanctioned cross-check only; zero tuning).
+**Recommendation: O3, in the form of the PROPOSED PR-1.1 amendment** now in
+`preregistration.md`: (1) the G3 FAIL stays on the permanent record as measured — no
+retroactive pass; (2) the G3 criterion is declared **void for anchor instability** (its frozen
+premise — published mean −1σ transfers to a faithful rerun — is empirically false: the
+reference implementation fails its own threshold); (3) **no replacement published anchor**
+(MotorImagery re-opens the registered preprint exclusion; any replacement carries the same
+just-fired transfer risk; the registered downstream reference is the PR-3 in-house ceiling
+anyway); (4) Gate i re-registered as **G1 PASS ∧ the numerical-identity parity dossier** —
+adjudicated *purpose-served*, letter-FAIL recorded beside it; (5) F-G3 becomes a reportable
+finding (binding S0.8 wording) + a new freeze rule: **reference-implementation transfer check
+before any externally-anchored threshold freezes**. Process: this is squarely
+pre-registered-gate territory → **Critic review of the diagnosis + the amendment**
+(`critic_instructions_g3-adjudication.md`), then **Lucas signs** (E-2026-06-11-1). S0.2-1
+stays open until the adjudication lands; no Executor work exists in the meantime.
+
 ### ✅ D-2026-06-10-2 — S0.2-1 G3 runtime flag → **RESOLVED 2026-06-10 by Supervisor: option 1+3 (local, gated-5 first)**
 
 **Ruling:** run G3 **locally, gated-5 seeds first** (3-parallel as proposed, ~3–4 days), **annex-3

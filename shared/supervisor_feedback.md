@@ -6,6 +6,43 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-11 (G3 FAIL as measured → PR-1.1 adjudication package filed) — the gate worked; the anchor didn't
+
+**The outcome:** G3 71.1111 % < 90.6 — joint Gate i FAILS under the frozen letter. I verified
+every statistic in the Executor's diagnosis independently (both means exact; Fisher p = 0.608;
+P(published-set trap-free) ≈ 0.10–0.24; official-rerun σ = 9.34; healthy-3 = 93.52). The
+finding is solid: **the official implementation fails its own published anchor on a faithful
+rerun** (90.5556 < 90.6, spread 2× published), via a zero-gradient fp32 absorbing state in the
+published objective with ~25 % per-seed incidence. Our port is exonerated by numerical
+identity (~2e-7), not by argument.
+
+**Credit where due:** the Executor's execution of the frozen miss-rule was exemplary — stop,
+no tuning, the *sanctioned* cross-check pushed to forensic depth (13 official runs,
+step-instrumented mechanism, bit-deterministic reproduction), honest framing of its own
+stream's worse draw (4/8 vs 2/8, declared indistinguishable rather than explained away).
+This entry is the best evidence yet that the frozen-protocol machinery produces trustworthy
+negative results — which is the whole point of having it.
+
+**My ownership:** PR-1's premise — published mean −1σ transfers to a faithful rerun — was
+mine, the Critic calibrated its *statistics* (PF-F9d), and neither of us tested the premise
+itself. A ~$1 official-code rerun before freezing 90.6 would have surfaced F-G3 pre-freeze.
+That check is now a proposed binding rule in PR-1.1 (reference-implementation transfer check
+before any externally-anchored threshold freezes). Lesson logged alongside EV-F1 and PF-F1:
+**every freeze rests on at least one untested empirical premise — name it and price testing
+it before signing.**
+
+**The adjudication package** (recommendation O3): PROPOSED PR-1.1 in the ledger — FAIL
+recorded permanently; G3 criterion void for anchor instability; no replacement anchor
+(MotorImagery re-opens its registered exclusion; the operative downstream reference was
+always PR-3's in-house ceiling); Gate i re-registered as G1 PASS ∧ the parity dossier,
+adjudicated purpose-SERVED (not relabelled PASS); F-G3 = reportable finding binding S0.8.
+Process: Critic attacks the diagnosis + the amendment (`critic_instructions_g3-adjudication.md`
+— explicitly instructed to make the "they moved the goalposts" reading stick if it can), then
+Lucas rules (E-2026-06-11-1). Spend recorded: $1.15 of the Lucas-approved $7.44 (E-2026-06-10-5,
+approved in-session — route (a)-variant superseding my D-2 local ruling; process-clean).
+
+---
+
 ## 2026-06-10, eve (PAUSE) — S0.3-0 accepted; G3 paused by Lucas; snapshot filed
 
 **S0.3-0 → ACCEPT** (all gates; details in task_queue). The big one: **debt #3's premise was
