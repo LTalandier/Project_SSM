@@ -1,0 +1,12 @@
+
+GPU: NVIDIA GeForce RTX 3090 | torch 2.12.0+cu126 | cuda 12.6
+  [PASS] G1 full-model inference probs: max|delta| = 1.192e-07 (tol 2e-06)
+  [PASS] G1 full-model train-mode probs: max|delta| = 1.192e-07 (tol 2e-06)
+  [PASS] G1 BN running stats after train pass: max|delta| = 0.000e+00 (tol 2e-06)
+  [PASS] G3 full-model inference probs: max|delta| = 1.490e-07 (tol 2e-06)
+  [PASS] G3 full-model train-mode probs: max|delta| = 1.490e-07 (tol 2e-06)
+  [PASS] G3 BN running stats after train pass: max|delta| = 1.490e-08 (tol 2e-06)
+  [PASS] L=17,984 SSM layer (G3 size): max|delta| = 3.815e-06 (tol 0.0001)
+  [PASS] 20-step train determinism (bit-equal): max|delta| = 0.000e+00 (tol 0)
+
+PARITY GATE: PASS

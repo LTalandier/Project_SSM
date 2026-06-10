@@ -1,0 +1,30 @@
+{"record": "config", "dataset": "Heartbeat", "seed": 2345, "gated": true, "config": {"num_blocks": 6, "H": 16, "ssm": 16, "batch_size": 32}, "lr": 0.001, "num_steps": 100000, "print_steps": 1000, "data_dim": 62, "n_classes": 2, "split_sizes": [286, 61, 62], "param_count_trainable": 10738, "param_count_published_convention": 10936, "param_count_published_reference": 10936, "data_sha256": "253d513a197575c196e48df7c11b2af2f70ec2e87724bfd2a95bc7b3cb98f01c", "torch_version": "2.11.0+cpu", "threads": 5, "started_unix": 1781096413.1416354}
+{"step": 1000, "loss": 0.2621541297696531, "train_acc": 0.9930070042610168, "val_acc": 0.6393442749977112, "elapsed_s": 280.3, "test_acc_at_improv": 0.6612903475761414}
+{"step": 2000, "loss": 0.0737968888405012, "train_acc": 1.0, "val_acc": 0.5245901346206665, "elapsed_s": 544.1}
+{"step": 3000, "loss": 0.03811073213382042, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 802.1, "test_acc_at_improv": 0.6774193644523621}
+{"step": 4000, "loss": 0.01771033938685832, "train_acc": 1.0, "val_acc": 0.6229507923126221, "elapsed_s": 1076.0}
+{"step": 5000, "loss": 0.04058852980574375, "train_acc": 1.0, "val_acc": 0.6229507923126221, "elapsed_s": 1356.0}
+{"step": 6000, "loss": 0.0013883993862727948, "train_acc": 1.0, "val_acc": 0.6393442749977112, "elapsed_s": 1629.2}
+{"step": 7000, "loss": 0.030133958462718057, "train_acc": 1.0, "val_acc": 0.6557376980781555, "elapsed_s": 1911.8}
+{"step": 8000, "loss": 0.00988571091936501, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 2163.5, "test_acc_at_improv": 0.7580645084381104}
+{"step": 9000, "loss": 0.00031679069661231553, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 2440.5, "test_acc_at_improv": 0.7580645084381104}
+{"step": 10000, "loss": 0.00012414345811089333, "train_acc": 1.0, "val_acc": 0.688524603843689, "elapsed_s": 2732.4, "test_acc_at_improv": 0.7419354915618896}
+{"step": 11000, "loss": 0.04467458765789479, "train_acc": 1.0, "val_acc": 0.7049180269241333, "elapsed_s": 3032.2, "test_acc_at_improv": 0.725806474685669}
+{"step": 12000, "loss": 0.00037070657692675013, "train_acc": 1.0, "val_acc": 0.688524603843689, "elapsed_s": 3313.1}
+{"step": 13000, "loss": 0.00011721421836614355, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 3525.7}
+{"step": 14000, "loss": 6.709899987981771e-05, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 3777.1}
+{"step": 15000, "loss": 0.06408199029363695, "train_acc": 0.996503472328186, "val_acc": 0.7049180269241333, "elapsed_s": 4029.6, "test_acc_at_improv": 0.725806474685669}
+{"step": 16000, "loss": 0.026062402104631475, "train_acc": 1.0, "val_acc": 0.8032786846160889, "elapsed_s": 4274.9, "test_acc_at_improv": 0.725806474685669}
+{"step": 17000, "loss": 0.0009913689394879838, "train_acc": 1.0, "val_acc": 0.8196721076965332, "elapsed_s": 4554.9, "test_acc_at_improv": 0.6935483813285828}
+{"step": 18000, "loss": 0.00022703805081732752, "train_acc": 1.0, "val_acc": 0.7868852615356445, "elapsed_s": 4779.5}
+{"step": 19000, "loss": 0.07016255309680554, "train_acc": 1.0, "val_acc": 0.7540983557701111, "elapsed_s": 5037.5}
+{"step": 20000, "loss": 0.011446860038086015, "train_acc": 1.0, "val_acc": 0.7868852615356445, "elapsed_s": 5302.5}
+{"step": 21000, "loss": 0.0004311242099993251, "train_acc": 1.0, "val_acc": 0.7540983557701111, "elapsed_s": 5569.6}
+{"step": 22000, "loss": 0.0001342224104799925, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 5780.2}
+{"step": 23000, "loss": 7.906314639075162e-05, "train_acc": 1.0, "val_acc": 0.7377049326896667, "elapsed_s": 6008.8}
+{"step": 24000, "loss": 0.037928887075864455, "train_acc": 1.0, "val_acc": 0.7049180269241333, "elapsed_s": 6278.1}
+{"step": 25000, "loss": 0.00039986326304733666, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 6527.2}
+{"step": 26000, "loss": 0.013626717186084875, "train_acc": 1.0, "val_acc": 0.7377049326896667, "elapsed_s": 6783.0}
+{"step": 27000, "loss": 0.000750718469864296, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 7015.4}
+{"step": 28000, "loss": 0.00019825755153124192, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 7282.9}
+{"record": "summary", "dataset": "Heartbeat", "seed": 2345, "test_acc": 0.6935483813285828, "best_val": 0.8196721076965332, "steps_run": 28000, "wall_s": 7282.9}

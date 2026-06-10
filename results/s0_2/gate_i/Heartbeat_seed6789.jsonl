@@ -1,0 +1,15 @@
+{"record": "config", "dataset": "Heartbeat", "seed": 6789, "gated": true, "config": {"num_blocks": 6, "H": 16, "ssm": 16, "batch_size": 32}, "lr": 0.001, "num_steps": 100000, "print_steps": 1000, "data_dim": 62, "n_classes": 2, "split_sizes": [286, 61, 62], "param_count_trainable": 10738, "param_count_published_convention": 10936, "param_count_published_reference": 10936, "data_sha256": "253d513a197575c196e48df7c11b2af2f70ec2e87724bfd2a95bc7b3cb98f01c", "torch_version": "2.11.0+cpu", "threads": 5, "started_unix": 1781099716.5392575}
+{"step": 1000, "loss": 0.18673866252151491, "train_acc": 0.996503472328186, "val_acc": 0.688524603843689, "elapsed_s": 290.3, "test_acc_at_improv": 0.7580645084381104}
+{"step": 2000, "loss": 0.044610809257683286, "train_acc": 1.0, "val_acc": 0.7540983557701111, "elapsed_s": 548.2, "test_acc_at_improv": 0.7419354915618896}
+{"step": 3000, "loss": 0.015166071738316533, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 824.2}
+{"step": 4000, "loss": 0.02937129445543735, "train_acc": 0.9930070042610168, "val_acc": 0.688524603843689, "elapsed_s": 1084.6}
+{"step": 5000, "loss": 0.013857342082908872, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 1274.0}
+{"step": 6000, "loss": 0.022627173411498006, "train_acc": 1.0, "val_acc": 0.6557376980781555, "elapsed_s": 1548.2}
+{"step": 7000, "loss": 0.04803479811516809, "train_acc": 1.0, "val_acc": 0.688524603843689, "elapsed_s": 1815.0}
+{"step": 8000, "loss": 0.00845705047811316, "train_acc": 1.0, "val_acc": 0.7540983557701111, "elapsed_s": 2074.6, "test_acc_at_improv": 0.7096773982048035}
+{"step": 9000, "loss": 0.012531798091495149, "train_acc": 1.0, "val_acc": 0.688524603843689, "elapsed_s": 2317.4}
+{"step": 10000, "loss": 0.012436180842364593, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 2577.2}
+{"step": 11000, "loss": 0.00042322757570946126, "train_acc": 1.0, "val_acc": 0.6721311211585999, "elapsed_s": 2801.2}
+{"step": 12000, "loss": 0.015896185863731545, "train_acc": 1.0, "val_acc": 0.7213114500045776, "elapsed_s": 3041.7}
+{"step": 13000, "loss": 0.00017949718729460073, "train_acc": 1.0, "val_acc": 0.7049180269241333, "elapsed_s": 3339.4}
+{"record": "summary", "dataset": "Heartbeat", "seed": 6789, "test_acc": 0.7096773982048035, "best_val": 0.7540983557701111, "steps_run": 13000, "wall_s": 3339.4}

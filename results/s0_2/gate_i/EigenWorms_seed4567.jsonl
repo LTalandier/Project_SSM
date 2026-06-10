@@ -1,0 +1,20 @@
+{"record": "config", "dataset": "EigenWorms", "seed": 4567, "gated": true, "config": {"num_blocks": 2, "H": 128, "ssm": 64, "batch_size": 4}, "lr": 0.001, "num_steps": 100000, "print_steps": 1000, "data_dim": 7, "n_classes": 5, "split_sizes": [165, 35, 36], "param_count_trainable": 133765, "param_count_published_convention": 134279, "param_count_published_reference": 134279, "data_sha256": "e1d1f145d62698fe767f3175b2f5e3760668a90fd315bd8df54218ec701c477c", "torch_version": "2.12.0+cu126", "threads": 255, "device": "cuda", "gpu_name": "NVIDIA GeForce RTX 3090", "tf32_disabled": true, "deterministic_algorithms": true, "started_unix": 1781120454.01979}
+{"step": 1000, "loss": 0.5970631490666419, "train_acc": 0.9454545378684998, "val_acc": 0.800000011920929, "elapsed_s": 86.7, "test_acc_at_improv": 0.9166666865348816}
+{"step": 2000, "loss": 0.2594277666771332, "train_acc": 0.9939393401145935, "val_acc": 0.8571428656578064, "elapsed_s": 173.4, "test_acc_at_improv": 0.9166666865348816}
+{"step": 3000, "loss": 0.11396451089448499, "train_acc": 0.9939393401145935, "val_acc": 0.8857142925262451, "elapsed_s": 260.2, "test_acc_at_improv": 0.944444477558136}
+{"step": 4000, "loss": 0.4920316069494068, "train_acc": 0.9818181395530701, "val_acc": 0.8285714387893677, "elapsed_s": 347.0}
+{"step": 5000, "loss": 0.23165235160031716, "train_acc": 0.9939393401145935, "val_acc": 0.8571428656578064, "elapsed_s": 433.6}
+{"step": 6000, "loss": 0.11860844831119759, "train_acc": 0.9939393401145935, "val_acc": 0.8857142925262451, "elapsed_s": 520.2, "test_acc_at_improv": 0.9722222089767456}
+{"step": 7000, "loss": 0.11115816814713798, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 607.1, "test_acc_at_improv": 0.944444477558136}
+{"step": 8000, "loss": 0.11077977909216927, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 694.0, "test_acc_at_improv": 0.944444477558136}
+{"step": 9000, "loss": 0.11064398152674383, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 780.8, "test_acc_at_improv": 0.9166666865348816}
+{"step": 10000, "loss": 0.11518510409691968, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 867.7, "test_acc_at_improv": 0.9166666865348816}
+{"step": 11000, "loss": 0.11515646317492167, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 954.6, "test_acc_at_improv": 0.944444477558136}
+{"step": 12000, "loss": 0.10593089696002304, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 1041.4, "test_acc_at_improv": 0.944444477558136}
+{"step": 13000, "loss": 0.11053294235281118, "train_acc": 0.9939393401145935, "val_acc": 0.9142857193946838, "elapsed_s": 1128.3, "test_acc_at_improv": 0.944444477558136}
+{"step": 14000, "loss": 8.471502276873402, "train_acc": 0.4060606062412262, "val_acc": 0.6000000238418579, "elapsed_s": 1215.0}
+{"step": 15000, "loss": 10.877412130355834, "train_acc": 0.4060606062412262, "val_acc": 0.6000000238418579, "elapsed_s": 1301.1}
+{"step": 16000, "loss": 10.937279343605042, "train_acc": 0.4060606062412262, "val_acc": 0.6000000238418579, "elapsed_s": 1387.3}
+{"step": 17000, "loss": 10.928069003105163, "train_acc": 0.4060606062412262, "val_acc": 0.6000000238418579, "elapsed_s": 1473.6}
+{"step": 18000, "loss": 10.951094854354858, "train_acc": 0.4060606062412262, "val_acc": 0.6000000238418579, "elapsed_s": 1559.8}
+{"record": "summary", "dataset": "EigenWorms", "seed": 4567, "test_acc": 0.944444477558136, "best_val": 0.9142857193946838, "steps_run": 18000, "wall_s": 1559.8}

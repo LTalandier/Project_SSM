@@ -1,0 +1,31 @@
+=== [1/2] GPU parity gate (blocks the gated runs on FAIL) ===
+
+GPU: NVIDIA GeForce RTX 3090 | torch 2.12.0+cu126 | cuda 12.6
+  [PASS] G1 full-model inference probs: max|delta| = 1.192e-07 (tol 2e-06)
+  [PASS] G1 full-model train-mode probs: max|delta| = 1.192e-07 (tol 2e-06)
+  [PASS] G1 BN running stats after train pass: max|delta| = 0.000e+00 (tol 2e-06)
+  [PASS] G3 full-model inference probs: max|delta| = 1.490e-07 (tol 2e-06)
+  [PASS] G3 full-model train-mode probs: max|delta| = 1.490e-07 (tol 2e-06)
+  [PASS] G3 BN running stats after train pass: max|delta| = 1.490e-08 (tol 2e-06)
+  [PASS] L=17,984 SSM layer (G3 size): max|delta| = 3.815e-06 (tol 0.0001)
+  [PASS] 20-step train determinism (bit-equal): max|delta| = 0.000e+00 (tol 0)
+
+PARITY GATE: PASS
+
+=== [2/2] Gated-5 EigenWorms, sequential, device=cuda ===
+--- seed 2345 start: 19:01:38 ---
+[EigenWorms seed 2345] test=0.194444 best_val=0.171429 steps=12000 wall=1040.6s
+--- seed 3456 start: 19:19:03 ---
+[EigenWorms seed 3456] test=0.888889 best_val=0.914286 steps=15000 wall=1302.4s
+--- seed 4567 start: 19:40:50 ---
+[EigenWorms seed 4567] test=0.944444 best_val=0.914286 steps=18000 wall=1559.8s
+--- seed 5678 start: 20:06:54 ---
+[EigenWorms seed 5678] test=0.972222 best_val=0.942857 steps=13000 wall=1126.7s
+--- seed 6789 start: 20:25:45 ---
+[EigenWorms seed 6789] test=0.555556 best_val=0.428571 steps=12000 wall=1038.4s
+all 5 gated seeds done
+{"record": "summary", "dataset": "EigenWorms", "seed": 2345, "test_acc": 0.1944444477558136, "best_val": 0.17142857611179352, "steps_run": 12000, "wall_s": 1040.6}
+{"record": "summary", "dataset": "EigenWorms", "seed": 3456, "test_acc": 0.8888888955116272, "best_val": 0.9142857193946838, "steps_run": 15000, "wall_s": 1302.4}
+{"record": "summary", "dataset": "EigenWorms", "seed": 4567, "test_acc": 0.944444477558136, "best_val": 0.9142857193946838, "steps_run": 18000, "wall_s": 1559.8}
+{"record": "summary", "dataset": "EigenWorms", "seed": 5678, "test_acc": 0.9722222089767456, "best_val": 0.9428571462631226, "steps_run": 13000, "wall_s": 1126.7}
+{"record": "summary", "dataset": "EigenWorms", "seed": 6789, "test_acc": 0.5555555820465088, "best_val": 0.4285714328289032, "steps_run": 12000, "wall_s": 1038.4}

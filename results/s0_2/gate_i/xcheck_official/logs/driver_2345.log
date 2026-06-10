@@ -1,0 +1,14 @@
+Running experiment with seed: 2345
+Creating dataset EigenWorms
+Traceback (most recent call last):
+  File "/workspace/xcheck_driver.py", line 6, in <module>
+    run_experiments(["LinOSS"], ["EigenWorms"], "/workspace/xcheck_configs")
+  File "/workspace/linoss/run_experiment.py", line 128, in run_experiments
+    run_fn(seed=seed, **run_args)
+  File "/workspace/linoss/train.py", line 370, in create_dataset_model_and_train
+    dataset = create_dataset(
+              ^^^^^^^^^^^^^^^
+  File "/workspace/linoss/data_dir/datasets.py", line 406, in create_dataset
+    f.name for f in os.scandir(data_dir + "/processed/toy") if f.is_dir()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data_dir/processed/toy'

@@ -1,0 +1,152 @@
+/workspace/jaxenv/lib/python3.11/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+/workspace/jaxenv/lib/python3.11/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+/workspace/jaxenv/lib/python3.11/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+/workspace/jaxenv/lib/python3.11/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+Running experiment with seed: 2345
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /workspace/xcheck_outoutputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_2345 has been created.
+Step: 1000, Loss: 0.6211557388305664, Train metric: 0.9333332777023315, Validation metric: 0.800000011920929, Time: 45.30942440032959
+Test metric: 0.8611111044883728
+Step: 2000, Loss: 0.3945242166519165, Train metric: 0.9696969389915466, Validation metric: 0.8857142925262451, Time: 20.868443489074707
+Test metric: 0.944444477558136
+Step: 3000, Loss: 0.19168265163898468, Train metric: 0.9939393401145935, Validation metric: 0.7428571581840515, Time: 21.043113708496094
+Step: 4000, Loss: 0.16483478248119354, Train metric: 0.9939393401145935, Validation metric: 0.9142857193946838, Time: 20.581042528152466
+Test metric: 1.0
+Step: 5000, Loss: 0.18258406221866608, Train metric: 0.7515151500701904, Validation metric: 0.7714285850524902, Time: 20.570677042007446
+Step: 6000, Loss: 0.24690020084381104, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.36458134651184
+Test metric: 0.944444477558136
+Step: 7000, Loss: 0.12518584728240967, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.54993438720703
+Test metric: 0.9722222089767456
+Step: 8000, Loss: 0.11119038611650467, Train metric: 0.9939393401145935, Validation metric: 0.9142857193946838, Time: 20.55086612701416
+Step: 9000, Loss: 0.11539135873317719, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.476221084594727
+Test metric: 0.9722222089767456
+Step: 10000, Loss: 0.11065120995044708, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.419896125793457
+Test metric: 0.9722222089767456
+Step: 11000, Loss: 0.11057998239994049, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.5497567653656
+Test metric: 0.9722222089767456
+Step: 12000, Loss: 0.1151568591594696, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.546916723251343
+Test metric: 0.9722222089767456
+Step: 13000, Loss: 0.1151440367102623, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.52583336830139
+Test metric: 0.9722222089767456
+Step: 14000, Loss: 0.10592862218618393, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.53688931465149
+Test metric: 0.9722222089767456
+Step: 15000, Loss: 0.11513310670852661, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.410141944885254
+Test metric: 0.9722222089767456
+Step: 16000, Loss: 0.11052579432725906, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.55603528022766
+Test metric: 0.9722222089767456
+Step: 17000, Loss: 0.11513029783964157, Train metric: 0.9939393401145935, Validation metric: 0.9428571462631226, Time: 20.54486656188965
+Test metric: 0.9722222089767456
+Running experiment with seed: 6789
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /workspace/xcheck_outoutputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_6789 has been created.
+Step: 1000, Loss: 0.4447343051433563, Train metric: 0.903030276298523, Validation metric: 0.8571428656578064, Time: 40.04228115081787
+Test metric: 0.6388888955116272
+Step: 2000, Loss: 0.13145214319229126, Train metric: 0.9575757384300232, Validation metric: 0.9714285731315613, Time: 20.350057363510132
+Test metric: 0.7777777910232544
+Step: 3000, Loss: 0.005342772230505943, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.625240087509155
+Step: 4000, Loss: 0.00036398350493982434, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.518564462661743
+Step: 5000, Loss: 0.00015960505697876215, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.31251573562622
+Step: 6000, Loss: 7.268264016602188e-05, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.521540641784668
+Step: 7000, Loss: 3.9782731619197875e-05, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.31122398376465
+Step: 8000, Loss: 1.9981011064373888e-05, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.51295828819275
+Step: 9000, Loss: 1.1740103218471631e-05, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.306231260299683
+Step: 10000, Loss: 5.655764198309043e-06, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.503610849380493
+Step: 11000, Loss: 3.388262484804727e-06, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.307054042816162
+Step: 12000, Loss: 1.7286361071455758e-06, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.51206684112549
+Step: 13000, Loss: 9.249769732377899e-07, Train metric: 0.9999999403953552, Validation metric: 0.8285714387893677, Time: 20.288257598876953
+Test metric: 0.7777777910232544
+Running experiment with seed: 3456
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /workspace/xcheck_outoutputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_3456 has been created.
+Step: 1000, Loss: 0.4663723111152649, Train metric: 0.939393937587738, Validation metric: 0.800000011920929, Time: 39.56398367881775
+Test metric: 0.8333333134651184
+Step: 2000, Loss: 0.15116538107395172, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.570833444595337
+Test metric: 0.8888888955116272
+Step: 3000, Loss: 0.0037896865978837013, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.911392211914062
+Test metric: 0.8888888955116272
+Step: 4000, Loss: 0.000509322271682322, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.65987753868103
+Test metric: 0.8888888955116272
+Step: 5000, Loss: 0.000154017805471085, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.426347732543945
+Step: 6000, Loss: 0.00010257351823383942, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.303197383880615
+Step: 7000, Loss: 3.4472894185455516e-05, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.58746576309204
+Test metric: 0.8888888955116272
+Step: 8000, Loss: 2.155049514840357e-05, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.348607778549194
+Step: 9000, Loss: 9.67220330494456e-06, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.562389612197876
+Test metric: 0.8333333134651184
+Step: 10000, Loss: 5.201121807098389, Train metric: 0.5030303001403809, Validation metric: 0.3142857253551483, Time: 20.289454460144043
+Step: 11000, Loss: 9.141260147094727, Train metric: 0.5030303001403809, Validation metric: 0.3142857253551483, Time: 20.166213512420654
+Step: 12000, Loss: 9.150465965270996, Train metric: 0.5030303001403809, Validation metric: 0.3142857253551483, Time: 20.42262864112854
+Step: 13000, Loss: 9.141256332397461, Train metric: 0.5030303001403809, Validation metric: 0.3142857253551483, Time: 20.155409574508667
+Test metric: 0.8333333134651184
+Running experiment with seed: 4567
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /workspace/xcheck_outoutputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_4567 has been created.
+Step: 1000, Loss: 0.6210817098617554, Train metric: 0.939393937587738, Validation metric: 0.7714285850524902, Time: 39.41333627700806/workspace/jaxenv/lib/python3.11/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+
+Test metric: 0.8888888955116272
+Step: 2000, Loss: 0.17501820623874664, Train metric: 0.8787878751754761, Validation metric: 0.8285714387893677, Time: 20.32494568824768
+Test metric: 0.8888888955116272
+Step: 3000, Loss: 0.11236390471458435, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.37345576286316
+Test metric: 0.944444477558136
+Step: 4000, Loss: 0.0019297085236757994, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.760998964309692
+Test metric: 0.944444477558136
+Step: 5000, Loss: 0.00038048229180276394, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.33892059326172
+Step: 6000, Loss: 0.00016667363524902612, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.300570487976074
+Step: 7000, Loss: 7.193518831627443e-05, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.651742458343506
+Test metric: 0.9722222089767456
+Step: 8000, Loss: 3.542288322933018e-05, Train metric: 0.9999999403953552, Validation metric: 0.8571428656578064, Time: 20.3570716381073
+Step: 9000, Loss: 1.788843292160891e-05, Train metric: 0.9999999403953552, Validation metric: 0.9142857193946838, Time: 20.315134525299072
+Test metric: 0.9722222089767456
+Step: 10000, Loss: 1.1396493391657714e-05, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.71697163581848
+Step: 11000, Loss: 4.829528279515216e-06, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 20.31883716583252
+Step: 12000, Loss: 2.5038416385650635, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.280193567276
+Step: 13000, Loss: 15.639200210571289, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.53811478614807
+Step: 14000, Loss: 15.602357864379883, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.183650732040405
+Step: 15000, Loss: 15.629995346069336, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.18139362335205
+Step: 16000, Loss: 15.629993438720703, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.593828916549683
+Step: 17000, Loss: 15.620782852172852, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.193090438842773
+Step: 18000, Loss: 15.625383377075195, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.25713324546814
+Step: 19000, Loss: 15.653019905090332, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.62950825691223
+Step: 20000, Loss: 15.616175651550293, Train metric: 0.1515151411294937, Validation metric: 0.17142857611179352, Time: 20.236167669296265
+Test metric: 0.9722222089767456
+Running experiment with seed: 5678
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /workspace/xcheck_outoutputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_5678 has been created.
+Step: 1000, Loss: 0.5918954610824585, Train metric: 0.842424213886261, Validation metric: 0.800000011920929, Time: 39.163549184799194
+Test metric: 0.7777777910232544
+Step: 2000, Loss: 0.2879279553890228, Train metric: 0.9878787398338318, Validation metric: 0.9428571462631226, Time: 20.31039261817932
+Test metric: 0.944444477558136
+Step: 3000, Loss: 0.009401886723935604, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.6922447681427
+Test metric: 0.944444477558136
+Step: 4000, Loss: 0.0008661846513859928, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.33316445350647
+Test metric: 0.944444477558136
+Step: 5000, Loss: 0.0002995152899529785, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.329943418502808
+Test metric: 0.944444477558136
+Step: 6000, Loss: 0.43609362840652466, Train metric: 0.9939393401145935, Validation metric: 0.9714285731315613, Time: 20.733530282974243
+Test metric: 0.9722222089767456
+Step: 7000, Loss: 0.002980533754453063, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.337602138519287
+Test metric: 0.944444477558136
+Step: 8000, Loss: 0.000533597485627979, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.354039192199707
+Test metric: 0.944444477558136
+Step: 9000, Loss: 0.0001949325087480247, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.33397650718689
+Test metric: 0.944444477558136
+Step: 10000, Loss: 9.016710100695491e-05, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.768177270889282
+Test metric: 0.944444477558136
+Step: 11000, Loss: 3.9884416764834896e-05, Train metric: 0.9999999403953552, Validation metric: 0.9714285731315613, Time: 20.335885286331177
+Test metric: 0.944444477558136
+Step: 12000, Loss: 0.179092675447464, Train metric: 0.9939393401145935, Validation metric: 0.9714285731315613, Time: 20.340320587158203
+Test metric: 1.0
+Step: 13000, Loss: 0.11296218633651733, Train metric: 0.9939393401145935, Validation metric: 0.9714285731315613, Time: 20.33874773979187
+Test metric: 0.9722222089767456
+Step: 14000, Loss: 0.10646936297416687, Train metric: 0.9939393401145935, Validation metric: 0.9714285731315613, Time: 20.75692057609558
+Test metric: 0.9722222089767456

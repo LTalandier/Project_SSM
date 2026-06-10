@@ -1,0 +1,14 @@
+{"record": "config", "dataset": "EigenWorms", "seed": 2345, "gated": true, "config": {"num_blocks": 2, "H": 128, "ssm": 64, "batch_size": 4}, "lr": 0.001, "num_steps": 100000, "print_steps": 1000, "data_dim": 7, "n_classes": 5, "split_sizes": [165, 35, 36], "param_count_trainable": 133765, "param_count_published_convention": 134279, "param_count_published_reference": 134279, "data_sha256": "e1d1f145d62698fe767f3175b2f5e3760668a90fd315bd8df54218ec701c477c", "torch_version": "2.12.0+cu126", "threads": 255, "device": "cuda", "gpu_name": "NVIDIA GeForce RTX 3090", "tf32_disabled": true, "deterministic_algorithms": true, "started_unix": 1781118102.5235803}
+{"step": 1000, "loss": 16.408199955940248, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 86.6, "test_acc_at_improv": 0.1944444477558136}
+{"step": 2000, "loss": 16.403616430282593, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 173.3, "test_acc_at_improv": 0.1944444477558136}
+{"step": 3000, "loss": 16.385195749282836, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 260.1, "test_acc_at_improv": 0.1944444477558136}
+{"step": 4000, "loss": 16.42203711128235, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 346.8, "test_acc_at_improv": 0.1944444477558136}
+{"step": 5000, "loss": 16.40822160053253, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 433.5, "test_acc_at_improv": 0.1944444477558136}
+{"step": 6000, "loss": 16.403616430282593, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 520.3, "test_acc_at_improv": 0.1944444477558136}
+{"step": 7000, "loss": 16.435852622032165, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 607.0, "test_acc_at_improv": 0.1944444477558136}
+{"step": 8000, "loss": 16.385195749282836, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 693.7, "test_acc_at_improv": 0.1944444477558136}
+{"step": 9000, "loss": 16.42203711128235, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 780.4, "test_acc_at_improv": 0.1944444477558136}
+{"step": 10000, "loss": 16.40822160053253, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 867.1, "test_acc_at_improv": 0.1944444477558136}
+{"step": 11000, "loss": 16.41282677078247, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 953.9, "test_acc_at_improv": 0.1944444477558136}
+{"step": 12000, "loss": 16.42664228153229, "train_acc": 0.1090909093618393, "val_acc": 0.17142857611179352, "elapsed_s": 1040.6}
+{"record": "summary", "dataset": "EigenWorms", "seed": 2345, "test_acc": 0.1944444477558136, "best_val": 0.17142857611179352, "steps_run": 12000, "wall_s": 1040.6}

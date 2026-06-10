@@ -1,0 +1,2 @@
+/workspace/jaxenv/lib/python3.11/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
