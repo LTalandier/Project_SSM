@@ -8,6 +8,44 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
+### D-2026-06-10-2 — S0.2-1 G3 (EigenWorms) runtime exceeds the pre-registered ~24 h flag threshold — compute-logistics ruling needed (G3 gated runs HELD; G1 running)
+
+**Raised by:** Executor, 2026-06-10. **Blocks:** the G3 (EigenWorms) gated runs only. **Not blocked:**
+G1 (Heartbeat) — in-budget (~1.5 min per 1000-step eval cycle, all 8 seeds projected ≲ 2–3 h total,
+4-parallel), launched under the frozen PR-1 protocol; the PF-F1 rider; everything else in S0.2-1.
+
+**This is a wall-clock/logistics question only — zero protocol content.** No truncation, no chunking
+of sequences, no config change is on the table (PR-1 frozen; the task spec itself names sequence
+truncation a protocol deviation). The in-house layer is validated: 12 unit tests + cross-framework
+forward parity vs the official JAX model (transplanted weights) at float32 precision — full-model
+probs agree to ~2e-7 (both anchors, train + inference modes), BN state updates bit-exact (G1), and
+the full-length L=17,984 SSM layer to 1.5e-5 abs. Param counts reconciled exactly (trainable 10,738 /
+133,765; published 10,936 / 134,279 = trainable + BatchNorm state buffers, 2H+1 per block).
+
+**Measured (this machine: 20-core CPU, torch 2.11 fp32, no GPU), after optimization** (custom
+analytic-backward associative scan — same recurrence, ~1.9× faster than the naive autograd path):
+- G3 per training step (batch 4, L=17,984): **4.38 s** → one 1000-step eval cycle (incl. the official
+  full train+val inference evals): **74.5 min**.
+- Early stopping (official: break after 11 consecutive non-improving evals) is the unknown:
+  at a realistic 16–40 cycles to stop → **20–50 h per seed** (central ~31 h); hard cap (no early
+  stop, 100 cycles) 124 h/seed.
+- 8 seeds: sequential ~250 h; **3-parallel (6 threads each, RAM-safe) ≈ 4.5–6 days wall-clock**;
+  gated-5 only ≈ 3–4 days, annex-3 following ≈ +1.5–2 days.
+
+**Options:**
+1. **Run locally as-is (recommended).** Zero spend, zero protocol risk. Start the 5 gated seeds now
+   (3-parallel, ~3–4 days), annex 3 after. The machine is otherwise idle; G1 finishes today and its
+   results entry can be filed meanwhile (results entry then amended with G3, or split G1/G3 entries).
+2. **Cloud GPU** (would need Lucas approval via `escalate_to_human.md` — house rule). A single A100
+   runs the official-scale job fast (the paper's own runs were GPU); est. ≲ $30–60 spot for all
+   8 seeds incl. setup risk. Buys ~4 days of calendar time at the cost of an approval round-trip +
+   environment-parity revalidation on GPU (the parity harness is rerunnable there).
+3. **Reduced-seed interim** (run gated-5 only, defer annex-3 to idle time later) — halves the wait;
+   annex is non-gating by construction (PF-F8g), so the gate verdict is complete with option 3.
+
+**Executor recommendation:** option 1 (or 1+3: gated-5 first — the gate verdict lands ~2 days sooner,
+annex trails). Will hold G3 until the Supervisor rules.
+
 ### ✅ D-2026-06-09-2 — PR-15 search verdicts → **RESOLVED 2026-06-10 by Lucas** (rulings: PR-15.1 signed · Böhm boundary-cite · Wu no-outreach-yet, W1 default · retrievals pending)
 Resolution recorded in `preregistration.md` **PR-15.1 amendment block** (the authoritative record) +
 `escalate_to_human.md` (RESOLVED cluster). Gate state: provisional one-sided PASS under PR-15.1,

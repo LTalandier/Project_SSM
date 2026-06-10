@@ -15,6 +15,118 @@ Per result, report:
 
 ---
 
+## S0.2-1 — In-house LinOSS-IM layer + Gate-i runs: **G1 PASS (72.9032% ≥ 72.1%)** · G3 HELD on runtime flag D-2026-06-10-2 (2026-06-10, Executor)
+
+**Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
+and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):
+G1 Heartbeat unrounded 5-seed mean ≥ 72.1% **AND** G3 EigenWorms ≥ 90.6%. Rider first (PF-F1
+premise re-verification, retrieval level). **Status: G1 complete (5 gated + 3 annex seeds) — PASS.
+G3 not started — held on the pre-registered >24 h runtime flag (D-2026-06-10-2), awaiting the
+Supervisor's compute-logistics ruling. Zero protocol deviations; no tuning anywhere.**
+
+**Config:** PR-1 frozen values only — G1: lr 1e-3, hidden 16, state 16, blocks 6, batch 32;
+num_steps 100,000, print_steps 1,000, T=1, time-channel on, IM discretization, learnable
+per-dim sigmoid Δt, ReLU diagonal A; seeds gated {2345, 3456, 4567, 5678, 6789} + annex
+{7890, 8901, 9012}; splits = the official per-seed 70/15/15 assignment (below). Framework:
+torch 2.11.0+cpu (in-house code, this repo); official MIT JAX repo (tk-rusch/linoss @ 05a8353,
+equinox 0.11.4 / jax 0.4.28 scratch venv) used ONLY for split extraction + parity cross-checks
+per the PR-1 closure rule.
+
+**Rider — PF-F1 premise re-verification (retrieval level) [EV]:** Vinckier et al. 2015
+(arXiv:1501.03024, full text): the anchor system is a **linear passive cavity** — *"an
+experimental implementation of a photonic reservoir computer based on a coherently driven
+passive fiber cavity"*; *"our reservoir is a passive optical cavity, with very low intra-cavity
+losses"*; *"absence of active elements in the cavity"* — whose states are linear in the input:
+*"the reservoir states xi(n) are given by a linear combination of the previous inputs u(n−l)"*.
+The task-solving nonlinearity is the **readout photodiode |·|²**: *"All the reservoir states …
+are recovered by a photodiode which performs a quadratic transformation on A(t), since the
+photodiode output is proportional to |xi(n)|²"*, with y(n) = Σᵢ Wᵢ|xᵢ(n)|² (their eq. 3).
+Honesty note: the *experimental* input encoding passes the input Mach–Zehnder sine
+(A_in ∝ sin{V(t)π/(2Vπ)}); the authors verified both codings *"give the same performance of the
+reservoir, except for the evaluation of the memory capacities"* — performance-neutral input
+preprocessing, not reservoir nonlinearity. Paquot et al. 2012 (arXiv:1111.7219, Sci Rep 2:287,
+full text): that anchor's nonlinearity is **in-loop** — *"As nonlinear element we exploit the
+sine nonlinearity of an integrated Mach-Zehnder intensity modulator"* (single nonlinear node +
+delay loop). **PF-F1 premise confirmed; the Critic's linear floor stands; no frozen text touched.**
+
+**Key findings:**
+1. **The in-house layer is built and validated as the official computation.** Architecture: a
+   complex-diagonal (S4D/DSS-class) scan engine with an inter-mode coupling hook μ (zero
+   throughout this task), whose Gate-i configuration computes the published LinOSS-IM recurrence
+   verbatim (per-mode 2×2 IM blocks; official expressions kept character-identical). **D-08-2
+   made computational:** `ComplexDiagSSM.from_linoss_im` constructs the exact conjugate-pair
+   complex-diagonal equivalent (λ = s·(1 + i·dt·√A)) and a unit test asserts forward parity;
+   the Gate-i path runs the 2×2 real form because the diagonalization is undefined on the
+   measure-zero ReLU boundary A = 0 (Jordan cell) — same recurrence, not an approximation.
+   12/12 unit tests pass (`tests/test_linoss_gate_i.py`), incl. analytic-backward-vs-autograd
+   at 1e-9 (float64) and gradient flow through the full state (house constraint 3a/3b).
+2. **Cross-framework parity vs the official JAX model (transplanted weights): float32-exact.**
+   Full-model class probabilities, both anchor configs: max|Δ| = 2.4e-7 (G1) / 2.7e-7 (G3) in
+   BOTH inference and train modes; BatchNorm running-stat updates bit-exact (G1) / ≤1.2e-7 (G3);
+   SSM-layer-only at full EigenWorms length L=17,984: 1.5e-5 abs on O(3) outputs (scan
+   association order, fp-inherent). Port-critical reference behaviors replicated: equinox-0.11.4
+   BatchNorm (normalize-by-just-updated-EMA, momentum 0.99, first-call copy, biased var),
+   jax tanh-GELU, batch-shared dropout masks, tail-batch-dropping shuffle loop, softmax-inside-
+   model with −Σy·log(p+1e-8) loss, Adam(0.9, 0.999, 1e-8) constant lr, eval cadence 1000,
+   early-stop >10 non-improving evals (ties count both ways; break precedes the tie test-eval),
+   reported metric = test-at-best-val.
+3. **Param-count integrity check (PR-1): reconciled exactly, diagnosed pre-training.** Trainable:
+   10,738 (G1) / 133,765 (G3). Published appendix counts 10,936 / 134,279 = trainable + the
+   BatchNorm state arrays (2H+1 per block: 6×33 = 198 / 2×257 = 514) — the published convention
+   tallies every array leaf of the equinox model incl. non-trainable state. Not a layer mismatch.
+4. **PF-F6 split reproduction: exact.** Official process_uea.py run verbatim (its np.unique dedup
+   both removes duplicates AND lexicographically re-orders samples — the split permutation indexes
+   that order, so the official pipeline was run, not re-implemented); per-seed indices from the
+   official PRNG chain (PRNGKey(seed)→split(4)[0]→split(2)[0]→permutation(N)). Heartbeat: N=409
+   (0 dups) → 286/61/62. **EigenWorms: the official dedup deletes 23 duplicate samples → N=236**
+   (not the nominal 259) → 165/35/36. `splits_official.json` + data sha256 recorded per dataset.
+5. **G1 Heartbeat — GATE PASS.** Unrounded gated 5-seed mean = **0.7290322542190552 (72.9032%)
+   ≥ 0.721** (margin **+0.80 pp**); per-seed sd 3.85 pp (published σ 3.7). Sits at −0.78σ_published
+   of the 75.8% mean — inside the registered −1σ allowance (PF-F9d: the margin catches gross
+   breaks; a sub-σ offset is the expected cross-framework regime). Per-seed (test %, best-val %,
+   steps-to-stop, wall): 2345: 69.3548, 81.97, 28k, 121 min · 3456: 70.9677, 75.41, 13k, 55 min ·
+   4567: 74.1935, 73.77, 23k, 99 min · 5678: 79.0323, 73.77, 18k, 80 min · 6789: 70.9677, 75.41,
+   13k, 56 min. **Annex (non-gating, PF-F8g):** 7890: 67.7419 · 8901: 80.6452 · 9012: 79.0323
+   (annex mean 75.81%; all-8 mean 73.99% ± 4.99 pp). All runs early-stopped (13k–28k of the 100k
+   cap); no tuning of any kind.
+6. **G3 EigenWorms — held on the pre-registered runtime flag.** Measured on this 20-core CPU
+   after optimization (custom analytic-backward constant-transition scan; 6.63 → 4.38 s/step):
+   74.5 min per 1000-step eval cycle → central ~31 h/seed (16–40-cycle early-stop range:
+   20–50 h), 8 seeds ≈ 4.5–6 days at 3-parallel — over the task's ~24 h threshold ⇒ flagged
+   **D-2026-06-10-2** (options + recommendation: run locally, gated-5 first), G3 runs NOT
+   started. No protocol-touching workaround used or proposed (no truncation/chunking; the scan
+   optimization is the same associative reduction, parity-verified).
+
+**Gates (PR-1):** G1 **PASS** (72.9032% ≥ 72.1%, unrounded). G3 **pending** (runs held on
+D-2026-06-10-2) ⇒ **joint Gate-i verdict pending G3**. Process gates: zero deviation from frozen
+values ✔ · configs verbatim ✔ · closure rule honored (all unstated details resolved to the
+official repo, documented in code) ✔ · no tuning ✔ · 5+3 seeds per anchor reported per-seed
+(G1 done; G3 pending) ✔ · param counts reported + reconciled ✔ · split-reproduction method
+documented ✔ · rider done ✔.
+
+**Anomalies / concerns:** (i) **EigenWorms N=236 after official dedup** (23 duplicates deleted,
+−8.9% of corpus) — official-pipeline behavior, inherited by every published run; recorded since
+the nominal UEA size is 259. (ii) Seed-2345 val/test divergence (best-val 81.97% vs test 69.35%)
+— 61/62-sample val/test sets; ±1 sample = ±1.6 pp; within-protocol variance, gated mean
+unaffected. (iii) Per-seed test values quantize to n/62 (62 test samples) — sd comparisons with
+the published σ carry that granularity. (iv) The G1 PASS margin (+0.80 pp) is one test-set sample
+above threshold (45/62 mean-equivalent); fragile-looking but exactly what the pre-registered
+−1σ calibration prices in (false-kill ≈1.3%/anchor). (v) The published-count convention (finding
+3) should be quoted whenever param counts are compared downstream.
+
+**Data paths:** runs `results/s0_2/gate_i/Heartbeat_seed{2345..9012}.jsonl` (config record +
+per-cycle train/val + test-at-improvement trail + summary) · logs `results/s0_2/gate_i/logs/` ·
+splits `data/processed/UEA/{Heartbeat,EigenWorms}/splits_official.json` (+ data.npy/labels.npy,
+sha256 in-file: HB 253d513a…, EW e1d1f145…) · code `photonic_ssm/linoss/{layer,stack,data,train}.py`,
+`scripts/{extract_official_splits,run_gate_i,parity_torch_side,parity_jax_side}.py`,
+`tests/test_linoss_gate_i.py` · parity artifacts /tmp/parity_gate_i/ (regenerable).
+
+**Compute:** local 20-core CPU only (no GPU, no cloud, $0). G1: 8 runs, 9.5 h summed process
+time ≈ 3.1 h wall at 4-parallel × 5 threads. Validation/parity/timing: ~0.5 h. Scratch venv
+/tmp/linoss_venv (jax 0.4.28 CPU, equinox 0.11.4, optax 0.2.2, sktime 0.30.1 — the official pins).
+
+---
+
 ## S0.2-0 — Debt-#2 benchmark recon + bake-off task candidates + PR-2 input sheet + EV rider (2026-06-10, Executor)
 
 **Goal:** design-input for the PR-1/PR-2 freeze (S0.2 step 0 of 2; continuation-gate GO
