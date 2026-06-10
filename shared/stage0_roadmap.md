@@ -119,6 +119,9 @@ And clear the two gates:
   Critic-audited conditional-positive lite envelope (APPROVE-WITH-EDITS, verdict survives). S0.2 runs as
   **S0.2-0** (debt-#2 recon + task/benchmark candidates — feeds the freeze) → **PR-1/PR-2 freeze (Lucas)**
   → **S0.2-1** (implementation + the Gate-i run), mirroring the S0.7L-0→PR-10→S0.7L-1 pattern.
+  **Status: S0.2-0 ✅ (2026-06-10) → PR-1/PR-2 (+PR-13 early) 🔒 FROZEN 2026-06-10** (Critic-reviewed v2 —
+  AMEND→fix applied: R2-intensity headline readout, PF-F1; Lucas "ok go", E-2026-06-10-4) → **S0.2-1
+  ACTIVE** (the Gate-i runs).
 - **Do:** implement LinOSS (stable for nonnegative-diagonal $A$) + D-LinOSS (learnable damping); reproduce
   a long-range / time-series benchmark within a **pre-registered margin** (PR-1) set *before* the run.
   Resolve verification debt **#2** here (its S0.L memo is a *prerequisite* — F14; sharpened by D-08-2:
@@ -279,7 +282,8 @@ S0.L (literature): debt #1 → pre-S0.2 (PR-15, front-loaded) · debt #2 → S0.
 - **pre-S0.2 (continuation gate):** **PR-15** (white-space existence gate — 🔒 **FROZEN 2026-06-09**),
   PR-10 (S0.7-lite assumptions — freeze *before* the lite run).
 - **S0.2:** PR-1 (Gate-i margin + benchmark), PR-2 (task + architecture + parameter partition + actuation;
-  carries the blessed D-08-2/D-08-3 constraints — see ledger Notes).
+  carries the blessed D-08-2/D-08-3 constraints — see ledger Notes). **Both 🔒 FROZEN 2026-06-10**
+  (Critic-reviewed v2; Lucas E-2026-06-10-4; PR-13 frozen early in the same act).
 - **S0.3:** PR-4 ($(\alpha,Q_i)$ pair + $\kappa_\text{ext}$ + noise cell), PR-12 (damping cell, at close).
 - **S0.4:** PR-5 (PAT twin-mismatch), PR-6 (fairness contract, CRITICAL), PR-7 (cost accounting), PR-3
   (BPTT ceiling rule before close; ceiling frozen at close), PR-11 (RHEL echo invariants).
@@ -295,6 +299,9 @@ S0.L (literature): debt #1 → pre-S0.2 (PR-15, front-loaded) · debt #2 → S0.
   (provisional one-sided PASS under signed PR-15.1) + the Critic-audited conditional-positive S0.7-lite
   envelope in hand, **Lucas authorized S0.2–S0.5**. Standing frame unchanged: the "first" is collectible
   only on hardware (Stage 1+); Stage 0 alone yields a methods/feasibility paper.
+- ✅ **PR-1/PR-2 freeze → signed ("ok go", 2026-06-10, E-2026-06-10-4):** the Critic-reviewed v2 blocks
+  (PR-2 amended per PF-F1: R2-intensity headline readout) + PR-13 early. Gate i + the bake-off object are
+  now fully governed; S0.2-1 runs under them.
 - The parked $Q$ choice (D-2026-06-08-1) → adjudicated by F13: foundry-grade gates, class-leading sweeps;
   formalized at PR-4.
 - Gate (ii) outcome → proceed to Stage 1 on **PAT/SPSA**; whether to reserve a *later* hardware slot for

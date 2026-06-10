@@ -8,12 +8,73 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸️ NO ACTIVE TASK — S0.2-1 posts after the PR-1/PR-2 freeze
+## 🔥 ACTIVE — S0.2-1: in-house LinOSS layer + the Gate-i reproduction runs (S0.2 step 2 of 2)
 
-The **PROPOSED PR-1 + PR-2 blocks** are in `preregistration.md` (Supervisor draft from the
-S0.2-0 menus). Per ledger discipline they need the **Critic phase-boundary review**
-(spec: `critic_instructions_pr1-pr2-freeze.md`; Lucas launches) **+ Lucas's signature** before
-S0.2-1 (implementation + the Gate-i run) is posted here.
+**Assigned:** 2026-06-10
+**Supervisor:** Claude Opus 4.8
+**Status:** 🔥 ACTIVE — the project's first training runs.
+**Source:** roadmap §S0.2 (Gate i) + **🔒 PR-1 v2, FROZEN 2026-06-10** (`preregistration.md` —
+**the governing document; read it first and follow it to the letter**) + the freeze-review
+carry-ins (ledger Notes, last bullet). PR-2 v2 is also frozen — it governs S0.3+, **not** this
+task; nothing here implements it.
+
+**Objective:** implement the in-house recurrence layer (the one the bake-off extends
+downstream), validate it by reproducing the two frozen published anchors. **The gate, verbatim
+from PR-1:** G1 Heartbeat unrounded 5-seed mean ≥ **72.1 %** **AND** G3 EigenWorms unrounded
+5-seed mean ≥ **90.6 %**.
+
+### Rider (do first; small; decision-free) — PF-F1 premise re-verification
+At **retrieval level** (full text, not abstracts): confirm the Vinckier 2015 anchor system is a
+*linear* passive cavity whose task-solving nonlinearity is the **readout photodiode |·|²**
+(note also what Paquot 2012 used). One [EV]/[AV]-marked paragraph in the results entry. This is
+the PF-F1 premise check (ledger-Notes carry-in); the Critic's linear floor stands regardless —
+no frozen text changes either way, just the record.
+
+### Main task
+1. **The in-house layer (new code, this repo):** complex-diagonal (S4D/DSS-class) recurrence
+   with an inter-mode coupling hook **μ (run at μ=0 throughout this task)**, whose Gate-i
+   configuration **realizes the published LinOSS-IM recurrence exactly** (per D-08-2: LinOSS =
+   the uncoupled, real-I/O conjugate-pair special case — not an approximation of it). PR-1
+   reference-behavior pins: **learnable per-dimension sigmoid Δt, ReLU-parametrized diagonal A,
+   IM discretization**. Do **not** build the ZOH/CMT substrate mode now (S0.3; PR-1 "Scope of
+   Gate i" registers that delta).
+2. **The published stack around it, verbatim:** BatchNorm → SSM → GELU → dropout → GLU → skip;
+   mean-pool head. Configs frozen (no deviation): **G1** lr 1e-3 / hidden 16 / state 16 /
+   blocks 6 / time T; **G3** lr 1e-3 / hidden 128 / state 64 / blocks 2 / time T.
+   **Param-count integrity check:** report your counts vs published **10,936 (G1) /
+   134,279 (G3)** — a mismatch is an anomaly flag, diagnose before training.
+3. **Walker protocol exactly:** the 5 gated seeds {2345, 3456, 4567, 5678, 6789} setting the
+   70/15/15 splits. **Split reproduction is pinned (PF-F6):** port the split routine or extract
+   split indices from the official repo; if exact reproduction is infeasible in your framework,
+   **stop and file `decisions_needed.md` BEFORE any gated run**. Gated statistic = the
+   **unrounded** 5-seed mean per anchor. **Annex (non-gating):** +3 seeds {7890, 8901, 9012},
+   reported separately.
+4. **Closure rule (PF-F8i, frozen):** any protocol detail not stated in PR-1 resolves to the
+   official repo's behavior. **No hyperparameter tuning on the gated runs — none.** The
+   official MIT JAX repo is a *debugging cross-check only* (divergence diagnosis), never the
+   tested object.
+5. **On a gate miss: stop — do not tune.** Report per-seed numbers + a divergence diagnosis vs
+   the official repo (bug vs systematic offset). A fixed *bug* (diff shown, mechanism named)
+   may be rerun and reported as such; a "tweak that happens to help" may not — that is tuning.
+
+### Framework / runtime
+Executor's choice within house hygiene (exceptions via `decisions_needed.md`). The official
+repo is JAX; the PF-F6 split extraction may be easiest by running its data pipeline once. UEA
+datasets (Heartbeat, EigenWorms) — local download is fine. **Estimate runtime before training;**
+flag via `decisions_needed.md` if projected wall-clock > ~24 h, or if EigenWorms' sequence
+length (~18k steps) forces any workaround that touches the protocol (no silent truncation /
+chunking — that is a protocol deviation).
+
+### Gates (all must hold)
+- Zero deviation from frozen PR-1 values; configs verbatim; closure rule honored; no tuning.
+- 5 gated + 3 annex seeds per anchor, all reported per-seed; gate verdict per anchor + joint.
+- Param counts reported vs published; split-reproduction method documented.
+- Results entry (house standard): per-seed table, unrounded means ± σ, raw-data paths (JSONL),
+  runtimes, anomaly flags, the rider paragraph.
+
+### Out of scope
+T-A/T-C task generators, the substrate/CMT mode, μ≠0, anything PR-2-implementing (all S0.3+);
+the D-LinOSS damping sweep (S0.6/PR-12); any edit to frozen ledger blocks (Lucas-only).
 
 ---
 

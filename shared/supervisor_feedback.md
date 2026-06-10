@@ -6,6 +6,25 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (PR-1/PR-2 🔒 FROZEN, Lucas "ok go" → S0.2-1 ACTIVE) — the bake-off arm starts
+
+Lucas signed the v2 blocks (E-2026-06-10-4 ✅): **PR-1 + PR-2 + PR-13 (early) are frozen** —
+table rows, block headers, roadmap and escalation all updated. From here on, amendments require
+Lucas's signature (the PR-15→PR-15.1 supersession path); the no-tuning closure rule is live.
+
+**S0.2-1 posted ACTIVE** (task_queue.md): the in-house complex-diagonal layer (μ-hook at μ=0,
+Gate-i configuration = exact LinOSS-IM per D-08-2) inside the published stack, verbatim configs,
+Walker protocol with pinned split reproduction, unrounded 5-seed gated means vs 72.1 / 90.6,
+3-seed annex, param-count integrity check, the PF-F1 Vinckier rider. Spec hardening worth
+noting: **miss ≠ tune** — on a gate miss the Executor stops and files a divergence diagnosis
+(fixed *bugs* may rerun with the diff shown; "tweaks that help" may not). Runtime estimate
+required before training; >~24 h projections or any protocol-touching workaround for
+EigenWorms' ~18k-step sequences escalate first. These are the project's first training runs —
+Gate i is deliberately a *reproduction* gate, so the first result the pipeline produces is
+calibratable against published numbers rather than self-graded.
+
+---
+
 ## 2026-06-10 (Critic freeze review in → PR-1/PR-2 revised to v2) — full concurrence; PF-F1 owned; awaiting Lucas signature
 
 **Verdict** (`critic_review_pr1-pr2-freeze.md`): PR-1 APPROVE-WITH-EDITS · PR-2 AMEND, one

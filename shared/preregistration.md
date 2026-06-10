@@ -43,13 +43,18 @@ boundary before the run proceeds.
 > cross-references all verified clean. **Supervisor concurs in full; blocks revised to v2 below**
 > (fix (i) + every edit applied; PR-3/PR-4/PR-6 carry-ins logged in Notes). ⬜ **awaiting Lucas
 > signature** (E-2026-06-10-4).
+>
+> **Update (2026-06-10, freeze):** **PR-1 + PR-2 (+ PR-13, early) 🔒 FROZEN** — Lucas "ok go"
+> (E-2026-06-10-4) on the Critic-reviewed v2 blocks. Gate i and the bake-off object are now fully
+> governed; **S0.2-1** (in-house layer + the Gate-i runs — the project's first training runs) is
+> posted to the Executor. Next freezes: **PR-4** at S0.3 (+ the PR-3 *rule* before S0.4 close).
 
 ## Ledger
 
 | ID | Governs | Freeze before | Status | What must be registered | Source |
 |----|---------|---------------|--------|-------------------------|--------|
-| **PR-1** | Gate (i) | S0.2 run | ⬜ | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
-| **PR-2** | Bake-off setup | S0.2 | ⬜ | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
+| **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
+| **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
 | **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | ⬜ | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
 | **PR-5** | PAT (S0.4a) | S0.4a | ⬜ | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
@@ -60,7 +65,7 @@ boundary before the run proceeds.
 | **PR-10** | S0.7-lite | before S0.2 task reg | 🔒 **FROZEN 2026-06-10** (Lucas "ok"; values in the block below) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
 | **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
 | **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
-| **PR-13** | S0.5 secondary task | S0.5 | ⬜ | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
+| **PR-13** | S0.5 secondary task | S0.5 | 🔒 **FROZEN 2026-06-10** (early, jointly with PR-2 — Lucas E-2026-06-10-4; task-family detail in the PR-2 v2 block) | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
 | **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** · 🔁 **AMENDED → PR-15.1, signed 2026-06-10** (v1 retained below) | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (**q1∧q2∧q3∧q4** per PR-15.1) + search lanes + two-modality protocol + disposition. **Full frozen detail + the signed amendment in the blocks below** — the table row is a pointer only. | D-09-1, F15, WS-F1/2/3/5 |
 
@@ -269,7 +274,7 @@ converged independently; Lucas signed ("ok", ruling 2 of E-2026-06-09-5).
 
 ---
 
-## PR-1 — PROPOSED freeze block **v2** (Supervisor draft 2026-06-10; revised same day per Critic phase-boundary review `critic_review_pr1-pr2-freeze.md` — verdict **APPROVE-WITH-EDITS**, edits PF-F6/F7/F8g–i/F9d applied; ⬜ until Lucas signature)
+## PR-1 — 🔒 FROZEN v2 (proposed 2026-06-10; Critic phase-boundary review `critic_review_pr1-pr2-freeze.md` APPROVE-WITH-EDITS, edits PF-F6/F7/F8g–i/F9d applied; **frozen 2026-06-10, Lucas "ok go" — E-2026-06-10-4**)
 
 **Governs:** the S0.2-1 Gate-i run (idealized digital model reproduces published oscillatory-SSM
 accuracy). Sources: `docs/s0_2/debt2_benchmark_recon.md` (§3–§5, [EV]-verified) — cited per row.
@@ -311,7 +316,7 @@ accuracy). Sources: `docs/s0_2/debt2_benchmark_recon.md` (§3–§5, [EV]-verifi
   (compute-flagged stretch; not needed for Gate-i purpose); Weather (no σ/seeds/code —
   irreproducible at pre-registration grade); EthanolConcentration (spectral, near-chance).
 
-## PR-2 — PROPOSED freeze block **v2** (Supervisor draft 2026-06-10; revised same day per Critic phase-boundary review `critic_review_pr1-pr2-freeze.md` — verdict **AMEND**, fix (i) adopted: **R2-intensity headline readout** (PF-F1 CRITICAL) + PF-F2/F3/F4/F5/F8a–f/F9a–c applied; ⬜ until Lucas signature) — jointly proposes PR-13
+## PR-2 — 🔒 FROZEN v2 (proposed 2026-06-10; Critic phase-boundary review `critic_review_pr1-pr2-freeze.md` AMEND → fix (i) adopted: **R2-intensity headline readout** (PF-F1 CRITICAL) + PF-F2/F3/F4/F5/F8a–f/F9a–c applied; **frozen 2026-06-10, Lucas "ok go" — E-2026-06-10-4**) — jointly freezes PR-13
 
 **Governs:** the bake-off setup (S0.2-1 → S0.5). Sources: `docs/s0_2/bakeoff_task_candidates.md`
 (generator [EV]-quoted), `mapping_result.md`, `B1_actuation_map.md`, ledger Notes (D-08-2/D-08-3

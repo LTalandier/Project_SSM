@@ -18,7 +18,14 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### 🧊 E-2026-06-10-4 — Freeze ask: **PR-1 (Gate-i benchmark + margin) + PR-2 (the bake-off pin)** — the last step before S0.2-1 runs
+*(nothing currently open)*
+
+---
+
+### ✅ E-2026-06-10-4 — PR-1/PR-2 freeze → **RESOLVED 2026-06-10 by Lucas: "ok go" — FROZEN**
+**Ruling:** signed on the Critic-reviewed v2 blocks. **PR-1 + PR-2 (+ PR-13, early) are 🔒 in the
+ledger**; S0.2-1 (in-house layer + the Gate-i runs) posted to the Executor. The ask as resolved:
+
 **Filed:** 2026-06-10 (Supervisor). **Updated same day: the Critic phase-boundary review is done**
 (`critic_review_pr1-pr2-freeze.md`) **and the blocks are revised to v2 — ready for your
 signature.**
