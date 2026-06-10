@@ -247,3 +247,82 @@ converged independently; Lucas signed ("ok", ruling 2 of E-2026-06-09-5).
   **Remaining full-texts (NTT ADI 2025, Fisher 1987, Shi LPR 2025): claim-freeze-paced (before
   PR-2/S0.8 wording), NOT continuation-gate-blocking** — both carry documented non-fatal leans
   (NTT: digital-twin-trained → q2; FiT-DNN class → q1 rider; Fisher: 1987 LCLV, topology unresolved).
+
+---
+
+## PR-1 — PROPOSED freeze block (Supervisor draft 2026-06-10; ⬜ until Critic phase-boundary review + Lucas signature)
+
+**Governs:** the S0.2-1 Gate-i run (idealized digital model reproduces published oscillatory-SSM
+accuracy). Sources: `docs/s0_2/debt2_benchmark_recon.md` (§3–§5, [EV]-verified) — cited per row.
+
+- **Anchors (two; Gate i passes iff BOTH pass):**
+  - **G1 — Heartbeat, LinOSS-IM:** published 75.8 ± 3.7 % (recon §3 [EV]); config lr 1e-3 /
+    hidden 16 / state 16 / blocks 6 / time T, 10,936 params (recon §4 [EV]). Criterion:
+    **mean test accuracy ≥ 72.1 %** (published mean − 1σ).
+  - **G3 — EigenWorms, LinOSS-IM:** published 95.0 ± 4.4 % (recon §3 [EV]); config lr 1e-3 /
+    hidden 128 / state 64 / blocks 2 / time T, 134,279 params (recon §4 [EV]). Criterion:
+    **mean test accuracy ≥ 90.6 %** (published mean − 1σ; implies clearing the best
+    non-oscillatory competitor, LRU 87.8 %).
+- **Protocol:** exactly the published Walker protocol — the 5 fixed seeds {2345, 3456, 4567,
+  5678, 6789} setting the 70/15/15 splits; mean over the 5 runs is the gated statistic.
+  **Non-gating annex:** +3 additional seeds reported for robustness (not part of the criterion).
+- **Reference behavior = the official code, not the paper text** (recon §4.3 discrepancy):
+  learnable per-dimension Δt (sigmoid), ReLU-parametrized diagonal A, IM discretization, the
+  published multi-block stack (BatchNorm → SSM → GELU → dropout → GLU → skip; mean-pool head).
+- **Implementation under test = the in-house layer** (the one the bake-off uses downstream, run
+  at μ=0), validated against the anchors; the official MIT JAX repo is a debugging cross-check
+  only. Framework/runtime choice = S0.2-1 Executor within house hygiene (exceptions via
+  `decisions_needed.md`).
+- **Excluded anchors + reasons (registered):** G2 MotorImagery (tight-σ target anchors on
+  D-LinOSS = preprint-only at snapshot; the LinOSS-IM alternative has σ = 7.5); G4 PPG-DaLiA
+  (compute-flagged stretch; not needed for Gate-i purpose); Weather (no σ/seeds/code —
+  irreproducible at pre-registration grade); EthanolConcentration (spectral, near-chance).
+
+## PR-2 — PROPOSED freeze block (Supervisor draft 2026-06-10; ⬜ until Critic phase-boundary review + Lucas signature) — jointly proposes PR-13
+
+**Governs:** the bake-off setup (S0.2-1 → S0.5). Sources: `docs/s0_2/bakeoff_task_candidates.md`
+(generator [EV]-quoted), `mapping_result.md`, `B1_actuation_map.md`, ledger Notes (D-08-2/D-08-3
+constraints + EV-F1/F3/F5 carry-ins), PR-10 frozen grid, PR-15.1 W1.
+
+- **Headline task — T-A, Jaeger–Haas nonlinear channel equalization:** 4-PAM i.i.d. d(n) ∈
+  {−3,−1,1,3}; the verbatim 10-tap ISI polynomial + memoryless nonlinearity
+  u(n) = q(n) + 0.036 q²(n) − 0.011 q³(n) + AWGN (candidates memo §2.T-A, [EV] from
+  arXiv:1501.03024); **target = d(n−2)** (canonical 2-delay convention — the Vinckier prose
+  ambiguity is resolved by freezing this); metric **SER** (NMSE secondary); held-out test
+  10⁴ symbols/seed. **Registered SNR grid {16, 24, 28, 32} dB, headline cell 28 dB** (the
+  RC-anchored point: Vinckier SER→0 at 28/32 dB with 50 nodes). **Clock: headline 2 GS/s**
+  (dominant 7-tap span vs foundry memory 6.58 samples = ◑, honestly memory-limited — the
+  ceiling-relative PR-3 rule absorbs this; class-leading fits fully); 1 GS/s = reported sweep
+  cell (foundry-infeasible at 3.29 samples — stated, kept for the memory story).
+- **Secondary task family (= the PR-13 registration, frozen early in this act):** delayed
+  recall u(n−k) + sticky detection, 4-ary i.i.d. input, **lag grid k ∈ {1, 3, 10, 30, 100}** at
+  1 GS/s (+ a 2 GS/s cell at k=100 — the designed class-leading memory-cliff cell, 100 > 98.8);
+  NMSE / accuracy per cell. Tap-span generalization of T-A = optional tertiary, not frozen.
+- **Hybrid architecture (the bake-off object, distinct from PR-1's digital stack):** digital
+  affine encoder → **one** photonic ring-bank recurrence layer — complex-diagonal (S4D/DSS)
+  poles + trainable nearest-neighbor couplings μ, **no conjugate pairing** (D-08-2 + audit
+  carry-in) — → readout **R1 = single-quadrature homodyne** y = Re(Σ c_j a_j) (real-linear,
+  LinOSS-equivalent, EV-F5-consistent) → digital linear head. **R2 (intensity |·|²) = registered
+  alternative sweep cell** (the physical-nonlinearity story); **R3 (I/Q) excluded** —
+  envelope-inconsistent (EV-F5; choosing it would re-open audited envelope cells).
+  **N grid {8, 32, 128}** (PR-10), **headline N=32** (niche + the 50-node RC anchor); every
+  N=128 cell carries the EV-F3 class-leading-corner caveat.
+- **Trainable-parameter partition (the SAME set for every estimator — PR-6): P2, gain-free
+  minimal B1 = {δ_j (heaters), κ_ext,j (tunable couplers), μ_jk (ring–ring couplers)}** — all
+  thermo-optic, ≈3 ch/ring (inside the frozen PR-10 2–4 bracket), actuation per the B1 map.
+  **W1 cross-check ✓:** trains pole positions on both axes (Re via κ_ext, Im via δ) AND
+  inter-resonator couplings. Digital-side params (encoder, B/C residues, head) trained
+  digitally; **the claim attaches only to the in-situ-trained recurrent set.** P1 (gain-rich)
+  = labelled Stage-2 extension, not frozen (4–5 ch/ring busts the PR-10 bracket); P3 excluded
+  (surrenders trained damping — the D-LinOSS evidence axis — and strains the W1 "pole
+  positions" wording); P4 excluded (fails W1).
+- **F6 κ_ext dual-role policy = option (a):** κ_ext trainable within the registered B3 bounds;
+  **the reservoir baseline holds κ_ext frozen at the PR-4 policy value** (the baseline must
+  never gain recurrence-shaping through the readout knob — keeps the §5.3 contrast clean).
+- **Coupling topology:** photonic-molecule **nearest-neighbor chain** (fixed sparsity mask,
+  trainable strengths, N−1 couplers — deployable-corner-consistent with the PR-10 bracket);
+  bus-mediated mesh = labelled sweep extension only.
+- **Reservoir baseline (§5.3 contrast):** B1 frozen at init; B/C residues + ridge head trained
+  (readout-only) — the in-data falsifier of "training the recurrence matters."
+- **T-B (IM-DD PAM-4 at 1–2 GBd):** labelled non-frozen extension (niche-native demo for
+  S0.7-full/Stage-1; generator port deferred — not in the salvage manifest).

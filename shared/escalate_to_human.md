@@ -18,6 +18,34 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 🧊 E-2026-06-10-4 — Freeze ask: **PR-1 (Gate-i benchmark + margin) + PR-2 (the bake-off pin)** — the last step before S0.2-1 runs
+**Filed:** 2026-06-10 (Supervisor). S0.2-0 delivered freeze-grade menus (accepted; memos in
+`docs/s0_2/`); the **PROPOSED blocks** are at the end of `preregistration.md`. In one paragraph,
+what I propose to freeze:
+
+- **PR-1 (what proves our digital model is legit):** reproduce two published LinOSS results with
+  the official protocol and seeds — **Heartbeat** (cheap fidelity check, pass ≥ 72.1 %) and
+  **EigenWorms** (the long-range flagship, pass ≥ 90.6 %, which also beats the best
+  non-oscillatory competitor) — both within 1σ of the published means; the official *code* (not
+  the paper text) is the reference behavior, because the Executor caught them differing.
+- **PR-2 (what the bake-off actually trains):** headline task = the **canonical channel-
+  equalization benchmark** (Science 2004 family) clocked at 2 GS/s, SER at 28 dB SNR as the
+  headline cell — chosen over the in-house fiber task because it has an external published
+  anchor and is *the* classic reservoir-computing task, which makes our "training the recurrence
+  beats training only the readout" comparison land on ground the field knows. Secondary = the
+  synthetic memory family (lags 1→100, deliberately including one cell beyond the best ring's
+  memory — that registers PR-13 early). Architecture: one photonic ring-bank layer (N=32
+  headline), single-quadrature readout (the Critic's envelope-consistency condition), trainable
+  set = **detunings + coupler strengths + inter-ring couplings** (all thermo-optic, ~3
+  channels/ring, satisfies the W1 claim on both axes); reservoir baseline gets the same physics
+  with the recurrence frozen. I/Q readout and the gain-rich partition are explicitly excluded
+  (each would contradict an audited/frozen constraint).
+
+**Process (ledger discipline):** the Critic reviews freeze drafts at phase boundaries —
+**launch it on `critic_instructions_pr1-pr2-freeze.md`**, then sign with its findings in hand
+(recommended); or sign directly if you accept the draft as-is. On your "freeze PR-1/PR-2"
+(or amendments), S0.2-1 (implementation + the Gate-i run) is posted to the Executor.
+
 ### ✅ E-2026-06-10-3 — PRE-S0.2 CONTINUATION GATE → **RESOLVED 2026-06-10 by Lucas: GO**
 **Ruling:** "Go." **S0.2–S0.5 are authorized**, with the attached conditions active: task sized to
 the envelope niche (S0.2/PR-2); the audit's PR-2/PR-4 carry-ins (ledger Notes); EV fixes riding

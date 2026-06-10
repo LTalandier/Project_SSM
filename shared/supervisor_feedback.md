@@ -6,6 +6,43 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (S0.2-0 accepted → PR-1/PR-2 PROPOSED) — freeze ask filed (E-2026-06-10-4); Critic phase-boundary review next
+
+**S0.2-0 → ACCEPT** (all gates; results_log + memos are freeze-grade). The catches that shaped
+the draft: paper-vs-code Δt discrepancy (→ PR-1 pins the code as reference); D-LinOSS
+preprint-only (→ G2 excluded as anchor); Weather irreproducible (→ excluded, registered);
+the μ=0 guard-check came back clean — **no published coupled LinOSS-class benchmark exists**,
+so the coupled-μ transfer rests on the PR-3 in-house ceiling exactly as registered (debt #2
+substantially discharged for Stage 0).
+
+**Supervisor freeze proposals (the methodology calls, with reasons):**
+- **PR-1 = G1 + G3 at M1 (±1σ), both-must-pass, published 5-seed protocol gated + 3-seed annex.**
+  G1 Heartbeat = cheap fidelity anchor (peer-reviewed, exact config); G3 EigenWorms = the
+  flagship long-range result Gate i's wording points at (and M1 ⇒ M3: ≥90.6 clears LRU 87.8).
+  G2 rejected (anchors on a preprint or on σ=7.5); G4 rejected (compute-flagged stretch).
+- **PR-2 headline = T-A (Jaeger–Haas eq @ 2 GS/s, SER, 28 dB headline, d(n−2) frozen).** The
+  decisive reason: external published anchor + *the* canonical RC task → the §5.3
+  trained-recurrence-vs-trained-readout contrast (the claim's in-data falsifier) lands on
+  ground the field knows. Honesty lines carried: GS/s is a simulated clock (RC hardware record
+  on this channel is ~MS/s); the headline cell is memory-limited at the foundry corner (◑,
+  6.58 vs 7 dominant taps) — absorbed by PR-3's ceiling-relative rule, and it keeps the memory
+  story visible in the headline. T-B = labelled extension (niche-native but anchor-free;
+  port cost deferred); T-C = the secondary AND the PR-13 registration in one act (k ∈
+  {1,3,10,30,100} incl. the designed k=100 cliff).
+- **PR-2 pins: P2 partition** ({δ, κ_ext, μ} all-thermo-optic, ~3 ch/ring, W1 ✓ both axes;
+  P1 busts the PR-10 bracket, P3 surrenders the D-LinOSS trained-damping axis, P4 fails W1);
+  **R1 single-quadrature** (EV-F5-consistent; R2 = registered alternative; R3 excluded);
+  **F6 policy (a)** (baseline holds κ_ext at the PR-4 value — no recurrence-shaping through the
+  readout knob); **nearest-neighbor chain** topology (bracket-consistent; mesh = labelled
+  extension); one-photonic-layer hybrid kept explicitly distinct from PR-1's digital stack.
+
+**Process:** PROPOSED blocks appended to the ledger; Critic spec
+`critic_instructions_pr1-pr2-freeze.md` filed (phase-boundary discipline); freeze ask =
+**E-2026-06-10-4**. Lucas launches the Critic, then signs (or signs directly). S0.2-1 posts
+after the signature.
+
+---
+
 ## 2026-06-10 (CONTINUATION GATE: GO) — Lucas authorized S0.2–S0.5; S0.2 split -0/-1 around the PR-1/PR-2 freeze; S0.2-0 ACTIVE
 
 **Lucas ruled "Go" on E-2026-06-10-3** — the bake-off arm is authorized with the attached

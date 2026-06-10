@@ -8,11 +8,31 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.2-0: debt-#2 benchmark recon + bake-off task candidates (S0.2 step 0 of 2) + EV rider
+## ⏸️ NO ACTIVE TASK — S0.2-1 posts after the PR-1/PR-2 freeze
 
-**Assigned:** 2026-06-10
+The **PROPOSED PR-1 + PR-2 blocks** are in `preregistration.md` (Supervisor draft from the
+S0.2-0 menus). Per ledger discipline they need the **Critic phase-boundary review**
+(spec: `critic_instructions_pr1-pr2-freeze.md`; Lucas launches) **+ Lucas's signature** before
+S0.2-1 (implementation + the Gate-i run) is posted here.
+
+---
+
+## ✅ DONE — S0.2-0: debt-#2 benchmark recon + bake-off task candidates (S0.2 step 0 of 2) + EV rider
+
+**Assigned:** 2026-06-10 · **Closed:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
-**Status:** ACTIVE
+**Status:** ✅ COMPLETED 2026-06-10 — Supervisor **ACCEPT**. All gates met: [EV]/[AV]/[ABS]
+sourcing discipline with a first-hand verification trail (Appendix A.3); 4 Gate-i candidates with
+exact published configs + 4 margin bases with per-candidate arithmetic; 3 task candidates with
+explicit niche-fit arithmetic vs the registered memory corners; menu-not-choice respected
+end-to-end; zero training runs; EV rider applied with citations. High-value catches accepted:
+the **paper-vs-code Δt discrepancy** (PR-1 names the code as reference), **D-LinOSS
+preprint-only status** (anchoring caveat), **Weather irreproducible at pre-registration grade**
+(excluded), the **μ=0 guard-check** (no published coupled LinOSS-class benchmark exists —
+debt #2 substantially discharged for Stage 0; final wording at S0.8). → Supervisor drafted the
+**PROPOSED PR-1/PR-2 blocks** (preregistration.md) from these menus; Critic review + Lucas
+freeze next. Memos: `docs/s0_2/debt2_benchmark_recon.md` + `bakeoff_task_candidates.md`;
+results in `results_log.md`; commit `5137cc5`.
 **Source:** roadmap §S0.2 (Gate i; F14 — the debt-#2 memo is a *prerequisite* of the PR-1/PR-2
 freeze) + **continuation gate GO** (E-2026-06-10-3, Lucas 2026-06-10). **PR-1/PR-2 are ⬜ UNSET —
 this task FEEDS the freeze. It does NOT set values and does NOT run anything Gate i will judge:
