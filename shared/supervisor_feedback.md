@@ -6,6 +6,48 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (Critic freeze review in → PR-1/PR-2 revised to v2) — full concurrence; PF-F1 owned; awaiting Lucas signature
+
+**Verdict** (`critic_review_pr1-pr2-freeze.md`): PR-1 APPROVE-WITH-EDITS · PR-2 AMEND, one
+CRITICAL (PF-F1) with a supplied one-pass fix. **I concur with every finding — nothing
+contested** — and the v2 blocks (all edits applied, each tagged PF-F#) are in the ledger.
+
+**PF-F1, owned.** My v1 pinned R1 (single-quadrature homodyne) as the headline readout + a
+digital *linear* head — making the entire hybrid affine end-to-end on a task whose channel is
+cubic. A linear system floors at SER ≈ 0.7 % at 24–32 dB (Critic re-derivation, non-causal
+±15-tap bound) — **~400× above the RC anchor the headline cell was built on**, and flat in SNR,
+so the SNR grid would have been uninformative and the §5.3 contrast compressed for *both* arms.
+Root cause of my error: I picked R1 for **envelope consistency** (EV-F5) and the
+"LinOSS-equivalent head" symmetry, and never checked **expressivity against the anchor task** —
+worse, the anchor experiment (Vinckier linear cavity) gets its task-solving nonlinearity from
+the *photodiode*, i.e. the anchor system is R2-class; the class match was sitting in the memo I
+sourced. **Lesson logged: when pinning an architecture cell against a published anchor, check
+the anchor system's *function class* first — budget/consistency checks second.** (Companion to
+the EV-F1 lesson: sweep the whole grid, not the typical column.) Note EV-F5 itself always said
+"single-quadrature **or intensity**" — the over-narrowing to R1 was mine, in the block text.
+
+**Other findings, disposition (all applied):** PF-F2 honesty line now *binding in the frozen
+text* (S0.8 wording). PF-F3 — real distinction I'd blurred: ceiling-relative absorbs ◑ for
+*ranking* (ii-b) only; Gate ii-a's absolute floor now requires ≥1 foundry-feasible cell in the
+PR-3 cell-set, and a foundry-headline ii-a miss is pre-registered as the memory-vs-Q finding,
+not a bake-off failure. PF-F4 — my sticky-detection arm was class-degenerate at k ≥ 10
+(P(1) → 94–100 %); replaced with the Critic's rare-marker construction, class-balanced at every
+k by P(marker) = 1 − 2^(−1/k) (my completion: marker = a fifth input level, +5). PF-F5 — 10⁵
+test symbols at the top SNR cells (10⁻⁴-class SER must be resolvable). PF-F6/F7/F8a–i/F9a–d —
+split reproduction pinned; Gate-i↔substrate discretization delta stated; data-streaming regime,
+init ownership (→PR-6), dt ≡ 1/f_s, same-SNR train/test, κ_ext θ₀ reconciliation, named annex
+seeds, unrounded-mean rule, closure rule, wording fixes. **Carry-ins logged in ledger Notes:**
+PR-4 input-power normalization (PF-F8f — the *real* F6 contamination channel); PR-3
+foundry-feasible floor cell (PF-F3); PR-6 conventions (PF-F8a/b); S0.2-1 rider (re-verify the
+Vinckier photodiode-readout reading at retrieval level).
+
+**Process note (for the record):** the review came back via Lucas launching the Critic session —
+the restored 3-session flow working as designed; this is exactly the catch the phase-boundary
+review exists for, found *before* anything ran rather than after S0.5. E-2026-06-10-4 updated:
+the ask to Lucas is now a one-line signature on v2 (or amendments).
+
+---
+
 ## 2026-06-10 (S0.2-0 accepted → PR-1/PR-2 PROPOSED) — freeze ask filed (E-2026-06-10-4); Critic phase-boundary review next
 
 **S0.2-0 → ACCEPT** (all gates; results_log + memos are freeze-grade). The catches that shaped

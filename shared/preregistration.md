@@ -34,6 +34,15 @@ boundary before the run proceeds.
 > conditional positive, Critic-audited (APPROVE-WITH-EDITS). **Lucas ruled GO (E-2026-06-10-3): S0.2–S0.5
 > authorized.** Next freezes: **PR-1 + PR-2** (fed by S0.2-0; carry the ledger-Notes constraints incl.
 > the envelope-audit carry-ins), then PR-4 at S0.3.
+>
+> **Update (2026-06-10, PR-1/PR-2 phase-boundary review):** Critic review filed
+> (`critic_review_pr1-pr2-freeze.md`): **PR-1 APPROVE-WITH-EDITS · PR-2 AMEND** — one CRITICAL
+> structural finding (PF-F1: the v1 R1-headline hybrid was end-to-end linear; re-derived floor
+> SER ≈ 0.7 % at 24–32 dB, ~400× above the RC anchor it was built on; recommended fix = R2-intensity
+> headline) + edits PF-F2–F9. Transcription integrity, anchor choices, partition/topology pins, and
+> cross-references all verified clean. **Supervisor concurs in full; blocks revised to v2 below**
+> (fix (i) + every edit applied; PR-3/PR-4/PR-6 carry-ins logged in Notes). ⬜ **awaiting Lucas
+> signature** (E-2026-06-10-4).
 
 ## Ledger
 
@@ -88,6 +97,16 @@ boundary before the run proceeds.
   corner; adjudicate the {N=128 ⇄ class-leading-Q ⇄ splitting} coupling jointly with D-08-1.
   PR-4 should also eventually register a **holding/trim-statistics convention** (EV-F1: full-P_π
   worst case vs expected P_π/2 changes the hero-corner class-A in-window verdict).
+- **Carry-ins from the Critic PR-1/PR-2 freeze review (`critic_review_pr1-pr2-freeze.md`,
+  2026-06-10):** *PR-4 (PF-F8f):* register an **input-drive-power / intracavity-energy
+  normalization** — the digital encoder must not be able to buy SNR against the registered
+  noise cell (applies to both arms; the real F6 contamination channel, distinct from κ_ext).
+  *PR-3 (PF-F3):* the absolute-floor (ii-a) cell-set must contain **≥1 foundry-feasible cell**;
+  an ii-a miss at the foundry headline cell = the memory-vs-Q / Stage-1-reframing finding, not
+  a bake-off failure. *PR-6 (PF-F8a/b):* honor the PR-2 v2 data-regime (streaming fresh draws)
+  + init-ownership conventions. *S0.2-1 rider:* re-verify at retrieval level that the Vinckier
+  anchor system is linear-cavity + photodiode-|·|² readout (the PF-F1 premise; the Critic's
+  linear floor stands regardless of that sentence).
 - This ledger is referenced by `stage0_roadmap.md` and `escalate_to_human.md`. When an entry freezes, log
   the date + the approved value here and cite it from the phase's `task_queue.md` spec.
 
@@ -250,7 +269,7 @@ converged independently; Lucas signed ("ok", ruling 2 of E-2026-06-09-5).
 
 ---
 
-## PR-1 — PROPOSED freeze block (Supervisor draft 2026-06-10; ⬜ until Critic phase-boundary review + Lucas signature)
+## PR-1 — PROPOSED freeze block **v2** (Supervisor draft 2026-06-10; revised same day per Critic phase-boundary review `critic_review_pr1-pr2-freeze.md` — verdict **APPROVE-WITH-EDITS**, edits PF-F6/F7/F8g–i/F9d applied; ⬜ until Lucas signature)
 
 **Governs:** the S0.2-1 Gate-i run (idealized digital model reproduces published oscillatory-SSM
 accuracy). Sources: `docs/s0_2/debt2_benchmark_recon.md` (§3–§5, [EV]-verified) — cited per row.
@@ -263,22 +282,36 @@ accuracy). Sources: `docs/s0_2/debt2_benchmark_recon.md` (§3–§5, [EV]-verifi
     hidden 128 / state 64 / blocks 2 / time T, 134,279 params (recon §4 [EV]). Criterion:
     **mean test accuracy ≥ 90.6 %** (published mean − 1σ; implies clearing the best
     non-oscillatory competitor, LRU 87.8 %).
+  - **Margin calibration (registered reading — PF-F9d):** −1σ on a 5-seed mean = a 2.24-SE
+    one-sided allowance; false-kill ≈ 1.3 % per anchor, ≈ 2.5 % joint (Critic re-derivation).
+    Calibrated to catch gross breaks, not ≤1σ systematic offsets — the bake-off's operative
+    reference is the PR-3 in-house ceiling, not the published number.
 - **Protocol:** exactly the published Walker protocol — the 5 fixed seeds {2345, 3456, 4567,
-  5678, 6789} setting the 70/15/15 splits; mean over the 5 runs is the gated statistic.
-  **Non-gating annex:** +3 additional seeds reported for robustness (not part of the criterion).
+  5678, 6789} setting the 70/15/15 splits; mean over the 5 runs is the gated statistic,
+  **compared against the thresholds unrounded** (PF-F8h). **Split reproduction pinned
+  (PF-F6):** the five seeds must reproduce the published split assignment (port the split
+  routine or extract split indices from the official repo); if exact split reproduction is
+  infeasible in the chosen framework, declare via `decisions_needed.md` *before* the gated
+  runs. **Non-gating annex:** +3 additional seeds **{7890, 8901, 9012}** (PF-F8g) reported for
+  robustness (not part of the criterion).
 - **Reference behavior = the official code, not the paper text** (recon §4.3 discrepancy):
   learnable per-dimension Δt (sigmoid), ReLU-parametrized diagonal A, IM discretization, the
   published multi-block stack (BatchNorm → SSM → GELU → dropout → GLU → skip; mean-pool head).
+  **Closure rule (PF-F8i):** any protocol detail not stated here resolves to the official
+  repo's behavior; **no hyperparameter tuning is permitted for the gated runs.**
 - **Implementation under test = the in-house layer** (the one the bake-off uses downstream, run
   at μ=0), validated against the anchors; the official MIT JAX repo is a debugging cross-check
   only. Framework/runtime choice = S0.2-1 Executor within house hygiene (exceptions via
   `decisions_needed.md`).
+- **Scope of Gate i (registered — PF-F7):** Gate i validates the stack under the published
+  LinOSS-IM discretization (learnable Δt); the bake-off substrate runs exact-ZOH/CMT with
+  dt ≡ 1/f_s — that delta is bridged by the PR-3 BPTT-on-substrate ceiling, not by Gate i.
 - **Excluded anchors + reasons (registered):** G2 MotorImagery (tight-σ target anchors on
   D-LinOSS = preprint-only at snapshot; the LinOSS-IM alternative has σ = 7.5); G4 PPG-DaLiA
   (compute-flagged stretch; not needed for Gate-i purpose); Weather (no σ/seeds/code —
   irreproducible at pre-registration grade); EthanolConcentration (spectral, near-chance).
 
-## PR-2 — PROPOSED freeze block (Supervisor draft 2026-06-10; ⬜ until Critic phase-boundary review + Lucas signature) — jointly proposes PR-13
+## PR-2 — PROPOSED freeze block **v2** (Supervisor draft 2026-06-10; revised same day per Critic phase-boundary review `critic_review_pr1-pr2-freeze.md` — verdict **AMEND**, fix (i) adopted: **R2-intensity headline readout** (PF-F1 CRITICAL) + PF-F2/F3/F4/F5/F8a–f/F9a–c applied; ⬜ until Lucas signature) — jointly proposes PR-13
 
 **Governs:** the bake-off setup (S0.2-1 → S0.5). Sources: `docs/s0_2/bakeoff_task_candidates.md`
 (generator [EV]-quoted), `mapping_result.md`, `B1_actuation_map.md`, ledger Notes (D-08-2/D-08-3
@@ -288,41 +321,89 @@ constraints + EV-F1/F3/F5 carry-ins), PR-10 frozen grid, PR-15.1 W1.
   {−3,−1,1,3}; the verbatim 10-tap ISI polynomial + memoryless nonlinearity
   u(n) = q(n) + 0.036 q²(n) − 0.011 q³(n) + AWGN (candidates memo §2.T-A, [EV] from
   arXiv:1501.03024); **target = d(n−2)** (canonical 2-delay convention — the Vinckier prose
-  ambiguity is resolved by freezing this); metric **SER** (NMSE secondary); held-out test
-  10⁴ symbols/seed. **Registered SNR grid {16, 24, 28, 32} dB, headline cell 28 dB** (the
-  RC-anchored point: Vinckier SER→0 at 28/32 dB with 50 nodes). **Clock: headline 2 GS/s**
-  (dominant 7-tap span vs foundry memory 6.58 samples = ◑, honestly memory-limited — the
-  ceiling-relative PR-3 rule absorbs this; class-leading fits fully); 1 GS/s = reported sweep
-  cell (foundry-infeasible at 3.29 samples — stated, kept for the memory story).
-- **Secondary task family (= the PR-13 registration, frozen early in this act):** delayed
-  recall u(n−k) + sticky detection, 4-ary i.i.d. input, **lag grid k ∈ {1, 3, 10, 30, 100}** at
-  1 GS/s (+ a 2 GS/s cell at k=100 — the designed class-leading memory-cliff cell, 100 > 98.8);
-  NMSE / accuracy per cell. Tap-span generalization of T-A = optional tertiary, not frozen.
+  ambiguity is resolved by freezing this). **Invariant pin (PF-F9c):** with the verbatim
+  (centered) generator, the output at time n estimates d(n−2); implementations must not
+  re-shift the polynomial to causal form while keeping the target index (that combination is a
+  different, harder task — decision delay 0). Metric **SER** (NMSE secondary); held-out test
+  **10⁵ symbols/seed at the 28/32 dB cells, 10⁴ at 16/24 dB** (PF-F5: anchor-class SER
+  10⁻⁴–10⁻⁵ must be resolvable; cost trivial for a linear-time simulation). **Registered SNR
+  grid {16, 24, 28, 32} dB, headline cell 28 dB** (the RC-anchored point: Vinckier SER→0 at
+  28/32 dB with 50 nodes); **train and test at the same registered SNR per cell** (PF-F8d).
+  **Clock: headline 2 GS/s** (dominant 7-tap span vs foundry memory 6.58 samples = ◑, honestly
+  memory-limited — the ceiling-relative PR-3 *ranking* rule absorbs this for the method
+  comparison; **Gate ii-a's *absolute* floor does not inherit that absorption** (PF-F3): PR-3
+  must register the floor on a cell-set containing ≥1 foundry-feasible cell (e.g. T-C k≤3, or
+  T-A at the class-leading corner), and an ii-a miss at the foundry headline cell is recorded
+  as the memory-vs-Q / Stage-1-reframing finding (roadmap v3.1 semantics), not as a bake-off
+  failure; class-leading fits fully); 1 GS/s = reported sweep cell (foundry-infeasible at
+  3.29 samples — stated, kept for the memory story). **Honesty line (binding for S0.8 wording —
+  PF-F2):** the photonic-hardware record on this exact channel is ~0.1–0.9 MS/s (Paquot 2012;
+  Vinckier 2015); the GS/s clock sizes the *simulated* niche only and is not a
+  hardware-demonstrated rate claim.
+- **Secondary task family (= the PR-13 registration, frozen early in this act):** 4-ary i.i.d.
+  input; **lag grid k ∈ {1, 3, 10, 30, 100}** at 1 GS/s (+ a 2 GS/s cell at k=100). Two arms:
+  **(a) delayed recall** — target u(n−k), metric NMSE. **(b) sticky detection** — binary target
+  1 iff a marker occurred within the last k samples, the marker drawn as a separate registered
+  rare-event stream with per-cell **P(marker) = 1 − 2^(−1/k)** (class-balanced at every k by
+  construction — PF-F4: the v1 4-ary-value variant is degenerate at k ≥ 10, P(1) → 94.4 %/
+  99.98 %/≈100 % at k = 10/30/100); mechanical realization: the marker is a fifth registered
+  input level (+5 on the {−3,−1,1,3} scale) substituted i.i.d. at the marker times; metric =
+  **balanced accuracy**. **Memory-cliff cells = registered *hypothesis*, not a hard wall
+  (PF-F9b):** k=100 already exceeds the 1 GS/s class-leading 1/e yardstick (100 > 49.4); the
+  2 GS/s cell is the *marginal* cliff (100 > 98.8, amplitude retention e^(−100/98.8) ≈ 0.36);
+  noiseless linear memory capacity scales with N, so the cliff outcome is interpreted jointly
+  with the PR-4 noise cell. Tap-span generalization of T-A = optional tertiary, not frozen.
 - **Hybrid architecture (the bake-off object, distinct from PR-1's digital stack):** digital
   affine encoder → **one** photonic ring-bank recurrence layer — complex-diagonal (S4D/DSS)
   poles + trainable nearest-neighbor couplings μ, **no conjugate pairing** (D-08-2 + audit
-  carry-in) — → readout **R1 = single-quadrature homodyne** y = Re(Σ c_j a_j) (real-linear,
-  LinOSS-equivalent, EV-F5-consistent) → digital linear head. **R2 (intensity |·|²) = registered
-  alternative sweep cell** (the physical-nonlinearity story); **R3 (I/Q) excluded** —
-  envelope-inconsistent (EV-F5; choosing it would re-open audited envelope cells).
+  carry-in) — → readout **R2 = direct-detection intensity** y(n) = |Σ_j c_j a_j(n)|² (single
+  chain, EV-F5-consistent; the |·|² is the hybrid's only physical nonlinearity and the
+  RC-anchor-native readout class — the ring states are time-mixtures of the input, so |·|²
+  supplies the cross-lag quadratic features channel inversion needs) → digital linear head over
+  the registered tap window **{y(n−m), m = 0…7}**. **R1 (single-quadrature homodyne,
+  real-linear — the LinOSS-equivalent-head cell) = registered alternative sweep cell**; an
+  end-to-end-linear hybrid floors at SER ≈ 0.7 % on this channel at 24–32 dB (Critic
+  re-derivation, **PF-F1 CRITICAL** — the v1 R1-headline was ~400× above the RC anchor by
+  construction), so R1 cells are reported against the linear-class ceiling, never against the
+  RC anchor. **R3 (I/Q) excluded** — envelope-inconsistent (EV-F5; choosing it would re-open
+  audited envelope cells). *(R2-headline consistency, Critic-checked: one O/E + one ADC — C8
+  holds; no LO needed, removing one §7 unbudgeted exclusion; digital-equivalent op count rises
+  ~14N → ~18N, a favorable-direction delta re-opening no audited envelope cell. Cost: departs
+  the LinOSS-equivalent head, so benchmark transfer leans on the PR-3 in-house ceiling — the
+  cost D-08-2 already accepted for μ≠0.)*
   **N grid {8, 32, 128}** (PR-10), **headline N=32** (niche + the 50-node RC anchor); every
   N=128 cell carries the EV-F3 class-leading-corner caveat.
+- **Registered run conventions (F12 completeness — PF-F8):** *(a) data regime:* bake-off
+  training data = **streaming fresh i.i.d. draws per iteration** (no fixed corpus); per-seed
+  generator streams common across methods (→ PR-6) — streaming-vs-corpus changes what
+  sample-efficiency *means* and cannot be an implementation choice. *(b) init ownership:* B1
+  init distributions (δ, κ_ext, μ at θ₀) are registered at PR-6 with the common-θ₀ convention;
+  reference default = D-LinOSS radial-band init mapped through B1 ranges, **μ(0) = 0**.
+  *(c) hybrid timestep:* **no learnable Δt** — dt ≡ 1/f_s; pole-placement freedom is carried
+  entirely by (δ_j, κ_ext,j) within B1/B3 ranges (a digitally-learnable per-ring dt would be
+  unphysical).
 - **Trainable-parameter partition (the SAME set for every estimator — PR-6): P2, gain-free
   minimal B1 = {δ_j (heaters), κ_ext,j (tunable couplers), μ_jk (ring–ring couplers)}** — all
   thermo-optic, ≈3 ch/ring (inside the frozen PR-10 2–4 bracket), actuation per the B1 map.
   **W1 cross-check ✓:** trains pole positions on both axes (Re via κ_ext, Im via δ) AND
   inter-resonator couplings. Digital-side params (encoder, B/C residues, head) trained
   digitally; **the claim attaches only to the in-situ-trained recurrent set.** P1 (gain-rich)
-  = labelled Stage-2 extension, not frozen (4–5 ch/ring busts the PR-10 bracket); P3 excluded
+  = labelled Stage-2 extension, not frozen (4–5 ch/ring sits at/above the PR-10 bracket —
+  PF-F9a; the load-bearing exclusion ground is Stage-2 gain); P3 excluded
   (surrenders trained damping — the D-LinOSS evidence axis — and strains the W1 "pole
   positions" wording); P4 excluded (fails W1).
 - **F6 κ_ext dual-role policy = option (a):** κ_ext trainable within the registered B3 bounds;
-  **the reservoir baseline holds κ_ext frozen at the PR-4 policy value** (the baseline must
-  never gain recurrence-shaping through the readout knob — keeps the §5.3 contrast clean).
+  **the reservoir baseline holds κ_ext frozen at the common θ₀ ≡ the PR-4 policy value**
+  (one value, reconciling the v1 "at init"/"at policy value" double reading — PF-F8e; the
+  baseline must never gain recurrence-shaping through the readout knob — keeps the §5.3
+  contrast clean). The real contamination channel is input power: → the PR-4 carry-in
+  (PF-F8f, ledger Notes).
 - **Coupling topology:** photonic-molecule **nearest-neighbor chain** (fixed sparsity mask,
   trainable strengths, N−1 couplers — deployable-corner-consistent with the PR-10 bracket);
   bus-mediated mesh = labelled sweep extension only.
-- **Reservoir baseline (§5.3 contrast):** B1 frozen at init; B/C residues + ridge head trained
-  (readout-only) — the in-data falsifier of "training the recurrence matters."
+- **Reservoir baseline (§5.3 contrast):** B1 frozen at the common θ₀; B/C residues + ridge head
+  trained (readout-only) — the in-data falsifier of "training the recurrence matters." **Under
+  R2 the baseline is Vinckier-class** — linear fixed dynamics + quadratic readout + trained
+  linear weights — so the §5.3 contrast lands on the RC field's own configuration (PF-F1).
 - **T-B (IM-DD PAM-4 at 1–2 GBd):** labelled non-frozen extension (niche-native demo for
   S0.7-full/Stage-1; generator port deferred — not in the salvage manifest).

@@ -19,32 +19,53 @@ Escalate (don't decide autonomously):
 ## OPEN FOR LUCAS
 
 ### 🧊 E-2026-06-10-4 — Freeze ask: **PR-1 (Gate-i benchmark + margin) + PR-2 (the bake-off pin)** — the last step before S0.2-1 runs
-**Filed:** 2026-06-10 (Supervisor). S0.2-0 delivered freeze-grade menus (accepted; memos in
-`docs/s0_2/`); the **PROPOSED blocks** are at the end of `preregistration.md`. In one paragraph,
-what I propose to freeze:
+**Filed:** 2026-06-10 (Supervisor). **Updated same day: the Critic phase-boundary review is done**
+(`critic_review_pr1-pr2-freeze.md`) **and the blocks are revised to v2 — ready for your
+signature.**
 
-- **PR-1 (what proves our digital model is legit):** reproduce two published LinOSS results with
-  the official protocol and seeds — **Heartbeat** (cheap fidelity check, pass ≥ 72.1 %) and
-  **EigenWorms** (the long-range flagship, pass ≥ 90.6 %, which also beats the best
-  non-oscillatory competitor) — both within 1σ of the published means; the official *code* (not
-  the paper text) is the reference behavior, because the Executor caught them differing.
+**Critic verdict:** PR-1 **approve-with-edits** (anchor choice, margins, protocol all verified
+sound; edits were completeness pins). PR-2 **amend** — it caught **one real structural error in
+my draft (PF-F1, CRITICAL)**: the headline configuration I pinned (single-quadrature readout +
+linear digital head) made the *entire* system linear end-to-end, and the channel-equalization
+task is nonlinear — a linear system measurably floors ~400× above the published anchor the
+headline was built on (the Critic re-derived the floor numerically: SER ≈ 0.7 % flat across
+24–32 dB, vs anchor ≈ 0). The published anchor experiment itself used a linear cavity with a
+**photodiode** as the nonlinearity — i.e. the intensity readout I had relegated to "alternative."
+The fix (Critic-recommended, I concur): **swap them — direct-detection intensity |·|² is the
+headline readout** (still one detector + one ADC, so every audited envelope cell survives; it
+even *removes* the local-oscillator the envelope never budgeted), and the single-quadrature cell
+stays as a registered sweep cell reported against the linear-class ceiling. Everything else
+checked clean: every number traces, no silent edits, all exclusions honest, no contradictions
+with the frozen entries. The Critic also fixed a degenerate secondary-task cell (the sticky-
+detection target was 94–100 % "yes" at long lags — now a rare-marker variant, class-balanced at
+every lag by construction) and pinned ~a dozen conventions the Executor would otherwise have had
+to invent (data streaming, init ownership, test-set sizes, split reproduction, no-tuning rule).
+
+**I concur with every finding — all edits are applied in the v2 blocks** at the end of
+`preregistration.md` (each tagged with its PF-F# for audit). What you're signing, in one breath
+each:
+
+- **PR-1 (proves our digital model is legit):** reproduce two published LinOSS results with the
+  official protocol and seeds — **Heartbeat** (pass ≥ 72.1 %) and **EigenWorms** (the long-range
+  flagship, pass ≥ 90.6 %, which also beats the best non-oscillatory competitor) — both within
+  1σ of the published means; the official *code* (not the paper text) is the reference behavior;
+  no hyperparameter tuning permitted on the gated runs.
 - **PR-2 (what the bake-off actually trains):** headline task = the **canonical channel-
-  equalization benchmark** (Science 2004 family) clocked at 2 GS/s, SER at 28 dB SNR as the
-  headline cell — chosen over the in-house fiber task because it has an external published
-  anchor and is *the* classic reservoir-computing task, which makes our "training the recurrence
-  beats training only the readout" comparison land on ground the field knows. Secondary = the
-  synthetic memory family (lags 1→100, deliberately including one cell beyond the best ring's
-  memory — that registers PR-13 early). Architecture: one photonic ring-bank layer (N=32
-  headline), single-quadrature readout (the Critic's envelope-consistency condition), trainable
-  set = **detunings + coupler strengths + inter-ring couplings** (all thermo-optic, ~3
-  channels/ring, satisfies the W1 claim on both axes); reservoir baseline gets the same physics
-  with the recurrence frozen. I/Q readout and the gain-rich partition are explicitly excluded
-  (each would contradict an audited/frozen constraint).
+  equalization benchmark** (Science 2004 family) at 2 GS/s, SER at 28 dB SNR — with a binding
+  honesty line that the photonic-hardware record on this channel is ~MS/s and our GS/s clock
+  sizes the simulated niche only. Secondary = the synthetic memory family (lags 1→100, the
+  long-lag cells registered as a memory-cliff *hypothesis*; registers PR-13 early).
+  Architecture: one photonic ring-bank layer (N=32 headline), **direct-detection intensity
+  readout** (the photodiode's |·|² = the one physical nonlinearity, anchor-native — the PF-F1
+  fix), trainable set = **detunings + coupler strengths + inter-ring couplings** (all
+  thermo-optic, ~3 channels/ring, satisfies the W1 claim on both axes); reservoir baseline =
+  same physics, recurrence frozen — under the new readout it is exactly the RC field's own
+  configuration, which makes our "training the recurrence beats training only the readout"
+  contrast as fair as it can be. I/Q readout and the gain-rich partition stay excluded.
 
-**Process (ledger discipline):** the Critic reviews freeze drafts at phase boundaries —
-**launch it on `critic_instructions_pr1-pr2-freeze.md`**, then sign with its findings in hand
-(recommended); or sign directly if you accept the draft as-is. On your "freeze PR-1/PR-2"
-(or amendments), S0.2-1 (implementation + the Gate-i run) is posted to the Executor.
+**Your move (one line):** **"freeze PR-1/PR-2"** — or amendments. The Critic's review is already
+in hand, so signature closes the loop. On your signature, S0.2-1 (implementation + the Gate-i
+run — the project's first training runs) is posted to the Executor, and you launch it as usual.
 
 ### ✅ E-2026-06-10-3 — PRE-S0.2 CONTINUATION GATE → **RESOLVED 2026-06-10 by Lucas: GO**
 **Ruling:** "Go." **S0.2–S0.5 are authorized**, with the attached conditions active: task sized to
