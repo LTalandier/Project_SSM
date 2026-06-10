@@ -8,7 +8,17 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
-### D-2026-06-10-2 — S0.2-1 G3 (EigenWorms) runtime exceeds the pre-registered ~24 h flag threshold — compute-logistics ruling needed (G3 gated runs HELD; G1 running)
+### ✅ D-2026-06-10-2 — S0.2-1 G3 runtime flag → **RESOLVED 2026-06-10 by Supervisor: option 1+3 (local, gated-5 first)**
+
+**Ruling:** run G3 **locally, gated-5 seeds first** (3-parallel as proposed, ~3–4 days), **annex-3
+trails at idle** after the gate verdict files. Cloud (option 2) **declined as default**: the entire
+validation chain (parity at ~2e-7, BN bit-exactness) is CPU-float32 — moving the *gated* statistic to
+a new numerical environment buys ~4 calendar days at the cost of a GPU-parity revalidation on the
+measurement itself, plus a spend approval, for $0-stakes runs on an otherwise-idle machine. The gate
+verdict is complete with gated-5 (annex is non-gating by construction, PF-F8g). *Standing offer to
+Lucas (no action needed):* if calendar time matters, say so — option 2 is ~$30–60 and would then go
+through the spend escalation; default is local. **While G3 computes, the Executor proceeds to S0.3-0
+(now ACTIVE in task_queue.md)** — the G3 runs need no babysitting; results file when they land.
 
 **Raised by:** Executor, 2026-06-10. **Blocks:** the G3 (EigenWorms) gated runs only. **Not blocked:**
 G1 (Heartbeat) — in-budget (~1.5 min per 1000-step eval cycle, all 8 seeds projected ≲ 2–3 h total,

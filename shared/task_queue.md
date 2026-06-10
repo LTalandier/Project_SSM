@@ -8,11 +8,87 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🔥 ACTIVE — S0.2-1: in-house LinOSS layer + the Gate-i reproduction runs (S0.2 step 2 of 2)
+## 🔥 ACTIVE — S0.3-0: substrate design recon + PR-4 input sheet (S0.3 step 0 of 2; runs while S0.2-1's G3 computes)
 
 **Assigned:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
-**Status:** 🔥 ACTIVE — the project's first training runs.
+**Status:** 🔥 ACTIVE — **after** launching S0.2-1's G3 runs (see the ⏳ task below; that launch
+is your first action this session).
+**Source:** roadmap §S0.3 + ledger Notes **PR-4 constraint bullets** (D-08-3 roughness/splitting;
+EV-F1 holding/trim convention; EV-F3 N=128⇄class-leading-Q⇄splitting; **PF-F8f input-power
+normalization**) + parked **D-2026-06-08-1** ((α, Q_i) pair — adjudicated by F13, formalized at
+PR-4) + **debt #3** (Er:Si₃N₄ NF — front-loaded per F14: the sourced NF bracket is a
+*prerequisite* of the substrate's ASE knob). Pattern: S0.x-0 recon → **PR-4 freeze (Critic
+review + Lucas)** → S0.3-1 substrate build. **Menu, not choice** — this task feeds the PR-4
+freeze; it sets no values and builds no substrate.
+
+**Objective:** every input the PR-4 freeze needs, as [EV]-sourced menus; plus the
+substrate-physics decision inventory so S0.3-1 has zero invent-at-implementation-time gaps (F12).
+
+### Tasks
+1. **Debt #3 — Er:Si₃N₄ noise figure (the critical-path item).** (a) What the flagship
+   Er:Si₃N₄ amplifier paper states and measurably does NOT state about NF [EV-quoted]; (b)
+   measured NF brackets from the nearest comparables (EDWA / Er:Al₂O₃ / Er:LNOI waveguide
+   amps + the 3 dB quantum-limit floor, each with provenance); (c) 2–3 candidate conservative
+   NF values for the PR-4 noise cell, with the argument for each.
+2. **D-08-1 inputs — candidate (α, Q_i) operating pairs:** foundry-grade + class-leading, each
+   self-consistent (derive one from the other; apply the S0.1 registry loss↔Q fix), with
+   provenance; for each candidate, the EV-F3 check — informationally distinct poles/GHz at
+   N=128 (linewidth packing), so the PR-4 freeze can adjudicate the N=128⇄Q⇄splitting coupling
+   on numbers.
+3. **Roughness/splitting sub-parameter (D-08-3):** sourced backscatter/mode-splitting statistics
+   per roughness/platform class; splitting evaluated **at operating κ_ext** (not undercoupled
+   worst case); CW/CCW-knob default policy options (ON except clean-damascene corner — confirm
+   or revise from sources).
+4. **Gain-stage physics inventory (decides what "gain saturation" means in the substrate):**
+   Er upper-state lifetime (~ms) vs the registered GS/s clocks — show the regime arithmetic
+   (is gain quasi-static per-symbol at 0.1–2 GS/s? at training-relevant envelope timescales?);
+   consequences for the salvaged SOA rate-equation model's role (its ~ns dynamics are a
+   *different* regime); menu of substrate gain-model classes (static saturated gain + ASE vs
+   full rate-equation) with what each costs/buys. Flag explicitly if this forks methodology —
+   the Supervisor takes it to the ledger/decision file.
+5. **PR-4 input sheet** (`docs/s0_3/pr4_input_sheet.md`): candidate noise cells (Q/α + NF + ASE
+   level), κ_ext policy options vs the B3 bounds, holding/trim-statistics convention options
+   (EV-F1), and a concrete **input-drive-power / intracavity-energy normalization mechanism**
+   (PF-F8f — how the encoder is power-bounded so it cannot buy SNR against the noise cell).
+   Menu-not-choice; the Supervisor drafts the PROPOSED PR-4 block from this.
+
+### Gates
+- [EV]/[AV]/[ABS] sourcing discipline with a verification trail (the S0.2-0 standard).
+- Menu-not-choice end-to-end; **zero substrate code; zero training runs**; no edits to frozen
+  ledger blocks.
+- Each menu row carries provenance + the arithmetic that sizes it against registered values
+  (PR-10 grid, B1/B3 ranges, the frozen PR-2 cells).
+
+### Deliverables
+`docs/s0_3/substrate_recon.md` (tasks 1–4) + `docs/s0_3/pr4_input_sheet.md` (task 5) +
+`results_log.md` entry (house standard; anomaly flags; subagent/token accounting as in S0.2-0).
+
+### Out of scope
+Substrate implementation (S0.3-1, post-PR-4-freeze); any PR-2 task-generator work; the F5
+B2-crossover primary-source pass (S0.L-paced); D-LinOSS damping sweep (S0.6/PR-12); touching
+the in-flight G3 runs beyond health checks.
+
+---
+
+## ⏳ S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS (accepted) · G3: LAUNCH NOW per D-2 ruling, then runs in flight**
+
+**Assigned:** 2026-06-10 · **G1 portion accepted:** 2026-06-10
+**Supervisor:** Claude Opus 4.8
+**Status:** ⏳ PARTIAL-ACCEPT + G3 IN FLIGHT. **G1 Heartbeat: GATE PASS, Supervisor-verified**
+(gated mean 72.9032 % ≥ 72.1 reproduced from the per-seed table; per-seed values are exact n/62
+counts; −0.78σ_published, inside the registered allowance; margin = 2.5 mean-granules of test-set
+quantization — priced in by the frozen PF-F9d calibration, no re-litigation either direction).
+Acceptance highlights: float32-exact cross-framework parity (~2e-7 transplanted-weight probs) is
+the load-bearing validation; param-count convention diagnosed pre-training (published = trainable
++ BN state — quote it downstream, anomaly v); **PF-F6 vindicated** — the official-pipeline run
+surfaced EigenWorms N=236 (23 dups deleted), which a reimplemented split would have silently
+missed; PF-F1 rider confirmed [EV] (Vinckier linear cavity + photodiode |·|²; Paquot in-loop MZ).
+Zero protocol deviations; the >24 h flag was raised exactly per spec.
+**→ Executor, on relaunch, FIRST action: start the G3 gated-5 runs** per the D-2026-06-10-2
+ruling (local, 3-parallel, frozen PR-1 protocol; annex-3 trails at idle after the verdict).
+Once they are launched and stable, **proceed to S0.3-0 below** while they compute. S0.2-1 closes
+when the G3 results + joint Gate-i verdict file in `results_log.md` (amend the existing entry).
 **Source:** roadmap §S0.2 (Gate i) + **🔒 PR-1 v2, FROZEN 2026-06-10** (`preregistration.md` —
 **the governing document; read it first and follow it to the letter**) + the freeze-review
 carry-ins (ledger Notes, last bullet). PR-2 v2 is also frozen — it governs S0.3+, **not** this

@@ -6,6 +6,42 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10 (S0.2-1 partial: G1 PASS accepted · G3 ruled local · S0.3-0 posted) — first gate result of the project
+
+**G1 Heartbeat: GATE PASS, verified.** I reproduced the gated mean from the per-seed table
+(72.9032 % ≥ 72.1, +0.80 pp), the σ-distance (−0.78σ_published), the n/62 quantization, and the
+annex/all-8 means — all exact. Two things deserve naming. First, the **real** validation isn't
+the accuracy statistic — it's the float32-exact parity (~2e-7 full-model probabilities with
+transplanted weights, BN updates bit-exact): the in-house layer doesn't *approximate* the
+official computation, it **is** the official computation, so the gated statistic measures
+protocol+data fidelity, which the PF-F6 split pin then nailed. Second, **PF-F6 earned its keep
+immediately**: running the official pipeline verbatim surfaced EigenWorms N=236 (the official
+dedup deletes 23 duplicates, −8.9 % of corpus) — a reimplemented "equivalent" split would have
+silently diverged from every published run. The thin-looking margin (+0.80 pp = 2.5 test-sample
+mean-granules) is exactly what the frozen PF-F9d calibration prices; PASS under the frozen rule,
+and symmetrically I don't get to want more margin after the fact. Param-count convention
+(published = trainable + BN state) goes into the quote-downstream list (anomaly v).
+
+**D-2026-06-10-2 ruled: option 1+3** — G3 locally, gated-5 first (~3–4 days, 3-parallel),
+annex trails at idle. Cloud declined as default: the validation chain is CPU-float32; I won't
+move the *gated* measurement to a new numerical environment to buy calendar days, and the
+machine is idle. Standing offer to Lucas recorded if calendar time matters (~$30–60, would go
+through the spend escalation). The flag itself worked as designed: estimate-before-train caught
+a 31 h/seed central projection, zero protocol content leaked into the hold.
+
+**S0.3-0 posted ACTIVE** (runs while G3 computes — the runs need no babysitting): substrate
+design recon + the PR-4 input sheet. Front-loads debt #3 (Er:Si₃N₄ NF bracket — prerequisite of
+the ASE knob), the D-08-1 (α, Q_i) candidate pairs with the EV-F3 N=128 packing check, the
+D-08-3 roughness/splitting sourcing, the gain-regime arithmetic (Er ~ms lifetime vs GS/s symbols
+— what "saturation" even means in-substrate), and the PF-F8f power-normalization mechanism.
+Menu-not-choice; feeds the PR-4 freeze (Critic review + Lucas signature at the S0.3 boundary,
+same pattern as PR-1/PR-2). Risk note, considered: posting S0.3-0 before the joint Gate-i
+verdict is safe — the recon is literature/design work needed under any G3 outcome, and the
+parity result makes a G3 implementation-break miss unlikely (residual risk is protocol/data,
+already pinned).
+
+---
+
 ## 2026-06-10 (PR-1/PR-2 🔒 FROZEN, Lucas "ok go" → S0.2-1 ACTIVE) — the bake-off arm starts
 
 Lucas signed the v2 blocks (E-2026-06-10-4 ✅): **PR-1 + PR-2 + PR-13 (early) are frozen** —
