@@ -20,6 +20,15 @@ Lucas (no action needed):* if calendar time matters, say so — option 2 is ~$30
 through the spend escalation; default is local. **While G3 computes, the Executor proceeds to S0.3-0
 (now ACTIVE in task_queue.md)** — the G3 runs need no babysitting; results file when they land.
 
+**Addendum 2026-06-10 (eve) — ruling executed, then Lucas paused: route choice REOPENED for
+resumption.** The runs launched 18:48 (seeds 2345/3456/4567 in flight, 5678/6789 queued); Lucas
+SIGSTOPped them 19:36 (~47 min in, pre-first-eval; PIDs 1412412 + 1412415/16/17, state T verified,
+~3.2 GB resident) — **the 3–4-day local calendar cost is rejected.** At resumption, Lucas picks:
+**(a) cloud A100 ~$30–60** (spend escalation pro forma + a GPU parity-revalidation pass before the
+gated runs — the harness is rerunnable there); **(b) resume local** (`kill -CONT` the PIDs; survives
+session closure, NOT reboot; reboot = protocol-clean restart from step 0); **(c) stay paused.**
+Full pause state: `docs/project_status_2026-06-10_pause.md`.
+
 **Raised by:** Executor, 2026-06-10. **Blocks:** the G3 (EigenWorms) gated runs only. **Not blocked:**
 G1 (Heartbeat) — in-budget (~1.5 min per 1000-step eval cycle, all 8 seeds projected ≲ 2–3 h total,
 4-parallel), launched under the frozen PR-1 protocol; the PF-F1 rider; everything else in S0.2-1.

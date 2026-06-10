@@ -6,6 +6,31 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-10, eve (PAUSE) — S0.3-0 accepted; G3 paused by Lucas; snapshot filed
+
+**S0.3-0 → ACCEPT** (all gates; details in task_queue). The big one: **debt #3's premise was
+false** — the flagship *measured* NF ≈ 7 dB, three-way verified. Better for the program (the
+noise cell anchors on a measurement, not a guess), embarrassing for the v0.5 debt list, and a
+standing lesson: debt #4 is the same inferred-absence type → re-verify at first full-text
+contact before S0.8 wording. Also accepted: EV-F3 lands two-against-one (N=128 ⇒ class-leading
+⇒ knob-ON only), CORNERSTONE = passive-only cell, and the **M1-vs-M3 gain-regime fork left open
+by design** — correctly so; it's a methodology call that shapes what "the substrate" even is,
+it folds into PR-4, and S0.3-1 stays blocked behind it. I note for the record the M1 structure
+(linear in-loop + readout |·|²) coincides with the frozen PF-F1 architecture — that's mutual
+consistency between two independently-derived conclusions, and PR-4 should *say* it rather than
+let a reviewer discover it.
+
+**G3: Lucas paused the runs** (~47 min in, SIGSTOP, pre-first-eval; verified state T) — the
+3–4-day local ETA is rejected on calendar grounds. My D-2 "local" ruling is suspended;
+the route choice (cloud ~$30–60 / resume local / hold) is **reopened for Lucas at resumption**
+(D-2 addendum). Queue updated so no future session relaunches over the paused PIDs.
+
+**Project paused.** Snapshot: `docs/project_status_2026-06-10_pause.md` (resumption-grade:
+frozen rulebook, results on the books, exact G3 state + reboot semantics, the ordered
+resumption decisions — route → fork → PR-4 freeze → S0.3-1 — and launch commands).
+
+---
+
 ## 2026-06-10 (S0.2-1 partial: G1 PASS accepted · G3 ruled local · S0.3-0 posted) — first gate result of the project
 
 **G1 Heartbeat: GATE PASS, verified.** I reproduced the gated mean from the per-seed table

@@ -8,12 +8,31 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🔥 ACTIVE — S0.3-0: substrate design recon + PR-4 input sheet (S0.3 step 0 of 2; runs while S0.2-1's G3 computes)
+## ✅ DONE — S0.3-0: substrate design recon + PR-4 input sheet (S0.3 step 0 of 2)
 
-**Assigned:** 2026-06-10
+**Assigned:** 2026-06-10 · **Closed:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
-**Status:** 🔥 ACTIVE — **after** launching S0.2-1's G3 runs (see the ⏳ task below; that launch
-is your first action this session).
+**Status:** ✅ COMPLETED 2026-06-10 — Supervisor **ACCEPT**. All gates met: [EV]/[AV]/[ABS]
+discipline with a re-grep verification trail; menu-not-choice end-to-end; zero substrate code /
+zero training; every registered anchor reproduced exactly by the arithmetic kernel. Headline
+catches accepted: **debt #3's premise is FALSE** (the flagship *measured* NF ≈ 7 dB — three-way
+verified; S0.8 reword = Supervisor's, and it is a process datum for debt #4, the other
+inferred-absence debt); two draft assumptions killed by sources (Mu "3–4 dB" untraceable;
+Frankis no-NF); **EV-F3 resolves two-against-one** (N=128-in-band only at class-leading r≲1 —
+its split regime; only knob-ON survives); **AN800 never qualifies for knob-OFF**; **Er is
+rigorously quasi-static** at all registered clocks (τ = 3.4 ms measured) → the **M1-vs-M3
+gain-regime fork is left open by design — it is the first methodology decision on resumption
+and S0.3-1 is blocked behind it** (anomaly v; note the M1 structure — linear in-loop + static
+gain + ASE + readout |·|² — *echoes* the frozen PF-F1 architecture, which is consistency, not
+coincidence, and must be named deliberately at PR-4); gain budget: **CORNERSTONE cell is
+passive-only**; Cui 2023 = probable AN800 primary **[AV — verify at the PR-4 freeze]**; the
+foundry-corner T-A memory death under any loading is exactly the pre-registered PF-F3 path
+(the freeze anticipated it; nothing to amend). Memos: `docs/s0_3/substrate_recon.md` +
+`pr4_input_sheet.md`; results in `results_log.md`; commit `aa8e982`.
+→ Next on resumption: Supervisor names the gain-regime fork (decision → Lucas), drafts the
+PROPOSED PR-4 block from the input sheet, Critic phase-boundary review, Lucas freeze — then
+S0.3-1 (substrate build). **Project paused by Lucas 2026-06-10 (eve)** — see
+`docs/project_status_2026-06-10_pause.md`.
 **Source:** roadmap §S0.3 + ledger Notes **PR-4 constraint bullets** (D-08-3 roughness/splitting;
 EV-F1 holding/trim convention; EV-F3 N=128⇄class-leading-Q⇄splitting; **PF-F8f input-power
 normalization**) + parked **D-2026-06-08-1** ((α, Q_i) pair — adjudicated by F13, formalized at
@@ -71,7 +90,17 @@ the in-flight G3 runs beyond health checks.
 
 ---
 
-## ⏳ S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS (accepted) · G3: LAUNCH NOW per D-2 ruling, then runs in flight**
+## ⏸️ S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS (accepted) · G3 PAUSED by Lucas mid-run (route decision on resumption)**
+
+> **PAUSE STATE (2026-06-10 19:36, Lucas):** G3 gated-5 was launched per the D-2 ruling (seeds
+> 2345/3456/4567 in flight 18:48, 5678/6789 queued) and **SIGSTOPped ~47 min in, before the
+> first eval record** — driver 1412412 + workers 1412415/16/17, state T verified (~3.2 GB
+> resident). Survives session closure, **not reboot**; a reboot restarts affected seeds from
+> step 0, which is protocol-clean (no mid-run state reuse). **Resume = `kill -CONT` those PIDs**
+> (local route, ~3–4 days) — or the cloud route (~$30–60, Lucas spend approval + GPU parity
+> revalidation), or stay paused: **Lucas's call at resumption** (D-2026-06-10-2 addendum).
+> S0.2-1 closes when the G3 per-seed table + joint Gate-i verdict are appended to the results
+> entry.
 
 **Assigned:** 2026-06-10 · **G1 portion accepted:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
@@ -85,9 +114,9 @@ the load-bearing validation; param-count convention diagnosed pre-training (publ
 surfaced EigenWorms N=236 (23 dups deleted), which a reimplemented split would have silently
 missed; PF-F1 rider confirmed [EV] (Vinckier linear cavity + photodiode |·|²; Paquot in-loop MZ).
 Zero protocol deviations; the >24 h flag was raised exactly per spec.
-**→ Executor, on relaunch, FIRST action: start the G3 gated-5 runs** per the D-2026-06-10-2
-ruling (local, 3-parallel, frozen PR-1 protocol; annex-3 trails at idle after the verdict).
-Once they are launched and stable, **proceed to S0.3-0 below** while they compute. S0.2-1 closes
+~~→ Executor, on relaunch, FIRST action: start the G3 gated-5 runs~~ **DONE 2026-06-10 18:48,
+then PAUSED by Lucas 19:36 — see the PAUSE STATE block above. Do NOT relaunch the runs; the
+route decision (resume local / cloud / stay paused) is Lucas's at resumption.** S0.2-1 closes
 when the G3 results + joint Gate-i verdict file in `results_log.md` (amend the existing entry).
 **Source:** roadmap §S0.2 (Gate i) + **🔒 PR-1 v2, FROZEN 2026-06-10** (`preregistration.md` —
 **the governing document; read it first and follow it to the letter**) + the freeze-review
