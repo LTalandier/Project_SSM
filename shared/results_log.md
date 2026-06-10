@@ -130,6 +130,12 @@ untouched by this task beyond health checks.)
 > env knob (logistics only — zero protocol content). ETA ~3–4 days; per-seed table + the joint
 > Gate-i verdict will be appended here when they land; annex-3 trails at idle after the verdict
 > (PF-F8g: non-gating).
+> **PAUSED 2026-06-10 19:36 by Lucas** (~47 min in, before the first eval record): SIGSTOP to
+> driver 1412412 + workers 1412415/16/17 (state T verified). In-RAM state preserved (~GBs held
+> resident; survives session closure, **not** a reboot — a reboot/kill restarts the affected
+> seeds from step 0, which is protocol-clean: no mid-run state is reused). Resume = `kill -CONT`
+> same PIDs. Run-state question (resume local vs cloud option ~$30–60 vs stay paused) is with
+> Lucas/Supervisor.
 
 **Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
 and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):
