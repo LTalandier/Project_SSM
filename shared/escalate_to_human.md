@@ -18,6 +18,72 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### 🔴 E-2026-06-11-2 — S0.3 gain-regime fork: which gain-model class does the shared substrate register? **Recommendation: M1 (SiN-native static-saturated)**
+
+**Filed:** 2026-06-11 (Supervisor). **Gates:** the PROPOSED PR-4 draft (my next output) and
+S0.3-1 (the substrate build). **Source:** the S0.3-0 recon flagged this as a methodology fork
+and left it open by design (`docs/s0_3/substrate_recon.md` §4e; `docs/s0_3/pr4_input_sheet.md`
+§6.3) — the roadmap's S0.3 line "erbium (or III-V) gain saturation" silently spans two
+physically different regimes.
+
+**The physics (Executor-verified, [EV]):** the flagship Er:Si₃N₄ gain medium has τ = 3.4 ms.
+At every registered clock (0.1–2 GS/s) the gain is frozen within an episode by 5–7 orders of
+magnitude in time and ≥4 orders in energy (E_sym/E_sat ≈ 5×10⁻⁶–9×10⁻⁵, large-signal
+avalanche check included). Erbium-on-SiN measurably does **not** have per-symbol gain
+dynamics; sub-ns gain response is the III-V/SOA regime (carrier τ ~ 50–500 ps — the native
+regime of the salvaged `pnn-multilayer` rate-equation model).
+
+**The menu (recon §4d):**
+- **M1 — static average-power-saturated operating point** g(P̄), fixed within the rollout +
+  per-round-trip ASE + slow drift between episodes. The SiN-native cell at all registered
+  clocks. In-loop physics: **linear** (dissipative rings + static gain); the task-solving
+  nonlinearity is the readout |·|² — exactly the structure PR-2 v2 froze (R2).
+- **M2 — rate equation at τ = 3.4 ms:** physically exact but numerically inert in-episode
+  (integrates ≤3 %-relaxation dynamics at full rollout cost); useful only as M1's validation
+  reference.
+- **M3 — rate equation at τ_c ~ 0.1–0.5 ns** (the salvaged model as-is): real per-symbol gain
+  patterning + in-loop nonlinearity — **the III-V fallback platform's physics, not SiN's**.
+
+**Why this can't be defaulted:** it is not a fidelity knob — it changes what all four
+estimators face: PAT's twin-mismatch families (what "structural omission" means), the
+adjoint's linearity assumptions, what RHEL's echo must conjugate (a linear field vs a
+gain-patterned one), and the reservoir-baseline contrast.
+
+**Recommendation — (a) M1 headline · M2 registered as M1's one-off validation test · M3
+deferred to the §8 III-V fallback axis (named, not built in S0.3-1):**
+1. The proposal's platform is SiN (v0.5 §3). Registering M3 would have the bake-off train
+   against physics the headline platform measurably does not have — indefensible at review.
+2. Quasi-static is **measured, not assumed** ([EV]: τ = 3.4 ms; input saturation −15 dBm;
+   the large-signal criterion holds with ≥4 orders of margin).
+3. Registered validity conditions go into PR-4: within-episode **stationary drive
+   statistics** — satisfied by construction by the frozen task families (PR-2 T-A i.i.d.
+   4-PAM; PR-13 synthetic); **bursty/packeted inputs void M1** (stated boundary, per
+   Bononi & Rusch). Cross-episode gain memory + pump/thermal drift live at *training*
+   cadence via the existing drift knob + a slow operating-point update. The operating point
+   enters the autograd graph differentiably (house constraint 3a/3b — no detach).
+4. **The honest consequence, stated up front:** under M1 the substrate's in-loop physics is
+   linear; the expressivity story is *trained dissipative recurrence + |·|² readout* — which
+   is already exactly what PR-2 v2 froze (R2 headline; Vinckier-class reservoir baseline;
+   the linear-class ceiling comparison). The white-space claim (W1: pole positions +
+   couplings trained on-device) is untouched by in-loop linearity.
+5. Cost: M1 is the cheapest in-rollout (no added state); the salvaged integrator stays in
+   the repo for the M2 validation test and any future III-V fallback work.
+
+**Coupling to name now (recon §4f):** the 50/90 % loss-compensation conventions only close
+at P-FND and above — a CORNERSTONE cell is **passive-only** (no gain model; the fork is moot
+at that corner).
+
+**Ask — rule one of:**
+- **(a) M1 (recommended)** — SiN-native cell; M3 stays a named fallback, unbuilt.
+- (b) M1 headline + an **M3 sensitivity row** in the S0.5/S0.6 sweeps (labelled, non-gating
+  III-V fallback evidence; roughly doubles the substrate matrix for a demoted platform).
+- (c) M3 headline (would need a platform-story justification I don't see).
+
+On your ruling I draft **PROPOSED PR-4** from the ready input sheet → Critic phase-boundary
+review → your freeze → S0.3-1 substrate build (Executor).
+
+---
+
 ### ✅ E-2026-06-11-1 — Gate-i adjudication → **RESOLVED 2026-06-11 by Lucas: "sign PR-1.1"** — PR-1.1 v2 signed as written
 
 **RESOLUTION:** Lucas signed PR-1.1 v2 verbatim (no amendments). Ledger header flipped to
