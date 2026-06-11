@@ -137,8 +137,12 @@ untouched by this task beyond health checks.)
 > full-model probs GPU↔CPU **1.2–1.5e-7** (same magnitude as the CPU↔JAX record), BN stats
 > 0.0/1.5e-8, L=17,984 layer 3.8e-6, 20-step train **bit-deterministic** → the chain GPU-torch
 > ≡ CPU-torch ≡ official-JAX is closed (`scripts/parity_gpu_side.py`; box log
-> `logs/parity_gpu.log`). Gated-5 launched sequentially on cuda (same frozen protocol, CPU RNG
-> streams, identical seeds/splits/configs). The paused local workers were then killed (partial
+> `logs/parity_gpu.log`). Gated-5 launched sequentially on cuda (same frozen protocol,
+> identical seeds/splits/configs). **Deviation from E-5(iii), recorded (GA-F4):** dropout
+> masks moved to a device generator (commit 087a346) for throughput; init/shuffle remained
+> CPU-drawn; stream bits were never protocol content (PR-1 pins behavior, not bit-streams) —
+> the gated outcome is conditional on the realized stream either way, which is precisely the
+> property F-G3 establishes. The paused local workers were then killed (partial
 > state discarded — protocol-clean; nothing reused) and their config-only JSONLs removed.
 > First instance (40442878) had dead proxy-SSH, destroyed at ~$0.06 sunk. Per-seed table +
 > joint verdict + $ actuals follow when the runs land.
@@ -171,7 +175,11 @@ untouched by this task beyond health checks.)
 >    (eqx Linear lim = 1/√in for weight+bias = our `_init_linear`; A/steps U[0,1), B ±1/√H,
 >    C ±1/√ssm, D N(0,1)) — weight-transplant parity is blind to init bugs by construction,
 >    so this was checked line-by-line against models/LinOSS.py + eqx 0.11.4 source. Only the
->    stream BITS differ (declared framework-inherent in this entry's original config note).
+>    stream BITS differ — declared framework-inherent at commit 087a346, the earliest
+>    committed declaration (the per-run jsonl config blocks carry no such note — GA-F4
+>    pointer fix); the E-5(iii) deviation is reconciled above. Completeness note (GA-F7):
+>    BN scale/bias are init-trivial (1/0); the BN state arrays are excluded from trainables —
+>    covered by the param-count reconciliation.
 > 4. **Official-repo cross-check IN FLIGHT** (the decisive evidence): the official JAX code —
 >    pinned commit 05a8353, jax 0.4.28 / eqx 0.11.4 / optax 0.2.2 (the S0.2-1 reference-venv
 >    pins), official pickles, their own run_experiment.py, one config copy with seeds
@@ -181,7 +189,8 @@ untouched by this task beyond health checks.)
 >    per-stream; the gate-semantics adjudication (PR-1, stream-sensitive anchor) goes to the
 >    Supervisor/Lucas via decisions_needed.md. Note for that reading: the official code sets
 >    no matmul-precision flags → jax default (TF32-class on Ampere GPUs) vs our strict-fp32 —
->    rounding-noise difference only; the fp32 softmax underflow threshold is identical.
+>    a per-op rounding-class difference only, NOT outcome-neutral over 13k+ training steps
+>    (GA-F2 qualification); the fp32 softmax underflow threshold is identical in both stacks.
 > Spend so far ≈ $0.8 of the $7.44 ceiling (incl. all diagnosis runs).
 >
 > **DIAGNOSIS CLOSED 2026-06-11 (small hours) — the official-repo cross-check lands BOTH ways
@@ -190,8 +199,13 @@ untouched by this task beyond health checks.)
 >    commit + reference-venv versions, official pickles, same GPU): per-seed **97.22 / 83.33 /
 >    97.22 / 97.22 / 77.78**, gated mean **0.9055555462837219 = 90.5556 % — BELOW the frozen
 >    90.6 gate** (unrounded, PF-F8h), σ ≈ 9.3 pp vs the published 4.4. No traps on these 5.
+>    Official seed-6789: best-val 97.14 → test 77.78 (35/36-sample sets) — the published
+>    protocol's own selection convention swings ~20 pp on this dataset (GA-F7 anchor-noise
+>    color).
 > 2. **Official code, 8 fresh seeds: 2/8 trap** (9012 → 50.0 %, 22222 → 11.1 %; same
->    flat-loss absorbing-state signature; fresh-8 mean 73.26 %). Ours 4/8 vs official-fresh
+>    flat-loss absorbing-state signature; fresh-8 mean 73.26 %) — *console-observed on the
+>    destroyed instance, unarchived; superseded by the archived local regeneration (GA-F1,
+>    S0.2-1R addendum below)*. Ours 4/8 vs official-fresh
 >    2/8: Fisher p ≈ 0.6 — statistically indistinguishable; **the absorbing state belongs to
 >    the published method at this anchor**, and the published seed set avoids it by draw.
 > 3. **Joint Gate-i verdict as measured: G1 PASS ∧ G3 FAIL → Gate i FAIL** under the frozen
@@ -199,8 +213,11 @@ untouched by this task beyond health checks.)
 >    implementation fails the gate too). Adjudication (incl. any re-registration, Lucas-only)
 >    → `decisions_needed.md` D-2026-06-11-1. **Zero tuning; zero gated reruns; closure rule
 >    held throughout** (official repo used only as the sanctioned divergence cross-check).
-> 4. Official-rerun raw trail synced: `results/s0_2/gate_i/xcheck_official/` (driver logs +
->    per-seed npy trails for all 13 official runs). Box destroyed after sync.
+> 4. Official-rerun raw trails: `results/s0_2/gate_i/xcheck_official/` — **per-seed trails
+>    for the 5 published-seed runs (archived); fresh-8 console-only, superseded by the
+>    archived local regeneration (GA-F1 — see the S0.2-1R addendum below)**. The
+>    `solver_Heun` field in the official output paths is the Walker-codebase directory-name
+>    template, not an integrator used by LinOSS (GA-F7). Box destroyed after sync.
 > **Final compute actuals: $1.1512 of the $7.44 ceiling** (both instances + parity + gated-5
 > + all diagnosis + 13 official cross-check runs; jax ≈ 21 s/eval-cycle, torch ≈ 87 s).
 

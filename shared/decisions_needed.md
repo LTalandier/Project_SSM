@@ -57,9 +57,12 @@ raw `results/s0_2/gate_i/` (ours) + `results/s0_2/gate_i/xcheck_official/` (offi
   pre-registration hygiene; costs a re-freeze round.
 - **(O3)** Both: record FAIL-as-measured + register a replacement anchor going forward.
 - **Carry regardless (debt #2 / paper record):** the LinOSS-IM EigenWorms 95.0±4.4 headline
-  rests on a seed set that avoids a ~25 %-incidence init collapse of its own objective and
-  does not reproduce under a faithful rerun (90.6 ± 9.3) — first-hand support for the
+  is consistent with a favorable seed draw from an fp32 **optimization** collapse of its own
+  objective (−Σ y·log(softmax+1e-8); entered by training steps 1–7, not at init) with
+  material incidence in both stacks (point estimates 15–50 %, small-n CIs wide), and does
+  not reproduce under a faithful rerun (90.56, σ 9.34) — first-hand support for the
   project's "in-house BPTT ceiling, not published numbers" anchoring philosophy (PR-3).
+  *(Wording per Critic GA-F3(ii)/(iii) + GA-F7, applied 2026-06-11 in the S0.2-1R pass.)*
 
 **Executor state:** stopped on this item per PR-1 ("on a miss: stop"). Annex-3 not run
 (post-verdict idle work — moot pending adjudication). Box destroyed; spend ≈ $1.0 of $7.44

@@ -1,0 +1,32 @@
+/tmp/linoss_venv/lib/python3.12/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+Running experiment with seed: 1
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /home/lucas/Documents/Project_SSM/results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_1000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_1 has been created.
+Step: 1000, Loss: 0.6369073390960693, Train metric: 0.9818181395530701, Validation metric: 0.9714285731315613, Time: 4689.792694568634
+Test metric: 0.9166666865348816
+Test metric: 0.9166666865348816
+	Command being timed: "/tmp/linoss_venv/bin/python scripts/xcheck_official_local.py results/s0_2/gate_i/xcheck_official_local/config_bench"
+	User time (seconds): 14714.85
+	System time (seconds): 1347.04
+	Percent of CPU this job got: 341%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:18:19
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3616468
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 561159825
+	Voluntary context switches: 2962320
+	Involuntary context switches: 1988262
+	Swaps: 0
+	File system inputs: 32
+	File system outputs: 96
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
