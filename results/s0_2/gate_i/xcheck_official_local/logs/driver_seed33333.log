@@ -1,0 +1,15 @@
+/tmp/linoss_venv/lib/python3.12/site-packages/jax/_src/lax/lax.py:2745: ComplexWarning: Casting complex values to real discards the imaginary part
+  x_bar = _convert_element_type(x_bar, x.aval.dtype, x.aval.weak_type)
+Running experiment with seed: 33333
+Creating dataset EigenWorms
+Creating model LinOSS
+Directory /home/lucas/Documents/Project_SSM/results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_33333 has been created.
+Step: 1000, Loss: 0.6187052130699158, Train metric: 0.9636363387107849, Validation metric: 0.800000011920929, Time: 4289.959505558014
+Test metric: 0.7777777910232544
+Step: 2000, Loss: 0.18724872171878815, Train metric: 0.9939393401145935, Validation metric: 0.8571428656578064, Time: 4268.131125926971
+Test metric: 0.8333333134651184
+Step: 3000, Loss: 0.011891232803463936, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 4270.805533647537
+Test metric: 0.9166666865348816
+Step: 4000, Loss: 0.000761460221838206, Train metric: 0.9999999403953552, Validation metric: 0.8857142925262451, Time: 4379.699314832687
+Test metric: 0.9166666865348816
+Test metric: 0.9166666865348816

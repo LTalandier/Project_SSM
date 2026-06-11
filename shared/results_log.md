@@ -220,6 +220,65 @@ untouched by this task beyond health checks.)
 >    template, not an integrator used by LinOSS (GA-F7). Box destroyed after sync.
 > **Final compute actuals: $1.1512 of the $7.44 ceiling** (both instances + parity + gated-5
 > + all diagnosis + 13 official cross-check runs; jax ≈ 21 s/eval-cycle, torch ≈ 87 s).
+>
+> **ADDENDUM 2026-06-11 — S0.2-1R record repair (Critic GA-F1/F4/F7; diagnostic only: zero
+> gated numbers touched, zero tuning, zero gated reruns, official code unmodified).**
+> 1. **Pre-declaration before any run (the task gate):** fresh-seed list (n=8, incl. 9012 +
+>    22222), screen protocol, and the three-leg trap classifier committed at `889ab53`
+>    BEFORE execution (`results/s0_2/gate_i/xcheck_official_local/PREDECLARATION.md`). The
+>    same commit **force-added the previously gitignored `results/s0_2/gate_i/` tree** (G1 +
+>    gated-G3 jsonls, box-synced published-5 official trails, logs) — the gitignore was the
+>    actual "archived" gap behind GA-F1.
+> 2. **Ours-annex 600-step screens regenerated locally, archived** (per-step loss + total
+>    grad², CPU generators, deterministic; `ours_annex_screens/*.jsonl`): **8901 TRAP@1 ·
+>    9012 TRAP@555 · 7890 ALIVE**. 9012 is the first observed *late* entry (first exact-zero
+>    gradient at step 392, one transient nonzero step at 554 — dropout-borne — exact
+>    absorption from 555; batch losses quantized to multiples of 18.4207/4, i.e. every
+>    sample's p_true exactly 0 or 1). vs the box-CUDA prose (7890@7 · 8901@1 · 9012 alive):
+>    **the same seed's trap status flips in BOTH directions across environments** (7890
+>    GPU-trap→CPU-alive; 9012 GPU-alive→CPU-trap).
+> 3. **Official fresh-8 regenerated locally, archived** (pinned CPU venv jax 0.4.28 / eqx
+>    0.11.4 / optax 0.2.2; official runner + pickles; commit 05a8353 zero source edits;
+>    4-cycle screens per the pre-declared protocol; executed as 8 single-seed config copies
+>    of the committed config — scheduling only, the official seed loop is per-seed
+>    independent): **0/8 strict-trap** under the pre-declared classifier (val+train+loss all
+>    constant). Two 2/3-constant cases flagged verbatim, classified ALIVE per the
+>    conservative rule: **22222 chance-frozen on val AND train across all 4 evals** (5/35,
+>    22/165; cycle-mean losses 15.9385–15.9708 ≈ 0.87 × full-saturation, drifting in the 3rd
+>    digit → saturated basin with residual gradient — *behaviorally collapsed without exact
+>    zero-gradient absorption in this environment/window*); 9012 plateau-stuck (train 45.45%
+>    bit-constant, loss ~10.01–10.05 moving) — mechanically alive. The remaining 6 train
+>    healthily (val 0.83–0.91 by eval 4).
+> 4. **Superseding statement (per the Critic):** *incidence is stream- and
+>    environment-dependent; the rented-box console observations (2/8) are superseded by this
+>    archived local estimate* — **0/8 strict-trap, 1/8 behaviorally collapsed (22222)**.
+>    Instrument note: ours screens instrument the gradient directly; the official screens
+>    classify by trail constancy (the official code was deliberately left unmodified — no
+>    gradient hook). Precision note: box runs were TF32-class (jax Ampere default), local is
+>    strict fp32 — the saturation *threshold* is identical, the trajectory *into* saturation
+>    is not, hence incidence differences are expected (GA-F2/F3 logic). Window: 4,000 steps.
+>    The box fresh-8 final accuracies (incl. the 73.26 % mean) stay demoted: console-observed,
+>    unarchived, indicative only.
+> 5. **What the incidence evidence now rests on (all archived):** ours gated-GPU trails 2/5
+>    (2345@1, 6789@4; the trap's stop-at-exactly-12k signature is visible in the gated
+>    jsonls independently of any diagnosis script) · ours annex-local 2/3 (grad ≡ 0.0
+>    per-step) · official-behavioral 22222 (chance-frozen 4/4 evals). The criterion-voiding
+>    logic is unchanged — any material incidence voids it (GA-F3), and the dispersion leg
+>    (90.56, σ 9.34 — GA-F2) needs no incidence estimate at all. **Beyond the console
+>    version, the archived record adds: same-seed trap-status flips with environment in both
+>    stacks — the anchor-instability finding is *stronger* as archived.**
+> 6. **Corrections landed in this pass** (in-place above + D-item): GA-F1 data-path sentence
+>    (published-5 archived / fresh-8 console-only-superseded) · GA-F4 E-5(iii) deviation
+>    reconciliation + the "original config note" pointer → commit 087a346 · GA-F7 (official
+>    seed-6789 val→test sentence; BN init-audit completeness; `solver_Heun`
+>    directory-template note) · GA-F2 "rounding-noise only" qualification · GA-F3(ii)/(iii)
+>    + GA-F7 rewordings in D-2026-06-11-1.
+> 7. **Logistics:** all local CPU, **$0**. Bench (seed 1, excluded): 78-min cycle. Waves:
+>    03:11→07:57→12:44 (~9.6 h wall, 2×4 drivers × ~3.3 cores × 3.6 GB). Trails:
+>    `results/s0_2/gate_i/xcheck_official_local/` (outputs/, logs/, ours_annex_screens/,
+>    config*, PREDECLARATION.md); classifier `analysis/s0_2_1r_classify.py`; commits
+>    `889ab53`, `268e6a6` + closing. The Supervisor cites the archived k/n in PR-1.1 v2's
+>    incidence sentence (ledger edits Supervisor-side).
 
 **Goal:** implement the in-house recurrence layer (the bake-off object downstream), validate it,
 and reproduce the two frozen PR-1 anchors under the exact Walker protocol. Gate i (PR-1 verbatim):
