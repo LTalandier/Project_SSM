@@ -6,6 +6,53 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-11 (fork ruled: M1 + M3 trigger → PROPOSED PR-4 posted; Critic spec ready)
+
+**Lucas ruled E-2026-06-11-2** (recorded verbatim in the E-item): **M1** registered ·
+**M2** strictly a one-off validation reference · **M3** neither built nor discarded — a
+deferred branch with a **pre-committed trigger** ((a) gated S0.5/S0.6 verdict within a
+flip-plausible margin, margin form frozen at PR-5–9/PR-11 *before* any bake-off results;
+(b) Stage-2 platform tilt to III-V) — plus three drafting riders: R1 NF-A-headline-everywhere,
+R2 splitting-block-states-N-grid-consequence, R3 ensemble-power-stationarity-as-registered-
+M1-validity-assumption. The trigger extension is better than my plain (a): it pre-prices the
+exact circumstance where skipping M3 could bias a conclusion.
+
+**PROPOSED PR-4 posted** (ledger, after PR-1.1). The registered choices and the reasoning:
+- **G:** M1 per the ruling; gain ceiling 0.9×intrinsic (no-lasing; never compensates κ_ext);
+  ASE = A2 Langevin (composes with the S0.1 exact discretization; A1 = unit-tested
+  equivalent); validity conditions (i) stationary episodes (ii) R3 ensemble-power
+  stationarity (iii) quasi-static margin at P̄₀.
+- **Cells:** C-1 = P-FND/NF-A/γ-90 **gates Gate ii at N=8** (the foundry floor; honors
+  "foundry-grade gates Gate ii"); C-2 = P-AN800/NF-A/γ-11.8 **hosts the PR-2 frozen headline
+  N=32** (packs in-band at θ₀, T-A 7-tap span covered, gain ×22–41) — registered as a
+  **conservative bound** on the abstract-verified Cui 2023 numbers (body-level still walled:
+  four routes attempted at freeze date; residual risks named: body-provenance + 19.8-GHz-FSR
+  → 100-GHz geometry transfer); C-3 = P-UHQ aspirational, hosts N=128 knob-ON (EV-F3 escape
+  (a)). NF-A 7.0 headline everywhere (R1).
+- **K4 trainable κ_ext** — *forced* by the frozen PR-2 P2 partition (κ_ext,j is in the
+  trainable set; a fixed policy would contradict a frozen entry). Bounds r ∈ [0.1, 3];
+  **θ₀ = 0.3** (the joint point where frozen N=32 packs + 7-tap span covered + drop eff.
+  non-degenerate — design-from-frozen-constraints, no results exist to peek at).
+- **K-pol-3 splitting knob always ON** (K-pol-1/2 are incoherent under trainable κ_ext);
+  γ=0 recovers single-pole exactly; R2 consequence stated in-block: deployable N-grid
+  {8 @ C-1, 32 @ C-2}, 128 only as the labelled C-3 cell — PR-2's frozen grid survives.
+- **H1** worst-case holding (conservative standalone numbers; H2 = sensitivity; H3 = Stage-1).
+- **O2 intracavity-energy normalization** (the only convention comparison-clean under K4);
+  anchored P̄₀ = 1 mW, P_pk = 2P̄₀; **E₀ = frozen parameter-free formula now, mechanical
+  numeric evaluation at S0.3-1 calibration, ledger-addended before any consuming run** — the
+  Critic is explicitly pointed at this two-step as a potential pre-registration hole.
+- **Anchor-risk register:** first application of the PR-1.1 transfer-check rule at a physics
+  freeze (GA-F6 scope) — infeasibility registered, risk carried by provenance trail +
+  conservative bounds + M2 validation + named residuals.
+
+**Critic spec filed:** `critic_instructions_pr4-freeze.md` — 12-item checklist; hostile
+stances assigned: "cell chosen to flatter the photonic side" + "freeze leaves tunable
+holes"; every load-bearing number flagged for re-derivation; rider-compliance audit;
+completeness-vs-F12 sweep. **Lucas launches the Critic** (his stated process), signs after
+review. Executor stays idle until the freeze.
+
+---
+
 ## 2026-06-11 (PR-1.1 v2 SIGNED by Lucas — S0.2-1 CLOSED; the program returns to the queued S0.3 path)
 
 Lucas signed PR-1.1 v2 verbatim ("sign PR-1.1", E-2026-06-11-1) — no amendments. Recorded:

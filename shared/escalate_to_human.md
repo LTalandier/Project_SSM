@@ -18,7 +18,37 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### 🔴 E-2026-06-11-2 — S0.3 gain-regime fork: which gain-model class does the shared substrate register? **Recommendation: M1 (SiN-native static-saturated)**
+### ✅ E-2026-06-11-2 — S0.3 gain-regime fork → **RESOLVED 2026-06-11 by Lucas: M1, with a registered M3 trigger** (extension of option (a); ruling recorded verbatim below)
+
+**RULING (Lucas, 2026-06-11 — binding content, recorded in full):**
+1. **M1 is the registered gain-model class** for the S0.3-1 shared substrate: static
+   saturated operating point + ASE + slow drift, under the validity conditions as proposed
+   (stationary episodes — the frozen tasks qualify; bursty inputs void; differentiable
+   operating point; drift at training cadence).
+2. **M2 is retained strictly as M1's one-off validation reference:** run once to confirm the
+   quasi-static reduction against the rate equation at τ = 3.4 ms; not a substrate-matrix
+   member; archive the comparison with the S0.3-1 validation set.
+3. **M3 is neither built nor discarded: a deferred branch with a pre-committed trigger.**
+   The M3 sensitivity row is built iff (a) a gated S0.5/S0.6 comparison lands within a
+   margin where the gain-model class could plausibly flip the verdict — **the quantitative
+   form of that margin is frozen with the bake-off pre-registrations (PR-5–9/PR-11), before
+   any bake-off results exist** — or (b) the Stage-2 platform assessment tilts to III-V/SOA.
+   Until a trigger fires, M3 stays named and unbuilt at $0.
+
+**Riders for the PROPOSED PR-4 draft (drafting instructions, not post-hoc amendments):**
+- **R1:** NF-A 7.0 (measured) is the headline noise cell everywhere; NF-C 3.0 may appear
+  only as a clearly-labeled aspirational sensitivity, never in a headline figure.
+- **R2:** the splitting-policy block must state its N-grid consequence in the same block
+  (the policy is the de facto {8,32} vs {8,32,128} decision).
+- **R3:** whichever drive-normalization cell is proposed, the ensemble-power stationarity
+  assumption (gain operating point follows average power; train/test power statistics
+  pinned) is written as a **registered assumption of M1's validity**, not a line item.
+
+**Process (per the ruling):** Supervisor drafts PROPOSED PR-4 → Lucas launches the Critic
+for the phase-boundary review once posted → Lucas signs after review. Executor idle until
+the freeze.
+
+*Original item as filed:*
 
 **Filed:** 2026-06-11 (Supervisor). **Gates:** the PROPOSED PR-4 draft (my next output) and
 S0.3-1 (the substrate build). **Source:** the S0.3-0 recon flagged this as a methodology fork
