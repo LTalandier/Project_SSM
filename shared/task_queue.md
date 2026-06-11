@@ -90,11 +90,25 @@ the in-flight G3 runs beyond health checks.
 
 ---
 
-## 🔥 ACTIVE — S0.2-1R: G3 record repair (Critic GA-F1/F4/F7 — decision-free; ~2–3 h local, $0)
+## ✅ DONE — S0.2-1R: G3 record repair (Critic GA-F1/F4/F7) — **ACCEPTED 2026-06-11, Supervisor-verified from archived trails**
 
-**Assigned:** 2026-06-11
+**Assigned:** 2026-06-11 · **Completed + accepted:** 2026-06-11
 **Supervisor:** Claude Opus 4.8
-**Status:** 🔥 ACTIVE.
+**Status:** ✅ DONE (Executor commits 889ab53 pre-declaration → 268e6a6 annex screens +
+GA-F2/F3/F4/F7 corrections → 60f665b fresh-8 + closing; ~9.6 h wall, local CPU, **$0**).
+**Acceptance verification (artifacts first, numbers second):** 8 archived official run dirs +
+non-empty per-seed driver logs + `PREDECLARATION.md` committed at 889ab53 BEFORE any run +
+3 gradient-instrumented annex jsonls under `results/s0_2/gate_i/xcheck_official_local/`;
+previously gitignored `gate_i/` tree force-added (the actual hole behind GA-F1). Supervisor
+re-ran the pre-declared classifier from the archived npy/jsonl: **official fresh-8 = 0/8
+strict-trap, 1/8 behaviorally collapsed** (22222 chance-frozen on both metric legs, loss
+drifting → ALIVE under the conservative conjunction, flagged verbatim; 9012 plateau-moving =
+alive; six healthy at val 0.83–0.91) · **ours annex-local = 8901 TRAP@1 · 9012 TRAP@555 (one
+dropout-borne transient at 554) · 7890 ALIVE** — every claimed figure reproduces. Console 2/8
+superseded per the pre-declared sentence; GA-F4 reconciliation (commit 087a346 cited) + GA-F7
+nits verified in the results entry. PR-1.1 v2's incidence bullet now cites the archived
+figures (Supervisor-side ledger edit done). **Sole remaining S0.2 item: Lucas signs PR-1.1 v2
+(E-2026-06-11-1).**
 **Source:** `critic_review_g3-adjudication.md` (verdict **APPROVE-WITH-EDITS — "sign PR-1.1
 with these edits"**; GA-F1 was the signature-blocking item — resolved *now* by demotion in
 PR-1.1 v2, and *upgraded* by this regeneration). **Not a gated run.** Nothing here touches
@@ -133,7 +147,7 @@ all trails archived + committed · corrections cite GA-F numbers.
 
 ---
 
-## 🔴 S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS · G3 ❌ FAIL as measured (71.11 % < 90.6) · ADJUDICATION PENDING (PR-1.1 → Critic review → Lucas)**
+## 🔴 S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS · G3 ❌ FAIL as measured (71.11 % < 90.6) · ADJUDICATION: PR-1.1 v2 sign-ready (Critic-approved + record-repaired) — awaiting Lucas**
 
 > **MEASURED OUTCOME (2026-06-11; GPU route per E-2026-06-10-5, Lucas-approved in-session,
 > $1.15 of $7.44):** GPU parity gate passed (1.2–1.5e-7) → gated-5 ran to completion →

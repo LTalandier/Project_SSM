@@ -100,6 +100,17 @@ console-only (unarchived; box destroyed) → demoted in v2; archived local regen
 **Executor task S0.2-1R** (ACTIVE). **GA-F4** (E-5(iii) RNG deviation unrecorded)
 reconciliation rides S0.2-1R. Awaiting Lucas on E-2026-06-11-1.
 
+**Update (2026-06-11, S0.2-1R landed + accepted):** the archived local regeneration
+supersedes the console figures — official fresh-8: **0/8 strict-trap, 1/8 behaviorally
+collapsed** (22222 chance-frozen across all 4 evals); ours annex-local: **2/3** (8901@1;
+9012@555, the first observed late entry; 7890 alive); the same seed's trap status flips with
+environment in both stacks. I re-ran the pre-declared classifier from the archived npy/jsonl
+trails — every claimed figure reproduces. GA-F4 reconciliation + GA-F7 corrections are on the
+record; PR-1.1 v2's incidence bullet now cites only archived, per-environment figures (the
+stale Fisher values computed on superseded counts are dropped; the operative logic — any
+material incidence voids, ruling rests on dispersion + mechanism — is unchanged). **Sole
+remaining step: Lucas signs PR-1.1 v2 (E-2026-06-11-1).**
+
 ### ✅ D-2026-06-10-2 — S0.2-1 G3 runtime flag → **RESOLVED 2026-06-10 by Supervisor: option 1+3 (local, gated-5 first)**
 
 **Ruling:** run G3 **locally, gated-5 seeds first** (3-parallel as proposed, ~3–4 days), **annex-3

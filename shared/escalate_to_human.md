@@ -26,7 +26,7 @@ APPROVE-WITH-EDITS, bottom line "sign PR-1.1 with these edits" — and all edits
 and moved the goalposts" stick; it reports the adjudication survives, *after* repairs it
 identified: one evidentiary gap (the official fresh-seed collapse numbers were observed on
 the destroyed cloud box's console but never archived — now demoted to "indicative" in v2,
-with an archived local regeneration running as Executor task S0.2-1R, ~$0), two
+with an archived local regeneration **since landed and Supervisor-verified** (S0.2-1R, 2026-06-11, $0)), two
 overstatement fixes (the rerun's 0.04-pp shortfall is one test-sample wide and
 environment-sensitive — the *real* evidence is the 2.1× dispersion; the collapse-incidence
 statistics get honest small-sample error bars), one process-record repair (a GPU-run RNG
@@ -49,10 +49,14 @@ proceed on the validation evidence that actually holds.
   the frozen gate's edge (one test-sample short), with seed-to-seed spread 2.1× what the
   paper reports** (individual published seeds landing at 77.8 and 83.3 — archived,
   Critic-verified from raw). Per the Critic (GA-F2): the anchor fails on **dispersion and
-  environment-sensitivity**, not on a 0.04-pp technicality. The collapse also fires in the
-  official code on fresh seeds (console-observed 2/8 vs our archived 4/8 — no detectable
-  stack difference; the samples are too small for equivalence claims and none is needed:
-  **any material incidence makes the gate a seed lottery**). The published 95.0 ± 4.4 is
+  environment-sensitivity**, not on a 0.04-pp technicality. The collapse fires beyond our gated run, and its
+  incidence moves with the compute environment (all archived now, S0.2-1R): our stack shows
+  2/5 gated seeds (GPU) and 2/3 annex seeds (local CPU) trapped; the official code's fresh
+  seeds, rerun locally, show 0/8 in the strict zero-gradient sense but 1/8 frozen at chance
+  anyway (seed 22222) — and the *same seed* flips between trapped and healthy across
+  environments, in both stacks. No equivalence between stacks is claimed and none is needed:
+  **any material incidence makes the gate a seed lottery**, and the incidence itself being
+  environment-dependent is the instability in its purest form. The published 95.0 ± 4.4 is
   *consistent with* a favorable draw from that collapse mode.
 - **Our implementation is exonerated** by evidence stronger than any accuracy score: with
   the same weights, our code and theirs agree to ~2×10⁻⁷ — numerically the same model. The
@@ -77,20 +81,11 @@ the amendment is signed by you, after independent Critic review, on evidence tha
 premise* — not our model — failed. The hostile reading is priced in and the Critic is
 explicitly instructed to attack it.
 
-**Your moves now (the Critic step is done — its verdict: "sign PR-1.1 with these edits",
-edits applied in v2):**
-1. *(Recommended but not blocking)* **Launch the Executor on S0.2-1R** — the ~2–3 h, $0
-   record-repair the Critic asked for (re-run the official code's fresh seeds *locally* so
-   the collapse-incidence numbers are archived, not console folklore; plus four small
-   results-log corrections):
-   ```bash
-   cd ~/Documents/Project_SSM
-   claude "Read shared/launch_executor.md and follow it."
-   ```
-2. **Rule on PR-1.1 v2** — "sign PR-1.1" / amendments / a different option from
+**Your move now — one item left (Critic review ✅ done; S0.2-1R record repair ✅ done,
+landed 2026-06-11, ~9.6 h local CPU, $0, Supervisor-verified from the archived trails):**
+1. **Rule on PR-1.1 v2** — reply "sign PR-1.1" / amendments / a different option from
    D-2026-06-11-1 (O1 record-FAIL-only · O2 replacement anchor · O3 = the proposal above).
-   v2 is sign-ready as-is (the unarchived numbers are already demoted in the text); sign
-   before or after S0.2-1R lands — your preference.
+   Every citable number in v2 is now archived; nothing else blocks on you.
 
 On your signature: S0.2-1 closes (G1 PASS ∧ G3 void-with-finding), and the next Supervisor
 outputs are the erbium gain-regime proposal + the PROPOSED PR-4 — the path that was queued

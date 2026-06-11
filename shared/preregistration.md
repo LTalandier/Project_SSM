@@ -413,7 +413,7 @@ constraints + EV-F1/F3/F5 carry-ins), PR-10 frozen grid, PR-15.1 W1.
 - **T-B (IM-DD PAM-4 at 1–2 GBd):** labelled non-frozen extension (niche-native demo for
   S0.7-full/Stage-1; generator port deferred — not in the salvage manifest).
 
-## PR-1.1 — PROPOSED amendment **v2** (Supervisor draft 2026-06-11; revised same day per Critic review `critic_review_g3-adjudication.md` — verdict **APPROVE-WITH-EDITS, "sign with these edits"**; GA-F1(b) demotion applied + GA-F1(a) regeneration rider posted; GA-F2/F3/F5/F6/F7 applied; ⬜ until Lucas signature; PR-1 v2 above retained per supersession discipline)
+## PR-1.1 — PROPOSED amendment **v2** (Supervisor draft 2026-06-11; revised same day per Critic review `critic_review_g3-adjudication.md` — verdict **APPROVE-WITH-EDITS, "sign with these edits"**; GA-F1(b) demotion applied + GA-F1(a) regeneration **landed & archived** (S0.2-1R, 2026-06-11, Supervisor-verified from trails); GA-F2/F3/F5/F6/F7 applied; ⬜ until Lucas signature; PR-1 v2 above retained per supersession discipline)
 
 **Triggered by the measured Gate-i outcome** (results_log S0.2-1 addenda; adjudication item
 D-2026-06-11-1) — filed *after* the runs, so it is held to the amendment standard: Critic
@@ -442,16 +442,26 @@ review + Lucas signature, with the measured record permanent and unamended.
    an **optimization collapse of the published objective**, entered at training steps 1–7
    (not an init pathology; GA-F3iii). Critic re-derived both saturation directions to
    exactly-zero gradient and bounded the escape paths (GA checklist 1: CONFIRMED).
-3. **Incidence:** material in both stacks — **ours 4/8 protocol seeds (archived trails)**;
-   official **2/8 fresh seeds — console-observed on the destroyed instance, unarchived,
-   indicative only** (GA-F1; an archived local regeneration on the pinned venv is in flight
-   as a record-repair rider and supersedes the console figure when it lands). **No detectable
-   stack difference** (Fisher p = 0.15–0.61 across denominators; the 8-vs-8 design has ~9 %
-   power at the observed rates — **equivalence is neither claimed nor needed: any material
-   incidence voids the criterion**; at incidence as low as 0.1, P(≥1 trap in a fresh 5-seed
-   gate) = 41 %). The published 95.0 ± 4.4 **is consistent with** a favorable draw from a
-   collapse mode with material incidence in both stacks (point estimates 15–50 %; small-n
-   CIs wide) (GA-F3).
+3. **Incidence (all citable figures archived — S0.2-1R; reported per-environment, since
+   incidence is stream- and environment-dependent):** ours, gated GPU run: **2/5** (2345@1,
+   6789@4; the stop-at-exactly-12k trap signature is visible in the archived gated jsonls) ·
+   ours, annex local-CPU regeneration: **2/3** (8901 absorbed from step 1; 9012 from step 555
+   — the first observed *late* entry, one dropout-borne transient at 554; 7890 alive;
+   per-step gradient ≡ 0.0 archived) · official code, fresh-8 local-CPU regeneration
+   (pre-declared seed list, pinned venv, zero source edits): **0/8 strict-trap, 1/8
+   behaviorally collapsed** (22222 chance-frozen on val AND train across all 4 evals —
+   saturated basin with residual gradient). The rented-box console observations
+   (official-fresh 2/8; ours-annex 7890@7/8901@1/9012-alive) are **superseded by these
+   archived local estimates** (GA-F1) and remain indicative only. Relative to that console
+   record, **the same seed's trap status flips with environment in both stacks** (ours 7890
+   CUDA-trap→CPU-alive and 9012 CUDA-alive→CPU-trap; official 22222 console-strict→locally
+   behavioral-only) — incidence is itself environment-contingent, which *is* the instability
+   claim. **Equivalence across stacks is neither claimed nor needed: any material incidence
+   voids the criterion** (small-n throughout — ~9 % power at these sizes; at incidence as
+   low as 0.1, P(≥1 trap in a fresh 5-seed gate) = 41 %). The published 95.0 ± 4.4 **is
+   consistent with** a favorable draw from a collapse mode with material incidence (GA-F3);
+   the void ruling rests on the dispersion leg (bullet 1) and the mechanism (bullet 2), not
+   on any particular k/n.
 4. **The port is exonerated on independent evidence:** float32-exact cross-framework parity
    (2.4–2.7×10⁻⁷ full-model, both anchors, incl. full L=17,984; 1.2–1.5×10⁻⁷ on the GPU),
    line-by-line init-distribution audit vs the official source (BN scale/bias init-trivial;

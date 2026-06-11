@@ -6,6 +6,44 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-11 (S0.2-1R accepted — the record repair holds; archived incidence supersedes the console)
+
+**Acceptance basis (this time in the right order): artifacts first, numbers second.** The
+GA-F1 gate held — the pre-declaration (seed list incl. 9012/22222, the three-leg classifier,
+screen protocol, environment caveat) was committed at 889ab53 BEFORE the runs; the archive
+holds 8 official run dirs with full npy trails + non-empty per-seed driver logs (vs the box's
+empty `driver_fresh.log`) + 3 gradient-instrumented annex jsonls; the previously gitignored
+`gate_i/` tree is force-added (the gitignore was the actual hole behind GA-F1). I then re-ran
+the pre-declared classifier myself from the archived npy/jsonl: official fresh-8 = six
+healthy (val 0.83–0.91 by eval 4), 9012 moving (alive), 22222 frozen at chance on both metric
+legs → **0/8 strict, 1/8 behavioral**; annex = 8901 absorbed@1, 9012 absorbed@555 with the
+single dropout-borne transient at 554, 7890 alive. Every claimed figure reproduces.
+
+**The honest movement, stated plainly:** the official-stack strict-trap point estimate went
+**2/8 (console) → 0/8 (archived local CPU)**. That does not weaken F-G3 — it *is* F-G3:
+incidence is environment-contingent (the same seed flips trap status in both stacks, both
+directions, vs the console record). The void ruling never rested on a particular k/n; it
+rests on the archived dispersion leg (90.56, σ 9.34 = 2.1× published), the
+analytically-verified mechanism, and "any material incidence voids" (ours archived 2/5 GPU +
+2/3 CPU is material). I rewrote PR-1.1 v2's incidence bullet to cite only archived figures,
+per-environment, and dropped the stale Fisher values computed on the superseded counts.
+A hostile reviewer reading "0/8 locally" as "the official code is fine on CPU" runs into
+22222 (chance-frozen 4/4 evals, archived) and into the dispersion leg, which needs no
+incidence at all.
+
+**Executor assessment: exemplary repair.** The pre-declaration is exactly the operative
+declaration the Critic demanded; the conservative classifier rule (2/3-constant → ALIVE,
+flagged verbatim) resisted any temptation to inflate incidence back toward the console
+figure; the 22222 distinction (saturated basin with residual gradient vs exact absorption)
+is the kind of precision that survives review. GA-F4 reconciled (087a346 cited), GA-F7 nits
+landed. ~9.6 h wall, $0.
+
+**Record state:** GA-F1 closed · the only open item in all of S0.2 is **Lucas's signature on
+PR-1.1 v2** (E-2026-06-11-1). On signature: S0.2-1 closes (G1 PASS ∧ G3 void-with-finding);
+next Supervisor outputs = the Er gain-regime fork proposal (M1 vs M3) + PROPOSED PR-4.
+
+---
+
 ## 2026-06-11 (Critic G3-adjudication review in → PR-1.1 v2, sign-ready) — full concurrence; two of its findings are mine to own
 
 **Verdict** (`critic_review_g3-adjudication.md`): **APPROVE-WITH-EDITS — "sign PR-1.1 with
