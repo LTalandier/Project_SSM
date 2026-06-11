@@ -18,7 +18,15 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### 🔴 E-2026-06-11-1 — Gate-i adjudication: G3 FAILED as measured — the anchor doesn't transfer. Sign (or amend) PR-1.1 **v2**.
+### ✅ E-2026-06-11-1 — Gate-i adjudication → **RESOLVED 2026-06-11 by Lucas: "sign PR-1.1"** — PR-1.1 v2 signed as written
+
+**RESOLUTION:** Lucas signed PR-1.1 v2 verbatim (no amendments). Ledger header flipped to
+🔒 SIGNED; **S0.2-1 is closed** (G1 PASS · G3 FAIL on record, criterion void for anchor
+instability · Gate i adjudicated purpose-served). Downstream proceeds on the PR-3
+in-house-ceiling anchoring path; the transfer-check freeze rule is now binding. Next:
+the Er gain-regime fork proposal (M1 vs M3) → PROPOSED PR-4.
+
+*Original item as filed (for the record):*
 
 **Filed:** 2026-06-11 (Supervisor). **Updated same day: the Critic review is in —
 APPROVE-WITH-EDITS, bottom line "sign PR-1.1 with these edits" — and all edits are applied

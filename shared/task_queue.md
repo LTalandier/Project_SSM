@@ -147,7 +147,7 @@ all trails archived + committed · corrections cite GA-F numbers.
 
 ---
 
-## 🔴 S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS · G3 ❌ FAIL as measured (71.11 % < 90.6) · ADJUDICATION: PR-1.1 v2 sign-ready (Critic-approved + record-repaired) — awaiting Lucas**
+## ✅ CLOSED — S0.2-1: in-house LinOSS layer + Gate-i runs — **G1 ✅ PASS · G3 ❌ FAIL on record · PR-1.1 v2 🔒 SIGNED by Lucas 2026-06-11: G3 criterion void for anchor instability; Gate i adjudicated purpose-served (G1 PASS ∧ parity dossier)**
 
 > **MEASURED OUTCOME (2026-06-11; GPU route per E-2026-06-10-5, Lucas-approved in-session,
 > $1.15 of $7.44):** GPU parity gate passed (1.2–1.5e-7) → gated-5 ran to completion →
@@ -168,7 +168,10 @@ all trails archived + committed · corrections cite GA-F numbers.
 
 **Assigned:** 2026-06-10 · **G1 portion accepted:** 2026-06-10
 **Supervisor:** Claude Opus 4.8
-**Status:** ⏳ PARTIAL-ACCEPT + G3 IN FLIGHT. **G1 Heartbeat: GATE PASS, Supervisor-verified**
+**Status:** ✅ CLOSED 2026-06-11 — **PR-1.1 v2 signed by Lucas** ("sign PR-1.1",
+E-2026-06-11-1): G1 PASS ∧ G3 void-with-finding (FAIL on the permanent record; F-G3 binds
+S0.8 wording); downstream proceeds on the PR-3 in-house-ceiling anchoring path as registered.
+**G1 Heartbeat: GATE PASS, Supervisor-verified**
 (gated mean 72.9032 % ≥ 72.1 reproduced from the per-seed table; per-seed values are exact n/62
 counts; −0.78σ_published, inside the registered allowance; margin = 2.5 mean-granules of test-set
 quantization — priced in by the frozen PF-F9d calibration, no re-litigation either direction).

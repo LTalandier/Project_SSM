@@ -48,12 +48,21 @@ boundary before the run proceeds.
 > (E-2026-06-10-4) on the Critic-reviewed v2 blocks. Gate i and the bake-off object are now fully
 > governed; **S0.2-1** (in-house layer + the Gate-i runs — the project's first training runs) is
 > posted to the Executor. Next freezes: **PR-4** at S0.3 (+ the PR-3 *rule* before S0.4 close).
+>
+> **Update (2026-06-11, Gate-i adjudication):** **PR-1.1 v2 🔒 SIGNED by Lucas** ("sign PR-1.1",
+> E-2026-06-11-1) after Critic review (APPROVE-WITH-EDITS, `critic_review_g3-adjudication.md`)
+> and the S0.2-1R archived record repair. **G1 PASS · G3 FAIL on record, criterion VOID for
+> anchor instability (F-G3) · Gate i adjudicated purpose-served (G1 ∧ numerical-identity
+> dossier) · no replacement published anchor — downstream reference = PR-3 in-house ceiling ·
+> new binding freeze rule: reference-implementation transfer check before any externally-
+> anchored accuracy/threshold freeze.** S0.2-1 closed. Next freeze: **PR-4** at S0.3 (behind
+> the M1-vs-M3 gain-regime ruling).
 
 ## Ledger
 
 | ID | Governs | Freeze before | Status | What must be registered | Source |
 |----|---------|---------------|--------|-------------------------|--------|
-| **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
+| **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) · **amended by PR-1.1 🔒 SIGNED 2026-06-11** (G3 criterion void for anchor instability — F-G3; Gate i adjudicated purpose-served: G1 PASS ∧ parity dossier) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
 | **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | ⬜ | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
@@ -413,7 +422,7 @@ constraints + EV-F1/F3/F5 carry-ins), PR-10 frozen grid, PR-15.1 W1.
 - **T-B (IM-DD PAM-4 at 1–2 GBd):** labelled non-frozen extension (niche-native demo for
   S0.7-full/Stage-1; generator port deferred — not in the salvage manifest).
 
-## PR-1.1 — PROPOSED amendment **v2** (Supervisor draft 2026-06-11; revised same day per Critic review `critic_review_g3-adjudication.md` — verdict **APPROVE-WITH-EDITS, "sign with these edits"**; GA-F1(b) demotion applied + GA-F1(a) regeneration **landed & archived** (S0.2-1R, 2026-06-11, Supervisor-verified from trails); GA-F2/F3/F5/F6/F7 applied; ⬜ until Lucas signature; PR-1 v2 above retained per supersession discipline)
+## PR-1.1 — 🔒 **SIGNED amendment v2** (Lucas, 2026-06-11: "sign PR-1.1" — E-2026-06-11-1. Supervisor draft 2026-06-11, revised same day per Critic review `critic_review_g3-adjudication.md` — verdict **APPROVE-WITH-EDITS, "sign with these edits"**; GA-F1(b) demotion applied + GA-F1(a) regeneration **landed & archived** (S0.2-1R, Supervisor-verified from trails); GA-F2/F3/F5/F6/F7 applied; PR-1 v2 above retained per supersession discipline)
 
 **Triggered by the measured Gate-i outcome** (results_log S0.2-1 addenda; adjudication item
 D-2026-06-11-1) — filed *after* the runs, so it is held to the amendment standard: Critic

@@ -6,6 +6,30 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-11 (PR-1.1 v2 SIGNED by Lucas — S0.2-1 CLOSED; the program returns to the queued S0.3 path)
+
+Lucas signed PR-1.1 v2 verbatim ("sign PR-1.1", E-2026-06-11-1) — no amendments. Recorded:
+ledger header 🔒 SIGNED + adoption-blockquote update + PR-1 table-row amendment note;
+task_queue S0.2-1 → ✅ CLOSED; roadmap S0.2 status updated; E-item + D-item resolved.
+
+**What is now settled, permanently:** G1 PASS (gated, untouched) · G3 FAIL on the books as
+measured, its criterion **void for anchor instability** (F-G3 — a *reportable finding*, S0.8-
+binding, every citable number archived + environment-qualified) · Gate i **adjudicated
+purpose-served** on G1 ∧ the numerical-identity dossier · no replacement published anchor —
+downstream anchors on the **PR-3 in-house BPTT ceiling**, as registered at the freeze · the
+**reference-implementation transfer check** is now a binding freeze rule (GA-F6 scope).
+S0.2 took the project's first frozen-gate hit and the discipline held end-to-end: miss-rule
+honored, diagnosis sanctioned, adjudication Critic-attacked, record repaired to
+archived-or-demoted before signature. That chain — not the G1 number — is what the paper's
+methods section will lean on.
+
+**Next (the path queued before the pause):** (1) the **Er gain-regime fork proposal — M1 vs
+M3** (S0.3-0 left it open by design; it blocks S0.3-1) → Lucas rules; (2) **PROPOSED PR-4**
+drafted from `docs/s0_3/pr4_input_sheet.md` (verify Cui 2023 [AV] at freeze) → Critic
+phase-boundary review → Lucas signs → S0.3-1 substrate build.
+
+---
+
 ## 2026-06-11 (S0.2-1R accepted — the record repair holds; archived incidence supersedes the console)
 
 **Acceptance basis (this time in the right order): artifacts first, numbers second.** The

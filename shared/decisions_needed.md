@@ -8,7 +8,7 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
-### 🔴 D-2026-06-11-1 — Gate-i G3 adjudication: gate FAILED as measured, and the published anchor itself does not survive a faithful official-code rerun
+### ✅ D-2026-06-11-1 — Gate-i G3 adjudication → **RESOLVED 2026-06-11 by Lucas: O3 as PR-1.1 v2, SIGNED** ("sign PR-1.1", E-2026-06-11-1)
 
 **Raised by:** Executor, 2026-06-11. **Supersedes the route question in D-2026-06-10-2's
 addendum:** Lucas chose route (a)-variant in-session same evening — his own vast.ai credits
@@ -110,6 +110,8 @@ record; PR-1.1 v2's incidence bullet now cites only archived, per-environment fi
 stale Fisher values computed on superseded counts are dropped; the operative logic — any
 material incidence voids, ruling rests on dispersion + mechanism — is unchanged). **Sole
 remaining step: Lucas signs PR-1.1 v2 (E-2026-06-11-1).**
+
+**RESOLVED 2026-06-11: Lucas signed PR-1.1 v2 verbatim ("sign PR-1.1"). S0.2-1 closed.**
 
 ### ✅ D-2026-06-10-2 — S0.2-1 G3 runtime flag → **RESOLVED 2026-06-10 by Supervisor: option 1+3 (local, gated-5 first)**
 

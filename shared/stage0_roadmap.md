@@ -121,7 +121,13 @@ And clear the two gates:
   → **S0.2-1** (implementation + the Gate-i run), mirroring the S0.7L-0→PR-10→S0.7L-1 pattern.
   **Status: S0.2-0 ✅ (2026-06-10) → PR-1/PR-2 (+PR-13 early) 🔒 FROZEN 2026-06-10** (Critic-reviewed v2 —
   AMEND→fix applied: R2-intensity headline readout, PF-F1; Lucas "ok go", E-2026-06-10-4) → **S0.2-1
-  ACTIVE** (the Gate-i runs).
+  ✅ CLOSED 2026-06-11**: **G1 Heartbeat PASS** (72.9032 ≥ 72.1, Supervisor-verified; in-house layer
+  float32-exact vs official) · **G3 EigenWorms FAIL on record** — the published anchor itself fails a
+  faithful official-code rerun (F-G3: 90.56 %, σ 9.34 = 2.1× published, + fp32 optimization collapse) →
+  **PR-1.1 v2 🔒 SIGNED by Lucas** (Critic-reviewed; S0.2-1R archived record repair): G3 criterion **void
+  for anchor instability**, **Gate i adjudicated purpose-served** (G1 PASS ∧ numerical-identity parity
+  dossier); downstream anchors on the **PR-3 in-house BPTT ceiling** as registered; F-G3 binds S0.8
+  wording; transfer-check freeze rule now binding.
 - **Do:** implement LinOSS (stable for nonnegative-diagonal $A$) + D-LinOSS (learnable damping); reproduce
   a long-range / time-series benchmark within a **pre-registered margin** (PR-1) set *before* the run.
   Resolve verification debt **#2** here (its S0.L memo is a *prerequisite* — F14; sharpened by D-08-2:
