@@ -18,7 +18,16 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-06-13-1 — PR-4 v2 posted after Critic AMEND → **one ask left: sign PR-4** (the Cui-fetch ask is discharged; body confirmed [EV] via independent commentary)
+### ✅ E-2026-06-13-1 — PR-4 v2 → **RESOLVED 2026-06-13: Lucas signed ("sign PR-4")**
+
+**Resolution (2026-06-13):** Lucas signed PR-4 v2. **PR-4 🔒 FROZEN — the S0.3 substrate
+freeze is complete.** Ask (a) was discharged pre-signature (Cui body confirmed [EV] via the
+independent commentary; risk (i) closed). One registered deferral carries forward: the E₀
+numeric value + saturated reachability solve, evaluated at S0.3-1 calibration and
+ledger-addended before any consuming run. **The S0.3-1 substrate-build task is now ACTIVE in
+`task_queue.md`; Executor launches.** Original item below.
+
+---
 
 **Filed:** 2026-06-13 (Supervisor). **Context:** the Critic's phase-boundary review
 (`shared/critic_review_pr4-freeze.md`, 2026-06-12) returned **AMEND — "don't sign this draft;

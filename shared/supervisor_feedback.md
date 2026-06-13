@@ -6,6 +6,41 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-13 (PR-4 🔒 SIGNED — S0.3 substrate freeze complete → S0.3-1 ACTIVE)
+
+**Lucas signed PR-4 v2 ("sign PR-4"). The S0.3 substrate freeze is complete** — the single
+dissipative-ring model the entire bake-off will run on is now pinned: M1 gain at g_rt = 0.9×
+intrinsic, A2 Langevin ASE, K4 trainable coupling (r∈[0.1,3], θ₀=0.3), K-pol-3 splitting
+always ON, cells C-1/C-2/C-3, NF-A 7.0, H1, O2 @ 1 mW with the in-block E₀ formula. The entry
+is frozen with the Critic's twelve findings folded in and the Cui anchor body-confirmed [EV].
+One registered deferral carries forward: the E₀ numeric + saturated reachability solve, which
+the Executor evaluates at S0.3-1 calibration and I paste into the ledger as a one-line
+addendum **before any PR-5–9-gated or bake-off-consumed run**.
+
+**S0.3-1 posted to the Executor (ACTIVE).** It's a build task, not a methodology task: implement
+PR-4 v2 faithfully (the SSM core is new code per S0.0a; salvage gain/ASE/SOA/registry/readout/
+runner with provenance). Deliverables — the `DissipativeRingSubstrate` core with full state
+trajectories exposed and trainable {δ, κ_ext, μ}; M1 gain + A2 ASE + K-pol-3 splitting; the
+cell registry; the O2/E₀ calibration emitting the ledger addendum; the M2 one-off validation at
+**both** C-2/θ₀ and C-1/θ₀; eight registered unit tests (the load-bearing one is the
+**gradient-flow gate** — BPTT must backprop through gain+ASE+splitting to all P2 params with no
+detach/no_grad, the operational F18 proof); and the coarse BPTT damping sweep that *selects*
+PR-12's central cell (the PR-12 freeze stays mine+Lucas's, not the Executor's). Compute estimate
+before any sweep; escalate if cluster spend — C-3/N=128 kept off the gating path.
+
+**Carry-forward registrations now owed** (named so they don't slip): **PR-12** (damping cell)
+freezes at S0.3-close from the sweep curve; the **M3 trigger's quantitative margin form** must
+freeze with PR-5–9/PR-11 *before any bake-off results*; **PR-3** (BPTT ceiling at the registered
+cell) at S0.4 close; **PR-6/PR-5/PR-7** (fairness contract / PAT mismatch / cost accounting)
+before S0.4a starts. The transfer-check rule binds every externally-anchored freeze from here.
+
+**Process note for the record:** the AMEND→revise→sign loop worked exactly as the role
+architecture intends — the Critic (reporting to Lucas, not me) caught a real coherence hole I'd
+have shipped, I revised under supersession discipline, the anchor verification closed through a
+route neither of us had tried, and Lucas signed the result. That's the system, not a detour.
+
+---
+
 ## 2026-06-13 (Critic AMEND on PR-4 → v2 posted; the two HIGH findings were real)
 
 **The Critic's review (`critic_review_pr4-freeze.md`, verdict AMEND) is the system working.**

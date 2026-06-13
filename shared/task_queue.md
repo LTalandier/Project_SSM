@@ -8,6 +8,127 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## ACTIVE — S0.3-1: build the shared dissipative-ring substrate (PR-4 🔒 SIGNED)
+
+**Assigned:** 2026-06-13
+**Supervisor:** Claude Opus 4.8
+**Status:** ACTIVE
+**Prereqs / read first:** roadmap §S0.3 (Do / Deliverable / Gate F18) · **the frozen PR-4 v2
+block** in `shared/preregistration.md` (the substrate spec — this task *implements* it, sets
+no new values) · PR-2 v2 (partition P2, N-grid, F6, F12) · PR-13 (memory family) · PR-10
+(clocks) · PR-11 (irreversibility/ASE-stream carry-ins) · S0.1 (`results/s0_1/…` + the
+`pole_region` / discretization / `loss_q_consistency_error` functions — inherited conventions)
+· `docs/s0_3/substrate_recon.md` (R§ physics) · `docs/s0_3/pr4_input_sheet.md` · the 7-asset
+salvage manifest (S0.0). **The dynamical SSM core is new code** (S0.0a: the salvaged ring/MRR
+code is static-CW, the training engine MZI-specific — not liftable); **salvage** the gain/ASE
+functions, the rate-equation SOA (for M2 only), the SiN registry, static Lorentzians (CW-limit
+test refs), ridge readout (reservoir baseline), and the sweep/JSONL runner, with provenance
+headers.
+
+### Goal
+Build the **single shared dissipative-ring substrate** that all four estimators (S0.4) and the
+bake-off (S0.5) train through — finite-Q rings, M1 static-saturated gain, injected ASE, the
+splitting doublet — exactly as frozen in PR-4 v2, with full state trajectories exposed and the
+BPTT reference able to train through it end-to-end (the gradient-flow gate). This is the
+substrate the entire Stage-0 headline result is measured on; its fidelity and its
+no-`detach`/no-`no_grad` discipline are load-bearing. Plus the two registered numeric
+calibrations (E₀, saturated reachability) and the coarse BPTT damping sweep that selects
+PR-12's central cell.
+
+### Deliverables
+1. **Core substrate** — `substrate/dissipative_ring.py :: DissipativeRingSubstrate`. N-ring CMT
+   recurrence in **amplitude rates**, S0.1 conventions inherited (κᵢ = ω₀/2Qᵢ; κ_tot = κᵢ +
+   2κ_ext symmetric add-drop; **ZOH/van-Loan exact discretization**; 100-GHz-FSR geometry; λ =
+   1550 nm). Nearest-neighbor chain coupling μ_jk. **Trainable params = the frozen PR-2 P2
+   partition: {δ_j, κ_ext,j, μ_jk}** (gain-free). **Full state trajectory exposed in the API**
+   (Gate F18). Readout = intensity |·|² (PR-2 R2). Clock-parametric over PR-10 {0.1, 1, 2}
+   GS/s.
+2. **M1 gain** — `substrate/gain.py`. Per-episode operating point **g(P̄) = g₀/(1+P̄/P_sat)**,
+   fixed within the rollout, **differentiable** (no detach — house constraint 3a/3b). **P̄ and
+   P_sat at the intracavity plane**: P_sat,ring = I_sat·A_eff (A_eff = 1.2 µm²) from the
+   flagship −15 dBm; P_circ = Σⱼ|aⱼ|²·ħω₀/τ_rt. **Operating point g_rt = 0.9× intrinsic per-rt
+   loss** ⇒ κ_net = 0.1·κᵢ + 2κ_ext; g₀ set by the saturated solve so g(P̄₀ at the registered
+   drive) hits 0.9×. **Sensitivity rows g ∈ {0 passive, 0.5×}**; P-CORN passive-only.
+3. **A2 ASE** — `substrate/ase.py`. Continuous Langevin term ⟨F F*⟩ = 2κ_g n_sp δ(t−t′) (photon
+   units), discretized to compose with the ZOH/van-Loan step; n_sp from **NF-A (n_sp = 2.5)**.
+   **A1** (per-rt discrete kick) implemented as the registered first-order-equivalent. **Fresh
+   draws per pass; forward and echo streams independent** (PR-11). Expose an ASE-variance knob.
+4. **Splitting** — `substrate/splitting.py`. **K-pol-3** 2×2 CW/CCW doublet per ring, **always
+   ON**; γ per cell (C-1 90, C-2 11.8, C-3 per menu, MHz); **γ = 0 recovers the single-pole
+   model exactly** (assert in a test).
+5. **Cells** — `substrate/cells.py` (extend the salvaged SiN registry): **C-1 P-FND** (Qᵢ =
+   2×10⁶, γ 90 MHz, N=8), **C-2 P-AN800** (Qᵢ = 6.8×10⁶, γ 11.8 MHz, N=32), **C-3 P-UHQ** (Qᵢ =
+   3×10⁷, N=128); NF-A 7.0 headline. Sensitivity cells: P-CORN (passive), **C-2 ×2-loss derate
+   (Qᵢ ≈ 3.4×10⁶)**, γ ∈ {0,11.8,90,160}, NF ∈ {3,5,7}. Each cell carries its
+   `loss_q_consistency_error()` check (deliverable 8a).
+6. **O2 normalization + E₀ calibration** — `substrate/normalization.py` + `calibration.py`.
+   Implement the **frozen E₀ formula E₀ = 2·κ_ext,θ₀·(P̄₀/ħω₀)/κ_net²** (C-2, θ₀, δ=0, μ=0,
+   CW-equivalent reading); encoder scale derived **once per arm at θ₀ and frozen** (trained
+   κ_ext excursions thereafter are physics, not renormalization). **Numeric E₀ per cell** +
+   the **saturated reachability solve** (required g₀ vs the Er-anchor span 1.0–1.9 dB/cm, per
+   cell) → **emit a one-line ledger addendum** (`results/s0_3/e0_reachability_addendum.md` +
+   JSON) for the Supervisor to paste into PR-4 **before any consuming run**.
+7. **M2 one-off validation** — run the **salvaged rate-equation integrator at τ = 3.4 ms** once
+   at **C-2/θ₀ and once at C-1/θ₀** (P4-F9); confirm the quasi-static reduction (per-episode
+   relaxation ≤ 3 % bound); archive the comparison with the validation set. **M2 is not a
+   substrate-matrix member** — do not wire it into the estimator path.
+8. **Registered unit tests** (`tests/`, all must pass and be reported):
+   (a) `loss_q_consistency_error()` α↔Q registry check per cell;
+   (b) **zero-noise / passive limit recovers the S0.1 forward model** (vs the static Lorentzian
+   CW-limit references) within tolerance — Gate F18;
+   (c) **B1-consistency**: K4 bounds r ∈ [0.1, 3] map into the S0.1 realizable pole region at
+   **every** cell;
+   (d) **A1↔A2 statistical equivalence** (difference O(10⁻³) relative at per-rt gains ≤ 0.2 dB);
+   (e) **E₀ normalization**: E(E₀-normalized drive) = E₀ within tol, **per cell × bound-edge r ∈
+   {0.1, 3}**;
+   (f) **n_ss ≈ 23 ASE photons** at NF-7 / 90 %-compensation, corner-independent (≈ 9 at NF-3);
+   (g) **γ=0 ⇒ single-pole** structural equivalence;
+   (h) **gradient-flow gate (the operational F18 test)**: a BPTT loss backpropagates through the
+   full substrate (gain + ASE + splitting) to all P2 params — **no `no_grad`/`detach`** in the
+   rollout path; assert nonzero grads on δ, κ_ext, μ.
+9. **Coarse BPTT damping sweep at close (F3 → PR-12)** — `analysis/s0_3_1_damping_sweep.py` +
+   JSONL. Train the **BPTT-on-substrate reference** across a coarse D-LinOSS damping grid at
+   **C-1/N=8 and C-2/N=32** (θ₀, NF-A), ≥4 seeds/point (8 for any high-variance point), on the
+   T-A task (PR-2). Output the damping→accuracy curve. **This selects PR-12's central operating
+   cell — but the PR-12 freeze itself is a Supervisor+Lucas step, not yours; report the curve
+   and stop.** (Distinct from PR-3, the final ceiling measured at S0.4 close.)
+10. **Compute estimate (F21)** — aggregate order-of-magnitude for the substrate + the damping
+    sweep (+ a forward-looking note for S0.4/S0.5). **If anything implies cluster spend, stop
+    and escalate to Lucas via `escalate_to_human.md` before running it** (the C-3/N=128
+    aspirational axis is the likely heavy one — keep it out of the gating path).
+
+### Output schema
+- Damping sweep JSONL: `{cell, N, damping, seed, clock_GSps, bptt_test_acc, bptt_train_acc,
+  ase_var, n_passes, runtime_s, anomaly}` per row.
+- Calibration JSON: `{cell, E0_photons, kappa_i, kappa_ext_theta0, kappa_net, g0_required,
+  er_anchor_span_dB_per_cm, reachable_bool, sat_depth}` per cell.
+- Test report: pass/fail + the measured numbers for (b)/(d)/(e)/(f) (the equivalence residuals,
+  the n_ss value, the E₀ tolerances).
+- `results_log.md` entry with raw-data paths, summary stats, variance, anomaly flags.
+
+### Key gates and questions
+- **Build gate = roadmap F18:** substrate reproduces expected limits (test b), one variance
+  knob each for loss/gain/ASE, full state trajectories exposed, **and the BPTT reference trains
+  through end-to-end with verified gradient flow (test h)** — the operational proof the
+  detach/no_grad anti-pattern was avoided. **All registered unit tests (8a–h) must pass.**
+- **Report honestly if:** any cell fails B1-consistency (c) — that bounds the realizable region
+  and is a finding, not a silent clamp; the saturated reachability solve (6) shows a
+  gain-bearing cell can't reach 0.9× at the registered drive (C-1 is already flagged
+  material-aspirational in PR-4 — confirm the number, don't paper over it); A1↔A2 diverge beyond
+  O(10⁻³) (the integrator choice then needs the Supervisor); E₀/n_ss miss their registered
+  values.
+- **Do not decide** anything left to the freeze — every value is in PR-4 v2. If you find a gap
+  the freeze didn't cover, **escalate via `decisions_needed.md`; do not invent a value.**
+
+### Deployment
+Local first: substrate + all unit tests + a **smoke test** (one short rollout per cell at each
+clock, asserting state-trajectory shape + finite gradients) before any sweep. The coarse
+damping sweep at C-1/N=8 and C-2/N=32 should be local-feasible; **produce the compute estimate
+(deliverable 10) before launching it**, and escalate if it implies cluster spend. Seeds: ≥4
+per damping point, 8 for high-variance points. No cloud spend without Lucas's approval.
+
+---
+
 ## ✅ DONE — S0.3-0: substrate design recon + PR-4 input sheet (S0.3 step 0 of 2)
 
 **Assigned:** 2026-06-10 · **Closed:** 2026-06-10

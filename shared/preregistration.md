@@ -65,7 +65,7 @@ boundary before the run proceeds.
 | **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) · **amended by PR-1.1 🔒 SIGNED 2026-06-11** (G3 criterion void for anchor instability — F-G3; Gate i adjudicated purpose-served: G1 PASS ∧ parity dossier) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
-| **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 📋 **PROPOSED v2 2026-06-13** (block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; Cui body confirmed [EV] via independent commentary 2026-06-13, risk (i) closed; **awaiting only Lucas signature**) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
+| **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 🔒 **SIGNED v2 2026-06-13** (Lucas, "sign PR-4"; block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; Cui body confirmed [EV] via independent commentary 2026-06-13, risk (i) closed; E₀ numeric = registered S0.3-1 calibration addendum) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
 | **PR-5** | PAT (S0.4a) | S0.4a | ⬜ | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
 | **PR-6** | All estimators (S0.4) | S0.4a | ⬜ | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
 | **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
@@ -524,7 +524,22 @@ review + Lucas signature, with the measured record permanent and unamended.
 
 ---
 
-## PR-4 — 📋 PROPOSED **v2** (Supervisor revision 2026-06-13 per Critic review `shared/critic_review_pr4-freeze.md`, verdict **AMEND** 2026-06-12 — all findings P4-F1..F12 applied; v1 text preserved at commit 713efd4; fork ruling **E-2026-06-11-2** applied — M1 + M3 trigger + riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) + `docs/s0_3/pr4_input_sheet.md`; Cui body confirmed [EV] 2026-06-13; ⬜ until Lucas signature)
+## PR-4 — 🔒 **SIGNED v2** (Lucas, 2026-06-13: "sign PR-4")
+
+> **🔒 FROZEN 2026-06-13 by Lucas.** The S0.3 substrate freeze is complete. Signed after the
+> Critic phase-boundary review (verdict **AMEND**, `shared/critic_review_pr4-freeze.md`,
+> 2026-06-12) with all twelve findings P4-F1..F12 applied in v2, and after the Cui anchor
+> body-level numbers were confirmed [EV] (2026-06-13) via the independent peer-reviewed
+> commentary (C-2 verification status; residual risk (i) closed). Amendments to this entry
+> are Lucas-only henceforth (supersession discipline). The **E₀ numeric value** and the
+> **saturated reachability solve** are the one registered deferral: mechanically evaluated at
+> S0.3-1 calibration from the frozen in-block formula and reported here as a one-line addendum
+> **before any run a PR-5–9 gate or bake-off statistic consumes** (O2 / G).
+>
+> Provenance of the v2 revision (Supervisor 2026-06-13 per the Critic review; v1 text
+> preserved at commit 713efd4; fork ruling **E-2026-06-11-2** applied — M1 + M3 trigger +
+> riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) +
+> `docs/s0_3/pr4_input_sheet.md`).
 
 **v2 revision log (Critic findings → changes):** P4-F1 HIGH → per-cell operating gain
 **registered** (G, new bullet) + every consequence number recomputed at it (C/S, passive floor
