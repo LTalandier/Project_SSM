@@ -550,13 +550,19 @@ review + Lucas signature, with the measured record permanent and unamended.
 > **Numeric E₀ (frozen for all S0.3-1+ runs):** C-1 = **3.14×10⁷**, C-2 = **1.07×10⁸**,
 > C-3 = **4.72×10⁸** photons (C-2-derate 5.34×10⁷; P-CORN 7.06×10⁵). κ_net @ θ₀: C-1 2.13×10⁸,
 > C-2 6.25×10⁷ rad/s. Build-up ×262 and bus saturation depth ×31.6 @ C-2/θ₀ reproduce §G.
-> **Saturated reachability (honest, confirms the §G/P4-F2 prediction):** required small-signal
-> g₀ (bus) to hit 0.9×κᵢ at the registered drive = C-1 5.04, C-2 1.5, C-3 0.36 dB/cm vs the
-> Er-anchor span 1.0–1.9 dB/cm ⇒ **C-1 material-aspirational** (headroom ×6.5–12.3 < required
-> ×32.6 — anchor-risk (v)), **C-2 straddles** (reachable only for the **upper half** of the Er
-> span, ≥1.5 dB/cm; ×21.8–41.4 vs ×32.6), C-3 ✓, C-2-derate material-aspirational. **The "✅"
-> in the source table overstates C-2 — the registered honest status is "reachable iff Er ≥ 1.5
-> dB/cm"; carried at anchor-risk (v).**
+> **Saturated reachability (honest; corrected per Critic S31-F3 to the operative plane).** Two
+> planes: the gain model **saturates on the intracavity plane** (P4-F2's registered plane — "the
+> field the gain medium sees"), where the build-up makes P_circ/P_sat ≈ ×8.3e3 (C-2). On the
+> **bus** plane the required small-signal g₀ to hit 0.9×κᵢ is C-1 5.04 / C-2 1.50 / C-3 0.36
+> dB/cm (vs Er 1.0–1.9) ⇒ C-1 material-aspirational, C-2 reachable iff Er ≥ 1.5, C-3 ✓. **But on
+> the operative (intracavity) plane** the requirement is g₀ ≈ C-2 **380** / C-3 **403** dB/cm
+> (= g_op·(1+P_circ/P_sat); in the JSON as `g0_required_intracavity`) — **so against demonstrated
+> Er (≤1.9 dB/cm) every gain-bearing cell, C-2 and C-3 included, is material-aspirational.** The
+> bus number is a floor, not the operative requirement; the source table's "✅" for C-2/C-3 is on
+> the bus plane only. **Net honest status: the M1 gain operating point is a model aspiration not
+> supplied by demonstrated Er on the plane the model saturates on — Stage-1 integration risk,
+> strengthening anchor-risk (v) across all gain cells** (does not affect the substrate's runtime:
+> g₀ is set to deliver 0.9×κᵢ as a model; reachability is a physical-Er label, not a parameter).
 
 **v2 revision log (Critic findings → changes):** P4-F1 HIGH → per-cell operating gain
 **registered** (G, new bullet) + every consequence number recomputed at it (C/S, passive floor

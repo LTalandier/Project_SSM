@@ -6,6 +6,42 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-13 (Critic APPROVE-WITH-EDITS on S0.3-1 — S-F1 confirmed HIGH; edits posted; 2 items to Lucas)
+
+**The Critic confirmed S-F1 and made it sharper than I had it.** I'd called the gain-mode gap
+MEDIUM; the Critic re-derived the dropped ∂g/∂κ_ext at **27% of the κ_net channel at θ₀, 6× the
+retained term and sign-flipped at the r=0.1 trainable edge** — i.e. "fixed" isn't a benign small
+bias, it's a structurally different operating-point model over the K4 range, and `test_h` was
+hollow on exactly that path (it passes identically with the gain detached). HIGH is right.
+Useful correction to my framing: I'd offered Lucas fixed-vs-saturating as an open interpretation;
+the Critic's textual read closes it — §G's next clause + §N-E6 *mandate* saturating, so it's a
+code-conformance fix, not a freeze call. I've narrowed the ask to Lucas accordingly (CONFIRM the
+bake-off-wide consequence, not REINTERPRET).
+
+**Three Critic catches beyond S-F1, all accepted:**
+- **S31-F3 (one I missed):** I reported gain reachability on the bus plane; the model saturates on
+  the **intracavity** plane (P4-F2's own plane), where required g₀ ≈ 380 dB/cm (C-2) vs Er ≤ 1.9 —
+  so **all** gain-bearing cells are material-aspirational, not just C-1. Corrected the ledger
+  addendum. Strengthens anchor-risk (v); honest, sobering, doesn't change runtime or any freeze.
+- **S31-F4:** the PR-12 confound + a knot I'd only half-seen — the sweep's g_f axis *is* PR-4 §G's
+  registered operating point, so PR-12 can't freely pick g_f without contradicting signed PR-4.
+  Reconciliation (subsumed-by-§G vs distinct-D-LinOSS-knob-at-fixed-g_f) is Lucas's; I lean the
+  latter and have asked.
+- **S31-F2 sharpened:** μ(0)=0 isn't "disconnected → zero gradient" literally — with ASE on, rings
+  2..N carry a zero-task-signal *noise* gradient (worse than stalled). Signal-starvation. → PR-6.
+- **S31-F5:** the hygiene gate tests a token, not the invariant; rewrite it to assert the
+  source-stack symbols absent (the Critic verified they are) so no one codes around it again.
+
+**Disposition:** the freeze-conforming edits (flip default to saturating, harden test_h, surface
+intracavity reachability, rewrite the hygiene gate, register the ASE-detach convention in code)
+are posted as **S0.3-1b (ACTIVE)**. The freeze-gated items wait: PR-12 rerun on Lucas's PR-4/PR-12
+reconcile; the PR-6 registrations (mode-for-all, connected init, sweep recipe) before S0.4a;
+PR-11 generator-distinctness carried to S0.4. Filed/updated E-2026-06-13-2. **The system worked
+again: I verified, the Critic verified harder, and between us we turned a green gate into a real
+finding before it could bias the bake-off.**
+
+---
+
 ## 2026-06-13 (S0.3-1 substrate ACCEPTED — verified; one fidelity finding S-F1 + PR-12 deferred)
 
 **The substrate is built and I've accepted it.** Verified artifacts-first (the GA-F1 lesson):

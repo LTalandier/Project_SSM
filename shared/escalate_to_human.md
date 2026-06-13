@@ -18,60 +18,66 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-06-13-2 — S0.3-1 substrate ACCEPTED → one freeze-interpretation decision + a Critic launch (neither blocks today)
+### E-2026-06-13-2 — S0.3-1 ACCEPTED + Critic APPROVE-WITH-EDITS → 1 thing to CONFIRM + 1 to RECONCILE (neither blocks today)
 
-**Filed:** 2026-06-13 (Supervisor). **Context:** the Executor delivered the shared
-dissipative-ring substrate (S0.3-1). I verified it and **ACCEPTED** — re-ran the test suite
-myself (9/9 pass), confirmed the tests are substantive, hand-checked the load-bearing E₀ number,
-and pasted the E₀ + reachability calibration into PR-4 (the registered deferral, now
-discharged). The build is correct and its F18 gate genuinely passes. The Executor's reporting
-was exemplary (it flagged five concerns itself). **Nothing here blocks — the substrate is ready
-— but three things need your eye before S0.4 (the estimators) starts building on it.**
+**Filed:** 2026-06-13 (Supervisor). **Updated 2026-06-13 after the Critic report**
+(`critic_review_s0_3_1.md`, verdict **APPROVE-WITH-EDITS**, independently re-run 9/9).
+**Context:** the Executor delivered the shared dissipative-ring substrate (S0.3-1); I verified
+and **ACCEPTED** it (re-ran tests 9/9, read them for substance, hand-checked E₀, pasted the
+calibration into PR-4). The Critic then independently confirmed the build is correct and
+freeze-faithful, **confirmed my one finding (now HIGH)**, and added three catches. The substrate
+is sound to carry into S0.4. **The freeze-conforming code edits are already posted to the
+Executor (S0.3-1b, ACTIVE). Two items are yours.**
 
-**Decision 1 (a freeze interpretation — yours): how should the gain respond during training?**
-The frozen PR-4 §G says two things that pull in different directions: the operating point "**runs
-at g_rt = 0.9× intrinsic**" (sounds like a fixed value) *and* is "a **differentiable function of
-the episode drive statistics**" (sounds responsive), and §N's E6 says "trained κ_ext excursions
-change intracavity energy **as physics, not as renormalization**." The Executor implemented both
-modes but made **fixed** (gain pinned at 0.9·κᵢ regardless of how training moves κ_ext) the
-default. My read: the freeze intends the **saturating** mode (gain tracks the drive, computed
-once per episode and held fixed within the rollout) — otherwise SPSA (which perturbs the real
-saturating physics) and the gradient methods (which would backprop through a pinned gain) train
-*different functions*, breaking the "four estimators share one substrate" rule. **The honest
-options:**
-- **(A) Saturating is the registered rollout gain** (my recommendation) — faithful to "differentiable
-  in drive" + E6; all four methods see the same physics. Fix = flip the default + extend the F18
-  gate to cover the gain path. *No freeze text changes; this is reading §G as already-decided.*
-- **(B) Fixed (0.9·κᵢ) is the registered rollout gain**, saturating only for SPSA's perturbation
-  realism — i.e. the freeze *did* intend a pinned operating point. This needs you to say so (it's
-  the looser reading of §G), and we'd register that SPSA and the gradient methods intentionally
-  see slightly different gain handling, with the bias bounded/reported.
-I recommend **(A)**. Either way it's a one-line default + a gate extension, settled **before S0.4a**.
+**CONFIRM 1 — gain mode (downgraded from "decide" to "confirm": the Critic foreclosed the other
+option).** I'd offered you fixed-vs-saturating as an open interpretation. The Critic's textual
+read closes it: §G's "runs at g_rt = 0.9×intrinsic" is the operating-point *target* (hit by the
+saturated solve at the registered drive), and the **next clause** ("differentiable function of
+the episode drive statistics, no detach") + §N-E6 ("as physics, not renormalization") **mandate
+the saturating mode** — "fixed" is simply unfaithful. So this is **not a freeze reinterpretation**;
+flipping the code default conforms it to the signed freeze (S0.3-1b does this). It matters: the
+Critic measured the dropped gain gradient at **27% of the κ_net channel at θ₀ and 6× the retained
+term (sign-flipped) at the trainable edge** — "fixed" is a structurally different model, and the
+F18 gate was hollow on that path. **The one thing for you to confirm (not reinterpret): the
+bake-off-wide consequence — all four estimators run `gain_mode="saturating"`, so SPSA's forward
+passes and the gradient methods' backward passes target one function.** I'll register that in
+**PR-6**. Say "confirmed" (or flag it) when convenient; it's a PR-6 item, not urgent today.
 
-**Decision 2 (a heads-up, not yet a freeze): PR-12 is deferred.** The coarse BPTT damping sweep
-landed, but it's confounded — at a fixed 500-step budget the lighter-damped (longer-memory)
-points just train slower, so the curve conflates *achievable accuracy* with *training speed*
-(the Executor flagged this; a convergence sub-check confirms the slow points keep climbing). So
-I will **not** freeze PR-12 (the central damping cell) off this curve. Before S0.3-close I'll
-either commission a convergence-controlled rerun (train-to-fixed-loss) or bring you a
-confound-aware selection with the rationale. No action from you now — just flagging that
-S0.3-close has one more step.
+**RECONCILE 1 — PR-4 §G ↔ PR-12 (a real knot the Critic surfaced; touches signed PR-4, so it's
+yours).** The damping sweep parametrized "damping" as the gain compensation g_f — **but g_f=0.9
+*is* PR-4 §G's registered gain operating point** (κ_net = 0.1κᵢ + 2κ_ext). So PR-12 can't freely
+"select" a g_f: a pick of g_f≠0.9 would contradict the signed PR-4. Two readings, your call:
+- **(R-i) PR-12 is subsumed by PR-4 §G** — the "damping cell" *is* the registered g_f=0.9
+  operating point; no separate PR-12 sweep/freeze is needed (drop PR-12 or make it a pointer to
+  §G).
+- **(R-ii) D-LinOSS damping is a distinct knob** (my lean) — the *trainable* per-ring net loss
+  (the κ_ext/pole-placement range K4 explores) at **fixed** g_f=0.9, which is what S0.6 actually
+  sweeps. Then the coarse sweep used the wrong axis (it varied g_f instead of the trainable-damping
+  range at fixed g_f), and the convergence-controlled rerun should vary *that*.
+I lean **(R-ii)** but this is a methodology+freeze question, so I want your read before I commission
+the PR-12 rerun. (Independent of this, the rerun must be convergence-controlled + 8 seeds at the
+candidate point — the fixed-budget curve conflates accuracy with training speed, confirmed.)
 
-**Decision 3 (carry-forward, for when PR-6 freezes): the init convention is load-bearing.** The
-registered μ(0)=0 leaves the ring chain *disconnected* at initialization (only ring 1 is driven),
-so a cold-started N=32 device is **untrainable** until coupling grows — a real risk all four
-bake-off methods will face, not a bug. PR-6 (the fairness contract, which freezes before S0.4a)
-must register a sensible init. Noted now so it's front-and-center then.
+**FYI (no action) — the gain story got more honest, and more aspirational.** The Critic's S31-F3:
+I had reported gain reachability on the *bus* plane (C-2 reachable iff Er ≥ 1.5 dB/cm). But the
+gain model saturates on the **intracavity** plane (P4-F2's own registered plane), where the
+required small-signal gain is ≈**380 dB/cm** (C-2) / 403 (C-3) vs demonstrated Er ≤ 1.9 — so on
+the operative plane **every gain-bearing cell, not just C-1, is material-aspirational**. I've
+corrected the ledger addendum. This doesn't affect the substrate at runtime (g₀ is a model knob)
+and doesn't change any freeze, but it strengthens anchor-risk (v): the M1 gain operating point is
+a Stage-1+ aspiration not supplied by demonstrated Er on the plane it saturates on. Worth knowing
+for how we frame the gain realism in the paper.
 
-**Your move — launch the Critic on the build** (independent verification of Decision 1 + an
-anomaly audit; it reports to you):
-```bash
-cd ~/Documents/Project_SSM
-claude "Read shared/critic_instructions_s0_3_1.md and follow it."
-```
-After its review I'll bring you the gain-mode disposition to confirm, then the path is: settle
-Decision 1 → freeze PR-6/PR-5/PR-7 (fairness contract / PAT mismatch / cost accounting) →
-S0.4a (PAT + SPSA on the substrate). The Executor is idle until then.
+**Carry-forward (for the PR-6 freeze, before S0.4a):** (a) the **connected init** — μ(0)=0 leaves
+rings 2..N **signal-starved** (the Critic sharpened "disconnected": exactly-zero task-signal
+gradient noiseless, zero-mean *noise* gradient with ASE on — arguably worse than stalled; all four
+methods hit it, the N=32 headline cell is untrainable from cold) → PR-6 must register a connected
+init (the sweep's 0.3κᵢ is a candidate) or register that the in-situ claim rests on a nonzero
+coupling init; (b) the **mode-for-all-estimators** (CONFIRM 1); (c) the **sweep recipe** (batch /
+LR schedule / grad-clip / δ-band) — all load-bearing for trainability.
+
+**Path:** S0.3-1b edits (Executor, ACTIVE now) ∥ your CONFIRM 1 + RECONCILE 1 → I draft PR-6/PR-5/PR-7
+(+ the PR-12 disposition per your reconcile) → you sign → S0.4a (PAT + SPSA on the substrate).
 
 ---
 

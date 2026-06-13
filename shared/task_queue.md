@@ -8,6 +8,85 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## ACTIVE — S0.3-1b: substrate edits from the Critic APPROVE-WITH-EDITS (freeze-conforming)
+
+**Assigned:** 2026-06-13
+**Supervisor:** Claude Opus 4.8
+**Status:** ACTIVE — the freeze-conforming subset of the Critic's S0.3-1 edits (the rest is
+gated on Lucas's PR-4/PR-12 reconciliation + PR-6, below).
+**Prereqs / read first:** `shared/critic_review_s0_3_1.md` (verdict APPROVE-WITH-EDITS, findings
+S31-F1..F8) · the frozen PR-4 v2 §G + §N-E6 · `photonic_ssm/substrate/{dissipative_ring,gain,
+ase}.py` · `tests/test_substrate.py` · `tests/test_no_equalization_coupling.py` ·
+`results/s0_3/e0_reachability_addendum.{md,json}`.
+
+### Goal
+Apply the Critic edits that **conform the code to the already-signed freeze** (no freeze change,
+no new methodology) — the Critic established §G/§N-E6 *mandate* the saturating gain mode, so
+flipping the default is a correctness fix. The freeze-gated items (PR-12 rerun, PR-6
+registrations) are NOT in this task — they wait on Lucas (see the ACCEPTED block below + the
+roadmap S0.3 banner).
+
+### Deliverables (each maps to a Critic finding)
+1. **(S31-F1) Flip the rollout default** `gain_mode="fixed"` → `"saturating"` in
+   `DissipativeRingSubstrate`. Keep `"fixed"` as a **documented diagnostic/sensitivity** mode
+   (the gain-channel floor, analogous to γ=0). Add a one-line docstring note that the registered
+   bake-off mode is `"saturating"` for all four estimators (the PR-6 registration is the
+   Supervisor's; the code default conforms now).
+2. **(S31-F1/F2) Harden `test_h`** so the F18 gate is not hollow on the gain path: (a) run the
+   **faithful** (`saturating`) mode; (b) assert the **gain path is live** — the autograd
+   κ_ext-gradient of `kappa_net()` in saturating mode differs from the fixed-mode value by the
+   predicted ∂g/∂κ_ext (equivalently: saturating κ_ext-grad ≠ fixed κ_ext-grad on one
+   loss/seed); (c) add a **connected-init variant** (nonzero μ) so the gate actually exercises
+   rings 2..N — without it even the hardened test only proves ring-1's gain path. Keep the
+   existing assertions. Report the measured ∂g/∂κ_ext (≈ −0.75 at θ₀, the Critic's number) and
+   the at-edge values (−10.1 @ r=0.1 … +0.41 @ r=3, sign-flip @ r=0.5) as a printed diagnostic.
+3. **(S31-F3) Surface the intracavity reachability** in the calibration outputs: the addendum
+   `.md` already has the bus number — add the `g0_required_intracavity_dB_per_cm` column (already
+   in the `.json`: C-2 ≈ 380, C-3 ≈ 403) beside it, and state the corrected verdict (all
+   gain-bearing cells material-aspirational on the operative intracavity plane; the bus number is
+   a floor). The Supervisor has already corrected the ledger addendum — make the artifact match.
+4. **(S31-F5) Rewrite `test_no_equalization_coupling`** to assert the **real invariant**: the
+   source training-stack symbols are absent — at minimum `equalization_multilayer`,
+   `ManakovFiber`, `MRRWeightBank`, `MultiLayerEqualizer`, `ParallelPol`, `generate_dp_qpsk`,
+   `viterbi_viterbi`, `compute_nmse_field`, `forward_batched` (the Critic-verified list). **Drop
+   the generic task-token bans** (`PAM4`/`PAM-4`/`QPSK`/`HD_FEC`/`ber_curve`) that collide with
+   the project's own registered PR-2 T-A 4-PAM task. Then the neutral renames in
+   `tasks/equalization.py` are no longer needed (rename back to clear 4-PAM vocabulary if you
+   like, or leave them — your call, but the gate must test the stack, not a token).
+   `test_package_runtime_is_torch_only` stays.
+5. **(S31-F6) Register the ASE-covariance-gradient convention in code:** a docstring/comment in
+   `ase.py` stating that the noise covariance Q_d and the noise realization are intentionally
+   detached from the parameter gradient (exogenous-noise / hardware-faithful; the reparameterization
+   gradient through the noise *amplitude* is dropped by design), consistent across all estimators.
+   (The ledger registration is the Supervisor's PR-6 item; the code comment makes the intent local.)
+
+### Gate / acceptance
+All existing tests still pass; the **hardened `test_h` now fails in `"fixed"` mode and passes in
+`"saturating"`** (proving it's no longer hollow); the rewritten hygiene gate passes and is
+re-run-proven to **catch** a planted source-stack symbol (add+remove a temporary `MRRWeightBank`
+reference in a scratch file to confirm it trips, then delete). Report the ∂g/∂κ_ext diagnostics.
+
+### Deployment
+Local, minutes, $0. No sweeps. Smoke: one `saturating`-mode rollout per gating cell with finite
+nonzero gain-path gradient before running the suite.
+
+### NOT in this task (gated on Lucas / freezes — do not start)
+- **PR-12 convergence-controlled damping rerun + 8 seeds** (S31-F4) — blocked on Lucas's
+  **PR-4 §G ↔ PR-12 reconciliation** (does PR-12 = the registered g_f=0.9 operating point, or a
+  distinct D-LinOSS-damping/δ-init knob swept at fixed g_f=0.9?). Supervisor brings this to Lucas.
+- **PR-6 registrations** (S31-F2 connected init; S31-F1 mode-for-all-estimators; S31-F8 sweep
+  recipe: batch 8 / cosine LR / grad-clip / μ-init / δ-band) — freeze before S0.4a (Supervisor
+  drafts, Lucas signs).
+- **PR-11 generator-distinctness** (S31-F7) — an S0.4 RHEL-echo requirement; carry to S0.4.
+
+**Launch the Executor (separate terminal):**
+```
+cd ~/Documents/Project_SSM
+claude "Read shared/launch_executor.md and follow it."
+```
+
+---
+
 ## ✅ ACCEPTED — S0.3-1: build the shared dissipative-ring substrate (PR-4 🔒 SIGNED)
 
 > **Supervisor ACCEPT 2026-06-13 (verified, artifacts-first).** Ran `tests/test_substrate.py`
@@ -37,8 +116,18 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 >    pinned at 0.9κᵢ, or saturating-responsive?); the default + the F18 gate's gain-path coverage
 >    must be settled **before S0.4a**. Does not affect the calibration, M2, or tests a–g.
 >
-> Critic review of the build spec'd at `shared/critic_instructions_s0_3_1.md` (Lucas launches).
-> Next ACTIVE Executor task posts after the S-F1 interpretation + PR-6/5/7 freeze (pre-S0.4a).
+> **Critic verdict 2026-06-13: APPROVE-WITH-EDITS** (`shared/critic_review_s0_3_1.md`,
+> independently re-run 9/9). **S-F1 CONFIRMED and elevated to HIGH** (S31-F1): the dropped
+> ∂g/∂κ_ext is 27% of the κ_net gradient at θ₀ and **6× the retained term, sign-flipped, at the
+> r=0.1 trainable edge** — structurally different, not benign. Disposition APPROVE-WITH-EDITS not
+> AMEND: the freeze §G/§N-E6 *already mandate* saturating, so flipping the default conforms code
+> to the signed freeze (no freeze change); Lucas **confirms** (not reinterprets) the bake-off-wide
+> consequence (all four estimators use `saturating` — a PR-6 registration). Edits → **S0.3-1b
+> (ACTIVE, above)** for the freeze-conforming subset. New Critic catches folded in: **S31-F3**
+> (reachability is worse on the operative intracavity plane — all gain cells material-aspirational;
+> ledger addendum corrected), **S31-F4** (PR-12's sweep axis *is* PR-4 §G's g_f — needs PR-4/PR-12
+> reconciliation by Lucas before PR-12), **S31-F5** (hygiene gate → test the real invariant),
+> **S31-F2** (μ(0)=0 = signal-starvation, top S0.4 risk → PR-6), **F6/F7/F8** (register conventions).
 
 **Assigned:** 2026-06-13
 **Supervisor:** Claude Opus 4.8
