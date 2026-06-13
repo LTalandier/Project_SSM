@@ -65,7 +65,7 @@ boundary before the run proceeds.
 | **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) · **amended by PR-1.1 🔒 SIGNED 2026-06-11** (G3 criterion void for anchor instability — F-G3; Gate i adjudicated purpose-served: G1 PASS ∧ parity dossier) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
-| **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 📋 **PROPOSED 2026-06-11** (block below; fork ruling E-2026-06-11-2 + riders R1–R3 applied; Critic phase-boundary review pending, then Lucas freeze) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
+| **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 📋 **PROPOSED v2 2026-06-13** (block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; awaiting pre-signature OA fetch + Lucas signature) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
 | **PR-5** | PAT (S0.4a) | S0.4a | ⬜ | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
 | **PR-6** | All estimators (S0.4) | S0.4a | ⬜ | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
 | **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
@@ -524,24 +524,65 @@ review + Lucas signature, with the measured record permanent and unamended.
 
 ---
 
-## PR-4 — 📋 PROPOSED (Supervisor draft 2026-06-11; fork ruling **E-2026-06-11-2** applied — M1 + M3 trigger + riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) + `docs/s0_3/pr4_input_sheet.md`; ⬜ until Critic phase-boundary review + Lucas freeze)
+## PR-4 — 📋 PROPOSED **v2** (Supervisor revision 2026-06-13 per Critic review `shared/critic_review_pr4-freeze.md`, verdict **AMEND** 2026-06-12 — all findings P4-F1..F12 applied; v1 text preserved at commit 713efd4; fork ruling **E-2026-06-11-2** applied — M1 + M3 trigger + riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) + `docs/s0_3/pr4_input_sheet.md`; ⬜ until pre-signature OA fetch + Lucas freeze)
+
+**v2 revision log (Critic findings → changes):** P4-F1 HIGH → per-cell operating gain
+**registered** (G, new bullet) + every consequence number recomputed at it (C/S, passive floor
+in parentheses) + C-1 marginality sentence reconciled. P4-F2 HIGH → P̄/P_sat reference plane
+registered (intracavity), P_sat ring-scaling formula written, headroom rows demoted to
+small-signal statements, reachability solve registered at S0.3-1 calibration. P4-F3 → C-1
+splitting 1.9 corrected to **2.33** (kernel-reproduced). P4-F4 → Cui geometry corrected
+(64-GHz-FSR racetrack, mode/width is the residual risk) + **C-2 ×2-loss derate row**
+registered. P4-F5 → four-routes infeasibility superseded: article is **Gold OA (CC-BY)**;
+pre-signature fetch action registered. P4-F6 → E₀ closed form written in-block, inputs
+pinned, encoder-scale cadence registered. P4-F7 → anchor-risk items (v)/(vi) added; C-2 γ
+lineage basis stated. P4-F8 → clock qualifiers + N-assignment semantics registered. P4-F9 →
+M2 validation gains a C-1 episode. P4-F10 → F8-carry-in owners named. P4-F11 →
+`loss_q_consistency_error()` cited as the registered α↔Q check. P4-F12 → encoder map
+explicit, P_pk scoped per task family. **No registered choice changed** (Critic: every choice
+survives attack; the repairs are completeness-of-numbers).
 
 **Registers:** the shared dissipative-substrate cell that all four estimators train through
 (S0.3-1 build; Gate ii gates on it; S0.5 bake-off runs on it). One substrate model; the cells
 below are registered parameter points of it. All conventions inherited from S0.1 unless
 restated (amplitude rates; κᵢ = ω₀/2Qᵢ; κ_tot = κᵢ + 2κ_ext symmetric add-drop; memory =
-1/κ_tot; 100-GHz-FSR ring geometry registry convention; λ = 1550 nm).
+1/κ_tot; 100-GHz-FSR ring geometry registry convention; λ = 1550 nm). The ledger row's
+loss↔Q self-consistency demand is discharged by the existing **test-enforced
+`loss_q_consistency_error()` registry check**, hereby cited as the registered check (P4-F11).
 
 ### G — Gain-model class: **M1, static saturated operating point** (E-2026-06-11-2 ¶1)
-- **Form:** per-episode operating point g(P̄) = g₀/(1 + P̄/P_sat), fixed within the rollout;
-  P_sat anchored to the flagship's measured input saturation (−15 dBm class [EV], R§4b),
-  scaled to the ring per the registered geometry. The operating point enters the autograd
-  graph as a **differentiable function of the episode drive statistics** (house constraint
-  3a/3b — no detach).
-- **Gain ceiling (no-lasing bound):** registered target range g_rt ∈ [0, **0.9 × intrinsic
-  per-rt loss**] (the S0.1 deep-compensation convention; gain never compensates κ_ext).
-  Headroom vs demonstrated Er:Si₃N₄ gain (1.0–1.9 dB/cm [EV], R§4f): **×6.5–12 at C-1,
-  ×22–41 at C-2** — closes. P-CORN does not close (×0.7–1.3 vs *full* intrinsic) → P-CORN is
+- **Form:** per-episode operating point g(P̄) = g₀/(1 + P̄/P_sat), fixed within the rollout.
+  **Reference plane (P4-F2): P̄ and P_sat live at the same plane — the field the gain medium
+  sees (intracavity).** P_sat,ring is the flagship's measured input saturation (−15 dBm class
+  [EV], R§4b) mapped through the registered geometry by the formula registered here:
+  I_sat = P_sat,wg/A_eff (A_eff = 1.2 µm² [EV]), applied to the ring's circulating intensity
+  P_circ = Σⱼ|aⱼ|²·ħω₀/τ_rt. The operating point enters the autograd graph as a
+  **differentiable function of the episode drive statistics** (house constraint 3a/3b — no
+  detach). Under this intracavity reading, SPSA's ± perturbations of {δ, κ_ext, μ} are
+  handled automatically by the per-episode form: a κ_ext perturbation changes the intracavity
+  power the gain sees, each SPSA pass is its own episode, and the ≥ ms inter-pass cadence is
+  where gain follows adiabatically (Critic item 2).
+- **Gain ceiling (no-lasing bound):** g_rt ∈ [0, **0.9 × intrinsic per-rt loss**] (the S0.1
+  deep-compensation convention; gain never compensates κ_ext).
+- **Operating point (registered, P4-F1):** every gain-bearing cell runs at **g_rt = 0.9 ×
+  intrinsic per-rt loss** (the ceiling value — the same point the registered ASE level
+  n_ss ≈ 23 is computed at), giving **κ_net = 0.1·κᵢ + 2κ_ext**. **g = 0 (passive floor) and
+  g = 0.5× are labelled sensitivity rows**; P-CORN is passive-only (below). All in-block
+  consequence numbers are quoted at the registered operating point with the passive floor in
+  parentheses; **Gate ii and the bake-off headline run at the registered operating point.**
+  g₀ per cell is set by the registered saturated solve such that g(P̄ at the registered
+  drive) = 0.9 × intrinsic per-rt loss — a *model* operating point; whether the Er anchor
+  materially supplies that g₀ is anchor-risk item (v), not a substrate parameter.
+- **Reachability (P4-F2):** the saturated operating-point solve at the registered drive
+  (O2, P̄₀ = 1 mW) is computed at S0.3-1 calibration alongside E₀ and reported to this ledger
+  with the **achieved required-g₀ vs the Er-anchor span, per cell**. The headroom rows below
+  are **small-signal material-plausibility statements, not operating-point claims**: at
+  P̄₀ = 1 mW the bus-referenced saturation depth alone is ≈ ×32 (intracavity CW-resonant
+  ≈ ×260 at C-2/θ₀ passive), so C-1's small-signal span (×6.5–12) already falls short of its
+  bus-referenced requirement (≈ ×33) — C-1's gain-bearing rows carry the item-(v)
+  material-aspirational label unless the calibration solve lands lower. Small-signal headroom
+  vs demonstrated Er:Si₃N₄ gain (1.0–1.9 dB/cm [EV], R§4f): ×6.5–12 at C-1, ×22–41 at C-2.
+  P-CORN does not close even small-signal (×0.7–1.3 vs *full* intrinsic) → P-CORN is
   **passive-only** wherever it appears (sensitivity axes).
 - **ASE:** convention **A2** — continuous Langevin term in the CMT ODE, ⟨F F*⟩ = 2κ_g n_sp
   δ(t−t′) (photon units), discretized by the registered integrator (composes with the S0.1
@@ -552,7 +593,10 @@ restated (amplitude rates; κᵢ = ω₀/2Qᵢ; κ_tot = κᵢ + 2κ_ext symmetr
   axis below.
 - **Drift:** cross-episode gain memory + pump/thermal drift live at *training* cadence
   (batch-to-batch, SPSA perturbation tracking) via the salvaged `drift_inject` machinery + a
-  slow operating-point update — never inside the rollout (R§4b table).
+  slow operating-point update — never inside the rollout (R§4b table). **Deferred with named
+  owners (P4-F10):** the drift *magnitudes*, thermal self-heating at operating power, and
+  pole-placement precision (S0.1 §4 F8 carry-ins) freeze at **PR-6/PR-5–9** (the bake-off
+  protocol freezes) — explicit deferrals, not silent.
 - **Registered validity conditions (M1 is VOID outside these):**
   (i) **within-episode stationary drive statistics** — the frozen task families satisfy this
   by construction (PR-2 T-A i.i.d. 4-PAM; PR-13 synthetic family); **bursty/packeted inputs
@@ -565,9 +609,10 @@ restated (amplitude rates; κᵢ = ω₀/2Qᵢ; κ_tot = κᵢ + 2κ_ext symmetr
   (iii) quasi-static margin holds at the registered drive (E_sym/E_sat ≈ 5×10⁻⁶–9×10⁻⁵ at
   P̄₀ = 1 mW across the clock grid, ≥4 orders [EV]-anchored, R§4b).
 - **M2 (E-2026-06-11-2 ¶2):** retained strictly as M1's **one-off validation reference** —
-  the salvaged rate-equation integrator at τ = 3.4 ms, run once at C-2/θ₀ to confirm the
-  quasi-static reduction (per-episode relaxation ≤ 3 % bound, R§4b); **not a substrate-matrix
-  member**; the comparison is archived with the S0.3-1 validation set.
+  the salvaged rate-equation integrator at τ = 3.4 ms, run once at C-2/θ₀ **and once at
+  C-1/θ₀ (P4-F9 — Gate ii's gating cell; trivial cost)** to confirm the quasi-static
+  reduction (per-episode relaxation ≤ 3 % bound, R§4b); **not a substrate-matrix member**;
+  the comparisons are archived with the S0.3-1 validation set.
 - **M3 (E-2026-06-11-2 ¶3): deferred branch, pre-committed trigger, named and unbuilt at $0.**
   The M3 sensitivity row is built **iff** (a) a gated S0.5/S0.6 comparison lands within a
   margin where the gain-model class could plausibly flip the verdict — **the quantitative
@@ -580,34 +625,55 @@ restated (amplitude rates; κᵢ = ω₀/2Qᵢ; κ_tot = κᵢ + 2κ_ext symmetr
   figure; NF-C 3.0 always carries the "quantum-floor, aspirational" label.
 - **C-1 — Gate-ii gating cell ("foundry floor"):** **P-FND** (Qᵢ = 2×10⁶ ⇔ α = 0.172 dB/cm,
   registry-self-consistent), NF-A 7.0, γ = 90 MHz (subtractive-low, [EV] — process-class
-  assumption, stated as such). **Gate ii gates here** (ledger rule: foundry-grade gates
-  Gate ii), at **N = 8** (in-band at θ₀: ~12.9 intrinsic-linewidth-class poles in the 2-GHz
-  band). Memory at θ₀ (r = 0.3): ≈ 4.1 samples @ 2 GS/s — the honestly-marginal T-A regime
-  already priced by PR-2's binding MS/s honesty line; Gate ii's target is the **PR-3 BPTT
-  ceiling measured on this same cell**, so marginal capacity hits both arms identically.
+  assumption, stated as such). **Gate ii gates here, at 2 GS/s** (ledger rule: foundry-grade
+  gates Gate ii; clock per P4-F8), at **N = 8** — in-band at θ₀ in the 2-GHz band: **29.5 at
+  the registered operating point (12.9 passive floor)**. Memory at θ₀ (r = 0.3) @ 2 GS/s:
+  **≈ 9.4 samples at the registered operating point (4.1 passive floor)** — at the registered
+  point C-1 **covers** the T-A 7-tap span; the honestly-marginal framing applies to the
+  **passive-floor row only** (4.1 < 7; priced by PR-2's binding MS/s honesty line)
+  (P4-F1 reconciliation). Gate ii's target is the **PR-3 BPTT ceiling measured on this same
+  cell at the same operating point**, so capacity hits both arms identically.
 - **C-2 — bake-off headline cell ("demonstrated MPW-class"):** **P-AN800** (Qᵢ = 6.8×10⁶ ⇔
-  α = 0.051 dB/cm), NF-A 7.0, γ = 11.8 MHz (damascene-clean [AV] — favorable assumption,
-  knob ON regardless, see S). **The PR-2 frozen headline N = 32 runs here** (in-band at θ₀:
-  ~44 in the 2-GHz band); memory at θ₀ ≈ 14 samples @ 2 GS/s (covers the T-A 7-tap span);
-  gain budget ×22–41. **Verification status (transfer-check rule, GA-F6 scope):** the pair
-  is registered as a **conservative bound** on the abstract-verified platform numbers —
-  Cui et al., Adv. Photon. Nexus 2(4) 046007 (2023), abstract verbatim via Semantic Scholar
-  API [EV-class]: *"propagation loss of only 3.3 dB/m and a mean intrinsic Q of around
-  10.8 million"*, standard-MPW-foundry process — i.e. the registered 5.1 dB/m / 6.8×10⁶ is
-  strictly worse than the verified platform demonstration. Body-level sentence remains
-  paywalled after **four routes attempted at the freeze date** (SPIE ×2 slugs JS-wall, ADS
-  JS-wall, researching.cn TLS — 2026-06-11, Supervisor; matching the Executor's S0.3-0
-  failures). Residual anchor risks, registered: (i) body-vs-abstract figure provenance
-  unresolved; (ii) **geometry transfer** — Cui's demonstration is a 19.8-GHz-FSR racetrack
-  (0.21 mm²); applying its loss class to the 100-GHz-FSR registry ring assumes
-  bend-loss-neutral scaling (Euler-bend class). Both risks are carried as labels on C-2, not
-  silently.
+  α = 0.051 dB/cm), NF-A 7.0, **γ = 11.8 MHz (damascene-clean class [AV]; basis stated per
+  P4-F7: the AN800 platform is the LIGENTEC-AN damascene process lineage — a process-class
+  assignment, no AN800-specific γ measurement exists; favorable assumption, knob ON
+  regardless, see S).** **The PR-2 frozen headline N = 32 runs here** — in-band at θ₀ in the
+  2-GHz band: **100 at the registered operating point (43.9 passive floor)**; memory at θ₀
+  @ 2 GS/s: **32.0 samples at the registered point (14.0 passive)** — covers the T-A 7-tap
+  span at both points; small-signal gain headroom ×22–41 (plausibility statement per G).
+  **Verification status (transfer-check rule, GA-F6 scope):** the pair is registered as a
+  **conservative bound** on the abstract-verified platform numbers — Cui et al., Adv.
+  Photon. Nexus 2(4) 046007 (2023), abstract verbatim via Semantic Scholar API [EV-class]:
+  *"propagation loss of only 3.3 dB/m and a mean intrinsic Q of around 10.8 million"*,
+  *"fabricated by the standard multi project wafer (MPW) foundry process"* (phrase re-verified
+  by the Critic, 2026-06-12) — i.e. the registered 5.1 dB/m / 6.8×10⁶ is strictly worse than
+  the verified platform demonstration on both axes. **OA status (P4-F5, supersedes the v1
+  four-routes infeasibility):** the article is **Gold OA (CC-BY)** — Semantic Scholar
+  `openAccessPdf` + Unpaywall both carry the publisher-PDF link (Critic 2026-06-12;
+  Supervisor re-verified 2026-06-13). Programmatic fetches are bot-walled (six attempts,
+  two sessions), but a human browser fetch is one click. **Pre-signature action (Lucas,
+  headed browser):** download the OA PDF and check for the 0.051 dB/cm / 6.8×10⁶ sentence —
+  found ⇒ P-AN800 flips [AV]→[EV] and residual risk (i) closes; not found ⇒ the pair stands
+  on the conservative-bound construction alone. Either outcome is freeze-compatible.
+  Residual anchor risks, registered: (i) body-vs-abstract figure provenance (resolves at the
+  pre-signature fetch); (ii) **geometry transfer (corrected per P4-F4)** — Cui's
+  demonstration is a racetrack of perimeter 2.226 mm (effective radius 195 µm, 3-µm-wide
+  multimode waveguide, modified Euler bends; FSR ≈ 64 GHz) [abstract-verified]; applying its
+  loss class to the 100-GHz-FSR registry ring (L ≈ 1.43–1.54 mm) assumes the loss class
+  survives the **single-mode, narrower-waveguide geometry** — the demonstrated number is
+  achieved *by* the wide-multimode Euler-bend design, so the residual risk is mode/width
+  geometry, **not ring size** (the registry ring's equivalent bend radius ≈ 228 µm is no
+  tighter than Cui's 195 µm). Priced by the registered **C-2-derate sensitivity row: ×2
+  registered loss (Qᵢ ≈ 3.4×10⁶)** — cost ≈ 0 in simulation. Both risks are carried as
+  labels on C-2, not silently.
 - **C-3 — aspirational axis:** **P-UHQ** (Qᵢ = 3×10⁷), NF-A headline (NF ∈ {3, 5} labelled
   sensitivity). Hosts **N = 128** — per EV-F3 the *only* true N=128 option is escape (a):
   r ≲ 1 with the splitting knob ON (the doublet is the model). Labelled aspirational
   sweep axis; never gates anything.
 - **Sensitivity axes (reported, never headline):** P-CORN (passive-only per G) ·
-  P-MPW-MM · γ ∈ {0, 11.8, 90, 160 MHz} · NF ∈ {3, 5, 7}.
+  P-MPW-MM · **C-2 derate ×2 loss (Qᵢ ≈ 3.4×10⁶, P4-F4)** · **gain rows g ∈ {0 (passive
+  floor), 0.5×} (P4-F1; 0.9× is the registered point)** · γ ∈ {0, 11.8, 90, 160 MHz} ·
+  NF ∈ {3, 5, 7}.
 
 ### K — κ_ext policy: **K4, trainable within registered bounds** (forced by the frozen PR-2
 P2 partition — κ_ext,j is *in* the trainable set; a fixed-κ_ext policy would contradict it)
@@ -618,9 +684,16 @@ P2 partition — κ_ext,j is *in* the trainable set; a fixed-κ_ext policy would
   unit test in the S0.3-1 validation set.
 - **θ₀ policy value (the F6 baseline hold, one value): r₀ = 0.3** (deep side of critical).
   Chosen jointly (input sheet §6): at C-2 it is the value where the frozen N = 32 packs
-  in-band AND the T-A 7-tap span is covered (14 samples) AND drop efficiency (0.141) is
-  non-degenerate under the O2 bookkeeping. The reservoir baseline holds κ_ext ≡ r₀ = 0.3
-  (PR-2 v2 F6, frozen).
+  in-band AND the T-A 7-tap span is covered AND drop efficiency (0.141) is non-degenerate
+  under the O2 bookkeeping. **Direction of fit (Critic reading-1 adjudication, recorded):**
+  N = 32 was frozen at PR-2/PR-10 — anchored to the 50-node Vinckier RC, before any substrate
+  cell existed — and C-1 cannot host it; the alternatives were break a frozen grid or
+  register a demonstrated-MPW cell that hosts it, keeping Gate ii on the foundry floor.
+  θ₀ = 0.3 is not a knife edge: the C-2 co-satisfaction band is wide (N = 32 packs for
+  r ≤ 0.6; the 7-tap span is covered for r ≤ 1.0; drop efficiency non-degenerate from
+  r ≈ 0.3), and 0.3 is an existing B3 ladder rung — design-from-frozen-constraints, made
+  before any results exist. The reservoir baseline holds κ_ext ≡ r₀ = 0.3 (PR-2 v2 F6,
+  frozen).
 - K4's registered prerequisites: (i) F6 hygiene — frozen in PR-2 v2 ✓; (ii) the **O2
   normalization below** (the only drive convention comparison-clean under trainable κ_ext,
   input sheet §5) ✓; (iii) splitting validity across the whole bound range — structurally
@@ -632,19 +705,28 @@ P2 partition — κ_ext,j is *in* the trainable set; a fixed-κ_ext policy would
   ~×2 ring-update cost accepted — same 2×2 machinery the coupled-μ hook needs anyway.
   Rationale: under K4 the κ_ext-conditional policies (K-pol-1/2) are incoherent — trained
   κ_ext moves through their validity boundary mid-run.
-- **Registered claim condition:** any single-pole-abstraction claim anywhere downstream must
-  name the cell (process class + Q + r) where 2γ/κ_tot < 1; at θ₀: C-1 2γ/κ_tot ≈ 1.9
-  (split), C-2 ≈ 1.0 (doublet-class) — **no registered cell supports a knob-OFF single-pole
-  claim at θ₀.**
+- **Registered claim condition (numbers corrected per P4-F3, kernel-reproduced):** any
+  single-pole-abstraction claim anywhere downstream must name the cell (process class + Q +
+  r) where 2γ/κ_tot < 1; at θ₀: **C-1 2γ/κ_tot ≈ 2.33 (split), C-2 ≈ 1.04 (doublet-class)
+  at the passive floor — ≈ 5.3 / 2.4 at the registered operating gain** (C-3: 4.58 / 10.5) —
+  **no registered cell supports a knob-OFF single-pole claim at θ₀, passive or compensated.**
 - **Rider R2 — the N-grid consequence, stated here:** with the knob always ON, EV-F3's
   escape (a) stays open, so the **PR-2 frozen N-grid {8, 32, 128} survives intact** — pinned
-  as: N = 8 in-band at C-1 (Gate ii) · N = 32 in-band at C-2 (bake-off headline) · N = 128
-  **only** as the C-3 knob-ON aspirational cell. The de facto *deployable* grid is
-  **{8 @ C-1, 32 @ C-2}**; any headline using N = 128 must carry the C-3 aspirational label.
-  (In-band counting convention: intrinsic-linewidth poles per the EV-F3/R§5 packing anchor,
-  loaded ×(1+2r) at the quoted r; training may subsequently trade pole placement against
-  linewidth inside the registered pole region — the packing row is the *initialization*
-  feasibility statement.)
+  as a **per-cell assignment, not a per-cell sweep (P4-F8):** N = 8 ↔ C-1 (Gate ii) ·
+  N = 32 ↔ C-2 (bake-off headline) · N = 128 **only** as the C-3 knob-ON aspirational cell.
+  The de facto *deployable* grid is **{8 @ C-1, 32 @ C-2}**; any headline using N = 128 must
+  carry the C-3 aspirational label. **Clock qualifier (P4-F8): all in-band counts in this
+  block are 2-GS/s figures; Gate ii runs at 2 GS/s.** At 1 GS/s the registered operating
+  point still holds N in-band at every cell (C-1 14.8, C-2 50, C-3 222) but the **passive
+  floor does not** (6.5 < 8, 22 < 32, 97 < 128); at 0.1 GS/s no cell holds N in-band.
+  Registered as a property, not a defect: training may overlap or park poles out-of-band;
+  the packing row is the *initialization* feasibility statement (in-band counting
+  convention: intrinsic-linewidth poles per the EV-F3/R§5 packing anchor, loaded ×(1+2r) at
+  the quoted r, κ_net at the registered gain) — never an out-of-band-clock claim.
+  **PR-13 cross-reference at 1 GS/s, registered operating point** (the k-grid placement the
+  cliff hypothesis reads against; passive floor ÷2.3): C-1 memory 4.7 samples → k ∈ {1, 3}
+  in-memory, k = 10 ×2.1 over; C-2 16.0 → k ≤ 10 in, k = 30 ×1.9 over; C-3 70.6 → k ≤ 30
+  in, k = 100 ×1.4 over (the cliff).
 
 ### H — Holding/trim-statistics convention (EV-F1 carry-in): **H1, full-P_π worst case**
 - The substrate's standing-power side-ledger charges every heater P_π/2-class holding at max
@@ -655,17 +737,32 @@ P2 partition — κ_ext,j is *in* the trainable set; a fixed-κ_ext policy would
 
 ### N — Input-drive normalization (PF-F8f): **O2, registered intracavity-energy budget**
 - **Anchor:** P̄₀ = **1 mW** per-sequence mean bus power (the [EV] quasi-static worked-example
-  drive, G(iii)); peak bound P_pk = **2·P̄₀** (equiprobable 4-PAM {0..3} arithmetic).
-- **E₀ definition (the frozen formula — no free parameter):** E₀ ≡ the steady-state
+  drive, G(iii)). **Encoder map, explicit (P4-F12):** the unipolar affine map
+  {0, 1, 2, 3} → {0, ⅓, ⅔, 1}·P_pk; equiprobable mean = P_pk/2. **Peak-to-average is
+  task-family-scoped:** P_pk = **2·P̄₀** for the equiprobable 4-PAM T-A family;
+  **≈ 2.7·P̄₀** for the PR-13 marker family (fifth level on the same map). The G(iii)
+  quasi-static margin is quoted at the worst registered family peak — it holds (≥ ~4 orders).
+- **E₀ definition (the frozen formula, written here per P4-F6):** E₀ ≡ the steady-state
   intracavity photon number Σⱼ⟨|aⱼ|²⟩ established by a stationary P̄₀ drive at **C-2, θ₀,
-  on-resonance (δ = 0)** under the registered coupling conventions — closed-form for
-  stationary inputs (input sheet §5-O2). The **numeric value** is a mechanical evaluation of
-  this frozen formula, computed at S0.3-1 calibration, reported to this ledger as a one-line
+  on-resonance (δ ≡ 0)**, under these pinned inputs: **CW-equivalent stationarity reading**
+  (the formula uses the per-sequence mean power P̄₀, not the at-clock modulated PSD — the PSD
+  reading differs by the build-up factor and is a labelled sensitivity only); **calibration
+  injection on the bus port of ring 1 only** (chain head; input-output normalization
+  |s_in|² = P̄₀/ħω₀ photon flux); **μ = μ(0) = 0** (rings 2..N dark at the calibration
+  point); the cell's registered N. Closed form:
+  **E₀ = 2κ_ext,θ₀ · (P̄₀/ħω₀) / κ_net²** , κ_net = 0.1·κᵢ + 2κ_ext at the registered
+  operating gain (the passive-floor row uses κ_tot). No free parameter remains. The
+  **numeric value** is a mechanical evaluation of this formula, computed at S0.3-1
+  calibration (alongside the G reachability solve), reported to this ledger as a one-line
   addendum **before any run that a PR-5–9 gate or bake-off statistic consumes**, and frozen
   there. Every arm (SSM and reservoir baseline) and every κ_ext policy point derives its
   encoder scale to hit the same E₀ — **the encoder cannot buy SNR in either arm** (the F6
   contamination channel closed under K4; the natural partner of the corner-independent
-  n_ss ≈ 23 ASE photons, R§1.3).
+  n_ss ≈ 23 ASE photons, R§1.3). **Encoder-scale cadence (P4-F6):** the encoder scale is
+  derived **once per arm at the registered θ₀ and frozen for the run**; trained κ_ext
+  excursions thereafter change intracavity energy **as physics, not as renormalization** —
+  the only reading under which "the encoder cannot buy SNR" and "the task input is fixed"
+  are simultaneously true.
 - **Registered unit test:** E(E₀-normalized drive) = E₀ within tolerance, per cell × per
   κ_ext bound-edge (r = 0.1, 3) — S0.3-1 validation set.
 - **R3 cross-reference:** the stationarity this normalization assumes is the same registered
@@ -680,11 +777,23 @@ No executable reference implementation exists for a physics cell — the transfe
 **out of scope by the registered rule**; the analogous risk is carried instead by: (i) the
 [EV]/[AV] provenance trail per number (R§Appendix A); (ii) the **conservative-bound
 construction** of C-2 (registered values strictly worse than the abstract-verified
-demonstration); (iii) the M2 one-off validation of the M1 reduction; (iv) the named residual
-risks on C-2 (body-provenance + geometry transfer). **Infeasibility of deeper verification at
-proportionate cost is hereby registered as anchor risk, per the rule.**
+demonstration); (iii) the M2 one-off validation of the M1 reduction (now two cells, P4-F9);
+(iv) the named residual risks on C-2 (body-provenance — resolves at the pre-signature OA
+fetch — + geometry transfer, priced by the ×2-loss derate row); **(v) the Er-gain budget
+applies the flagship's straight-implanted-waveguide coefficient (1.0–1.9 dB/cm [EV]) to an
+undoped foundry ring on a different process — a Stage-1 integration assumption (R§4f),
+carried as a label on every gain-bearing cell (and the source of C-1's material-aspirational
+label, G reachability); (vi) P_sat's ring scaling (formula in G) is an anchor-transfer
+assumption validated only at Stage 1 (P4-F7).** The v1 sentence registering *infeasibility of
+deeper verification* is **superseded (P4-F5)**: the Cui article is Gold OA (CC-BY) and the
+body check is the registered pre-signature action — what remains genuinely infeasible at
+proportionate cost is programmatic retrieval only (bot-walled, six attempts/two sessions).
 
-**Freeze checklist for Lucas (after Critic review):** the registered choices are — M1 (+M2
-validation, M3 trigger) · cells C-1/C-2/C-3 with roles as above, NF-A headline · K4 r ∈
-[0.1, 3], θ₀ = 0.3 · K-pol-3 always-ON · H1 · O2 @ P̄₀ = 1 mW. Everything else in the input
-sheet's menus is a labelled sensitivity axis or explicitly deferred.
+**Freeze checklist for Lucas (after Critic review — verdict AMEND, this v2 is the revision):**
+the registered choices are — M1 (+M2 validation ×2 cells, M3 trigger) · **operating point
+g_rt = 0.9× intrinsic per cell (P4-F1)** · cells C-1/C-2/C-3 with roles as above, NF-A
+headline · K4 r ∈ [0.1, 3], θ₀ = 0.3 · K-pol-3 always-ON · H1 · O2 @ P̄₀ = 1 mW with the
+in-block E₀ formula. Everything else in the input sheet's menus is a labelled sensitivity
+axis or an explicitly-owned deferral (P4-F10). **Pre-signature action (P4-F5):** one-click
+headed-browser download of the Cui OA PDF + check for the 0.051 dB/cm / 6.8×10⁶ sentence;
+either outcome is freeze-compatible — record found/not-found with the signature.

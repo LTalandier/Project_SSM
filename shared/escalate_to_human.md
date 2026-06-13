@@ -18,6 +18,40 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-06-13-1 — PR-4 v2 posted after Critic AMEND: two asks (one click + one signature)
+
+**Filed:** 2026-06-13 (Supervisor). **Context:** the Critic's phase-boundary review
+(`shared/critic_review_pr4-freeze.md`, 2026-06-12) returned **AMEND — "don't sign this draft;
+sign the one-pass revision."** Its bottom line: *every registered choice survives attack*
+(M1 + M2 validation + M3 trigger · C-1/C-2/C-3 roles · NF-A · K4, r ∈ [0.1, 3], θ₀ = 0.3 ·
+K-pol-3 · H1 · O2 @ 1 mW — none reopened); what failed was completeness of the numbers
+around the choices — chiefly the **unregistered operating gain** (P4-F1) and the
+**unregistered saturation reference plane** (P4-F2), exactly its hostile reading 2. The
+**v2 revision is now posted** in the ledger with all twelve findings applied (revision log
+at the top of the PR-4 block; v1 preserved at commit 713efd4). The one registered choice v2
+adds: **every gain-bearing cell runs at g_rt = 0.9× intrinsic** (the ceiling — the point the
+registered ASE level was already computed at; Critic-recommended), with g = 0 and 0.5× as
+labelled sensitivity rows, and all consequence numbers recomputed at it.
+
+**Ask (a) — one click, before signing (P4-F5):** the Cui 2023 anchor paper turned out to be
+**Gold OA (CC-BY)** — the v1 "verification infeasible" line was wrong and is superseded.
+Programmatic fetches are bot-walled, but a browser click works. Please download:
+<https://www.spiedigitallibrary.org/journals/advanced-photonics-nexus/volume-2/issue-4/046007/Compact-microring-resonator-based-on-ultralow-loss-multimode-silicon-nitride/10.1117/1.APN.2.4.046007.pdf>
+and check whether the body states the **0.051 dB/cm / Q ≈ 6.8×10⁶** pair (our registered
+C-2 values). Found ⇒ P-AN800 flips [AV]→[EV], residual risk (i) closes. Not found ⇒ the
+registration stands on the conservative-bound construction alone (our values are strictly
+worse than the abstract-verified 3.3 dB/m / 10.8 M). **Either outcome is freeze-compatible** —
+just tell me which it was, and it goes in the freeze record.
+
+**Ask (b) — sign PR-4 v2** (e.g. "sign PR-4", plus the fetch outcome). On signature: PR-4
+flips 🔒, S0.3 freeze complete, and the **S0.3-1 substrate-build task goes to the Executor**
+(M1 @ g_rt = 0.9×, A2 ASE, splitting knob, K4 bounds + B1-consistency unit test, M2
+validation episodes at C-2/θ₀ + C-1/θ₀, E₀ + reachability calibration with the ledger
+addendum, coarse BPTT sweep feeding PR-12). If instead you want any registered value changed,
+say which — it is your freeze.
+
+---
+
 ### ✅ E-2026-06-11-2 — S0.3 gain-regime fork → **RESOLVED 2026-06-11 by Lucas: M1, with a registered M3 trigger** (extension of option (a); ruling recorded verbatim below)
 
 **RULING (Lucas, 2026-06-11 — binding content, recorded in full):**

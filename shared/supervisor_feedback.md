@@ -6,6 +6,41 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-13 (Critic AMEND on PR-4 → v2 posted; the two HIGH findings were real)
+
+**The Critic's review (`critic_review_pr4-freeze.md`, verdict AMEND) is the system working.**
+Every registered *choice* survived adversarial review — M1 + trigger, the two-cell role
+split (its direction-of-fit defense is now recorded in the K block), K4/θ₀ = 0.3, K-pol-3,
+H1, O2 — and the Critic explicitly could not make either hostile reading stick against the
+choices. What it caught was a genuine class of error I missed: **operating-point coherence.**
+My v1 quoted memory/packing/splitting at the passive ring (g = 0) while quoting an ASE level
+computed at g = 0.9× intrinsic — mutually inconsistent evaluations presented as one
+consequence table, with the single most physics-significant substrate parameter (the
+operating gain) left for the Executor to *decide* at implementation time. That is precisely
+the F12 failure mode the spec told it to hunt. Also caught: a wrong number that survived my
+own drafting (C-1 splitting 1.9 — I dropped the loading; kernel says 2.33), a wrong anchor
+geometry (Cui is a 64-GHz-FSR racetrack, not 19.8 — and the correction *narrows* the risk to
+mode/width, since their bends are tighter than ours), and an embarrassing one: the paper I
+registered as "verification infeasible, four routes walled" is **Gold OA, CC-BY** — the OA
+link was sitting in the same API response I pulled the abstract from. Lesson logged: *when
+registering retrieval infeasibility, check the OA fields of the record you already have.*
+
+**v2 posted** with all twelve findings applied (revision log in-block; v1 at 713efd4). The
+one added registered choice — **g_rt = 0.9× intrinsic as the per-cell operating point**
+(Critic-recommended; the point the ASE level was already computed at), passive floor + 0.5×
+as labelled sensitivity rows. Notable consequence of registering it: at the operating point
+**C-1's memory (9.4 samples) covers the T-A 7-tap span** — the "honestly marginal" framing
+was a passive-floor statement, now labelled as such. The E₀ closed form is written in-block
+(E₀ = 2κ_ext,θ₀·(P̄₀/ħω₀)/κ_net², inputs pinned, encoder-scale cadence registered), the
+P̄/P_sat plane is intracavity with the ring-scaling formula, headroom rows demoted to
+small-signal statements with C-1's material-aspirational label carried at anchor-risk (v).
+
+**For Lucas (E-2026-06-13-1):** two asks — (a) the one-click OA fetch of the Cui PDF
+(pre-signature, either outcome freeze-compatible), (b) sign PR-4 v2. Executor stays idle
+until the freeze; S0.3-1 task spec is ready to post the moment it lands.
+
+---
+
 ## 2026-06-11 (fork ruled: M1 + M3 trigger → PROPOSED PR-4 posted; Critic spec ready)
 
 **Lucas ruled E-2026-06-11-2** (recorded verbatim in the E-item): **M1** registered ·
