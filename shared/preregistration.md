@@ -541,6 +541,23 @@ review + Lucas signature, with the measured record permanent and unamended.
 > riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) +
 > `docs/s0_3/pr4_input_sheet.md`).
 
+> **📌 CALIBRATION ADDENDUM (S0.3-1, 2026-06-13 — the registered §N/§G deferral, discharged).**
+> Mechanical evaluation of the frozen E₀ formula and the saturated reachability solve at θ₀
+> (r=0.3), P̄₀ = 1 mW, g_rt = 0.9×κᵢ — **sets no values; reproduces the closed form to ~1e-15**
+> (unit test e). Source: `photonic_ssm.substrate.calibration` →
+> `results/s0_3/e0_reachability_addendum.{md,json}` (Executor; Supervisor-verified, C-2
+> hand-checked: 2·κ_ext,θ₀·(P̄₀/ħω₀)/κ_net² = 1.07e8 ✓).
+> **Numeric E₀ (frozen for all S0.3-1+ runs):** C-1 = **3.14×10⁷**, C-2 = **1.07×10⁸**,
+> C-3 = **4.72×10⁸** photons (C-2-derate 5.34×10⁷; P-CORN 7.06×10⁵). κ_net @ θ₀: C-1 2.13×10⁸,
+> C-2 6.25×10⁷ rad/s. Build-up ×262 and bus saturation depth ×31.6 @ C-2/θ₀ reproduce §G.
+> **Saturated reachability (honest, confirms the §G/P4-F2 prediction):** required small-signal
+> g₀ (bus) to hit 0.9×κᵢ at the registered drive = C-1 5.04, C-2 1.5, C-3 0.36 dB/cm vs the
+> Er-anchor span 1.0–1.9 dB/cm ⇒ **C-1 material-aspirational** (headroom ×6.5–12.3 < required
+> ×32.6 — anchor-risk (v)), **C-2 straddles** (reachable only for the **upper half** of the Er
+> span, ≥1.5 dB/cm; ×21.8–41.4 vs ×32.6), C-3 ✓, C-2-derate material-aspirational. **The "✅"
+> in the source table overstates C-2 — the registered honest status is "reachable iff Er ≥ 1.5
+> dB/cm"; carried at anchor-risk (v).**
+
 **v2 revision log (Critic findings → changes):** P4-F1 HIGH → per-cell operating gain
 **registered** (G, new bullet) + every consequence number recomputed at it (C/S, passive floor
 in parentheses) + C-1 marginality sentence reconciled. P4-F2 HIGH → P̄/P_sat reference plane

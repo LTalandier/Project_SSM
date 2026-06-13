@@ -6,6 +6,44 @@ for context, but task assignments live in `task_queue.md` and review specs in `c
 
 ---
 
+## 2026-06-13 (S0.3-1 substrate ACCEPTED — verified; one fidelity finding S-F1 + PR-12 deferred)
+
+**The substrate is built and I've accepted it.** Verified artifacts-first (the GA-F1 lesson):
+re-ran `tests/test_substrate.py` myself (9/9), then *read* the tests to confirm they aren't
+hollow — (b) is bit-identical to the S0.1 forward model to 1.4e-20 plus the analytic Lorentzian,
+(e) is a real 5000-step end-to-end E₀ measurement, (h) asserts the registered operating point
+with finite nonzero grads on all P2 families. Hand-checked E₀ (C-2 = 1.07e8 from the closed
+form ✓) and pasted the calibration into PR-4 (the registered deferral, discharged). The
+Executor's reporting is the best I've seen on this project — it flagged five concerns itself,
+including the μ(0)=0 cold-start and a token-hygiene transparency note it could have stayed
+silent on.
+
+**The one finding I add on top (S-F1, MEDIUM):** the rollout defaults to `gain_mode="fixed"`
+(g pinned at 0.9·κᵢ), and `test_h` runs that default — so the F18 gradient-flow gate, which is
+supposed to be the operational proof that training sees the real physics, actually flows its
+κ_ext gradient through the coupling/loss path and **not through the gain**. The freeze (§G
+"differentiable function of the episode drive statistics" + §N E6 "κ_ext excursions are physics,
+not renormalization") wants the gain to respond to κ_ext — the `saturating` mode, which exists
+but isn't the default and isn't gated. The real bite: if SPSA perturbs the saturating physics
+while PAT/adjoint/BPTT backprop through a pinned gain, the four estimators aren't training one
+substrate. I read this as a freeze-interpretation Lucas should rule (rec: saturating is the
+registered rollout gain), settled before S0.4a. **Caught it by reading the gain code, not by
+trusting the green gate** — which is the whole reason to read tests, not just run them.
+
+**PR-12 deferred, deliberately.** The damping curve is confounded by a fixed-budget trainability
+artifact (the Executor flagged it; a convergence sub-check confirms slow-memory points keep
+climbing). Freezing the central damping cell off that curve would bake in "trains-fast-at-500-
+steps" as if it were "best accuracy." I'll commission a convergence-controlled rerun or bring a
+confound-aware selection at S0.3-close. **Anomaly A (μ(0)=0 disconnected cold-start)** is carried
+to PR-6 as the load-bearing trainability decision.
+
+**Process:** Critic review of the build spec'd (`critic_instructions_s0_3_1.md`, centered on
+S-F1) → Lucas launches → I bring the gain-mode disposition → PR-6/5/7 freeze → S0.4a. Filed
+E-2026-06-13-2. The Executor's work is committed with my acceptance edits (it had left the build
+uncommitted; I attributed the implementation to it in the message).
+
+---
+
 ## 2026-06-13 (PR-4 🔒 SIGNED — S0.3 substrate freeze complete → S0.3-1 ACTIVE)
 
 **Lucas signed PR-4 v2 ("sign PR-4"). The S0.3 substrate freeze is complete** — the single

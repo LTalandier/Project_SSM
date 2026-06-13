@@ -8,11 +8,41 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ACTIVE — S0.3-1: build the shared dissipative-ring substrate (PR-4 🔒 SIGNED)
+## ✅ ACCEPTED — S0.3-1: build the shared dissipative-ring substrate (PR-4 🔒 SIGNED)
+
+> **Supervisor ACCEPT 2026-06-13 (verified, artifacts-first).** Ran `tests/test_substrate.py`
+> myself → **9/9 pass** (8 registered a–h + checkpoint); read each test to confirm it is
+> *substantive* (b is bit-identical to S0.1 to 1.4e-20 + analytic Lorentzian; e is a 5000-step
+> end-to-end E₀ measurement; h asserts the registered operating point + finite nonzero grads on
+> all P2 families). Hand-verified the load-bearing E₀ number (C-2 = 1.07e8 ✓) and the
+> reachability prediction (C-1 material-aspirational, C-2 straddles — matches §G/P4-F2). E₀
+> addendum **pasted into PR-4** (the registered deferral, discharged). M2 quasi-static confirmed
+> at both cells. Compute $0/local. The Executor's transparency is exemplary (5 anomalies flagged,
+> incl. one it could have buried). **Build gate F18 PASS — accepted.**
+>
+> **Two items NOT closed by this acceptance (carried, not blockers to acceptance):**
+> 1. **PR-12 deferred — NOT frozen on this curve.** The damping sweep is confounded by a
+>    fixed-budget trainability artifact (anomaly B; the Executor flagged it and correctly left
+>    PR-12 to Supervisor+Lucas). A clean PR-12 needs a convergence-controlled rerun (train-to-
+>    fixed-loss, not fixed-steps) OR a documented confound-aware selection. Held for S0.3-close.
+> 2. **Finding S-F1 (MEDIUM, pre-S0.4 must-resolve + freeze-interpretation for Lucas):** the
+>    rollout defaults to `gain_mode="fixed"` (g ≡ 0.9·κᵢ constant); `test_h` runs that default,
+>    so the F18 gate's κ_ext grads flow through the coupling/loss path, **not through the gain**.
+>    The frozen §G ("differentiable function of the episode drive statistics") + §N E6 ("trained
+>    κ_ext excursions change intracavity energy *as physics, not renormalization*") require the
+>    gain to **respond** to κ_ext (the implemented-but-non-default `gain_mode="saturating"`). Risk:
+>    if SPSA perturbs the real saturating gain while PAT/adjoint/BPTT backprop through fixed gain,
+>    the four estimators are **not training one substrate** (violates the shared-substrate
+>    standard). → Critic review item #1; Lucas freeze-interpretation question (is the rollout gain
+>    pinned at 0.9κᵢ, or saturating-responsive?); the default + the F18 gate's gain-path coverage
+>    must be settled **before S0.4a**. Does not affect the calibration, M2, or tests a–g.
+>
+> Critic review of the build spec'd at `shared/critic_instructions_s0_3_1.md` (Lucas launches).
+> Next ACTIVE Executor task posts after the S-F1 interpretation + PR-6/5/7 freeze (pre-S0.4a).
 
 **Assigned:** 2026-06-13
 **Supervisor:** Claude Opus 4.8
-**Status:** ACTIVE
+**Status:** ✅ ACCEPTED 2026-06-13 — F18 build gate PASS (Supervisor-verified); PR-12 deferred; finding S-F1 (gain-mode) → Critic + Lucas before S0.4a
 **Prereqs / read first:** roadmap §S0.3 (Do / Deliverable / Gate F18) · **the frozen PR-4 v2
 block** in `shared/preregistration.md` (the substrate spec — this task *implements* it, sets
 no new values) · PR-2 v2 (partition P2, N-grid, F6, F12) · PR-13 (memory family) · PR-10

@@ -18,6 +18,63 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-06-13-2 — S0.3-1 substrate ACCEPTED → one freeze-interpretation decision + a Critic launch (neither blocks today)
+
+**Filed:** 2026-06-13 (Supervisor). **Context:** the Executor delivered the shared
+dissipative-ring substrate (S0.3-1). I verified it and **ACCEPTED** — re-ran the test suite
+myself (9/9 pass), confirmed the tests are substantive, hand-checked the load-bearing E₀ number,
+and pasted the E₀ + reachability calibration into PR-4 (the registered deferral, now
+discharged). The build is correct and its F18 gate genuinely passes. The Executor's reporting
+was exemplary (it flagged five concerns itself). **Nothing here blocks — the substrate is ready
+— but three things need your eye before S0.4 (the estimators) starts building on it.**
+
+**Decision 1 (a freeze interpretation — yours): how should the gain respond during training?**
+The frozen PR-4 §G says two things that pull in different directions: the operating point "**runs
+at g_rt = 0.9× intrinsic**" (sounds like a fixed value) *and* is "a **differentiable function of
+the episode drive statistics**" (sounds responsive), and §N's E6 says "trained κ_ext excursions
+change intracavity energy **as physics, not as renormalization**." The Executor implemented both
+modes but made **fixed** (gain pinned at 0.9·κᵢ regardless of how training moves κ_ext) the
+default. My read: the freeze intends the **saturating** mode (gain tracks the drive, computed
+once per episode and held fixed within the rollout) — otherwise SPSA (which perturbs the real
+saturating physics) and the gradient methods (which would backprop through a pinned gain) train
+*different functions*, breaking the "four estimators share one substrate" rule. **The honest
+options:**
+- **(A) Saturating is the registered rollout gain** (my recommendation) — faithful to "differentiable
+  in drive" + E6; all four methods see the same physics. Fix = flip the default + extend the F18
+  gate to cover the gain path. *No freeze text changes; this is reading §G as already-decided.*
+- **(B) Fixed (0.9·κᵢ) is the registered rollout gain**, saturating only for SPSA's perturbation
+  realism — i.e. the freeze *did* intend a pinned operating point. This needs you to say so (it's
+  the looser reading of §G), and we'd register that SPSA and the gradient methods intentionally
+  see slightly different gain handling, with the bias bounded/reported.
+I recommend **(A)**. Either way it's a one-line default + a gate extension, settled **before S0.4a**.
+
+**Decision 2 (a heads-up, not yet a freeze): PR-12 is deferred.** The coarse BPTT damping sweep
+landed, but it's confounded — at a fixed 500-step budget the lighter-damped (longer-memory)
+points just train slower, so the curve conflates *achievable accuracy* with *training speed*
+(the Executor flagged this; a convergence sub-check confirms the slow points keep climbing). So
+I will **not** freeze PR-12 (the central damping cell) off this curve. Before S0.3-close I'll
+either commission a convergence-controlled rerun (train-to-fixed-loss) or bring you a
+confound-aware selection with the rationale. No action from you now — just flagging that
+S0.3-close has one more step.
+
+**Decision 3 (carry-forward, for when PR-6 freezes): the init convention is load-bearing.** The
+registered μ(0)=0 leaves the ring chain *disconnected* at initialization (only ring 1 is driven),
+so a cold-started N=32 device is **untrainable** until coupling grows — a real risk all four
+bake-off methods will face, not a bug. PR-6 (the fairness contract, which freezes before S0.4a)
+must register a sensible init. Noted now so it's front-and-center then.
+
+**Your move — launch the Critic on the build** (independent verification of Decision 1 + an
+anomaly audit; it reports to you):
+```bash
+cd ~/Documents/Project_SSM
+claude "Read shared/critic_instructions_s0_3_1.md and follow it."
+```
+After its review I'll bring you the gain-mode disposition to confirm, then the path is: settle
+Decision 1 → freeze PR-6/PR-5/PR-7 (fairness contract / PAT mismatch / cost accounting) →
+S0.4a (PAT + SPSA on the substrate). The Executor is idle until then.
+
+---
+
 ### ✅ E-2026-06-13-1 — PR-4 v2 → **RESOLVED 2026-06-13: Lucas signed ("sign PR-4")**
 
 **Resolution (2026-06-13):** Lucas signed PR-4 v2. **PR-4 🔒 FROZEN — the S0.3 substrate
