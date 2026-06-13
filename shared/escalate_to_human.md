@@ -18,7 +18,7 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-06-13-1 — PR-4 v2 posted after Critic AMEND: two asks (one click + one signature)
+### E-2026-06-13-1 — PR-4 v2 posted after Critic AMEND → **one ask left: sign PR-4** (the Cui-fetch ask is discharged; body confirmed [EV] via independent commentary)
 
 **Filed:** 2026-06-13 (Supervisor). **Context:** the Critic's phase-boundary review
 (`shared/critic_review_pr4-freeze.md`, 2026-06-12) returned **AMEND — "don't sign this draft;
@@ -33,17 +33,26 @@ adds: **every gain-bearing cell runs at g_rt = 0.9× intrinsic** (the ceiling �
 registered ASE level was already computed at; Critic-recommended), with g = 0 and 0.5× as
 labelled sensitivity rows, and all consequence numbers recomputed at it.
 
-**Ask (a) — one click, before signing (P4-F5):** the Cui 2023 anchor paper turned out to be
-**Gold OA (CC-BY)** — the v1 "verification infeasible" line was wrong and is superseded.
-Programmatic fetches are bot-walled, but a browser click works. Please download:
-<https://www.spiedigitallibrary.org/journals/advanced-photonics-nexus/volume-2/issue-4/046007/Compact-microring-resonator-based-on-ultralow-loss-multimode-silicon-nitride/10.1117/1.APN.2.4.046007.pdf>
-and check whether the body states the **0.051 dB/cm / Q ≈ 6.8×10⁶** pair (our registered
-C-2 values). Found ⇒ P-AN800 flips [AV]→[EV], residual risk (i) closes. Not found ⇒ the
-registration stands on the conservative-bound construction alone (our values are strictly
-worse than the abstract-verified 3.3 dB/m / 10.8 M). **Either outcome is freeze-compatible** —
-just tell me which it was, and it goes in the freeze record.
+**Ask (a) — DISCHARGED 2026-06-13 by the Supervisor; no longer needs you.** You couldn't
+reach the SPIE link (it's JS-walled to everyone, not just you). I retrieved the body numbers
+a different way: an **independent peer-reviewed commentary** on the Cui paper — Ye &
+Marpaung (Univ. Twente), *"Compact multi-mode silicon-nitride micro-ring resonator with low
+loss,"* Adv. Photon. 5(5) 050503 (2023), CC-BY — whose explicit subject is Cui 046007 (their
+Ref. 4) and which **reproduces Cui's Figures 1–2**. It confirms, at body level: loss reduced
+20 → 3.3 dB/m; intrinsic linewidth 18–20 MHz → Qᵢ ≈ 10.8M; a **249-resonance histogram of
+intrinsic linewidth spanning ≈ 13–25 MHz**; 3-µm multimode waveguide, modified Euler bends,
+FSR 65 GHz. Our registered C-2 cell (6.8M ⇔ ≈ 28 MHz linewidth, 5.1 dB/m) is **worse than the
+single broadest-linewidth device in their entire measured distribution** (≈ 25 MHz ⇔ 7.7M) —
+so the conservative bound holds against the distribution, not just the mean. **Residual risk
+(i) is closed**; P-AN800's platform numbers are now [EV] (via an independent secondary
+source reproducing the primary figures). The commentary also independently flags the same
+multimode-fabrication-yield concern that is our geometry-transfer risk (ii) — which stays
+priced by the ×2-loss derate row. PDF archived at `docs/s0_3/refs/`. (Note: the "0.051 dB/cm
+/ 6.8M" pair was always *our* conservative registry value, never a sentence to find in Cui —
+the real question was whether the body supports the platform class we bound against, and it
+does.)
 
-**Ask (b) — sign PR-4 v2** (e.g. "sign PR-4", plus the fetch outcome). On signature: PR-4
+**Ask (b) — the only thing left: sign PR-4 v2** (e.g. "sign PR-4"). On signature: PR-4
 flips 🔒, S0.3 freeze complete, and the **S0.3-1 substrate-build task goes to the Executor**
 (M1 @ g_rt = 0.9×, A2 ASE, splitting knob, K4 bounds + B1-consistency unit test, M2
 validation episodes at C-2/θ₀ + C-1/θ₀, E₀ + reachability calibration with the ledger

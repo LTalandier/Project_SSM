@@ -65,7 +65,7 @@ boundary before the run proceeds.
 | **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) · **amended by PR-1.1 🔒 SIGNED 2026-06-11** (G3 criterion void for anchor instability — F-G3; Gate i adjudicated purpose-served: G1 PASS ∧ parity dossier) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
-| **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 📋 **PROPOSED v2 2026-06-13** (block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; awaiting pre-signature OA fetch + Lucas signature) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
+| **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 📋 **PROPOSED v2 2026-06-13** (block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; Cui body confirmed [EV] via independent commentary 2026-06-13, risk (i) closed; **awaiting only Lucas signature**) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
 | **PR-5** | PAT (S0.4a) | S0.4a | ⬜ | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
 | **PR-6** | All estimators (S0.4) | S0.4a | ⬜ | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
 | **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
@@ -524,7 +524,7 @@ review + Lucas signature, with the measured record permanent and unamended.
 
 ---
 
-## PR-4 — 📋 PROPOSED **v2** (Supervisor revision 2026-06-13 per Critic review `shared/critic_review_pr4-freeze.md`, verdict **AMEND** 2026-06-12 — all findings P4-F1..F12 applied; v1 text preserved at commit 713efd4; fork ruling **E-2026-06-11-2** applied — M1 + M3 trigger + riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) + `docs/s0_3/pr4_input_sheet.md`; ⬜ until pre-signature OA fetch + Lucas freeze)
+## PR-4 — 📋 PROPOSED **v2** (Supervisor revision 2026-06-13 per Critic review `shared/critic_review_pr4-freeze.md`, verdict **AMEND** 2026-06-12 — all findings P4-F1..F12 applied; v1 text preserved at commit 713efd4; fork ruling **E-2026-06-11-2** applied — M1 + M3 trigger + riders R1/R2/R3; evidence base `docs/s0_3/substrate_recon.md` (R§n) + `docs/s0_3/pr4_input_sheet.md`; Cui body confirmed [EV] 2026-06-13; ⬜ until Lucas signature)
 
 **v2 revision log (Critic findings → changes):** P4-F1 HIGH → per-cell operating gain
 **registered** (G, new bullet) + every consequence number recomputed at it (C/S, passive floor
@@ -533,8 +533,10 @@ registered (intracavity), P_sat ring-scaling formula written, headroom rows demo
 small-signal statements, reachability solve registered at S0.3-1 calibration. P4-F3 → C-1
 splitting 1.9 corrected to **2.33** (kernel-reproduced). P4-F4 → Cui geometry corrected
 (64-GHz-FSR racetrack, mode/width is the residual risk) + **C-2 ×2-loss derate row**
-registered. P4-F5 → four-routes infeasibility superseded: article is **Gold OA (CC-BY)**;
-pre-signature fetch action registered. P4-F6 → E₀ closed form written in-block, inputs
+registered. P4-F5 → four-routes infeasibility superseded; **body-level numbers since
+confirmed [EV] 2026-06-13** via an independent peer-reviewed commentary reproducing Cui's
+figures (Ye & Marpaung, Adv. Photon. 5(5) 050503, archived `docs/s0_3/refs/`) — residual
+risk (i) closed. P4-F6 → E₀ closed form written in-block, inputs
 pinned, encoder-scale cadence registered. P4-F7 → anchor-risk items (v)/(vi) added; C-2 γ
 lineage basis stated. P4-F8 → clock qualifiers + N-assignment semantics registered. P4-F9 →
 M2 validation gains a C-1 episode. P4-F10 → F8-carry-in owners named. P4-F11 →
@@ -641,31 +643,40 @@ loss↔Q self-consistency demand is discharged by the existing **test-enforced
   2-GHz band: **100 at the registered operating point (43.9 passive floor)**; memory at θ₀
   @ 2 GS/s: **32.0 samples at the registered point (14.0 passive)** — covers the T-A 7-tap
   span at both points; small-signal gain headroom ×22–41 (plausibility statement per G).
-  **Verification status (transfer-check rule, GA-F6 scope):** the pair is registered as a
-  **conservative bound** on the abstract-verified platform numbers — Cui et al., Adv.
-  Photon. Nexus 2(4) 046007 (2023), abstract verbatim via Semantic Scholar API [EV-class]:
-  *"propagation loss of only 3.3 dB/m and a mean intrinsic Q of around 10.8 million"*,
-  *"fabricated by the standard multi project wafer (MPW) foundry process"* (phrase re-verified
-  by the Critic, 2026-06-12) — i.e. the registered 5.1 dB/m / 6.8×10⁶ is strictly worse than
-  the verified platform demonstration on both axes. **OA status (P4-F5, supersedes the v1
-  four-routes infeasibility):** the article is **Gold OA (CC-BY)** — Semantic Scholar
-  `openAccessPdf` + Unpaywall both carry the publisher-PDF link (Critic 2026-06-12;
-  Supervisor re-verified 2026-06-13). Programmatic fetches are bot-walled (six attempts,
-  two sessions), but a human browser fetch is one click. **Pre-signature action (Lucas,
-  headed browser):** download the OA PDF and check for the 0.051 dB/cm / 6.8×10⁶ sentence —
-  found ⇒ P-AN800 flips [AV]→[EV] and residual risk (i) closes; not found ⇒ the pair stands
-  on the conservative-bound construction alone. Either outcome is freeze-compatible.
-  Residual anchor risks, registered: (i) body-vs-abstract figure provenance (resolves at the
-  pre-signature fetch); (ii) **geometry transfer (corrected per P4-F4)** — Cui's
-  demonstration is a racetrack of perimeter 2.226 mm (effective radius 195 µm, 3-µm-wide
-  multimode waveguide, modified Euler bends; FSR ≈ 64 GHz) [abstract-verified]; applying its
-  loss class to the 100-GHz-FSR registry ring (L ≈ 1.43–1.54 mm) assumes the loss class
-  survives the **single-mode, narrower-waveguide geometry** — the demonstrated number is
-  achieved *by* the wide-multimode Euler-bend design, so the residual risk is mode/width
-  geometry, **not ring size** (the registry ring's equivalent bend radius ≈ 228 µm is no
-  tighter than Cui's 195 µm). Priced by the registered **C-2-derate sensitivity row: ×2
-  registered loss (Qᵢ ≈ 3.4×10⁶)** — cost ≈ 0 in simulation. Both risks are carried as
-  labels on C-2, not silently.
+  **Verification status (transfer-check rule, GA-F6 scope) — body confirmed [EV]
+  2026-06-13:** the pair is registered as a **conservative bound** on the platform numbers of
+  Cui et al., Adv. Photon. Nexus 2(4) 046007 (2023). Abstract verbatim via Semantic Scholar
+  API [EV]: *"propagation loss of only 3.3 dB/m and a mean intrinsic Q of around 10.8
+  million"*, *"standard multi project wafer (MPW) foundry process"* (re-verified by the
+  Critic 2026-06-12). **Body-level numbers now confirmed [EV] via an independent
+  peer-reviewed commentary** (P4-F5 follow-through, Supervisor 2026-06-13): Ye & Marpaung
+  (Univ. Twente), *"Compact multi-mode silicon-nitride micro-ring resonator with low loss,"*
+  Adv. Photon. 5(5) 050503 (2023), CC-BY
+  (`docs/s0_3/refs/Ye_Marpaung_2023_AdvPhoton_5-5-050503_commentary_on_Cui_046007_CCBY.pdf`)
+  — reads Cui 046007 as its explicit subject (their Ref. 4) and **reproduces Cui's
+  Figs. 1–2**: propagation loss reduced **20 → 3.3 dB/m**; intrinsic linewidth **18–20 MHz →
+  Qᵢ ≈ 10.8M**; a **249-resonance intrinsic-linewidth histogram spanning ≈ 13–25 MHz** (Cui
+  Fig. 2a, reproduced); 3-µm multimode waveguide, modified Euler bends, **FSR 65 GHz**. **The
+  registered C-2 pair** (Qᵢ = 6.8×10⁶ ⇔ intrinsic linewidth ≈ 28 MHz, α = 5.1 dB/m) is
+  therefore **strictly worse than the broadest-linewidth device in the full measured
+  distribution** (≈ 25 MHz ⇔ Qᵢ ≈ 7.7×10⁶, α ≈ 4.3 dB/m) — the conservative bound holds
+  against the *distribution*, not merely the mean. (The "0.051 dB/cm / 6.8M" pair is *our*
+  conservative registry value, never a Cui sentence; the meaningful check — does the body
+  support the platform class we bound against — is satisfied.) The Cui primary PDF remains
+  programmatically walled (researching.cn article pages → Aliyun 405; SPIE renders
+  title-only; six attempts/two sessions); the independent-commentary PDF was directly
+  retrievable and is archived. Residual anchor risks: (i) body provenance — **RESOLVED**
+  (reproduced primary figures in the peer-reviewed commentary); (ii) **geometry transfer
+  (P4-F4, independently corroborated)** — Cui's device is a 3-µm-wide multimode racetrack
+  (perimeter ≈ 2.23 mm, FSR 65 GHz, modified Euler bends); applying its loss class to the
+  single-mode, narrower-waveguide 100-GHz-FSR registry ring (L ≈ 1.43–1.54 mm) assumes the
+  loss class survives the geometry change — the demonstrated number is achieved *by* the
+  wide-multimode Euler-bend design, so the residual risk is mode/width geometry, **not ring
+  size** (registry equivalent bend radius ≈ 228 µm ≥ Cui's ≈ 195 µm). **The commentary
+  independently flags this exact risk** ("suppression of higher-order modes... challenging...
+  impacting yield and reproducibility"). Priced by the registered **C-2-derate sensitivity
+  row: ×2 registered loss (Qᵢ ≈ 3.4×10⁶)** — cost ≈ 0 in simulation. Carried as a label on
+  C-2.
 - **C-3 — aspirational axis:** **P-UHQ** (Qᵢ = 3×10⁷), NF-A headline (NF ∈ {3, 5} labelled
   sensitivity). Hosts **N = 128** — per EV-F3 the *only* true N=128 option is escape (a):
   r ≲ 1 with the splitting knob ON (the doublet is the model). Labelled aspirational
@@ -776,24 +787,28 @@ P2 partition — κ_ext,j is *in* the trainable set; a fixed-κ_ext policy would
 No executable reference implementation exists for a physics cell — the transfer check is
 **out of scope by the registered rule**; the analogous risk is carried instead by: (i) the
 [EV]/[AV] provenance trail per number (R§Appendix A); (ii) the **conservative-bound
-construction** of C-2 (registered values strictly worse than the abstract-verified
-demonstration); (iii) the M2 one-off validation of the M1 reduction (now two cells, P4-F9);
-(iv) the named residual risks on C-2 (body-provenance — resolves at the pre-signature OA
-fetch — + geometry transfer, priced by the ×2-loss derate row); **(v) the Er-gain budget
+construction** of C-2 (registered values strictly worse than the verified demonstration —
+now confirmed against the full measured distribution, see C-2); (iii) the M2 one-off
+validation of the M1 reduction (now two cells, P4-F9); (iv) the named residual risks on C-2
+(body-provenance — **RESOLVED 2026-06-13** via the independent peer-reviewed commentary
+reproducing Cui's figures — + geometry transfer, priced by the ×2-loss derate row); **(v) the Er-gain budget
 applies the flagship's straight-implanted-waveguide coefficient (1.0–1.9 dB/cm [EV]) to an
 undoped foundry ring on a different process — a Stage-1 integration assumption (R§4f),
 carried as a label on every gain-bearing cell (and the source of C-1's material-aspirational
 label, G reachability); (vi) P_sat's ring scaling (formula in G) is an anchor-transfer
 assumption validated only at Stage 1 (P4-F7).** The v1 sentence registering *infeasibility of
-deeper verification* is **superseded (P4-F5)**: the Cui article is Gold OA (CC-BY) and the
-body check is the registered pre-signature action — what remains genuinely infeasible at
-proportionate cost is programmatic retrieval only (bot-walled, six attempts/two sessions).
+deeper verification* is **superseded (P4-F5):** the Cui body-level numbers were confirmed
+[EV] (2026-06-13) via an independent peer-reviewed commentary that reproduces Cui's figures
+(Ye & Marpaung, Adv. Photon. 5(5) 050503, CC-BY, archived in `docs/s0_3/refs/`); only
+retrieval of the *primary* Cui PDF remains programmatically walled (bot-walled, six
+attempts/two sessions) — and is no longer load-bearing.
 
 **Freeze checklist for Lucas (after Critic review — verdict AMEND, this v2 is the revision):**
 the registered choices are — M1 (+M2 validation ×2 cells, M3 trigger) · **operating point
 g_rt = 0.9× intrinsic per cell (P4-F1)** · cells C-1/C-2/C-3 with roles as above, NF-A
 headline · K4 r ∈ [0.1, 3], θ₀ = 0.3 · K-pol-3 always-ON · H1 · O2 @ P̄₀ = 1 mW with the
 in-block E₀ formula. Everything else in the input sheet's menus is a labelled sensitivity
-axis or an explicitly-owned deferral (P4-F10). **Pre-signature action (P4-F5):** one-click
-headed-browser download of the Cui OA PDF + check for the 0.051 dB/cm / 6.8×10⁶ sentence;
-either outcome is freeze-compatible — record found/not-found with the signature.
+axis or an explicitly-owned deferral (P4-F10). **Pre-signature action (P4-F5): DISCHARGED
+2026-06-13** — the Cui body-level numbers are confirmed [EV] via the independent
+peer-reviewed commentary (C-2 verification status); residual risk (i) closed. No action
+remains for Lucas but the signature itself.

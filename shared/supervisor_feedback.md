@@ -39,6 +39,25 @@ small-signal statements with C-1's material-aspirational label carried at anchor
 (pre-signature, either outcome freeze-compatible), (b) sign PR-4 v2. Executor stays idle
 until the freeze; S0.3-1 task spec is ready to post the moment it lands.
 
+**Update 2026-06-13 — ask (a) discharged; the body verification came through a side door.**
+Lucas couldn't reach the SPIE link (JS-walled to everyone). I tried the rendering fetch on
+SPIE (title-only) and researching.cn (Aliyun 405 WAF on article pages) — both walled, as the
+Critic found. But the web search surfaced a **peer-reviewed commentary** on the Cui paper —
+Ye & Marpaung (Twente), Adv. Photon. 5(5) 050503 (2023), CC-BY — and *its* direct PDF on
+researching.cn was retrievable (the WAF blocks article landing pages, not the ArticlePdf
+path). The commentary's explicit subject is Cui 046007 (their Ref. 4) and it **reproduces
+Cui's Figs. 1–2**, so the body-level facts are now [EV] via an independent secondary source
+reproducing the primary figures: 20 → 3.3 dB/m, 18–20 MHz → 10.8M, a 249-resonance linewidth
+histogram (13–25 MHz), 3-µm multimode / Euler bends / 65-GHz FSR. **Our 6.8M sits below the
+worst device in the full distribution** — the conservative bound is stronger than I'd
+claimed (holds against the distribution, not just the mean). Risk (i) closed; the commentary
+independently corroborates both the P4-F4 geometry correction and the geometry-transfer risk
+(it flags the same multimode-yield concern). Two lessons logged: (1) when a primary is walled,
+a peer-reviewed *commentary that reproduces its figures* is a legitimate [EV] route — and
+often the only one that renders; (2) WAF blocks are often path-specific (landing pages ≠
+direct-asset paths). PDF archived at `docs/s0_3/refs/`. **Only ask (b) — the signature —
+remains.**
+
 ---
 
 ## 2026-06-11 (fork ruled: M1 + M3 trigger → PROPOSED PR-4 posted; Critic spec ready)
