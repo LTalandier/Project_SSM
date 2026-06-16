@@ -11,7 +11,11 @@ The N-ring coupled-mode recurrence the headline result is measured on:
 
 with M the 2N×2N CW/CCW doublet (K-pol-3 always ON), gain folded into the
 net loss at the registered operating point (M1, g_rt = 0.9·κᵢ ⇒ κ_net =
-0.1κᵢ + 2κ_ext), and η the per-step A2 Langevin ASE increment. It extends the
+0.1κᵢ + 2κ_ext), and η the per-step A2 Langevin ASE increment. The gain is
+**`saturating` by default** (g(P̄(κ_ext)) responds to the trained κ_ext as
+physics, §G/§N-E6 — the registered bake-off mode for all four estimators, so
+SPSA's two forward passes and the gradient methods' backward pass target one
+function; `"fixed"` is a diagnostic floor, see `gain_mode`). It extends the
 S0.1 forward model (`dynamics.coupled_rings`) — same _build_M / van-Loan
 discretization, same amplitude-rate conventions — with the realistic
 dissipative physics the recon flagged.
@@ -56,8 +60,13 @@ class DissipativeRingSubstrate(nn.Module):
     loss_scale, ase_variance_scale : F18 variance knobs (default 1).
     gain_factor : M1 operating fraction (default = cell.gain_factor; 0.9 op,
                   0 passive, 0.5 sensitivity). Passive cells forced to 0.
-    gain_mode   : "fixed" (registered operating point g=factor·κᵢ, default) or
-                  "saturating" (g(P̄) from the episode drive — SPSA realism).
+    gain_mode   : "saturating" (DEFAULT, faithful — g(P̄(κ_ext)) responds to
+                  the trained κ_ext as physics, §G/§N-E6; the registered
+                  bake-off mode for ALL FOUR estimators, PR-6) or "fixed"
+                  (diagnostic/sensitivity floor: g≡factor·κᵢ constant, the
+                  gain-channel analogue of γ=0 — drops ∂g/∂κ_ext; the plane the
+                  frozen operating-point numbers and the B1/E₀ calibrations are
+                  quoted at).
     ase_convention : "A2" (default, exact Langevin) or "A1" (per-rt kick).
     dtype       : complex128 (default, S0.1 fidelity) or complex64.
     seed        : init RNG seed for δ (reproducibility).
@@ -68,7 +77,7 @@ class DissipativeRingSubstrate(nn.Module):
                  delta_band_rad_s: Optional[float] = None,
                  loss_scale: float = 1.0, ase_variance_scale: float = 1.0,
                  gain_factor: Optional[float] = None,
-                 gain_mode: str = "fixed", ase_convention: str = "A2",
+                 gain_mode: str = "saturating", ase_convention: str = "A2",
                  dtype: torch.dtype = torch.complex128,
                  seed: Optional[int] = None):
         super().__init__()
@@ -144,8 +153,10 @@ class DissipativeRingSubstrate(nn.Module):
     # ------------------------------------------------------------------ #
     def gain_rate_per_ring(self) -> torch.Tensor:
         """The M1 gain rate g_j [rad/s] per ring at the current operating
-        point. `fixed` (default): g = factor·κᵢ (registered operating value).
-        `saturating`: g(P̄(κ_ext, drive)) — differentiable in κ_ext."""
+        point. `saturating` (default, registered bake-off mode): g(P̄(κ_ext,
+        drive)) — differentiable in κ_ext, so ∂g/∂κ_ext enters the autograd
+        graph (§G/§N-E6). `fixed` (diagnostic): g = factor·κᵢ constant — drops
+        ∂g/∂κ_ext (the gain-channel floor, the plane the frozen numbers use)."""
         ki = self.kappa_i
         if self.gain_factor == 0.0:
             return torch.zeros(self.N, dtype=self._rdtype)
@@ -274,7 +285,8 @@ class DissipativeRingSubstrate(nn.Module):
         g_per_ring = self.gain_rate_per_ring()
         g_per_mode = torch.cat([g_per_ring, g_per_ring])   # CW & CCW
         inject = None
-        if self.ase_variance_scale > 0.0 and float(g_per_mode.abs().sum()) > 0:
+        if self.ase_variance_scale > 0.0 and \
+                float(g_per_mode.detach().abs().sum()) > 0:
             inject = ASEInjector(
                 M, g_per_mode, self.nf_dB, self.dt,
                 convention=self.ase_convention,

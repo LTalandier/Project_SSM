@@ -8,6 +8,51 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
+### D-2026-06-13-1 — saturating-gain default makes the K4 lower bound r=0.1 super-threshold (κ_ext clamp policy for the S0.4 bake-off)
+
+**Raised by:** Executor, 2026-06-13 (during S0.3-1b). **Blocks:** nothing in S0.3-1b (all 5
+edits done, full suite 128/128). **Due at:** PR-6 / S0.4a bake-off setup — a real consequence
+of the S31-F1 flip the Critic/Supervisor disposition did not trace numerically. **Not a freeze
+change; not mine to decide** (κ_ext training-band / clamp policy is bake-off methodology).
+
+**Finding.** S0.3-1b flipped the rollout default to `gain_mode="saturating"` (faithful to
+§G/§N-E6, the registered bake-off mode — S31-F1). In saturating mode g responds to κ_ext: as
+κ_ext drops below θ₀ the on-resonance build-up falls, the gain **de-saturates upward**, and
+κ_net = κᵢ − g(κ_ext) + 2κ_ext crosses zero. Measured (all three gating cells, cell-independent):
+
+| r = κ_ext/κᵢ | κ_net/κᵢ (saturating) | status |
+|---|---|---|
+| 0.30 (θ₀) | +0.70 | operating point (calibrated) |
+| **0.134** | **0.00** | **lasing threshold r\*** |
+| 0.10 (K4 lower bound) | **−0.318** | **super-threshold → rollout diverges** |
+
+So under the new default the **effective trainable κ_ext range is r ∈ [≈0.134, 3], not the
+registered K4 [0.1, 3]** at the low end. (At θ₀ and upward — r ≥ 0.3 — everything is stable; the
+default init sits at r=0.3, and `test_h`/smoke confirm finite gradients. The frozen B1/E₀
+calibrations are unaffected: they are operating-point definitions, so `test_c`/`test_e` now pin
+`gain_mode="fixed"` — the plane those frozen numbers live on.)
+
+**Why it matters for S0.4.** `DissipativeRingSubstrate.clamp_to_bounds()` projects κ_ext to the
+K4 box [0.1κᵢ, 3κᵢ]. If a bake-off estimator (esp. SPSA's ± perturbations, or any optimizer that
+walks κ_ext down) reaches r ≲ 0.134 in saturating mode, the substrate goes super-threshold and
+the rollout diverges — a shared-substrate hazard, and exactly the κ_ext edge S31-F2's
+signal-starvation discussion pushes toward.
+
+**Options (Supervisor → likely PR-6, alongside the S31-F1/F2/F8 registrations already routed to
+you):**
+- **(A)** Raise the saturating-mode κ_ext **clamp lower bound** to r_min ≈ 0.15 (a small margin
+  above r\*≈0.134) — register r_min in PR-6 as the operative trainable band; keep K4 [0.1,3] as
+  the *passive/fixed-plane* bound. Minimal, matches the physics (the device would lase below r\*).
+- **(B)** Add a **no-lasing gain ceiling** g ≤ g_rt (clamp the saturating gain at the 0.9·κᵢ
+  operating value) so de-saturation can't exceed threshold. Keeps r=0.1 usable but introduces a
+  kink at θ₀ (∂g/∂κ_ext jumps −0.75→0) and is a new modeling choice the freeze didn't make — I did
+  **not** implement it (would be inventing a mechanism).
+- **(C)** Soft barrier/penalty on κ_net→0 in the training objective (estimator-side, S0.4).
+
+**Executor action:** surfaced only — no clamp/ceiling added; the substrate ships with K4 [0.1,3]
+and the honest divergence at the edge, documented in `gain.py` + the S0.3-1b results entry.
+Holding for the Supervisor's PR-6 call.
+
 ### ✅ D-2026-06-11-1 — Gate-i G3 adjudication → **RESOLVED 2026-06-11 by Lucas: O3 as PR-1.1 v2, SIGNED** ("sign PR-1.1", E-2026-06-11-1)
 
 **Raised by:** Executor, 2026-06-11. **Supersedes the route question in D-2026-06-10-2's

@@ -15,6 +15,99 @@ Per result, report:
 
 ---
 
+## S0.3-1b — Critic APPROVE-WITH-EDITS, freeze-conforming subset (S31-F1/F2/F3/F5/F6): **gain default → `saturating` · `test_h` hardened (no longer hollow) · hygiene gate rewritten · intracavity reachability surfaced · ASE-grad convention registered** — full suite 128/128 (2026-06-13, Executor)
+
+**Goal:** apply the five Critic edits that **conform the S0.3-1 substrate code to the already-signed
+PR-4 v2 freeze** (no freeze change, no new methodology). The Critic's S-F1 disposition established
+that §G ("differentiable function of the episode drive statistics, no detach") + §N-E6 ("trained
+κ_ext excursions change intracavity energy as physics, not renormalization") *already mandate* the
+saturating gain mode, so flipping the default is a correctness fix, not a re-registration. The
+freeze-gated items (PR-12 rerun, the PR-6 registrations, PR-11 carry) are explicitly NOT in this
+task — they wait on Lucas/Supervisor.
+
+**Config:** local, CPU, torch 2.11, float64; $0; ~3 min incl. the full suite. No sweeps. Files
+touched: `substrate/{dissipative_ring,gain,ase,calibration}.py`, `tasks/__init__.py`,
+`tests/{test_substrate,test_no_equalization_coupling}.py`, `results/s0_3/e0_reachability_addendum.{md,json}`.
+
+**Key findings (each maps to a Critic finding):**
+
+1. **(S31-F1) Gain default flipped `fixed` → `saturating`.** `DissipativeRingSubstrate(gain_mode=
+   "saturating")` is now the default; `"fixed"` is retained as a documented diagnostic/sensitivity
+   floor (the gain-channel analogue of γ=0). Docstrings in `dissipative_ring.py`/`gain.py` now state
+   `saturating` is the registered bake-off mode for all four estimators (the PR-6 registration is the
+   Supervisor's; the code default conforms now).
+2. **(S31-F1/F2) `test_h` hardened — the F18 gate is no longer hollow on the gain path.** It now
+   (a) runs the faithful `saturating` default; (b) asserts the **gain path is live** — the autograd
+   `dκ_net/dκ_ext` ≠ 2 in saturating mode, verified against a `fixed` twin where it is **exactly 2**;
+   (c) adds a **connected-init (μ≠0) variant** so rings 2..N are actually exercised (μ(0)=0
+   signal-starves the chain). **Discriminating power proven directly:** the gain-path assertion
+   **PASSES in saturating (|dκ_net/dκ_ext − 2| = 0.750) and FAILS in fixed (= 0 exactly)**. The
+   printed ∂g/∂κ_ext diagnostic **reproduces the Critic's S31-F1 numbers to the digit**: −0.750 @θ₀
+   (⇒ dκ_net/dκ_ext = 2.750, fixed drops 27.3%), edges r{0.1,0.3,0.5,1,3} = −10.12 / −0.75 / −0.00 /
+   +0.32 / +0.41, sign-flip at r≈0.5.
+3. **(S31-F3) Intracavity reachability surfaced in the calibration addendum.** `calibration.py`'s
+   `write_addendum` now emits the `req. g₀ intracav (dB/cm)` column beside the bus number (C-1 377,
+   C-2 380.8, C-3 403.9) and the corrected verdict: **on the operative intracavity plane every
+   gain-bearing cell — C-1, C-2, C-3, C-2-derate — is material-aspirational** (required g₀ ≈ 377–404
+   dB/cm ≫ Er ≤ 1.9), the bus-plane ×31.6 requirement is a **floor**, and anchor-risk (v) reads on the
+   intracavity plane. Regenerated `.md`/`.json`; **JSON numbers bit-identical** (only the `.md`
+   presentation/verdict changed). C-2/C-3 `reachable?` now read "✅ (bus) / ❌ intracav".
+4. **(S31-F5) Hygiene gate rewritten to the real invariant.** `test_no_equalization_coupling`'s
+   `FORBIDDEN` now lists the **source training-stack symbols/modules** (`equalization_*`,
+   `ManakovFiber`/`manakov`, `MRRWeightBank`, `MultiLayerEqualizer`, `ParallelPol`, `generate_dp_qpsk`,
+   `viterbi_viterbi`, `compute_nmse_field`, `forward_batched`) and **drops the generic task-token bans**
+   (`PAM4`/`PAM-4`/`QPSK`/`HD_FEC`/`ber_curve`) that collided with the project's own registered PR-2
+   T-A 4-PAM task. **Re-run-proven to catch a planted symbol:** adding `MRRWeightBank` to a scratch
+   file trips the gate (`assert not [('_scratch…','MRRWeightBank')]`), removing it passes; scratch
+   deleted. The `PAM_LEVELS`/`nearest_pam` names are kept (clear; the now-stale "renamed to dodge the
+   gate" comment in `tasks/__init__.py` is corrected). `test_package_runtime_is_torch_only` unchanged.
+5. **(S31-F6) ASE-covariance-gradient convention registered in code.** `ase.py`'s module docstring now
+   states that Q_d **and** the noise realization η are intentionally detached from the parameter
+   gradient (the reparameterization gradient through the noise amplitude/covariance is dropped by
+   design — exogenous, hardware-faithful, identical across all four estimators), the companion choice
+   to the freeze's "no detach in the state path."
+
+**NEW finding from executing the flip — D-2026-06-13-1 (posted to `decisions_needed.md`).** The
+saturating default makes the **K4 lower bound r=0.1 super-threshold**: as κ_ext drops below θ₀ the
+build-up falls, the gain de-saturates upward, and κ_net crosses zero at **r\* ≈ 0.134
+(cell-independent)**; at r=0.1, κ_net/κᵢ = **−0.318** (lasing → rollout diverges). So the **effective
+trainable κ_ext range under saturating gain is r ∈ [≈0.134, 3], not the registered K4 [0.1, 3]** at
+the low end. `clamp_to_bounds()` clamps to r=0.1 — unsafe in saturating mode — a shared-substrate
+hazard for the S0.4 bake-off (esp. SPSA's ± perturbations). **Surfaced, not resolved** (no clamp/
+ceiling added — that is a PR-6/S0.4 methodology call; options A/B/C in the decision item). This is
+*why* `test_c` (B1 pole region) and `test_e` (E₀ formula) now pin `gain_mode="fixed"`: both are
+**frozen operating-point definitions** (test_c hard-codes κ_net = 0.1κᵢ + 2κ_ext; E₀ is the
+operating-point closed form), so they belong on the fixed plane the frozen numbers live on — not a
+weakening, a correctness alignment, documented in both tests.
+
+**Gates (all met):**
+- **All existing tests still pass — full suite 128/128** (substrate 9/9; the 2 warnings are
+  pre-existing `fork()` warnings in `test_sweep_runner`, untouched).
+- **Hardened `test_h` fails in `fixed`, passes in `saturating`** — proven (item 2).
+- **Rewritten hygiene gate passes AND catches a planted source-stack symbol** — proven (item 4).
+- ∂g/∂κ_ext diagnostics reported (item 2). Deployment smoke (saturating rollout + finite nonzero
+  gain-path gradient per gating cell C-1/C-2/C-3) PASS before the suite.
+
+**Anomalies / concerns:**
+- **(D-2026-06-13-1) super-threshold-at-low-r in saturating mode** — the load-bearing carry above;
+  for the Supervisor's PR-6 κ_ext-clamp decision (reinforces S31-F2's signal-starvation point — both
+  bite at the low-κ_ext edge).
+- The flip introduced one grad-tensor scalarization warning in `forward()` (the ASE-injector gate
+  `float(g_per_mode.abs().sum())`); fixed with `.detach()` on the gate (structural condition, not the
+  differentiable path).
+- Items NOT in this task and still owed to Supervisor/Lucas (unchanged from the S0.3-1 ACCEPT): PR-12
+  convergence-controlled rerun + reconciliation with PR-4 §G (S31-F4); the PR-6 registrations
+  (saturating-for-all-estimators, connected init, sweep recipe — S31-F1/F2/F8); PR-11
+  generator-distinctness at S0.4 (S31-F7).
+
+**Data path:** code as above (uncommitted — awaiting the commit ask). Regenerated artifact
+`results/s0_3/e0_reachability_addendum.{md,json}`. Decision item `shared/decisions_needed.md`
+(D-2026-06-13-1).
+
+**Compute used:** local CPU, ~3 min, $0.
+
+---
+
 ## S0.3-1 — Shared dissipative-ring substrate build (PR-4 v2 🔒): **F18 build gate PASS · 8/8 unit tests · E₀+reachability calibration emitted · M2 quasi-static confirmed · damping curve → PR-12** (2026-06-13, Executor)
 
 > **SUPERVISOR EVALUATION 2026-06-13 — ACCEPT (verified).** Re-ran the suite (9/9), read the

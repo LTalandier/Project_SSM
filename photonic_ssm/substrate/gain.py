@@ -35,9 +35,17 @@ is the more demanding alternative plane.
 
 House constraint 3a/3b: g(P̄) is differentiable in the episode drive
 statistics and in κ_ext (through the build-up); no detach. The substrate
-holds g fixed within the rollout (M1) — the default rollout uses the
-registered operating value g = factor·κᵢ directly; the saturating form is
-used by the reachability solve and is available for SPSA-realism downstream.
+holds g fixed across the T steps within an episode (M1 — one evaluation per
+rollout) but lets it RESPOND to the trained κ_ext between episodes: the
+registered default is **`saturating`** (g(P̄(κ_ext)), faithful to §G/§N-E6,
+the bake-off mode for all four estimators); **`fixed`** (g = factor·κᵢ
+constant) is a diagnostic/sensitivity floor and the plane the frozen
+operating-point numbers (B1 pole region, E₀) are quoted at. Caveat
+(S0.3-1b): under `saturating`, reducing κ_ext below θ₀ lowers the build-up,
+de-saturates g upward, and drives κ_net→0 (super-threshold) for r ≲ 0.13 at
+the cell-independent operating point — the effective trainable κ_ext floor in
+saturating mode is above the K4 r=0.1 bound; flagged for the bake-off clamp
+policy (PR-6).
 """
 
 from __future__ import annotations

@@ -34,6 +34,22 @@ generator; forward and echo must pass DIFFERENT generators. The noise path
 does NOT carry a gradient (exogenous); the deterministic Φ a + Γ u path
 stays autograd-safe (house constraint 3a) — adding a detached η preserves
 ∂loss/∂params through Φ, Γ.
+
+**Registered convention (S31-F6 → PR-6): the ASE covariance Q_d AND the
+noise realization η are intentionally detached from the parameter gradient.**
+Q_d = Q_d(M(δ,κ_ext,μ), g) is a function of the trainable parameters and
+η = L·z (L = chol Q_d) is a reparameterized draw, so a reparameterization
+gradient ∂η/∂params *through the noise amplitude/covariance* exists in
+principle. It is **dropped by design** — `process_noise_cov_A2/A1` and
+`sample()` run under `no_grad`. Rationale: ASE is an exogenous, hardware-
+faithful noise source whose statistics the device does not let the optimizer
+shape; the in-situ training signal must come from the deterministic recurrence,
+not from steering the noise floor. This is held **identically across all four
+estimators** (SPSA's model-free forward passes never see it; PAT/adjoint/BPTT
+would expose it, so they are pinned to the same convention) — preserving the
+shared-substrate standard. The freeze says "no detach in the *state* path"; this
+registers the companion choice it left open (no reparameterization gradient
+through the *noise* path).
 """
 
 from __future__ import annotations

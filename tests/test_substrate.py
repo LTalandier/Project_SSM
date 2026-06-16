@@ -104,7 +104,16 @@ def test_c_b1_consistency_pole_region():
     lo, hi = C.R_BOUNDS
     for lab in GATING_CELLS:
         for r in (lo, hi):
-            sub = DRS.from_cell(lab, clock_GSps=2.0)
+            # The B1/K4 realizable pole region is a FROZEN operating-point
+            # property: it is defined at g_rt = 0.9·κᵢ FIXED (κ_net = 0.1κᵢ +
+            # 2κ_ext — the very formula this test hard-codes for `mem` below).
+            # So this structural test pins `gain_mode="fixed"`, the plane the
+            # frozen numbers are quoted at. (In the default `saturating` mode
+            # the gain de-saturates upward as κ_ext is pushed below θ₀ and the
+            # ring goes super-threshold for r ≲ 0.13 — a real training-band
+            # finding surfaced in S0.3-1b, NOT a property of the frozen B1
+            # region, and out of scope for this operating-point test.)
+            sub = DRS.from_cell(lab, clock_GSps=2.0, gain_mode="fixed")
             with torch.no_grad():
                 sub.kappa_ext.fill_(r * float(sub.kappa_i))
             poles = sub.continuous_poles()
@@ -154,7 +163,13 @@ def test_e_E0_normalization():
         for r in (lo, hi):
             kext = r * ki
             scale = O2.encoder_scale_to_hit_E0(E0ref, kext, ki, cell.gain_factor)
-            sub = DRS.from_cell(lab, clock_GSps=2.0)
+            # E₀ is the frozen operating-point closed form (κ_net = 0.1κᵢ +
+            # 2κ_ext at g = 0.9·κᵢ); the encoder scale is "derived once at θ₀
+            # and frozen." Validating the formula therefore uses the
+            # operating-point (`fixed`) gain plane it is defined on. (Default
+            # `saturating` would de-saturate g at r=0.1 → κ_net<0 → the CW
+            # rollout diverges; see the S0.3-1b training-band finding.)
+            sub = DRS.from_cell(lab, clock_GSps=2.0, gain_mode="fixed")
             sub.ase_variance_scale = 0.0
             with torch.no_grad():
                 sub.kappa_ext.fill_(kext)
@@ -223,13 +238,39 @@ def test_g_gamma0_single_pole():
 # -------------------------------------------------------------------- #
 #  (h) gradient-flow gate — the operational F18 test
 # -------------------------------------------------------------------- #
+def _dkappa_net_dkappa_ext(sub):
+    """Autograd diagonal dκ_net,j/dκ_ext,j (d(Σκ_net)/dκ_ext,k picks the
+    diagonal, since gain and the +2κ_ext term are per-ring). = 2 in `fixed`
+    mode (g constant); = 2 − ∂g/∂κ_ext in `saturating` mode."""
+    knet = sub.kappa_net()
+    return torch.autograd.grad(knet.sum(), sub.kappa_ext)[0].detach()
+
+
+def _dg_dkappa_ext_at_r(sub, r):
+    """∂g/∂κ_ext [dimensionless] of the saturating gain at κ_ext = r·κᵢ (the
+    θ₀-calibrated g₀ held; build-up recomputed at r). The Critic's diagnostic."""
+    ki = float(sub.kappa_i)
+    kext = torch.tensor([r * ki], dtype=torch.float64, requires_grad=True)
+    g = sub.gain_model.rate_saturating(kext)[0]
+    # ∂g/∂κ_ext is dimensionless (both rates in rad/s).
+    return float(torch.autograd.grad(g, kext)[0])
+
+
 def test_h_gradient_flow_full_substrate():
     """A BPTT loss backpropagates through the FULL substrate (gain + ASE +
     splitting) to all P2 params {δ, κ_ext, μ}; grads are finite and nonzero
     (proof the no_grad/detach anti-pattern was avoided). Run at C-1/N=8 and
-    C-2/N=32, registered operating point, NF-A, splitting ON, ASE ON."""
+    C-2/N=32, registered operating point, NF-A, splitting ON, ASE ON.
+
+    Hardened (S0.3-1b / S31-F1,F2): (a) runs the FAITHFUL `saturating` mode (now
+    the default); (b) asserts the GAIN PATH IS LIVE — dκ_net/dκ_ext ≠ 2, the
+    assertion that distinguishes the faithful model from the hollow `fixed`
+    plane (this test now FAILS in `fixed` mode, where g drops out and
+    dκ_net/dκ_ext ≡ 2); (c) a connected-init (μ≠0) variant so rings 2..N are
+    actually exercised (μ(0)=0 signal-starves the chain — S31-F2/PR-6)."""
     for lab in ("C-1", "C-2"):
         sub = DRS.from_cell(lab, clock_GSps=2.0, seed=1)
+        assert sub.gain_mode == "saturating"         # (a) faithful mode default
         assert sub.gain_factor == 0.9 and sub.ase_variance_scale == 1.0
         assert float(sub.gamma.abs().sum()) > 0      # splitting ON
         flux = (O2.P_BAR0_W / O2.H_NU_J) ** 0.5
@@ -246,6 +287,43 @@ def test_h_gradient_flow_full_substrate():
             assert p.grad is not None, f"{lab}: no grad on {name}"
             assert torch.isfinite(p.grad).all(), f"{lab}: non-finite grad {name}"
             assert p.grad.abs().sum() > 0, f"{lab}: zero grad on {name}"
+
+        # (b) THE GAIN PATH IS LIVE. In the faithful saturating mode the gain
+        # responds to κ_ext, so dκ_net/dκ_ext ≠ 2; in the hollow `fixed` mode
+        # g is constant and dκ_net/dκ_ext ≡ 2 exactly. This assertion is what
+        # makes the gate no longer hollow — it FAILS if the substrate is in
+        # `fixed` mode (verified against a fixed twin here).
+        dknet_sat = _dkappa_net_dkappa_ext(sub)
+        sub_fix = DRS.from_cell(lab, clock_GSps=2.0, seed=1, gain_mode="fixed")
+        dknet_fix = _dkappa_net_dkappa_ext(sub_fix)
+        assert torch.allclose(dknet_fix, torch.full_like(dknet_fix, 2.0),
+                              atol=1e-6), f"{lab}: fixed-mode dκ_net/dκ_ext≠2"
+        assert (dknet_sat - 2.0).abs().max() > 1e-3, \
+            f"{lab}: gain path DEAD (dκ_net/dκ_ext={dknet_sat.tolist()})"
+        dg_theta0 = (2.0 - dknet_sat).mean().item()  # ∂g/∂κ_ext at θ₀
+        edges = {r: _dg_dkappa_ext_at_r(sub, r)
+                 for r in (0.1, 0.3, 0.5, 1.0, 3.0)}
+        print(f"\n(h) {lab} gain path LIVE: dκ_net/dκ_ext = "
+              f"{dknet_sat.mean().item():.3f} (fixed = 2.000); "
+              f"∂g/∂κ_ext @θ₀ = {dg_theta0:+.3f}; "
+              f"edges r{{0.1,0.3,0.5,1,3}} = "
+              f"{[f'{edges[r]:+.2f}' for r in (0.1,0.3,0.5,1.0,3.0)]} "
+              f"(sign-flips near r≈0.5)")
+
+        # (c) CONNECTED-INIT variant (μ≠0): rings 2..N must carry a signal
+        # gradient. With the registered μ(0)=0 they are signal-starved (exactly
+        # zero in the noiseless limit, S31-F2) and the gate above only proves
+        # ring-1's gain path. A nonzero μ-init exercises the whole chain.
+        sub_c = DRS.from_cell(lab, clock_GSps=2.0, seed=1)
+        with torch.no_grad():
+            sub_c.mu_chain.fill_(0.3 * float(sub_c.kappa_i))
+        yc = sub_c.forward_intensity(
+            u, generator=torch.Generator().manual_seed(11))
+        ((yc - torch.zeros_like(yc)) ** 2).mean().backward()
+        assert sub_c.delta.grad[1:].abs().sum() > 0, \
+            f"{lab}: chain rings dark even with μ≠0"
+        assert sub_c.kappa_ext.grad[1:].abs().sum() > 0, \
+            f"{lab}: chain κ_ext dark even with μ≠0"
 
 
 # -------------------------------------------------------------------- #

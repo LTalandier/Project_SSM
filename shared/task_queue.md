@@ -8,12 +8,29 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ACTIVE — S0.3-1b: substrate edits from the Critic APPROVE-WITH-EDITS (freeze-conforming)
+## ✅ DONE — S0.3-1b: substrate edits from the Critic APPROVE-WITH-EDITS (freeze-conforming) — **ACCEPTED 2026-06-13 (Supervisor-verified)**
+
+> **Supervisor ACCEPT 2026-06-13 (verified; re-confirmed green on resumption 2026-06-17).** All 5
+> freeze-conforming edits landed; **full suite 128/128**. Gain default flipped `fixed`→`saturating`
+> (faithful to §G/§N-E6 — code now conforms to the signed freeze, no freeze change); `test_h`
+> de-hollowed (gain-path-live assert PASS @saturating / FAIL @fixed; ∂g/∂κ_ext reproduces the
+> Critic to the digit — −0.750 @θ₀, edges −10.1..+0.41, sign-flip @r≈0.5) + a connected-init
+> variant exercising rings 2..N; hygiene gate rewritten to ban the real source-stack symbols
+> (dropping the PR-2-colliding task-token bans) and planted-symbol-proven; intracavity-reachability
+> column surfaced in the calibration artifact (all gain cells material-aspirational on the operative
+> plane); ASE-grad-detached convention registered in `ase.py`. `test_c`/`test_e` pin
+> `gain_mode="fixed"` (the plane the frozen B1/E₀ numbers live on). $0/local.
+> **One new finding surfaced — D-2026-06-13-1** (saturating default makes the K4 lower bound r=0.1
+> super-threshold: κ_net crosses 0 at r\*≈0.134, so the effective trainable band is [≈0.134, 3],
+> not the registered [0.1, 3]; `clamp_to_bounds(r=0.1)` is unsafe in saturating mode) → routed to
+> **PR-6 / S0.4a** (κ_ext-clamp policy; Supervisor leans option A, raise the saturating-mode clamp
+> to r_min≈0.15). The freeze-gated items (PR-12 rerun, PR-6 registrations) remain on Lucas
+> (E-2026-06-13-2 + D-2026-06-13-1).
 
 **Assigned:** 2026-06-13
 **Supervisor:** Claude Opus 4.8
-**Status:** ACTIVE — the freeze-conforming subset of the Critic's S0.3-1 edits (the rest is
-gated on Lucas's PR-4/PR-12 reconciliation + PR-6, below).
+**Status:** ✅ DONE 2026-06-13 — ACCEPTED (Supervisor-verified 128/128); freeze-conforming, $0;
+finding D-2026-06-13-1 surfaced → PR-6. The freeze-gated items wait on Lucas (E-2026-06-13-2).
 **Prereqs / read first:** `shared/critic_review_s0_3_1.md` (verdict APPROVE-WITH-EDITS, findings
 S31-F1..F8) · the frozen PR-4 v2 §G + §N-E6 · `photonic_ssm/substrate/{dissipative_ring,gain,
 ase}.py` · `tests/test_substrate.py` · `tests/test_no_equalization_coupling.py` ·

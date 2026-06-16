@@ -120,18 +120,21 @@ def write_addendum(out_dir: str = "results/s0_3") -> tuple[str, str]:
     lines.append("")
     lines.append("| Cell | E₀ (photons) | κ_net (rad/s) | g_op (dB/cm) | "
                  "small-signal headroom ×(Er/g_op) | sat-depth (bus / intracav) | "
-                 "required g₀ bus (dB/cm) | reachable? |")
-    lines.append("|---|---|---|---|---|---|---|---|")
+                 "req. g₀ bus (dB/cm) | req. g₀ **intracav** (dB/cm) | "
+                 "reachable? (bus plane) |")
+    lines.append("|---|---|---|---|---|---|---|---|---|")
     for r in rows:
         hd = "—" if r["headroom_small_signal"] is None else \
             f"×{r['headroom_small_signal'][0]}–{r['headroom_small_signal'][1]}"
         reach = "passive" if r["gain_factor"] == 0 else \
-            ("✅" if r["reachable_bool"] else "❌ material-aspirational")
+            ("✅ (bus) / ❌ intracav" if r["reachable_bool"]
+             else "❌ material-aspirational")
         lines.append(
             f"| {r['cell']} ({r['name']}) | {f(r['E0_photons'])} | "
             f"{f(r['kappa_net_rad_s'])} | {f(r['g_op_dB_per_cm'],3)} | {hd} | "
             f"×{f(r['sat_depth_bus'],3)} / ×{f(r['sat_depth_intracavity'],3)} | "
-            f"{f(r['g0_required_bus_dB_per_cm'],3)} | {reach} |")
+            f"{f(r['g0_required_bus_dB_per_cm'],3)} | "
+            f"{f(r['g0_required_intracavity_dB_per_cm'],4)} | {reach} |")
     lines.append("")
     c1 = next(r for r in rows if r["cell"] == "C-1")
     c2 = next(r for r in rows if r["cell"] == "C-2")
@@ -147,6 +150,25 @@ def write_addendum(out_dir: str = "results/s0_3") -> tuple[str, str]:
         f"vs ×{f(1.0 + c2['sat_depth_bus'],3)}); E₀ reproduces the closed form "
         f"to machine precision (unit test e). The operating κ_net and E₀ are "
         f"frozen at these values for all S0.3-1+ runs.")
+    lines.append("")
+    c3 = next(r for r in rows if r["cell"] == "C-3")
+    buildup_c2 = c2["sat_depth_intracavity"] / c2["sat_depth_bus"]
+    lines.append(
+        f"**Operative-plane correction (S31-F3 — strengthens anchor-risk (v)):** "
+        f"the `reachable? (bus plane)` column is on the **bus plane** (the "
+        f"freeze's cross-cell, cell-independent ×{f(c2['sat_depth_bus'],3)} "
+        f"comparison). But the M1 gain saturates on the **intracavity plane** — "
+        f"the field the medium actually sees — where the on-resonance build-up "
+        f"(×{f(buildup_c2,3)} at C-2/θ₀) makes the required small-signal g₀ ≈ "
+        f"{f(c1['g0_required_intracavity_dB_per_cm'],3)}–"
+        f"{f(c3['g0_required_intracavity_dB_per_cm'],3)} dB/cm for **every** "
+        f"gain-bearing cell, two orders above the Er anchor (≤1.9 dB/cm). **On "
+        f"the operative plane all gain cells — C-1, C-2, C-3, C-2-derate — are "
+        f"material-aspirational; the bus-plane ×{f(c2['sat_depth_bus'],3)} "
+        f"requirement is a floor (the most favorable plane), not the operating "
+        f"requirement.** The freeze chose the bus plane knowingly; surfacing the "
+        f"intracavity column here makes anchor-risk (v) explicit rather than "
+        f"understated (no freeze change).")
     lines.append("")
     with open(md_path, "w") as fh:
         fh.write("\n".join(lines) + "\n")

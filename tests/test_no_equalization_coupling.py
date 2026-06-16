@@ -1,8 +1,17 @@
 # pattern-port of pnn-multilayer tests/test_mrr_primitives.py::
 #   test_mrr_primitives_no_soa_coupling (the source-grep negative test)
 """Decoupling hygiene: the salvaged package must carry NO references to
-the source repo's equalization stack (the 'honest flag' gate of task
-S0.0 — salvaged assets must not drag in equalization assumptions)."""
+the source repo's equalization TRAINING STACK (the 'honest flag' gate of task
+S0.0 — salvaged assets must not drag in the source equalization implementation).
+
+S0.3-1b rewrite (S31-F5): the gate asserts the REAL invariant — the specific
+source-stack *symbols/modules* are absent (the Critic-verified list) — NOT a
+generic task token. The old gate banned task-framing words ("PAM4", "QPSK",
+"HD_FEC", "ber_curve") that collide with the project's OWN registered PR-2 T-A
+4-PAM equalization task; that forced legitimate vocabulary to be renamed and,
+worse, would have let a contributor re-import the source stack under a neutral
+name and slip past. Banning the source symbols is the invariant that actually
+matters; the project's registered 4-PAM task vocabulary is allowed."""
 
 import os
 import re
@@ -10,15 +19,21 @@ import re
 import photonic_ssm
 
 
+# The source-repo equalization training stack: module names, fiber-channel and
+# DSP classes, and batched-engine entry points (Critic-verified absent from
+# photonic_ssm/). These — not task-framing tokens — are the salvage-hygiene
+# invariant: their presence would mean the MZI-specific training engine or the
+# fiber-equalization assumptions leaked in.
 FORBIDDEN = [
-    # source-repo equalization stack symbols / modules
+    # source equalization modules
     "equalization_multilayer", "equalization_nonlinear",
     "equalization_ringbank", "equalization_mrr_rc",
-    "compute_nmse_field", "forward_batched",
+    # fiber channel / dual-pol DSP
     "ManakovFiber", "manakov", "generate_dp_qpsk", "viterbi_viterbi",
-    "ParallelPol", "MultiLayerEqualizer", "MRRWeightBank",
-    # fiber-task framing
-    "QPSK", "PAM-4", "PAM4", "HD_FEC", "hdfec", "ber_curve",
+    "ParallelPol",
+    # source training-engine classes / entry points
+    "MultiLayerEqualizer", "MRRWeightBank",
+    "compute_nmse_field", "forward_batched",
 ]
 
 
