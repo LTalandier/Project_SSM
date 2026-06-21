@@ -8,6 +8,29 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## ⏸ NO ACTIVE TASK (2026-06-17) — S0.4 freeze packet at Critic review; S0.4-0 queued behind Lucas's signature
+
+**State:** S0.3-1b ACCEPTED + committed (2d0673b). Lucas ruled the three S0.4-gating questions
+(saturating-all · clamp A · R-ii, 2026-06-17); the Supervisor drafted **PR-6/PR-7/PR-5/PR-12
+PROPOSED** into `preregistration.md`. **Nothing is ACTIVE for the Executor** — the next gate is the
+**Critic phase-boundary review** (`shared/critic_instructions_s0_4_freeze.md`, Lucas launches) →
+**Lucas signs** → then **S0.4-0** goes ACTIVE.
+
+**QUEUED (gated on PR-6 signature — DO NOT START) — S0.4-0: calibration + PR-5 recon.** Local, $0.
+1. **δ-aware r_min measurement (PR-6 §C clamp A):** sweep r* over the registered §D δ-band **at the
+   connected init** μ_c (not μ=0); evaluate clauses (a) κ_net≥m_κ·κᵢ and (b) M1 §G(iii) margin;
+   report r_min (candidate ≈0.15) as a one-line ledger addendum. Confirm **r* sits inside M1's
+   validity** (if M1 voids at r_M1>r*, r_min ← r_M1). **Init-consistency:** verify init + δ-band +
+   κ_ext-init(θ₀=0.3) + the PR-12 damping-sweep range all lie inside [r_min,3].
+2. **Connected-init smoke (PR-6 §B):** confirm μ_c=0.3κᵢ de-starves N=32 (nonzero task-signal
+   gradient reaches rings 2..N); if insufficient, adjust + addend.
+3. **PR-5 recon (S0.4-0 lit):** source the numeric twin-mismatch levels (SiN ring + Er-gain
+   characterization accuracy; PAT-precedent twin-gap, Wright et al. *Nature* 2022 + SPSA hardware
+   demos) → menu for the Supervisor to fill PR-5's [RECON-DEFERRED] levels.
+*(Post-signature the Supervisor promotes this to ACTIVE with full deliverable/gate spec.)*
+
+---
+
 ## ✅ DONE — S0.3-1b: substrate edits from the Critic APPROVE-WITH-EDITS (freeze-conforming) — **ACCEPTED 2026-06-13 (Supervisor-verified)**
 
 > **Supervisor ACCEPT 2026-06-13 (verified; re-confirmed green on resumption 2026-06-17).** All 5

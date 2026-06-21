@@ -18,7 +18,19 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-06-13-2 — S0.3-1 ACCEPTED + Critic APPROVE-WITH-EDITS → 1 thing to CONFIRM + 1 to RECONCILE (neither blocks today)
+### ✅ E-2026-06-13-2 — all three S0.4-gating rulings RESOLVED 2026-06-17 (saturating-all · clamp A · R-ii) → **S0.4 freeze packet PR-6/7/5/12 PROPOSED, ready for Critic review then your signature**
+
+> **RESOLVED 2026-06-17.** Lucas ruled all three: **(1)** gain `saturating` for all four estimators
+> ("let's do the saturating"); **(2)** κ_ext **clamp A** (δ-/M1-validity-aware r_min rule); **(3)**
+> PR-12 **R-ii** (distinct trainable-damping knob at fixed g_f=0.9). Supervisor drafted the packet
+> into `preregistration.md`: **PR-6** (fairness contract, CRITICAL — saturating-all, clamp A §C,
+> connected init §B, sweep recipe §D, equal budgets §E), **PR-7** (cost metric = device passes),
+> **PR-5** (PAT twin-mismatch — structure now, numeric levels recon-deferred to S0.4-0), **PR-12**
+> (R-ii disposition). All ⬜ PROPOSED. **Next: Lucas launches the Critic phase-boundary review**
+> (`critic_instructions_s0_4_freeze.md` staged) → signature → S0.4-0 calibration (δ-aware r_min +
+> connected-init smoke + PR-5 recon) → S0.4a. *Original item (the three asks) below, for the record.*
+
+### E-2026-06-13-2 — S0.3-1 ACCEPTED + Critic APPROVE-WITH-EDITS → CONFIRM 1 ✅ DONE (2026-06-17, saturating) · RECONCILE 1 + κ_ext-clamp (D-2026-06-13-1) ✅ DONE 2026-06-17
 
 **Filed:** 2026-06-13 (Supervisor). **Updated 2026-06-13 after the Critic report**
 (`critic_review_s0_3_1.md`, verdict **APPROVE-WITH-EDITS**, independently re-run 9/9).
@@ -28,6 +40,13 @@ calibration into PR-4). The Critic then independently confirmed the build is cor
 freeze-faithful, **confirmed my one finding (now HIGH)**, and added three catches. The substrate
 is sound to carry into S0.4. **The freeze-conforming code edits are already posted to the
 Executor (S0.3-1b, ACTIVE). Two items are yours.**
+
+**✅ CONFIRM 1 — RESOLVED 2026-06-17: Lucas — "let's do the saturating."** All four estimators run
+`gain_mode="saturating"`, so SPSA's two forward passes and the gradient methods' backward passes
+target *one* function. The substrate already defaults to it (S0.3-1b); I register the bake-off-wide
+consequence in **PR-6**. **Consequence now binding:** locking saturating is exactly what makes the
+K4 r=0.1 edge lase (D-2026-06-13-1), so the κ_ext-clamp policy is now a *required* pre-S0.4a
+decision (Supervisor leans option A), not optional. *Original ask, for the record:*
 
 **CONFIRM 1 — gain mode (downgraded from "decide" to "confirm": the Critic foreclosed the other
 option).** I'd offered you fixed-vs-saturating as an open interpretation. The Critic's textual
@@ -42,6 +61,14 @@ F18 gate was hollow on that path. **The one thing for you to confirm (not reinte
 bake-off-wide consequence — all four estimators run `gain_mode="saturating"`, so SPSA's forward
 passes and the gradient methods' backward passes target one function.** I'll register that in
 **PR-6**. Say "confirmed" (or flag it) when convenient; it's a PR-6 item, not urgent today.
+
+**✅ RECONCILE 1 — RESOLVED 2026-06-17 by Lucas: R-ii** ("R-ii, with PR-12/K4/PR-6
+init-consistency checked and r* verified inside M1's validity"). D-LinOSS damping = the **trainable
+per-ring net loss** (κ_ext over the clamped §C box) at **fixed g_f=0.9**, not a g_f sweep. The
+coarse sweep used the wrong axis → **convergence-controlled rerun** varies the trainable-damping
+range at fixed g_f=0.9 (gated on this signature). PR-12 collapses into PR-6 §C/§D + a BPTT-reference
+diagnostic. Registered as **PR-12 R-ii PROPOSED** + the init-consistency + r*-in-M1-validity checks
+(S0.4-0). *Original ask below.*
 
 **RECONCILE 1 — PR-4 §G ↔ PR-12 (a real knot the Critic surfaced; touches signed PR-4, so it's
 yours).** The damping sweep parametrized "damping" as the gain compensation g_f — **but g_f=0.9
@@ -76,8 +103,11 @@ init (the sweep's 0.3κᵢ is a candidate) or register that the in-situ claim re
 coupling init; (b) the **mode-for-all-estimators** (CONFIRM 1); (c) the **sweep recipe** (batch /
 LR schedule / grad-clip / δ-band) — all load-bearing for trainability.
 
-**Path:** S0.3-1b edits (Executor, ACTIVE now) ∥ your CONFIRM 1 + RECONCILE 1 → I draft PR-6/PR-5/PR-7
-(+ the PR-12 disposition per your reconcile) → you sign → S0.4a (PAT + SPSA on the substrate).
+**Path (updated 2026-06-17 — your three rulings landed; packet drafted):** ✅ S0.3-1b ACCEPTED +
+committed · ✅ your three rulings → ✅ **PR-6/PR-7/PR-5/PR-12 PROPOSED in the ledger** → **Critic
+phase-boundary review (you launch; spec staged)** → **your signature** → S0.4-0 calibration
+(δ-aware r_min measure + connected-init smoke + PR-5 recon, Executor, $0) → **S0.4a (PAT + SPSA on
+the substrate)** — the project's first bake-off estimators.
 
 ---
 

@@ -8,7 +8,22 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
-### D-2026-06-13-1 — saturating-gain default makes the K4 lower bound r=0.1 super-threshold (κ_ext clamp policy for the S0.4 bake-off)
+### ✅ D-2026-06-13-1 — saturating-gain default makes the K4 lower bound r=0.1 super-threshold → **RESOLVED 2026-06-17 by Lucas: clamp policy A** (δ-/M1-validity-aware r_min rule), registered in PR-6 §C PROPOSED
+
+**RESOLUTION (Lucas, 2026-06-17): clamp A** — "clamp A, r_min pinned against the δ-aware margin
+and co-registered with the PR-6 sweep recipe." Registered in **PR-6 §C** (PROPOSED): the operative
+`saturating`-mode training band is **κ_ext ∈ [r_min, 3]**; **r_min rule frozen** (smallest r s.t.
+for all δ in the §D band at the connected init, κ_net ≥ m_κ·κᵢ [cand. m_κ=0.05] AND M1 §G(iii)
+quasi-static margin holds, + safety Δr [cand. 0.02]; candidate r_min ≈ 0.15); the **numeric r_min
+is measured at S0.4-0** (δ-aware r* sweep) and ledger-addended before any bake-off run. K4 [0.1,3]
+retained as the passive/fixed-plane bound. **A chosen over B/C** because B (re-cap g≤0.9κᵢ) adds an
+unregistered mechanism + kinks ∂g/∂κ_ext at θ₀, and C (soft barrier) cannot stand alone (the
+divergence is in the forward recurrence, not the loss) — A is the only option that contains the
+SPSA hazard while keeping §G's saturating form intact. Lucas also required **r* verified inside
+M1's validity** (PR-6 §C clause (b): if M1 voids at r_M1 > r*, r_min is governed by r_M1) and
+**PR-12/K4/PR-6 init-consistency** (S0.4-0 gated check). *Original item below.*
+
+---
 
 **Raised by:** Executor, 2026-06-13 (during S0.3-1b). **Blocks:** nothing in S0.3-1b (all 5
 edits done, full suite 128/128). **Due at:** PR-6 / S0.4a bake-off setup — a real consequence

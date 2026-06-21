@@ -58,6 +58,23 @@ boundary before the run proceeds.
 > anchored accuracy/threshold freeze.** S0.2-1 closed. Next freeze: **PR-4** at S0.3 (behind
 > the M1-vs-M3 gain-regime ruling).
 
+> **Update (2026-06-13, S0.3 substrate freeze):** **PR-4 v2 🔒 SIGNED by Lucas** ("sign PR-4") after
+> Critic AMEND (all P4-F1..F12 applied; g_rt=0.9× operating point registered). S0.3-1 substrate
+> built + ACCEPTED + Critic APPROVE-WITH-EDITS; **S0.3-1b** freeze-conforming edits ACCEPTED (gain
+> default → `saturating`, test_h de-hollowed, 128/128). E₀ + intracavity-reachability addenda folded
+> into PR-4 §G/§N.
+>
+> **Update (2026-06-17, S0.4 freeze packet PROPOSED):** Lucas ruled the three open S0.4-gating
+> questions — **(1) gain `saturating` for all four estimators** ("let's do the saturating");
+> **(2) κ_ext clamp A** (δ-/M1-validity-aware r_min rule, co-registered with the PR-6 sweep recipe;
+> D-2026-06-13-1); **(3) PR-12 = R-ii** (D-LinOSS damping a distinct trainable-net-loss knob at fixed
+> g_f=0.9, with PR-12/K4/PR-6 init-consistency + r*-in-M1-validity checks). **PR-6 (fairness contract,
+> CRITICAL) · PR-7 (cost metric) · PR-5 (PAT twin-mismatch; structure now, levels recon-deferred) ·
+> PR-12 (R-ii disposition)** are now ⬜ **PROPOSED** (blocks at the end of this file). Next:
+> **Critic phase-boundary review → Lucas signature → S0.4-0 calibration (δ-aware r_min + connected-init
+> smoke + PR-5 recon) → S0.4a (PAT + SPSA on the substrate).** PR-8/PR-9/PR-11 (statistics, Gate-ii
+> semantics + the M3-trigger margin, RHEL echo) freeze at S0.5; PR-3's *rule* freezes before S0.4 close.
+
 ## Ledger
 
 | ID | Governs | Freeze before | Status | What must be registered | Source |
@@ -66,14 +83,14 @@ boundary before the run proceeds.
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
 | **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 🔒 **SIGNED v2 2026-06-13** (Lucas, "sign PR-4"; block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; Cui body confirmed [EV] via independent commentary 2026-06-13, risk (i) closed; E₀ numeric = registered S0.3-1 calibration addendum) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
-| **PR-5** | PAT (S0.4a) | S0.4a | ⬜ | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
-| **PR-6** | All estimators (S0.4) | S0.4a | ⬜ | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
-| **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
+| **PR-5** | PAT (S0.4a) | S0.4a | ⬜ **PROPOSED 2026-06-17** (block below; structure frozen-able, numeric levels recon-deferred → S0.4-0) | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
+| **PR-6** | All estimators (S0.4) | S0.4a | ⬜ **PROPOSED 2026-06-17** (block below; encodes Lucas's saturating-all + clamp-A + R-ii rulings) | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
+| **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ **PROPOSED 2026-06-17** (block below) | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
 | **PR-8** | S0.5 analysis | S0.5 | ⬜ | Statistical plan: **right-censoring** treatment (fraction-reaching-target within B + median/IQR among reachers / survival treatment); lexicographic ranking (success-fraction, then median passes); paired-by-seed bootstrap CIs; **≥8 seeds for all methods in headline cells** (4 only for exploratory grid). | F11 |
 | **PR-9** | Gate ii + promotion | S0.5 | ⬜ | **Gate-ii semantics** decomposed: (ii-a) capacity — BPTT ceiling clears the utility floor; (ii-b) trainability — **PAT or SPSA** within margin of ceiling (only-adjoint/RHEL-pass → escalate-and-redesign, *not* a pass). **Promotion criteria**: "clearly beats" quantified (e.g. ≥X% better pass-to-target w/ non-overlapping 95% CIs, or strictly-better scaling, or strictly-simpler hardware ledger at non-inferior efficiency); **"exactness" struck** from the menu (outcome metrics + F8 hardware ledger only). | F10 |
 | **PR-10** | S0.7-lite | before S0.2 task reg | 🔒 **FROZEN 2026-06-10** (Lucas "ok"; values in the block below) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
 | **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
-| **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
+| **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ **PROPOSED 2026-06-17 → R-ii** (Lucas reconcile; block below) — D-LinOSS damping = trainable per-ring net loss (κ_ext over the §C clamped box) at fixed g_f=0.9, **not** a g_f sweep; PR-12 collapses into PR-6 §C/§D + a convergence-controlled BPTT diagnostic rerun. | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
 | **PR-13** | S0.5 secondary task | S0.5 | 🔒 **FROZEN 2026-06-10** (early, jointly with PR-2 — Lucas E-2026-06-10-4; task-family detail in the PR-2 v2 block) | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
 | **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** · 🔁 **AMENDED → PR-15.1, signed 2026-06-10** (v1 retained below) | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (**q1∧q2∧q3∧q4** per PR-15.1) + search lanes + two-modality protocol + disposition. **Full frozen detail + the signed amendment in the blocks below** — the table row is a pointer only. | D-09-1, F15, WS-F1/2/3/5 |
@@ -121,7 +138,13 @@ boundary before the run proceeds.
   + init-ownership conventions. *S0.2-1 rider:* re-verify at retrieval level that the Vinckier
   anchor system is linear-cavity + photodiode-|·|² readout (the PF-F1 premise; the Critic's
   linear floor stands regardless of that sentence).
-- This ledger is referenced by `stage0_roadmap.md` and `escalate_to_human.md`. When an entry freezes, log
+- **S0.4-packet carry-ins (2026-06-17, PR-6 PROPOSED — supersession index):** (a) PR-2 PF-F8b's
+  *reference default* μ(0)=0 is **superseded by the PR-6 §B connected init** μ(0)=μ_c≈0.3κᵢ (S31-F2
+  signal-starvation; PR-2 delegated the init to PR-6, so this is delegated authority exercised, not a
+  PR-2 amendment; the μ(0)=0 cold-start is retained as a registered sensitivity row). (b) PR-4 §K's
+  K4 [0.1,3] is the **passive/fixed-plane** bound; the **operative training band in `saturating`
+  mode is PR-6 §C's [r_min,3]** (clamp A; r_min ≈ 0.15 candidate, δ-aware number measured at S0.4-0 +
+  addended). (c) the M1-validity check on r* (PR-6 §C clause (b)) reads against PR-4 §G(iii).
   the date + the approved value here and cite it from the phase's `task_queue.md` spec.
 
 ## PR-15 — frozen detail (registered + 🔒 FROZEN 2026-06-09; Lucas "ok go", E-2026-06-09-2)
@@ -850,3 +873,264 @@ axis or an explicitly-owned deferral (P4-F10). **Pre-signature action (P4-F5): D
 2026-06-13** — the Cui body-level numbers are confirmed [EV] via the independent
 peer-reviewed commentary (C-2 verification status); residual risk (i) closed. No action
 remains for Lucas but the signature itself.
+
+---
+
+## PR-6 — PROPOSED (2026-06-17, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
+
+> **Status: ⬜ PROPOSED — awaiting Critic phase-boundary review, then Lucas signature.**
+> **Governs:** all four estimators (SPSA · PAT · recurrent in-situ adjoint · RHEL) on the shared
+> `DissipativeRingSubstrate` (PR-4), S0.4a → S0.5. **Encodes Lucas's 2026-06-17 rulings:** gain
+> mode `saturating` for all four (CONFIRM 1); κ_ext clamp **A** with a δ-/M1-validity-aware r_min
+> rule (D-2026-06-13-1); the PR-12 **R-ii** disposition (block below). Sources: the frozen PR-2 v2
+> (partition P2, data regime, init ownership, R2 readout, reservoir baseline), PR-4 v2 §G/§K/§N,
+> the Critic S0.3-1 findings S31-F1/F2/F8, the PR-1/PR-2 freeze-review carry-ins (PF-F8a/b), the
+> roadmap S0.5 sample-efficiency primary metric, the §6 CLAUDE quality standard (≥8 seeds).
+
+### A — Physical-operations invariant (what a gradient may touch)
+- **One shared substrate.** Every estimator's updates derive **only** from simulated device passes
+  through the *single* `DissipativeRingSubstrate` instance (PR-4), with **fresh ASE per pass**
+  (PR-11 stream independence). `autodiff-through-substrate` (BPTT) is **reserved for the PR-3
+  reference ceiling only** — it is *not* one of the four estimators.
+- **Gain mode = `saturating` for all four** (CONFIRM 1, Lucas 2026-06-17). SPSA's two forward
+  passes and PAT/adjoint/RHEL's backward/adjoint/echo passes target the **same** g(P̄) function
+  (PR-4 §G). No estimator runs `gain_mode="fixed"` — that is the demoted diagnostic floor (its
+  ∂g/∂κ_ext≡0 drops 27 % of the κ_net channel at θ₀, 6× the retained term sign-flipped at the
+  edge; S31-F1). **Load-bearing:** a method may not face a different substrate than its rivals;
+  the whole bake-off premise is that the four train one model.
+- **Stochasticity convention.** The **data stream** (PR-2 streaming fresh i.i.d. draws) and the
+  **θ₀ init** are common-per-seed across methods (§B). **ASE realizations are fresh per pass,
+  independent across methods** — exogenous hardware noise is not shared (sharing it would be an
+  unphysical variance-reduction not available on a real device; PR-11). What is held common is the
+  *task*, not the *noise*.
+
+### B — Initialization: common θ₀ + the connected-init fix (S31-F2)
+- **Common θ₀ per seed**: identical starting (δ_j, κ_ext,j, μ_jk) and identical data ordering
+  across all four methods (PR-2 PF-F8a/b carry-in, verbatim). δ_j and κ_ext,j init = the PR-2
+  reference D-LinOSS radial-band init mapped through the B1 ranges; **κ_ext init at θ₀ = r₀ = 0.3**
+  (safely above r_min, §C).
+- **Connected init (supersedes the PR-2 "reference default μ(0)=0").** PR-2 *delegated* the init
+  distributions to PR-6 (PR-2 PF-F8b: "registered at PR-6") and offered μ(0)=0 only as a reference
+  default. S31-F2 (Critic, HIGH): μ(0)=0 leaves rings 2..N **signal-starved** — exactly-zero
+  task-signal gradient (noiseless), zero-mean *noise* gradient with ASE on — so the **N=32 headline
+  cell (C-2) is untrainable from cold for all four methods**. PR-6 therefore registers a
+  **connected nearest-neighbor init μ(0) = μ_c ≠ 0**, candidate **μ_c = 0.3·κᵢ** (the coarse-sweep
+  value, matched to the θ₀ κ_ext scale). This exercises PR-2's delegated authority informed by
+  S31-F2; it is **not** a silent PR-2 override (PR-2 froze no μ(0) value).
+- **Init-dependence honesty (E-2026-06-13-2 carry-(a)).** The headline runs the connected init;
+  the **μ(0)=0 cold-start is a registered sensitivity row** (expected to fail/near-fail on rings
+  2..N at C-2). The W1 claim is unaffected — μ *is* trained in situ (from μ_c, not from 0); W1 never
+  said "from zero coupling." The record states plainly: the in-situ-trained-recurrence result rests
+  on a **nonzero coupling init**, with the cold-start outcome reported, not hidden.
+- **Connected-init smoke (S0.4-0, post-signature):** the Executor confirms μ_c de-starves N=32
+  (nonzero task-signal gradient reaches rings 2..N) before any gated run; if μ_c=0.3κᵢ is
+  insufficient, the value is adjusted and ledger-addended (the value is a candidate pending this
+  smoke, like E₀).
+
+### C — κ_ext clamp: **policy A** (D-2026-06-13-1) — the saturating-mode feasible box
+- **The hazard (measured, S0.3-1b).** Under `saturating` (§A), at κ_ext below θ₀ the on-resonance
+  build-up falls, g **de-saturates above the 0.9κᵢ ceiling** (the §G ceiling is the *operating-point
+  target*, not a hard cap on the saturating form), and κ_net = κᵢ − g(P̄) + 2κ_ext **crosses zero**.
+  At the current init: r* ≈ 0.134 (cell-independent), κ_net/κᵢ = −0.318 at the K4 lower bound r=0.1
+  → the ring lases. Because M1 holds the gain **fixed within the episode** (the in-loop dynamics are
+  *linear*; saturation acts only between episodes, §G), there is **no in-rollout clamp** — the
+  linear rollout diverges. So the registered K4 lower bound r=0.1 is **infeasible in saturating
+  mode**; the K4 prerequisites §K(i–iii) silently assumed the fixed-mode relation
+  κ_net=0.1κᵢ+2κ_ext, which CONFIRM 1 breaks at the lower edge.
+- **Clamp A (Lucas 2026-06-17).** The operative trainable band that `clamp_to_bounds()` enforces
+  **during training, in saturating mode** is **κ_ext ∈ [r_min, 3]**. K4's [0.1, 3] is **retained as
+  the passive/fixed-plane bound** — the plane the frozen B1/E₀ numbers live on (`test_c`/`test_e`
+  already pin `gain_mode="fixed"`); no PR-4 number changes.
+- **r_min rule (the formula is frozen here; the *number* is measured at S0.4-0 + addended).**
+  r_min ≡ the smallest r such that, **for every δ in the registered δ-band (§D) and at the connected
+  init (§B)**, BOTH:
+  **(a)** κ_net(r, δ) ≥ m_κ·κᵢ — a positive net-loss floor, candidate **m_κ = 0.05**; AND
+  **(b)** the M1 quasi-static validity margin §G(iii) still holds (E_sym/E_sat ≤ the registered
+  ceiling — i.e. the near-threshold build-up has *not* diverged out of M1's regime);
+  **plus** a safety margin **Δr** (candidate 0.02) above the binding crossing. Candidate
+  r_min ≈ 0.15. The **numeric r_min** is a mechanical δ-aware sweep at S0.4-0 calibration (over the
+  §D δ-band, at the connected init), reported as a one-line ledger addendum **before any bake-off
+  run** and frozen there — the E₀/reachability deferral pattern (PR-4 §G/§N).
+- **r\* inside M1's validity (Lucas's check).** Near threshold the build-up diverges (E₀ ∝ 1/κ_net²,
+  §N), so §G(iii)'s quasi-static margin erodes *before* κ_net reaches exactly 0: **if M1 voids at
+  r_M1 > r*, r_min is governed by r_M1** (the validity boundary), not the bare lasing crossing —
+  whichever is more conservative (clause (b)). The clamp is therefore a **physical-validity bound**
+  (it keeps the substrate inside the regime where M1 — the registered gain model — is even defined),
+  not merely a numerical-stability patch; this strengthens, not weakens, anchor-risk framing.
+- **Why A, not B or C (registered rationale).** **B** (hard-cap g ≤ 0.9κᵢ everywhere) *adds an
+  unregistered mechanism*: it caps the saturating form below θ₀, putting a **kink in ∂g/∂κ_ext at
+  θ₀** — the very gradient PAT/adjoint train on — a modeling choice the freeze did not make (the
+  Executor correctly did **not** implement it). **C** (soft barrier in the objective) *cannot stand
+  alone*: the divergence is in the forward **state recurrence**, not the loss landscape, so SPSA's
+  sub-threshold perturbation diverges the rollout before any finite penalty can bite. **A is the
+  only option that contains the SPSA hazard** while keeping §G's saturating form intact. (C may ride
+  *on top of* A as an optional estimator-side soft guard — non-load-bearing.)
+- **Identical for all four** (fairness): SPSA's ± perturbations, PAT/adjoint/RHEL updates all project
+  onto [r_min, 3]. No method may reach a κ_ext its rivals cannot. The **reservoir baseline** holds
+  κ_ext ≡ θ₀ = 0.3 (PR-2 §5.3) — above r_min, unaffected.
+
+### D — Shared training protocol (the sweep recipe, S31-F8) — co-registered with §C
+- **Data regime:** streaming fresh i.i.d. draws per iteration; per-seed generator stream **common
+  across methods** (PR-2 PF-F8a, verbatim) — streaming-vs-corpus changes what sample-efficiency
+  *means* and is not an implementation choice.
+- **δ-band (init + training):** the support of the PR-2 D-LinOSS radial-band δ-init mapped through
+  B1 — **this is the band the §C r_min rule sweeps over** (the co-registration Lucas required).
+  Candidate registered band: δ_init ~ the radial-band image keeping poles in the S0.1 realizable
+  region; the explicit numeric band is pinned in this block at signature (Critic-reviewable) and
+  reused verbatim by the S0.4-0 r_min sweep.
+- **Batch:** 8 fresh sequences per gradient step (one device pass = one sequence, PR-7 §C).
+- **LR schedule / grad-clip:** cosine decay from a per-method base LR; global-norm gradient clip at
+  a registered value — both **tuned within the equal HP budget (§E)**, frozen before the gated seeds.
+- **Budget B:** the equal max-device-pass horizon per cell (§E) = PR-8's right-censoring horizon.
+
+### E — Equal budgets
+- **Equal HP budget per method.** Each estimator gets the **same-size** hyperparameter search
+  (e.g. equal number of {base-LR, perturbation-scale c, clip} trials), tuned on a **registered
+  validation cell distinct from the test cell**, frozen before the gated seeds. SPSA's c, PAT's
+  twin-LR, the adjoint step, RHEL's echo gain all get **equal** search — no method is hand-tuned
+  more than another (the F7 core).
+- **Equal device-pass budget B per cell.** The PRIMARY bake-off score is
+  **sample-efficiency-to-target-accuracy** (device passes to target, roadmap S0.5). All methods get
+  the same B at a given cell; PR-7 defines what one device pass *costs* per method (the exchange
+  rate), PR-6 fixes B **equal in that common unit**. PR-6 = the budget; PR-7 = the conversion.
+
+### F — Seeds, trained set, baseline
+- **≥8 seeds** for every method in headline cells (esp. SPSA — high variance); 4 only for the
+  exploratory grid (PR-8 / §6 quality standard).
+- **Trained set = PR-2 P2 {δ_j, κ_ext,j, μ_jk}, gain-free** (frozen). Digital-side params (encoder,
+  B/C residues, R2 head) trained digitally, **common across methods**; the claim attaches only to
+  the in-situ recurrent set (PR-2 / W1).
+- **Reservoir baseline** (§5.3 contrast): B1 frozen at θ₀ (κ_ext ≡ 0.3), readout-only trained
+  (PR-2) — the in-data falsifier of "training the recurrence matters."
+
+---
+
+## PR-7 — PROPOSED (2026-06-17, Supervisor) — the cost metric (F5)
+
+> **Status: ⬜ PROPOSED.** Defines the unit the PRIMARY bake-off score is measured in, so PR-6 §E's
+> "equal budget B" is unambiguous. Honors the PR-4 §N interaction rows (PR-7 charges the drive at
+> P̄₀; PR-6 gives both arms the identical budget) verbatim.
+
+### A — Cost unit = one physical device pass (any direction)
+One **device pass** = a single forward / backward / adjoint / echo propagation through the shared
+substrate over **one sequence/episode**. The PRIMARY metric = **device passes to reach target
+accuracy** (PR-3 ceiling-relative target). Per-method exchange rate:
+
+| estimator | device passes / gradient step | digital side-ledger |
+|---|---|---|
+| **SPSA** | **2 forward** (two-sided ±c; model-free) | — |
+| **PAT** | **1 forward** (physical) | **+1 twin-backward** (digital twin — *not* a device pass) |
+| **recurrent in-situ adjoint** | **1 forward + 1 adjoint** = 2 (adjoint is a *physical* reverse pass by hypothesis) | — |
+| **RHEL / Hamiltonian-echo** | **1 forward + 1 echo** = 2 (+ the χ³ echo sub-model penalties, PR-11 — charged to accuracy-per-pass, not the count) | — |
+| **BPTT reference** (ceiling, not ranked) | 1 forward/step | **+1 autodiff-backward** (digital) |
+
+- **The PAT crux (honest):** PAT's backward runs on the **digital twin**, so it lands on the digital
+  side-ledger, **not** the device-pass count — PAT = 1 device pass/step. PAT spends *digital* compute
+  to save *device* passes; both are reported (§B). This is exactly PAT's value proposition and must
+  not be hidden by merging ledgers.
+- **Adjoint realizability caveat:** the count charges 1 physical adjoint pass *as if* realizable; the
+  recurrent-adjoint demonstration gap (debt #4) is the *separate* hardware-slot question (§5.2
+  guardrail) — the simulation bake-off measures sample-efficiency assuming the pass exists.
+
+### B — Digital-compute side-ledger (reported alongside, never merged — F5)
+Captures PAT's twin-backward FLOPs, BPTT's backward FLOPs, the digital head/encoder training. The
+**device pass is the physical-scarce resource** the photonic advantage is about; digital FLOPs are
+conventional compute. A method that saves device passes by spending digital FLOPs (PAT) has a real
+but *different* advantage than a model-free one (SPSA) — two ledgers keep that honest, and feed the
+S0.7 systems-advantage envelope (PR-10) without double-counting.
+
+### C — Batch convention
+**One device pass = one sequence.** A batch-8 step costs (passes/step from §A) × 8 forward device
+passes. Sample-efficiency is measured in **total device passes** (= steps × passes/step × batch),
+never in steps (steps flatter the 2-pass methods). So at batch 8: SPSA = 16 fwd passes/step; PAT = 8
+device passes/step (+ 8 twin-backwards, side-ledger). The metric captures the 2× device-pass gap and
+the twin cost simultaneously.
+
+### D — Interaction pins (PR-4 §N, verbatim)
+PR-7 charges the optical drive at **P̄₀ = 1 mW**; PR-10's modulator-drive rows price the same P̄₀;
+PR-6 gives both arms the identical budget. The device-pass **count** is the bake-off metric; the
+**energy per pass** (conversion stack × passes) is the S0.7 envelope's concern — distinct but
+consistent, no double-count.
+
+### E — M3-trigger-margin hook (PR-4 §G carry-in)
+The §G M3 trigger ("a gated S0.5/S0.6 comparison within a margin where the gain-model class could
+flip the verdict") needs "the verdict" defined. **Form** (registered here; the numeric Δ lands in
+PR-9 at the S0.5 freeze, before any bake-off results — honoring §G's "frozen with PR-5–9/PR-11"):
+the verdict = the PR-9 lexicographic rank (success-fraction to target, then median device-passes);
+the M3 trigger fires when the leader↔runner-up gap is **smaller than** the fixed↔saturating gain
+sensitivity at that cell. Registered as a pointer now; quantified at PR-9.
+
+---
+
+## PR-5 — PROPOSED (2026-06-17, Supervisor) — PAT twin-mismatch families (F7.2–3, **CRITICAL**) — *structure frozen-able now; numeric levels recon-deferred to S0.4-0*
+
+> **Status: ⬜ PROPOSED (structure) · numeric mismatch levels [RECON-DEFERRED → S0.4-0].** PAT is
+> Physics-Aware Training: physical forward, **digital-twin backward**. PAT's robustness *is* its
+> ability to train when the twin ≠ the substrate; testing it against a *perfect* twin would flatter
+> it (a perfect twin = BPTT-through-twin, unphysical for PAT's value). PR-5 registers the
+> **twin-mismatch** so the test is honest. The *families* are a design decision (registered now,
+> Critic-reviewable); the *magnitudes* want a metrology/PAT-precedent source (the project's
+> menu-sourced-then-frozen discipline) → S0.4-0 recon + addendum, exactly as PR-4's E₀ *number* rode
+> the S0.3-1 calibration.
+
+### A — Mismatch families (the twin's gap vs the substrate); headline = one registered level each
+- **(M-par) Parametric calibration error.** The twin's {κᵢ, κ_ext, δ, μ, g₀, P_sat, γ} differ from
+  the substrate's by **characterization-accuracy-realistic** offsets. **Levels [RECON-DEFERRED]:**
+  per-parameter brackets from realistic SiN ring + gain metrology (linewidth-fit κ accuracy,
+  resonance-tracking δ, gain-characterization g₀/P_sat — the loosest) — sourced at S0.4-0.
+- **(M-struct) Structural omission.** The twin omits a mechanism it plausibly would not model
+  perfectly. **Headline candidate — the twin linearizes the gain (`gain_mode="fixed"`) while the
+  substrate saturates** — this reuses the demoted `fixed` mode in its *honest* role and directly
+  tests whether PAT absorbs the dropped ∂g/∂κ_ext (the exact S31-F1 quantity). Alternates registered
+  as sensitivity: twin single-pole (γ=0) vs substrate splitting; twin A1-ASE vs substrate A2.
+- **(M-noise) Noise-model mismatch.** Twin assumes a different NF/ASE than the substrate's NF-A 7.0
+  — candidate twin at NF-C 3.0 (optimistic) — testing PAT under noise-underestimate.
+
+### B — Headline + reporting
+Headline = the registered realistic (M-par) level **+** the (M-struct) gain-linearization omission;
+**PAT reported as accuracy/efficiency *as a function of* mismatch** (the table-descriptor mandate).
+The **zero-mismatch (perfect-twin) cell is an upper-bound diagnostic only**, never the headline.
+
+### C — Calibration-error unification (PF-F7.3) — the in-situ-vs-offline fairness
+The **offline-train-deploy baseline** (§5.3 fallback: train in simulation, deploy weights open-loop)
+suffers a weight-mapping error = **the same (M-par) family at the same level** as PAT's twin error.
+Registering them from one family makes "in-situ training (PAT) vs offline-deploy" fair: both face the
+same characterization accuracy; PAT gets to **adapt** to it via in-loop physical forward passes,
+offline-deploy does not. This is the registered apples-to-apples for the in-situ-vs-offline contrast
+the white-space claim leans on.
+
+### D — Recon scope (S0.4-0)
+The numeric levels in (M-par)/(M-noise) + the (M-struct) magnitudes are sourced from: realistic SiN
+characterization accuracies (ring + Er-gain metrology) and the **PAT-precedent twin-gap** (Wright
+et al., *Nature* 2022, and the SPSA hardware demos). Drafted as a menu, frozen by Lucas after the
+recon — no invented numbers enter the headline.
+
+---
+
+## PR-12 — PROPOSED disposition (2026-06-17) — **R-ii: D-LinOSS damping is a distinct knob** (Lucas 2026-06-17; resolves the PR-4 §G ↔ PR-12 reconciliation)
+
+> **Status: ⬜ PROPOSED (R-ii).** RECONCILE 1 (E-2026-06-13-2): the coarse S0.3-1 damping sweep
+> parametrized "damping" as the gain compensation g_f — **but g_f = 0.9 *is* PR-4 §G's registered
+> operating point** (κ_net = 0.1κᵢ + 2κ_ext); PR-12 cannot freely "select" g_f without contradicting
+> signed PR-4. **Lucas ruled R-ii.**
+
+- **R-ii (registered).** D-LinOSS **damping** is **not** g_f. It is the **trainable per-ring net
+  loss** — the pole-real-part range the partition explores via **κ_ext (the K4 box) at fixed
+  g_f = 0.9** (PR-4 §G), i.e. the κ_net(κ_ext) range over the clamped band **[r_min, 3]** (§C). The
+  D-LinOSS "damping operating point" is therefore **defined by the §C feasible box + the §B init**,
+  not by a separate g_f freeze.
+- **The coarse sweep used the wrong axis.** It varied g_f (an illegal degree of freedom under §G);
+  it must be **re-run varying the trainable-damping range at fixed g_f = 0.9**. The rerun is also
+  **convergence-controlled** (train-to-fixed-loss, not fixed-steps — the S0.3-1 anomaly-B confound:
+  the fixed-budget curve conflated accuracy with training speed) and **≥8 seeds** at the candidate
+  point. **Gated on Lucas's R-ii signature**; not yet posted.
+- **Init-consistency check (Lucas's requirement; gated check at S0.4-0).** The connected init μ_c
+  (§B), the δ-init band (§D), and the κ_ext init (θ₀=0.3) must all sit **inside the clamped box
+  [r_min, 3]**, and the trainable-damping sweep range must **stay inside it** — verified at S0.4-0
+  (the same δ-aware r_min sweep confirms r* at the connected init, closing PR-12/K4/PR-6 mutual
+  consistency).
+- **Consequence for PR-9.** Because R-ii makes "damping" a *range the estimators train through*
+  rather than a *cell we freeze*, the PR-12 "central operating cell" collapses into PR-6 §C/§D; PR-12
+  survives as a **pointer to the §C box + the convergence-controlled rerun that characterizes the
+  damping→accuracy curve** (a BPTT-reference diagnostic, not a frozen scalar). R-i (subsume into §G
+  and drop PR-12) was the alternative; Lucas chose R-ii.
