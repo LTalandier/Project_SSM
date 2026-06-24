@@ -8,25 +8,33 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸ NO ACTIVE TASK (2026-06-17) — S0.4 freeze packet at Critic review; S0.4-0 queued behind Lucas's signature
+## ⏸ NO ACTIVE TASK (2026-06-17) — S0.4 freeze packet v2 at Critic re-confirm; S0.4-0 queued behind Lucas's signature
 
 **State:** S0.3-1b ACCEPTED + committed (2d0673b). Lucas ruled the three S0.4-gating questions
-(saturating-all · clamp A · R-ii, 2026-06-17); the Supervisor drafted **PR-6/PR-7/PR-5/PR-12
-PROPOSED** into `preregistration.md`. **Nothing is ACTIVE for the Executor** — the next gate is the
-**Critic phase-boundary review** (`shared/critic_instructions_s0_4_freeze.md`, Lucas launches) →
+(saturating-all · clamp A · R-ii) **and delegated the Critic-AMEND's two HIGH calls** ("OK I trust
+you", E-2026-06-17-1). The Supervisor wrote **packet v2** (PR-6/PR-7/PR-5/PR-12 PROPOSED v2 in
+`preregistration.md`). **Nothing is ACTIVE for the Executor** — next gate is the **brief Critic
+re-confirm of v2** (`shared/critic_instructions_s0_4_freeze.md` + the v2 addendum at its end) →
 **Lucas signs** → then **S0.4-0** goes ACTIVE.
 
-**QUEUED (gated on PR-6 signature — DO NOT START) — S0.4-0: calibration + PR-5 recon.** Local, $0.
-1. **δ-aware r_min measurement (PR-6 §C clamp A):** sweep r* over the registered §D δ-band **at the
-   connected init** μ_c (not μ=0); evaluate clauses (a) κ_net≥m_κ·κᵢ and (b) M1 §G(iii) margin;
-   report r_min (candidate ≈0.15) as a one-line ledger addendum. Confirm **r* sits inside M1's
-   validity** (if M1 voids at r_M1>r*, r_min ← r_M1). **Init-consistency:** verify init + δ-band +
-   κ_ext-init(θ₀=0.3) + the PR-12 damping-sweep range all lie inside [r_min,3].
-2. **Connected-init smoke (PR-6 §B):** confirm μ_c=0.3κᵢ de-starves N=32 (nonzero task-signal
-   gradient reaches rings 2..N); if insufficient, adjust + addend.
-3. **PR-5 recon (S0.4-0 lit):** source the numeric twin-mismatch levels (SiN ring + Er-gain
-   characterization accuracy; PAT-precedent twin-gap, Wright et al. *Nature* 2022 + SPSA hardware
-   demos) → menu for the Supervisor to fill PR-5's [RECON-DEFERRED] levels.
+**QUEUED (gated on PR-6 v2 signature — DO NOT START) — S0.4-0: calibration + PR-5 recon.** Local, $0.
+1. **Input-map controllability measurement (PR-6 §B, D1 — the new load-bearing one):** find the
+   **minimal input-tap set** (≤ K=4 taps) s.t. at C-2/N=32, connected init μ_c=0.3κᵢ, on-resonance,
+   **every** ring's task gradient ≥ **10⁻³·ring-1** (the meaningful-ratio gate). **Report the tap count
+   to the S0.7 envelope** (E/O-channel cost). **If no ≤K-tap B clears it → fallback (c):** report the
+   measured effective trainable depth, down-scope the C-2 claim to "front-of-chain in situ."
+2. **r_min measurement (PR-6 §C v2, on-resonance):** smallest r s.t. on-resonance the **saturating**
+   κ_net ≥ 0.05κᵢ AND M1 §G(iii) margin holds (evaluate clause (b) on the **saturating** κ_net, NOT
+   the §N fixed-plane E₀); r_min = max(r*+0.02, r_M1); addend (candidate ≈0.15). **κ_ext-axis
+   init-consistency:** κ_ext-init(0.3) + the PR-12 damping range inside [r_min,3].
+3. **§G-conformance check (PR-6 §C/§G, D2):** determine whether δ-dependent build-up (PR-4 §G's
+   P_circ=Σ|aⱼ|²) is a **conformance fix** (no freeze change) or a model addition; if conformance-cheap,
+   fold in → r_min becomes δ-aware; else log anchor-risk (vii). Sweep δ over [−κᵢ,+κᵢ] to characterize
+   off-resonance de-saturation.
+4. **Multi-point E₀ re-derivation (PR-6 §G-addendum):** re-evaluate E₀ for the resolved input map
+   (total-energy budget over the taps); single S0.4-0 addendum consumed before any bake-off run.
+5. **PR-5 recon (lit):** source twin-mismatch levels (SiN ring + Er-gain characterization accuracy;
+   Wright et al. *Nature* 2022 + SPSA hardware demos) → menu for the [RECON-DEFERRED] levels.
 *(Post-signature the Supervisor promotes this to ACTIVE with full deliverable/gate spec.)*
 
 ---

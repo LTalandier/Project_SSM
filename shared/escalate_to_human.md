@@ -18,6 +18,29 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### ✅ E-2026-06-17-1 — Critic AMEND on the S0.4 packet → **RESOLVED 2026-06-17 by delegation ("OK I trust you")**; Supervisor's D1/D2 calls recorded below; writing v2
+
+> **RESOLVED 2026-06-17 (Lucas: "OK I trust you" — delegated the two HIGH calls to the Supervisor).**
+> Supervisor's resolution (transparent, veto-window left open):
+> - **D1 (P6-F1) → measured-minimal-controllable input map + honest fallback.** Register the *rule*,
+>   not a blind topology: the input map B = the **fewest input taps** (spread along the chain) that lift
+>   ring-N task-gradient to **≥ 10⁻³·ring-1 at C-2**, measured at S0.4-0; **report the E/O channel count
+>   to the S0.7 envelope** (multi-point drive costs conversion overhead — the §10 risk — so the
+>   trainability fix is priced against it). If no bounded-tap B clears the gate → **fall back to (c)**:
+>   down-scope the C-2 claim to "front-of-chain trained in situ," N=32 as a capacity study. (= the
+>   well-specified version of (b) with (c) as safety net; not (a) strong-coupling.) §B smoke →
+>   meaningful-ratio gate. **New consideration surfaced to Lucas:** multi-point drive ↑ E/O channels ↑
+>   conversion overhead → priced, not assumed.
+> - **D2 (P6-F2) → clamp on-resonance now + Executor §G-conformance check.** Evaluate clauses (a)/(b)
+>   on the *saturating* κ_net; freeze m_κ=0.05, Δr=0.02; **drop the "δ-aware" label**, log off-resonance
+>   de-saturation as explicit anchor-risk — unless S0.4-0 finds δ-dependent build-up is a §G
+>   P_circ=Σ|aⱼ|² *conformance* fix (then fold in, margin becomes genuinely δ-aware + conservative).
+> - **F3–F9** fold in mechanically.
+> - **Frozen-block touch:** both D1's input-map and D2's possible δ-fix re-derive the PR-4 §N E₀
+>   injection convention → they ride **Lucas's signature on v2**, not a unilateral edit (supersession
+>   discipline preserved). **Path:** Supervisor writes v2 → brief Critic re-confirm → Lucas signs →
+>   S0.4-0 → S0.4a. *Original escalation (the two decisions as options) below.*
+
 ### E-2026-06-17-1 — Critic AMEND on the S0.4 packet → **2 HIGH decisions are yours before I write v2** (the other 7 findings fold in mechanically)
 
 **Filed:** 2026-06-17 (Supervisor). **Source:** `shared/critic_review_s0_4_freeze.md`, verdict

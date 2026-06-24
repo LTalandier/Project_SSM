@@ -146,6 +146,41 @@ CONFIRMED/REFUTED/EDIT, load-bearing claims independently re-derived from the co
 (esp. items 2, 4). If you would not sign, say which finding is signature-blocking and what the
 one-pass revision is.
 
+---
+
+## ADDENDUM — v2 RE-CONFIRM (2026-06-17; your v1 verdict was AMEND, the Supervisor wrote v2)
+
+Your v1 review (AMEND) is filed and folded. Lucas **delegated** the two HIGH calls to the Supervisor
+("OK I trust you", E-2026-06-17-1). Packet **v2** is in `preregistration.md` (PR-6 status line marks
+v2). **This re-confirm is focused — do not re-litigate the CONFIRMED spine; check that v2 actually
+discharges your two HIGH findings, and that the new bits don't open new holes.** Append a short
+verdict (APPROVE / APPROVE-WITH-EDITS / AMEND) + any residual P6-F# to the *same* review file.
+
+Check specifically:
+1. **P6-F1 → §B v2.** The fix is now a **measured-minimal-controllable input map** (≤K=4 taps, gate =
+   every ring's grad ≥ 10⁻³·ring-1 at C-2), the E/O-channel cost reported to the envelope, and an
+   explicit **fallback (c)** (down-scope to "front-of-chain in situ" if no bounded B clears it). Is the
+   *rule* (gate + cap + fallback) genuinely frozen (not a hidden tunable)? Is the systems-cost pricing
+   honest? Does the meaningful-ratio gate replace your "hollow smoke"? Is the W1 claim now correctly
+   scoped to the rings actually trained?
+2. **P6-F2 → §C/§D v2.** Clause (a)/(b) now evaluate on the **saturating** κ_net (clause (b) explicitly
+   NOT via the §N fixed-plane E₀); m_κ=0.05, Δr=0.02 **frozen**; the δ-band is numeric ([−κᵢ,+κᵢ]); the
+   "δ-aware" label is **dropped**, off-resonance de-saturation is **anchor-risk (vii)**, and an S0.4-0
+   **§G-conformance check** may restore δ-awareness if P_circ=Σ|aⱼ|² is already δ-dependent. Does this
+   make clause (b) actually bind (no hollow-gate residue)? Is dropping the δ-aware label + logging the
+   hazard the right honest call, or does the off-resonance permissiveness need more than a log?
+3. **Frozen-block ride-on (PR-6 §G-addendum).** §B's multi-point B + §C's δ-fix re-derive the **frozen
+   PR-4 §N E₀ injection convention** (single-port → multi-tap total-energy budget), ratified by Lucas's
+   v2 signature. Is this a legitimate signature-ratified amendment (supersession discipline) or does it
+   reopen something §N depends on (the "encoder cannot buy SNR" invariant — preserved on *total* energy)?
+4. **The mechanical folds:** P6-F5 (PAT decomposed {M-par/M-struct/both/perfect-twin}), P6-F6 (SPSA
+   c-grid in the feasible box + one-sided at boundaries), P6-F7 (rank principle: device-passes primary,
+   digital ledger always co-reported, tiebreaker-entry deferred to PR-9), P6-F8 (S0.4-close gates on
+   PR-3's rule), P6-F9 (PR-12 init-consistency wording: only κ_ext-valued quantities in [r_min,3]). Each
+   discharged?
+
+If v2 clears 1–3 (the HIGH fixes) and the folds are clean, say so — Lucas signs on your APPROVE.
+
 Launch the Critic (separate terminal):
 ```
 cd ~/Documents/Project_SSM

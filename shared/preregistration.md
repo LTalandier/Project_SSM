@@ -878,13 +878,18 @@ remains for Lucas but the signature itself.
 
 ## PR-6 — PROPOSED (2026-06-17, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
 
-> **Status: ⬜ PROPOSED — Critic review 2026-06-17 = AMEND; v2 revision pending Lucas's two HIGH
-> rulings (E-2026-06-17-1).** Do NOT sign this v1. `critic_review_s0_4_freeze.md`: spine CONFIRMED
-> (§A saturating-for-all, §C A-over-B/C, lasing arithmetic to the digit) but **two HIGH blockers** —
-> **P6-F1** (§B connected init μ_c=0.3κᵢ leaves ring-32 at 2.2e-28 rel. gradient → N=32 deep-ring
-> starvation; smoke hollow) and **P6-F2** (the δ-aware r_min rule is inert as-built: κ_net δ-independent;
-> clause (b) uses the fixed-plane κ_net) — plus P6-F3..F9 (mechanical). Both HIGH need a Lucas decision
-> (D1 drive-map/claim-scope; D2 δ-dependence handling) → v2 → brief Critic re-confirm → signature.
+> **Status: ⬜ PROPOSED v2 (2026-06-17) — folds the Critic AMEND + Lucas's delegated D1/D2 calls
+> (E-2026-06-17-1, "OK I trust you"); ready for a brief Critic re-confirm → Lucas signature.** v1 →
+> AMEND (`critic_review_s0_4_freeze.md`: spine CONFIRMED — §A saturating-for-all, §C A-over-B/C, lasing
+> arithmetic to the digit — two HIGH blockers + 7 mechanical). v2 changes: **§B** P6-F1 — the input map
+> B becomes a **measured-minimal-controllable** topology (meaningful-ratio gate; E/O-cost-priced; (c)
+> down-scope fallback), not the failed μ_c=0.3κᵢ single-drive init; **§C/§D** P6-F2 — clamp evaluated
+> **on-resonance on the *saturating* κ_net**, m_κ/Δr **frozen**, δ-band numeric, "δ-aware" label dropped
+> + off-resonance de-saturation logged as anchor-risk (with an S0.4-0 §G-conformance check that may
+> restore it); **§E** P6-F6 SPSA c-grid in the feasible box; **PR-5** P6-F5 decomposed reporting;
+> **PR-7** P6-F7 rank principle + P6-F8 PR-3-gate; **PR-12** P6-F9 wording. **Frozen-block ride-on:**
+> §B's multi-point B and §C/§D's possible δ-fix re-derive the PR-4 §N E₀ injection convention → ratified
+> by Lucas's v2 signature (see §G-addendum below), not unilaterally.
 > **Governs:** all four estimators (SPSA · PAT · recurrent in-situ adjoint · RHEL) on the shared
 > `DissipativeRingSubstrate` (PR-4), S0.4a → S0.5. **Encodes Lucas's 2026-06-17 rulings:** gain
 > mode `saturating` for all four (CONFIRM 1); κ_ext clamp **A** with a δ-/M1-validity-aware r_min
@@ -915,23 +920,34 @@ remains for Lucas but the signature itself.
   across all four methods (PR-2 PF-F8a/b carry-in, verbatim). δ_j and κ_ext,j init = the PR-2
   reference D-LinOSS radial-band init mapped through the B1 ranges; **κ_ext init at θ₀ = r₀ = 0.3**
   (safely above r_min, §C).
-- **Connected init (supersedes the PR-2 "reference default μ(0)=0").** PR-2 *delegated* the init
-  distributions to PR-6 (PR-2 PF-F8b: "registered at PR-6") and offered μ(0)=0 only as a reference
-  default. S31-F2 (Critic, HIGH): μ(0)=0 leaves rings 2..N **signal-starved** — exactly-zero
-  task-signal gradient (noiseless), zero-mean *noise* gradient with ASE on — so the **N=32 headline
-  cell (C-2) is untrainable from cold for all four methods**. PR-6 therefore registers a
-  **connected nearest-neighbor init μ(0) = μ_c ≠ 0**, candidate **μ_c = 0.3·κᵢ** (the coarse-sweep
-  value, matched to the θ₀ κ_ext scale). This exercises PR-2's delegated authority informed by
-  S31-F2; it is **not** a silent PR-2 override (PR-2 froze no μ(0) value).
-- **Init-dependence honesty (E-2026-06-13-2 carry-(a)).** The headline runs the connected init;
-  the **μ(0)=0 cold-start is a registered sensitivity row** (expected to fail/near-fail on rings
-  2..N at C-2). The W1 claim is unaffected — μ *is* trained in situ (from μ_c, not from 0); W1 never
-  said "from zero coupling." The record states plainly: the in-situ-trained-recurrence result rests
-  on a **nonzero coupling init**, with the cold-start outcome reported, not hidden.
-- **Connected-init smoke (S0.4-0, post-signature):** the Executor confirms μ_c de-starves N=32
-  (nonzero task-signal gradient reaches rings 2..N) before any gated run; if μ_c=0.3κᵢ is
-  insufficient, the value is adjusted and ledger-addended (the value is a candidate pending this
-  smoke, like E₀).
+- **The starvation problem (P6-F1, Critic HIGH — re-derived from code).** A connected init alone does
+  **not** fix C-2. With the input driven into ring 1 only (input map B = e₁) and the nearest-neighbor
+  chain, the per-ring task-gradient decays ~(μ/κ_net)^hop; at μ_c=0.3κᵢ ring-32 sits at **2.2e-28** of
+  ring-1's gradient — the deep half of the 32-ring chain stays at init. This is **controllability**, not
+  μ(0): a single input point + a length-32 chain starves the far end regardless of μ(0) in the
+  weak-coupling regime (strong coupling μ_c≈2κᵢ "fixes" it only by delocalizing rings into supermodes —
+  rejected: breaks the one-ring-one-pole framing / exits the K4 box). μ(0)=0 is strictly worse
+  (S31-F2: exactly-zero task gradient noiseless; zero-mean noise gradient with ASE).
+- **Input map B — registered as the minimal controllable topology (D1, Lucas-delegated 2026-06-17;
+  the *rule* is frozen, the *topology* measured at S0.4-0).** B = the **fewest input taps** (spread
+  along the chain) such that, at C-2 (N=32), the connected init, on-resonance, **every** ring's task
+  gradient ≥ **10⁻³ · ring-1's** (the meaningful-ratio gate — replaces the hollow "nonzero" smoke).
+  Drive amplitude split equally across taps. **Connected nearest-neighbor init μ(0) = μ_c = 0.3·κᵢ**
+  retained (supersedes PR-2 PF-F8b's μ(0)=0 *reference default* — delegated authority, not a frozen
+  override; PR-2 froze no μ(0) value). The same B + μ_c are common across all four methods (fairness)
+  and given to the reservoir baseline (digital-side — the in-situ claim is about the recurrence
+  μ/poles, not B; the contrast stays clean).
+- **Systems cost is priced, not assumed (the §10 carry).** Multi-point drive ⇒ more E/O channels
+  (DAC/modulator per tap) — the conversion overhead the S0.7 envelope is most fragile on. S0.4-0
+  **reports the resolved tap count to the envelope (PR-10)**; the trainability fix is charged against
+  the §10 advantage, not hidden.
+- **Honest fallback (c).** If **no bounded-tap B** (≤ a registered cap K_taps, candidate K=4) clears the
+  10⁻³ gate at C-2, the headline **down-scopes**: the C-2 claim becomes "the **controllable front of
+  the chain** is trained in situ," N=32 is reported as a **capacity-vs-controllability study**, and the
+  measured effective trainable depth is stated. Either way the deep-ring limit is on the record, not
+  hidden; the W1 claim attaches to the rings that are *actually* trained in situ.
+- **Frozen-block ride-on:** a multi-point B re-derives the PR-4 §N E₀ injection convention (which froze
+  single-port-ring-1 injection) — registered in the §G-addendum below, ratified by the v2 signature.
 
 ### C — κ_ext clamp: **policy A** (D-2026-06-13-1) — the saturating-mode feasible box
 - **The hazard (measured, S0.3-1b).** Under `saturating` (§A), at κ_ext below θ₀ the on-resonance
@@ -947,22 +963,31 @@ remains for Lucas but the signature itself.
   **during training, in saturating mode** is **κ_ext ∈ [r_min, 3]**. K4's [0.1, 3] is **retained as
   the passive/fixed-plane bound** — the plane the frozen B1/E₀ numbers live on (`test_c`/`test_e`
   already pin `gain_mode="fixed"`); no PR-4 number changes.
-- **r_min rule (the formula is frozen here; the *number* is measured at S0.4-0 + addended).**
-  r_min ≡ the smallest r such that, **for every δ in the registered δ-band (§D) and at the connected
-  init (§B)**, BOTH:
-  **(a)** κ_net(r, δ) ≥ m_κ·κᵢ — a positive net-loss floor, candidate **m_κ = 0.05**; AND
-  **(b)** the M1 quasi-static validity margin §G(iii) still holds (E_sym/E_sat ≤ the registered
-  ceiling — i.e. the near-threshold build-up has *not* diverged out of M1's regime);
-  **plus** a safety margin **Δr** (candidate 0.02) above the binding crossing. Candidate
-  r_min ≈ 0.15. The **numeric r_min** is a mechanical δ-aware sweep at S0.4-0 calibration (over the
-  §D δ-band, at the connected init), reported as a one-line ledger addendum **before any bake-off
-  run** and frozen there — the E₀/reachability deferral pattern (PR-4 §G/§N).
-- **r\* inside M1's validity (Lucas's check).** Near threshold the build-up diverges (E₀ ∝ 1/κ_net²,
-  §N), so §G(iii)'s quasi-static margin erodes *before* κ_net reaches exactly 0: **if M1 voids at
-  r_M1 > r*, r_min is governed by r_M1** (the validity boundary), not the bare lasing crossing —
-  whichever is more conservative (clause (b)). The clamp is therefore a **physical-validity bound**
-  (it keeps the substrate inside the regime where M1 — the registered gain model — is even defined),
-  not merely a numerical-stability patch; this strengthens, not weakens, anchor-risk framing.
+- **r_min rule — v2, on-resonance on the *saturating* κ_net (P6-F2; the formula + margins are frozen
+  here, the *number* is measured at S0.4-0 + addended).** r_min ≡ the smallest r such that, at the
+  connected init (§B), **on-resonance (δ=0)**, BOTH:
+  **(a)** the **saturating** κ_net(r) ≥ m_κ·κᵢ — a positive net-loss floor, **m_κ = 0.05 (frozen)**; AND
+  **(b)** the M1 quasi-static margin §G(iii) holds, **evaluated on the intracavity energy computed
+  with the *saturating* κ_net** (NOT the §N E₀ formula, which uses the fixed-plane κ_net and never
+  diverges — P6-F2 (ii); evaluating clause (b) on the fixed plane would make it inert, the S31-F1
+  hollow-gate pattern). If M1 voids at r_M1 > r* (the bare saturating crossing r*≈0.134), **r_min is
+  governed by r_M1** — the more conservative of (r* + Δr, r_M1).
+  **plus** a frozen safety margin **Δr = 0.02** above the binding crossing. Candidate r_min ≈ 0.15.
+  The **numeric r_min** is a mechanical S0.4-0 sweep, reported as a one-line addendum **before any
+  bake-off run** and frozen there (the E₀ deferral pattern). **Clamp identical for all four; reservoir
+  baseline at κ_ext≡0.3 unaffected.**
+- **Off-resonance is an unmodeled hazard, logged as anchor-risk (P6-F2 (i); the "δ-aware" label is
+  dropped).** As-built the gain uses an **on-resonance** build-up, so κ_net is δ-independent — the
+  substrate cannot evaluate a δ-aware r_min. Physically, a **detuned** ring has lower build-up ⇒ less
+  saturation ⇒ g de-saturates toward g₀ ≈ 187κᵢ ⇒ it lases *more* easily — so the on-resonance r_min
+  is a **lower bound** and the clamp may be slightly permissive when rings are simultaneously
+  detuned-and-low-κ_ext. Registered as **anchor-risk (vii): off-resonance de-saturation is unmodeled;
+  on-resonance r_min + Δr is the operative clamp.** **S0.4-0 §G-conformance check:** determine whether
+  a δ-dependent build-up (PR-4 §G already registers P_circ = Σⱼ|aⱼ|², which *is* δ-dependent if it
+  uses the actual field) is a **conformance fix** (no freeze change — the on-resonance build-up would
+  then be an implementation simplification, cf. the S31-F1 gain-mode flip) rather than a model
+  addition; **if conformance-cheap, fold it in** and r_min becomes genuinely δ-aware + conservative
+  (re-addended); **else** the on-resonance clamp stands with anchor-risk (vii) logged.
 - **Why A, not B or C (registered rationale).** **B** (hard-cap g ≤ 0.9κᵢ everywhere) *adds an
   unregistered mechanism*: it caps the saturating form below θ₀, putting a **kink in ∂g/∂κ_ext at
   θ₀** — the very gradient PAT/adjoint train on — a modeling choice the freeze did not make (the
@@ -979,14 +1004,16 @@ remains for Lucas but the signature itself.
 - **Data regime:** streaming fresh i.i.d. draws per iteration; per-seed generator stream **common
   across methods** (PR-2 PF-F8a, verbatim) — streaming-vs-corpus changes what sample-efficiency
   *means* and is not an implementation choice.
-- **δ-band (init + training):** the support of the PR-2 D-LinOSS radial-band δ-init mapped through
-  B1 — **this is the band the §C r_min rule sweeps over** (the co-registration Lucas required).
-  Candidate registered band: δ_init ~ the radial-band image keeping poles in the S0.1 realizable
-  region; the explicit numeric band is pinned in this block at signature (Critic-reviewable) and
-  reused verbatim by the S0.4-0 r_min sweep.
+- **δ-band (numeric, P6-F4).** Detuning init band **δ_init ∈ [−κᵢ, +κᵢ]** per ring (the B1 radial-band
+  image that keeps poles in the S0.1 realizable region at every cell — Critic-reviewable; ≤ half the
+  100-GHz-FSR free range, well inside the in-band pole region). Role in v2: it is the **init** detuning
+  range and the band the **S0.4-0 §G-conformance check** (§C) sweeps to characterize off-resonance
+  de-saturation — **not** the r_min sweep (r_min is on-resonance per §C v2). No longer double-deferred.
 - **Batch:** 8 fresh sequences per gradient step (one device pass = one sequence, PR-7 §C).
-- **LR schedule / grad-clip:** cosine decay from a per-method base LR; global-norm gradient clip at
-  a registered value — both **tuned within the equal HP budget (§E)**, frozen before the gated seeds.
+- **LR schedule / grad-clip (P6-F8):** cosine decay from a per-method base LR; **global-norm gradient
+  clip at 1.0**; the per-method base-LR + SPSA c (§E) tuned within the equal HP budget on the
+  **registered validation cell = C-2 at a held-out SNR (24 dB), distinct from the 28 dB test cell**,
+  frozen before the gated seeds.
 - **Budget B:** the equal max-device-pass horizon per cell (§E) = PR-8's right-censoring horizon.
 
 ### E — Equal budgets
@@ -999,6 +1026,13 @@ remains for Lucas but the signature itself.
   **sample-efficiency-to-target-accuracy** (device passes to target, roadmap S0.5). All methods get
   the same B at a given cell; PR-7 defines what one device pass *costs* per method (the exchange
   rate), PR-6 fixes B **equal in that common unit**. PR-6 = the budget; PR-7 = the conversion.
+- **SPSA boundary handling (P6-F6 — a hazard with no gradient-method analogue).** Near κ_ext=r_min,
+  a perturbation c that pushes the −c arm sub-r* would diverge the rollout; clamping that arm to r_min
+  biases the two-sided difference. Registered: **the SPSA c-grid is bounded so r_min + c ≤ κ_ext ≤ 3 − c
+  for all evaluated κ_ext** (the perturbation stays inside the feasible box); within the equal-HP search
+  (above), c is selected from a grid respecting this box. Where a parameter sits within c of a boundary,
+  SPSA uses the **one-sided** difference at that coordinate (registered, applied identically) rather than
+  a clamped (biased) two-sided one. The residual boundary effect is reported, not hidden.
 
 ### F — Seeds, trained set, baseline
 - **≥8 seeds** for every method in headline cells (esp. SPSA — high variance); 4 only for the
@@ -1008,6 +1042,19 @@ remains for Lucas but the signature itself.
   the in-situ recurrent set (PR-2 / W1).
 - **Reservoir baseline** (§5.3 contrast): B1 frozen at θ₀ (κ_ext ≡ 0.3), readout-only trained
   (PR-2) — the in-data falsifier of "training the recurrence matters."
+
+### G — Frozen-PR-4-§N ride-on (ratified by the v2 signature, P6-F1/F2)
+The §B multi-point input map and the §C δ-conformance option both touch the **frozen PR-4 §N E₀
+convention** ("calibration injection on the bus port of ring 1 only"). Registered amendment, ratified
+by Lucas's signature on this v2 (supersession discipline — not a unilateral edit):
+- **Multi-point E₀:** under input map B (§B), the encoder scale is derived **once per arm to hit the
+  same total intracavity-energy budget E₀** summed over the driven taps (not per-ring) — the "encoder
+  cannot buy SNR" invariant is preserved on **total** injected energy. The §N E₀ *formula* and θ₀
+  calibration are otherwise unchanged; the numeric E₀ is re-evaluated for the resolved B at S0.4-0 and
+  addended (the existing §N deferral, now over the multi-tap drive).
+- **δ-conformance:** if S0.4-0 finds δ-dependent build-up is a §G P_circ=Σⱼ|aⱼ|² conformance fix (§C),
+  that too is a §G/§N-faithful correction (no new mechanism), addended at S0.4-0.
+Both numerics ride the **single S0.4-0 calibration addendum** consumed before any bake-off run.
 
 ---
 
@@ -1020,7 +1067,9 @@ remains for Lucas but the signature itself.
 ### A — Cost unit = one physical device pass (any direction)
 One **device pass** = a single forward / backward / adjoint / echo propagation through the shared
 substrate over **one sequence/episode**. The PRIMARY metric = **device passes to reach target
-accuracy** (PR-3 ceiling-relative target). Per-method exchange rate:
+accuracy** (PR-3 ceiling-relative target). **S0.4-close gate (P6-F8):** "target accuracy" is defined
+by PR-3's ceiling-relative *rule*, which **must freeze before S0.4 closes** — S0.4a may *start* under
+this packet, but no to-target statistic is final until PR-3's rule is signed. Per-method exchange rate:
 
 | estimator | device passes / gradient step | digital side-ledger |
 |---|---|---|
@@ -1044,6 +1093,13 @@ Captures PAT's twin-backward FLOPs, BPTT's backward FLOPs, the digital head/enco
 conventional compute. A method that saves device passes by spending digital FLOPs (PAT) has a real
 but *different* advantage than a model-free one (SPSA) — two ledgers keep that honest, and feed the
 S0.7 systems-advantage envelope (PR-10) without double-counting.
+- **Rank-ledger principle (P6-F7, outcome-determining — pinned now).** The PRIMARY rank runs on
+  **device passes** (the photonic-scarce resource); the **digital side-ledger is always co-reported**
+  and **no method may be called "most sample-efficient" without both shown**. The rank's median-passes
+  tiebreaker (PR-8/PR-9) structurally favors the 1-pass method (PAT), so a PAT win on device-passes that
+  rides a larger digital ledger must display both — the headline cannot hide the twin cost. Whether the
+  digital ledger *enters* the rank (vs co-reported-only) is the one residual choice, **explicitly
+  deferred to PR-9** with this principle binding it (it is registered as a known fork, not a silent hole).
 
 ### C — Batch convention
 **One device pass = one sequence.** A batch-8 step costs (passes/step from §A) × 8 forward device
@@ -1092,10 +1148,15 @@ sensitivity at that cell. Registered as a pointer now; quantified at PR-9.
 - **(M-noise) Noise-model mismatch.** Twin assumes a different NF/ASE than the substrate's NF-A 7.0
   — candidate twin at NF-C 3.0 (optimistic) — testing PAT under noise-underestimate.
 
-### B — Headline + reporting
+### B — Headline + reporting (decomposed, P6-F5)
 Headline = the registered realistic (M-par) level **+** the (M-struct) gain-linearization omission;
 **PAT reported as accuracy/efficiency *as a function of* mismatch** (the table-descriptor mandate).
-The **zero-mismatch (perfect-twin) cell is an upper-bound diagnostic only**, never the headline.
+**Required decomposition (P6-F5 — never report the combined number alone):** the four cells
+**{M-par-only, M-struct-only, both, perfect-twin}** are reported separately. Rationale: M-struct
+(gain-linearization) hands PAT *exactly* the ∂g/∂κ_ext omission the white-space claim turns on, so a
+single combined number conflates **PAT-the-method** with **PAT-handed-the-gain-omission**; the
+decomposition keeps them distinct. The **perfect-twin cell is an upper-bound diagnostic only**, never
+the headline.
 
 ### C — Calibration-error unification (PF-F7.3) — the in-situ-vs-offline fairness
 The **offline-train-deploy baseline** (§5.3 fallback: train in simulation, deploy weights open-loop)
@@ -1130,11 +1191,13 @@ recon — no invented numbers enter the headline.
   **convergence-controlled** (train-to-fixed-loss, not fixed-steps — the S0.3-1 anomaly-B confound:
   the fixed-budget curve conflated accuracy with training speed) and **≥8 seeds** at the candidate
   point. **Gated on Lucas's R-ii signature**; not yet posted.
-- **Init-consistency check (Lucas's requirement; gated check at S0.4-0).** The connected init μ_c
-  (§B), the δ-init band (§D), and the κ_ext init (θ₀=0.3) must all sit **inside the clamped box
-  [r_min, 3]**, and the trainable-damping sweep range must **stay inside it** — verified at S0.4-0
-  (the same δ-aware r_min sweep confirms r* at the connected init, closing PR-12/K4/PR-6 mutual
-  consistency).
+- **Init-consistency check (Lucas's requirement; gated check at S0.4-0; wording fixed per P6-F9).**
+  The box [r_min, 3] is a **κ_ext** band, so only κ_ext-valued quantities live in it: the **κ_ext init
+  (θ₀=0.3)** and the **trainable-damping sweep range** (which *is* the κ_net(κ_ext) range over κ_ext)
+  must sit inside [r_min, 3]. μ_c (a coupling) and the δ-init band (detunings) are **not** κ_ext ratios
+  — they are *not* checked against this box; they have their own ranges (μ_c per §B, δ_init per §D
+  within the realizable pole region). The S0.4-0 calibration confirms r_min at the connected init +
+  the resolved input map, closing PR-12/K4/PR-6 consistency on the κ_ext axis.
 - **Consequence for PR-9.** Because R-ii makes "damping" a *range the estimators train through*
   rather than a *cell we freeze*, the PR-12 "central operating cell" collapses into PR-6 §C/§D; PR-12
   survives as a **pointer to the §C box + the convergence-controlled rerun that characterizes the
