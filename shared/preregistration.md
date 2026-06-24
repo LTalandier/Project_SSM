@@ -878,7 +878,13 @@ remains for Lucas but the signature itself.
 
 ## PR-6 — PROPOSED (2026-06-17, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
 
-> **Status: ⬜ PROPOSED — awaiting Critic phase-boundary review, then Lucas signature.**
+> **Status: ⬜ PROPOSED — Critic review 2026-06-17 = AMEND; v2 revision pending Lucas's two HIGH
+> rulings (E-2026-06-17-1).** Do NOT sign this v1. `critic_review_s0_4_freeze.md`: spine CONFIRMED
+> (§A saturating-for-all, §C A-over-B/C, lasing arithmetic to the digit) but **two HIGH blockers** —
+> **P6-F1** (§B connected init μ_c=0.3κᵢ leaves ring-32 at 2.2e-28 rel. gradient → N=32 deep-ring
+> starvation; smoke hollow) and **P6-F2** (the δ-aware r_min rule is inert as-built: κ_net δ-independent;
+> clause (b) uses the fixed-plane κ_net) — plus P6-F3..F9 (mechanical). Both HIGH need a Lucas decision
+> (D1 drive-map/claim-scope; D2 δ-dependence handling) → v2 → brief Critic re-confirm → signature.
 > **Governs:** all four estimators (SPSA · PAT · recurrent in-situ adjoint · RHEL) on the shared
 > `DissipativeRingSubstrate` (PR-4), S0.4a → S0.5. **Encodes Lucas's 2026-06-17 rulings:** gain
 > mode `saturating` for all four (CONFIRM 1); κ_ext clamp **A** with a δ-/M1-validity-aware r_min

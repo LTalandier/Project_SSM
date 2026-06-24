@@ -18,6 +18,91 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-06-17-1 — Critic AMEND on the S0.4 packet → **2 HIGH decisions are yours before I write v2** (the other 7 findings fold in mechanically)
+
+**Filed:** 2026-06-17 (Supervisor). **Source:** `shared/critic_review_s0_4_freeze.md`, verdict
+**AMEND** ("do not sign as written; two HIGH findings need a decision, then it signs cleanly").
+**Supervisor position: I concur with the review in full** — no push-back on any of the 9 findings.
+The Critic re-derived the load-bearing physics from the code (lasing crossing r*=0.1336 to the digit,
+the connected-init chain-decay, the SPSA boundary, the δ-independence of the as-built gain). The
+packet's spine is sound (PR-7 cost unit, PR-5 twin-mismatch, PR-12 R-ii, PR-6 §A saturating-for-all,
+the A-over-B/C clamp rationale — all CONFIRMED). But two HIGH findings sit **under the headline** and
+need **your** call because they touch the white-space claim and the frozen substrate, not just wording.
+
+**DECISION 1 — P6-F1 (HIGH): the N=32 headline cell isn't trainable where it counts.** The §B
+connected-init fix I drafted (μ_c = 0.3κᵢ) **does not work on C-2**: with the input driven into ring 1
+and a nearest-neighbor chain, the per-ring task-gradient decays ~(μ/κ_net)^hop, so ring-32 sits at
+**2.2e-28** of ring-1's gradient — the deep half of the 32-ring chain stays frozen at init. (N=8/C-1
+reaches 4.9e-7 — marginal; the problem is specific to the long chain.) My §B "smoke" (nonzero gradient
+reaches rings 2..N) is **hollow** — 2.2e-28 passes it. This is structural: a single input point + a
+32-ring NN chain starves the far end *regardless of μ(0)* in the weak-coupling regime. It's really a
+**controllability** problem — in SSM terms the input matrix is B = e₁ (drive ring 1 only), which is a
+badly-conditioned B for a 32-state chain. **Note it affects both arms equally** (the reservoir baseline's
+deep rings are dead too), so the SSM-vs-reservoir *comparison* stays fair — but the cell is effectively
+N≈8, and "a 32-ring recurrence trained in situ" is not what's demonstrated. **Options:**
+- **(b) — register a controllable input map (multi-point drive), my recommendation.** Drive the input
+  into several rings (a richer B than e₁ — the encoder is digital → multiple DACs/taps, physically
+  standard). This is the **SSM-principled fix**: it restores controllability so all 32 rings see signal,
+  keeps the weak-coupling one-ring-one-pole physics (no supermodes), and **doesn't touch the claim** (B is
+  digital-side, trained in both arms — the in-situ claim is about the *recurrence* μ/poles, not B; the
+  reservoir contrast stays clean). Cost: it's an architecture change touching frozen PR-2 (which implied
+  single-point drive) + re-derives the §N E₀ normalization — so it's **yours to bless**, and the Critic
+  should re-confirm the v2.
+- **(c) — honest down-scope (clean fallback).** Keep single-point drive; report the deep-ring starvation
+  as a measured **controllability limit**; state the C-2 claim as "the front ~8 rings are trained in
+  situ" and treat N=32 as a capacity-vs-controllability study, not a 32-ring in-situ demonstration.
+  Cheapest, most honest, but a weaker headline.
+- **(a) — push μ_c to strong coupling (~2κᵢ): not recommended.** It de-starves the chain only by
+  delocalizing the rings into supermodes — which breaks the "one ring = one pole" framing (D-08-2) and
+  likely exits the K4/realizable-pole box. Buys trainability by damaging the claim.
+- **Regardless of choice:** the §B smoke becomes a **meaningful-ratio gate** (ring-N grad ≥ 10⁻³·ring-1),
+  not nonzero-ness.
+- *My lean: (b) if a multi-point input is acceptable to you as the architecture (it makes the N=32
+  headline genuine and is the principled SSM fix); (c) if you'd rather not reopen PR-2 — in which case
+  C-1/N=8 effectively becomes the honest headline and C-2 is a capacity study.*
+
+**DECISION 2 — P6-F2 (HIGH): the "δ-aware" r_min margin you asked for can't be evaluated as-built.** The
+substrate's gain uses an **on-resonance** build-up, so κ_net is **δ-independent** as built (flat over
+±4κᵢ of detuning) — the δ-sweep would return the on-resonance r_min while *labeling* it δ-aware. And
+clause (b)'s "energy ∝ 1/κ_net² diverges near threshold" is computed through the §N E₀ formula, which
+uses the **fixed**-plane κ_net (never diverges) — so as written it's inert too. **You were right that
+detuning matters** — the Critic confirms detuned rings de-saturate toward g₀ ≈ 187κᵢ and lase *more*
+easily, so the on-resonance r_min is a **lower bound** (the clamp could be slightly too permissive) — but
+the as-built model can't see it. **Options:**
+- **(ii) — clamp on-resonance now + log the off-resonance hazard as explicit anchor-risk (my interim
+  recommendation, unblocks S0.4a).** Evaluate clause (a) on the *saturating* κ_net on-resonance; add the
+  Δr safety margin; **drop the "δ-aware / M1-validity-governed" labels** in favor of an honest "on-resonance
+  clamp; detuned-ring de-saturation is an unmodeled lasing hazard, logged." Fixes clause (b)'s plane
+  (evaluate on saturating κ_net, not §N E₀) so the M1-validity arm *can* bind on-resonance.
+- **(i) — make the gain δ-dependent (the real fix, needs a substrate check first).** PR-4 §G's registered
+  formula is P_circ = Σⱼ|aⱼ|², which **is** δ-dependent if it uses the actual field — so the on-resonance
+  proxy may be an **implementation simplification, not a registered choice**, and conforming it to §G
+  (δ-dependent build-up) could be a *conformance fix* (no freeze change, like the S31-F1 gain-mode flip)
+  rather than a model addition. **I'd have the Executor check this at S0.4-0**; if it's a cheap conformance
+  fix, we do it and your δ-aware margin becomes real and conservative; if it's a genuine model addition,
+  we stay with (ii) and log the hazard.
+- *My lean: approve the **path** — clamp on-resonance (ii) so S0.4a isn't blocked, AND task the S0.4-0
+  Executor to check whether δ-dependent build-up is a §G-conformance fix; fold it in if cheap, else (ii)
+  stands with the hazard logged. You approve a path, not a binary.*
+
+**The other 7 findings (P6-F3..F9) — I fold these into v2 mechanically, no decision needed** (flagging
+for transparency): F3 freeze m_κ=0.05 / Δr=0.02 as registered (not "candidate"); F4 put the explicit
+numeric δ-band in §D (coupled to Decision 2); F5 report PAT **decomposed** (M-par-only / M-struct-only /
+both / perfect-twin), never only combined; F6 register the SPSA c-grid so the −c arm can't cross r*
+(boundary-bias handling, no gradient-method analogue); F7 pin the rank principle (device-passes primary,
+digital side-ledger **always co-reported**, never claim "most sample-efficient" without both; exact
+tiebreaker explicitly deferred to PR-9); F8 state S0.4 can't *close* until PR-3's ceiling rule freezes
+(S0.4a may start); F9 fix the PR-12 init-consistency wording (category error — μ_c/δ aren't κ_ext ratios;
+only κ_ext-init + the damping sweep-range live in [r_min,3]) + reword roadmap objective (d) "characterize
+a curve," not "choose a point."
+
+**Path:** your two rulings → I write the packet **v2** (your D1/D2 choices + F3–F9 folded) → **brief Critic
+re-confirm** (the Critic offered "with those, I'd sign it"; D1-(b) especially warrants a re-look since it
+reopens PR-2) → your signature → S0.4-0 → S0.4a. **You can answer in a couple of lines** — e.g. *"D1: b
+(multi-point drive ok); D2: approve the path (clamp on-resonance, Executor checks the conformance fix)."*
+
+---
+
 ### ✅ E-2026-06-13-2 — all three S0.4-gating rulings RESOLVED 2026-06-17 (saturating-all · clamp A · R-ii) → **S0.4 freeze packet PR-6/7/5/12 PROPOSED, ready for Critic review then your signature**
 
 > **RESOLVED 2026-06-17.** Lucas ruled all three: **(1)** gain `saturating` for all four estimators
