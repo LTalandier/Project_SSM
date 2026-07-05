@@ -18,7 +18,36 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-07-05-1 — **Sign the S0.4 freeze packet v2** (PR-6/PR-7/PR-5/PR-12) — the one action the program is gated on
+### E-2026-07-05-1 — **Sign the S0.4 freeze packet** (PR-6/PR-7/PR-5/PR-12) — now gated on D3/D4 → v3
+
+> **UPDATE 2026-07-05 (later the same day) — the Critic's max-effort pass landed
+> (`critic_review_s0_4_freeze.md` updated in place): verdict AMEND stands; do NOT sign v2.
+> Two decisions (D3/D4) gate a v3.** Supervisor assessment: the sharpened findings are **verified** —
+> the clause-(b) refutation checked *textually* against frozen PR-4 §G(iii) (it registers only the θ₀
+> value E_sym/E_sat ≈ 5e-6–9e-5; **no void ceiling is frozen**, so clause (b) has no threshold), and
+> the floor-margin arithmetic cross-checked to order of magnitude (E_sym/E_sat ≲ 1e-2 at the clause-(a)
+> floor whether the build-up ratio is the Critic's ×37 or the naive ×91 — conclusion insensitive; the
+> factor lands with the S0.4-0 measurement). Several of the review's menu items are **already encoded
+> in v2** (multi-point-measured B + the 10⁻³ meaningful-ratio gate + fallback (c); m_κ=0.05/Δr=0.02
+> frozen; numeric δ-band; §G-addendum ride-on) — the genuinely new deltas:
+> - **D3 (P6-F1 hardened → a capacity finding).** C-2's effective participating dimension ≈ **3 of 32
+>   rings**; the reservoir baseline is the **in-data falsifier of debt #1**; the Critic *verified*
+>   taps {1,9,17,25} lift 26/32 rings ≥1e-3 — which also previews that the strict *every-ring* gate
+>   at K=4 likely triggers fallback (c) (a ~26/32 down-scope, still a massive de-starve vs 3/32).
+>   **Supervisor recommends:** keep the v2 §B rule unchanged (the fork stays decided as
+>   multi-point-measured + honest fallback); **add** (i) a registered effective-dimension
+>   (participation-profile) measurement at S0.4-0 + reporting requirement, (ii) the explicit
+>   falsifier-consequence sentence (quantitative margin → PR-9, as already deferred), (iii)
+>   {1,9,17,25} as the registered *seed* of the S0.4-0 minimal-tap search, (iv) fallback wording
+>   "controllable subset" (taps spread ⇒ not a "front").
+> - **D4 (P6-F2 sharpened → clause (b) REFUTED).** Clause (b) can never bind (r_M1 < r_a always;
+>   E_sym/E_sat ≈ 3e-3 ≪ O(1) at the floor; and §G(iii) froze no ceiling). **Supervisor recommends:
+>   drop clause (b) as a live governor** — r_min = clause (a) + Δr (candidate ≈ 0.16) — and register
+>   your required M1-validity check as **performed and PASSED across the whole clamped box** (the
+>   check is satisfied; its contingency arm is dead code citing an unregistered ceiling). Anchor-risk
+>   (vii) + the S0.4-0 §G-conformance check stay unchanged from v2.
+> **Ask:** rule D3/D4 (or delegate) → Supervisor writes **v3** → single focused Critic re-confirm →
+> sign v3. *Original v2-signature item below (superseded in sequence, retained for record).*
 
 **Filed:** 2026-07-05 (Supervisor — housekeeping: this pending action was previously tracked only in
 the `task_queue.md` banner; it belongs here). **Sequence:**

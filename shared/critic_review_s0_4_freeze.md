@@ -37,12 +37,45 @@ strong-coupling regime; modeling off-resonance de-saturation is a substrate addi
 **AMEND**, not APPROVE-WITH-EDITS. The remaining findings (P6-F3..F9) are pre-registration holes and
 reporting-honesty edits that should ride the same revision.
 
+### Max-effort re-examination (this pass): both HIGH findings survive, and sharpen
+
+At Lucas's request I re-ran the review at maximum scrutiny, trying to *break* my own AMEND. The two
+HIGH findings not only survive — they sharpen, and one packet claim is now outright **REFUTED**:
+
+- **P6-F1 hardens from "deep rings hard to train" to a capacity finding.** The starvation is not a
+  finite-sequence transient (ring-32/ring-1 gradient = 3e-45 / 2e-28 / 3e-26 at T=50/200/1000 —
+  astronomically small at every length), not loss-specific (2.7e-28 under an independent
+  MSE-to-target loss), and structural: the **effective participating dimension of the N=32 headline
+  cell is ≈3 rings** — only 1 ring carries ≥0.1·|a₁|, 2 rings ≥0.01, 3 rings ≥0.001 (ring-8 already
+  6e-7, ring-16 6e-11; the ±4κᵢ δ-init band doubly suppresses via detuning). So **C-2 is a ~3-active-
+  ring model wearing a 32-ring label**; the mode-count/capacity the headline leans on is overstated
+  ~10×, and — the deepest bite — a ~3-ring effective recurrence + a digitally-trained readout may show
+  **little lift over the reservoir baseline** (§F), which is the in-data falsifier of "training the
+  recurrence matters" (debt #1, the single load-bearing sentence). The multi-point-drive fix **works**
+  (driving {1,9,17,25} lifts 26/32 rings into the ≥1e-3 band vs 3/32) but is a **frozen-block change**
+  (B_doublet is single-port by construction; §N E₀ is single-port-calibrated), confirming this is a
+  fork, not a tweak.
+- **P6-F2 sharpens; the "M1-validity-governed r_min" claim is REFUTED.** §G(iii) registers only the
+  *value* at θ₀ (E_sym/E_sat ≈ 5e-6–9e-5), **no void ceiling** — so clause (b)'s "≤ the registered
+  ceiling" has no threshold to compare against. And even fixed to use the *saturating* κ_net, clause
+  (b) **never binds before clause (a)**: at the clause-(a) floor (κ_net=0.05κᵢ, r≈0.14) the circulating
+  energy is ×37 vs θ₀ ⇒ E_sym/E_sat ≈ 3e-3, still ≪1 (M1 voids nearer O(1)). Lucas's check "r* inside
+  M1 validity" therefore **passes** (r* is comfortably inside — E_sym/E_sat ~1e-2 at r*), but its
+  intended *consequence* (r_M1 > r* governing r_min) **does not occur**. Net: the δ-aware + M1-validity
+  machinery is inert/decorative; the honest rule is **clause (a) alone** (r_min = smallest r with
+  κ_net ≥ m_κ·κᵢ, +Δr ≈ 0.16), δ-independent and evaluable — with the off-resonance de-saturation
+  hazard moved to anchor-risk (or a scoped substrate change), not dressed up as a clamp the substrate
+  cannot compute.
+- **One thing that does NOT break (balance).** The §N E₀ normalization is robust to the connected
+  init — energy localizes on the driven ring, so Σⱼ|aⱼ|² shifts <5% from μ_c=0 to μ_c=0.3κᵢ. The
+  frozen-E₀ ride-along one might have worried about is fine; I am not flagging it.
+
 ## Findings
 
 | # | Severity | One line |
 |---|---|---|
-| P6-F1 | **HIGH** | §B connected-init μ_c=0.3κᵢ leaves ring-32 at **2.2e-28** rel. gradient (N=8 reaches 4.9e-7); the N=32 headline cell's deep rings are untrainable from single-point drive + NN chain, and the §B "nonzero gradient" smoke is **hollow** (2.2e-28 passes it). De-starving needs μ_c≈2κᵢ (μ/κ_net≈2.9, mode-delocalizing) — a qualitative change, not a candidate tweak. **Signature-blocking.** |
-| P6-F2 | **HIGH** | The §C "δ-aware r_min rule" is inert as-built: κ_net is **δ-independent** (gain uses on-resonance build-up; max Δ=0.0 over ±4κᵢ), and clause (b)'s E₀∝1/κ_net² uses the **fixed**-plane κ_net (§N formula → 0.38κᵢ at r=0.14, no divergence), not the saturating κ_net (≈0.003κᵢ). Both refinements Lucas required are currently undeliverable; off-resonance de-saturation (g→g₀≈187κᵢ) is a real, unmodeled lasing hazard → on-resonance r_min is a *lower* bound (clamp too permissive). **Signature-blocking.** |
+| P6-F1 | **HIGH** | §B connected-init μ_c=0.3κᵢ leaves ring-32 at **2.2e-28** rel. gradient (T-robust: 3e-45/2e-28/3e-26 at T=50/200/1000; loss-robust: 2.7e-28 under MSE-to-target). Structural: single-port drive + NN chain ⇒ the N=32 headline cell has an **effective participating dimension ≈3 rings** (1 ring ≥0.1·|a₁|, 3 ≥1e-3) — a ~3-ring model wearing a 32-ring label; capacity overstated ~10× and **may not beat the reservoir baseline** (debt #1). The §B "nonzero gradient" smoke is **hollow** (2.2e-28 passes). Multi-point drive fixes it (26/32 rings ≥1e-3) but is a **frozen-block change** (single-port B, single-port E₀). **Signature-blocking.** |
+| P6-F2 | **HIGH** | The §C δ-aware / M1-validity r_min rule is inert/decorative as-built: κ_net is **δ-independent** (on-resonance gain build-up; max Δ=0.0 over ±4κᵢ); §G(iii) registers **no void ceiling** (only the θ₀ *value*), so clause (b) has no threshold; and even fixed to the *saturating* κ_net, clause (b) **never binds before clause (a)** (E_sym/E_sat≈3e-3≪1 at the κ_net=0.05κᵢ floor) → **"r_min governed by r_M1 > r*" REFUTED**. Honest rule = clause (a) alone (r_min≈0.16). Off-resonance de-saturation (g→g₀≈187κᵢ) is a real *unmodeled* hazard → on-resonance r_min is a lower bound (belongs in anchor-risk or a substrate change). **Signature-blocking.** |
 | P6-F3 | MEDIUM | "Measure r_min + addend" is a legitimate deferral (E₀ precedent) **only if** m_κ and Δr are frozen *now*. As written both are "candidate" and the δ-band is a description, so S0.4-0 retains free knobs that move r_min → a pre-registration hole. Freeze m_κ, Δr, and the explicit δ-band at signature. |
 | P6-F4 | MEDIUM | §D says the δ-band is "pinned in this block at signature" but **no number is in the block** — only "candidate radial-band image." r_min (§C) and the PR-12 init-consistency check both depend on it → double-deferred. Put the numeric band in §D before signing. |
 | P6-F5 | MEDIUM | Saturating-for-all is **fair to SPSA** (it sees ∂g/∂κ_ext through its forwards — refutes "rigged for gradient methods"). But the headline PAT twin (PR-5 M-struct = gain-linearization) is handed *exactly* the ∂g/∂κ_ext omission the white-space claim rests on; the M-struct penalty must be reported **decomposed** (M-par-only, M-struct-only, both, perfect-twin), never only combined, or PAT-the-method is conflated with PAT-handed-the-gain-omission. |
@@ -107,34 +140,46 @@ saturated only via a ×262 on-resonance build-up saturating a small-signal g₀�
 anything that drops the build-up (κ_ext↓ — handled; **detuning — not handled, P6-F2**) de-saturates g
 catastrophically. The clamp covers the κ_ext axis, not the δ axis.
 
-**3. r\* inside M1 validity (§C clause b) — EDIT (P6-F2).** The physics is right in spirit (near
-threshold the true intracavity energy ∝1/κ_net² grows, eroding the quasi-static margin *before* κ_net=0),
-**but the substrate cannot evaluate it as the deferral is written**: (i) the §N E₀ formula
-(`normalization.py`/`calibration.py`) uses the **fixed**-plane κ_net = 0.1κᵢ+2κ_ext (= 0.38κᵢ at r=0.14,
-which never diverges), not the saturating κ_net (≈0.003κᵢ at r=0.14). So clause (b) via §N E₀ sees no
-divergence and is **inert**; the divergence is real only if the S0.4-0 sweep recomputes the energy with
-the *saturating* κ_net. (ii) The gain's own build-up uses the **passive** κ_tot (the documented
-non-circular choice), which also never diverges — so the gain proxy can't see the erosion either.
-**The "more conservative of (lasing+margin, r_M1)" is the right rule** — but specify that clause (b)
-evaluates the intracavity energy on the saturating κ_net, or r_M1 never binds and the "M1-validity-
-governed" framing is hollow (the same hollow-gate pattern as S31-F1). The "physical-validity bound,
-strengthening anchor-risk" framing is legitimate *once clause (b) actually binds*; until then it is spin.
+**3. r\* inside M1 validity (§C clause b) — REFUTED as written; clause (b) is decorative (P6-F2).**
+The check Lucas asked for **passes** — r* *is* comfortably inside M1's validity (E_sym/E_sat ~1e-2 at
+r*, four+ orders below the ~O(1) void). But precisely *because* it passes, the consequence the packet
+built on it does not occur: I re-derived that clause (b) **never binds before clause (a)**. Three gaps,
+each independently fatal to the clause as written: (i) the §N E₀ formula
+(`normalization.py`/`calibration.py`) uses the **fixed**-plane κ_net = 0.1κᵢ+2κ_ext (0.38κᵢ at r=0.14,
+never diverges), not the saturating κ_net (≈0.003κᵢ) — so via §N E₀ clause (b) is trivially inert;
+(ii) §G(iii) registers only the θ₀ *value* (E_sym/E_sat ≈ 5e-6–9e-5), **not a void ceiling** — so
+"E_sym/E_sat ≤ the registered ceiling" has no number to test against; (iii) even fixing (i) to the
+saturating κ_net and picking a physical ceiling, at the clause-(a) floor (κ_net=0.05κᵢ, r≈0.14) the
+circulating energy is only ×37 vs θ₀ ⇒ E_sym/E_sat ≈ 3e-3 ≪ 1, so M1 stays valid well past the
+lasing-margin floor and **r_M1 < r_a always**. **Recommendation: drop clause (b).** The honest rule is
+clause (a) alone — r_min = smallest r with κ_net(saturating) ≥ m_κ·κᵢ, +Δr ≈ 0.16 — which is evaluable
+and δ-independent. The real physics Lucas was reaching for (near-threshold M1 breakdown; off-resonance
+de-saturation, g→g₀≈187κᵢ) is **not captured by the as-built substrate** and should be logged as
+anchor-risk, or bought with a substrate change (δ-dependent + circulating-energy-consistent gain) — not
+presented as a clamp the code computes. The "physical-validity bound, strengthening anchor-risk" framing
+is spin until that physics is actually modeled.
 
-**4. Connected init vs the white-space claim (§B) — CONFIRMED problem, REFUTED remedy (P6-F1).** μ(0)=0
-signal-starves rings 2..N (re-confirmed: exactly-zero gradient noiseless). **The §B fix fails on the
-headline cell.** Per-ring |∂loss/∂δ_j| at μ_c=0.3κᵢ, drive on ring 1, C-2 noiseless:
-ring1 2.0 · ring2 0.20 · ring4 8.1e-3 · ring8 3.3e-5 · ring16 7.1e-11 · **ring32 4.4e-28**. The signal
-decays ~(μ/κ_net)^(hop); μ_c=0.3κᵢ ⇒ μ/κ_net≈0.43 ⇒ exponential death over 31 hops. N=8 (C-1) reaches
-ring-8/ring-1 = 4.9e-7 (marginal); N=32 (C-2) reaches **2.2e-28** (dead). To lift ring-32 to even 1e-6
-of ring-1 needs μ_c≈2κᵢ (μ/κ_net≈2.9) — strong coupling that delocalizes the rings into supermodes and
-changes the physics being claimed (and interacts with the realizable-pole region / K4 box). **The
-supersession is legitimate authority** (PR-2 PF-F8b delegated init to PR-6) — but the *value* and the
-*smoke* are wrong: 0.3κᵢ doesn't work, and the smoke ("nonzero gradient reaches rings 2..N") would pass
-on 2.2e-28 (hollow — make it a *meaningful-ratio* gate, e.g. ring-N grad ≥ 10⁻³·ring-1). **Honesty
-framing:** "μ is trained from μ_c, W1 untouched" is sound for the front of the chain; for the deep rings
-the honest statement is "not trained in situ from this drive/topology" — bigger than §B admits. A
-sensitivity row for μ(0)=0 is **not** sufficient; the deep-ring starvation must be a stated structural
-limit, or the headline cell / drive map changed (multi-point input would be the clean fix).
+**4. Connected init vs the white-space claim (§B) — CONFIRMED problem, REFUTED remedy, now a CAPACITY
+finding (P6-F1).** μ(0)=0 signal-starves rings 2..N (re-confirmed: exactly-zero gradient noiseless).
+**The §B fix fails on the headline cell.** Per-ring |∂loss/∂δ_j| at μ_c=0.3κᵢ, drive on ring 1, C-2
+noiseless: ring1 2.0 · ring2 0.20 · ring4 8.1e-3 · ring8 3.3e-5 · ring16 7.1e-11 · **ring32 4.4e-28**
+— T-robust (3e-45/2e-28/3e-26 at T=50/200/1000) and loss-robust (2.7e-28 under MSE-to-target). **The
+sharper framing (max-effort pass):** the settled-state amplitude profile gives C-2 an **effective
+participating dimension ≈3 rings** (1 ring ≥0.1·|a₁|, 2 ≥0.01, 3 ≥0.001; the ±4κᵢ δ-band suppresses via
+detuning on top of the spatial hops) — so the N=32 headline runs an effectively ~3-mode recurrence, and
+the memory/capacity that "N=32" advertises is overstated ~10×. **The deepest consequence:** a ~3-ring
+recurrence with a digitally-trained readout may not clear the **reservoir baseline** (§F, readout-only)
+— which would collapse the very thing the bake-off exists to show, that *training the recurrence*
+matters (debt #1). To de-starve ring-32 needs μ_c≈2κᵢ (μ/κ_net≈2.9, mode-delocalizing — different
+physics, interacts with the realizable-pole region / K4 box); or **multi-point drive**, which I verified
+works (driving {1,9,17,25} lifts 26/32 rings ≥1e-3·max) but is a **frozen-block change** (B_doublet is
+single-port; §N E₀ is single-port-calibrated → re-derive for a multi-tap injection). **The supersession
+is legitimate authority** (PR-2 PF-F8b delegated init to PR-6) — but the *value* and the *smoke* are
+wrong: 0.3κᵢ doesn't work, and the smoke ("nonzero gradient reaches rings 2..N") passes on 2.2e-28
+(hollow — make it a *meaningful-ratio* gate, ring-N grad ≥ 10⁻³·ring-1). **Honesty framing:** "μ trained
+from μ_c, W1 untouched" is sound for the front ~3 rings; for the rest the honest statement is "not
+trained in situ from this drive/topology." A μ(0)=0 sensitivity row is **not** sufficient; the effective-
+dimension limit must be a stated structural caveat, or the headline cell / drive map changed.
 
 **5. PR-12 R-ii soundness — CONFIRMED (R-ii correct, cleaner than R-i).** κ_net = κᵢ−g+2κ_ext *is* the
 pole real part; training it via κ_ext at fixed g_f=0.9 is exactly D-LinOSS damping mapped onto the
@@ -183,23 +228,29 @@ packet is mostly excellent: PR-7's cost unit, PR-5's twin-mismatch, PR-12 R-ii, 
 for-all and A-over-B/C clamp rationale are all sound, and I confirmed the §C lasing arithmetic to the
 digit. The two blockers are not nitpicks — they sit under the headline:
 
-1. **The N=32 headline cell isn't trainable where it counts (P6-F1).** The §B fix you'd be signing
-   (connected init μ_c=0.3κᵢ) leaves ring-32 at a gradient 2.2e-28 of ring-1's — the deep half of the
-   C-2 chain stays at init, and the smoke meant to catch this ("nonzero gradient") would pass on that
-   2.2e-28. This is structural: one drive point + a nearest-neighbor chain over 32 rings starves the far
-   end no matter the (weak-coupling) μ(0). **Decision needed:** push μ_c into the strong-coupling regime
-   (~2κᵢ — changes the physics), drive multiple rings (a cleaner B map), or down-scope the headline
-   claim to "the front of the chain is trained in situ" and report deep-ring starvation as a limit. In
-   all three, the §B smoke must become a *meaningful-ratio* gate, not nonzero-ness.
-2. **The δ-aware clamp you required can't be evaluated as built (P6-F2).** κ_net is δ-independent in the
-   substrate (the gain build-up is on-resonance only), and the "E₀ diverges near threshold" clause uses
-   the fixed-plane κ_net (which never diverges), not the saturating one. So the S0.4-0 sweep would hand
-   you r_min from the on-resonance crossing while calling it δ-aware + M1-validity-governed — neither of
-   the two refinements you asked for actually binding. The off-resonance hazard is real (detuned rings
-   de-saturate toward g₀≈187κᵢ and lase *more* easily), so on-resonance r_min is a lower bound — the
-   clamp could be too permissive. **Decision needed:** add δ-dependent (detuned) build-up to the gain
-   proxy (a substrate addition, review-worthy) and evaluate clause (b) on the saturating κ_net, or
-   reframe r_min as on-resonance with the off-resonance margin logged as explicit unmodeled anchor-risk.
+1. **The N=32 headline cell is effectively a ~3-ring model (P6-F1).** The §B fix you'd be signing
+   (connected init μ_c=0.3κᵢ) leaves ring-32 at a gradient 2.2e-28 of ring-1's, and the settled-state
+   profile shows only **≈3 of the 32 rings carry signal at all** — so C-2 runs an effectively ~3-mode
+   recurrence, the capacity "N=32" advertises is overstated ~10×, and (the part that would hurt most in
+   the paper) a ~3-ring recurrence + digital readout **may not beat the reservoir baseline**, which is
+   exactly the falsifier of "training the recurrence matters." The smoke meant to catch this ("nonzero
+   gradient") passes on 2.2e-28. This is structural — one drive point + a nearest-neighbor chain over 32
+   rings — not a μ(0) tuning miss. **Decision needed:** strong-coupling μ_c (~2κᵢ, changes the physics),
+   **multi-point drive** (I verified it works — {1,9,17,25} activates 26/32 rings — but B and E₀ are
+   single-port in the frozen block, so it's a re-derivation), or down-scope the headline claim to the
+   effective dimension and report the limit. In all three the §B smoke must become a *meaningful-ratio*
+   gate, not nonzero-ness.
+2. **The δ-aware / M1-validity clamp you required is inert, and one piece of it is refuted (P6-F2).**
+   κ_net is δ-independent in the substrate (on-resonance gain build-up), §G(iii) registers no void
+   ceiling for clause (b) to test against, and I verified clause (b) **never binds before clause (a)**
+   even when fixed to the saturating κ_net (E_sym/E_sat≈3e-3≪1 at the floor) — so "r_min governed by
+   r_M1 > r*" does not happen. Your check "r* inside M1 validity" **passes**; its intended consequence
+   does not. **Decision needed:** the cheap, honest path is to **drop clause (b)** and set
+   r_min by clause (a) alone (κ_net ≥ m_κ·κᵢ + Δr ≈ 0.16) with m_κ, Δr, and the δ-band **frozen now**,
+   logging the off-resonance de-saturation hazard (detuned rings → g₀≈187κᵢ) as unmodeled anchor-risk;
+   the expensive path is a substrate change (δ-dependent + circulating-energy-consistent gain) if you
+   want the clamp to actually carry that physics. Either way, don't sign the triple-clause rule as a
+   thing the code computes — it doesn't.
 
 The one-pass revision that makes it signable: re-pin **§B** (μ_c value + meaningful-ratio smoke, or the
 drive-map/claim-scope decision); fix **§C** (freeze m_κ, Δr, the explicit δ-band; specify clause (a)/(b)

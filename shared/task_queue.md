@@ -8,7 +8,16 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸ NO ACTIVE TASK (2026-06-17) — S0.4 freeze packet v2 at Critic re-confirm; S0.4-0 queued behind Lucas's signature
+## ⏸ NO ACTIVE TASK (2026-07-05) — Critic max-effort pass: AMEND stands (sharpened) → D3/D4 with Lucas → Supervisor writes v3 → focused re-confirm → signature; S0.4-0 still queued
+
+> **Update 2026-07-05:** the max-effort Critic pass (`critic_review_s0_4_freeze.md`, updated in place)
+> kept AMEND and sharpened both HIGHs: **P6-F1 → capacity finding** (C-2 effective participating
+> dimension ≈3/32 rings; reservoir baseline = debt-#1 in-data falsifier; taps {1,9,17,25} verified
+> 26/32 ≥1e-3 — strict every-ring gate at K=4 likely → fallback (c)); **P6-F2 → clause (b) REFUTED**
+> (never binds before clause (a); §G(iii) froze no void ceiling — Supervisor verified textually) →
+> v3 will drop it to clause-(a)-only (r_min cand. ≈0.16) with the M1-validity check recorded as
+> PASSED. Decisions D3/D4 + Supervisor recommendations: **E-2026-07-05-1 (updated)**. The S0.4-0 list
+> below gains (post-ruling, v3): the effective-dimension measurement + the {1,9,17,25} search seed.
 
 **State:** S0.3-1b ACCEPTED + committed (2d0673b). Lucas ruled the three S0.4-gating questions
 (saturating-all · clamp A · R-ii) **and delegated the Critic-AMEND's two HIGH calls** ("OK I trust
