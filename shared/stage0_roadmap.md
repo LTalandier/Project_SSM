@@ -48,6 +48,14 @@ its run (Critic F12). PR-IDs below point into it.
 > envelope + **Lucas's program-level call** (the "first" is collectible only at Stage 1+; Stage 0 alone =
 > methods paper — E-2026-06-09-2). Wording refinement stays at PR-2/S0.8; the dated S0.8 sweep stays.
 
+> **v3.2 changelog (2026-07-05, Supervisor doc-hygiene under Critic P6-F9 + Lucas "ok go").** All
+> PR-12 mentions reworded to the **R-ii disposition** (PR-12 PROPOSED v2, 2026-06-17): D-LinOSS
+> damping is a **trainable per-ring net-loss knob via κ_ext at the fixed §G operating point
+> g_f = 0.9** — *not* a frozen "central damping cell." The S0.3-close coarse sweep swept the wrong
+> axis (g_f *is* PR-4 §G's registered operating point) and is **re-run convergence-controlled
+> (≥8 seeds) at S0.4** over the PR-6 §C/§D clamped box. No scope change — this aligns the roadmap
+> with `preregistration.md` PR-12.
+
 ## Goal of Stage 0
 
 Produce, with **no fabrication**, the deliverables that gate the program:
@@ -151,6 +159,9 @@ And clear the two gates:
   the Gate-ii cell**, class-leading a labelled aspirational sweep). Carry an **optional mode-splitting
   knob** iff S0.1's bound (B2) says it bites in-range (F19). **Coarse damping sweep at close** (F3): train
   the BPTT-on-substrate reference at each damping point → register the central operating cell (PR-12).
+  *[Superseded by PR-12 R-ii (2026-06-17, v3.2): the sweep ran but parametrized the wrong axis (g_f =
+  the §G operating point); no cell was frozen from it — the convergence-controlled re-run happens at
+  S0.4 on the κ_ext axis.]*
   **Compute sizing** (F21): aggregate order-of-magnitude estimate before substrate fidelity is fixed;
   escalate to Lucas if it implies cluster spend.
 - **Deliverable:** documented substrate with named, cited parameter ranges; unit tests (zero-noise limit
@@ -192,8 +203,9 @@ And clear the two gates:
 
 ### S0.5 — The bake-off (the headline Stage-0 result + Gate ii)
 - **Do:** run all four estimators **+ the baselines** (offline-train-deploy; reservoir-readout, §5.3) on
-  the shared substrate as loss/gain/ASE are swept, at the registered realistic-noise cell (PR-4) and the
-  central damping cell (PR-12). **Primary metric: sample-efficiency-to-target-accuracy** — passes-to-reach
+  the shared substrate as loss/gain/ASE are swept, at the registered realistic-noise cell (PR-4);
+  damping is **not a frozen cell** but the trainable κ_ext-axis knob of PR-12 R-ii, exercised over the
+  PR-6 §C/§D clamped box (v3.2 reword). **Primary metric: sample-efficiency-to-target-accuracy** — passes-to-reach
   **within the pre-registered margin of the BPTT-on-substrate ceiling** (PR-3), cost in **physical device
   passes, any direction** (PR-7), under the **statistical plan (PR-8)**: right-censoring treatment,
   lexicographic ranking (success-fraction then median passes), paired-by-seed bootstrap CIs, **≥8 seeds
@@ -211,8 +223,10 @@ And clear the two gates:
   fine-tuning (risk #2).*
 
 ### S0.6 — Damping operating point (D-LinOSS)
-- **Do:** the central operating cell is already set by the F3 coarse sweep at S0.3-close (PR-12); here,
-  flesh out the full damping/accuracy curve (or merge into the S0.5 sweep analysis). The sweep is over the
+- **Do:** *(reworded v3.2 per PR-12 R-ii — the S0.3-close coarse sweep froze no cell; it swept the
+  wrong axis.)* Damping is the **trainable per-ring net loss via κ_ext at fixed g_f = 0.9** (PR-12
+  v2); here, flesh out the full damping/accuracy curve from the convergence-controlled ≥8-seed re-run
+  over the PR-6 §C clamped box (or merge into the S0.5 sweep analysis). The sweep is over the
   physical damping **floor** (loss–gain operating point) + any damping init/range — **not** a fixed value
   (D-LinOSS damping is trainable). The v0.2 "conservatism–damping frontier" is retired.
 - **Deliverable:** the damping/accuracy curve + a recommended operating point.
@@ -292,7 +306,9 @@ S0.L (literature): debt #1 → pre-S0.2 (PR-15, front-loaded) · debt #2 → S0.
 - **S0.2:** PR-1 (Gate-i margin + benchmark), PR-2 (task + architecture + parameter partition + actuation;
   carries the blessed D-08-2/D-08-3 constraints — see ledger Notes). **Both 🔒 FROZEN 2026-06-10**
   (Critic-reviewed v2; Lucas E-2026-06-10-4; PR-13 frozen early in the same act).
-- **S0.3:** PR-4 ($(\alpha,Q_i)$ pair + $\kappa_\text{ext}$ + noise cell), PR-12 (damping cell, at close).
+- **S0.3:** PR-4 ($(\alpha,Q_i)$ pair + $\kappa_\text{ext}$ + noise cell — 🔒 **SIGNED v2 2026-06-13**);
+  PR-12 reframed by **R-ii** (⬜ PROPOSED v2 2026-06-17 — damping = trainable κ_ext-axis knob at fixed
+  g_f=0.9; the "damping cell at close" framing is superseded, v3.2).
 - **S0.4:** PR-5 (PAT twin-mismatch), PR-6 (fairness contract, CRITICAL), PR-7 (cost accounting), PR-3
   (BPTT ceiling rule before close; ceiling frozen at close), PR-11 (RHEL echo invariants).
 - **S0.5:** PR-8 (statistics + seeds), PR-9 (Gate-ii semantics + promotion), PR-13 (secondary task), PR-14

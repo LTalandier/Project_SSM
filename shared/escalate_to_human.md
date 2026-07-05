@@ -18,6 +18,21 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-07-05-1 — **Sign the S0.4 freeze packet v2** (PR-6/PR-7/PR-5/PR-12) — the one action the program is gated on
+
+**Filed:** 2026-07-05 (Supervisor — housekeeping: this pending action was previously tracked only in
+the `task_queue.md` banner; it belongs here). **Sequence:**
+1. Launch the **brief Critic re-confirm** of v2 — the addendum at the end of
+   `shared/critic_instructions_s0_4_freeze.md` scopes it to the two HIGH fixes (P6-F1→§B,
+   P6-F2→§C/§D), the PR-6 §G-addendum ride-on, and the mechanical folds:
+   `claude "Read shared/critic_instructions_s0_4_freeze.md and follow it."`
+2. On its APPROVE, **sign** (e.g. "sign the S0.4 packet"). Your signature also **ratifies the PR-6
+   §G-addendum** (the multi-tap E₀ re-derivation riding on frozen PR-4 §N — supersession discipline).
+
+**Unblocks:** S0.4-0 calibration ($0, local, 5 items staged in `task_queue.md`) → S0.4a (PAT + SPSA).
+
+## ✅ RESOLVED (retained in filing order, newest first)
+
 ### ✅ E-2026-06-17-1 — Critic AMEND on the S0.4 packet → **RESOLVED 2026-06-17 by delegation ("OK I trust you")**; Supervisor's D1/D2 calls recorded below; writing v2
 
 > **RESOLVED 2026-06-17 (Lucas: "OK I trust you" — delegated the two HIGH calls to the Supervisor).**

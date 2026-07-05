@@ -107,6 +107,8 @@ Three local Claude Code sessions coordinate through `shared/`:
   pre-registered margins). Log to `shared/decisions_needed.md` or `shared/escalate_to_human.md`.
 
 ### Coordination files (`shared/`)
+- `PROJECT_HANDOFF.md` — self-contained snapshot (mission + live frozen-vs-pending state +
+  disciplines + file map) for onboarding a fresh agent/environment; snapshot only, the ledger wins
 - `stage0_roadmap.md` — master Stage-0 plan (S0.0–S0.8 + S0.L; the bake-off; gates)
 - `task_queue.md` — Supervisor assigns; Executor executes the **ACTIVE** task
 - `results_log.md` — Executor writes results; Supervisor evaluates

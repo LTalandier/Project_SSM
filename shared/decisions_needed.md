@@ -8,6 +8,11 @@ decision it wasn't given. The **Supervisor** answers (or escalates to Lucas via
 
 ## OPEN
 
+*(none as of 2026-07-05 — the pending human action is Lucas's signature on the S0.4 packet v2,
+tracked as **E-2026-07-05-1** in `escalate_to_human.md`.)*
+
+## ✅ RESOLVED — recent (retained in filing order, newest first)
+
 ### ✅ D-2026-06-13-1 — saturating-gain default makes the K4 lower bound r=0.1 super-threshold → **RESOLVED 2026-06-17 by Lucas: clamp policy A** (δ-/M1-validity-aware r_min rule), registered in PR-6 §C PROPOSED
 
 **RESOLUTION (Lucas, 2026-06-17): clamp A** — "clamp A, r_min pinned against the δ-aware margin
@@ -256,7 +261,12 @@ while the ruling pends; envelope itself waits for the PR-10 freeze). Synthesis +
 four rulings (amendment / Wu / Böhm / retrievals): **E-2026-06-09-5**. Gate closes on: Lucas's rulings +
 Critic Part 2 + the lite envelope.
 
-### D-2026-06-08-1 (parked) — SiN operating $Q$ for the substrate (pre-registration)
+### ✅ D-2026-06-08-1 — SiN operating $Q$ for the substrate → **RESOLVED at PR-4 v2 (🔒 SIGNED 2026-06-13)** *(housekeeping flip 2026-07-05; was "(parked)")*
+
+**Resolution:** exactly the "register a *range* and report sensitivity" shape anticipated below —
+PR-4 v2 registered the three-cell span **C-1 P-FND (Qi=2e6, Gate-ii) · C-2 P-AN800 (6.8e6, headline)
+· C-3 P-UHQ (3e7, aspirational)**, with the roughness/splitting sub-parameter (K-pol-3 always-ON)
+evaluated at the operating κ_ext. Nothing here remains open. *Original item:*
 **Raised by:** Supervisor (from the S0.0a recon). **Blocks:** nothing yet; **due at S0.2/S0.3.**
 The salvaged platform registry ships SiN `Qi=2×10⁶` (foundry-conservative corner), but the proposal
 cites `Q>10⁷` (class-leading, e.g. damascene SiN). Which do we pre-register as the operating point for

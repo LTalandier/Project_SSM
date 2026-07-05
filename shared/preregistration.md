@@ -876,7 +876,7 @@ remains for Lucas but the signature itself.
 
 ---
 
-## PR-6 — PROPOSED (2026-06-17, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
+## PR-6 — PROPOSED **v2** (2026-06-17, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
 
 > **Status: ⬜ PROPOSED v2 (2026-06-17) — folds the Critic AMEND + Lucas's delegated D1/D2 calls
 > (E-2026-06-17-1, "OK I trust you"); ready for a brief Critic re-confirm → Lucas signature.** v1 →
@@ -1058,9 +1058,11 @@ Both numerics ride the **single S0.4-0 calibration addendum** consumed before an
 
 ---
 
-## PR-7 — PROPOSED (2026-06-17, Supervisor) — the cost metric (F5)
+## PR-7 — PROPOSED **v2** (2026-06-17, Supervisor) — the cost metric (F5)
 
-> **Status: ⬜ PROPOSED.** Defines the unit the PRIMARY bake-off score is measured in, so PR-6 §E's
+> **Status: ⬜ PROPOSED v2** *(v2 = the P6-F7 fold: §B rank-ledger principle — device passes are the
+> primary rank, the digital side-ledger is **always co-reported**, ledger-tiebreak semantics → PR-9).*
+> Defines the unit the PRIMARY bake-off score is measured in, so PR-6 §E's
 > "equal budget B" is unambiguous. Honors the PR-4 §N interaction rows (PR-7 charges the drive at
 > P̄₀; PR-6 gives both arms the identical budget) verbatim.
 
@@ -1124,9 +1126,11 @@ sensitivity at that cell. Registered as a pointer now; quantified at PR-9.
 
 ---
 
-## PR-5 — PROPOSED (2026-06-17, Supervisor) — PAT twin-mismatch families (F7.2–3, **CRITICAL**) — *structure frozen-able now; numeric levels recon-deferred to S0.4-0*
+## PR-5 — PROPOSED **v2** (2026-06-17, Supervisor) — PAT twin-mismatch families (F7.2–3, **CRITICAL**) — *structure frozen-able now; numeric levels recon-deferred to S0.4-0*
 
-> **Status: ⬜ PROPOSED (structure) · numeric mismatch levels [RECON-DEFERRED → S0.4-0].** PAT is
+> **Status: ⬜ PROPOSED v2 (structure) · numeric mismatch levels [RECON-DEFERRED → S0.4-0].**
+> *(v2 = the P6-F5 fold: §B decomposed mismatch reporting — {M-par-only / M-struct-only / both /
+> perfect-twin}, so PAT's headline isn't conflated with being handed the gain omission.)* PAT is
 > Physics-Aware Training: physical forward, **digital-twin backward**. PAT's robustness *is* its
 > ability to train when the twin ≠ the substrate; testing it against a *perfect* twin would flatter
 > it (a perfect twin = BPTT-through-twin, unphysical for PAT's value). PR-5 registers the
@@ -1174,9 +1178,11 @@ recon — no invented numbers enter the headline.
 
 ---
 
-## PR-12 — PROPOSED disposition (2026-06-17) — **R-ii: D-LinOSS damping is a distinct knob** (Lucas 2026-06-17; resolves the PR-4 §G ↔ PR-12 reconciliation)
+## PR-12 — PROPOSED disposition **v2** (2026-06-17) — **R-ii: D-LinOSS damping is a distinct knob** (Lucas 2026-06-17; resolves the PR-4 §G ↔ PR-12 reconciliation)
 
-> **Status: ⬜ PROPOSED (R-ii).** RECONCILE 1 (E-2026-06-13-2): the coarse S0.3-1 damping sweep
+> **Status: ⬜ PROPOSED v2 (R-ii).** *(v2 = the P6-F9 fold: init-consistency wording fixed — only
+> κ_ext-valued quantities are constrained to [r_min, 3] — + the roadmap "damping cell" reword,
+> applied 2026-07-05.)* RECONCILE 1 (E-2026-06-13-2): the coarse S0.3-1 damping sweep
 > parametrized "damping" as the gain compensation g_f — **but g_f = 0.9 *is* PR-4 §G's registered
 > operating point** (κ_net = 0.1κᵢ + 2κ_ext); PR-12 cannot freely "select" g_f without contradicting
 > signed PR-4. **Lucas ruled R-ii.**
