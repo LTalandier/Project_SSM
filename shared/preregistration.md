@@ -876,10 +876,18 @@ remains for Lucas but the signature itself.
 
 ---
 
-## PR-6 — PROPOSED **v2** (2026-06-17, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
+## PR-6 — PROPOSED **v3** (2026-07-05, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
 
-> **Status: ⬜ PROPOSED v2 (2026-06-17) — folds the Critic AMEND + Lucas's delegated D1/D2 calls
-> (E-2026-06-17-1, "OK I trust you"); ready for a brief Critic re-confirm → Lucas signature.** v1 →
+> **Status: ⬜ PROPOSED v3 (2026-07-05) — folds the Critic max-effort pass + Lucas's delegated D3/D4
+> ("go", E-2026-07-05-1); ready for the focused Critic re-confirm → Lucas signature.** v3 changes:
+> **§B** — registered effective-dimension (participation-profile) measurement + reporting requirement
+> (the ≈3-of-32 capacity finding), the reservoir-baseline **falsifier consequence** (margin → PR-9),
+> the **{1,9,17,25}** S0.4-0 search seed (Critic-verified 26/32), fallback wording "controllable
+> subset"; **§C** — the v2 clause (b) M1-validity governor **DROPPED** (REFUTED: no §G(iii) void
+> ceiling frozen; never binds before clause (a)) → r_min = clause (a) + Δr (candidate ≈ 0.16), with
+> Lucas's M1-validity check registered **PERFORMED + PASSED** across the clamped box. v2
+> (2026-06-17) folded the Critic AMEND + Lucas's delegated D1/D2 calls (E-2026-06-17-1,
+> "OK I trust you"). v1 →
 > AMEND (`critic_review_s0_4_freeze.md`: spine CONFIRMED — §A saturating-for-all, §C A-over-B/C, lasing
 > arithmetic to the digit — two HIGH blockers + 7 mechanical). v2 changes: **§B** P6-F1 — the input map
 > B becomes a **measured-minimal-controllable** topology (meaningful-ratio gate; E/O-cost-priced; (c)
@@ -892,8 +900,10 @@ remains for Lucas but the signature itself.
 > by Lucas's v2 signature (see §G-addendum below), not unilaterally.
 > **Governs:** all four estimators (SPSA · PAT · recurrent in-situ adjoint · RHEL) on the shared
 > `DissipativeRingSubstrate` (PR-4), S0.4a → S0.5. **Encodes Lucas's 2026-06-17 rulings:** gain
-> mode `saturating` for all four (CONFIRM 1); κ_ext clamp **A** with a δ-/M1-validity-aware r_min
-> rule (D-2026-06-13-1); the PR-12 **R-ii** disposition (block below). Sources: the frozen PR-2 v2
+> mode `saturating` for all four (CONFIRM 1); κ_ext clamp **A** (D-2026-06-13-1 — the r_min rule is
+> now v3 clause-(a)-only, §C: the "δ-aware" framing was dropped at v2 and the M1-validity governor
+> refuted at v3, with the required M1 check recorded PASSED); the PR-12 **R-ii** disposition (block
+> below). Sources: the frozen PR-2 v2
 > (partition P2, data regime, init ownership, R2 readout, reservoir baseline), PR-4 v2 §G/§K/§N,
 > the Critic S0.3-1 findings S31-F1/F2/F8, the PR-1/PR-2 freeze-review carry-ins (PF-F8a/b), the
 > roadmap S0.5 sample-efficiency primary metric, the §6 CLAUDE quality standard (≥8 seeds).
@@ -936,16 +946,33 @@ remains for Lucas but the signature itself.
   retained (supersedes PR-2 PF-F8b's μ(0)=0 *reference default* — delegated authority, not a frozen
   override; PR-2 froze no μ(0) value). The same B + μ_c are common across all four methods (fairness)
   and given to the reservoir baseline (digital-side — the in-situ claim is about the recurrence
-  μ/poles, not B; the contrast stays clean).
+  μ/poles, not B; the contrast stays clean). **S0.4-0 search seed (registered, v3):** the
+  Critic-verified candidate **{1, 9, 17, 25}** (lifts 26/32 rings ≥ 10⁻³·ring-1 at C-2, vs 3/32
+  single-drive) — the minimal-tap search starts there, then tries fewer taps and completed coverage
+  within K.
+- **The capacity finding + the registered effective-dimension report (P6-F1 max-effort pass; D3,
+  Lucas-delegated 2026-07-05 "go").** At the v1 §B remedy (single-drive B=e₁, μ_c=0.3κᵢ) the C-2
+  settled-state amplitude profile has an **effective participating dimension ≈ 3 of 32 rings**
+  (1 ring ≥ 0.1·|a₁|, 3 ≥ 10⁻³; ring-8 already 6×10⁻⁷) — i.e. the headline cell would run a ~3-mode
+  recurrence wearing a 32-ring label. Accordingly, two registrations: **(1) S0.4-0 measures the
+  participation profile** (per-ring settled |a_j|/maxⱼ + the count ≥ 10⁻³) under the *resolved*
+  input map B, and **every use of the "N=32" label in results and paper carries the measured
+  effective dimension**. **(2) Falsifier consequence:** the reservoir baseline (§F; PR-2 §5.3 —
+  readout-only on the same substrate) is the **in-data falsifier of debt #1**: if the
+  in-situ-trained recurrence fails to clear it at the headline cell, the "training the recurrence
+  matters" claim **fails in-data at that cell** and is reported as such (the quantitative
+  clear-margin freezes at PR-9 with the Gate-ii semantics, per the existing deferral).
 - **Systems cost is priced, not assumed (the §10 carry).** Multi-point drive ⇒ more E/O channels
   (DAC/modulator per tap) — the conversion overhead the S0.7 envelope is most fragile on. S0.4-0
   **reports the resolved tap count to the envelope (PR-10)**; the trainability fix is charged against
   the §10 advantage, not hidden.
 - **Honest fallback (c).** If **no bounded-tap B** (≤ a registered cap K_taps, candidate K=4) clears the
-  10⁻³ gate at C-2, the headline **down-scopes**: the C-2 claim becomes "the **controllable front of
-  the chain** is trained in situ," N=32 is reported as a **capacity-vs-controllability study**, and the
-  measured effective trainable depth is stated. Either way the deep-ring limit is on the record, not
-  hidden; the W1 claim attaches to the rings that are *actually* trained in situ.
+  10⁻³ gate at C-2, the headline **down-scopes**: the C-2 claim becomes "the **controllable subset**
+  (the tap neighborhoods) is trained in situ," N=32 is reported as a **capacity-vs-controllability
+  study**, and the measured effective trainable depth is stated. *(The registered seed previews this
+  path: {1,9,17,25} reaches 26/32 at K=4 — if that is the ceiling, an honest ~26/32 report is a
+  strong result; the gate is **not** softened to dodge the fallback.)* Either way the deep-ring limit
+  is on the record, not hidden; the W1 claim attaches to the rings that are *actually* trained in situ.
 - **Frozen-block ride-on:** a multi-point B re-derives the PR-4 §N E₀ injection convention (which froze
   single-port-ring-1 injection) — registered in the §G-addendum below, ratified by the v2 signature.
 
@@ -963,19 +990,26 @@ remains for Lucas but the signature itself.
   **during training, in saturating mode** is **κ_ext ∈ [r_min, 3]**. K4's [0.1, 3] is **retained as
   the passive/fixed-plane bound** — the plane the frozen B1/E₀ numbers live on (`test_c`/`test_e`
   already pin `gain_mode="fixed"`); no PR-4 number changes.
-- **r_min rule — v2, on-resonance on the *saturating* κ_net (P6-F2; the formula + margins are frozen
-  here, the *number* is measured at S0.4-0 + addended).** r_min ≡ the smallest r such that, at the
-  connected init (§B), **on-resonance (δ=0)**, BOTH:
-  **(a)** the **saturating** κ_net(r) ≥ m_κ·κᵢ — a positive net-loss floor, **m_κ = 0.05 (frozen)**; AND
-  **(b)** the M1 quasi-static margin §G(iii) holds, **evaluated on the intracavity energy computed
-  with the *saturating* κ_net** (NOT the §N E₀ formula, which uses the fixed-plane κ_net and never
-  diverges — P6-F2 (ii); evaluating clause (b) on the fixed plane would make it inert, the S31-F1
-  hollow-gate pattern). If M1 voids at r_M1 > r* (the bare saturating crossing r*≈0.134), **r_min is
-  governed by r_M1** — the more conservative of (r* + Δr, r_M1).
-  **plus** a frozen safety margin **Δr = 0.02** above the binding crossing. Candidate r_min ≈ 0.15.
-  The **numeric r_min** is a mechanical S0.4-0 sweep, reported as a one-line addendum **before any
-  bake-off run** and frozen there (the E₀ deferral pattern). **Clamp identical for all four; reservoir
-  baseline at κ_ext≡0.3 unaffected.**
+- **r_min rule — v3, clause (a) alone, on-resonance on the *saturating* κ_net (P6-F2 max-effort
+  pass; D4, Lucas-delegated 2026-07-05 "go". The formula + margins are frozen here, the *number* is
+  measured at S0.4-0 + addended).** r_min ≡ (the smallest r such that, at the connected init (§B),
+  **on-resonance (δ=0)**, the **saturating** κ_net(r) ≥ m_κ·κᵢ — a positive net-loss floor,
+  **m_κ = 0.05 (frozen)**) **plus** a frozen safety margin **Δr = 0.02**. **Candidate r_min ≈ 0.16**
+  (the κ_net = 0.05κᵢ crossing sits at r ≈ 0.14, above the bare lasing crossing r* ≈ 0.134 — this
+  rule is *more* conservative than r* + Δr). The **numeric r_min** is a mechanical S0.4-0 sweep,
+  reported as a one-line addendum **before any bake-off run** and frozen there (the E₀ deferral
+  pattern). **Clamp identical for all four; reservoir baseline at κ_ext≡0.3 unaffected.**
+- **The v2 clause (b) — the M1-validity governor — is DROPPED in v3 (Critic max-effort pass:
+  REFUTED; Supervisor-verified textually).** Three independent reasons, each fatal: (i) frozen §G(iii)
+  registers only the θ₀ *value* (E_sym/E_sat ≈ 5×10⁻⁶–9×10⁻⁵) — **no void ceiling was ever frozen**,
+  so the clause had no registered threshold to test against; (ii) even evaluated on the saturating
+  κ_net, it can **never bind before clause (a)**: at the clause-(a) floor the circulating energy is
+  ×37–×91 vs θ₀ ⇒ E_sym/E_sat ≈ 3×10⁻³–10⁻² ≪ O(1); (iii) hence "r_min governed by r_M1 > r*"
+  cannot occur in-band. **Lucas's required check — "r* verified inside M1's validity"
+  (D-2026-06-13-1) — is registered here as PERFORMED and PASSED across the entire clamped box**
+  (E_sym/E_sat ~10⁻² at r*, ≲10⁻² at the clause-(a) floor, ≥2 orders inside the O(1) void; the exact
+  floor factor lands with the S0.4-0 r_min addendum). The requirement is honored as a **recorded
+  verification result**, not a live governor that the ledger cannot evaluate.
 - **Off-resonance is an unmodeled hazard, logged as anchor-risk (P6-F2 (i); the "δ-aware" label is
   dropped).** As-built the gain uses an **on-resonance** build-up, so κ_net is δ-independent — the
   substrate cannot evaluate a δ-aware r_min. Physically, a **detuned** ring has lower build-up ⇒ less

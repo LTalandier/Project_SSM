@@ -18,7 +18,7 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-07-05-1 — **Sign the S0.4 freeze packet** (PR-6/PR-7/PR-5/PR-12) — now gated on D3/D4 → v3
+### E-2026-07-05-1 — **Sign the S0.4 freeze packet v3** (PR-6/PR-7/PR-5/PR-12) — D3/D4 ✅ delegated ("go"), v3 WRITTEN; remaining: focused Critic re-confirm → your signature
 
 > **UPDATE 2026-07-05 (later the same day) — the Critic's max-effort pass landed
 > (`critic_review_s0_4_freeze.md` updated in place): verdict AMEND stands; do NOT sign v2.
@@ -46,8 +46,15 @@ Escalate (don't decide autonomously):
 >   your required M1-validity check as **performed and PASSED across the whole clamped box** (the
 >   check is satisfied; its contingency arm is dead code citing an unregistered ceiling). Anchor-risk
 >   (vii) + the S0.4-0 §G-conformance check stay unchanged from v2.
-> **Ask:** rule D3/D4 (or delegate) → Supervisor writes **v3** → single focused Critic re-confirm →
-> sign v3. *Original v2-signature item below (superseded in sequence, retained for record).*
+> **✅ D3/D4 RESOLVED 2026-07-05 by delegation (Lucas: "go").** The Supervisor wrote **v3** the same
+> day, per the recommendations above verbatim: §C clause-(a)-only r_min (candidate ≈ 0.16; clause (b)
+> dropped with the three-part refutation recorded; the M1-validity check registered PERFORMED +
+> PASSED) · §B effective-dimension report + falsifier consequence (margin → PR-9) + {1,9,17,25}
+> search seed + "controllable subset" wording. PR-7/PR-5/PR-12 untouched. **Remaining sequence:**
+> (1) launch the **focused v3 re-confirm** — the v3 addendum at the end of
+> `critic_instructions_s0_4_freeze.md` supersedes the v2 one; (2) on its APPROVE, **sign v3**
+> (also ratifies the §G-addendum). *Original v2-signature item below (superseded in sequence,
+> retained for record).*
 
 **Filed:** 2026-07-05 (Supervisor — housekeeping: this pending action was previously tracked only in
 the `task_queue.md` banner; it belongs here). **Sequence:**

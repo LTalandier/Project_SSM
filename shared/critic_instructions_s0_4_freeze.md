@@ -181,6 +181,39 @@ Check specifically:
 
 If v2 clears 1–3 (the HIGH fixes) and the folds are clean, say so — Lucas signs on your APPROVE.
 
+## ADDENDUM — v3 RE-CONFIRM (2026-07-05; supersedes the v2 addendum above — run THIS one)
+
+Your **max-effort pass** (AMEND, sharpened: P6-F1 → the ≈3-of-32 capacity finding; P6-F2 → clause (b)
+REFUTED) is filed and folded. Lucas **delegated** D3/D4 to the Supervisor ("go", E-2026-07-05-1).
+Packet **v3** is in `preregistration.md` (PR-6 header + status mark v3; PR-7/PR-5/PR-12 are unchanged
+from the v2 you already assessed as sound). **This re-confirm is focused — do not re-litigate the
+CONFIRMED spine or the v2 items you already credited; check that v3 discharges the two sharpened
+findings.** Append a short verdict (APPROVE / APPROVE-WITH-EDITS / AMEND) + any residual P6-F# to the
+*same* review file.
+
+Check specifically:
+1. **P6-F1 (capacity) → §B v3.** New registrations: (i) S0.4-0 measures the **participation profile**
+   under the resolved B, and every "N=32" use carries the measured effective dimension; (ii) the
+   reservoir baseline is registered as the **in-data falsifier of debt #1** (quantitative clear-margin
+   → PR-9, the existing deferral); (iii) your verified **{1,9,17,25}** is the registered S0.4-0
+   search seed; (iv) fallback (c) reworded to "controllable subset," with the explicit note that the
+   gate is not softened to dodge the fallback (26/32 at K=4 previews that path). Does this discharge
+   the capacity finding — is the honest-reporting machinery complete, or is a structural caveat still
+   missing? Is registering *your* measured numbers (≈3/32, 26/32) as seed/preview legitimate, or does
+   it pre-bias the S0.4-0 measurement?
+2. **P6-F2 (clause (b) refuted) → §C v3.** Clause (b) is **dropped as a live governor** with the
+   three-part refutation recorded in-block (no §G(iii) void ceiling; never binds before clause (a);
+   r_M1 > r* impossible in-band). r_min = clause (a) + Δr (m_κ=0.05, Δr=0.02 unchanged; candidate
+   ≈0.16 — note it is *more* conservative than r*+Δr). Lucas's required check is registered as
+   **PERFORMED + PASSED** across the clamped box. Anchor-risk (vii) + the S0.4-0 §G-conformance check
+   are unchanged from v2. Is the refuted machinery fully gone (no decorative residue)? Is the
+   PASSED-check record an honest discharge of Lucas's D-2026-06-13-1 requirement, or does dropping
+   the governor need his explicit ratification beyond the delegated "go"?
+3. **Scope check.** Confirm v2→v3 changed nothing else (PR-7/PR-5/PR-12 untouched; §G-addendum
+   unchanged; the §B rule/cap/gate and §C m_κ/Δr numbers identical to v2).
+
+If v3 clears 1–3, say so — **Lucas signs on your APPROVE.**
+
 Launch the Critic (separate terminal):
 ```
 cd ~/Documents/Project_SSM

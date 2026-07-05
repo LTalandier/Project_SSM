@@ -8,7 +8,7 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸ NO ACTIVE TASK (2026-07-05) — Critic max-effort pass: AMEND stands (sharpened) → D3/D4 with Lucas → Supervisor writes v3 → focused re-confirm → signature; S0.4-0 still queued
+## ⏸ NO ACTIVE TASK (2026-07-05) — S0.4 packet **v3 WRITTEN** (D3/D4 delegated "go") → focused Critic re-confirm → Lucas signs → S0.4-0 goes ACTIVE
 
 > **Update 2026-07-05:** the max-effort Critic pass (`critic_review_s0_4_freeze.md`, updated in place)
 > kept AMEND and sharpened both HIGHs: **P6-F1 → capacity finding** (C-2 effective participating
@@ -16,8 +16,11 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 > 26/32 ≥1e-3 — strict every-ring gate at K=4 likely → fallback (c)); **P6-F2 → clause (b) REFUTED**
 > (never binds before clause (a); §G(iii) froze no void ceiling — Supervisor verified textually) →
 > v3 will drop it to clause-(a)-only (r_min cand. ≈0.16) with the M1-validity check recorded as
-> PASSED. Decisions D3/D4 + Supervisor recommendations: **E-2026-07-05-1 (updated)**. The S0.4-0 list
-> below gains (post-ruling, v3): the effective-dimension measurement + the {1,9,17,25} search seed.
+> PASSED. Decisions D3/D4 + Supervisor recommendations: **E-2026-07-05-1 (updated)**.
+> **Lucas delegated ("go") → v3 written + committed the same day:** §C clause-(a)-only (candidate
+> r_min ≈ 0.16; M1 check PASSED-recorded), §B effective-dimension report + falsifier consequence +
+> {1,9,17,25} seed + "controllable subset." The **v3 re-confirm addendum** is staged at the end of
+> `critic_instructions_s0_4_freeze.md` (supersedes the v2 addendum). S0.4-0 items 1–2 updated to v3.
 
 **State:** S0.3-1b ACCEPTED + committed (2d0673b). Lucas ruled the three S0.4-gating questions
 (saturating-all · clamp A · R-ii) **and delegated the Critic-AMEND's two HIGH calls** ("OK I trust
@@ -26,16 +29,20 @@ you", E-2026-06-17-1). The Supervisor wrote **packet v2** (PR-6/PR-7/PR-5/PR-12 
 re-confirm of v2** (`shared/critic_instructions_s0_4_freeze.md` + the v2 addendum at its end) →
 **Lucas signs** → then **S0.4-0** goes ACTIVE.
 
-**QUEUED (gated on PR-6 v2 signature — DO NOT START) — S0.4-0: calibration + PR-5 recon.** Local, $0.
-1. **Input-map controllability measurement (PR-6 §B, D1 — the new load-bearing one):** find the
-   **minimal input-tap set** (≤ K=4 taps) s.t. at C-2/N=32, connected init μ_c=0.3κᵢ, on-resonance,
-   **every** ring's task gradient ≥ **10⁻³·ring-1** (the meaningful-ratio gate). **Report the tap count
-   to the S0.7 envelope** (E/O-channel cost). **If no ≤K-tap B clears it → fallback (c):** report the
-   measured effective trainable depth, down-scope the C-2 claim to "front-of-chain in situ."
-2. **r_min measurement (PR-6 §C v2, on-resonance):** smallest r s.t. on-resonance the **saturating**
-   κ_net ≥ 0.05κᵢ AND M1 §G(iii) margin holds (evaluate clause (b) on the **saturating** κ_net, NOT
-   the §N fixed-plane E₀); r_min = max(r*+0.02, r_M1); addend (candidate ≈0.15). **κ_ext-axis
-   init-consistency:** κ_ext-init(0.3) + the PR-12 damping range inside [r_min,3].
+**QUEUED (gated on PR-6 v3 signature — DO NOT START) — S0.4-0: calibration + PR-5 recon.** Local, $0.
+1. **Input-map controllability measurement (PR-6 §B v3, D1/D3):** find the **minimal input-tap set**
+   (≤ K=4 taps) s.t. at C-2/N=32, connected init μ_c=0.3κᵢ, on-resonance, **every** ring's task
+   gradient ≥ **10⁻³·ring-1** (the meaningful-ratio gate). **Start at the registered seed
+   {1,9,17,25}** (Critic-verified 26/32); try fewer taps, then completed coverage within K. **Measure
+   + register the participation profile** (per-ring settled |a_j|/max + count ≥10⁻³) under the
+   resolved B — every "N=32" use carries this effective dimension (v3). **Report the tap count to the
+   S0.7 envelope** (E/O-channel cost). **If no ≤K-tap B clears it → fallback (c):** report the
+   measured effective trainable depth, down-scope the C-2 claim to "controllable subset in situ."
+2. **r_min measurement (PR-6 §C v3, clause (a) alone, on-resonance):** smallest r s.t. on-resonance
+   the **saturating** κ_net ≥ 0.05κᵢ, then r_min = that + Δr=0.02; addend (candidate ≈0.16). Clause
+   (b) is DROPPED (v3) — do NOT evaluate an M1-validity governor; DO report E_sym/E_sat at r* and at
+   the clause-(a) floor (pins the ×37-vs-×91 build-up factor; goes into the PASSED-check record).
+   **κ_ext-axis init-consistency:** κ_ext-init(0.3) + the PR-12 damping range inside [r_min,3].
 3. **§G-conformance check (PR-6 §C/§G, D2):** determine whether δ-dependent build-up (PR-4 §G's
    P_circ=Σ|aⱼ|²) is a **conformance fix** (no freeze change) or a model addition; if conformance-cheap,
    fold in → r_min becomes δ-aware; else log anchor-risk (vii). Sweep δ over [−κᵢ,+κᵢ] to characterize
