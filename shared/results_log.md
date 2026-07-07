@@ -15,6 +15,30 @@ Per result, report:
 
 ---
 
+## S0.4b — recurrent in-situ adjoint built; pre-registered gates **B1–B5 ALL PASS (B3 3/3 seeds)**; adjoint ≈ BPTT-grade at SPSA's device cost; gain-channel cosine 0.994 (C-1) → 0.925 (C-2) — suite 144/144 (2026-07-07, single-session mode)
+
+**Goal:** build the third estimator per the spec pre-registered at `c85fe62` (*before* the build):
+adjoint = 1 physical forward + 1 physical adjoint pass, fresh ASE in **both** (roadmap S0.4b
+verbatim; PR-7 row 3 = 2 device passes/update, digital 0). Sim model: pass 2 = autodiff through a
+fresh-ASE replay of the device itself with gain **frozen at its operating-point value**
+(`detach_gain` substrate flag, forward-value bit-identical — gate B5); registered limitations
+disclosed (adjoint arm = **optimistic bound**: no additive-λ noise channel, non-reciprocity →
+F8 ledger; debt-#4 realizability caveat rides PR-7). **Config:** C-1/N=8 smoke (300 updates ×
+3 seeds) + B2 gradient probes (C-1 + C-2) + C-2 spot; conventions identical to S0.4a. ~1 min CPU,
+$0. **Key findings:** (1) B1 ✅ fixed-gain/noiseless adjoint ≡ BPTT to machine precision
+(test-enforced floor check per the roadmap S0.4 gate); (2) B2 ✅ saturating-noiseless cosine
+0.9940 (C-1) / 0.9247 (C-2) — both meet the registered ≥0.9 expectation, **but the dropped
+∂g/∂κ_ext channel grows with the cell** (~8 % of gradient direction at C-2): M-struct/adjoint
+mismatch sensitivity at the headline cell must be measured at S0.5, not extrapolated from C-1;
+(3) B3 ✅ 3/3 seeds, 85.5–86.8 % MSE cut → loss 0.647–0.715 / SER 0.216–0.240 — **BPTT-grade
+(Δ≈1 %) at 4800 device passes (= SPSA's cost, 2× PAT's)** — the S0.5 three-way tension is now
+concrete; (4) B4 ✅ ledger exact 2×batch/0; (5) C-2 spot +4.7 % — the S0.4a sizing flag extends
+to adjoint. **New code:** `estimators/adjoint.py`, `detach_gain` flag in
+`substrate/dissipative_ring.py`, harness method, `tests/test_s0_4b.py` (6 gate tests).
+**Data:** `results/s0_4b/smoke.{json,md}`.
+
+---
+
 ## S0.4a phase 1 — PAT + SPSA built; pre-registered smoke **S1/S2/S3 ALL PASS (3/3 seeds)**; in-situ > head-only already visible; PAT-both ≈ BPTT at frozen mismatch — suite 138/138 (2026-07-07, single-session mode)
 
 **Goal:** build PAT (+PR-5 twin families, levels frozen in the spec at `0b8c817` *before* the runs)

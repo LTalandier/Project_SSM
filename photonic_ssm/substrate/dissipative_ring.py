@@ -106,6 +106,11 @@ class DissipativeRingSubstrate(nn.Module):
         self.ase_convention = ase_convention
         self.loss_scale = float(loss_scale)
         self.ase_variance_scale = float(ase_variance_scale)
+        # S0.4b: freeze g(P̄) at its operating-point value in the autograd
+        # graph (adjoint pass: the counter-propagating field sees the medium's
+        # saturation state but cannot realize the ∂g/∂κ_ext Jacobian channel).
+        # Forward VALUES are bit-identical either way (gate B5).
+        self.detach_gain = False
 
         plat = cellmod.platform_of(cell)
         self.FSR_Hz = plat.FSR_GHz * 1e9
@@ -181,7 +186,8 @@ class DissipativeRingSubstrate(nn.Module):
                               dtype=self._rdtype)
         # saturating: g(P̄) per ring from each ring's κ_ext (drive on head;
         # build-up is the per-ring on-resonance estimate).
-        return self.gain_model.rate_saturating(self.kappa_ext).to(self._rdtype)
+        g = self.gain_model.rate_saturating(self.kappa_ext).to(self._rdtype)
+        return g.detach() if self.detach_gain else g
 
     def kappa_net(self) -> torch.Tensor:
         """Net amplitude decay κ_net,j = loss_scale·κᵢ − g_j + 2κ_ext,j

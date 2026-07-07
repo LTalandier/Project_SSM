@@ -33,6 +33,7 @@ from ..substrate import cells as cellmod
 from ..substrate import normalization as O2
 from ..substrate.dissipative_ring import DissipativeRingSubstrate
 from ..tasks.equalization import make_ta_dataset, symbol_error_rate
+from .adjoint import AdjointEstimator
 from .pat import PATEstimator
 from .spsa import PerturbationAdaptor
 
@@ -135,8 +136,8 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           N: Optional[int] = None, lr_phys_frac: float = 1e-3,
           lr_head: float = 3e-2, spsa_c_frac: float = 0.01) -> RunLedger:
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
-    "pat-M-struct","pat-both","spsa","head-only"}. Smoke HPs from the S0.4a
-    spec; the equal-HP *search* is S0.5 (PR-8)."""
+    "pat-M-struct","pat-both","spsa","adjoint","head-only"}. Smoke HPs from
+    the S0.4a spec; the equal-HP *search* is S0.5 (PR-8)."""
     torch.manual_seed(run_seed)
     sub = make_substrate(cell_label, run_seed, N=N)
     ki = float(sub.kappa_i)
@@ -158,6 +159,9 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
     if method_base == "pat":
         family = method[len("pat-"):]
         est = PATEstimator(sub, family)
+        opt_phys = torch.optim.Adam(in_situ, lr=lr_phys_frac * ki)
+    elif method == "adjoint":
+        est = AdjointEstimator(sub)
         opt_phys = torch.optim.Adam(in_situ, lr=lr_phys_frac * ki)
     elif method == "bptt":
         opt_phys = torch.optim.Adam(in_situ, lr=lr_phys_frac * ki)
@@ -211,6 +215,21 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
                 in_situ + list(head.parameters()), 1.0)
             opt_phys.step()
             opt_head.step()
+        elif method == "adjoint":
+            def adj_loss(y_adj):
+                return mse_loss(head(y_adj / y_scale), target)
+            opt_head.zero_grad()
+            for p in in_situ:
+                p.grad = None
+            # Distinct ASE tags: 6 = pass 1 (fwd), 7 = pass 2 (adjoint) —
+            # fresh, never shared (PR-11 irreversibility invariant).
+            loss_val, _ = est.step(u, adj_loss,
+                                   gen_fwd=ase_gen(run_seed, it, 6),
+                                   gen_adj=ase_gen(run_seed, it, 7))
+            torch.nn.utils.clip_grad_norm_(
+                in_situ + list(head.parameters()), 1.0)
+            opt_phys.step()
+            opt_head.step()
         elif method == "spsa":
             state["it"] = it
             loss_val = adaptor.step(u, target)      # 2 physical evals only
@@ -232,14 +251,14 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
             opt_head.step()
             loss_val = float(loss.detach())
 
-        if method_base in ("bptt", "pat"):
+        if method_base in ("bptt", "pat", "adjoint"):
             sub.clamp_to_bounds()
         elif method == "spsa":
             sub.clamp_to_bounds()
         led["loss_trace"].append(loss_val)
 
     # Ledger totals (PR-7).
-    if method_base == "pat":
+    if method_base in ("pat", "adjoint"):
         led["device_passes"] = est.n_device_passes
         led["digital_passes"] = est.n_digital_passes
     elif method == "spsa":

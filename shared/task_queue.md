@@ -8,7 +8,9 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.4b: recurrent in-situ photonic adjoint (sim-only; 1 fwd + 1 adjoint device pass, fresh ASE in both)
+## ✅ DONE — S0.4b: recurrent in-situ adjoint built; gates B1–B5 ALL PASS (2026-07-07, same day) — see results_log + `results/s0_4b/smoke.md`; 144/144. Adjoint ≈ BPTT-grade at SPSA's device cost; C-2 gain-channel cosine 0.925 → S0.5 flag. Next: PR-11 draft → S0.4c (RHEL) → S0.5 freeze.
+
+*(Spec below retained as executed — pre-registered at `c85fe62` before the build/run.)*
 
 **Goal:** the third estimator — the recurrent in-situ adjoint (Hughes/Fan/Pai lineage,
 time-domain/cavity extension per roadmap S0.4b) — built on the shared substrate and the S0.4a
