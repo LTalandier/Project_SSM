@@ -15,6 +15,32 @@ Per result, report:
 
 ---
 
+## S0.4c — RHEL + honest echo sub-model built; **R1/R2/R4/R5 PASS · R1 cosine → 1.0000 in the non-dissipative limit · KEY FINDING: RHEL ≡ head-only at the registered cell even with an IDEALIZED echo (dissipative-echo bias binding, κ_net·T·dt ≈ 27; conjugation chain second-order)** — suite 150/150 (2026-07-07, single-session mode)
+
+**Goal:** the fourth estimator per the spec pre-registered at `5ca8d52` (PR-11 numeric freeze
+in-spec, before any run): RHEL as verified from arXiv:2506.05259 (state-snapshot conjugation;
+time-reversed phase-flipped replay; stored-forward-residual nudge ∓ε; symmetric finite
+difference of ∇θH_coh between the ±ε echoes; **4 device passes/update** per PR-7.1 dissipative-
+operational count) + the honest C_op (η_c = −22.4 dB frozen chain at θ₀; quantum + RIN floors
+measured at 2.5–2.9e-6 of state — negligible, as registered-to-measure). **Key findings:**
+(1) **R1 ✅ the floor check the roadmap demanded:** cosine(Δθ_RHEL, ∇θ ref) = −0.75 / +0.985 /
++0.9987 / **+1.0000** at κ_net·T·dt = 1.02/0.34/0.15/0.03 — exact recovery of the theorem's
+non-dissipative limit, monotone; (2) **RHEL-ideal ≡ RHEL-honest ≡ head-only plateau**
+(1.19–1.20 / SER 0.41 vs head-only 1.18–1.23 / 0.41; BPTT/PAT 0.67/0.23) → **in-situ
+contribution ≈ 0 at the registered cell; binding constraint = dissipative-echo bias** (echo
+memory dies in ~9 of 256 steps; at κ_net·T·dt ≈ 1 the direction is already ANTI-aligned) —
+the §5.2 "odds-improved, not feasibility-reopened" framing lands in-data; conjugation chain
+(−22.4 dB) second-order at this cell; (3) **the registered R3b→F22 template rule mislabels**
+(absolute-cut criterion says "A"; the readout-only differential says **B**) — both recorded,
+protocol note filed for the PR-9 freeze (the reservoir-baseline falsifier closes exactly this
+gap); (4) R2/R4/R5 ✅ (invariant-4 unit test; 4×batch ledger; independent streams + no
+loss-sign flip, test-enforced); C-2 spot +4.5 % (sizing flag extends). **New code:**
+`estimators/rhel.py` (C_op + H_coh + estimator), harness `rhel`/`rhel-ideal` arms,
+`tests/test_s0_4c.py` (6 gate tests). **Data:** `results/s0_4c/smoke.{json,md}` +
+`results/s0_4c/pr11_recon_calc.json`.
+
+---
+
 ## S0.4b — recurrent in-situ adjoint built; pre-registered gates **B1–B5 ALL PASS (B3 3/3 seeds)**; adjoint ≈ BPTT-grade at SPSA's device cost; gain-channel cosine 0.994 (C-1) → 0.925 (C-2) — suite 144/144 (2026-07-07, single-session mode)
 
 **Goal:** build the third estimator per the spec pre-registered at `c85fe62` (*before* the build):

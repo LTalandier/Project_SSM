@@ -8,7 +8,9 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.4c: RHEL + the concrete χ³-FWM echo sub-model (sim-only; PR-11 numeric freeze HERE, before any run)
+## ✅ DONE — S0.4c: RHEL + honest echo sub-model built; R1/R2/R4/R5 PASS (2026-07-07, same day) — see results_log + `results/s0_4c/smoke.md`; 150/150. **Key finding: RHEL ≡ head-only at the registered cell even with idealized echo (dissipative-echo bias binding); R3b template rule mislabels → PR-9 protocol note.** All four estimators now built. Next: S0.4-close (PR-3 ceiling + F8 ledger) → S0.5 freeze (PR-8/9) → the gated bake-off.
+
+*(Spec below retained as executed — pre-registered at `5ca8d52` before the build/run.)*
 
 **Goal:** the fourth estimator — RHEL per Pourcel & Ernoult arXiv:2506.05259 (semantics verified
 2026-07-07, PR-11 ⚠verify-1) — on the shared substrate with the **honest echo sub-model**
