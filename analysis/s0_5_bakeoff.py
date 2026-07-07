@@ -139,6 +139,35 @@ def stage_bakeoff():
     print("bakeoff runs complete")
 
 
+def _unit(tag):
+    with open(os.path.join(OUT, "runs", tag + ".json")) as fh:
+        return json.load(fh)
+
+
+def stage_merge_ceiling():
+    """Assemble ceiling.json from the parallel per-unit files (PR-3 §A)."""
+    out = {"U_max": _load("sizing.json")["U_max"]}
+    out["c2"] = [_unit(f"bptt_C-2_{s}") for s in SEEDS8]
+    out["ceiling_ser_c2"] = median([r["final_ser"] for r in out["c2"]])
+    out["c2_fixed"] = [_unit(f"bptt_C-2_{s}_fixed") for s in SEEDS3]
+    out["delta_m3"] = abs(out["ceiling_ser_c2"]
+                          - median([r["final_ser"] for r in out["c2_fixed"]]))
+    out["c1"] = [_unit(f"bptt_C-1_{s}") for s in SEEDS8]
+    out["ceiling_ser_c1"] = median([r["final_ser"] for r in out["c1"]])
+    out["ser_target_c2"] = 1.25 * out["ceiling_ser_c2"] + 0.005   # PR-3 §B
+    out["ser_target_c1"] = 1.25 * out["ceiling_ser_c1"] + 0.005
+    _dump(out, "ceiling.json")
+    print({k: out[k] for k in ("ceiling_ser_c2", "delta_m3",
+                               "ceiling_ser_c1", "ser_target_c2")})
+
+
+def stage_merge_bakeoff():
+    """Assemble bakeoff_runs.json from the parallel per-unit files."""
+    runs = {m: [_unit(f"{m}_C-2_{s}") for s in SEEDS8]
+            for m in RANKED + BASELINES}
+    _dump(runs, "bakeoff_runs.json")
+
+
 def _to_target(row, ser_target, B):
     for it, passes, ser in row["eval_trace"]:
         if ser <= ser_target and passes <= B:
@@ -214,4 +243,6 @@ def stage_stats():
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     {"sizing": stage_sizing, "ceiling": stage_ceiling,
+     "merge-ceiling": stage_merge_ceiling,
+     "merge-bakeoff": stage_merge_bakeoff,
      "bakeoff": stage_bakeoff, "stats": stage_stats}[sys.argv[1]]()
