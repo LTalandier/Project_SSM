@@ -166,13 +166,16 @@ def eval_ser(sub, head, y_scale, n_batches: int = 2) -> float:
 def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           N: Optional[int] = None, lr_phys_frac: float = 1e-3,
           lr_head: float = 3e-2, spsa_c_frac: float = 0.01,
-          eval_every: Optional[int] = None) -> RunLedger:
+          eval_every: Optional[int] = None,
+          gain_mode: Optional[str] = None) -> RunLedger:
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
     "pat-M-struct","pat-both","spsa","adjoint","rhel","rhel-ideal",
     "head-only"}. Smoke HPs from the S0.4a spec; the equal-HP *search* is
     S0.5 (PR-8)."""
     torch.manual_seed(run_seed)
     sub = make_substrate(cell_label, run_seed, N=N)
+    if gain_mode is not None:          # PR-3 §A fixed-gain sensitivity spot
+        sub.gain_mode = gain_mode
     ki = float(sub.kappa_i)
     head = TapHead()
     led = RunLedger()
