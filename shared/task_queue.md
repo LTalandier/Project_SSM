@@ -8,6 +8,50 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🔴 ACTIVE — S0.4a phase 1: PAT + SPSA estimator builds + pre-registered smoke (2026-07-07, single-session mode)
+
+**Goal:** working PAT + SPSA (+ the PR-3 BPTT reference) on the shared substrate under the signed
+PR-6 contract, with the PR-5 twin-mismatch machinery decomposed per family. Phase 1 = build +
+smoke; the gated 8-seed to-target bake-off is S0.5 (PR-8/9 freeze first).
+
+**PR-5 numeric levels — FROZEN HERE (from the recon menu, before any PAT run):**
+- **M-par (L2 headline):** multiplicative errors on the twin's fixed constants + actuation maps —
+  κᵢ +5 % · γ +5 % · κ_ext-actuation ×1.05 · μ-actuation ×0.95 · δ-offset +0.05κᵢ per ring (fixed
+  signs = worst-case-coherent systematic calibration error; per-seed random signs = S0.5
+  sensitivity row) · gain pair g-factor ×1.10, P_sat ×0.75 (the loose debt-#3 bracket).
+- **M-struct:** twin runs `gain_mode="fixed"` (drops ∂g/∂κ_ext — the S31-F1 channel), true params.
+- **Both:** M-par + M-struct. **Perfect twin:** exact copy (diagnostic only, per PR-5 v2).
+- **M-noise (always on):** twin is noiseless; the substrate runs registered ASE (NF-A 7.0).
+- Decomposed reporting {M-par / M-struct / both / perfect} per PR-5 v2 — never conflated.
+
+**Registered S0.4a run conventions (smoke-scale; PR-8 re-freezes statistics at S0.5):**
+- Model = frozen PR-2 architecture: **fixed** affine encoder (u ∈ [−6,6] → P ∈ [0, P_pk],
+  T-A P_pk = 2P̄₀, E₀ scale = 1 at θ₀ per §N) → substrate (resolved B = taps {3,12,21,30},
+  connected init μ_c = 0.3κᵢ, δ-init [−κᵢ,κᵢ], r₀ = 0.3) → R2 intensity (c_readout fixed uniform
+  in phase 1) → digital linear head over {y(n−m), m=0..7}, trained by Adam on the *measured* y
+  (identical cadence/budget for every method — one head step per update). **Registered
+  simplifications (identical for all methods, strictly less digital freedom — conservative):**
+  fixed encoder + fixed c_readout; revisit at S0.5 only by re-registration.
+- Sequences: T=256 symbols @ 2 GS/s, batch 8 (= 8 device passes per forward eval, PR-7 §C),
+  headline 28 dB, warmup 16 skipped in loss + SER. In-situ partition {δ, κ_ext, μ} per P2;
+  clamp = the operative band [0.1606, 3] (S0.4-0).
+- Cost ledger (PR-7): SPSA 2×batch device passes/update; PAT 1×batch; BPTT reference = 0 device
+  (digital ledger only, reserved as the PR-3 ceiling).
+
+**Pre-registered smoke gates (phase-1 pass/fail, BEFORE the runs):**
+- **S1 (PAT correctness):** perfect-twin PAT gradient ≡ BPTT-through-twin gradient — cosine
+  ≥ 1 − 10⁻⁹ on a noiseless probe (they are the same computation by construction).
+- **S2 (trainability):** each of {BPTT, PAT×{perfect, M-par, M-struct, both}, SPSA} reduces T-A
+  MSE by ≥20 % of its initial value within ≤300 updates at C-1/N=8, 28 dB, ≥2 of 3 seeds.
+  (Modest by design — this is "the estimators train at all", NOT Gate ii.)
+- **S3 (ledger):** device/digital pass counts match the PR-7 table exactly.
+- C-2/N=32 spot run (1 seed, BPTT + PAT-both + SPSA) reported, ungated (context for S0.5 sizing).
+
+**Deliverables:** `photonic_ssm/estimators/{pat.py,harness.py}` + `tests/test_s0_4a.py` +
+`analysis/s0_4a_smoke.py` + `results/s0_4a/smoke.{json,md}` + results_log entry.
+
+---
+
 ## ✅ DONE — S0.4-0: calibration + PR-5 recon (2026-07-07, single-session mode) — **resolved B {3,12,21,30} (gate PASSES, no fallback) · r_min 0.1606 frozen · addendum in ledger · 132/132**
 
 > **Completed same day it went ACTIVE.** All 5 items discharged; see the S0.4-0 entry in

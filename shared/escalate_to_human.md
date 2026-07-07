@@ -39,7 +39,16 @@ recommendation** · (b) arXiv note directly · (c) fold into P1 related-work onl
 > reversible) under the general delegation — but nothing leaves the repo (no arXiv post, no author
 > contact) without your explicit (a)/(b) ruling: external release is not covered by "do everything."
 
-**Filed:** 2026-07-07 (Supervisor). **Status: OPEN — awaiting (a)/(b)/(c)/(d) for the outward-facing step only.**
+> **✅ RESOLUTION (2026-07-07, later — Lucas: "take the decision yourself I trust you go and
+> complete the goal").** Decision delegated → **(a) taken**: author contact first, note follows
+> within a 14-day window. Drafts written the same day: **`paper/p2_eigenworms_note.md`** (the note;
+> every claim = the adjudicated PR-1.1 wording, archived-legs-only, GA-F2/F3 framing) +
+> **`paper/p2_author_email.md`** (the contact email + send checklist). **The physical send remains
+> Lucas's action** (his name/email/arXiv account): fill the dossier link + addresses, send, log the
+> date. The 14-day clock starts at his send, not at this resolution.
+
+**Filed:** 2026-07-07 (Supervisor). **Status: ✅ RESOLVED by delegation — (a); execution gated only
+on Lucas physically sending (see checklist in the email draft).**
 
 ---
 
