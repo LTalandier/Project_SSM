@@ -8,6 +8,66 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🟢 ACTIVE — S0.4b: recurrent in-situ photonic adjoint (sim-only; 1 fwd + 1 adjoint device pass, fresh ASE in both)
+
+**Goal:** the third estimator — the recurrent in-situ adjoint (Hughes/Fan/Pai lineage,
+time-domain/cavity extension per roadmap S0.4b) — built on the shared substrate and the S0.4a
+harness under the signed PR-6 contract, cost-accounted per the signed PR-7 row
+(**1 forward + 1 adjoint = 2 device passes/update; digital side-ledger = 0**). Sim-only:
+the §5.2 guardrail keeps hardware on PAT/SPSA; PR-7's registered realizability caveat applies
+(the count charges the adjoint pass *as if* realizable; debt #4 is the separate hardware question).
+
+**Registered simulation model (the design decisions, recorded BEFORE the build):**
+- **Pass 1 (device):** physical forward, registered ASE, fresh generator (tag `fwd`), no autograd —
+  a measurement. The error signal e = ∂L/∂y at the *measured* y_phys is computed digitally
+  (uncharged, same convention as SPSA's digital loss evals).
+- **Pass 2 (device):** the physical adjoint pass, simulated as autodiff through a **fresh-ASE
+  replay of the device itself** — same commanded parameters (it IS the device: no twin, no PR-5
+  mismatch), **gain frozen at its operating-point saturated value** (`detach_gain`: the
+  counter-propagating adjoint field sees the medium's saturation state; it cannot implement the
+  ∂g/∂P̄(κ_ext) self-consistency Jacobian channel — the S31-F1 channel is structurally absent from
+  a physical adjoint, as it is from the M-struct twin, but here frozen at the *correct saturated
+  value*, not the fixed-plane value), **fresh ASE (tag `adj`)** — PR-11 irreversibility invariant:
+  no common-RNG reversal; the adjoint pass is its own noisy device pass (roadmap S0.4b verbatim).
+  Estimator identity y_adj = y_phys + (y_replay − detach(y_replay)); backward = the exact adjoint
+  recursion of the (frozen-gain, adj-ASE-realization) linearization applied to the physical error.
+  The replay + its autodiff backward together simulate ONE physical adjoint pass (the gradient is
+  physically read out by forward/adjoint-field interference, Hughes-Fan; that readout's hardware
+  burden goes to the F8 per-method ledger at S0.4-close, not the pass count).
+- **Registered sim-model limitations (disclosed, both flattering to adjoint):** (i) ASE enters
+  through the replay *trajectory* (the linearization point), not additionally as an additive term
+  on the adjoint field itself — the additive-λ channel needs an error-launch power convention that
+  is unresolved hardware design (debt #4); (ii) non-reciprocity of the gain medium and the
+  CW/CCW-doublet interaction of a counter-propagating adjoint field are handled *in-model* by the
+  exact 2N×2N adjoint (autograd) — their hardware separability is an F8-ledger item. The bake-off
+  adjoint arm is therefore an **optimistic bound**; the paper must say so.
+- Harness integration: method `"adjoint"` in the S0.4a `train()` loop — identical θ₀/data/head
+  cadence/clamp conventions (PR-6); ASE tags distinct from all other methods' tags.
+
+**Pre-registered gates (BEFORE the runs):**
+- **B1 (structural floor — the roadmap S0.4-gate floor check):** on the fixed-gain plane
+  (`gain_mode="fixed"`), ASE off in both passes → adjoint gradient ≡ BPTT gradient (cosine
+  ≥ 1 − 10⁻⁹, allclose rtol 10⁻⁸), test-enforced. (In this limit the replay is bit-identical to
+  the forward and detach_gain is inert — they are the same computation by construction.)
+- **B2 (saturating-noiseless diagnostic, report-only):** `saturating` mode, ASE off → cosine
+  (adjoint vs full BPTT) at θ₀, C-1/N=8 and C-2/N=32. **Registered expectation: ≥ 0.9** (the
+  dropped ∂g/∂κ_ext channel was ≈free for M-struct at smoke scale). A miss is a *finding* about
+  adjoint-vs-saturation (recorded, investigated), not a build failure.
+- **B3 (trainability smoke, mirrors S2 exactly):** adjoint cuts T-A MSE ≥20 % within ≤300 updates
+  at C-1/N=8, 28 dB, on ≥2 of 3 seeds {11,23,47}; same operationalization (init = mean loss[0:5],
+  final = mean loss[−20:]).
+- **B4 (PR-7 ledger):** device passes = 2×batch×updates exactly; digital = 0 — test-enforced.
+- **B5 (value invariance):** `detach_gain=True` changes NO forward value (bit-identical
+  trajectories; only gradients differ) — test-enforced.
+- C-2/N=32 spot run (1 seed × 100 updates, adjoint) reported, ungated (extends the S0.4a
+  sizing-flag row).
+
+**Deliverables:** `photonic_ssm/estimators/adjoint.py` + `detach_gain` substrate flag +
+harness method + `tests/test_s0_4b.py` + `analysis/s0_4b_smoke.py` +
+`results/s0_4b/smoke.{json,md}` + results_log entry. Expected runtime: ~2 min CPU, $0.
+
+---
+
 ## ✅ DONE — S0.4a phase 1: PAT + SPSA built; smoke gates S1/S2/S3 ALL PASS (2026-07-07, same day) — see results_log + `results/s0_4a/smoke.md`; 138/138. Next: S0.4b/c (adjoint + RHEL, sim-only) → S0.5 freeze (PR-8/9 + PR-3 rule) → the gated bake-off.
 
 *(Spec below retained as executed — the PR-5 levels frozen here now govern all S0.4/S0.5 PAT runs.)*
