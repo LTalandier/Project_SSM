@@ -8,6 +8,87 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🟢 ACTIVE — S0.4c: RHEL + the concrete χ³-FWM echo sub-model (sim-only; PR-11 numeric freeze HERE, before any run)
+
+**Goal:** the fourth estimator — RHEL per Pourcel & Ernoult arXiv:2506.05259 (semantics verified
+2026-07-07, PR-11 ⚠verify-1) — on the shared substrate with the **honest echo sub-model**
+(PR-11: no idealized conjugation operator). Sim-only; §5.2 guardrail; RHEL-on-SiN framed
+"odds-improved, not feasibility-reopened".
+
+**PR-11 numeric freeze (mechanism A headline — recon `docs/s0_4/pr11_echo_submodel_recon.md`):**
+- η_c,j = η_ex,j² · η_spiral · e^(−κ_net,j·τ_c) per ring j, computed **live** from the
+  commanded parameters: η_ex,j = 2κ_ext,j/κ_net,j (mode-dependent for free);
+  η_spiral = (γ_nl P_p L)² with **γ_nl = 0.97 W⁻¹m⁻¹** (n₂ = 2.4×10⁻¹⁹ m²/W, A_eff = 1 µm²;
+  class-consistent with the OL 40,875 (2015) CW low-loss-SiN conversion demo + γ = 1.19 W⁻¹m⁻¹
+  in Photonics 8,161), **P_p = 0.3 W/arm**, **L = 0.5 m**; **τ_c = τ_net** (per-cell mean).
+- φ_err = 0 headline; ±π/20 = an ungated sensitivity row (S0.5).
+- n_conj = √(1+η_c)·v with ⟨|v|²⟩ = 1 photon (conservative one-photon-per-mode convention;
+  the phase-insensitive parametric floor b = √η a* + √(1+η)v — expect **negligible** at the
+  ~1e8-photon state scale; measure + record the ratio). Pump-RIN excess: −145 dBc/Hz class
+  over the state band (⚠cite at S0.8) — expect negligible; measure + record.
+- **C_op fires once per echo pass** (independent draws) — twice per update.
+- **N-arm pump (N × 0.3 W) + the error-injection E/O channels → S0.7 envelope rows** (the
+  S0.4-0 multi-tap precedent).
+
+**RHEL estimator (registered semantics, from the verified paper):**
+- Forward (device, fresh ASE tag): drive u(0..T), measure y (head/loss/SER on this), store
+  a(T) conceptually — *operationally each echo needs its own forward* (below).
+- **C_op** on a(T) (frozen chain above), then **echo pass** (device, fresh ASE tag): the SAME
+  dissipative dynamics (no loss-sign flip) from the conjugated state, **drive replayed
+  time-reversed**, with the **continuous nudge force ∓iε·∂ℓ/∂a\*** injected per step
+  (ε_frac = 0.05 of the state-RMS scale, smoke value; equal-HP search at S0.5).
+- **Registered sim simplification (nudge):** ℓ(t) = the instantaneous per-step loss
+  (ŷ_k − d_k)² with the head's lag buffer treated as frozen context (m=0 term differentiated) —
+  the FIR head makes the true loss non-instantaneous; RHEL's theorem wants ℓ(Φ(t),t). The R1
+  floor check compares against BPTT **of this same truncated functional** (apples-to-apples);
+  the bake-off judges task loss/SER as for every method.
+- **Update rule:** Δθ ∝ −(1/2ε)·Σ_k dt·(∇_θH_coh[Φᵉ(t_k,+ε)] − ∇_θH_coh[Φᵉ(t_k,−ε)]), with
+  H_coh the **coherent generator only** (δ|a|² + μ couplings + the √(2κ_ext) drive coupling).
+  **Registered structural limitation:** κ_ext's *dissipative* channel (the 2κ_ext decay) is
+  invisible to ∇H_coh — RHEL trains κ_ext only through the drive-coupling term. A measured
+  bake-off property, not a bug.
+- **Pass accounting (PR-7.1 extension, registered in the ledger):** on a dissipative substrate
+  the paper's 3-pass chaining (Hamiltonian re-traversal) is unavailable and state cloning is
+  unphysical → **operational count = 2 forward + 2 echo = 4 device passes/update** (headline;
+  the split-state 3-pass variant — 3 dB + vacuum on both echoes — noted, not run). Digital = 0.
+
+**Pre-registered gates (BEFORE the runs):**
+- **R1 (floor check, operational form — refines PR-11 §D to the theorem's validity domain):**
+  RHEL's theorem is stated for **non-dissipative** systems, so the floor check runs a
+  **dissipation sequence**: C-1 variant, gain 0, loss_scale ∈ {1.0, 0.1, 0.01}, r = 0.1, short
+  T = 32, C_op ideal (η_c = 1, n_conj = 0, φ_err = 0), ASE off, ε_frac = 0.01. Gate:
+  |cosine(Δθ_RHEL, ∇θ_BPTT-of-truncated-loss)| ≥ 0.9 at the least-dissipative point AND
+  monotone improvement with decreasing dissipation. (Sign convention resolved empirically at
+  the first point and recorded.)
+- **R2 (PR-11 invariant-4 unit test):** the echo of a noisy forward does NOT recover the
+  noiseless initial state — recovery error ≥ the (1−fidelity)+ASE floor bound; test-enforced.
+- **R3a (mechanics trainability):** with C_op **idealized** (η_c=1, n_conj=0) at C-1/N=8,
+  28 dB: RHEL cuts T-A MSE ≥20 % within ≤300 updates on ≥2/3 seeds {11,23,47} (tests the
+  estimator mechanics, not the echo physics).
+- **R3b (honest-echo smoke, report-only):** same runs at the **frozen** penalty chain — the
+  outcome selects which F22 template the data currently favors (recorded; S0.5 owns the gated
+  verdict either way).
+- **R4 (PR-7.1 ledger):** 4×batch device passes/update exactly; digital 0 — test-enforced.
+- **R5 (invariants 1–3):** fresh independent ASE/conjugation streams per pass; echo κ_net > 0
+  (no loss-sign flip); gain ASE present in echo passes — test-enforced.
+
+**F22 conclusion templates (pre-drafted, per roadmap S0.4-close):**
+- **Template A (RHEL-competitive):** "Under the registered echo sub-model (η_c ≈ −18 dB chain,
+  PR-11), RHEL trains to within the PR-3 margin at ≤ [X]× the PAT/SPSA device-pass cost; its
+  4-pass updates and N-arm pump ([N×0.3] W) remain the hardware barrier (F8/envelope)."
+- **Template B (RHEL-fails-under-honest-echo):** "Under the registered echo sub-model, RHEL
+  [does not reach target / needs [X]× the passes] at the registered cell; the decomposition
+  attributes the gap to [η_c attenuation / conjugation noise / dissipative-echo bias /
+  κ_ext-channel invisibility]; the idealized-C_op control (R3a) confirms the mechanics train,
+  isolating the echo physics as the binding constraint. RHEL-on-SiN stays sim-only."
+
+**Deliverables:** `photonic_ssm/estimators/rhel.py` (C_op + H_coh + estimator) + harness
+methods (`rhel`, `rhel-ideal`) + `tests/test_s0_4c.py` + `analysis/s0_4c_smoke.py` +
+`results/s0_4c/smoke.{json,md}` + results_log entry + PR-7.1 extension in the ledger.
+Expected runtime: ~5 min CPU, $0.
+
+---
+
 ## ✅ DONE — S0.4b: recurrent in-situ adjoint built; gates B1–B5 ALL PASS (2026-07-07, same day) — see results_log + `results/s0_4b/smoke.md`; 144/144. Adjoint ≈ BPTT-grade at SPSA's device cost; C-2 gain-channel cosine 0.925 → S0.5 flag. Next: PR-11 draft → S0.4c (RHEL) → S0.5 freeze.
 
 *(Spec below retained as executed — pre-registered at `c85fe62` before the build/run.)*

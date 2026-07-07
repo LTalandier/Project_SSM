@@ -1225,6 +1225,15 @@ sensitivity at that cell. Registered as a pointer now; quantified at PR-9.
   one-sided alternative (forward + single nudged echo vs the unperturbed reference) would be a
   *modified* algorithm, not the published one — if S0.4c wants it as a cheaper RHEL variant it
   must be registered as a separate arm, not silently substituted.
+- **Extension (2026-07-07, same day — the S0.4c spec's operational analysis):** the paper's
+  3-pass count relies on **Hamiltonian re-traversal chaining** (the echo returns the system
+  near its pre-forward state, so the next pass can reuse it). On a **dissipative** substrate
+  that chaining is unavailable (the echoed state is attenuated ~η_c·e^(−2κ_net·T)) and *state
+  cloning is unphysical* — each nudged echo needs its own physical forward. **Operational
+  bake-off count: RHEL = 2 forward + 2 echo = 4 device passes/update** (at batch 8: 32
+  passes/step). The **split-state 3-pass variant** (beam-split a(T) into two conjugation arms;
+  −3 dB + vacuum on each echo) is registered as a *variant*, not run in the headline. Direction:
+  again against RHEL; again factual (dissipation is the substrate's defining property).
 
 ---
 
