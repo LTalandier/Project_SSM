@@ -1494,3 +1494,24 @@ perturbations at the clamp boundary per PR-6.
 - **M3 trigger (PR-7 §E quantified):** the gain-model-class flag fires if the
   leader↔runner-up gap in median passes-to-target < **Δ_M3** (the fixed-vs-saturating ceiling
   sensitivity measured per PR-3 §A, recorded in the S0.4-close addendum before the bake-off).
+
+---
+
+## 🔒 S0.4-CLOSE ADDENDUM — measured sizing + ceiling numbers (2026-07-07; consumed by PR-3/8/9)
+
+> Recorded per the S0.4-close spec sequence; each part committed BEFORE the runs it governs.
+
+### Part 1 — sizing (pilot seed 7, EXCLUDED from the 8; committed before any C-2 estimator run)
+- Pilot: BPTT @ C-2, 8000 updates, eval/100. Curve: SER 0.70 (head warm-up to ~700) → steady
+  descent → **0.0010–0.0013 floor from ~5700 updates** (= 4–5 symbol errors on the 3840-symbol
+  eval set — the quantization floor). The registered 1 %-relative plateau rule fires at
+  **U_conv = 7900** (it saturates at the eval-quantization floor — noted: conservative, longer).
+- **U_max = 12000 · B = 252,800 device passes.** Per-arm updates at batch 8 (PR-8 §C):
+  PAT-both 31,600 · SPSA 15,800 · adjoint 15,800 · RHEL 7,900 · head-only 31,600 ·
+  offline-deploy 31,600 (phase B; phase A digital U_off = 12,000).
+- Sizing observation (feeds the paper): the S0.4a "C-2 barely moves in 100 updates" flag is
+  confirmed ×50 — the headline cell needs ~5,000+ updates; smoke scale was ~2 % of convergence.
+- Raw: `results/s0_5/{pilot_seed7.json,sizing.json}`.
+
+### Part 2 — ceiling + Δ_M3 (appended after the ceiling stage, before the bake-off)
+*(pending — the ceiling stage writes here)*
