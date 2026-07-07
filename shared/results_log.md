@@ -15,6 +15,24 @@ Per result, report:
 
 ---
 
+## S0.4a phase 1 — PAT + SPSA built; pre-registered smoke **S1/S2/S3 ALL PASS (3/3 seeds)**; in-situ > head-only already visible; PAT-both ≈ BPTT at frozen mismatch — suite 138/138 (2026-07-07, single-session mode)
+
+**Goal:** build PAT (+PR-5 twin families, levels frozen in the spec at `0b8c817` *before* the runs)
++ wire SPSA + the BPTT reference into one fair harness (PR-6 conventions); pass the pre-registered
+build gates. **Config:** C-1/N=8 smoke (300 updates × 3 seeds × 7 arms) + C-2 spot; T=256, batch 8,
+28 dB; resolved B (proportional image at N=8); operative clamp live. ~3 min CPU, $0.
+**Key findings:** (1) S1 ✅ perfect-twin PAT ≡ BPTT gradient to machine precision; (2) S2 ✅ all
+gated methods cut MSE ≥20 % on 3/3 seeds — BPTT/PAT → loss ≈0.67 / SER ≈0.23, SPSA → ≈1.0 / 0.35,
+vs **head-only plateau ≈1.2 / 0.41** (early ungated signal in the debt-#1 direction); (3) **PAT
+under the full frozen mismatch ≈ BPTT to 3 digits** (M-par the binding family, ≈+6 %); (4) S3 ✅
+PR-7 ledgers exact (SPSA 2×batch, PAT 1×batch + digital side-ledger, BPTT 0 device); (5) **C-2
+spot: +4.7 % in 100 updates, methods indistinguishable** → S0.5 budget-sizing flag (headline cell
+needs ≫ smoke scale). **New code:** `estimators/{pat.py,harness.py}`, `tests/test_s0_4a.py` (6
+gate tests). **Deviations registered** (smoke-only; re-freeze at S0.5): fixed lr, no HP search,
+fixed c_readout/encoder. **Data:** `results/s0_4a/smoke.{json,md}`.
+
+---
+
 ## S0.4-0 — calibration + PR-5 recon: **resolved B = {3,12,21,30} (gate PASSES robustly, no fallback) · r_min = 0.1606 frozen · ×37-vs-×91 moot (measured ×0.42, doublet-quenched) · anchor-risk (vii) quantified (δ-aware floor would be 0.255) · multi-tap E₀ invariant** — suite 132/132 (2026-07-07, single-session mode)
 
 **Goal:** discharge the five registered S0.4-0 deferrals (PR-6 v3 §B/§C/§G-addendum + PR-5 recon)

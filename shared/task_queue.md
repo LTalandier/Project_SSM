@@ -8,7 +8,9 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🔴 ACTIVE — S0.4a phase 1: PAT + SPSA estimator builds + pre-registered smoke (2026-07-07, single-session mode)
+## ✅ DONE — S0.4a phase 1: PAT + SPSA built; smoke gates S1/S2/S3 ALL PASS (2026-07-07, same day) — see results_log + `results/s0_4a/smoke.md`; 138/138. Next: S0.4b/c (adjoint + RHEL, sim-only) → S0.5 freeze (PR-8/9 + PR-3 rule) → the gated bake-off.
+
+*(Spec below retained as executed — the PR-5 levels frozen here now govern all S0.4/S0.5 PAT runs.)*
 
 **Goal:** working PAT + SPSA (+ the PR-3 BPTT reference) on the shared substrate under the signed
 PR-6 contract, with the PR-5 twin-mismatch machinery decomposed per family. Phase 1 = build +
