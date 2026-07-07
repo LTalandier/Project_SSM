@@ -8,7 +8,9 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.4-close + S0.5-core: PR-3/8/9 frozen → sizing pilot → measured ceiling (+Δ_M3) → F8 ledger → the gated 8-seed bake-off (Lucas 2026-07-07: "ok then do now")
+## ✅ DONE — S0.4-close + S0.5-core: **Gate ii PASS (both ii-a ×21.5 & ii-b via PAT-both AND SPSA 8/8)** — the headline Stage-0 trainability result is in-data (2026-07-07, same day). Rank PAT<adjoint<SPSA, RHEL censored (template B); no promotion → PAT/SPSA hardware roadmap; **offline-deploy ties in-situ PAT at 5% mismatch (advantage-vs-offline NOT in-data — F7.3 working as designed).** See results_log + `results/s0_5/bakeoff.md`. Next: S0.6 damping → S0.7-full envelope → S0.8 paper (§3 substrate + §4 results now writable).
+
+*(Spec below retained as executed — PR-3/8/9 frozen `ae16f6d`, sizing `7bcbcb9`, ceiling `4fca58d`, all before the runs.)*
 
 **Governing freezes (committed with this spec, BEFORE the pilot):** PR-3 rule 🔒 · PR-8 🔒 ·
 PR-9 🔒 (ledger blocks). Sequence + deliverables:

@@ -15,6 +15,33 @@ Per result, report:
 
 ---
 
+## S0.5-core — the gated 8-seed bake-off: **Gate ii-a PASS ×21.5 · Gate ii-b PASS (PAT-both AND SPSA both 8/8 to target)** · rank PAT<adjoint<SPSA, RHEL censored (template B) · **offline-deploy TIES in-situ PAT at 5% mismatch → advantage-vs-offline NOT yet in-data** (2026-07-07, single-session mode)
+
+**Goal:** the headline Stage-0 result — run the four estimators + baselines on the shared C-2
+substrate under the frozen PR-3/8/9 blocks (rule `ae16f6d`, sizing `7bcbcb9`, ceiling `4fca58d`,
+all committed BEFORE the runs). **Config:** C-2/N=32, T-A 4-PAM @28 dB, **B = 252,800 device
+passes**, target SER ≤ **0.00565** (1.25×ceiling 0.00052 + 0.005), 8 seeds. Mixed-platform
+(local x86 + Hetzner cpx51; same code/seeds/float64 — disclosed). ~4 h wall, ~€2 cloud.
+**Key findings:** (1) **Gate ii-a PASS ×21.5** (ceiling 0.00052 ≤ 0.5×reservoir 0.0224);
+(2) **Gate ii-b PASS — BOTH PAT-both and SPSA reach target on 8/8 seeds** → the Stage-0
+trainability claim is in-data (recurrence params train to within margin of the exact-gradient
+ceiling by both hardware-committed methods); (3) **rank (median device-passes to target):
+PAT-both 38,400 < adjoint 73,600 < SPSA 176,000; RHEL 0/8 censored** (paired bootstrap CIs all
+exclude 0 for the ordered pairs); (4) **NO promotion** — adjoint beats SPSA (−58% passes) but
+loses to PAT (+92%); RHEL censored → hardware roadmap stays PAT/SPSA (§5.2 guardrail outcome);
+(5) **RHEL template B sharpened:** final SER 0.1409 **worse than readout-only** (+0.118
+differential) — dissipative-echo bias makes the honest echo actively harmful at this cell;
+(6) **the honest headline for §10/S0.7: offline-train-deploy (same 5% M-par mismatch, F7.3
+unification) reaches 0.0010 ≈ in-situ PAT 0.0008** — statistically tied → **the
+advantage-over-offline claim is NOT in-data at 5% mismatch**; the demonstration (first
+in-situ-trained recurrent photonic system) stands, but the paper must rest any advantage claim
+on larger/unknown mismatch (PR-5 sensitivity, S0.5-full), drift (unmodeled here), or the
+envelope. **Data:** `results/s0_5/{bakeoff.md,bakeoff.json,ceiling.json,sizing.json,runs/}`;
+F8 ledger `docs/s0_4/f8_hardware_ledger.md`. C-1 diagnostic tier (PAT mismatch decomposition +
+rhel-ideal, 3 seeds) running.
+
+---
+
 ## S0.4c — RHEL + honest echo sub-model built; **R1/R2/R4/R5 PASS · R1 cosine → 1.0000 in the non-dissipative limit · KEY FINDING: RHEL ≡ head-only at the registered cell even with an IDEALIZED echo (dissipative-echo bias binding, κ_net·T·dt ≈ 27; conjugation chain second-order)** — suite 150/150 (2026-07-07, single-session mode)
 
 **Goal:** the fourth estimator per the spec pre-registered at `5ca8d52` (PR-11 numeric freeze
