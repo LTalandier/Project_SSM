@@ -34,7 +34,7 @@ from ..substrate import normalization as O2
 from ..substrate.dissipative_ring import DissipativeRingSubstrate
 from ..tasks.equalization import make_ta_dataset, symbol_error_rate
 from .adjoint import AdjointEstimator
-from .pat import PATEstimator
+from .pat import MPAR_LEVELS, PATEstimator
 from .rhel import RHELEstimator
 from .spsa import PerturbationAdaptor
 
@@ -126,16 +126,47 @@ def ase_gen(run_seed: int, it: int, tag: int) -> torch.Generator:
 
 
 class RunLedger(dict):
-    """PR-7 ledgers + loss trace."""
+    """PR-7 ledgers + loss trace (+ optional eval trace)."""
 
     def __init__(self):
         super().__init__(device_passes=0, digital_passes=0, loss_trace=[],
-                         ser_final=None)
+                         ser_final=None, eval_trace=[])
+
+
+EVAL_SEED_BASE = 900_001     # reserved held-out eval streams (never trained)
+
+
+def eval_ser(sub, head, y_scale, n_batches: int = 2) -> float:
+    """Held-out eval-SER on the FIXED reserved streams (identical for every
+    method and seed — PR-8 eval protocol). Eval device passes are excluded
+    from the budget B and reported nowhere near the rank (diagnostic
+    measurement, uniform across methods)."""
+    total = 0.0
+    n = 0
+    with torch.no_grad():
+        for j in range(n_batches):
+            us, ts = [], []
+            for b in range(BATCH):
+                u, tgt, _ = make_ta_dataset(
+                    T_SYMBOLS, SNR_DB, seed=EVAL_SEED_BASE + j * 101 + b)
+                us.append(u)
+                ts.append(tgt)
+            u_raw, target = torch.stack(us), torch.stack(ts)
+            y = sub.forward_intensity(
+                encode_drive(u_raw).unsqueeze(-1),
+                generator=torch.Generator().manual_seed(
+                    EVAL_SEED_BASE + 7 * j))
+            pred = head(y / y_scale)
+            for b in range(BATCH):
+                total += symbol_error_rate(pred[b], target[b], warmup=WARMUP)
+                n += 1
+    return total / n
 
 
 def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           N: Optional[int] = None, lr_phys_frac: float = 1e-3,
-          lr_head: float = 3e-2, spsa_c_frac: float = 0.01) -> RunLedger:
+          lr_head: float = 3e-2, spsa_c_frac: float = 0.01,
+          eval_every: Optional[int] = None) -> RunLedger:
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
     "pat-M-struct","pat-both","spsa","adjoint","rhel","rhel-ideal",
     "head-only"}. Smoke HPs from the S0.4a spec; the equal-HP *search* is
@@ -168,6 +199,60 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
     elif method in ("rhel", "rhel-ideal"):
         est = RHELEstimator(sub, ideal_echo=(method == "rhel-ideal"))
         opt_phys = torch.optim.Adam(in_situ, lr=lr_phys_frac * ki)
+    elif method == "offline-deploy":
+        # The §10 baseline (PR-5 F7.3 calibration-error unification): phase A
+        # trains {δ, κ_ext, μ} + head fully DIGITALLY on the offline
+        # designer's model, which is wrong by the SAME frozen M-par family
+        # as PAT's twin; the trained values are then deployed through
+        # actuation maps carrying the same family errors; phase B (the
+        # budgeted loop below) is on-device HEAD recalibration only.
+        off = DissipativeRingSubstrate.from_cell(
+            cell_label, N=sub.N, clock_GSps=2.0, seed=run_seed,
+            input_taps=taps_for_N(sub.N),
+            loss_scale=1.0 + MPAR_LEVELS["kappa_i_rel"],
+            gain_factor=sub.gain_factor
+            * (1.0 + MPAR_LEVELS["gain_factor_rel"]),
+            ase_variance_scale=0.0)
+        with torch.no_grad():
+            off.gamma.mul_(1.0 + MPAR_LEVELS["gamma_rel"])
+            off.gain_model = off.gain_model._replace(
+                P_sat_W=off.gain_model.P_sat_W
+                * (1.0 + MPAR_LEVELS["p_sat_rel"]))
+            off.delta.copy_(sub.delta)
+            off.kappa_ext.copy_(sub.kappa_ext)
+            off.mu_chain.copy_(sub.mu_chain)
+        off_in_situ = [off.delta, off.kappa_ext, off.mu_chain]
+        opt_off = torch.optim.Adam(off_in_situ, lr=lr_phys_frac * ki)
+        opt_head_off = torch.optim.Adam(head.parameters(), lr=lr_head)
+        with torch.no_grad():
+            y0o = off.forward_intensity(encode_drive(u0).unsqueeze(-1))
+            ys_off = float(y0o.mean()) + 1e-30
+        for it in range(1, n_updates + 1):
+            u_raw, target = fresh_batch(run_seed, it)
+            y = off.forward_intensity(encode_drive(u_raw).unsqueeze(-1))
+            loss = mse_loss(head(y / ys_off), target)
+            opt_head_off.zero_grad()
+            for p in off_in_situ:
+                p.grad = None
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(
+                off_in_situ + list(head.parameters()), 1.0)
+            opt_off.step()
+            opt_head_off.step()
+            off.clamp_to_bounds()
+            led["digital_passes"] += 2 * BATCH        # all-digital phase A
+        # Deploy: commands realized through M-par actuation maps.
+        with torch.no_grad():
+            sub.delta.copy_(off.delta
+                            + MPAR_LEVELS["delta_offset_ki"] * ki)
+            sub.kappa_ext.copy_(off.kappa_ext
+                                * MPAR_LEVELS["kext_actuation"])
+            sub.mu_chain.copy_(off.mu_chain
+                               * MPAR_LEVELS["mu_actuation"])
+            sub.clamp_to_bounds()
+            y0d = sub.forward_intensity(encode_drive(u0).unsqueeze(-1),
+                                        generator=ase_gen(run_seed, 0, 14))
+            y_scale = float(y0d.mean()) + 1e-30       # re-measured on device
     elif method == "bptt":
         opt_phys = torch.optim.Adam(in_situ, lr=lr_phys_frac * ki)
     elif method == "spsa":
@@ -268,9 +353,11 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
             opt_head.zero_grad()
             loss_h.backward()
             opt_head.step()
-        else:                                        # head-only
+        else:                    # head-only / offline-deploy phase B
+            tag = 15 if method == "offline-deploy" else 4
             with torch.no_grad():
-                y = sub.forward_intensity(u, generator=ase_gen(run_seed, it, 4))
+                y = sub.forward_intensity(u,
+                                          generator=ase_gen(run_seed, it, tag))
             led["device_passes"] += BATCH
             pred = head(y.detach() / y_scale)
             loss = mse_loss(pred, target)
@@ -284,6 +371,18 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
         elif method == "spsa":
             sub.clamp_to_bounds()
         led["loss_trace"].append(loss_val)
+
+        if eval_every is not None and it % eval_every == 0:
+            if method_base in ("pat", "adjoint", "rhel"):
+                passes_now = est.n_device_passes
+            elif method == "spsa":
+                passes_now = adaptor.n_forward_equivalents * BATCH
+            elif method in ("head-only", "offline-deploy"):
+                passes_now = it * BATCH
+            else:                                    # bptt reference
+                passes_now = 0
+            led["eval_trace"].append(
+                (it, passes_now, eval_ser(sub, head, y_scale)))
 
     # Ledger totals (PR-7).
     if method_base in ("pat", "adjoint", "rhel"):

@@ -81,13 +81,13 @@ boundary before the run proceeds.
 |----|---------|---------------|--------|-------------------------|--------|
 | **PR-1** | Gate (i) | S0.2 run | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) · **amended by PR-1.1 🔒 SIGNED 2026-06-11** (G3 criterion void for anchor instability — F-G3; Gate i adjudicated purpose-served: G1 PASS ∧ parity dossier) | Gate-i accuracy margin + the named published benchmark it reproduces. | roadmap S0.2 |
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
-| **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
+| **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | 🔒 **rule FROZEN 2026-07-07** (by delegation; block below — SER_target = 1.25×ceiling+0.005; ii-a floor = 0.5×reservoir; ceiling number → S0.4-close addendum) | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
 | **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 🔒 **SIGNED v2 2026-06-13** (Lucas, "sign PR-4"; block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; Cui body confirmed [EV] via independent commentary 2026-06-13, risk (i) closed; E₀ numeric = registered S0.3-1 calibration addendum) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
 | **PR-5** | PAT (S0.4a) | S0.4a | 🔒 **SIGNED v2 structure 2026-07-07** (by delegation, packet-v3 — block below; numeric levels frozen in the S0.4a spec at `0b8c817` from the S0.4-0 recon) | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
 | **PR-6** | All estimators (S0.4) | S0.4a | 🔒 **SIGNED v3 2026-07-07** (by delegation, E-2026-07-05-1; block below + S0.4-0 calibration addendum) | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
 | **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | 🔒 **SIGNED v2 2026-07-07** (by delegation, packet-v3; block below) · **PR-7.1 amendment 2026-07-07** (RHEL row) | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL ~~1 fwd + 1 echo~~ **PR-7.1: 1 fwd + 2 echo = 3**); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
-| **PR-8** | S0.5 analysis | S0.5 | ⬜ | Statistical plan: **right-censoring** treatment (fraction-reaching-target within B + median/IQR among reachers / survival treatment); lexicographic ranking (success-fraction, then median passes); paired-by-seed bootstrap CIs; **≥8 seeds for all methods in headline cells** (4 only for exploratory grid). | F11 |
-| **PR-9** | Gate ii + promotion | S0.5 | ⬜ | **Gate-ii semantics** decomposed: (ii-a) capacity — BPTT ceiling clears the utility floor; (ii-b) trainability — **PAT or SPSA** within margin of ceiling (only-adjoint/RHEL-pass → escalate-and-redesign, *not* a pass). **Promotion criteria**: "clearly beats" quantified (e.g. ≥X% better pass-to-target w/ non-overlapping 95% CIs, or strictly-better scaling, or strictly-simpler hardware ledger at non-inferior efficiency); **"exactness" struck** from the menu (outcome metrics + F8 hardware ledger only). | F10 |
+| **PR-8** | S0.5 analysis | S0.5 | 🔒 **FROZEN 2026-07-07** (by delegation; block below — 8 seeds, censoring-at-B lexicographic rank, paired bootstrap, digital ledger co-reported-not-ranked, equal registered HPs) | Statistical plan: **right-censoring** treatment (fraction-reaching-target within B + median/IQR among reachers / survival treatment); lexicographic ranking (success-fraction, then median passes); paired-by-seed bootstrap CIs; **≥8 seeds for all methods in headline cells** (4 only for exploratory grid). | F11 |
+| **PR-9** | Gate ii + promotion | S0.5 | 🔒 **FROZEN 2026-07-07** (by delegation; block below — ii-b ≥5/8; promotion = ≥25 % + CI-excludes-0 or simpler-F8-at-non-inferior; R3b readout-differential rule; M3 = Δ_M3) | **Gate-ii semantics** decomposed: (ii-a) capacity — BPTT ceiling clears the utility floor; (ii-b) trainability — **PAT or SPSA** within margin of ceiling (only-adjoint/RHEL-pass → escalate-and-redesign, *not* a pass). **Promotion criteria**: "clearly beats" quantified (e.g. ≥X% better pass-to-target w/ non-overlapping 95% CIs, or strictly-better scaling, or strictly-simpler hardware ledger at non-inferior efficiency); **"exactness" struck** from the menu (outcome metrics + F8 hardware ledger only). | F10 |
 | **PR-10** | S0.7-lite | before S0.2 task reg | 🔒 **FROZEN 2026-06-10** (Lucas "ok"; values in the block below) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
 | **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ **PROPOSED 2026-07-07** (block below; recon `docs/s0_4/pr11_echo_submodel_recon.md`) | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
 | **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | 🔒 **SIGNED disposition v2 (R-ii) 2026-07-07** (by delegation, packet-v3; block below) — D-LinOSS damping = trainable per-ring net loss (κ_ext over the §C clamped box) at fixed g_f=0.9, **not** a g_f sweep; PR-12 collapses into PR-6 §C/§D + a convergence-controlled BPTT diagnostic rerun. | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
@@ -1380,3 +1380,117 @@ phase-insensitive parametric quantum floor + pump-transfer excess.
 > continuous nudge force during each echo** → error-injection E/O channels are an envelope
 > cost (S0.4-0 multi-tap class); RHEL is stated for non-dissipative systems only (the
 > dissipative extrapolation is exactly what the bake-off measures).
+
+---
+
+## PR-3 — 🔒 FROZEN rule (2026-07-07) — the to-target rule + utility floor (F2.3, F10.2); ceiling number = measured addendum at S0.4-close
+
+> **Status: 🔒 rule FROZEN 2026-07-07 (single-session mode, by the standing delegation —
+> Lucas 2026-07-07: "ok then do now: S0.4-close — freeze the PR-3 to-target rule, measure the
+> BPTT ceiling…"; review non-independent, disclosed). Registered BEFORE the ceiling pilot and
+> before any C-2 estimator run.** The ceiling *number* follows the S0.4-0 pattern: rule frozen
+> here → measured → recorded in the S0.4-close addendum below this block.
+
+### A — Ceiling protocol
+- **Ceiling = BPTT-on-substrate** (the PR-3 reference, never a contestant) at the registered
+  cell, PR-6 θ₀/data/clamp conventions, S0.4a registered smoke HPs (equal-HP simplification,
+  PR-8 §D). **8 seeds = {11, 23, 47, 61, 83, 101, 127, 151}** (registered; the sizing pilot
+  runs seed 7, excluded from the 8). Train U_max updates (U_max from the pilot plateau,
+  recorded in the addendum); **eval every 100 updates** on the FIXED reserved eval streams
+  (harness `EVAL_SEED_BASE`, 2 batches × 8 seqs × T=256, warmup-trimmed — identical for every
+  method and seed). **Final statistic = median over the last 3 eval points, per seed;
+  ceiling SER = median over the 8 seeds (+ IQR).** No best-checkpoint selection (the G3
+  lesson: best-val + collapse = silent stop).
+- **Fixed-gain sensitivity spot (PR-7 §E feed):** 3 seeds {11, 23, 47} at `gain_mode="fixed"`,
+  same protocol → **Δ_M3 = |median SER_sat − median SER_fixed|** recorded in the addendum
+  (the M3-trigger margin PR-9 §D consumes).
+- Eval device passes are **excluded from the budget B** (uniform diagnostic overhead;
+  registered PR-8 §C convention).
+- **Cells:** headline = **C-2/N=32** (foundry P-AN800 — the PF-F3 ≥1-foundry-feasible-cell
+  requirement holds); C-1/N=8 secondary (same protocol, exploratory); C-3 deferred to the
+  S0.5 sweep tier (registered, not silent).
+
+### B — The to-target rule (feeds Gate ii-b; the "X%")
+A method **reaches target** at a cell iff its eval-SER ≤ **SER_target = 1.25 × SER_ceiling +
+0.005** at any registered eval point within the budget B. **Passes-to-target = the device-pass
+count at the first eval point at/below SER_target** (linear no-interpolation: the eval grid is
+the resolution). Runs that never reach target within B are **right-censored at B** (PR-8 §B).
+The multiplicative 25 % margin + the 0.005 additive guard (degenerate-ceiling protection) are
+both frozen before any C-2 estimator run.
+
+### C — The utility floor (Gate ii-a)
+- **Primary (relative, in-data): SER_ceiling ≤ 0.5 × SER_reservoir** — the readout-only
+  (head-only) arm at the same cell, budget, and eval protocol, 8 seeds median. In-situ
+  capacity must at least halve the readout-only error (the debt-#1 falsifier direction made a
+  gate). Per PF-F3 (carried in verbatim): an ii-a miss at the foundry headline cell = the
+  memory-vs-Q / Stage-1-reframing **finding**, not a bake-off failure.
+- **Absolute record (report-only, never gate-bearing):** absolute SER + 4-PAM chance (0.75)
+  recorded for the paper. No external absolute anchor (the G3 anchor-void lesson).
+
+---
+
+## PR-8 — 🔒 FROZEN (2026-07-07) — the statistical plan (F11)
+
+> **Status: 🔒 FROZEN 2026-07-07 (single-session mode, by the standing delegation — same
+> instruction as PR-3; disclosed). Registered before any gated bake-off run.**
+
+### A — Seeds & arms
+**8 seeds** {11, 23, 47, 61, 83, 101, 127, 151} for ALL arms at the headline cell (C-2).
+**Ranked contestants:** PAT-both (the PR-5 headline family) · SPSA · adjoint · RHEL (honest
+frozen chain). **References/baselines (never ranked):** BPTT (ceiling) · head-only
+(reservoir) · offline-train-deploy (phase A = all-digital training on the M-par-family-wrong
+offline model, U_off = U_max updates; deploy through the same-family actuation maps; phase B =
+on-device head recalibration within B — the §10/F7.3 baseline). PAT mismatch decomposition
+{perfect, M-par, M-struct} + rhel-ideal run at **C-1** (3 seeds, diagnostic tier — registered
+scope bound, cost control).
+
+### B — Right-censoring + rank
+Per-arm per-seed outcome = (reached_target ∈ {0,1}, passes_to_target; censored at B).
+**Lexicographic rank:** (1) success fraction within B (higher wins); (2) median
+passes-to-target with censored runs counted at B⁺ (i.e. above every uncensored value).
+**Paired-by-seed bootstrap** (10,000 resamples over the 8 seed indices) for the CI on
+median-passes differences between arm pairs. **The digital side-ledger is co-reported always
+and does NOT enter the rank** (resolving the fork PR-7 §B left to PR-9, under its binding
+principle: no "most sample-efficient" claim without both ledgers shown).
+
+### C — Budget B
+**B (device passes, per arm per seed) = 2 × the pilot-observed BPTT convergence-equivalent,
+expressed as U_B updates of a 2-pass method: B = 16·batch·U_B... concretely B = 2 × U_conv ×
+16 passes** where U_conv = the pilot plateau update count (recorded in the S0.4-close addendum
+BEFORE any estimator run). Conversion per PR-7/PR-7.1 rates at batch 8: PAT B/8 updates ·
+SPSA & adjoint B/16 · RHEL B/32 · head-only & offline-phase-B B/8. Eval passes excluded
+(PR-3 §A). Loss traces + eval traces archived per run.
+
+### D — HP policy (equal, pre-registered)
+The S0.4a registered smoke HPs for every method (lr_phys = 1e-3·κᵢ Adam, lr_head = 3e-2,
+grad-clip 1.0, SPSA c = 0.01·κᵢ, RHEL ε_frac = 0.05): **zero per-method tuning = equal
+budgets** (PR-6 §E's equal-HP-search satisfied degenerately; a genuine equal-budget HP search
+is registered as an S0.5-full sensitivity tier, not silently skipped). One-sided SPSA
+perturbations at the clamp boundary per PR-6.
+
+---
+
+## PR-9 — 🔒 FROZEN (2026-07-07) — Gate-ii semantics + promotion + M3 trigger (F10)
+
+> **Status: 🔒 FROZEN 2026-07-07 (single-session mode, by the standing delegation; disclosed).
+> Registered before any gated bake-off run. Folds the S0.4c protocol note (the R3b
+> template-rule gap).**
+
+- **Gate ii-a (capacity):** PR-3 §C — SER_ceiling ≤ 0.5 × SER_reservoir at C-2 (8-seed
+  medians). Miss ⇒ the PF-F3 reframing finding.
+- **Gate ii-b (trainability):** **PAT-both or SPSA** reaches the PR-3 §B target on **≥ 5 of 8
+  seeds** at C-2 within B. **Only-adjoint/RHEL-pass ⇒ escalate-and-redesign** (not a pass) —
+  unchanged.
+- **The R3b fix (registered rule, from the S0.4c finding):** any per-method "trains /
+  competitive / improves" statement — in gates, ranks, or prose — must be stated as the
+  **readout-only differential** (vs the head-only arm at matched budget and eval protocol),
+  never as absolute loss reduction. The S0.4c smoke's F22 label is re-derived under this rule
+  at S0.5 (expected: template B).
+- **Promotion ("clearly beats", toward a later hardware slot):** a candidate (adjoint/RHEL)
+  is promoted only if, vs BOTH PAT-both and SPSA: **(a)** ≥ 25 % lower median passes-to-target
+  AND the paired-bootstrap 95 % CI on the difference excludes zero, at ≥ equal success
+  fraction; **or (b)** a strictly simpler F8 hardware ledger at non-inferior efficiency
+  (CI-overlapping median passes). "Exactness" remains struck.
+- **M3 trigger (PR-7 §E quantified):** the gain-model-class flag fires if the
+  leader↔runner-up gap in median passes-to-target < **Δ_M3** (the fixed-vs-saturating ceiling
+  sensitivity measured per PR-3 §A, recorded in the S0.4-close addendum before the bake-off).

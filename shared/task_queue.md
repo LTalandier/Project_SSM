@@ -8,6 +8,36 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🟢 ACTIVE — S0.4-close + S0.5-core: PR-3/8/9 frozen → sizing pilot → measured ceiling (+Δ_M3) → F8 ledger → the gated 8-seed bake-off (Lucas 2026-07-07: "ok then do now")
+
+**Governing freezes (committed with this spec, BEFORE the pilot):** PR-3 rule 🔒 · PR-8 🔒 ·
+PR-9 🔒 (ledger blocks). Sequence + deliverables:
+
+1. **Sizing pilot (seed 7, excluded from the 8):** BPTT at C-2, U = 3000 updates, eval every
+   100 → U_conv = the plateau point (first eval after which no >1 % relative median-of-3
+   improvement occurs). Sets **U_max = ceil(1.5 × U_conv, to the nearest 500)** and
+   **B = 2 × U_conv × 16 passes** (PR-8 §C). Numbers → the S0.4-close addendum, committed
+   BEFORE any estimator run at C-2.
+2. **Ceiling (PR-3 §A):** BPTT × 8 seeds at C-2 (U_max, eval/100); + fixed-gain 3-seed spot →
+   Δ_M3. C-1 secondary ceiling (8 seeds, same protocol). Ceiling SER (median + IQR) → the
+   addendum; **SER_target derives mechanically** (1.25× + 0.005).
+3. **F8 per-method hardware-requirements ledger** → `docs/s0_4/f8_hardware_ledger.md`
+   (observables · actuators · added components + loss · calibration burden · per-method E/O
+   channel count for the envelope).
+4. **The gated bake-off (S0.5-core):** ranked arms {pat-both, spsa, adjoint, rhel} + baselines
+   {head-only, offline-deploy} × 8 seeds at C-2 under budget B (per-method update counts per
+   PR-8 §C conversion); C-1 diagnostic tier (pat families + rhel-ideal, 3 seeds).
+   → `results/s0_5/bakeoff.{json,md}`: PR-8 stats (success fractions, censored medians,
+   paired-bootstrap CIs), Gate ii-a/ii-b verdicts, R3b-rule differentials, both ledgers
+   per arm, M3-trigger check, F22 template re-derivation.
+5. Results-log entry + ledger addendum + trackers. **NOT in scope (registered):** the S0.5-full
+   loss/gain/ASE sweeps, PR-13 secondary task, PR-14 bias/variance diagnostic, the genuine
+   equal-budget HP search (S0.5-full tier, after this core lands).
+
+**Expected runtime:** pilot ~3 min · ceilings ~30 min · bake-off ~2–4 h CPU background · $0.
+
+---
+
 ## ✅ DONE — S0.4c: RHEL + honest echo sub-model built; R1/R2/R4/R5 PASS (2026-07-07, same day) — see results_log + `results/s0_4c/smoke.md`; 150/150. **Key finding: RHEL ≡ head-only at the registered cell even with idealized echo (dissipative-echo bias binding); R3b template rule mislabels → PR-9 protocol note.** All four estimators now built. Next: S0.4-close (PR-3 ceiling + F8 ledger) → S0.5 freeze (PR-8/9) → the gated bake-off.
 
 *(Spec below retained as executed — pre-registered at `5ca8d52` before the build/run.)*
