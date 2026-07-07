@@ -89,7 +89,7 @@ boundary before the run proceeds.
 | **PR-8** | S0.5 analysis | S0.5 | ⬜ | Statistical plan: **right-censoring** treatment (fraction-reaching-target within B + median/IQR among reachers / survival treatment); lexicographic ranking (success-fraction, then median passes); paired-by-seed bootstrap CIs; **≥8 seeds for all methods in headline cells** (4 only for exploratory grid). | F11 |
 | **PR-9** | Gate ii + promotion | S0.5 | ⬜ | **Gate-ii semantics** decomposed: (ii-a) capacity — BPTT ceiling clears the utility floor; (ii-b) trainability — **PAT or SPSA** within margin of ceiling (only-adjoint/RHEL-pass → escalate-and-redesign, *not* a pass). **Promotion criteria**: "clearly beats" quantified (e.g. ≥X% better pass-to-target w/ non-overlapping 95% CIs, or strictly-better scaling, or strictly-simpler hardware ledger at non-inferior efficiency); **"exactness" struck** from the menu (outcome metrics + F8 hardware ledger only). | F10 |
 | **PR-10** | S0.7-lite | before S0.2 task reg | 🔒 **FROZEN 2026-06-10** (Lucas "ok"; values in the block below) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
-| **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
+| **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ **PROPOSED 2026-07-07** (block below; recon `docs/s0_4/pr11_echo_submodel_recon.md`) | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
 | **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ **PROPOSED 2026-06-17 → R-ii** (Lucas reconcile; block below) — D-LinOSS damping = trainable per-ring net loss (κ_ext over the §C clamped box) at fixed g_f=0.9, **not** a g_f sweep; PR-12 collapses into PR-6 §C/§D + a convergence-controlled BPTT diagnostic rerun. | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
 | **PR-13** | S0.5 secondary task | S0.5 | 🔒 **FROZEN 2026-06-10** (early, jointly with PR-2 — Lucas E-2026-06-10-4; task-family detail in the PR-2 v2 block) | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
@@ -1294,3 +1294,51 @@ recon — no invented numbers enter the headline.
   survives as a **pointer to the §C box + the convergence-controlled rerun that characterizes the
   damping→accuracy curve** (a BPTT-reference diagnostic, not a frozen scalar). R-i (subsume into §G
   and drop PR-12) was the alternative; Lucas chose R-ii.
+
+---
+
+## PR-11 — ⬜ PROPOSED (2026-07-07) — the RHEL χ³-FWM echo / phase-conjugation sub-model (F9)
+
+> **Status: ⬜ PROPOSED (Supervisor, 2026-07-07, single-session mode — review non-independent,
+> disclosed).** Structure + invariants proposed now; the **numeric freeze happens in the S0.4c
+> task spec** (committed before any RHEL run), after the recon's ⚠verify-1..6 items are checked
+> — the PR-5 pattern (structure → recon → freeze-at-spec). Recon with the quantified mechanism
+> menu: `docs/s0_4/pr11_echo_submodel_recon.md` (+ `analysis/pr11_echo_recon_calc.py` →
+> `results/s0_4c/pr11_recon_calc.json`).
+
+### A — The invariants (registered in the row above; bind the S0.4c implementation)
+1. Independent forward/echo ASE streams — fresh generators, **no common-RNG reversal**.
+2. **No loss-sign flip**: the echo pass propagates through the *same* dissipative substrate.
+3. Gain injects **fresh ASE in the echo pass too** (no free re-amplification).
+4. **Unit test**: the echo of a noisy forward must **not** recover the noiseless initial state —
+   recovery error lower-bounded by (conjugation fidelity × ASE floor).
+
+### B — The sub-model structure (freezes at the S0.4c spec)
+One echo update = 1 forward pass + **C_op** + 1 echo pass (PR-7 row 4: 2 device passes; the χ³
+penalties charge accuracy-per-pass, not the count). Per doublet mode j:
+**C_op: a_j(T) → √η_c,j · e^{iφ_err,j} · a_j(T)\* + n_conj,j**, with η_c,j the *mechanism-derived*
+efficiency chain (extraction × conversion × re-injection × timing decay — no idealized
+conjugation operator, proposal §6(c) verbatim), φ_err the systematic phase error, n_conj ≥ the
+phase-insensitive parametric quantum floor + pump-transfer excess.
+
+### C — The mechanism menu (recon-quantified; freeze picks ONE headline)
+- **(A) on-chip shared-spiral conjugator bank — proposed headline:** η_c ≈ −18 dB class at
+  P_p = 0.3 W/arm (η_ex = 2κ_ext/κ_net = 0.86 at θ₀, computed live; η_spiral = (γ_nl P_p L)²);
+  **N parallel arms** (ring fields spectrally overlap — not wavelength-separable) → **N·P_p ≈
+  9.6 W on-chip pump at C-2**, charged to the S0.7 envelope like the S0.4-0 E/O channels.
+- **(B) resonant conjugator ring:** the registered enhancement↔bandwidth tension, now
+  quantified — under the state-snapshot reading the Q_L ceiling is 1.5e6/5.0e6/2.2e7 (C-1/2/3),
+  so not trivially excluded; excluded ×70 under the drive-stream reading (recon ⚠verify-1
+  decides). Recorded alternative, not the headline.
+- **(C) off-chip conjugation — the explicit admission, priced:** transit amplitude survival at
+  10 ns = 0.12/0.54/0.87 (C-1/2/3) + facet losses + N channels; **no storage/timing primitive
+  exists to wait out the conjugator** — the decay is the price. Admission only; not run headline.
+
+### D — S0.4c obligations (pre-registered here, before the RHEL build)
+- The floor check (roadmap S0.4 gate): as η_c → 1, φ_err → 0, n_conj → 0, ASE → 0, the echo
+  update must approach the exact gradient.
+- **Both F22 conclusion templates** (RHEL-competitive / RHEL-fails-under-honest-echo)
+  pre-drafted in the S0.4c spec before any run.
+- RHEL semantics (⚠verify-1: state-snapshot vs drive-stream conjugation; update rule; error
+  injection point) settled from Pourcel & Ernoult arXiv:2506.05259 + López-Pastor & Marquardt
+  PRX 13, 031020 — and recorded in the spec — before the estimator is coded.
