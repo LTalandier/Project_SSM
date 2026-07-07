@@ -67,6 +67,13 @@ class DissipativeRingSubstrate(nn.Module):
                   gain-channel analogue of γ=0 — drops ∂g/∂κ_ext; the plane the
                   frozen operating-point numbers and the B1/E₀ calibrations are
                   quoted at).
+    input_taps  : ring indices (0-based) the single bus drive is split into
+                  (PR-6 §B v3 multi-tap input map B; §G-addendum ride-on on
+                  PR-4 §N). Default (0,) = the original single-port ring-1
+                  convention, bit-identical to the pre-S0.4-0 substrate. With
+                  K taps the drive amplitude is split equally, weight 1/√K per
+                  tap (total injected power conserved; the §G-addendum
+                  total-energy E₀ budget is over the tap sum, not per ring).
     ase_convention : "A2" (default, exact Langevin) or "A1" (per-rt kick).
     dtype       : complex128 (default, S0.1 fidelity) or complex64.
     seed        : init RNG seed for δ (reproducibility).
@@ -78,11 +85,20 @@ class DissipativeRingSubstrate(nn.Module):
                  loss_scale: float = 1.0, ase_variance_scale: float = 1.0,
                  gain_factor: Optional[float] = None,
                  gain_mode: str = "saturating", ase_convention: str = "A2",
+                 input_taps: Optional[tuple] = None,
                  dtype: torch.dtype = torch.complex128,
                  seed: Optional[int] = None):
         super().__init__()
         self.cell = cell
         self.N = int(N if N is not None else cell.N)
+        if input_taps is None:
+            input_taps = (0,)
+        taps = tuple(sorted({int(t) for t in input_taps}))
+        if not taps or any(t < 0 or t >= self.N for t in taps):
+            raise ValueError(
+                f"input_taps must be non-empty 0-based ring indices < N={self.N}, "
+                f"got {input_taps}")
+        self.input_taps = taps
         self.clock_GSps = float(clock_GSps)
         self._dtype = dtype
         self._rdtype = torch.float64 if dtype == torch.complex128 else torch.float32
@@ -195,10 +211,18 @@ class DissipativeRingSubstrate(nn.Module):
         return splitmod.doublet_matrix(self.M_dir(), self.gamma)
 
     def B_doublet(self) -> torch.Tensor:
-        """Input map: bus drive on ring-1 CW only (chain head; E₀ convention).
-        b = sqrt(2κ_ext,1) — differentiable in κ_ext,1 (physical coupling)."""
-        B_dir = torch.zeros((self.N, 1), dtype=self._dtype)
-        B_dir[0, 0] = torch.sqrt(2.0 * self.kappa_ext[0]).to(self._dtype)
+        """Input map B (PR-6 §B v3): the single bus drive split equally over
+        `input_taps` (CW modes), weight 1/√K per tap so total injected power
+        is conserved. b_t = sqrt(2κ_ext,t)/√K — differentiable in κ_ext,t
+        (physical coupling). Default taps (0,) = the original single-port
+        ring-1 §N convention (weight 1, bit-identical)."""
+        K = len(self.input_taps)
+        w = 1.0 / (K ** 0.5)
+        rows = torch.zeros((self.N, 1), dtype=self._dtype)
+        B_dir = rows.index_put(
+            (torch.tensor(self.input_taps), torch.zeros(K, dtype=torch.long)),
+            (w * torch.sqrt(2.0 * self.kappa_ext[list(self.input_taps)])
+             ).to(self._dtype))
         return splitmod.embed_input(B_dir)
 
     def C_doublet(self) -> torch.Tensor:
@@ -231,9 +255,15 @@ class DissipativeRingSubstrate(nn.Module):
 
     @torch.no_grad()
     def clamp_to_bounds(self) -> None:
-        """Project κ_ext back into the K4 bounds (training-time box
-        constraint; not used inside the autograd rollout)."""
+        """Project κ_ext back into the operative trainable band (training-time
+        box constraint; not used inside the autograd rollout). In the
+        registered `saturating` mode with gain ON, the lower bound is the
+        S0.4-0-measured r_min (PR-6 v3 §C clamp A — below r*≈0.134 the ring
+        lases and the linear rollout diverges); in `fixed`/passive modes the
+        K4 passive-plane bound r=0.1 applies."""
         lo, hi = cellmod.R_BOUNDS
+        if self.gain_mode == "saturating" and self.gain_factor > 0.0:
+            lo = cellmod.R_MIN_SATURATING
         self.kappa_ext.clamp_(lo * float(self.kappa_i),
                               hi * float(self.kappa_i))
 

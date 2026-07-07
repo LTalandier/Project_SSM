@@ -58,8 +58,16 @@ NF_SENSITIVITY_DB: tuple[float, ...] = (3.0, 5.0, 7.0)
 GAMMA_SENSITIVITY_MHZ: tuple[float, ...] = (0.0, 11.8, 90.0, 160.0)
 # θ₀ policy value (the F6 baseline hold): r₀ = κ_ext/κᵢ = 0.3 (PR-4 v2 §K).
 R0_THETA0: float = 0.3
-# K4 trainable κ_ext bounds, r = κ_ext/κᵢ ∈ [0.1, 3] (PR-4 v2 §K).
+# K4 trainable κ_ext bounds, r = κ_ext/κᵢ ∈ [0.1, 3] (PR-4 v2 §K) — the
+# passive/fixed-plane box (the plane the frozen B1/E₀ numbers live on).
 R_BOUNDS: tuple[float, float] = (0.1, 3.0)
+# Operative saturating-mode floor (PR-6 v3 §C clamp A, clause (a) alone):
+# r_min = (smallest r with saturating on-resonance κ_net ≥ 0.05·κᵢ) + Δr=0.02
+# = 0.1406 + 0.02, MEASURED at S0.4-0 (2026-07-07; cell-independent across
+# C-1/C-2/C-3; r*≈0.1337). Frozen by the S0.4-0 calibration addendum
+# (preregistration.md, PR-6 §C) — do not re-tune. Below r* the saturating
+# rollout lases (linear in-episode divergence, no in-rollout clamp — M1).
+R_MIN_SATURATING: float = 0.1606
 
 
 class SubstrateCell(NamedTuple):

@@ -15,6 +15,61 @@ Per result, report:
 
 ---
 
+## S0.4-0 — calibration + PR-5 recon: **resolved B = {3,12,21,30} (gate PASSES robustly, no fallback) · r_min = 0.1606 frozen · ×37-vs-×91 moot (measured ×0.42, doublet-quenched) · anchor-risk (vii) quantified (δ-aware floor would be 0.255) · multi-tap E₀ invariant** — suite 132/132 (2026-07-07, single-session mode)
+
+**Goal:** discharge the five registered S0.4-0 deferrals (PR-6 v3 §B/§C/§G-addendum + PR-5 recon)
+— the single calibration addendum consumed before any bake-off run.
+
+**Config:** local, CPU, deterministic (noiseless, fixed seeds); $0; ~2 min. C-2 headline (N=32),
+2 GS/s, saturating gain, splitting ON, connected init μ_c=0.3κᵢ, on-resonance; gradients =
+per-ring |∂L/∂δ_j|, T=200 registered 4-PAM drive; 14 tap-set candidates × 5 drive seeds for the
+finalists. New code: `input_taps` multi-tap B (equal 1/√K split; default bit-identical),
+mode-aware `clamp_to_bounds` (saturating floor = measured r_min), `tests/test_s0_4_0.py`.
+
+**Key findings:**
+1. **Input map RESOLVED: B = taps {3,12,21,30}, K=4** — every-ring ≥10⁻³ gate **PASSES robustly**
+   (32/32, worst 1.42e-3, min-over-5-drive-seeds); fallback (c) NOT triggered. The registered seed
+   {1,9,17,25} is not the winner (28/32 — ring 32 was 7 hops from a tap); no K≤3 clears (best
+   24/32); K=2 fails honestly. Two recorded protocol rulings: gate reference = max ring (the
+   vs-ring-1 letter is gameable when ring 1 is untapped); min-over-seeds robustness (single-seed
+   margins flicker ×20). Participation profile (resolved B): **{4, 26, 32}/32 ≥ {0.1,1e-2,1e-3}**;
+   single-drive {1,3,5}/32 (capacity finding verified). **E/O cost → envelope: 4 channels.**
+2. **r_min = 0.1606** (r_a=0.1406 + Δr; cell-independent to 4 digits; r*≈0.1337; candidate ≈0.16
+   confirmed). Operative saturating band **[0.1606, 3]** now code-enforced.
+3. **E_sym/E_sat pinned; the ×37-vs-×91 debate is moot in-data:** measured as-built build-up at
+   the clause-(a) floor = **×0.42 of θ₀** (the K-pol-3 doublet, γ/κ_net=16.6, + chain hybridization
+   quench the single-pole on-resonance build-up both estimates presumed). Floor band
+   [2.1e-6, 3.8e-5] (better than θ₀); r* [4.7e-6, 8.5e-5] (field-consistent solve); even the
+   never-realized single-pole bound ×91.9 stays ≤8.3e-3 ≪ O(1). **D-2026-06-13-1 PASSED, factors
+   measured.**
+4. **§G-conformance: NOT conformance-cheap** (actual-field P_circ needs a per-episode
+   self-consistent solve → changes the fairness surface + PR-7 pricing) → on-resonance clamp
+   stands; **anchor-risk (vii) quantified and material**: at r_min a ring detuned |δ|=κᵢ would
+   de-saturate to κ_net = −0.48κᵢ (super-threshold) under a Lorentzian δ-aware build-up; δ-aware
+   r_min would be ≈0.2547 (+0.094). → F19 limits verbatim.
+5. **Multi-tap E₀ INVARIANT**: 1.069e8 photons, ratio 1.000000 to the frozen closed form for
+   single/seed/resolved taps — §N stands on total energy, encoder scale unchanged.
+6. PR-5 recon menu written (`docs/s0_4/pr5_twin_mismatch_recon.md`): M-par L2=5 % headline (gain
+   pair 10 %/25 % — the debt-#3 gap), M-struct = fixed-mode twin (the S31-F1 channel), M-noise =
+   noiseless twin; freeze at the S0.4a spec.
+
+**Gates:** §B meaningful-ratio gate PASS (robust) · clause-(a) r_min measured+frozen · M1-validity
+check PASSED with measured factors · E₀ invariance PASS (1e-6) · suite **132/132**.
+
+**Anomalies / concerns:** (i) the two protocol rulings above were made single-session (no
+independent Critic) — flagged for Lucas; both *strengthen* the gate, neither softens it; (ii) the
+δ-de-saturation magnitude is large — model-limits item, could reorder methods on hardware near the
+floor (F19); (iii) the Critic's ×37 self-consistent estimate and my ×91 closed form were BOTH
+wrong about the as-built substrate (×0.42) — a good example of why the addendum measures rather
+than trusts derivations.
+
+**Data path:** `results/s0_4_0/s0_4_0_calibration.{json,md}` · ledger addendum in
+`preregistration.md` (PR-6 §G block) · `analysis/s0_4_0_calibration.py`.
+
+**Compute used:** local CPU, ~2 min, $0.
+
+---
+
 ## S0.3-1b — Critic APPROVE-WITH-EDITS, freeze-conforming subset (S31-F1/F2/F3/F5/F6): **gain default → `saturating` · `test_h` hardened (no longer hollow) · hygiene gate rewritten · intracavity reachability surfaced · ASE-grad convention registered** — full suite 128/128 (2026-06-13, Executor)
 
 **Goal:** apply the five Critic edits that **conform the S0.3-1 substrate code to the already-signed

@@ -1098,6 +1098,47 @@ by Lucas's signature on this packet (supersession discipline — not a unilatera
   that too is a §G/§N-faithful correction (no new mechanism), addended at S0.4-0.
 Both numerics ride the **single S0.4-0 calibration addendum** consumed before any bake-off run.
 
+### 🔒 S0.4-0 CALIBRATION ADDENDUM (2026-07-07; single-session mode) — the registered deferrals, discharged. Frozen; consumed by S0.4a+.
+Evidence: `results/s0_4_0/s0_4_0_calibration.{md,json}` (deterministic; `analysis/s0_4_0_calibration.py`).
+- **§B resolved input map: B = taps {3, 12, 21, 30} (1-based), K=4, equal amplitude split 1/√K
+  (total injected power conserved).** The every-ring ≥10⁻³ gate **PASSES robustly** (32/32; worst
+  ratio 1.42×10⁻³ under the recorded min-over-5-drive-seeds protocol); **fallback (c) NOT
+  triggered**. The registered seed {1,9,17,25} is *not* the winner (28/32 robust — ring 32 sat 7
+  hops from a tap); the registered search ("fewer taps, then completed coverage within K") found the
+  tail-covered set. No K≤3 clears robustly (best 24/32); K=2 fails under the honest reading. **Two
+  measurement-protocol rulings, recorded:** (i) gate reference = the **max ring** (the vs-ring-1
+  letter is gameable when ring 1 is not a tap — K=2 passes it with rings at 10⁻⁵ of max, the
+  hollow-gate pathology the gate replaces; both readings co-reported); (ii) per-ring ratio = min
+  over drive seeds {7,19,41,101,271}, adopted *before* finalist evaluation (single-seed margins
+  flicker ×20 with the realization). **Participation profile under the resolved B (the registered
+  "N=32 carries eff-dim" rule): counts ≥{0.1, 10⁻², 10⁻³} = {4, 26, 32}/32**; single-drive
+  verification of the capacity finding: {1, 3, 5}/32. **E/O cost to PR-10/S0.7: 4 input channels.**
+- **§C r_min = 0.1606 (FROZEN; operative saturating-mode band r ∈ [0.1606, 3]).** Clause (a)
+  crossing r_a = 0.1406, + Δr = 0.02; cell-independent (C-1/C-2/C-3 identical to 4 digits);
+  r\* ≈ 0.1337. κ_net/κᵢ at r_min = 0.1749. Enforced in code (`cells.R_MIN_SATURATING`,
+  mode-aware `clamp_to_bounds`); fixed/passive planes keep K4 r=0.1. PR-12 init-consistency ✓
+  (r₀=0.3 and the damping axis inside the band). **E_sym/E_sat record (pins the ×37-vs-×91
+  factor — both moot in-data):** measured as-built build-up at the floor is **×0.42 of θ₀** (not
+  ×37 or ×91): the K-pol-3 doublet (γ/κ_net = 16.6 at the floor) + chain hybridization quench the
+  single-pole on-resonance build-up both prior estimates presumed. E_sym/E_sat: floor (as-built)
+  **[2.1×10⁻⁶, 3.8×10⁻⁵]** — *better than the θ₀ band*; r\* (field-consistent solve; as-built has
+  no steady state there) **[4.7×10⁻⁶, 8.5×10⁻⁵]**; even the never-realized single-pole worst case
+  (×91.9) stays ≤ 8.3×10⁻³ ≪ O(1). **Lucas's D-2026-06-13-1 check: PASSED with measured factors.**
+- **§C/§G conformance determination: NOT conformance-cheap → the on-resonance clamp stands;
+  anchor-risk (vii) is REAL and now quantified.** Actual-field P_circ needs a per-episode
+  self-consistent solve — it would change the g(P̄) surface all four estimators train through
+  (PR-6 §A) and add passes PR-7 would have to price: a model change, not a conformance fix.
+  Magnitude (hypothetical Lorentzian δ-aware build-up over the §D band): at r_min a ring detuned by
+  |δ|=κᵢ de-saturates to **κ_net = −0.48κᵢ (super-threshold)**; a δ-aware clause (a) would sit at
+  r_min ≈ 0.2547 (+0.094). Goes verbatim to the paper's F19 limits section: *a real device detuned
+  at low κ_ext could lase where this model does not.*
+- **§G-addendum multi-tap E₀: INVARIANT — no numeric change.** CW-equivalent reading at θ₀:
+  E₀(measured) = 1.069×10⁸ photons for single-port, seed, and resolved B alike (ratio 1.000000 to
+  the frozen closed form; equal power split over identical rings reproduces the single-port E₀
+  exactly). Encoder scale unchanged (=1 at θ₀); "encoder cannot buy SNR" preserved on total energy.
+- PR-5 numeric mismatch levels: recon memo `docs/s0_4/pr5_twin_mismatch_recon.md` (menu; the levels
+  freeze in the S0.4a task spec per the PR-5 v2 deferral).
+
 ---
 
 ## PR-7 — 🔒 **SIGNED v2** (2026-07-07) — the cost metric (F5)
