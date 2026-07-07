@@ -8,7 +8,15 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## ⏸ NO ACTIVE TASK (2026-07-05) — S0.4 packet **v3 WRITTEN** (D3/D4 delegated "go") → focused Critic re-confirm → Lucas signs → S0.4-0 goes ACTIVE
+## 🔴 ACTIVE — S0.4-0: calibration + PR-5 recon (2026-07-07; executed by the main session — single-session mode)
+
+> **MODE CHANGE (Lucas, 2026-07-07): "don't use the critic for now on do everything."** Critic
+> suspended; the main session absorbs Executor work. **Packet v3 🔒 SIGNED 2026-07-07 by delegation**
+> (Supervisor-performed re-confirm APPROVE-WITH-EDITS; see `critic_review_s0_4_freeze.md` tail +
+> E-2026-07-05-1 resolution). The QUEUED block below is therefore **ACTIVE** — items 1–5 unchanged,
+> plus the re-confirm's reporting requirement: **item 1 must log the tap-set search *trace*** (which
+> sets were evaluated, in what order), so "minimal" is evidenced. Results → `results_log.md` +
+> the single S0.4-0 calibration addendum in `preregistration.md` (consumed before any bake-off run).
 
 > **Update 2026-07-05:** the max-effort Critic pass (`critic_review_s0_4_freeze.md`, updated in place)
 > kept AMEND and sharpened both HIGHs: **P6-F1 → capacity finding** (C-2 effective participating

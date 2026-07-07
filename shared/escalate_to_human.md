@@ -32,14 +32,29 @@ EigenWorms anchor fails a faithful official-code rerun (90.56 % mean, seed σ 9.
 fp32 optimization collapse; port exonerated by the 2.4–2.7e-7 parity dossier). Publishing it
 standalone is **outward-facing critique of published work** → your call, not the pipeline's. Options:
 **(a) contact the LinOSS authors first with the dossier, note follows within a stated window ← Supervisor
-recommendation** · (b) arXiv note directly · (c) fold into P1 related-work only · (d) drop. Nothing
-moves on P2 until you rule. *(Venue for P1 is also yours but only binds at submission — not blocking.)*
+recommendation** · (b) arXiv note directly · (c) fold into P1 related-work only · (d) drop.
+*(Venue for P1 is also yours but only binds at submission — not blocking.)*
 
-**Filed:** 2026-07-07 (Supervisor). **Status: OPEN — awaiting (a)/(b)/(c)/(d).**
+> **UPDATE 2026-07-07 (after "do everything"):** the Supervisor will **draft** P2 (internal,
+> reversible) under the general delegation — but nothing leaves the repo (no arXiv post, no author
+> contact) without your explicit (a)/(b) ruling: external release is not covered by "do everything."
+
+**Filed:** 2026-07-07 (Supervisor). **Status: OPEN — awaiting (a)/(b)/(c)/(d) for the outward-facing step only.**
 
 ---
 
-### E-2026-07-05-1 — **Sign the S0.4 freeze packet v3** (PR-6/PR-7/PR-5/PR-12) — D3/D4 ✅ delegated ("go"), v3 WRITTEN; remaining: focused Critic re-confirm → your signature
+### E-2026-07-05-1 — ✅ **RESOLVED 2026-07-07: S0.4 freeze packet v3 SIGNED (by delegation)** (PR-6/PR-7/PR-5/PR-12)
+
+> **✅ RESOLUTION (2026-07-07).** Lucas: *"don't use the critic for now on do everything."* Read as:
+> (1) the **Critic role is suspended** "for now" — no further Critic-session reviews until reinstated;
+> (2) packet **closure is delegated** to the Supervisor, who now also absorbs Executor work
+> (single-session mode). Executed same day: the focused v3 re-confirm was **Supervisor-performed**
+> against the Critic's own staged checklist (verdict APPROVE-WITH-EDITS; 3 stale cross-refs fixed
+> pre-signature; independence disclosure recorded at the tail of `critic_review_s0_4_freeze.md` —
+> reviews from 2026-07-07 are non-independent and the paper must disclose it). **PR-6 v3 / PR-7 v2 /
+> PR-5 v2(structure) / PR-12 v2 are 🔒 SIGNED 2026-07-07 by delegation**; the signature ratifies the
+> PR-6 §G-addendum (multi-tap E₀ ride-on on frozen PR-4 §N). **S0.4-0 is now ACTIVE**, executed by
+> this session. *(Entry retained below as filed, for the record.)*
 
 > **UPDATE 2026-07-05 (later the same day) — the Critic's max-effort pass landed
 > (`critic_review_s0_4_freeze.md` updated in place): verdict AMEND stands; do NOT sign v2.

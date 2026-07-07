@@ -259,3 +259,41 @@ decomposed PAT, P6-F6 SPSA c-grid in the feasible box, P6-F7 rank-ledger decisio
 With those, the contract is apples-to-apples and I'd sign it. The four-method bake-off premise — one
 substrate, fairly shared — is right; the headline cell and the clamp just have to actually deliver what
 the blocks claim.
+
+---
+
+## v3 RE-CONFIRM — performed by the SUPERVISOR (Critic role suspended by Lucas, 2026-07-07)
+
+> ⚠️ **Independence disclosure.** Lucas directed 2026-07-07: *"don't use the critic for now on do
+> everything."* This re-confirm was therefore run by the Supervisor against the staged v3 addendum
+> checklist (`critic_instructions_s0_4_freeze.md`) — it is a conformance check of the v3 text against
+> the Critic's own stated conditions ("With §B and §C fixed, I'd sign it," + the two-decision line
+> above), **not** an independent adversarial pass. Reviews from this date forward are non-independent
+> until the Critic is reinstated; the paper's methods section must disclose this (P1 §[limits]).
+
+**Verdict: APPROVE-WITH-EDITS (edits applied pre-signature).** Against the addendum's three checks:
+
+1. **P6-F1 discharge (§B v3) — CLEARS.** All four registrations present in the block: (i) S0.4-0
+   participation-profile measurement + the "every 'N=32' carries the measured effective dimension"
+   reporting rule; (ii) reservoir baseline = in-data falsifier of debt #1, quantitative margin → PR-9;
+   (iii) {1,9,17,25} as search seed; (iv) "controllable subset" fallback + explicit gate-not-softened
+   note. On the embedded question (does registering the Critic's ≈3/32, 26/32 numbers pre-bias the
+   S0.4-0 measurement?): **no** — the acceptance gate (every ring ≥10⁻³·ring-1, cap K=4) is frozen
+   independently of the seed, and the registered search protocol must try fewer taps / completed
+   coverage; the seed fixes where the search *starts*, not what it *accepts*. **Reporting requirement
+   (the "edit"):** S0.4-0 must log the search *trace* (which tap sets were evaluated, in what order),
+   so "minimal" is evidenced rather than assumed — folded into the S0.4-0 task item.
+2. **P6-F2 discharge (§C v3) — CLEARS.** Clause (b) dropped as a live governor with the three-part
+   refutation recorded in-block; r_min = clause (a) + Δr with m_κ=0.05/Δr=0.02 identical to v2;
+   candidate ≈0.16 noted as *more* conservative than r*+Δr; Lucas's D-2026-06-13-1 check registered
+   PERFORMED+PASSED; anchor-risk (vii) + the §G-conformance check unchanged. No decorative residue of
+   the refuted machinery found, except one stale cross-ref ("per §C v2" in §D) — **fixed**. On the
+   embedded ratification question: superseded — Lucas's 2026-07-07 directive delegates packet closure
+   including signature (recorded at the signature block + E-2026-07-05-1 resolution).
+3. **Scope check — CLEARS with 2 mechanical fixes.** PR-7/PR-5/PR-12 headers and bodies untouched from
+   the v2 the max-effort pass already credited as sound; §B gate/cap and §C m_κ/Δr numerically identical
+   to v2. Found + fixed: the §G-addendum (and the status-blockquote echo) said "ratified by the **v2**
+   signature" — no v2 signature ever occurred; corrected to "the packet signature," which is the v3
+   signature now being given.
+
+**Supervisor (acting), 2026-07-07.**

@@ -90,6 +90,15 @@ systems-advantage budget.
 
 ## Multi-agent coordination
 
+> **⚠️ MODE CHANGE (Lucas, 2026-07-07): single-session mode.** *"don't use the critic for now on do
+> everything"* — the Critic role is **suspended** and the main (Supervisor) session **absorbs Executor
+> and review work**. Do not wait on, or instruct Lucas to launch, Critic/Executor sessions. The
+> Supervisor-does-not-code boundary is lifted while this mode holds. Consequences: reviews from
+> 2026-07-07 are **non-independent** (disclosed at the tail of `critic_review_s0_4_freeze.md`; the
+> paper must disclose it); phase-boundary self-review replaces Critic review; escalation to Lucas
+> still applies for compute spend, outward-facing releases, and pre-registered gates/margins. The
+> table below describes the original (suspended) structure, kept for when it is reinstated.
+
 Three local Claude Code sessions coordinate through `shared/`:
 
 | Role | Session | Responsibility |

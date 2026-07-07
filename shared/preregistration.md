@@ -876,10 +876,18 @@ remains for Lucas but the signature itself.
 
 ---
 
-## PR-6 — PROPOSED **v3** (2026-07-05, Supervisor) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
+## PR-6 — 🔒 **SIGNED v3** (2026-07-07) — the fairness contract (F7, **CRITICAL**) — the S0.4 bake-off apples-to-apples standard
 
-> **Status: ⬜ PROPOSED v3 (2026-07-05) — folds the Critic max-effort pass + Lucas's delegated D3/D4
-> ("go", E-2026-07-05-1); ready for the focused Critic re-confirm → Lucas signature.** v3 changes:
+> **Status: 🔒 SIGNED v3 (2026-07-07, by delegation).** Lucas 2026-07-07: *"don't use the critic for
+> now on do everything"* — packet closure (re-confirm + signature) delegated to the Supervisor
+> (E-2026-07-05-1 resolution). The focused v3 re-confirm was **Supervisor-performed** (Critic
+> suspended; APPROVE-WITH-EDITS, 3 stale cross-refs fixed pre-signature — see
+> `critic_review_s0_4_freeze.md` tail, independence disclosure there). **This signature also ratifies
+> the §G frozen-PR-4-§N ride-on** (multi-point E₀ total-energy budget + the δ-conformance option).
+> From here PR-6 §B/§C/§D/§E/§F/§G are frozen; the registered S0.4-0 numerics (r_min, resolved B,
+> multi-tap E₀, participation profile) land as the single calibration addendum before any bake-off
+> run. — *Drafted PROPOSED v3 2026-07-05 (Supervisor), folding the Critic max-effort pass + Lucas's
+> delegated D3/D4 ("go", E-2026-07-05-1).* v3 changes:
 > **§B** — registered effective-dimension (participation-profile) measurement + reporting requirement
 > (the ≈3-of-32 capacity finding), the reservoir-baseline **falsifier consequence** (margin → PR-9),
 > the **{1,9,17,25}** S0.4-0 search seed (Critic-verified 26/32), fallback wording "controllable
@@ -897,7 +905,7 @@ remains for Lucas but the signature itself.
 > restore it); **§E** P6-F6 SPSA c-grid in the feasible box; **PR-5** P6-F5 decomposed reporting;
 > **PR-7** P6-F7 rank principle + P6-F8 PR-3-gate; **PR-12** P6-F9 wording. **Frozen-block ride-on:**
 > §B's multi-point B and §C/§D's possible δ-fix re-derive the PR-4 §N E₀ injection convention → ratified
-> by Lucas's v2 signature (see §G-addendum below), not unilaterally.
+> by Lucas's packet signature (see §G-addendum below), not unilaterally.
 > **Governs:** all four estimators (SPSA · PAT · recurrent in-situ adjoint · RHEL) on the shared
 > `DissipativeRingSubstrate` (PR-4), S0.4a → S0.5. **Encodes Lucas's 2026-06-17 rulings:** gain
 > mode `saturating` for all four (CONFIRM 1); κ_ext clamp **A** (D-2026-06-13-1 — the r_min rule is
@@ -1042,7 +1050,7 @@ remains for Lucas but the signature itself.
   image that keeps poles in the S0.1 realizable region at every cell — Critic-reviewable; ≤ half the
   100-GHz-FSR free range, well inside the in-band pole region). Role in v2: it is the **init** detuning
   range and the band the **S0.4-0 §G-conformance check** (§C) sweeps to characterize off-resonance
-  de-saturation — **not** the r_min sweep (r_min is on-resonance per §C v2). No longer double-deferred.
+  de-saturation — **not** the r_min sweep (r_min is on-resonance per §C). No longer double-deferred.
 - **Batch:** 8 fresh sequences per gradient step (one device pass = one sequence, PR-7 §C).
 - **LR schedule / grad-clip (P6-F8):** cosine decay from a per-method base LR; **global-norm gradient
   clip at 1.0**; the per-method base-LR + SPSA c (§E) tuned within the equal HP budget on the
@@ -1077,10 +1085,10 @@ remains for Lucas but the signature itself.
 - **Reservoir baseline** (§5.3 contrast): B1 frozen at θ₀ (κ_ext ≡ 0.3), readout-only trained
   (PR-2) — the in-data falsifier of "training the recurrence matters."
 
-### G — Frozen-PR-4-§N ride-on (ratified by the v2 signature, P6-F1/F2)
+### G — Frozen-PR-4-§N ride-on (ratified by the packet signature, P6-F1/F2)
 The §B multi-point input map and the §C δ-conformance option both touch the **frozen PR-4 §N E₀
 convention** ("calibration injection on the bus port of ring 1 only"). Registered amendment, ratified
-by Lucas's signature on this v2 (supersession discipline — not a unilateral edit):
+by Lucas's signature on this packet (supersession discipline — not a unilateral edit):
 - **Multi-point E₀:** under input map B (§B), the encoder scale is derived **once per arm to hit the
   same total intracavity-energy budget E₀** summed over the driven taps (not per-ring) — the "encoder
   cannot buy SNR" invariant is preserved on **total** injected energy. The §N E₀ *formula* and θ₀
@@ -1092,9 +1100,10 @@ Both numerics ride the **single S0.4-0 calibration addendum** consumed before an
 
 ---
 
-## PR-7 — PROPOSED **v2** (2026-06-17, Supervisor) — the cost metric (F5)
+## PR-7 — 🔒 **SIGNED v2** (2026-07-07) — the cost metric (F5)
 
-> **Status: ⬜ PROPOSED v2** *(v2 = the P6-F7 fold: §B rank-ledger principle — device passes are the
+> **Status: 🔒 SIGNED v2 (2026-07-07, by delegation — the packet-v3 signature, PR-6 block).**
+> *(v2 = the P6-F7 fold: §B rank-ledger principle — device passes are the
 > primary rank, the digital side-ledger is **always co-reported**, ledger-tiebreak semantics → PR-9).*
 > Defines the unit the PRIMARY bake-off score is measured in, so PR-6 §E's
 > "equal budget B" is unambiguous. Honors the PR-4 §N interaction rows (PR-7 charges the drive at
@@ -1160,9 +1169,10 @@ sensitivity at that cell. Registered as a pointer now; quantified at PR-9.
 
 ---
 
-## PR-5 — PROPOSED **v2** (2026-06-17, Supervisor) — PAT twin-mismatch families (F7.2–3, **CRITICAL**) — *structure frozen-able now; numeric levels recon-deferred to S0.4-0*
+## PR-5 — 🔒 **SIGNED v2** (2026-07-07) — PAT twin-mismatch families (F7.2–3, **CRITICAL**) — *structure frozen; numeric levels recon-deferred to S0.4-0*
 
-> **Status: ⬜ PROPOSED v2 (structure) · numeric mismatch levels [RECON-DEFERRED → S0.4-0].**
+> **Status: 🔒 SIGNED v2 structure (2026-07-07, by delegation — the packet-v3 signature, PR-6
+> block) · numeric mismatch levels [RECON-DEFERRED → S0.4-0], addended before S0.4a.**
 > *(v2 = the P6-F5 fold: §B decomposed mismatch reporting — {M-par-only / M-struct-only / both /
 > perfect-twin}, so PAT's headline isn't conflated with being handed the gain omission.)* PAT is
 > Physics-Aware Training: physical forward, **digital-twin backward**. PAT's robustness *is* its
@@ -1212,9 +1222,9 @@ recon — no invented numbers enter the headline.
 
 ---
 
-## PR-12 — PROPOSED disposition **v2** (2026-06-17) — **R-ii: D-LinOSS damping is a distinct knob** (Lucas 2026-06-17; resolves the PR-4 §G ↔ PR-12 reconciliation)
+## PR-12 — 🔒 **SIGNED disposition v2** (2026-07-07) — **R-ii: D-LinOSS damping is a distinct knob** (Lucas 2026-06-17; resolves the PR-4 §G ↔ PR-12 reconciliation)
 
-> **Status: ⬜ PROPOSED v2 (R-ii).** *(v2 = the P6-F9 fold: init-consistency wording fixed — only
+> **Status: 🔒 SIGNED v2 (R-ii) (2026-07-07, by delegation — the packet-v3 signature, PR-6 block).** *(v2 = the P6-F9 fold: init-consistency wording fixed — only
 > κ_ext-valued quantities are constrained to [r_min, 3] — + the roadmap "damping cell" reword,
 > applied 2026-07-05.)* RECONCILE 1 (E-2026-06-13-2): the coarse S0.3-1 damping sweep
 > parametrized "damping" as the gain compensation g_f — **but g_f = 0.9 *is* PR-4 §G's registered
