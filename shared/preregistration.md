@@ -1513,5 +1513,16 @@ perturbations at the clamp boundary per PR-6.
   confirmed ×50 — the headline cell needs ~5,000+ updates; smoke scale was ~2 % of convergence.
 - Raw: `results/s0_5/{pilot_seed7.json,sizing.json}`.
 
-### Part 2 — ceiling + Δ_M3 (appended after the ceiling stage, before the bake-off)
-*(pending — the ceiling stage writes here)*
+### Part 2 — ceiling + Δ_M3 (measured 2026-07-07; committed BEFORE any contestant run)
+- **Ceiling (C-2, 8 seeds, U_max=12000): SER = 0.00052 median** (7/8 seeds at 0.0005 = 2
+  errors/3840 eval symbols — the quantization floor; 1 seed at 0.0008). IQR ≈ 0. **The frozen
+  substrate + BPTT solves the headline cell.** C-1 ceiling = 0.0018 (8 seeds).
+- **SER_target(C-2) = 1.25×0.00052 + 0.005 = 0.00565** (the additive guard dominates at a
+  floor-level ceiling — by design). SER_target(C-1) = 0.00728.
+- **Δ_M3 = 0.0** — the fixed-gain ceiling is identical (0.0005) to the saturating one: the
+  gain-model class does not move the achievable ceiling at all, so it cannot flip the bake-off
+  verdict → **M3 declared un-triggerable at this cell.** Honest note: PR-9's M3 wording
+  compares a passes-gap to an SER-difference (a unit inconsistency registered by mistake);
+  with Δ_M3 = 0 the intent resolves unambiguously regardless (zero sensitivity ⇒ no flip
+  possible), and the wording is marked for repair if a nonzero Δ_M3 ever needs it.
+- Raw: `results/s0_5/ceiling.json` + `results/s0_5/runs/bptt_*.json`.
