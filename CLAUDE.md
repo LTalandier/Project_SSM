@@ -110,6 +110,8 @@ Three local Claude Code sessions coordinate through `shared/`:
 - `PROJECT_HANDOFF.md` — self-contained snapshot (mission + live frozen-vs-pending state +
   disciplines + file map) for onboarding a fresh agent/environment; snapshot only, the ledger wins
 - `stage0_roadmap.md` — master Stage-0 plan (S0.0–S0.8 + S0.L; the bake-off; gates)
+- `publication_plan.md` — publishable-unit map (P1 Stage-0 paper → `paper/` · P2 G3 note ·
+  P3 Stage-1 hardware letter); Supervisor-owned, venue/P2 decisions are Lucas's
 - `task_queue.md` — Supervisor assigns; Executor executes the **ACTIVE** task
 - `results_log.md` — Executor writes results; Supervisor evaluates
 - `decisions_needed.md` — Executor escalates design questions to the Supervisor

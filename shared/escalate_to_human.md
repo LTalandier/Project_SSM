@@ -18,6 +18,27 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-07-07-1 — **Publication plan proposed + one go/no-go: the LinOSS EigenWorms reproducibility note (P2)**
+
+**Context:** your goal directive 2026-07-07 ("make something publishable — and hopefully buildable —
+anything with SSM and photonics") → Supervisor wrote **`shared/publication_plan.md`** (PROPOSED):
+**P1** = the Stage-0 methods/feasibility paper (primary; ~half writable now, Supervisor starting
+`paper/` immediately; sole blocker for its results = the v3 signature, E-2026-07-05-1 below) ·
+**P2** = standalone reproducibility note on the G3 finding · **P3** = the Stage-1 hardware letter
+(the "first"; buildable arm, gated by the S0.7 envelope as designed) · P4 folded into P1.
+
+**The decision (P2):** we hold an on-record, Critic-adjudicated finding that the published LinOSS
+EigenWorms anchor fails a faithful official-code rerun (90.56 % mean, seed σ 9.34 ≈ 2.1× published,
+fp32 optimization collapse; port exonerated by the 2.4–2.7e-7 parity dossier). Publishing it
+standalone is **outward-facing critique of published work** → your call, not the pipeline's. Options:
+**(a) contact the LinOSS authors first with the dossier, note follows within a stated window ← Supervisor
+recommendation** · (b) arXiv note directly · (c) fold into P1 related-work only · (d) drop. Nothing
+moves on P2 until you rule. *(Venue for P1 is also yours but only binds at submission — not blocking.)*
+
+**Filed:** 2026-07-07 (Supervisor). **Status: OPEN — awaiting (a)/(b)/(c)/(d).**
+
+---
+
 ### E-2026-07-05-1 — **Sign the S0.4 freeze packet v3** (PR-6/PR-7/PR-5/PR-12) — D3/D4 ✅ delegated ("go"), v3 WRITTEN; remaining: focused Critic re-confirm → your signature
 
 > **UPDATE 2026-07-05 (later the same day) — the Critic's max-effort pass landed
