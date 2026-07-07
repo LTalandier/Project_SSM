@@ -83,14 +83,14 @@ boundary before the run proceeds.
 | **PR-2** | Bake-off setup | S0.2 | 🔒 **FROZEN 2026-06-10** (Lucas "ok go", E-2026-06-10-4; Critic-reviewed v2 block below) | The bake-off **task**; the **hybrid architecture** (what is simulated — layer/stack, encoder, head, nonlinearity); the **trainable-parameter partition** (every method trains the *same* partition); the **in-situ-trainable physical-parameter set + actuation map** (which params, by what actuator — heater detuning vs tunable coupling vs gain). Task sized against S0.1's pole/memory bound + the S0.7-lite niche (PR-10). | F2, white-space |
 | **PR-3** | S0.5 target | rule before S0.4 close; **ceiling frozen at S0.4 close** | ⬜ | The bake-off **target rule relative to the BPTT-on-substrate ceiling** ("within X% of exact-gradient accuracy at the same cell"); the **absolute task-utility floor** (ii-a). Register the *rule* (X%) first; measure + freeze the ceiling once at S0.4 close; then run. | F2.3, F10.2 |
 | **PR-4** | Substrate + Gate ii | S0.3 build / S0.5 gate | 🔒 **SIGNED v2 2026-06-13** (Lucas, "sign PR-4"; block below; Critic review 2026-06-12 verdict **AMEND** — all P4-F1..F12 applied; Cui body confirmed [EV] via independent commentary 2026-06-13, risk (i) closed; E₀ numeric = registered S0.3-1 calibration addendum) | Self-consistent operating **(α, Q_i) pair** (derive one from the other; add a loss↔Q registry check); the **κ_ext policy** (fixed regime or trainable bounds); the named **"realistic SiN noise" cell** (Q/α, NF, ASE level). **Foundry-grade gates Gate ii; class-leading is a labelled aspirational sweep axis.** Resolves D-2026-06-08-1. | F13, F10.5 |
-| **PR-5** | PAT (S0.4a) | S0.4a | ⬜ **PROPOSED 2026-06-17** (block below; structure frozen-able, numeric levels recon-deferred → S0.4-0) | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
-| **PR-6** | All estimators (S0.4) | S0.4a | ⬜ **PROPOSED 2026-06-17** (block below; encodes Lucas's saturating-all + clamp-A + R-ii rulings) | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
-| **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | ⬜ **PROPOSED 2026-06-17** (block below) | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL 1 fwd + 1 echo device pass); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
+| **PR-5** | PAT (S0.4a) | S0.4a | 🔒 **SIGNED v2 structure 2026-07-07** (by delegation, packet-v3 — block below; numeric levels frozen in the S0.4a spec at `0b8c817` from the S0.4-0 recon) | PAT **twin-mismatch families + levels** (parametric calibration error at realistic characterization accuracy + structural omission); **calibration-error unification** — offline-deploy baseline's weight-mapping error drawn from the *same* family. Headline cell = the registered mismatch level; report PAT as a function of it. | F7.2–3 (CRITICAL) |
+| **PR-6** | All estimators (S0.4) | S0.4a | 🔒 **SIGNED v3 2026-07-07** (by delegation, E-2026-07-05-1; block below + S0.4-0 calibration addendum) | The **fairness contract**: physical-operations invariant (gradients only from simulated device passes on the shared substrate w/ fresh noise; autodiff-through-substrate reserved for the BPTT reference); common θ₀ + data ordering per seed; **equal pre-registered HP budgets** per method; **equal max-device-pass budget B** per cell. | F7 (CRITICAL) |
+| **PR-7** | Cost metric (S0.4/S0.5) | S0.4 | 🔒 **SIGNED v2 2026-07-07** (by delegation, packet-v3; block below) · **PR-7.1 amendment 2026-07-07** (RHEL row) | Cost **unit = physical device passes, any direction** (per-method table: SPSA 2 fwd; PAT 1 fwd + digital twin-backward on a side-ledger; adjoint 1 fwd + 1 adjoint device pass; RHEL ~~1 fwd + 1 echo~~ **PR-7.1: 1 fwd + 2 echo = 3**); batch convention; **digital-compute side-ledger** reported alongside. | F5 |
 | **PR-8** | S0.5 analysis | S0.5 | ⬜ | Statistical plan: **right-censoring** treatment (fraction-reaching-target within B + median/IQR among reachers / survival treatment); lexicographic ranking (success-fraction, then median passes); paired-by-seed bootstrap CIs; **≥8 seeds for all methods in headline cells** (4 only for exploratory grid). | F11 |
 | **PR-9** | Gate ii + promotion | S0.5 | ⬜ | **Gate-ii semantics** decomposed: (ii-a) capacity — BPTT ceiling clears the utility floor; (ii-b) trainability — **PAT or SPSA** within margin of ceiling (only-adjoint/RHEL-pass → escalate-and-redesign, *not* a pass). **Promotion criteria**: "clearly beats" quantified (e.g. ≥X% better pass-to-target w/ non-overlapping 95% CIs, or strictly-better scaling, or strictly-simpler hardware ledger at non-inferior efficiency); **"exactness" struck** from the menu (outcome metrics + F8 hardware ledger only). | F10 |
 | **PR-10** | S0.7-lite | before S0.2 task reg | 🔒 **FROZEN 2026-06-10** (Lucas "ok"; values in the block below) | S0.7-lite **assumptions**: conversion energies, DAC/ADC rates, named **digital-baseline class + sources**, operating scale (N rings, rates). Labelled assumption-driven; not load-bearing in outreach before full S0.7. | F1, F16 |
 | **PR-11** | RHEL echo (S0.4c) | S0.4c | ⬜ **PROPOSED 2026-07-07** (block below; recon `docs/s0_4/pr11_echo_submodel_recon.md`) | RHEL echo **invariants**: independent forward/echo ASE streams (no common-RNG reversal); no loss-sign flip (echo through the *same* dissipative substrate); gain injects fresh ASE in the echo too. **Conjugation-fidelity bound** + the **unit test** (echo of a noisy forward must *not* recover the noiseless state; bounded by fidelity × ASE floor). | F9 |
-| **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | ⬜ **PROPOSED 2026-06-17 → R-ii** (Lucas reconcile; block below) — D-LinOSS damping = trainable per-ring net loss (κ_ext over the §C clamped box) at fixed g_f=0.9, **not** a g_f sweep; PR-12 collapses into PR-6 §C/§D + a convergence-controlled BPTT diagnostic rerun. | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
+| **PR-12** | Damping cell | after S0.3 coarse sweep, before S0.5 grid | 🔒 **SIGNED disposition v2 (R-ii) 2026-07-07** (by delegation, packet-v3; block below) — D-LinOSS damping = trainable per-ring net loss (κ_ext over the §C clamped box) at fixed g_f=0.9, **not** a g_f sweep; PR-12 collapses into PR-6 §C/§D + a convergence-controlled BPTT diagnostic rerun. | The **central damping operating cell** for the bake-off, from the F3 coarse BPTT-on-substrate sweep; the sweep is over the physical damping **floor** + init/range, not a fixed value. | F3 |
 | **PR-13** | S0.5 secondary task | S0.5 | 🔒 **FROZEN 2026-06-10** (early, jointly with PR-2 — Lucas E-2026-06-10-4; task-family detail in the PR-2 v2 block) | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
 | **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** · 🔁 **AMENDED → PR-15.1, signed 2026-06-10** (v1 retained below) | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (**q1∧q2∧q3∧q4** per PR-15.1) + search lanes + two-modality protocol + disposition. **Full frozen detail + the signed amendment in the blocks below** — the table row is a pointer only. | D-09-1, F15, WS-F1/2/3/5 |
@@ -1162,7 +1162,7 @@ this packet, but no to-target statistic is final until PR-3's rule is signed. Pe
 | **SPSA** | **2 forward** (two-sided ±c; model-free) | — |
 | **PAT** | **1 forward** (physical) | **+1 twin-backward** (digital twin — *not* a device pass) |
 | **recurrent in-situ adjoint** | **1 forward + 1 adjoint** = 2 (adjoint is a *physical* reverse pass by hypothesis) | — |
-| **RHEL / Hamiltonian-echo** | **1 forward + 1 echo** = 2 (+ the χ³ echo sub-model penalties, PR-11 — charged to accuracy-per-pass, not the count) | — |
+| **RHEL / Hamiltonian-echo** | ~~**1 forward + 1 echo** = 2~~ **→ PR-7.1 (§E-adjacent, below): 1 forward + 2 echo = 3** (+ the χ³ echo sub-model penalties, PR-11 — charged to accuracy-per-pass, not the count, now ×2/update) | — |
 | **BPTT reference** (ceiling, not ranked) | 1 forward/step | **+1 autodiff-backward** (digital) |
 
 - **The PAT crux (honest):** PAT's backward runs on the **digital twin**, so it lands on the digital
@@ -1207,6 +1207,24 @@ PR-9 at the S0.5 freeze, before any bake-off results — honoring §G's "frozen 
 the verdict = the PR-9 lexicographic rank (success-fraction to target, then median device-passes);
 the M3 trigger fires when the leader↔runner-up gap is **smaller than** the fixed↔saturating gain
 sensitivity at that cell. Registered as a pointer now; quantified at PR-9.
+
+### PR-7.1 — factual amendment to §A row 4 (RHEL pass count), 2026-07-07
+
+> **Status: registered 2026-07-07 (single-session mode, by the standing delegation; v2 above
+> retained per supersession discipline).** Source-driven correction, not a judgment call: the
+> RHEL algorithm as published (Pourcel & Ernoult, arXiv:2506.05259, verified against the paper
+> body 2026-07-07 — PR-11 ⚠verify-1) computes the gradient as a **symmetric finite difference
+> between TWO nudged echo trajectories**: forward + echo(+ε) + echo(−ε).
+
+- §A row 4 becomes: **RHEL = 1 forward + 2 echo = 3 device passes / gradient step** (+ the χ³
+  echo sub-model penalties per PR-11, now charged **twice per update** — each echo pass starts
+  from its own physical conjugation event). Digital side-ledger unchanged (—).
+- §C batch arithmetic follows: at batch 8, RHEL = 24 device passes/step.
+- Direction of the correction: **against** RHEL (3 > 2, and doubled conjugation penalties) — it
+  cannot flatter the outsider method; fairness (PR-6) requires charging the true cost. The
+  one-sided alternative (forward + single nudged echo vs the unperturbed reference) would be a
+  *modified* algorithm, not the published one — if S0.4c wants it as a cheaper RHEL variant it
+  must be registered as a separate arm, not silently substituted.
 
 ---
 
@@ -1342,3 +1360,14 @@ phase-insensitive parametric quantum floor + pump-transfer excess.
 - RHEL semantics (⚠verify-1: state-snapshot vs drive-stream conjugation; update rule; error
   injection point) settled from Pourcel & Ernoult arXiv:2506.05259 + López-Pastor & Marquardt
   PRX 13, 031020 — and recorded in the spec — before the estimator is coded.
+
+> **⚠verify-1 RESOLVED (2026-07-07, from arXiv:2506.05259 directly — recon memo §⚠verify has
+> the full record):** conjugation = a **single state-snapshot momentum flip** (Σ_z; optically =
+> phase conjugation of the snapshot — the state-band reading CONFIRMED, (B)'s ceilings stand);
+> **RHEL takes THREE passes/update** (forward + echo(+ε) + echo(−ε), symmetric finite
+> difference of ∇_θH between the nudged echo trajectories) → **PR-7.1 amendment** corrects
+> row 4 to 3 device passes/update and **C_op fires twice per update** (two independent
+> conjugation events, fresh penalties each); inputs replayed time-reversed; **error = a
+> continuous nudge force during each echo** → error-injection E/O channels are an envelope
+> cost (S0.4-0 multi-tap class); RHEL is stated for non-dissipative systems only (the
+> dissipative extrapolation is exactly what the bake-off measures).

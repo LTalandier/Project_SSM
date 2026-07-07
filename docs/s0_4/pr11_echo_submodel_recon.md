@@ -146,8 +146,27 @@ therefore only even conceivable for C-3-class cells, and stays an admission, not
 
 ## ⚠verify ledger (before the S0.4c freeze — none are load-bearing for this memo's structure)
 
-1. **RHEL echo semantics** (state-snapshot vs drive-stream conjugation; update rule; error
-   injection point) — read Pourcel & Ernoult 2506.05259 + López-Pastor & Marquardt PRX 13.
+1. **RHEL echo semantics** — ✅ **RESOLVED 2026-07-07** (arXiv:2506.05259 abstract + HTML body,
+   fetched same day). Findings, which **supersede §1's working reading where they differ**:
+   - **Conjugation = a single instantaneous state-snapshot operation** at the forward/echo
+     boundary: Σ_z·Φ = (φ, −π) — momentum flip; for an optical field, **phase conjugation of
+     the snapshot**. The §1 working reading is CONFIRMED → the conjugator spans the **state
+     band**, and option (B)'s Q_L ceilings stand.
+   - **THREE passes per update, not two:** forward + echo(+ε) + echo(−ε) — the gradient is the
+     **symmetric finite difference** of ∇_θH between the two nudged echo trajectories,
+     Δθ ∝ −(1/2ε)(∇_θH[Φᵉ(t,+ε)] − ∇_θH[Φᵉ(t,−ε)]) integrated over the echo. **The signed PR-7
+     row-4 count (1 fwd + 1 echo = 2) is corrected by amendment PR-7.1** (RHEL = 3 device
+     passes/update). Consequence for this sub-model: **C_op fires TWICE per update** (each echo
+     pass starts from its own physical conjugation event — fresh η_c, φ_err, n_conj each), and
+     each echo pass carries fresh ASE.
+   - **Inputs are replayed time-reversed** during the echo; the **error enters as a continuous
+     nudge force −εJ∇_Φℓ throughout the echo pass** (not a boundary kick) — physically a
+     modulated optical error drive at the readout ports during the echo → **error-injection E/O
+     channels are an envelope cost** (same class as the S0.4-0 multi-tap drive channels).
+   - RHEL is stated for **non-dissipative Hamiltonian systems**; the authors do not treat
+     dissipation — the bake-off's dissipative substrate tests exactly this extrapolation.
+   - Demonstrations: coupled harmonic oscillators + Hamiltonian SSM stacks (HRUs, leapfrog),
+     seq-length ~50k — the LinOSS-adjacent regime, good news for task comparability.
 2. **Phase-insensitive conjugation quantum-noise form at η_c < 1** (idler vacuum penalty).
 3. **n₂ / γ_nl sources** for Si₃N₄ (Ikeda 2008 / Moss 2013 class numbers).
 4. **γ_nl of the actual ULL foundry geometry** (CORNERSTONE/LIGENTEC dilute core) + transition
