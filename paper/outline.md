@@ -61,7 +61,8 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
 
 ## Section plan (source → prose; ✍ = writable now)
 
-1. **Introduction** ✍ — the in-situ-training gap for *recurrent* photonics; why SSMs (LinOSS
+1. **Introduction** ✍ DRAFT v1 (`sections/01_intro.md`, 2026-07-08; W1 scope used, W0-vs-W1 = PI
+   call at S0.8; search refresh required pre-submission) — the in-situ-training gap for *recurrent* photonics; why SSMs (LinOSS
    line) are the right recurrence class for rings; the sharpened white-space sentence
    (exact PR-15 wording from `docs/s0_L/whitespace_claim_wording.md`); contributions list =
    claims table. Pre-empt: reservoir computing, Bueno/Brunner RL line, internal-param
@@ -69,13 +70,14 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
 2. **From oscillatory SSMs to coupled SiN microrings** ✍ — the LinOSS/D-LinOSS unit; the
    dissipative-A validity argument; the mapping + realizable pole region (S0.1 figures);
    actuation map (B1), backscatter/splitting (B2, K-pol-3 always-ON), κ_ext trade-off (B3).
-3. **A pre-registered dissipative substrate** ✍ — PR-4 v2 as prose: M1 saturating gain at
+3. **A pre-registered dissipative substrate** ✍ DRAFT v1 (`sections/03_substrate.md`, 2026-07-08)
+   — PR-4 v2 as prose: M1 saturating gain at
    g_rt=0.9×intrinsic, A2 Langevin ASE (van-Loan covariance), NF-A 7.0 dB, the three cells
    (P-FND/8 · P-AN800/32 headline · P-UHQ/128), K4 drive box + the lasing-boundary clamp
    (r*≈0.134 → operative band [r_min, 3], r_min rule PR-6 §C v3); why one shared substrate =
    the apples-to-apples condition. Sidebar: the pre-registration ledger as method (what was
    frozen when; supplementary = `shared/preregistration.md`).
-4. **Four routes to on-chip gradients** ✍ (specs; results later) — SPSA; PAT (+ PR-5
+4. **Four routes to on-chip gradients** ✍ DRAFT v1 (`sections/04_methods.md`, 2026-07-08) — SPSA; PAT (+ PR-5
    twin-mismatch protocol); recurrent in-situ adjoint; RHEL + the concrete echo/
    phase-conjugation sub-model (PR-11). The fairness contract (PR-6) and the cost metric
    (PR-7: device passes primary, digital ledger co-reported). The
