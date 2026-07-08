@@ -80,7 +80,10 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
    phase-conjugation sub-model (PR-11). The fairness contract (PR-6) and the cost metric
    (PR-7: device passes primary, digital ledger co-reported). The
    parallel-in-simulation/singular-in-hardware guardrail (§5.2).
-5. **Bake-off results** ⬜ — sample-efficiency-to-target curves per cell (C4/C5); the
+5. **Bake-off results** ✍ DRAFT v1 (`sections/05_results.md`, 2026-07-08) — 5.1 pre-reg+ceiling ·
+   5.2 Gate ii PASS (C4) · 5.3 ranking PAT<adjoint<SPSA, RHEL censored (C5) · 5.4 RHEL honest echo
+   (C9) · 5.5 offline-tie honest-null · 5.6 diagnostics; 5.7 participation/eff-dim (C6) ▢ + 5.8
+   PR-14 cosine ▢ still to draft — sample-efficiency-to-target curves per cell (C4/C5); the
    participation-profile / effective-dimension result (C6) incl. the reservoir-readout
    baseline as debt-#1 falsifier; secondary diagnostic (PR-14 gradient-cosine) demoted to
    an appendix-grade subsection.
