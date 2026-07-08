@@ -8,7 +8,9 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.7-full-core: training-mode envelope + the case-threatening retrieval + §7 (Lucas 2026-07-08: "go")
+## ✅ DONE — S0.7-full-core (2026-07-08, same day): **training-energy metric INVERTS the device-pass rank (SPSA 2.6 mJ all-in vs PAT ~13–44 J digital-dominated); RHEL pump ×42 its conversion; EdgeDRNN >100× batch-1 deflator resolves the lite's case-threatening retrieval favorably**; §7 drafted. See `results/s0_7/training_envelope.md`. Remaining full-S0.7 items (registered → S0.8 list): exclusions ledger, page-level cite verification.
+
+*(Spec below retained as executed — pre-registered at `bd37703`.)*
 
 **Scope (registered):** S0.7-lite (PR-10 🔒, conditional-positive) stands as the inference
 envelope; this task adds **(a)** the per-method TRAINING-mode energy envelope from the S0.5

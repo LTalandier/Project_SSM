@@ -15,6 +15,24 @@ Per result, report:
 
 ---
 
+## S0.7-full-core — training-mode envelope: **energy metric INVERTS the device-pass rank — SPSA trains to target for ~2.6 mJ all-in (OPT) vs PAT ~13–44 J (digital-twin-dominated ×10⁴); RHEL pump ×42 its own conversion/update; EdgeDRNN >100× batch-1 deflator resolves the lite retrieval favorably** — rules pre-reg `bd37703` (2026-07-08, single-session mode)
+
+**Config:** arithmetic from frozen inputs (S0.5 measured passes-to-target · PR-10 corner stacks ·
+S0.4 adders: 4-tap drive, RHEL 9.6 W pump ×2/update, PAT 505,600 digital passes @ 1.3e13 FLOP
+order-class) + 1 web retrieval; $0. **Findings:** (1) PAT conversion 0.57/21.6 mJ (OPT/CONS) but
+digital 13–44 J → **SPSA is the Stage-1 training-energy story (2.6 mJ)**; the PR-7 §B rank-ledger
+principle anticipated the inversion; FLOP estimate charitable to PAT (direction strengthens);
+(2) adjoint 1.1 mJ zero-digital (+realizability caveat); (3) RHEL per-update pump 2.46 µJ = ×42
+OPT conversion; (4) retrieval: batch-1 RNN on edge GPUs measured >100× below peak (EdgeDRNN
+arXiv:1912.12193 ⚠page-verify; Orin DLA→GPU fallback for recurrent layers) → Jetson-sustained
+comparisons stand, Jetson-peak still never-beaten (reported); (5) lite exclusions stay unbudgeted
+(registered) → named S0.8 retrieval list. **Data:** `results/s0_7/training_envelope.{json,md}`;
+§7 drafted (`paper/sections/07_envelope.md`) — synthesis: demonstration in-data; advantage
+conditional (heater-class-gated niche + millijoule training when calibration unavailable/stale);
+S0.7-lite verdict unchanged.
+
+---
+
 ## S0.6 — damping characterization (PR-12 R-ii, claim C7): **damping = first-order knob (×302 spread; optimum = deep overcoupling r*=2.0) · R-ii CONFIRMED (trainable κ_ext finds it, beats best uniform pin: boxed 0.0005 = ceiling vs pinned 0.0013)** — 96 units, spec pre-reg `5a7f28b` (2026-07-08, single-session mode)
 
 **Config:** 2 arms (pinned κ_ext / boxed [r_min,r_hi]) × r ∈ {0.2,0.3,0.5,1,2,3} × 8 seeds, C-2,

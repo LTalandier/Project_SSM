@@ -56,7 +56,7 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
 | C5 | Method ranking at matched device-pass cost (+ digital-ledger co-report) | PR-6/PR-7, S0.5 | ✅ **PAT 38.4k < adjoint 73.6k < SPSA 176k; RHEL censored; no promotion; + offline-tie null** |
 | C6 | Effective participating dimension / controllability constraint + multi-tap remedy | PR-6 §B v3, S0.4-0 participation profile | ✅ measured (3/32 → 32/32 at K=4 taps {3,12,21,30}); §5.7 prose ▢ |
 | C7 | Damping operating point improves accuracy (D-LinOSS, R-ii trainable-κ_ext framing) | PR-12, S0.6 | ✅ **×302 spread; r*=2.0; R-ii CONFIRMED (boxed 0.0005 beats pin 0.0013)** |
-| C8 | Systems-advantage envelope verdict incl. conversion overhead | PR-10 lite (✅ conditional-positive) → S0.7-full | ⬜ full EMPTY |
+| C8 | Systems-advantage envelope verdict incl. conversion overhead | PR-10 lite (✅ conditional-positive) → S0.7-full | ✅ **core done: lite verdict stands + training-energy inversion (SPSA 2.6 mJ vs PAT 13–44 J); exclusions ledger → S0.8 list** |
 | C9 | RHEL-on-SiN feasibility via concrete χ³-FWM echo sub-model (or explicit off-chip admission) | PR-11, S0.4c | ✅ **template B: censored + worse-than-readout under honest echo; dissipative-echo bias (idealized-C_op control isolates); F22 record** |
 
 ## Section plan (source → prose; ✍ = writable now)
@@ -90,7 +90,7 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
    baseline as debt-#1 falsifier; secondary diagnostic (PR-14 gradient-cosine) demoted to
    an appendix-grade subsection.
 6. **Choosing the damping operating point** ✍ DRAFT v1 (`sections/06_damping.md`, 2026-07-08) — S0.6 sweep under R-ii framing (C7).
-7. **Does it pay? The systems envelope** ⬜ — S0.7-full vs the strong digital baseline
+7. **Does it pay? The systems envelope** ✍ DRAFT v1 (`sections/07_envelope.md`, 2026-07-08) — S0.7-full vs the strong digital baseline
    (F16 floor: named FPGA/ASIC/embedded-GPU sources, full power ledger incl. thermo-optic
    holding + locking + E/O–O/E + DAC/ADC, precision–accuracy link). Honest either-way
    verdict (§10).
