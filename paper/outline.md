@@ -52,12 +52,12 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
 | C1 | White-space: no prior in-situ gradient-based/-estimating training of recurrent-internal photonic params | PR-15 two-modality search, `docs/s0_L/` (+ S0.8 refresh sweep) | ✅ one-sided PASS on record |
 | C2 | Oscillatory SSM ↔ SiN ring lattice mapping + realizable pole region | S0.1, `docs/s0_1/` (B1–B3) | ✅ done |
 | C3 | Idealized model reproduces oscillatory-SSM task accuracy within pre-registered margin | Gate (i), PR-1/PR-2/PR-3 in-house ceiling | ✅ S0.2 closed (G1 PASS; G3 anchor void → in-house ceiling) |
-| C4 | ≥1 method trains to pre-registered accuracy at realistic SiN noise | Gate (ii), PR-8/PR-9, S0.5 bake-off | ⬜ EMPTY — needs S0.4/S0.5 |
-| C5 | Method ranking at matched device-pass cost (+ digital-ledger co-report) | PR-6/PR-7, S0.5 | ⬜ EMPTY |
-| C6 | Effective participating dimension / controllability constraint + multi-tap remedy | PR-6 §B v3, S0.4-0 participation profile | ⬜ EMPTY (finding previewed ≈3/32 → ≥26/32 at K=4) |
+| C4 | ≥1 method trains to pre-registered accuracy at realistic SiN noise | Gate (ii), PR-8/PR-9, S0.5 bake-off | ✅ **PASS 2026-07-07 — PAT-both AND SPSA 8/8 to target at C-2** (`results/s0_5/bakeoff.md`) |
+| C5 | Method ranking at matched device-pass cost (+ digital-ledger co-report) | PR-6/PR-7, S0.5 | ✅ **PAT 38.4k < adjoint 73.6k < SPSA 176k; RHEL censored; no promotion; + offline-tie null** |
+| C6 | Effective participating dimension / controllability constraint + multi-tap remedy | PR-6 §B v3, S0.4-0 participation profile | ✅ measured (3/32 → 32/32 at K=4 taps {3,12,21,30}); §5.7 prose ▢ |
 | C7 | Damping operating point improves accuracy (D-LinOSS, R-ii trainable-κ_ext framing) | PR-12, S0.6 | ⬜ EMPTY |
 | C8 | Systems-advantage envelope verdict incl. conversion overhead | PR-10 lite (✅ conditional-positive) → S0.7-full | ⬜ full EMPTY |
-| C9 | RHEL-on-SiN feasibility via concrete χ³-FWM echo sub-model (or explicit off-chip admission) | PR-11, S0.4c | ⬜ EMPTY |
+| C9 | RHEL-on-SiN feasibility via concrete χ³-FWM echo sub-model (or explicit off-chip admission) | PR-11, S0.4c | ✅ **template B: censored + worse-than-readout under honest echo; dissipative-echo bias (idealized-C_op control isolates); F22 record** |
 
 ## Section plan (source → prose; ✍ = writable now)
 
