@@ -36,9 +36,13 @@ unification) reaches 0.0010 ≈ in-situ PAT 0.0008** — statistically tied → 
 advantage-over-offline claim is NOT in-data at 5% mismatch**; the demonstration (first
 in-situ-trained recurrent photonic system) stands, but the paper must rest any advantage claim
 on larger/unknown mismatch (PR-5 sensitivity, S0.5-full), drift (unmodeled here), or the
-envelope. **Data:** `results/s0_5/{bakeoff.md,bakeoff.json,ceiling.json,sizing.json,runs/}`;
-F8 ledger `docs/s0_4/f8_hardware_ledger.md`. C-1 diagnostic tier (PAT mismatch decomposition +
-rhel-ideal, 3 seeds) running.
+envelope. (7) **C-1 diagnostic tier DONE** (`bakeoff_diag_c1.json`): PAT-perfect/M-par/M-struct
+all = C-1 ceiling 0.0018 (mismatch channels cost ≈0 **at C-1** — do NOT extrapolate; S0.4b B2
+showed the M-struct channel grows to ~8% at C-2); **rhel-ideal reaches target 0.0057 ≤ 0.0073
+— the decisive control: with a PERFECT conjugator RHEL's mechanics DO train, so its C-2
+failure is echo-physics×cell (dissipative bias), not broken mechanics.** **Data:**
+`results/s0_5/{bakeoff.md,bakeoff.json,bakeoff_diag_c1.json,ceiling.json,sizing.json,runs/}`;
+F8 ledger `docs/s0_4/f8_hardware_ledger.md`.
 
 ---
 
