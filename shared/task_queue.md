@@ -8,6 +8,26 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🟢 ACTIVE — S0.7-full-core: training-mode envelope + the case-threatening retrieval + §7 (Lucas 2026-07-08: "go")
+
+**Scope (registered):** S0.7-lite (PR-10 🔒, conditional-positive) stands as the inference
+envelope; this task adds **(a)** the per-method TRAINING-mode energy envelope from the S0.5
+measured passes-to-target + the S0.4 method adders (4-tap drive E/O; adjoint error-injection;
+RHEL 2×N-arm pump 9.6 W/echo; PAT digital-twin ledger 505,600 digital passes — FLOP-costed at
+the named F16 accelerator classes), computed at both PR-10 corners; **(b)** the lite's single
+most case-threatening retrieval (a measured *sustained* embedded-GPU number on a matched
+streaming workload — lite finding 5); **(c)** §7 draft. **Registered accounting rules (before
+computing):** per-sample conversion stack = the lite's frozen per-sample envelopes (cited, not
+re-derived); pass duration = T/f_s; digital FLOPs/pass estimated from the 2N-dim ZOH matvec
+(formula in-script, order-of-magnitude honesty class, labelled); the four lite exclusions
+(laser wall-plug, locking, control compute, packaging) remain UNBUDGETED here with the lite's
+only-shrinks-positive-cells direction statement — their primary-sourced ledger = a named S0.8
+retrieval item, not silently absorbed. **Deliverables:** `analysis/s0_7_training_envelope.py`
+→ `results/s0_7/training_envelope.{json,md}` · §7 draft · trackers. **Cost:** arithmetic + 1
+web retrieval, $0.
+
+---
+
 ## ✅ DONE — S0.6: damping characterization (2026-07-08, same day) — **×302 spread, optimum r*=2.0 deep overcoupling; R-ii CONFIRMED (boxed training finds it, 0.0005 = ceiling, beats best pin)**; see results_log + `results/s0_6/damping.md`; §6 drafted. Next: S0.7-full envelope → S0.8 assembly.
 
 *(Spec below retained as executed — pre-registered at `5a7f28b`.)*
