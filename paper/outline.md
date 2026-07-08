@@ -94,12 +94,12 @@ sentence 7 → S0.7-full envelope gate · sentence 8 → the honest either-way c
    (F16 floor: named FPGA/ASIC/embedded-GPU sources, full power ledger incl. thermo-optic
    holding + locking + E/O–O/E + DAC/ADC, precision–accuracy link). Honest either-way
    verdict (§10).
-8. **Limits of this model** ✍ — F19 verbatim seed: robustness measured against *modelled*
+8. **Limits of this model** ✍ DRAFT v1 (`sections/08_limits.md`, 2026-07-08) — F19 verbatim seed: robustness measured against *modelled*
    imperfections only; thermal transients, polarization, fab variation, un-knobbed
    mode-splitting could reorder methods on hardware. Plus: G3 anchor status (one careful
    paragraph; expanded treatment → P2 if Lucas rules GO), fp32 sensitivity, single-seed
    caveats where they exist.
-9. **Outlook: Stage 1** ✍ — MPW path (CORNERSTONE/LIGENTEC), PAT/SPSA hardware-committed,
+9. **Outlook: Stage 1** ✍ DRAFT v1 (`sections/09_outlook.md`, 2026-07-08) — MPW path (CORNERSTONE/LIGENTEC), PAT/SPSA hardware-committed,
    promotion rule for adjoint/RHEL (PR-9), what the first on-chip demonstration would
    require. Frame per F22: the novelty is the recurrent dissipative setting, not
    re-validating chip-proven PAT/SPSA.
