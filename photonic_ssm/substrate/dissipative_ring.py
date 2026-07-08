@@ -111,6 +111,9 @@ class DissipativeRingSubstrate(nn.Module):
         # saturation state but cannot realize the ∂g/∂κ_ext Jacobian channel).
         # Forward VALUES are bit-identical either way (gate B5).
         self.detach_gain = False
+        # S0.6 (PR-12 R-ii): optional training-time upper bound on r = κ_ext/κᵢ
+        # (a sub-box of the registered K4 band; None = the full band).
+        self.r_hi_train = None
 
         plat = cellmod.platform_of(cell)
         self.FSR_Hz = plat.FSR_GHz * 1e9
@@ -270,6 +273,8 @@ class DissipativeRingSubstrate(nn.Module):
         lo, hi = cellmod.R_BOUNDS
         if self.gain_mode == "saturating" and self.gain_factor > 0.0:
             lo = cellmod.R_MIN_SATURATING
+        if self.r_hi_train is not None:          # S0.6 sub-box (PR-12 R-ii)
+            hi = self.r_hi_train
         self.kappa_ext.clamp_(lo * float(self.kappa_i),
                               hi * float(self.kappa_i))
 

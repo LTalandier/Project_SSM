@@ -66,8 +66,8 @@ def taps_for_N(N: int) -> tuple:
                          for t in RESOLVED_TAPS}))
 
 
-def make_substrate(cell_label: str, seed: int, N: Optional[int] = None
-                   ) -> DissipativeRingSubstrate:
+def make_substrate(cell_label: str, seed: int, N: Optional[int] = None,
+                   r0: Optional[float] = None) -> DissipativeRingSubstrate:
     """Common θ₀ (PR-6 §B): δ linspace over [−κᵢ,+κᵢ] (§D numeric band),
     r₀ = 0.3, connected chain μ_c = 0.3κᵢ, resolved input taps."""
     sub = DissipativeRingSubstrate.from_cell(
@@ -79,7 +79,7 @@ def make_substrate(cell_label: str, seed: int, N: Optional[int] = None
     with torch.no_grad():
         sub.delta.copy_(torch.linspace(-1.0, 1.0, sub.N,
                                        dtype=sub.delta.dtype) * ki)
-        sub.kappa_ext.fill_(cellmod.R0_THETA0 * ki)
+        sub.kappa_ext.fill_((cellmod.R0_THETA0 if r0 is None else r0) * ki)
         sub.mu_chain.fill_(0.3 * ki)
     return sub
 
@@ -167,15 +167,19 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           N: Optional[int] = None, lr_phys_frac: float = 1e-3,
           lr_head: float = 3e-2, spsa_c_frac: float = 0.01,
           eval_every: Optional[int] = None,
-          gain_mode: Optional[str] = None) -> RunLedger:
+          gain_mode: Optional[str] = None,
+          r0: Optional[float] = None, r_hi: Optional[float] = None,
+          pin_kext: bool = False) -> RunLedger:
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
     "pat-M-struct","pat-both","spsa","adjoint","rhel","rhel-ideal",
     "head-only"}. Smoke HPs from the S0.4a spec; the equal-HP *search* is
     S0.5 (PR-8)."""
     torch.manual_seed(run_seed)
-    sub = make_substrate(cell_label, run_seed, N=N)
+    sub = make_substrate(cell_label, run_seed, N=N, r0=r0)
     if gain_mode is not None:          # PR-3 §A fixed-gain sensitivity spot
         sub.gain_mode = gain_mode
+    if r_hi is not None:               # S0.6 sub-box (PR-12 R-ii)
+        sub.r_hi_train = r_hi
     ki = float(sub.kappa_i)
     head = TapHead()
     led = RunLedger()
@@ -188,7 +192,10 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
                                    generator=ase_gen(run_seed, 0, 0))
         y_scale = float(y0.mean()) + 1e-30
 
-    in_situ = [sub.delta, sub.kappa_ext, sub.mu_chain]
+    # S0.6 arm B: κ_ext pinned at its init (damping = a fixed design point);
+    # only {δ, μ} train. Arm A / default: the full P2 partition.
+    in_situ = ([sub.delta, sub.mu_chain] if pin_kext
+               else [sub.delta, sub.kappa_ext, sub.mu_chain])
     opt_head = torch.optim.Adam(head.parameters(), lr=lr_head)
     method_base = method.split("-")[0]
 

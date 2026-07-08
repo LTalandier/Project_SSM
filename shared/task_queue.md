@@ -8,6 +8,39 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🟢 ACTIVE — S0.6: the damping characterization (PR-12 R-ii; claim C7) — spec PRE-registered before the runs (Lucas 2026-07-08: "ok launch the runs on the cloud")
+
+**Goal:** the accuracy-vs-damping curve under the signed R-ii framing — damping = the trainable
+per-ring net loss κ_net(κ_ext) at **fixed g_rt = 0.9κᵢ** — convergence-controlled (the S0.3-1
+anomaly-B fix), BPTT-reference diagnostic (never a bake-off contest; estimator-independence
+rides S0.5's methods≈BPTT result). Corrects the S0.3-1 coarse sweep's illegal g_f axis.
+
+**Design (registered):** two arms × 6-point grid × 8 seeds {11,23,47,61,83,101,127,151}, C-2
+headline, BPTT, U_max = 12000, eval/100 (identical PR-3 §A protocol: final = median-last-3;
+plateau required — non-plateaued runs flagged, not silently included):
+- **Arm B ("pinned"; the classic operating-point curve):** κ_ext FROZEN at
+  r_pin ∈ {0.2, 0.3, 0.5, 1.0, 2.0, 3.0}; only {δ, μ} train. Reads: does the damping *value*
+  matter when it is a fixed design choice?
+- **Arm A ("boxed"; the R-ii trainable-range curve):** full P2 partition, clamp sub-box
+  [r_min, r_hi] with r_hi ∈ {0.2, 0.3, 0.5, 1.0, 2.0, 3.0}; init r₀ = √(r_min·r_hi)
+  (registered formula, in-box by construction). Reads: does trainable κ_ext *find* the good
+  operating point within a given range — i.e., is damping a knob training absorbs (R-ii's
+  claim) or a choice the designer must make?
+- **C7 evaluation rule (registered):** (i) the pinned curve's spread = the damping stakes
+  (max/min median SER across r_pin); (ii) R-ii is CONFIRMED if every arm-A box whose span
+  contains the arm-B optimum reaches within the PR-3 margin factor (1.25×+0.005 absolute) of
+  the best pinned point — else the operating point must be designed, not trained (recorded
+  either way; feeds §6 + PR-12 closure).
+- Baseline context row: the S0.5 ceiling (full box [r_min, 3], r₀ = 0.3) is arm-A-adjacent
+  and reused, not rerun.
+
+**Deliverables:** `analysis/s0_6_run_one.py` + cloud manifests · `results/s0_6/{runs/,
+damping.json,damping.md}` · results_log entry · §6 draft. **Cost:** 96 units ≈ 3,600 unit-min
+on 4× Hetzner cpx51 (~32 workers, OMP=2) ≈ **~2 h wall, <€1**; mixed-platform disclosure as
+S0.5.
+
+---
+
 ## ✅ DONE — S0.4-close + S0.5-core: **Gate ii PASS (both ii-a ×21.5 & ii-b via PAT-both AND SPSA 8/8)** — the headline Stage-0 trainability result is in-data (2026-07-07, same day). Rank PAT<adjoint<SPSA, RHEL censored (template B); no promotion → PAT/SPSA hardware roadmap; **offline-deploy ties in-situ PAT at 5% mismatch (advantage-vs-offline NOT in-data — F7.3 working as designed).** See results_log + `results/s0_5/bakeoff.md`. Next: S0.6 damping → S0.7-full envelope → S0.8 paper (§3 substrate + §4 results now writable).
 
 *(Spec below retained as executed — PR-3/8/9 frozen `ae16f6d`, sizing `7bcbcb9`, ceiling `4fca58d`, all before the runs.)*
