@@ -15,6 +15,22 @@ Per result, report:
 
 ---
 
+## S0.6 — damping characterization (PR-12 R-ii, claim C7): **damping = first-order knob (×302 spread; optimum = deep overcoupling r*=2.0) · R-ii CONFIRMED (trainable κ_ext finds it, beats best uniform pin: boxed 0.0005 = ceiling vs pinned 0.0013)** — 96 units, spec pre-reg `5a7f28b` (2026-07-08, single-session mode)
+
+**Config:** 2 arms (pinned κ_ext / boxed [r_min,r_hi]) × r ∈ {0.2,0.3,0.5,1,2,3} × 8 seeds, C-2,
+BPTT reference, U_max=12000, PR-3 §A protocol; 3× Hetzner cpx51 ~2.5h <€1 (deleted).
+**Findings:** (1) pinned curve 0.393→0.0013 (r*=2.0, κ_net≈4.1κᵢ ≈5.5 samples — T-A needs 7-tap
+span; EXCESS memory harmful → D-LinOSS thesis in-data, optimum heavily-damped for this task);
+(2) **R-ii CONFIRMED** per the registered rule: every box containing r* reaches margin; [r_min,2]
+and [r_min,3] hit **0.0005 = the S0.5 ceiling < best pin 0.0013** (per-ring heterogeneous damping
+beats any uniform pin) → designer must only ensure the box CONTAINS the regime; (3) θ₀ pinned
+(r=0.3) = 0.038 vs trained 0.0005 (×77) → much of in-situ training's value on this task = finding
+the damping point; offline finds it too on its model → §5.5 advantage reading unchanged;
+(4) mid-grid (r=0.3–0.5) budget-censored (flagged; verdicts use plateaued configs only).
+**Data:** `results/s0_6/{damping.md,damping.json,runs/}`; §6 drafted (`paper/sections/06_damping.md`).
+
+---
+
 ## S0.5-core — the gated 8-seed bake-off: **Gate ii-a PASS ×21.5 · Gate ii-b PASS (PAT-both AND SPSA both 8/8 to target)** · rank PAT<adjoint<SPSA, RHEL censored (template B) · **offline-deploy TIES in-situ PAT at 5% mismatch → advantage-vs-offline NOT yet in-data** (2026-07-07, single-session mode)
 
 **Goal:** the headline Stage-0 result — run the four estimators + baselines on the shared C-2

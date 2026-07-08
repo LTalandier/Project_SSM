@@ -8,7 +8,9 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🟢 ACTIVE — S0.6: the damping characterization (PR-12 R-ii; claim C7) — spec PRE-registered before the runs (Lucas 2026-07-08: "ok launch the runs on the cloud")
+## ✅ DONE — S0.6: damping characterization (2026-07-08, same day) — **×302 spread, optimum r*=2.0 deep overcoupling; R-ii CONFIRMED (boxed training finds it, 0.0005 = ceiling, beats best pin)**; see results_log + `results/s0_6/damping.md`; §6 drafted. Next: S0.7-full envelope → S0.8 assembly.
+
+*(Spec below retained as executed — pre-registered at `5a7f28b`.)*
 
 **Goal:** the accuracy-vs-damping curve under the signed R-ii framing — damping = the trainable
 per-ring net loss κ_net(κ_ext) at **fixed g_rt = 0.9κᵢ** — convergence-controlled (the S0.3-1
