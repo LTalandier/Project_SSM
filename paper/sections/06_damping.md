@@ -2,7 +2,7 @@
 
 **Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
 **Sources of record:** `results/s0_6/{damping.md,damping.json,runs/}` (spec pre-registered at
-`5a7f28b`) · PR-12 🔒 R-ii · PR-3 §A eval protocol. **Open flags:** [CITE-D-LinOSS]; figure F6 ▢.
+`5a7f28b`) · PR-12 🔒 R-ii · PR-3 §A eval protocol. **Open flags:** [CITE-*] keys resolved via `paper/references.md`; figure F6 = `paper/figures/F6_damping.*`.
 
 ---
 

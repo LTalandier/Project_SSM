@@ -4,7 +4,7 @@
 **Sources of record:** `docs/s0_1/{mapping_result,mapping_notes,B1_actuation_map,B2_backscatter_bound,B3_kappa_ext_tradeoff}.md`
 · `shared/results_log.md` (S0.1, S0.1.1) · `shared/critic_review_s0-1-results.md`. Every number
 below is the Executor's, validated by the cited tests; none originate in this draft.
-**Open flags carried:** [CITE-*] placeholders; the B2 quantitative crossovers are ⚠ provisional
+**Open flags carried:** [CITE-*] keys resolved via `paper/references.md` (2026-07-12; backscatter sources page-verified, convention stated in-text); the B2 quantitative crossovers are ⚠ provisional
 pending F5 primary-source verification (S0.L, before submission).
 
 ---
@@ -117,13 +117,18 @@ policy folds the readout trade into the recurrence training.
 Sidewall roughness couples the counter-propagating modes at a coherent rate $\gamma$ that is a
 fabrication constant, essentially independent of $\kappa_\mathrm{tot}$; the resonance resolves
 into a standing-wave doublet when $2\gamma \gtrsim \kappa_\mathrm{tot}$ (conservative HWHM
-criterion; the FWHM criterion shifts every crossover ×2, conclusion unchanged). Because
+criterion; the FWHM criterion shifts every crossover ×2, conclusion unchanged)
+[CITE-modal-coupling]. Because
 $\kappa_i$ falls as $Q_i$ rises while $\gamma$ does not, splitting *grows* with $Q$: from
 measured SiN rates, a clean damascene-class process ($\gamma/2\pi \approx 12$ MHz
-[CITE-KONDRATIEV]) keeps the single-pole picture at the foundry corner ($2\gamma/\kappa_i
+[CITE-damascene]) keeps the single-pole picture at the foundry corner ($2\gamma/\kappa_i
 \approx 0.5$) and breaks it at $Q \approx 4\times10^6$ (HWHM; $8\times10^6$ FWHM), while a rough
-subtractive process ($\gamma/2\pi \approx 90$–$160$ MHz [CITE-SUBTRACTIVE⚠]) splits 21–75 % of
-modes *already at* $Q_i = 2\times10^6$. ⚠ *The assembled crossover curve brackets published SiN
+subtractive process splits 21–75 % of resonances *already at* $Q_i \lesssim 2.7\times10^6$, with
+average doublet separations of 180–320 MHz depending on etch mask [CITE-SUBTRACTIVE] — i.e.
+modal-coupling rates $\gamma/2\pi \approx 90$–$160$ MHz under the standard
+$2\gamma$-separation convention [CITE-modal-coupling], a mapping we state here because the
+source tabulates separations, not rates (page-verified 2026-07-12). ⚠ *The assembled crossover
+curve brackets published SiN
 data points — no single published SiN crossover exists, and no $\gamma$ is published for the
 specific target processes; primary-source verification is registered before submission (F5).*
 Two consequences propagate forward: the substrate model carries a roughness-gated CW/CCW doublet

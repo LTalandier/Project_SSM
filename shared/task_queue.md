@@ -8,6 +8,39 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## ✅ DONE — S0.8: P1 manuscript assembly core (2026-07-12, same day): **figures F1–F7 ALL MADE** (`paper/figures/`, generator `analysis/make_figures.py`) · **§5.7/5.8 drafted** (controllability first-class; PR-14 honest deferral) · **citation sweep DONE** (`paper/references.md`, 30+ keys, 4 page-level verifications — EdgeDRNN >100× VERIFIED verbatim [cite JETCAS arXiv:2012.13600 not 1912.12193]; Er:SiN measured NF ≈7 dB CONFIRMS frozen NF-A [debt-#3 rewritten to the S0.3-0-accurate history]; SiN-FWM γ: our 0.97 optimistic vs measured ULL 0.29–0.51 → disclosed in §4, direction favors RHEL conclusion; SUBTRACTIVE splitting = separations 180–320 MHz, 2γ convention now stated in §2) · **white-space refresh DONE** (`docs/s0_L/whitespace_refresh_2026-07-12.md`: **W1 clean, W0 survives**; Wu eLight = inference-only CLEAR, Zhao LPR = feedforward CLEAR; 5 near-misses dispatched by name in §1.1; 4 pre-submission page reads registered) · **abstract ▢-FILLED** · `paper/supplementary.md` (provenance commit table + repro statement). Remaining: Lucas rulings (title, W0-vs-W1) → E-2026-07-12-1; S-figs; venue formatting; final refresh sweep.
+
+*(Spec below retained as executed.)*
+
+## (executed spec) — S0.8: P1 manuscript assembly (2026-07-12, single-session mode)
+
+**Goal:** assemble the P1 manuscript from the nine drafted sections. No new runs; no gates
+consumed. Directed by Lucas 2026-07-12 ("figures F1–F7, the §5.7/5.8 stubs, citation sweep,
+white-space refresh").
+
+**Scope:**
+- **(a) §5.7/§5.8** — expand from the S0.4-0 record (`results/s0_4_0/s0_4_0_calibration.json`);
+  §5.8 = the honest PR-14-deferred paragraph (registered S0.5-full residue, no data invented).
+- **(b) Figures F1–F7** — `analysis/make_figures.py` → `paper/figures/F*.{png,pdf}`, all from
+  frozen result JSONs (s0_1 pole region · s0_4_0 calibration · s0_5 bakeoff+runs · s0_6 damping ·
+  s0_7 envelopes). Figures are committed (paper assets); `results/` stays gitignored.
+- **(c) Citation sweep** — resolve every `[CITE-*]` key into `paper/references.md` with a
+  per-entry verification status; **page-level verifications** for the load-bearing four:
+  EdgeDRNN >100× batch-1 deflator (arXiv:1912.12193), SiN-FWM chain numbers (PR-11 ⚠verify-2..6),
+  RHEL semantics quotes (arXiv:2506.05259), Cui-2023 Q anchor. Web-agent sourced, cross-checked.
+- **(d) White-space refresh** — re-run the PR-15 two-modality search dated 2026-07-12 →
+  `docs/s0_L/whitespace_refresh_2026-07-12.md`; specifically re-audit the Wu-eLight and Zhao-LPR
+  exposures and any 2025–26 newcomers. **W0-vs-W1 stays Lucas's ruling** — this task only
+  refreshes the evidence under it.
+- **(e) Assembly residue** — abstract ▢-fill from landed gates; `paper/supplementary.md`
+  (pre-registration ledger pointer + F8 + phase→commit-hash table + mixed-platform repro
+  statement); outline claim/figure statuses updated.
+
+**NOT in scope:** title pick + W0-vs-W1 (Lucas rulings, flagged at close); S0.5-full residue
+rows; P2 send (Lucas's physical action). **Cost:** web retrievals + local matplotlib, $0.
+
+---
+
 ## ✅ DONE — S0.7-full-core (2026-07-08, same day): **training-energy metric INVERTS the device-pass rank (SPSA 2.6 mJ all-in vs PAT ~13–44 J digital-dominated); RHEL pump ×42 its conversion; EdgeDRNN >100× batch-1 deflator resolves the lite's case-threatening retrieval favorably**; §7 drafted. See `results/s0_7/training_envelope.md`. Remaining full-S0.7 items (registered → S0.8 list): exclusions ledger, page-level cite verification.
 
 *(Spec below retained as executed — pre-registered at `bd37703`.)*

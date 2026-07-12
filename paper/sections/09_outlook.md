@@ -2,7 +2,7 @@
 
 **Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
 **Sources:** roadmap Stage-1 · F8 hardware ledger · PR-9 promotion record · F22 framing ·
-proposal §6–§8. **Open flags:** [CITE-*]; the S0.6/S0.7 results feed final numbers (▢).
+proposal §6–§8. **Open flags:** [CITE-*] keys resolved via `paper/references.md`; S0.6/S0.7 numbers landed (final-number sweep at venue formatting).
 
 ---
 

@@ -4,7 +4,7 @@
 **Sources of record:** `shared/preregistration.md` PR-5/6/7(+7.1)/11 · roadmap S0.4a–c ·
 `photonic_ssm/estimators/{spsa,pat,adjoint,rhel}.py` + gate tests (150/150) ·
 `results/s0_4{a,b,c}/smoke.md` · `docs/s0_4/{pr5_twin_mismatch_recon,pr11_echo_submodel_recon,
-f8_hardware_ledger}.md`. **Open flags:** [CITE-*] placeholders.
+f8_hardware_ledger}.md`. **Open flags:** [CITE-*] keys resolved via `paper/references.md` (2026-07-12; RHEL source page-verified; SiN-FWM γ disclosure added in-text).
 
 ---
 
@@ -90,8 +90,15 @@ through the ring ports ($\eta_\text{ex} = 2\kappa_\text{ext}/\kappa_\text{net} =
 single-pass spiral conversion ($(\gamma_\text{nl} P_p L)^2 \approx -16.7$ dB at 0.3 W pump,
 0.5 m; $\gamma_\text{nl} \approx 0.97\,\text{W}^{-1}\text{m}^{-1}$ for tight-confinement SiN
 [CITE-SiN-FWM]), and timing decay — totalling **−22.4 dB per conjugation**, plus the
-phase-insensitive parametric quantum floor (measured negligible at the $10^5$-photon state
-scale, as registered-to-measure) and pump-transfer excess. Because the ring fields overlap
+phase-insensitive parametric quantum floor. A page-level check at assembly found published
+*ultra-low-loss-geometry* demonstrations at $\gamma \approx 0.29$–$0.51\,\text{W}^{-1}
+\text{m}^{-1}$ (with CW power handling demonstrated to 7 W) [CITE-SiN-FWM]; our 0.97 assumes a
+tighter-confinement spiral than those demos, so the frozen chain is, if anything, *optimistic*
+for RHEL — at the measured ULL values the conjugation penalty deepens by a further ~6 dB. The
+direction only strengthens §5.4's conclusion, which the idealized-conjugator control shows does
+not hinge on the chain at all. The quantum floor itself was measured negligible at the
+$10^5$-photon state scale (as registered-to-measure), with pump-transfer excess included.
+Because the ring fields overlap
 spectrally, conjugating N rings needs N pumped arms: **≈9.6 W of on-chip pump at the headline
 cell**, charged to the envelope. Off-chip conjugation was priced and excluded (the state decays
 in transit: amplitude survival 0.12–0.54 at 10 ns for C-1/C-2; there is no storage primitive to

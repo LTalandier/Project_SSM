@@ -63,7 +63,9 @@ Stage 0 decomposition + live state: `shared/stage0_roadmap.md` + `shared/task_qu
    gradient-based/-estimating training* — never done (pre-empt reservoir computing, the Bueno/Brunner
    photonic-RNN RL line, internal-param reservoir variants). The single load-bearing sentence.
 2. **LinOSS / D-LinOSS / Mamba-3** benchmark specifics.
-3. **Er:Si₃N₄ noise figure** — flagship gain device published gain but **no measured NF**.
+3. **Er:Si₃N₄ noise figure** — original "no measured NF" premise found **false** at S0.3-0
+   (flagship device reports a coupling-loss-limited NF ≈ 7 dB; NF-A = 7.0 frozen to match;
+   re-verified at page level 2026-07-12). Residue: intrinsic amplifier NF not isolated.
 4. **Recurrent-adjoint gap** — inferred from absence of demonstrations (mid-2026).
 
 Plus the **§10 advantage question** (does a photonic SSM beat digital once conversion overhead is paid?)

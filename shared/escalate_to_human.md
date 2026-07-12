@@ -18,6 +18,38 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-07-12-1 — **S0.8 assembly core DONE — the two rulings only you can make now gate P1: (1) title, (2) W0-vs-W1 scope**
+
+**State:** all nine sections drafted (§5.7/5.8 filled today) · figures F1–F7 made
+(`paper/figures/`) · abstract filled from landed gates · citation sweep done
+(`paper/references.md`, 4 page-level verifications) · white-space refresh done
+(`docs/s0_L/whitespace_refresh_2026-07-12.md`) · supplementary skeleton + provenance table
+(`paper/supplementary.md`). Remaining non-PI items (S-figs, venue formatting, final refresh
+sweep + 4 registered page reads) hang off your two rulings.
+
+**(1) Title** — candidates in `paper/outline.md`; Supervisor recommendation unchanged: **#1**
+(question form: *"Can a photonic state-space model be trained on-chip? A pre-registered
+four-method bake-off on a realistic silicon-nitride ring substrate"*) — honest about Stage 0
+being simulation; "pre-registered" is the differentiator.
+
+**(2) W0-vs-W1** — the refresh strengthens the case for either, and the June freeze-low-
+reclaim-high logic still holds, but the facts moved: **Wu eLight resolved = inference-only
+(clears W0)** and **Zhao LPR resolved = feedforward weight banks (clears W0)** — the two
+exposures that originally forced the W1 hedge are both gone. **Updated Supervisor
+recommendation: claim W0 in the intro prose with W1 as the stated precise form** (the
+"first" sentence stays W1-shaped — it is exactly what we built — while the surrounding text
+now safely says no photonic recurrence of *any* kind has had recurrence-defining parameters
+trained on-device by gradient methods). Cost if a W0 attack surfaces in review: retreat to
+pure W1 = one paragraph edit; the W1 core claim is untouched. The 4 registered page-level
+reads (Wu full text, arXiv:2507.02297, arXiv:2606.13454, Zhao supplement) are the remaining
+diligence before the stronger wording ships.
+
+**Also standing:** the P2 author-email send (E-2026-07-07-1 below — your physical action).
+
+**Filed:** 2026-07-12 (Supervisor, single-session mode). **Status: OPEN — two rulings.**
+
+---
+
 ### E-2026-07-07-1 — **Publication plan proposed + one go/no-go: the LinOSS EigenWorms reproducibility note (P2)**
 
 **Context:** your goal directive 2026-07-07 ("make something publishable — and hopefully buildable —

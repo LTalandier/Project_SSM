@@ -4,7 +4,7 @@
 **Sources of record:** `shared/preregistration.md` PR-4 🔒 v2 (signed 2026-06-13) + PR-6 §B/§C/§D
 + the S0.4-0 calibration addendum · `photonic_ssm/substrate/` (tests 128/128 at freeze) ·
 `results/s0_4_0/` · `docs/s0_3/`. Every number is from the signed blocks or their registered
-calibration addenda; none originate in this draft. **Open flags:** [CITE-*]; the C-2 anchor's
+calibration addenda; none originate in this draft. **Open flags:** [CITE-*] keys resolved via `paper/references.md` (2026-07-12; Cui/Er:SiN page-verified, debt-#3 rewording folded in); the C-2 anchor's
 geometry-transfer caveat and the §G-conformance anchor-risk (vii) are carried verbatim (§3.6).
 
 ---
@@ -49,10 +49,14 @@ $\langle FF^*\rangle = 2\kappa_g n_\text{sp}\,\delta(t{-}t')$ in photon units, d
 exactly alongside the ZOH/van-Loan propagator, with **fresh draws on every physical pass** —
 noise is never shared between passes, methods, or the forward/reverse directions (this single
 convention carries much of the fairness burden, and one of RHEL's irreversibility invariants).
-The headline noise figure is **NF = 7.0 dB** ($n_\text{sp}=2.5$, measured-on-platform class); we
-flag that the flagship Er:Si₃N₄ gain device published gain but **no measured NF** — the noise
-budget is the less-proven number, tracked as verification debt #3, and NF ∈ {3, 5} are
-sensitivity values only.
+The headline noise figure is **NF = 7.0 dB** ($n_\text{sp}=2.5$). The program's original debt
+register carried "no measured NF for the flagship Er:Si₃N₄ device" as verification debt #3; the
+S0.3-0 substrate reconnaissance (2026-06-10) found that premise false — the full text reports
+"a noise figure of ca. 7 dB … at net gain of >20 dB, limited by coupling losses" [CITE-Er-SiN]
+— and NF-A = 7.0 dB was frozen *to match that measurement* (re-verified at page level during
+assembly, 2026-07-12). The residue of the debt is narrower than its original form: what exists
+is a single coupling-loss-limited *system* NF, not an isolated intrinsic amplifier NF, so
+NF ∈ {3, 5} remain registered sensitivity values.
 
 ## 3.3 The three cells
 
@@ -65,7 +69,7 @@ sensitivity values only.
 C-2 is registered as a *conservative bound* on a demonstrated MPW result (3.3 dB/m, mean
 $Q_i \approx 10.8$M [CITE-Cui-2023]); our pair ($5.1$ dB/m, $Q_i = 6.8\times10^6$) is strictly
 worse than the broadest-linewidth device in that paper's full 249-resonance distribution, whose
-figures are independently reproduced in a peer-reviewed commentary [CITE-Ye-Marpaung-2023]. The
+figures are independently assessed in an invited peer commentary [CITE-Ye-Marpaung-2023]. The
 residual anchor risk is geometry transfer (the demonstrated loss is achieved *by* a wide
 multimode Euler-bend racetrack; our registry ring is single-mode) — flagged by the commentary
 itself and priced by a registered ×2-loss derate row. At the operating point, C-2 holds ~32

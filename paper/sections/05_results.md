@@ -6,9 +6,9 @@ period). **Sources of record:** `shared/preregistration.md` (PR-3/6/7/8/9 blocks
 S0.4-close addenda, all committed before the runs they govern) · `results/s0_5/bakeoff.md` +
 `bakeoff.json` + `bakeoff_diag_c1.json` + `ceiling.json` + `sizing.json` ·
 `shared/results_log.md` (S0.4a/b/c, S0.5-core) · `docs/s0_4/f8_hardware_ledger.md`. Every number
-below is from those frozen artifacts; none originate in this draft. **Open flags:** [CITE-*]
-placeholders; C-2 mismatch-sensitivity, damping (§6), and the full envelope (§7) are S0.5-full /
-S0.6 / S0.7 rows, marked ▢ where they belong.
+below is from those frozen artifacts; none originate in this draft. **Open flags:** [CITE-*] keys resolved via `paper/references.md`; figures F3–F5 made
+(`paper/figures/`); C-2 mismatch-sensitivity and PR-14 are S0.5-full rows, marked where they
+belong (§5.6, §5.8).
 
 ---
 
@@ -144,21 +144,42 @@ sensitivity is a Stage-0.5-full measurement, not an inference from C-1. And the 
 is the control cited in §5.4. Neither row is a headline; both are the pre-registered controls that
 let the headlines mean what they say.
 
-## 5.7 Controllability and effective dimension ▢
+## 5.7 Controllability: what "N = 32" actually means
 
-▢ *To draft from S0.4-0 (`results/s0_4_0/`, the resolved input map + participation profile).*
-The single-drive substrate has an effective participating dimension of ≈3 of 32 rings (the
-gradient-magnitude profile decays steeply from the drive); the resolved four-tap input map
-$\{3,12,21,30\}$ raises every ring's gradient above the pre-registered $10^{-3}$ controllability
-threshold (32/32, worst $1.42\times10^{-3}$, min over five drive seeds). This is claim C6 and the
-in-data form of the debt-#1 reservoir falsifier: it is *why* the readout-only baseline is weak and
-*why* the multi-tap drive is required — at the cost of four E/O channels charged to the envelope
-(§7). The strict every-ring gate and the min-over-seeds robustness protocol are the two S0.4-0
-rulings flagged for review.
+The bake-off's cell label understates a constraint that any hardware implementation inherits, so
+we report it as a first-class result (Fig. F3). Under a single input tap, the per-ring gradient
+magnitude collapses geometrically with distance from the drive — by ring 32 it sits some
+twenty-five orders of magnitude below the maximum — and the *participation profile* (settled
+per-ring amplitude relative to the maximum) counts only $\{1, 3, 5\}$ of 32 rings above
+$\{10^{-1}, 10^{-2}, 10^{-3}\}$. A nominally 32-ring lattice driven at one port is, effectively,
+a three-ring computer with 29 passengers. This is the in-data form of the program's
+reservoir-falsifier: it is *why* the readout-only baseline stalls at $2.2\times10^{-2}$ (§5.2),
+and it is a controllability property of the chain physics, not of any training method.
 
-## 5.8 Secondary diagnostic (appendix-grade) ▢
+The pre-registered remedy is a measured, minimal input map: the smallest tap set (capped at
+$K = 4$) under which *every* ring's gradient clears $10^{-3}$ of the maximum. The resolved map,
+taps $\{3, 12, 21, 30\}$, clears the gate for all 32 rings with worst ratio $1.42\times10^{-3}$
+— taken as a *minimum over five drive realizations*, because single-seed margins at the gate
+boundary flicker by a factor of ~20. No three-tap set clears (best: 24 of 32), and the
+registered starting guess $\{1, 9, 17, 25\}$ was not the winner (28 of 32 — its worst ring sat
+seven hops from a tap). Under the resolved map the participation counts rise to
+$\{4, 26, 32\}$, and every use of "$N = 32$" in this paper carries that measured profile rather
+than the nominal dimension. Two protocol rulings made during resolution are on record: the
+gate references the *maximum-gradient* ring (the registered ring-1 reference is gameable when
+ring 1 is untapped), and robustness binds on the min-over-seeds. Both strengthen the gate; both
+were adopted before the finalists were evaluated. The price of controllability is charged
+honestly where it lands: four drive E/O channels instead of one, priced in the systems envelope
+(§7) — trainability of the deep lattice is bought with exactly the conversion overhead the
+advantage question (§7.4) must then carry.
 
-▢ *PR-14 bias/variance of the gradient estimate vs the BPTT reference.* Registered as a secondary
-diagnostic only — never the headline, since gradient-direction agreement structurally flatters the
-exact methods (adjoint, RHEL) and penalizes SPSA, whose poor per-step alignment averages to good
-convergence. Deferred to S0.5-full; belongs in an appendix, not this section's argument.
+## 5.8 Secondary diagnostic (registered, deferred)
+
+PR-14 — the bias/variance decomposition of each estimator's gradient against the BPTT reference
+— is registered as a secondary diagnostic only and was not run in the core bake-off; it is a
+Stage-0.5-full row. The reason it is secondary is structural: gradient-direction agreement
+flatters the exact methods (adjoint, RHEL) and penalizes SPSA, whose per-step alignment is poor
+by construction while its *averaged* trajectory converges (§5.3) — scoring on cosine alone would
+have reproduced the known failure mode of ranking estimators by a proxy the task does not pay
+for. The fragments that exist (the adjoint's 0.994/0.925 cell-dependent cosine, §5.6; RHEL's
+non-dissipative-limit recovery, §5.4) are reported where they carry mechanistic weight, and the
+full decomposition belongs in an appendix when the S0.5-full rows run.

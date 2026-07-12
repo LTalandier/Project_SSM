@@ -3,9 +3,9 @@
 **Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
 **Sources of record:** `docs/s0_L/whitespace_claim_wording.md` (W1 = the recommended scope — final
 W0-vs-W1 wording choice is the PI's, flagged) · PR-15/15.1 (the two-modality white-space search +
-kill-criterion) · `paper/outline.md` claims table · §2–§5 drafts. **Open flags:** [CITE-*]
-everywhere; the S0.8 refresh sweep of the white-space search must re-run before submission
-(the claim is time-indexed); Wu/Zhao boundary audits per the PR-15 disposition.
+kill-criterion) · `paper/outline.md` claims table · §2–§5 drafts. **Open flags:** [CITE-*] keys resolved via `paper/references.md` (2026-07-12; white-space
+refresh folded into §1.1 — Wu/Zhao boundary audits RESOLVED, both clear); a final refresh sweep
+re-runs immediately before submission (the claim is time-indexed; 4 page-level reads registered).
 
 ---
 
@@ -32,8 +32,21 @@ passes [CITE-Boehm-class]. A two-modality literature search with a pre-registere
 That sentence is this program's target, with each qualifier load-bearing: *on a computational
 task* excludes the servo/calibration lineage; *physical parameters of the recurrence* excludes
 hybrid-digital state carriage; *weight-tied recurrence* excludes feedforward meshes folded in
-time. The nearest neighbors are cited and distinguished individually in §8. ▢ [final W0-vs-W1
-scope wording: PI decision at S0.8; the search refresh re-runs before submission.]
+time. A refresh of the search at assembly (2026-07-12; memo in supplementary) confirms the gap
+against the strongest 2025–26 neighbors, which we dispatch by name because each is the
+"nearest miss" along one qualifier: on-chip all-photonic backpropagation is now demonstrated —
+for a *feedforward* network [CITE-Ashtiani-2026]; microring weight banks have been trained in
+situ through on-chip optical backprop — as *feedforward* layers [CITE-Zhao-2025]; a
+monolithic optical *recurrent* accelerator exists — for inference, training nothing on-device,
+with its recurrent state relayed opto-electronically [CITE-Wu-eLight-2025]; a time-synthetic
+fiber-loop network trains in situ — with per-step distinct programmed parameters, i.e.
+unrolled feedforward rather than a weight-tied recurrence [CITE-time-synthetic]; and an
+optoelectronic delay reservoir has had recurrence-defining parameters optimized in situ — by
+Bayesian search rather than gradient-based/-estimating training, through a digital feedback
+loop [CITE-OERC-insitu]. No coupled-resonator lattice has had its couplings learned on-device
+by any method. ▢ [final W0-vs-W1
+scope wording: PI decision at S0.8; the search refresh re-runs once more immediately before
+submission, with four registered page-level reads (supplementary).]
 
 ## 1.2 Why a state-space model, and why silicon nitride
 

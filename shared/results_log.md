@@ -15,6 +15,64 @@ Per result, report:
 
 ---
 
+## S0.8 — P1 assembly core: **figures F1–F7 made · §5.7/5.8 drafted · citation sweep (4 page-level verifications, 2 with substantive consequences) · white-space refresh: W1 CLEAN, W0 SURVIVES (both June exposures resolved CLEAR)** (2026-07-12, single-session mode; 4 delegated web agents)
+
+**Goal:** the four assembly items Lucas directed 2026-07-12 + abstract fill + supplementary
+skeleton. No new runs; no gates consumed.
+
+**Key findings (the sweep produced *results*, not just bibliography):**
+1. **White-space refresh (dated 2026-07-12):** W1 survives cleanly — no learned
+   inter-resonator-coupling experiment exists anywhere; W0 survives with qualifiers
+   load-bearing. **Both PR-15 exposures resolved:** Wu eLight 5:7 = inference-only O/E/O
+   accelerator (no training); Zhao LPR 2025 = feedforward MRR weight banks. Five 2025–26
+   near-misses now dispatched by name in §1.1 (Ashtiani Nature 651 on-chip backprop
+   [feedforward]; Zhao; Wu; time-synthetic ONN arXiv:2507.02297 [time-unrolled]; ACS-Photonics
+   opto-RC in-situ optimization [Bayesian + digital loop]). 4 page-level reads registered
+   pre-submission. → W0-vs-W1 recommendation updated in E-2026-07-12-1.
+2. **EdgeDRNN >100× batch-1 deflator VERIFIED verbatim at page level** (JETCAS §V.D/§VI:
+   Jetson Nano/TX2 peaks 0.5/0.8 TOp/s vs measured batch-1 GRU 1.9/3.5 GOp/s = 263×/229×);
+   correct cite = JETCAS version arXiv:2012.13600 (NOT 1912.12193). §7 ⚠ removed.
+3. **Er:Si₃N₄ NF:** the flagship paper *does* report "noise figure of ca. 7 dB … limited by
+   coupling losses" — re-confirming the S0.3-0 recon (commit `aa8e982`, which had already
+   found debt-#3's premise false); §3/§8/CLAUDE.md doc-rot fixed to the S0.3-0-accurate
+   history (NF-A = 7.0 was frozen *to match the measurement*; residue = intrinsic NF not
+   isolated).
+4. **PR-11 γ_nl = 0.97 /W/m is optimistic vs measured ULL-geometry FWM demos** (Riemensberger
+   Nature 612: γ = 0.51, 7 W CW power handling; Krückel OL 40: γ = 0.285): ~+6 dB deeper
+   conjugation penalty at measured values. **Direction runs AGAINST RHEL → conclusions
+   robust** (and the idealized-C_op control already isolates the failure to dissipative-echo
+   bias). Disclosed in §4.
+5. **Subtractive-SiN splitting numbers restated per source:** Table 2 tabulates doublet
+   *separations* 180–320 MHz (21–75 % split by mask); our 90–160 MHz = rates under the
+   2γ-separation convention, now stated explicitly in §2 (was an unstated mapping).
+   CITE-KONDRATIEV placeholder replaced (correct theory refs: Gorodetsky 2000 + Kippenberg
+   2002; no Kondratiev–Gorodetsky modal-coupling paper exists). Damascene article number =
+   2236 (the "12,235" in the frozen s0_1 JSON label is a typo in a results file; data
+   unaffected).
+6. **Figures F1–F7 all made** from frozen result JSONs only (`analysis/make_figures.py` →
+   `paper/figures/F*.{png,pdf}`): F1 architecture+memory region · F2 clamp/de-saturation ·
+   F3 participation cliff-vs-flat · F4 headline SER-vs-passes (6 arms, IQR bands) · F5
+   ranking + digital side-ledger · F6 damping pinned-vs-boxed · F7 energy inversion +
+   inference envelope. BPTT drawn as ceiling line only (its device-pass count is 0 — correct
+   per PR-7).
+7. **§5.7 drafted** (controllability/participation as first-class result, both protocol
+   rulings disclosed, E/O price cross-charged to §7) · **§5.8** = honest PR-14 deferral ·
+   **abstract ▢-filled** (states the offline-tie null explicitly) · `paper/references.md`
+   (30+ keys, verification status per entry) · `paper/supplementary.md` (S1–S6 plan,
+   registration→run commit table, mixed-platform repro statement).
+
+**Anomalies/concerns:** the citation sweep found *two* places where paper drafts had drifted
+from the project's own record (debt-#3 wording; the KONDRATIEV attribution) — both were in
+Supervisor-drafted prose, single-session mode; the disclosure in §8.4 stands. Verification
+was delegated to web agents (non-independent in the Critic sense; sources quoted verbatim in
+`paper/references.md` for auditability).
+
+**Data paths:** `paper/figures/` · `paper/references.md` · `paper/supplementary.md` ·
+`docs/s0_L/whitespace_refresh_2026-07-12.md` · section diffs in this commit.
+**Compute:** local matplotlib + 4 web agents; $0 cloud.
+
+---
+
 ## S0.7-full-core — training-mode envelope: **energy metric INVERTS the device-pass rank — SPSA trains to target for ~2.6 mJ all-in (OPT) vs PAT ~13–44 J (digital-twin-dominated ×10⁴); RHEL pump ×42 its own conversion/update; EdgeDRNN >100× batch-1 deflator resolves the lite retrieval favorably** — rules pre-reg `bd37703` (2026-07-08, single-session mode)
 
 **Config:** arithmetic from frozen inputs (S0.5 measured passes-to-target · PR-10 corner stacks ·

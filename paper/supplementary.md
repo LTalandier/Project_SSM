@@ -1,0 +1,77 @@
+# P1 supplementary material — assembly plan + provenance table
+
+**Status:** S0.8 assembly, 2026-07-12 (single-session mode; disclosed in §8.4).
+**Contents at submission:** (S1) the pre-registration ledger, (S2) the per-method hardware
+ledger, (S3) the white-space search dossier, (S4) the registration→run provenance table,
+(S5) reproducibility statement, (S6) S-figures.
+
+## S1 — Pre-registration ledger
+
+`shared/preregistration.md`, included verbatim. Every PR-block carries its status history
+(PROPOSED → AMEND → SIGNED/FROZEN) and the commit that froze it; the two S0.4-close addenda
+(sizing; ceiling) are dated *before* the runs they govern. The ledger is the paper's §3.7
+"ledger-as-method" object.
+
+## S2 — Per-method hardware ledger (F8)
+
+`docs/s0_4/f8_hardware_ledger.md`: per-route observables, actuators, added components, and
+calibration burdens (SPSA simplest → RHEL heaviest); the structural note that adjoint/RHEL
+cannot win promotion-rule (b) (strictly-simpler hardware) by construction.
+
+## S3 — White-space search dossier
+
+`docs/s0_L/debt1_whitespace_search.md` (PR-15 two-modality search + kill-criterion, 2026-06-09)
++ `docs/s0_L/whitespace_refresh_2026-07-12.md` (assembly refresh: W1 clean, W0 survives with
+qualifiers load-bearing; five named near-misses dispatched in §1.1; four page-level reads
+registered for the final pre-submission sweep).
+
+## S4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`)
+
+Rule being evidenced: **every threshold/spec commit predates the run that consumes it.**
+
+| object | registered (commit) | consumed/measured (commit) |
+|---|---|---|
+| PR-1.1 G3 adjudication (v2 signed) | `f659558` → `408e082` | — (S0.2 record) |
+| PR-4 substrate freeze v2 (signed) | `b1af15d` → `55746b5` | substrate build `c0b7359`/`2d0673b` |
+| S0.4 packet: PR-6 v3 / PR-7 v2 / PR-5 / PR-12 (signed by delegation) | `497f790` → `73099d5` → `a3c0c21` → `cde3f4a` | S0.4-0 calibration `991aef0` |
+| S0.4a spec + PR-5 mismatch levels | `0b8c817` | PAT/SPSA build+smoke `502e26e` |
+| S0.4b adjoint spec (gates B1–B5) | `c85fe62` | build+smoke `ade7795` |
+| PR-11 echo sub-model (proposed → verify-1 → numeric freeze) | `965680d` → `2fab8e9` → `5ca8d52` | RHEL build `b77aa60`, results `eb21520` |
+| PR-3 target rule + PR-8 stats + PR-9 gates | `ae16f6d` | — |
+| Sizing addendum (U_conv, B) | `7bcbcb9` | — |
+| Ceiling addendum (SER_target, Δ_M3) | `4fca58d` | bake-off `15405fd`, C-1 diagnostics `ac0f1d2` |
+| S0.6 damping spec (arms, grid, C7 rule) | `5a7f28b` | results `7808596` |
+| S0.7 training-envelope accounting rules | `bd37703` | results `dc2d561`/`fae0512` |
+| paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
+
+## S5 — Reproducibility statement (draft)
+
+All simulations are float64 PyTorch on CPU. Runs executed on a **mixed platform set** —
+local x86-64 Linux and Hetzner cpx51 (shared x86-64) cloud instances — with identical code,
+identical registered seeds, and per-unit idempotent runners (`analysis/s0_5_run_one.py`,
+`analysis/s0_6_run_one.py`) writing one JSON per (method, cell, seed) unit; merge/statistics
+stages (`analysis/s0_5_bakeoff.py`) are deterministic over the run files. Evaluation uses
+reserved noise streams (`EVAL_SEED_BASE = 900001`) never drawn during training. Training
+randomness is seeded per unit; eval SER at the quantization floor (2 errors / 3840 symbols)
+is platform-stable. The test suite (150 tests at S0.5-close) pins substrate bit-identity
+gates (e.g. adjoint pass-2 forward identity, ledger counts). Total cloud spend for all
+Stage-0 compute: <€10 (disclosed per-phase in `shared/results_log.md`).
+
+## S6 — S-figures (planned)
+
+| S-fig | content | source |
+|---|---|---|
+| S1 | G3 anchor-instability dossier summary | S0.2 record (PR-1.1) |
+| S2 | PAT twin-mismatch decomposition at C-1 (perfect / M-par / M-struct) | `results/s0_5/bakeoff_diag_c1.json` |
+| S3 | echo sub-model penalty chain + mechanism menu (A/B/C) | PR-11, `docs/s0_4/pr11_echo_submodel_recon.md` |
+| S4 | PR-14 gradient bias/variance | deferred (S0.5-full) — slot reserved |
+| S5 | RHEL non-dissipative-limit recovery (R1 cosine sequence) | `results/s0_4c/` |
+
+## Assembly residue (tracked)
+
+- Lucas rulings: **title** (outline candidates 1–3; rec #1) and **W0-vs-W1** scope.
+- Final pre-submission sweep: white-space re-run + the 4 registered page-level reads (S3).
+- S0.7 exclusions ledger (laser wall-plug, locking, control compute, packaging),
+  primary-sourced.
+- Venue formatting + [CITE-*] → numbered bibliography conversion (`paper/references.md` is
+  the key map).

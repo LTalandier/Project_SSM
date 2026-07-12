@@ -3,7 +3,7 @@
 **Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
 **Sources:** PR-4 anchor-risk register · F19 (verbatim seed) · the four verification debts
 (proposal closing note) · `shared/critic_review_s0_4_freeze.md` (independence disclosure) ·
-PR-1.1 (G3 record). **Open flags:** [CITE-*]; the P2 note's disposition (▢ PI action).
+PR-1.1 (G3 record). **Open flags:** [CITE-*] keys resolved via `paper/references.md`; the P2 note's send (▢ PI action).
 
 ---
 
@@ -24,9 +24,11 @@ literature-established [CITE-Wright-2022; CITE-SPSA-photonic].
 
 The substrate's realism leans on anchors with stated residual risks: the C-2 loss class
 transfers a wide-multimode racetrack result to a single-mode registry ring (priced by the
-×2-loss derate row, §3.3); the flagship Er:Si₃N₄ gain device published gain but **no measured
-noise figure** (debt #3 — our NF 7 dB is a platform-class value, and NF sensitivity rows exist
-for when a measurement lands); the recurrent adjoint pass is charged *as if realizable* with no
+×2-loss derate row, §3.3); the Er:Si₃N₄ noise budget rests on a **single coupling-loss-limited
+measured NF (~7 dB)** in the flagship device paper — debt #3's original "no measured NF" premise
+was found false at the S0.3-0 recon and our NF-A = 7.0 dB was frozen to match the measurement
+(§3.2); the narrower residue (intrinsic amplifier NF not isolated) keeps the NF sensitivity
+rows registered; the recurrent adjoint pass is charged *as if realizable* with no
 demonstration in the literature (debt #4 — an inference from absence, time-stamped mid-2026);
 and the white-space claim itself is one-sided evidence from a pre-registered search, to be
 re-swept before submission (debt #1). The S0.4-0 calibration retired one internal debt (the

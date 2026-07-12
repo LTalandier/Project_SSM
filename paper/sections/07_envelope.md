@@ -5,8 +5,9 @@
 `docs/s0_7/pr10_assumption_sources.md`) · S0.7-lite (`docs/s0_7/s07_lite_envelope.md`,
 `results/s0_7/`) with its Critic findings EV-F1/EV-F2 carried · S0.7-full-core
 (`results/s0_7/training_envelope.{json,md}`, rules pre-registered) · S0.5 measured
-passes-to-target. **Open flags:** [CITE-*]; the four unbudgeted exclusions + the EdgeDRNN
-page-level verification = named S0.8 retrievals; figure F7 ▢.
+passes-to-target. **Open flags:** [CITE-*] resolved via `paper/references.md` (EdgeDRNN
+page-verified 2026-07-12); the four unbudgeted exclusions remain a named retrieval
+(primary-sourced ledger, pre-submission); figure F7 = `paper/figures/F7_envelope.*`.
 
 ---
 
@@ -36,8 +37,11 @@ therefore does not reach the energy niche as computed — a Stage-1 platform con
 such, with the expected-value-holding sensitivity (under which the optimistic corner clears
 in-window) reported alongside per the review finding. Jetson's *peak* rating is never beaten
 anywhere; the niche claim rests on measured sustained behavior, for which batch-1 recurrent
-workloads on edge GPUs are documented at >100× below claimed peak [CITE-EdgeDRNN ⚠page-verify;
-the DLA path falls back to GPU for recurrent layers]. One boundary cell (the DSP-class
+workloads on edge GPUs are documented at >100× below claimed peak — page-verified: measured
+batch-1 GRU throughput of 1.9 and 3.5 GOp/s against claimed peaks of 0.5 and 0.8 TOp/s on the
+two Jetson-class devices (ratios ≈263× and ≈229×), with the source's own conclusion stating
+"a factor of over 100X" [CITE-EdgeDRNN]; the Orin DLA path falls back to GPU for recurrent
+layers. One boundary cell (the DSP-class
 comparison at N = 32) clears by ~1% and is treated as a tie.
 
 ## 7.3 Training: the energy metric inverts the sample-efficiency ranking
