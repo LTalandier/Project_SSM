@@ -1642,3 +1642,16 @@ a harness `deploy-then-drift` protocol wrapping the existing arms, and gate test
 ∝t to the target σ(24h); common-mode ⟂ independent separated; zero-drift ≡ S0.5). Runs: C-2, 8 seeds,
 2 regimes × 2 offline variants × {PAT, SPSA} in-situ + K=12 steps — an S0.6-scale cloud sweep (est.
 few €). **Pre-register (commit this block) → build + smoke → Lucas ratifies margins → run.**
+
+### 16.7 — BUILD ADDENDUM (2026-07-24): σ_step frozen; margins ratified by Lucas
+- **σ_step = 0.40 κ_i/step FROZEN** (Lucas ratify 2026-07-24, "finer drift steps" — gradual
+  resolvable curve over a cliff). With **K=12**: per-step increment 0.40 κ_i, **accumulated
+  σ(window) = 0.40·√12 ≈ 1.39 κ_i** (RW). Nominal real-time mapping via D=24 κ_i²/h ⇒ ~24 s/step;
+  **primary axis = accumulated drift (κ_i), elapsed-time secondary** — the short-time (s–min) drift
+  PSD is an open question (research memo Q2), so we do not over-claim the wall-clock rate.
+- **b_updates = 4,000/step** (fair per-step budget, both arms); **n_converge = 20,000** (insitu-pat,
+  offline arms) / **15,800** (insitu-spsa) so t=0 sits at the S0.5 converged state (ser0 validates
+  against S0.5 finals: pat 0.0008, offline 0.0010, spsa 0.0026).
+- **Margins RATIFIED as written** (Lucas 2026-07-24): S0.9a and S0.9b both use the **2× advantage
+  factor + CI-excludes-0**; grids as registered (m∈{1,2,3,4,6}; regimes common/independent; offline
+  head/relock; {pat,spsa} in-situ). This addendum is committed BEFORE the runs it governs.
