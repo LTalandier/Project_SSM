@@ -94,6 +94,9 @@ boundary before the run proceeds.
 | **PR-13** | S0.5 secondary task | S0.5 | 🔒 **FROZEN 2026-06-10** (early, jointly with PR-2 — Lucas E-2026-06-10-4; task-family detail in the PR-2 v2 block) | A **synthetic memory-task family** with tunable memory length (delayed recall / sticky detection at parametric lag) as a pre-registered secondary; stress-tests ranking robustness + the memory-vs-Q story. | F20 |
 | **PR-14** | Secondary diagnostic | S0.5 | ⬜ | The secondary diagnostic = **bias/variance decomposition of the gradient estimate vs the BPTT reference** (mean error-vector norm + variance), **not raw cosine**; confined to mechanism discussion, never the headline. | F6 |
 | **PR-15** | Pre-S0.2 continuation gate | the white-space search run (now) | 🔒 **FROZEN 2026-06-09** · 🔁 **AMENDED → PR-15.1, signed 2026-06-10** (v1 retained below) | White-space **existence** go/no-go (debt #1, front-loaded — D-2026-06-09-1): rule-form kill-criterion (**q1∧q2∧q3∧q4** per PR-15.1) + search lanes + two-modality protocol + disposition. **Full frozen detail + the signed amendment in the blocks below** — the table row is a pointer only. | D-09-1, F15, WS-F1/2/3/5 |
+| **PR-16** | Drift model (S0.9b) | before the S0.9b run | ⬜ **PROPOSED 2026-07-22** (block below; source `docs/s0_L/drift_research_2026-07-22.md`) | The **drift model** (magnitude 341 MHz/24h RW = σ(24h)≈24κᵢ at C-2, on δ; κ_ext secondary; gain/heater = flagged gaps) + **deploy-then-drift protocol** + **both correlation regimes** (common-mode / independent) + offline variants (head-recal / +global re-lock) + the per-regime advantage margin (offline ≥2× in-situ, CI excludes 0). Tests whether in-situ retraining beats a stale offline calibration — the §5.5 advantage axis. | §5.5, §10 |
+
+*(PR-5 gained §E — mismatch-sensitivity sweep addendum, ⬜ PROPOSED 2026-07-22, block below — turns the offline-tie null into a curve; a sensitivity extension of the signed §C unification.)*
 
 ## Notes
 
@@ -1526,3 +1529,116 @@ perturbations at the clamp boundary per PR-6.
   with Δ_M3 = 0 the intent resolves unambiguously regardless (zero sensitivity ⇒ no flip
   possible), and the wording is marked for repair if a nonzero Δ_M3 ever needs it.
 - Raw: `results/s0_5/ceiling.json` + `results/s0_5/runs/bptt_*.json`.
+
+---
+
+## PR-5 §E — ⬜ **PROPOSED addendum** (2026-07-22) — mismatch-sensitivity sweep (S0.9a): *turn the offline-tie null into a curve*
+
+> **Context.** At the frozen 5%-class M-par level the offline-deploy baseline **tied** in-situ PAT
+> (§5.5: 0.0010 vs 0.0008, statistically indistinguishable) — the honest null. PR-5 §C already
+> registered that in-situ and offline draw their calibration error from *one* family; §E sweeps the
+> **level** of that family to locate where (if anywhere) in-situ pulls away. This is a *sensitivity
+> extension of an already-signed contrast*, not a new comparison — so it inherits PR-5's fairness.
+> **Freeze before the S0.9a run; margins below are the load-bearing part for Lucas.**
+
+### E.1 — the swept knob
+A scalar **mismatch_scale m** multiplies the *deviation* of the five **calibration/actuation** M-par
+terms only — `kappa_i_rel` (+0.05), `gamma_rel` (+0.05), `kext_actuation` (1±0.05), `mu_actuation`
+(1∓0.05), `delta_offset_ki` (+0.05) — i.e. each becomes m× its frozen 5%-class deviation. The two
+**debt-#3 gain-characterization** terms (`gain_factor_rel`=+0.10, `p_sat_rel`=−0.25) are **held at
+their frozen S0.4-0 values** (already independently "loose"; scaling `p_sat_rel` past m≈3 is
+unphysical). Grid: **m ∈ {1, 2, 3, 4, 6}** → 5/10/15/20/30 %-class characterization accuracy.
+
+### E.2 — arms, protocol, statistics
+- Two arms per level: **in-situ PAT-both** and **offline-deploy**, both with the *same* m applied to
+  the *same* family (PR-5 §C unification holds at every level). C-2, **8 seeds** (PR-8 seed set),
+  same budget B=252,800, same target rule (PR-3). Final SER = median-last-3-evals (PR-3 §A).
+- BPTT is **not** re-run (its ceiling is m-independent — the substrate is unchanged; only each
+  arm's *knowledge* of it degrades). Reservoir/head-only likewise unchanged.
+
+### E.3 — registered hypothesis + the crossover margin (the deliverable)
+- **Hypothesis (directional, pre-registered).** In-situ PAT's final SER stays near the ceiling as m
+  grows (it adapts to the *true* device through physical passes); offline-deploy's final SER rises
+  monotonically (its model is m× wronger and the actuation-map errors compound with no on-device
+  correction of the recurrence). The two are tied at m=1 (known) and diverge with m.
+- **"In-situ advantage demonstrated at level m" iff:** offline median SER ≥ **2×** in-situ median SER
+  **AND** the paired-by-seed bootstrap (10k, PR-8) 95% CI of (offline − in-situ) SER excludes 0.
+  Report the **smallest such m = m\***, and separately the smallest m at which **offline fails the
+  target** (median > SER_target) while in-situ still passes.
+- **Honest either-way outcome:** if no m in the grid triggers the margin, the registered conclusion
+  is *"the offline-tie persists to 30%-class mismatch"* — a stronger, more surprising null than the
+  single 5% point, reported as such. The sweep cannot fail to produce a publishable statement.
+
+---
+
+## PR-16 — ⬜ **PROPOSED** (2026-07-22) — the drift model + deploy-then-drift protocol (S0.9b): *does in-situ retraining beat a stale offline calibration?*
+
+> **The advantage axis §5.5 named but could not test.** In-situ training's canonical justification is
+> that a device *drifts* and a once-calibrated offline model goes stale, while on-device retraining
+> tracks it. Our substrate was static, so the tie at fixed 5% mismatch left the advantage open. PR-16
+> introduces a **literature-sourced drift model** and a **deploy-then-drift** protocol to test it.
+> Sources: `docs/s0_L/drift_research_2026-07-22.md` (deep-research, 21 claims 3-0/2-1 verified).
+> **Freeze before the S0.9b run.** The correlation regime (§16.3) is the crux and is registered as
+> *both* bracketing cases so the result cannot be an artifact of a convenient choice.
+
+### 16.1 — the drift magnitude (SiN-specific, measured)
+- **Anchor: free-running SiN microcavity resonance drift ≈ 341 MHz std / 24 h** (temperature-
+  stabilized lab; Dacha et al., Nat. Photonics 2025, arXiv:2506.21692; device Q≈3×10⁶, our C-2 is the
+  same tens-of-MHz-linewidth regime). At C-2 (κ_i/2π ≈ 14.2 MHz) this is **σ(24 h) ≈ 24 κ_i** — a
+  random walk (Allan deviation grows with τ ⇒ RW): **σ²(t) = D·t, D = (24 κ_i)²/24 h = 24 κ_i²/h**,
+  so σ(1 min) ≈ 0.63 κ_i, σ(10 min) ≈ 2 κ_i. **Sub-linewidth staleness lasts only minutes
+  free-running** — an aggressive, well-sourced clock.
+- The primary drifting quantity is **δ_j (per-ring detuning)** — thermo-optic resonance shift, the
+  dominant and best-sourced term (dn/dT(SiN)=2.45×10⁻⁵/K; 1.2–1.9 GHz/K resonance sensitivity).
+  κ_ext drift (thermo-optic coupler shift) is a **secondary, smaller** term — registered OFF in the
+  primary run, ON in one sensitivity row. Gain drift (Er aging/photodarkening) and heater hysteresis
+  are **literature gaps** (no SiN data; §16.5) — **unquantified, flagged**, not in the primary model.
+
+### 16.2 — the deploy-then-drift protocol
+- **t=0:** both arms start from a converged model (in-situ: a PAT/SPSA-trained recurrence; offline:
+  the offline-deploy arm's phase-A model deployed through actuation maps — exactly as in S0.5, at the
+  frozen 5% M-par level so drift is the *only* new stressor).
+- **Deployment steps k=1…K** (candidate **K=12**, spacing ~5 min ⇒ window ~1 h): each step applies a
+  drift increment to δ (regime per §16.3), then each arm spends a **fixed per-step on-device budget b**
+  (candidate **b = 4,000 device passes**) on its allowed response, then SER is evaluated on the
+  reserved held-out streams (EVAL_SEED_BASE).
+- **Allowed responses (the honest asymmetry):** *in-situ* retrains the recurrence {δ, κ_ext, μ} +
+  head (SPSA and PAT both, reported separately). *Offline* gets **head-recalibration only** in the
+  baseline variant, and **head-recal + a single global δ re-centering ("laser re-lock")** in the
+  strong variant — the latter removes the common-mode component, so the strong-offline is a genuine
+  competitor, not a straw man.
+
+### 16.3 — correlation regime (the crux; BOTH registered)
+All measured drift is single-cavity; the cross-ring correlation is unmeasured (open question). Register
+both bracketing cases and report both:
+- **Regime I — common-mode:** one Wiener increment Δ(t) added to *all* δ_j (whole-chip thermal
+  wander). Largely removable by the strong-offline's global re-lock ⇒ the tie may *survive* here.
+- **Regime II — independent:** an i.i.d. per-ring increment Δ_j(t) (local drift) ⇒ scrambles the
+  coupled eigenstructure; head-recal and global re-lock cannot fix per-ring pole errors ⇒ in-situ is
+  expected to pull away. **This is where the advantage, if real, appears.**
+- (Optional Regime III — mixed, fraction ρ common — only if I/II bracket cleanly.)
+
+### 16.4 — registered margin (per regime)
+- **"In-situ advantage under drift demonstrated (regime R)" iff**, over the deployment window, the
+  **time-integrated (mean-over-k) median SER** of in-situ ≤ SER_target **AND** strong-offline's
+  ≥ **2×** in-situ's **AND** the paired-by-seed bootstrap 95% CI of (offline − in-situ) excludes 0.
+- Report the full SER(k) trajectories, both offline variants, both regimes, 8 seeds. **Pre-registered
+  expectation:** Regime II triggers the margin; Regime I does not (strong-offline re-lock absorbs it)
+  — and *that contrast is itself the result*: in-situ's advantage is specifically against
+  **uncorrelated** drift, exactly the component a global lock cannot catch.
+
+### 16.5 — registered gaps (do not overclaim)
+- **Er:SiN gain drift** (aging/photodarkening/pump-drift): **no SiN data exists** (both flagship
+  amplifier papers are static; verified). Left **unmodeled**; a §8 sentence states a slow gain drift
+  would add to the δ stressor and *only worsen offline* (direction favorable, magnitude unquantified).
+- **Heater/actuator hysteresis + thermal-crosstalk stability:** no SiN datum; `pnn-multilayer`
+  crosstalk is the only analogue. Left unmodeled in the primary; flagged.
+- **σ_step calibration** from D=24κ_i²/h and the chosen spacing is a **computation** addended at build
+  (the E₀/ceiling pattern — no invented numbers in the headline).
+
+### 16.6 — build + cost
+New: a `drift_schedule` capability on the substrate (per-step δ increment, regime flag, RNG-seeded),
+a harness `deploy-then-drift` protocol wrapping the existing arms, and gate tests (RW variance grows
+∝t to the target σ(24h); common-mode ⟂ independent separated; zero-drift ≡ S0.5). Runs: C-2, 8 seeds,
+2 regimes × 2 offline variants × {PAT, SPSA} in-situ + K=12 steps — an S0.6-scale cloud sweep (est.
+few €). **Pre-register (commit this block) → build + smoke → Lucas ratifies margins → run.**

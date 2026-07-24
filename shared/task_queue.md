@@ -8,6 +8,34 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## 🔵 ACTIVE — S0.9: break (or confirm) the offline-tie null (2026-07-22, single-session mode)
+
+**Origin:** Lucas 2026-07-22 "go with (1) and (2)" — the two highest-leverage moves from the
+recommendation ladder for turning the §5.5 offline-tie null into either a demonstrated in-situ
+advantage or a stronger, more surprising null. Both **pre-registered before any run** (specs
+committed this turn: PR-5 §E + PR-16). Skips ladder item (3) foundry-PDK (Stage-1).
+
+**S0.9a — mismatch-sensitivity sweep (PR-5 §E).** Sweep the M-par calibration/actuation level
+m ∈ {1,2,3,4,6} (5–30 %-class); in-situ PAT-both vs offline-deploy, C-2, 8 seeds, same budget.
+Deliverable: SER-vs-mismatch curve + the crossover m* where offline degrades ≥2× past in-situ
+(CI excludes 0), or the registered stronger-null if none. Reuses substrate/harness + a small
+level-scaled runner. Cheap.
+
+**S0.9b — drift model + deploy-then-drift (PR-16).** Literature-sourced drift (341 MHz/24h RW =
+σ(24h)≈24κᵢ on δ; `docs/s0_L/drift_research_2026-07-22.md`). New: `drift_schedule` substrate
+capability + `deploy-then-drift` harness protocol + gate tests. Both correlation regimes
+(common-mode / independent), both offline variants (head-recal / +global re-lock), {PAT,SPSA}
+in-situ, K=12 steps. Deliverable: SER(k) trajectories + per-regime advantage verdict. S0.6-scale
+cloud sweep.
+
+**Path:** specs committed → build S0.9a runner + S0.9b drift model/harness/tests → local smoke →
+**surface pre-registered margins to Lucas to ratify (escalation-sensitive)** → cloud runs →
+results → §5.5 upgrade (curve + drift result) or stronger-null. **Cost:** few € cloud.
+**NOT in scope:** foundry-PDK co-sim; method-symmetric physics; Er-gain/heater drift terms
+(literature gaps, flagged unquantified).
+
+---
+
 ## ✅ DONE — S0.8: P1 manuscript assembly core (2026-07-12, same day): **figures F1–F7 ALL MADE** (`paper/figures/`, generator `analysis/make_figures.py`) · **§5.7/5.8 drafted** (controllability first-class; PR-14 honest deferral) · **citation sweep DONE** (`paper/references.md`, 30+ keys, 4 page-level verifications — EdgeDRNN >100× VERIFIED verbatim [cite JETCAS arXiv:2012.13600 not 1912.12193]; Er:SiN measured NF ≈7 dB CONFIRMS frozen NF-A [debt-#3 rewritten to the S0.3-0-accurate history]; SiN-FWM γ: our 0.97 optimistic vs measured ULL 0.29–0.51 → disclosed in §4, direction favors RHEL conclusion; SUBTRACTIVE splitting = separations 180–320 MHz, 2γ convention now stated in §2) · **white-space refresh DONE** (`docs/s0_L/whitespace_refresh_2026-07-12.md`: **W1 clean, W0 survives**; Wu eLight = inference-only CLEAR, Zhao LPR = feedforward CLEAR; 5 near-misses dispatched by name in §1.1; 4 pre-submission page reads registered) · **abstract ▢-FILLED** · `paper/supplementary.md` (provenance commit table + repro statement). Remaining: Lucas rulings (title, W0-vs-W1) → E-2026-07-12-1; S-figs; venue formatting; final refresh sweep.
 
 *(Spec below retained as executed.)*
