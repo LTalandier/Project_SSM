@@ -34,7 +34,7 @@ from ..substrate import normalization as O2
 from ..substrate.dissipative_ring import DissipativeRingSubstrate
 from ..tasks.equalization import make_ta_dataset, symbol_error_rate
 from .adjoint import AdjointEstimator
-from .pat import MPAR_LEVELS, PATEstimator
+from .pat import MPAR_LEVELS, PATEstimator, scaled_mpar
 from .rhel import RHELEstimator
 from .spsa import PerturbationAdaptor
 
@@ -169,19 +169,27 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           eval_every: Optional[int] = None,
           gain_mode: Optional[str] = None,
           r0: Optional[float] = None, r_hi: Optional[float] = None,
-          pin_kext: bool = False) -> RunLedger:
+          pin_kext: bool = False, mismatch_scale: float = 1.0,
+          warm=None, return_state: bool = False):
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
     "pat-M-struct","pat-both","spsa","adjoint","rhel","rhel-ideal",
     "head-only"}. Smoke HPs from the S0.4a spec; the equal-HP *search* is
-    S0.5 (PR-8)."""
+    S0.5 (PR-8). `mismatch_scale` (PR-5 §E / S0.9a) scales the M-par
+    calibration/actuation gap for pat-* and offline-deploy; 1.0 == headline.
+    `warm=(sub, head)` (S0.9b) continues on an EXISTING substrate+head instead
+    of constructing fresh (the deploy-then-drift loop); `return_state` also
+    returns (led, sub, head)."""
     torch.manual_seed(run_seed)
-    sub = make_substrate(cell_label, run_seed, N=N, r0=r0)
-    if gain_mode is not None:          # PR-3 §A fixed-gain sensitivity spot
-        sub.gain_mode = gain_mode
-    if r_hi is not None:               # S0.6 sub-box (PR-12 R-ii)
-        sub.r_hi_train = r_hi
+    if warm is not None:               # S0.9b: continue on a live (drifted) device
+        sub, head = warm
+    else:
+        sub = make_substrate(cell_label, run_seed, N=N, r0=r0)
+        if gain_mode is not None:      # PR-3 §A fixed-gain sensitivity spot
+            sub.gain_mode = gain_mode
+        if r_hi is not None:           # S0.6 sub-box (PR-12 R-ii)
+            sub.r_hi_train = r_hi
+        head = TapHead()
     ki = float(sub.kappa_i)
-    head = TapHead()
     led = RunLedger()
 
     # Fixed per-seed output normalization (common across methods: same θ₀ +
@@ -201,7 +209,7 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
 
     if method_base == "pat":
         family = method[len("pat-"):]
-        est = PATEstimator(sub, family)
+        est = PATEstimator(sub, family, mismatch_scale=mismatch_scale)
         opt_phys = torch.optim.Adam(in_situ, lr=lr_phys_frac * ki)
     elif method == "adjoint":
         est = AdjointEstimator(sub)
@@ -216,18 +224,19 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
         # as PAT's twin; the trained values are then deployed through
         # actuation maps carrying the same family errors; phase B (the
         # budgeted loop below) is on-device HEAD recalibration only.
+        lv = scaled_mpar(mismatch_scale)     # PR-5 §E: 1.0 == frozen headline
         off = DissipativeRingSubstrate.from_cell(
             cell_label, N=sub.N, clock_GSps=2.0, seed=run_seed,
             input_taps=taps_for_N(sub.N),
-            loss_scale=1.0 + MPAR_LEVELS["kappa_i_rel"],
+            loss_scale=1.0 + lv["kappa_i_rel"],
             gain_factor=sub.gain_factor
-            * (1.0 + MPAR_LEVELS["gain_factor_rel"]),
+            * (1.0 + lv["gain_factor_rel"]),
             ase_variance_scale=0.0)
         with torch.no_grad():
-            off.gamma.mul_(1.0 + MPAR_LEVELS["gamma_rel"])
+            off.gamma.mul_(1.0 + lv["gamma_rel"])
             off.gain_model = off.gain_model._replace(
                 P_sat_W=off.gain_model.P_sat_W
-                * (1.0 + MPAR_LEVELS["p_sat_rel"]))
+                * (1.0 + lv["p_sat_rel"]))
             off.delta.copy_(sub.delta)
             off.kappa_ext.copy_(sub.kappa_ext)
             off.mu_chain.copy_(sub.mu_chain)
@@ -254,11 +263,11 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
         # Deploy: commands realized through M-par actuation maps.
         with torch.no_grad():
             sub.delta.copy_(off.delta
-                            + MPAR_LEVELS["delta_offset_ki"] * ki)
+                            + lv["delta_offset_ki"] * ki)
             sub.kappa_ext.copy_(off.kappa_ext
-                                * MPAR_LEVELS["kext_actuation"])
+                                * lv["kext_actuation"])
             sub.mu_chain.copy_(off.mu_chain
-                               * MPAR_LEVELS["mu_actuation"])
+                               * lv["mu_actuation"])
             sub.clamp_to_bounds()
             y0d = sub.forward_intensity(encode_drive(u0).unsqueeze(-1),
                                         generator=ase_gen(run_seed, 0, 14))
@@ -412,4 +421,6 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
             symbol_error_rate(pred[b], target[b], warmup=WARMUP)
             for b in range(BATCH)) / BATCH
     led["in_situ_r"] = (sub.kappa_ext.detach() / ki).tolist()
+    if return_state:
+        return led, sub, head
     return led

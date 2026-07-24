@@ -58,31 +58,54 @@ MPAR_LEVELS = {
 }
 FAMILIES = ("perfect", "M-par", "M-struct", "both")
 
+# PR-5 §E (S0.9a) — the mismatch-sensitivity sweep scales the FIVE calibration/
+# actuation deviations by a scalar m (m=1 == the frozen 5%-class level); the two
+# debt-#3 gain-characterization terms are HELD (scaling p_sat_rel past m≈3 is
+# unphysical; both are already independently "loose"). scaled_mpar(1.0) is
+# bit-identical to MPAR_LEVELS.
+_MPAR_SCALED_KEYS = ("kappa_i_rel", "gamma_rel", "delta_offset_ki")   # ±deviation
+_MPAR_HELD_KEYS = ("gain_factor_rel", "p_sat_rel")
 
-def build_twin(sub: DissipativeRingSubstrate, family: str
-               ) -> DissipativeRingSubstrate:
+
+def scaled_mpar(m: float = 1.0) -> dict:
+    """Return an MPAR_LEVELS copy with the 5 calibration/actuation terms scaled
+    by m and the 2 debt-#3 gain terms held (PR-5 §E)."""
+    out = dict(MPAR_LEVELS)
+    for k in _MPAR_SCALED_KEYS:
+        out[k] = MPAR_LEVELS[k] * m
+    out["kext_actuation"] = 1.0 + (MPAR_LEVELS["kext_actuation"] - 1.0) * m
+    out["mu_actuation"] = 1.0 + (MPAR_LEVELS["mu_actuation"] - 1.0) * m
+    for k in _MPAR_HELD_KEYS:
+        out[k] = MPAR_LEVELS[k]
+    return out
+
+
+def build_twin(sub: DissipativeRingSubstrate, family: str,
+               mismatch_scale: float = 1.0) -> DissipativeRingSubstrate:
     """Construct the digital twin of `sub` for a PR-5 family. The twin is a
     DissipativeRingSubstrate whose trainable attributes are UNBOUND (turned
     into plain tensors by `bind_command`) and whose fixed constants carry the
-    frozen M-par errors where the family says so."""
+    frozen M-par errors where the family says so. `mismatch_scale` (PR-5 §E)
+    scales the calibration/actuation gap; 1.0 == the frozen headline level."""
     if family not in FAMILIES:
         raise ValueError(f"family must be one of {FAMILIES}, got {family!r}")
     mpar = family in ("M-par", "both")
     mstruct = family in ("M-struct", "both")
+    lv = scaled_mpar(mismatch_scale)
 
     twin = DissipativeRingSubstrate(
         sub.cell, N=sub.N,
         clock_GSps=sub.clock_GSps,
-        loss_scale=sub.loss_scale * (1.0 + (MPAR_LEVELS["kappa_i_rel"] if mpar else 0.0)),
+        loss_scale=sub.loss_scale * (1.0 + (lv["kappa_i_rel"] if mpar else 0.0)),
         ase_variance_scale=0.0,                    # M-noise: noiseless twin
-        gain_factor=sub.gain_factor * (1.0 + (MPAR_LEVELS["gain_factor_rel"] if mpar else 0.0)),
+        gain_factor=sub.gain_factor * (1.0 + (lv["gain_factor_rel"] if mpar else 0.0)),
         gain_mode=("fixed" if mstruct else "saturating"),
         input_taps=sub.input_taps, dtype=sub._dtype, seed=None)
     with torch.no_grad():
         if mpar:
-            twin.gamma.mul_(1.0 + MPAR_LEVELS["gamma_rel"])
+            twin.gamma.mul_(1.0 + lv["gamma_rel"])
             twin.gain_model = twin.gain_model._replace(
-                P_sat_W=twin.gain_model.P_sat_W * (1.0 + MPAR_LEVELS["p_sat_rel"]))
+                P_sat_W=twin.gain_model.P_sat_W * (1.0 + lv["p_sat_rel"]))
         else:
             twin.gamma.copy_(sub.gamma)
     # Unbind the trainable parameters: delete the nn.Parameters so plain
@@ -122,10 +145,11 @@ class PATEstimator:
     The caller owns the optimizer step + clamp (harness). Ledgers per PR-7.
     """
 
-    def __init__(self, sub: DissipativeRingSubstrate, family: str = "both"):
+    def __init__(self, sub: DissipativeRingSubstrate, family: str = "both",
+                 mismatch_scale: float = 1.0):
         self.sub = sub
         self.family = family
-        self.twin = build_twin(sub, family)
+        self.twin = build_twin(sub, family, mismatch_scale=mismatch_scale)
         self.n_device_passes = 0          # PR-7 primary (physical) ledger
         self.n_digital_passes = 0         # twin fwd+bwd side-ledger
 
