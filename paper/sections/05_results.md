@@ -125,12 +125,40 @@ We state the consequence plainly, because the fair-comparison design exists prec
 **at 5% calibration accuracy on this task, training in situ buys essentially nothing over
 calibrate-then-deploy.** The demonstration claim — the first on-device-trained recurrent photonic
 recurrence — stands regardless; it is a claim about *what was done*, not about beating an
-alternative. But any claim that in-situ training is *advantageous* is not in evidence at this
-mismatch level, and this paper does not make one. The conditions under which the advantage would
-appear — larger or unknown calibration error, drift over a deployment lifetime (unmodelled here),
-or the systems envelope — are named as open, and two of them are pre-registered sensitivity axes
-for the next stage (PR-5 mismatch rows; §6–§7). Reporting a null advantage where the design was
-built to detect one is the honest core of the result, not a hedge around it.
+alternative. The question this raises — *under what conditions does the advantage appear?* — we
+then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
+PR-16; both frozen before the runs).
+
+**Calibration accuracy is not the axis.** Sweeping the shared mismatch level from 5% to 30%-class
+(in-situ and offline drawing from one frozen family at every level, §5.1), in-situ training holds
+at the ceiling ($7.8\times10^{-4}$, flat) while offline degrades only mildly ($1.0$–$1.2\times
+10^{-3}$) and *never fails the accuracy target* — the tie is robust to 30% calibration error. The
+differences are statistically real (paired-bootstrap CI excludes zero up to 20%) but never approach
+a factor of two: on this task the offline arm's on-device head recalibration absorbs static
+parametric error, so a wrong recurrence with a well-fit head still equalizes. In-situ *recurrence*
+training does not earn its keep against calibration error alone.
+
+**Drift is the axis — specifically the part a re-lock cannot catch.** We then let the substrate
+*drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
+resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [CITE-Dacha-2025]),
+deployed after convergence, with each arm allowed its on-device response — offline recalibrates the
+head and re-locks the laser (a single global detuning re-centering); in-situ retrains the
+recurrence. The pre-registered contrast holds cleanly. Under **common-mode** drift (whole-chip
+thermal wander) the laser re-lock absorbs it and offline keeps pace ($1.0$ vs $0.8\times10^{-3}$,
+no advantage). Under **independent** per-ring drift the re-lock *cannot* fix the scrambled
+pole scatter, and in-situ retraining pulls ahead: $1.0\times10^{-3}$ versus the re-locking
+offline's $1.8\times10^{-3}$, a $1.84\times$ separation with paired-bootstrap CI excluding zero —
+and the gap *grows with accumulated drift* (reaching $\sim$3–4× at the largest drift step). This
+$1.84\times$ time-integrated figure sits just below our pre-registered $2\times$ threshold, so we
+**do not declare a formal advantage** on the frozen metric; what the data show is a *statistically
+significant, mechanism-identified, drift-growing* in-situ edge that is specific to the uncorrelated
+drift a global lock leaves behind. A larger drift magnitude or an end-of-deployment metric would
+cross the threshold, but neither was pre-registered, so we name them rather than claim them.
+
+Reporting a null where the design was built to detect an advantage is the honest core of §5.5, not
+a hedge around it: in-situ training's value here is not calibration robustness (null to 30%) but
+tracking the uncorrelated drift a laser lock cannot — and quantifying *how uncorrelated real
+on-chip drift is* becomes the sharpest Stage-1 measurement (§9).
 
 ## 5.6 What the diagnostics add
 

@@ -8,7 +8,11 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
-## 🔵 ACTIVE — S0.9: break (or confirm) the offline-tie null (2026-07-22, single-session mode)
+## ✅ DONE — S0.9 (2026-07-24): **mismatch tie ROBUST to 30% (stronger null); drift produces a real sub-2× in-situ edge specific to UNCORRELATED drift a re-lock can't catch (1.84×, CI excludes 0; ~3–4× at peak drift)** — no formal 2× advantage declared, but the advantage case is now directional + mechanism-identified. §5.5 upgraded. See `results/s0_9/s0_9.md` + results_log. ≈€0.75 cloud, servers deleted.
+
+*(Spec below retained as executed — PR-5 §E + PR-16 pre-registered `45a5e13`, σ_step addendum `§16.7`, margins ratified 2026-07-24.)*
+
+## (executed) — S0.9: break (or confirm) the offline-tie null (2026-07-22, single-session mode)
 
 **Origin:** Lucas 2026-07-22 "go with (1) and (2)" — the two highest-leverage moves from the
 recommendation ladder for turning the §5.5 offline-tie null into either a demonstrated in-situ

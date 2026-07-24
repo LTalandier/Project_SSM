@@ -15,6 +15,42 @@ Per result, report:
 
 ---
 
+## S0.9 — attacking the offline-tie null: **mismatch tie ROBUST to 30%; drift produces a real sub-2× in-situ edge specific to uncorrelated drift** (2026-07-24, single-session mode; pre-registered PR-5 §E + PR-16 before runs)
+
+**Config:** 144 units, 3× cpx51 (ash), single-threaded, ~5 h, ≈€0.75, servers deleted. Margins
+ratified 2026-07-24 (2× factor + paired-bootstrap CI excludes 0). Data `results/s0_9/`.
+
+**Key findings:**
+1. **S0.9a (mismatch sweep):** in-situ PAT flat at 0.00078 across 5→30%-class calibration error;
+   offline degrades only 0.00104→0.00117 and **never fails target**. **crossover m\* = None → the
+   registered STRONGER NULL: the tie is robust to 30% parametric mismatch.** m=1 reproduces S0.5
+   exactly (0.00078/0.00104) = built-in validation PASS. Mechanism: offline's on-device head recal
+   absorbs static parametric error → calibration accuracy is not the axis in-situ pays on.
+2. **S0.9b (deploy-then-drift):** the pre-registered CONTRAST is confirmed — **common-mode drift is
+   absorbed by the offline re-lock** (relock tint 0.0010 ≈ no-drift; head 0.0027 degrades),
+   **independent (per-ring) drift is NOT** (relock 0.0018 ≈ head 0.0019; re-lock can't fix per-ring
+   pole scatter). in-situ PAT tracks drift to near-ceiling under both (0.0008–0.0010 ≤ target).
+   **Independent-regime: 1.84×, CI [0.0007,0.0028] excludes 0 → statistically-significant in-situ
+   edge, just under the ratified 2× bar → formal advantage NOT declared.** The gap GROWS with
+   accumulated drift (peak-k ratio ~3–4×); the time-integrated metric dilutes it.
+3. **Combined:** §5.5 moves from "flat tie at 5%" to "tie survives 30% calibration error;
+   uncorrelated drift yields a significant, drift-growing in-situ edge a global re-lock cannot
+   catch." Demonstration claim unchanged; the advantage case is now **directional + mechanism-
+   identified**, not absent.
+
+**Anomalies/lessons:** (a) torch defaults to all-cores-per-process → first launch oversubscribed
+(load 145 on 16 cores); fixed with OMP_NUM_THREADS=1 before any unit finished. (b) A `pkill -f`
+pattern matched the launching command's own cmdline (self-kill) → relaunch via a script FILE, not
+an inline command. (c) The first completion poll counted `cat|grep -c wall_s` — but json.dump
+writes no trailing newline, so each server's results collapsed to one "line" (capped at 3/144);
+runs were actually fine → count FILES (`find|wc -l`), never `grep -c` on newline-free JSON.
+(d) SPSA units ~84 min on cpx51 (the long pole). **NOT done (honest, would clear 2× but post-hoc,
+so named not claimed):** aggressive-drift or end-of-window metric.
+
+**Data:** `results/s0_9/{s0_9.md,analysis.json,runs_a/,runs_b/}`. **Compute:** ≈€0.75 cloud, deleted.
+
+---
+
 ## S0.8 — P1 assembly core: **figures F1–F7 made · §5.7/5.8 drafted · citation sweep (4 page-level verifications, 2 with substantive consequences) · white-space refresh: W1 CLEAN, W0 SURVIVES (both June exposures resolved CLEAR)** (2026-07-12, single-session mode; 4 delegated web agents)
 
 **Goal:** the four assembly items Lucas directed 2026-07-12 + abstract fill + supplementary

@@ -39,6 +39,7 @@ deferred to submission.
 | CITE-time-synthetic | Wu, Ren et al., time-synthetic optical neural network with programmable gain, arXiv:2507.02297 (2025) | white-space refresh; time-unrolled feedforward (per-step distinct parameters) — page-level confirm registered |
 | CITE-OERC-insitu | "In-situ optimization of an optoelectronic reservoir computer with digital delayed feedback," ACS Photonics (2025). arXiv:2502.11126 | white-space refresh; Bayesian (non-gradient) + digital feedback loop — clears twice |
 | CITE-whitespace-lanes | this work: PR-15 two-modality search + refresh memos (`docs/s0_L/debt1_whitespace_search.md`, `docs/s0_L/whitespace_refresh_2026-07-12.md`), supplementary | self-reference (supplementary) |
+| CITE-Dacha-2025 | Dacha, Zhao, McNulty, Bhatt, Lipson, Gaeta, "Frequency-stable nanophotonic microcavities via integrated thermometry," Nature Photonics (2025). arXiv:2506.21692 | **PAGE** (deep-research 2026-07-22, `docs/s0_L/drift_research_2026-07-22.md`): free-running SiN resonance drift ≈341 MHz std/24h (Q≈3×10⁶); the drift-magnitude anchor for PR-16/§5.5. dn/dT(SiN)=2.45×10⁻⁵/K corroborated (Arbabi & Goddard, Opt. Lett. 38:3878, 2013) |
 | CITE-pnn-multilayer | Talandier, multi-layer photonic-equalization manuscript (in preparation) + chip β-track thermal-crosstalk/perturbation-tolerance results | self-reference; finalize form at submission |
 
 **Aliases to normalize during final pass:** CITE-LINOSS=CITE-LinOSS; CITE-DLINOSS=CITE-D-LinOSS;
