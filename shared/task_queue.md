@@ -8,6 +8,8 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## ✅ DONE — P1 PI rulings (2026-07-26, delegated — Lucas: "you can chose the title and W0/W1"): **title = candidate 1** (question form, recorded CHOSEN in `paper/outline.md`) · **white-space scope = W0-in-prose + W1-core-sentence** (§1.1 ▢ removed; abstract + §1.3 refreshed to post-S0.9 §5.5). E-2026-07-12-1 RESOLVED — **P1 has no open PI gates**; remaining items non-PI (S-figs, venue formatting, final refresh sweep + 4 page reads, S0.7 exclusions ledger). P2 send still Lucas's physical action.
+
 ## ✅ DONE — S0.9 (2026-07-24): **mismatch tie ROBUST to 30% (stronger null); drift produces a real sub-2× in-situ edge specific to UNCORRELATED drift a re-lock can't catch (1.84×, CI excludes 0; ~3–4× at peak drift)** — no formal 2× advantage declared, but the advantage case is now directional + mechanism-identified. §5.5 upgraded. See `results/s0_9/s0_9.md` + results_log. ≈€0.75 cloud, servers deleted.
 
 *(Spec below retained as executed — PR-5 §E + PR-16 pre-registered `45a5e13`, σ_step addendum `§16.7`, margins ratified 2026-07-24.)*

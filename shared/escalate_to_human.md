@@ -18,7 +18,22 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-07-12-1 — **S0.8 assembly core DONE — the two rulings only you can make now gate P1: (1) title, (2) W0-vs-W1 scope**
+### ✅ E-2026-07-12-1 — **RESOLVED 2026-07-26 by delegation (Lucas: "you can chose the title and W0/W1")** — Supervisor rulings recorded: (1) title = candidate 1 · (2) W0-in-prose + W1-core-sentence
+
+> **RESOLVED 2026-07-26.** Lucas delegated both rulings. Supervisor adopted the standing
+> recommendations: **(1) Title = candidate 1** (question form: *"Can a photonic state-space
+> model be trained on-chip? A pre-registered four-method bake-off on a realistic
+> silicon-nitride ring substrate"*) — recorded as CHOSEN in `paper/outline.md`.
+> **(2) White-space scope = W0 claimed in prose with W1 as the precise core sentence**
+> (§1.1 edited: the ▢ placeholder replaced by the broad-form claim, the boxed W1 sentence
+> kept as its precise instantiation; retreat path if a W0 attack surfaces in review = one
+> paragraph edit, W1 core untouched). The 4 registered page-level reads remain the
+> pre-submission diligence before the stronger wording ships. Abstract + §1.3 also
+> refreshed to the post-S0.9 state of §5.5 in the same edit. P1 now has **no open PI
+> gates**; remaining items are non-PI (S-figs, venue formatting, final refresh sweep,
+> S0.7 exclusions ledger) + the P2 send (E-2026-07-07-1, physical action).
+
+*(Original filing kept below for the record.)*
 
 **State:** all nine sections drafted (§5.7/5.8 filled today) · figures F1–F7 made
 (`paper/figures/`) · abstract filled from landed gates · citation sweep done
@@ -46,7 +61,8 @@ diligence before the stronger wording ships.
 
 **Also standing:** the P2 author-email send (E-2026-07-07-1 below — your physical action).
 
-**Filed:** 2026-07-12 (Supervisor, single-session mode). **Status: OPEN — two rulings.**
+**Filed:** 2026-07-12 (Supervisor, single-session mode). **Status: ✅ RESOLVED 2026-07-26 by
+delegation — rulings recorded above.**
 
 ---
 

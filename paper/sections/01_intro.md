@@ -1,8 +1,9 @@
 # §1 — Introduction
 
-**Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
-**Sources of record:** `docs/s0_L/whitespace_claim_wording.md` (W1 = the recommended scope — final
-W0-vs-W1 wording choice is the PI's, flagged) · PR-15/15.1 (the two-modality white-space search +
+**Status:** DRAFT v2 (2026-07-26, single-session mode — not independently reviewed; disclosed).
+**Scope ruling:** W0-in-prose with W1 as the precise core sentence — adopted 2026-07-26 by
+PI-delegated ruling (E-2026-07-12-1 resolved; Lucas: "you can chose the title and W0/W1").
+**Sources of record:** `docs/s0_L/whitespace_claim_wording.md` · PR-15/15.1 (the two-modality white-space search +
 kill-criterion) · `paper/outline.md` claims table · §2–§5 drafts. **Open flags:** [CITE-*] keys resolved via `paper/references.md` (2026-07-12; white-space
 refresh folded into §1.1 — Wu/Zhao boundary audits RESOLVED, both clear); a final refresh sweep
 re-runs immediately before submission (the claim is time-indexed; 4 page-level reads registered).
@@ -44,9 +45,14 @@ unrolled feedforward rather than a weight-tied recurrence [CITE-time-synthetic];
 optoelectronic delay reservoir has had recurrence-defining parameters optimized in situ — by
 Bayesian search rather than gradient-based/-estimating training, through a digital feedback
 loop [CITE-OERC-insitu]. No coupled-resonator lattice has had its couplings learned on-device
-by any method. ▢ [final W0-vs-W1
-scope wording: PI decision at S0.8; the search refresh re-runs once more immediately before
-submission, with four registered page-level reads (supplementary).]
+by any method. As far as both searches and the assembly refresh can establish, the gap is in
+fact broader than the boxed sentence: no physical photonic system of *any* architecture has yet
+had its recurrent parameters — the parameters defining its recurrence — updated on the physical
+device by gradient-based or gradient-estimating training on a computational task. We state the
+claim in that broad form, and keep the boxed dissipative-resonator sentence as its precise
+instantiation: it is exactly the system this program builds, so the claim and the contribution
+remain the same sentence. (The claim is time-indexed: the search refresh re-runs once more
+immediately before submission, with four registered page-level reads; supplementary.)
 
 ## 1.2 Why a state-space model, and why silicon nitride
 
@@ -93,10 +99,12 @@ shipped as supplementary material (§3.7). Concretely:
    foundry-class noise cell. The ranking (PAT < adjoint < SPSA on device passes; RHEL censored,
    and worse than readout-only under an honest echo) settles the hardware roadmap on PAT/SPSA
    without promotion of the exotic routes. And the comparison the fair design was built to
-   expose lands as a null: at 5%-class calibration error, in-situ training buys essentially
-   nothing over calibrate-then-deploy — the demonstration stands, the *advantage* claim is
-   explicitly not made, and the conditions that would earn it (mismatch, drift, the envelope)
-   are named and pre-registered for the next stage (§5.5, §7).
+   expose lands as a sharpened null with one directional exception: calibrate-then-deploy
+   ties in-situ training at calibration errors all the way to 30%-class — calibration
+   accuracy is not the axis on which in-situ training pays — while uncorrelated per-ring
+   drift, which a global laser re-lock cannot absorb, gives in-situ retraining a
+   statistically significant edge that grows with accumulated drift yet stays below our
+   pre-registered 2× advantage bar, so no formal advantage is declared (§5.5, §7).
 5. **Limits, stated as limits** (§8): robustness is measured against modelled imperfections
    only; the anchor risks, verification debts, and the single-session review period are
    disclosed with the same specificity as the results.

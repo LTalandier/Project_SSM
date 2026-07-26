@@ -5,16 +5,17 @@
 slots stay EMPTY until their pre-registered runs produce them (the governing PR-ID is named
 on every slot). Critic reviews the manuscript at S0.8 as usual.
 
-**Working title candidates** (pick at S0.8):
-1. *Can a photonic state-space model be trained on-chip? A pre-registered four-method
-   bake-off on a realistic silicon-nitride ring substrate*
-2. *In-situ trainability of dissipative photonic state-space models: SPSA, physics-aware
-   training, adjoint, and Hamiltonian-echo compared under realistic noise*
-3. *Toward the first in-situ-trained recurrent photonic system: a simulation bake-off on
-   ultra-low-loss SiN microrings*
+**Title — CHOSEN 2026-07-26 (PI-delegated ruling, E-2026-07-12-1):**
 
-Recommendation: (1) — the question form is honest about Stage 0 being simulation, and
-"pre-registered" is a differentiator worth putting on the cover.
+> ***Can a photonic state-space model be trained on-chip? A pre-registered four-method
+> bake-off on a realistic silicon-nitride ring substrate***
+
+(Candidate 1; the question form is honest about Stage 0 being simulation, and
+"pre-registered" is a differentiator worth putting on the cover. Rejected alternates kept
+for the record: 2. *In-situ trainability of dissipative photonic state-space models: SPSA,
+physics-aware training, adjoint, and Hamiltonian-echo compared under realistic noise*;
+3. *Toward the first in-situ-trained recurrent photonic system: a simulation bake-off on
+ultra-low-loss SiN microrings*.)
 
 ---
 
@@ -45,13 +46,17 @@ Recommendation: (1) — the question form is honest about Stage 0 being simulati
 > beats every uniform setting. An end-to-end envelope including electro-optic conversion and
 > DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power
 > heater class) — while an equally-calibrated offline-train-then-deploy baseline
-> statistically ties in-situ training at 5%-class model error: the demonstration is in-data;
-> the *advantage* case rests on drift, larger mismatch, or training-energy grounds, and we
+> statistically ties in-situ training at calibration errors up to 30%-class; the tie breaks
+> only under uncorrelated per-ring drift, where in-situ retraining holds a statistically
+> significant, drift-growing edge that a global laser re-lock cannot absorb (1.84×
+> time-integrated, below our pre-registered 2× bar, so no formal advantage is declared):
+> the demonstration is in-data; the advantage case is directional and drift-specific, and we
 > say so. We release the pre-registration ledger, substrate model, and all training code.
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
-participation → S0.4-0 · damping → S0.6/PR-12 R-ii · niche + offline-tie → S0.7 lite/full +
-§5.5 honest null. The abstract states the null; it is the paper's most falsifiable sentence.)
+participation → S0.4-0 · damping → S0.6/PR-12 R-ii · niche + offline-tie/drift → S0.7 +
+§5.5 as upgraded by S0.9 (PR-5 §E + PR-16). The abstract states the null and the sub-2×
+drift verdict; these are the paper's most falsifiable sentences.)
 
 ## Claims → evidence table
 
@@ -69,8 +74,8 @@ participation → S0.4-0 · damping → S0.6/PR-12 R-ii · niche + offline-tie �
 
 ## Section plan (source → prose; ✍ = writable now)
 
-1. **Introduction** ✍ DRAFT v1 (`sections/01_intro.md`, 2026-07-08; W1 scope used, W0-vs-W1 = PI
-   call at S0.8; search refresh required pre-submission) — the in-situ-training gap for *recurrent* photonics; why SSMs (LinOSS
+1. **Introduction** ✍ DRAFT v2 (`sections/01_intro.md`, 2026-07-26; scope RULED: W0-in-prose +
+   W1-core-sentence; search refresh required pre-submission) — the in-situ-training gap for *recurrent* photonics; why SSMs (LinOSS
    line) are the right recurrence class for rings; the sharpened white-space sentence
    (exact PR-15 wording from `docs/s0_L/whitespace_claim_wording.md`); contributions list =
    claims table. Pre-empt: reservoir computing, Bueno/Brunner RL line, internal-param

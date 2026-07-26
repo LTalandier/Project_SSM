@@ -69,7 +69,9 @@ Stage-0 compute: <€10 (disclosed per-phase in `shared/results_log.md`).
 
 ## Assembly residue (tracked)
 
-- Lucas rulings: **title** (outline candidates 1–3; rec #1) and **W0-vs-W1** scope.
+- ✅ Lucas rulings RESOLVED 2026-07-26 by delegation: **title = candidate 1** (question
+  form, `paper/outline.md`) · **scope = W0 claimed in prose with W1 as the precise core
+  sentence** (§1.1 as edited; E-2026-07-12-1).
 - Final pre-submission sweep: white-space re-run + the 4 registered page-level reads (S3).
 - S0.7 exclusions ledger (laser wall-plug, locking, control compute, packaging),
   primary-sourced.
