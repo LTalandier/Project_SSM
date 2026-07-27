@@ -2,7 +2,7 @@
 
 *Lucas Talandier — independent researcher, Paris*
 
-**Abstract.** Recurrent photonic processors promise low-latency, low-energy sequence processing, but no recurrent photonic system has ever had its recurrence-defining parameters — pole positions and inter-ring couplings — trained on the physical device by any gradient-based or gradient-estimating method (§1, §8). We ask whether such in-situ training is feasible for a structured photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i) derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring lattice and bound its realizable pole region; (ii) build one shared dissipative substrate model — finite Q, saturating gain, amplified-spontaneous-emission noise — with all parameters pre-registered before any training run; and (iii) run a four-method in-situ-training bake-off — SPSA, physics-aware training (PAT), recurrent in-situ adjoint, and Hamiltonian-echo learning (RHEL) — under a pre-registered fairness contract, scored on sample-efficiency-to-target-accuracy at matched device-pass cost. At realistic SiN noise, three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy than SPSA's entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget, its echo defeated by the very dissipation the recurrence needs. A measured participation profile shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising to all 32 with four input taps — a controllability constraint, and conversion cost, that any hardware implementation inherits. Trained damping is a first-order design knob (×300 in error across the feasible box), and training finds a heterogeneous damping profile that beats every uniform setting. An end-to-end envelope including electro-optic conversion and DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power heater class) — while an equally-calibrated offline-train-then-deploy baseline statistically ties in-situ training at calibration errors up to 30%-class; the tie breaks only under uncorrelated per-ring drift, where in-situ retraining holds a statistically significant, drift-growing edge that a global laser re-lock cannot absorb (1.84× time-integrated, below our pre-registered 2× bar, so no formal advantage is declared): the demonstration is in-data; the advantage case is directional and drift-specific, and we say so. We release the pre-registration ledger, substrate model, and all training code.
+**Abstract.** Recurrent photonic processors promise low-latency, low-energy sequence processing, and the first optical recurrent network has recently been trained in situ — yet no continuous-time dissipative-resonator recurrence has ever had the parameters that define it — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the physical device by any gradient-based or gradient-estimating method (§1, §8). We ask whether such in-situ training is feasible for a structured photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i) derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring lattice and bound its realizable pole region; (ii) build one shared dissipative substrate model — finite Q, saturating gain, amplified-spontaneous-emission noise — with all parameters pre-registered before any training run; and (iii) run a four-method in-situ-training bake-off — SPSA, physics-aware training (PAT), recurrent in-situ adjoint, and Hamiltonian-echo learning (RHEL) — under a pre-registered fairness contract, scored on sample-efficiency-to-target-accuracy at matched device-pass cost. At realistic SiN noise, three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy than SPSA's entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget, its echo defeated by the very dissipation the recurrence needs. A measured participation profile shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising to all 32 with four input taps — a controllability constraint, and conversion cost, that any hardware implementation inherits. Trained damping is a first-order design knob (×300 in error across the feasible box), and training finds a heterogeneous damping profile that beats every uniform setting. An end-to-end envelope including electro-optic conversion and DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power heater class) — while an equally-calibrated offline-train-then-deploy baseline statistically ties in-situ training at calibration errors up to 30%-class; the tie breaks only under uncorrelated per-ring drift, where in-situ retraining holds a statistically significant, drift-growing edge that a global laser re-lock cannot absorb (1.84× time-integrated, below our pre-registered 2× bar, so no formal advantage is declared): the demonstration is in-data; the advantage case is directional and drift-specific, and we say so. We release the pre-registration ledger, substrate model, and all training code.
 
 ## 1. Introduction
 
@@ -13,7 +13,7 @@ processors, on-chip training is now routine enough to have families: model-free 
 methods [1, 2], hybrid physical-forward/digital-backward methods
 [3], and in-situ adjoint methods that read gradients from interference
 [4]. But the systems that most need on-device training — *recurrent* photonic
-processors, whose memory lives in the physics — have not received it. Photonic reservoir
+processors, whose memory lives in the physics — have barely begun to receive it. Photonic reservoir
 computing deliberately avoids the problem: the recurrence is fixed, random, and only a readout is
 trained [5]. Where internal parameters of a photonic recurrence have been
 adjusted at all, it has been by calibration or regime-tuning rather than task-driven training
@@ -29,34 +29,41 @@ passes [8]. A two-modality literature search with a pre-registered kill-criterio
 That sentence is this program's target, with each qualifier load-bearing: *on a computational
 task* excludes the servo/calibration lineage; *physical parameters of the recurrence* excludes
 hybrid-digital state carriage; *weight-tied recurrence* excludes feedforward meshes folded in
-time. A refresh of the search at assembly (2026-07-12; memo in supplementary) confirms the gap
-against the strongest 2025–26 neighbors, which we dispatch by name because each is the
-"nearest miss" along one qualifier: on-chip all-photonic backpropagation is now demonstrated —
-for a *feedforward* network [9]; microring weight banks have been trained in
-situ through on-chip optical backprop — as *feedforward* layers [10]; a
-monolithic optical *recurrent* accelerator exists — for inference, training nothing on-device,
-with its recurrent state relayed opto-electronically [11]; a time-synthetic
-fiber-loop network trains in situ — with per-step distinct programmed parameters, i.e.
-unrolled feedforward rather than a weight-tied recurrence [12]; and an
-optoelectronic delay reservoir has had recurrence-defining parameters optimized in situ — by
-Bayesian search rather than gradient-based/-estimating training, through a digital feedback
-loop [13]. No coupled-resonator lattice has had its couplings learned on-device
-by any method. As far as both searches and the assembly refresh can establish, the gap is in
-fact broader than the boxed sentence: no physical photonic system of *any* architecture has yet
-had its recurrent parameters — the parameters defining its recurrence — updated on the physical
-device by gradient-based or gradient-estimating training on a computational task. We state the
-claim in that broad form, and keep the boxed dissipative-resonator sentence as its precise
-instantiation: it is exactly the system this program builds, so the claim and the contribution
-remain the same sentence. (The claim is time-indexed: the search refresh re-runs once more
-immediately before submission, with four registered page-level reads; supplementary.)
+time. Refreshes of the search at assembly (2026-07-12) and a page-level verification round
+(2026-07-27; memos in supplementary) map the boundary against the strongest 2025–26 neighbors,
+which we dispatch by name because each is the "nearest miss" along one qualifier — and one of
+them moved the boundary. The **nearest neighbor** is the monolithic optical recurrent
+accelerator of Wu et al. [9]: its ORNN chip *is* trained in situ, by a
+model-free perturbative method (SPGD, two physical evaluations per update) on a classification
+task, with a weight-tied mesh applied across wavelength-encoded time steps — to our knowledge
+the first in-situ-trained optical recurrent network of any kind, and we cite it as such. What
+it does not do is train the parameters in the boxed sentence: its trained weights are
+interferometer-mesh voltages, its recurrent state is re-generated electronically at every step
+through a photodetector–modulator relay, and its resonators are calibrated once and held
+static — the continuous-time dissipative-resonator recurrence, whose *poles and couplings are
+themselves the memory*, remains untrained. The remaining near-misses each fall along one
+qualifier: on-chip all-photonic backpropagation is now demonstrated — for a *feedforward*
+network [10]; microring weight banks have been trained in situ through on-chip
+optical backprop — as *feedforward* layers [11]; a time-synthetic fiber-loop
+network trains in situ — with per-step distinct programmed parameters, i.e. unrolled
+feedforward rather than a weight-tied recurrence [12]; a
+modulation-and-weighting microring array trains weights sitting *inside* an analog recurrent
+loop on-device — by particle-swarm search, explicitly without gradients
+[13]; an optoelectronic delay reservoir has had recurrence-defining
+parameters optimized in situ — by Bayesian search, through a digital feedback loop
+[14]; and a silicon photonic reservoir equalizer is "trained in hardware" — its
+readout only, by an evolution strategy, the reservoir couplings fixed by fabrication
+[15]. No coupled-resonator lattice has had its couplings learned on-device by any
+method. (The claim is time-indexed: the search refresh re-runs once more immediately before
+submission, with the registered page-level reads listed in supplementary.)
 
 ### 1.2 Why a state-space model, and why silicon nitride
 
 Two developments make this the right moment to close the gap. On the algorithmic side, deep
 state-space models showed that *linear* recurrences with well-placed poles — not gated
-nonlinear dynamics — carry most of long-sequence performance [14, 15], and the
+nonlinear dynamics — carry most of long-sequence performance [16, 17], and the
 oscillatory LinOSS line extended this to second-order units that are exactly coupled damped
-oscillators [16, 17]. A lattice of coupled microrings *is* such a system:
+oscillators [18, 19]. A lattice of coupled microrings *is* such a system:
 poles are ring detunings and losses, couplings are physical couplers, and — decisively for
 hardware — the LinOSS stability analysis tolerates nonnegative damping, so a lossy-but-high-Q
 dissipative lattice is in-regime rather than an approximation to a conservative ideal (§2).
@@ -64,7 +71,7 @@ Damping becomes a design knob, not an embarrassment.
 
 On the platform side, the figure of merit for a dissipative ring recurrence is memory per pass —
 round-trip loss, hence intrinsic Q. Ultra-low-loss silicon nitride is class-leading and
-foundry-accessible ($Q_i$ near $10^7$ on multi-project-wafer runs [18]), thermally
+foundry-accessible ($Q_i$ near $10^7$ on multi-project-wafer runs [20]), thermally
 stable enough for the slow thermo-optic actuation that gradient-estimating training wants, and
 needs so little gain that the injected amplifier noise stays low (§3). The same choice has a
 cost we do not hide: SiN's weak $\chi^{(3)}$ makes the one training route that needs an optical
@@ -119,10 +126,10 @@ current answer to that question as it falls, not as we might wish it.
 A structured state-space model (SSM) processes a sequence $u_1, u_2, \dots$ through a linear
 recurrence $x_{t+1} = \bar A x_t + \bar B u_t$, $y_t = \mathrm{Re}(\bar C x_t) + D u_t$, whose
 expressive power is set by where the eigenvalues (poles) of $\bar A$ can be placed and how
-precisely. The diagonal variants that dominate current practice — S4D and DSS [15, 19]
+precisely. The diagonal variants that dominate current practice — S4D and DSS [17, 21]
 — reduce $\bar A$ to a set of independent complex poles, $H(s) = \sum_j c_j b_j/(s - \lambda_j) + D$;
-the oscillatory LinOSS family [16] instead parameterizes forced, damped harmonic
-oscillators, and its damped extension D-LinOSS [17] makes the damping of each mode a
+the oscillatory LinOSS family [18] instead parameterizes forced, damped harmonic
+oscillators, and its damped extension D-LinOSS [19] makes the damping of each mode a
 trainable parameter. Crucially for what follows, the LinOSS construction is valid for any
 nonnegative-diagonal (dissipative) state matrix: stability does not require conservative dynamics,
 only that every mode decay. A physical substrate that is *lossy but slowly so* is therefore
@@ -132,7 +139,7 @@ of the model class itself.
 ### 2.2 One ring is one trainable complex pole
 
 The mode amplitude $a_j$ of a silicon-nitride microring obeys temporal coupled-mode theory
-(Haus energy-amplitude convention, $|a|^2$ = stored energy) [20]:
+(Haus energy-amplitude convention, $|a|^2$ = stored energy) [22]:
 
 $$\dot a_j = (i\delta_j - \kappa_{\mathrm{tot},j})\,a_j
 + i\sum_{k\neq j}\mu_{jk}\,a_k + \sqrt{2\kappa_{\mathrm{ext},j}}\,u(t),$$
@@ -223,15 +230,15 @@ Sidewall roughness couples the counter-propagating modes at a coherent rate $\ga
 fabrication constant, essentially independent of $\kappa_\mathrm{tot}$; the resonance resolves
 into a standing-wave doublet when $2\gamma \gtrsim \kappa_\mathrm{tot}$ (conservative HWHM
 criterion; the FWHM criterion shifts every crossover ×2, conclusion unchanged)
-[21]. Because
+[23]. Because
 $\kappa_i$ falls as $Q_i$ rises while $\gamma$ does not, splitting *grows* with $Q$: from
 measured SiN rates, a clean damascene-class process ($\gamma/2\pi \approx 12$ MHz
-[22]) keeps the single-pole picture at the foundry corner ($2\gamma/\kappa_i
+[24]) keeps the single-pole picture at the foundry corner ($2\gamma/\kappa_i
 \approx 0.5$) and breaks it at $Q \approx 4\times10^6$ (HWHM; $8\times10^6$ FWHM), while a rough
 subtractive process splits 21–75 % of resonances *already at* $Q_i \lesssim 2.7\times10^6$, with
-average doublet separations of 180–320 MHz depending on etch mask [23] — i.e.
+average doublet separations of 180–320 MHz depending on etch mask [25] — i.e.
 modal-coupling rates $\gamma/2\pi \approx 90$–$160$ MHz under the standard
-$2\gamma$-separation convention [21], a mapping we state here because the
+$2\gamma$-separation convention [23], a mapping we state here because the
 source tabulates separations, not rates (page-verified 2026-07-12). *The assembled crossover curve brackets published SiN data
 points — no single published SiN crossover exists, and no $\gamma$ is published for the
 specific target processes; primary-source verification is registered before submission.*
@@ -319,7 +326,7 @@ convention carries much of the fairness burden, and one of RHEL's irreversibilit
 The headline noise figure is **NF = 7.0 dB** ($n_\text{sp}=2.5$). The program's original debt
 register carried "no measured NF for the flagship Er:Si₃N₄ device" as verification debt #3; the
 S0.3-0 substrate reconnaissance (2026-06-10) found that premise false — the full text reports
-"a noise figure of ca. 7 dB … at net gain of >20 dB, limited by coupling losses" [24]
+"a noise figure of ca. 7 dB … at net gain of >20 dB, limited by coupling losses" [26]
 — and NF-A = 7.0 dB was frozen *to match that measurement* (re-verified at page level during
 assembly, 2026-07-12). The residue of the debt is narrower than its original form: what exists
 is a single coupling-loss-limited *system* NF, not an isolated intrinsic amplifier NF, so
@@ -334,9 +341,9 @@ NF ∈ {3, 5} remain registered sensitivity values.
 | C-3 | aspirational (P-UHQ) | $3\times10^7$ | 128 | labelled sweep axis; never gates |
 
 C-2 is registered as a *conservative bound* on a demonstrated MPW result (3.3 dB/m, mean
-$Q_i \approx 10.8$M [18]); our pair ($5.1$ dB/m, $Q_i = 6.8\times10^6$) is strictly
+$Q_i \approx 10.8$M [20]); our pair ($5.1$ dB/m, $Q_i = 6.8\times10^6$) is strictly
 worse than the broadest-linewidth device in that paper's full 249-resonance distribution, whose
-figures are independently assessed in an invited peer commentary [25]. The
+figures are independently assessed in an invited peer commentary [27]. The
 residual anchor risk is geometry transfer (the demonstrated loss is achieved *by* a wide
 multimode Euler-bend racetrack; our registry ring is single-mode) — flagged by the commentary
 itself and priced by a registered ×2-loss derate row. At the operating point, C-2 holds ~32
@@ -428,7 +435,7 @@ descent direction from the difference: **2 device passes per update**, no model,
 added hardware beyond the plant's own actuators and its single readout (the simplest row of the
 hardware ledger, F8). Perturbations at the clamp boundary are one-sided. SPSA is
 chip-demonstrated [2] and inherits the crosstalk-robustness observed in our
-prior thermo-optic work [26]; its known weakness — gradient variance growing
+prior thermo-optic work [28]; its known weakness — gradient variance growing
 with parameter count — is precisely what the sample-efficiency metric prices.
 
 ### 4.3 PAT — physical forward, twin backward
@@ -469,7 +476,7 @@ with cell size.
 
 ### 4.5 RHEL — Hamiltonian echoes on a substrate that forgets
 
-Recurrent Hamiltonian echo learning [27, 28] trains by
+Recurrent Hamiltonian echo learning [29, 30] trains by
 time-reversal: evolve forward; apply a single conjugation to the state snapshot (for optical
 fields, phase conjugation); evolve again through the *same* physics with the input replayed
 time-reversed and a small error nudge injected continuously; the gradient is the symmetric finite
@@ -486,10 +493,10 @@ a $\chi^{(3)}$ four-wave-mixing conjugation stage with the full penalty chain �
 through the ring ports ($\eta_\text{ex} = 2\kappa_\text{ext}/\kappa_\text{net} = 0.86$ at θ₀),
 single-pass spiral conversion ($(\gamma_\text{nl} P_p L)^2 \approx -16.7$ dB at 0.3 W pump,
 0.5 m; $\gamma_\text{nl} \approx 0.97\,\text{W}^{-1}\text{m}^{-1}$ for tight-confinement SiN
-[29]), and timing decay — totalling **−22.4 dB per conjugation** (Fig. S3), plus the
+[31]), and timing decay — totalling **−22.4 dB per conjugation** (Fig. S3), plus the
 phase-insensitive parametric quantum floor. A page-level check at assembly found published
 *ultra-low-loss-geometry* demonstrations at $\gamma \approx 0.29$–$0.51\,\text{W}^{-1}
-\text{m}^{-1}$ (with CW power handling demonstrated to 7 W) [29]; our 0.97 assumes a
+\text{m}^{-1}$ (with CW power handling demonstrated to 7 W) [31]; our 0.97 assumes a
 tighter-confinement spiral than those demos, so the frozen chain is, if anything, *optimistic*
 for RHEL — at the measured ULL values the conjugation penalty deepens by a further ~6 dB. The
 direction only strengthens §5.4's conclusion, which the idealized-conjugator control shows does
@@ -560,7 +567,7 @@ and the inter-ring couplings $\{\delta_j, \kappa_{\text{ext},j}, \mu_{jk}\}$ —
 injected noise on every pass, to within the pre-registered margin of the exact-gradient ceiling.
 To our knowledge this is the first demonstration, by any method, of a recurrent photonic system
 whose recurrence-internal parameters are updated by on-device gradient-based or gradient-estimating
-training (the white-space claim, §1; [30]).
+training (the white-space claim, §1; [32]).
 
 ### 5.3 The ranking: sample-efficiency at matched device-pass cost
 
@@ -599,7 +606,7 @@ The fourth route, recurrent Hamiltonian echo learning (RHEL), is the one whose p
 SiN is least suited to supply. Rather than an idealized conjugation operator, we model the echo as
 a concrete $\chi^{(3)}$ four-wave-mixing phase-conjugation stage with its measured penalty chain —
 extraction, single-pass spiral conversion at 0.3 W pump, timing decay — totalling $-22.4$ dB per
-conjugation, plus the phase-insensitive parametric noise floor (§4, PR-11; [29]).
+conjugation, plus the phase-insensitive parametric noise floor (§4, PR-11; [31]).
 
 RHEL does not reach target on any seed; its final SER of $0.14$ is *worse than the readout-only
 baseline* (a $+0.118$ readout differential). Two controls locate the cause. A floor check confirms
@@ -627,8 +634,9 @@ indistinguishable from in-situ PAT's $8\times10^{-4}$.
 
 We state the consequence plainly, because the fair-comparison design exists precisely to force it:
 **at 5% calibration accuracy on this task, training in situ buys essentially nothing over
-calibrate-then-deploy.** The demonstration claim — the first on-device-trained recurrent photonic
-recurrence — stands regardless; it is a claim about *what was done*, not about beating an
+calibrate-then-deploy.** The demonstration claim — the first dissipative-resonator recurrence
+whose poles and couplings train on-device — stands regardless; it is a claim about *what was
+done*, not about beating an
 alternative. The question this raises — *under what conditions does the advantage appear?* — we
 then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
 PR-16; both frozen before the runs).
@@ -644,7 +652,7 @@ training does not earn its keep against calibration error alone.
 
 **Drift is the axis — specifically the part a re-lock cannot catch** (Fig. F8b,c). We then let the substrate
 *drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
-resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [31]),
+resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [33]),
 deployed after convergence, with each arm allowed its on-device response — offline recalibrates the
 head and re-locks the laser (a single global detuning re-centering); in-situ retrains the
 recurrence. The pre-registered contrast holds cleanly. Under **common-mode** drift (whole-chip
@@ -766,7 +774,15 @@ best published device class; CONS = named vendor parts at ENOB-at-speed, never n
 against named baselines (Microsoft Brainwave's author-stated batch-1 streaming efficiency; a
 coherent-DSP ASIC class; Jetson AGX Orin), with every number traced to a frozen source row and
 the four known exclusions (laser wall-plug, locking, control compute, packaging) explicitly
-unbudgeted — they only shrink positive cells, so negative findings are robust to them.
+unbudgeted — they only shrink positive cells, so negative findings are robust to them. An
+assembly-time retrieval bounds their magnitude from primary sources (supplementary ledger): the
+integrated-class stack — hybrid-laser wall-plug 0.2–0.6 W at mW-class on-chip power, TEC hold
+0.18 W, microcontroller-class control 0.13 W, FPGA-class locking up to ~10 W — totals of order
+0.5–1 W, the *same order as the budgeted N = 128 photonic power itself* (~0.9 W at 2 GS/s).
+Charging it would compress the positive cells' margin (§7.2) toward single digits, and a
+benchtop realization (40–100 W laser and instrument lock) would erase the niche outright. The
+niche verdict below therefore carries an integrated-realization condition on all four excluded
+items, alongside the heater-class condition it already states.
 
 ### 7.2 Inference: a conditional niche, gated by the heater class
 
@@ -786,7 +802,7 @@ anywhere; the niche claim rests on measured sustained behavior, for which batch-
 workloads on edge GPUs are documented at >100× below claimed peak — page-verified: measured
 batch-1 GRU throughput of 1.9 and 3.5 GOp/s against claimed peaks of 0.5 and 0.8 TOp/s on the
 two Jetson-class devices (ratios ≈263× and ≈229×), with the source's own conclusion stating
-"a factor of over 100X" [32]; the Orin DLA path falls back to GPU for recurrent
+"a factor of over 100X" [34]; the Orin DLA path falls back to GPU for recurrent
 layers. One boundary cell (the DSP-class
 comparison at N = 32) clears by ~1% and is treated as a tie.
 
@@ -917,7 +933,7 @@ the first-light training route with PAT layered on once the twin is characterize
 
 The multi-project-wafer path is concrete: the registered cells were chosen to be
 foundry-realizable (C-1 at generic-foundry loss; C-2 bounded by a demonstrated MPW result
-[18]), and the actuation map of §2 uses only standard thermo-optic tuners. The E/O
+[20]), and the actuation map of §2 uses only standard thermo-optic tuners. The E/O
 overhead the four-tap drive and the eval protocol add is exactly what §7's envelope prices.
 
 ### 9.2 What would change our mind
@@ -938,7 +954,7 @@ conjugator, to reopen.
 
 The frozen architecture is deliberately the unselective LTI core — poles and couplings, the part
 photonics builds natively. The selectivity axis (input-dependent dynamics in the Mamba direction
-[33]) maps onto the same lattice as input-dependent $C$ then $B$ actuation and is
+[35]) maps onto the same lattice as input-dependent $C$ then $B$ actuation and is
 scoped for a later stage only behind its own gate (per-step tuning without per-state DACs);
 nothing in this paper's claims depends on it. Likewise the damping operating point (§6) and
 the D-LinOSS accuracy question ride the *trainable* κ_ext axis established here rather than new
@@ -1078,28 +1094,30 @@ regime: the C-2 failure is dissipative-echo bias, not implementation error.
 6. Jayatilleka et al., "Wavelength tuning and stabilization of microring-based filters using silicon in-resonator photoconductive heaters," Opt. Express 23(19), 25084–25097 (2015); Mak, Sacher, Xue, Mikkelsen, Yong, Poon, "Automatic Resonance Alignment of High-Order Microring Filters," IEEE JQE 51(11) (2015); Milanizadeh, Aguiar, Melloni, Morichetti, "Canceling Thermal Cross-Talk Effects in Photonic Integrated Circuits," JLT 37(4), 1325–1332 (2019)
 7. Bueno, Maktoobi, Froehly, Fischer, Jacquot, Larger, Brunner, "Reinforcement learning in a large-scale photonic recurrent neural network," Optica 5(6), 756–760 (2018)
 8. Böhm, Verschaffelt, Van der Sande, "A poor man's coherent Ising machine based on opto-electronic feedback systems…," Nat. Commun. 10, 3538 (2019); companion: Böhm et al., Nat. Commun. 13, 5847 (2022)
-9. Ashtiani, Idjadi, Kim, "Integrated photonic neural network with on-chip backpropagation training," Nature 651, 927–932 (2026). arXiv:2506.14575
-10. Zhao et al., "In-Situ Trained Microring-Based Neural Networks," Laser Photon. Rev. (2025), 10.1002/lpor.202501576
-11. Wu et al., "Monolithically integrated asynchronous optical recurrent accelerator," eLight 5, 7 (2025)
-12. Wu, Ren et al., time-synthetic optical neural network with programmable gain, arXiv:2507.02297 (2025)
-13. "In-situ optimization of an optoelectronic reservoir computer with digital delayed feedback," ACS Photonics (2025). arXiv:2502.11126
-14. Gu, Goel, Ré, "Efficiently Modeling Long Sequences with Structured State Spaces," ICLR 2022. arXiv:2111.00396
-15. Gu, Gupta, Goel, Ré, "On the Parameterization and Initialization of Diagonal State Space Models," NeurIPS 2022. arXiv:2206.11893
-16. Rusch, Rus, "Oscillatory State-Space Models," ICLR 2025 (Oral). arXiv:2410.03943
-17. Boyer, Rusch, Rus, "Learning to Dissipate Energy in Oscillatory State-Space Models," arXiv:2505.12171
-18. Cui, Cao, Pan, Gao, Yu, Zhang, "Compact microring resonator based on ultralow-loss multimode silicon nitride waveguide," Adv. Photonics Nexus 2(4), 046007 (2023)
-19. Gupta, Gu, Berant, "Diagonal State Spaces are as Effective as Structured State Spaces," NeurIPS 2022. arXiv:2203.14343
-20. Haus, *Waves and Fields in Optoelectronics*, Prentice-Hall (1984)
-21. Gorodetsky, Pryamikov, Ilchenko, "Rayleigh scattering in high-Q microspheres," JOSA B 17(6), 1051–1057 (2000); Kippenberg, Spillane, Vahala, "Modal coupling in traveling-wave resonators," Opt. Lett. 27(19), 1669–1671 (2002)
-22. Liu, Huang, Wang, He, Raja, Liu, Engelsen, Kippenberg, "High-yield, wafer-scale fabrication of ultralow-loss, dispersion-engineered silicon nitride photonic circuits," Nat. Commun. 12, 2236 (2021)
-23. Rukh, Colación, Buck, Drake, "Process-structure-property relationships in subtractive fabrication of silicon nitride microresonators for nonlinear photonics," arXiv:2511.02198 (2025)
-24. Liu, Qiu, Ji, Lukashchuk, He, Riemensberger, Hafermann, Wang, Liu, Ronning, Kippenberg, "A photonic integrated circuit-based erbium-doped amplifier," Science 376, 1309–1313 (2022)
-25. Ye, Marpaung, "Compact multi-mode silicon-nitride micro-ring resonator with low loss," Adv. Photonics 5(5), 050503 (2023)
-26. Talandier, multi-layer photonic-equalization manuscript (in preparation) + chip β-track thermal-crosstalk/perturbation-tolerance results
-27. Pourcel, Ernoult, "Learning long range dependencies through time reversal symmetry breaking," arXiv:2506.05259 (2025)
-28. López-Pastor, Marquardt, "Self-Learning Machines Based on Hamiltonian Echo Backpropagation," Phys. Rev. X 13, 031020 (2023). arXiv:2103.04992
-29. Riemensberger, Kuznetsov, Liu, He, Wang, Kippenberg, "A photonic integrated continuous-travelling-wave parametric amplifier," Nature 612, 56–61 (2022); Krückel et al., "Continuous wave-pumped wavelength conversion in low-loss silicon nitride waveguides," Opt. Lett. 40(6), 875–878 (2015)
-30. this work: PR-15 two-modality search + refresh memos (`docs/s0_L/debt1_whitespace_search.md`, `docs/s0_L/whitespace_refresh_2026-07-12.md`), supplementary
-31. Dacha, Zhao, McNulty, Bhatt, Lipson, Gaeta, "Frequency-stable nanophotonic microcavities via integrated thermometry," Nature Photonics (2025). arXiv:2506.21692
-32. Gao, Rios-Navarro, Chen, Liu, Delbruck, "EdgeDRNN: Recurrent Neural Network Accelerator for Edge Inference," IEEE JETCAS 10(4), 419–432 (2020). arXiv:2012.13600
-33. Gu, Dao, "Mamba: Linear-Time Sequence Modeling with Selective State Spaces," COLM 2024 (Outstanding Paper). arXiv:2312.00752
+9. Wu et al., "Monolithically integrated asynchronous optical recurrent accelerator," eLight 5, 7 (2025)
+10. Ashtiani, Idjadi, Kim, "Integrated photonic neural network with on-chip backpropagation training," Nature 651, 927–932 (2026). arXiv:2506.14575
+11. Zhao et al., "In-Situ Trained Microring-Based Neural Networks," Laser Photon. Rev. (2025), 10.1002/lpor.202501576
+12. Wu, Ren et al., "Time-synthetic optical neural networks with stable programmable gain," arXiv:2507.02297 (retitled from "A scalable and programmable optical neural network in a time-synthetic dimension")
+13. Zhang, Wang, Lederman, Shastri, Prucnal et al., "Compact, reconfigurable, and scalable photonic neurons by modulation-and-weighting microring resonators," eLight 6, 6 (2026). arXiv:2505.11369
+14. "In-situ optimization of an optoelectronic reservoir computer with digital delayed feedback," ACS Photonics (2025). arXiv:2502.11126
+15. "Real-time optical signal equalization with a silicon photonic spatially distributed reservoir computer," Nat. Photonics (2026). arXiv:2503.19911 (Ghent/imec)
+16. Gu, Goel, Ré, "Efficiently Modeling Long Sequences with Structured State Spaces," ICLR 2022. arXiv:2111.00396
+17. Gu, Gupta, Goel, Ré, "On the Parameterization and Initialization of Diagonal State Space Models," NeurIPS 2022. arXiv:2206.11893
+18. Rusch, Rus, "Oscillatory State-Space Models," ICLR 2025 (Oral). arXiv:2410.03943
+19. Boyer, Rusch, Rus, "Learning to Dissipate Energy in Oscillatory State-Space Models," arXiv:2505.12171
+20. Cui, Cao, Pan, Gao, Yu, Zhang, "Compact microring resonator based on ultralow-loss multimode silicon nitride waveguide," Adv. Photonics Nexus 2(4), 046007 (2023)
+21. Gupta, Gu, Berant, "Diagonal State Spaces are as Effective as Structured State Spaces," NeurIPS 2022. arXiv:2203.14343
+22. Haus, *Waves and Fields in Optoelectronics*, Prentice-Hall (1984)
+23. Gorodetsky, Pryamikov, Ilchenko, "Rayleigh scattering in high-Q microspheres," JOSA B 17(6), 1051–1057 (2000); Kippenberg, Spillane, Vahala, "Modal coupling in traveling-wave resonators," Opt. Lett. 27(19), 1669–1671 (2002)
+24. Liu, Huang, Wang, He, Raja, Liu, Engelsen, Kippenberg, "High-yield, wafer-scale fabrication of ultralow-loss, dispersion-engineered silicon nitride photonic circuits," Nat. Commun. 12, 2236 (2021)
+25. Rukh, Colación, Buck, Drake, "Process-structure-property relationships in subtractive fabrication of silicon nitride microresonators for nonlinear photonics," arXiv:2511.02198 (2025)
+26. Liu, Qiu, Ji, Lukashchuk, He, Riemensberger, Hafermann, Wang, Liu, Ronning, Kippenberg, "A photonic integrated circuit-based erbium-doped amplifier," Science 376, 1309–1313 (2022)
+27. Ye, Marpaung, "Compact multi-mode silicon-nitride micro-ring resonator with low loss," Adv. Photonics 5(5), 050503 (2023)
+28. Talandier, multi-layer photonic-equalization manuscript (in preparation) + chip β-track thermal-crosstalk/perturbation-tolerance results
+29. Pourcel, Ernoult, "Learning long range dependencies through time reversal symmetry breaking," arXiv:2506.05259 (2025)
+30. López-Pastor, Marquardt, "Self-Learning Machines Based on Hamiltonian Echo Backpropagation," Phys. Rev. X 13, 031020 (2023). arXiv:2103.04992
+31. Riemensberger, Kuznetsov, Liu, He, Wang, Kippenberg, "A photonic integrated continuous-travelling-wave parametric amplifier," Nature 612, 56–61 (2022); Krückel et al., "Continuous wave-pumped wavelength conversion in low-loss silicon nitride waveguides," Opt. Lett. 40(6), 875–878 (2015)
+32. this work: PR-15 two-modality search + refresh memos (`docs/s0_L/debt1_whitespace_search.md`, `docs/s0_L/whitespace_refresh_2026-07-12.md`), supplementary
+33. Dacha, Zhao, McNulty, Bhatt, Lipson, Gaeta, "Frequency-stable nanophotonic microcavities via integrated thermometry," Nature Photonics (2025). arXiv:2506.21692
+34. Gao, Rios-Navarro, Chen, Liu, Delbruck, "EdgeDRNN: Recurrent Neural Network Accelerator for Edge Inference," IEEE JETCAS 10(4), 419–432 (2020). arXiv:2012.13600
+35. Gu, Dao, "Mamba: Linear-Time Sequence Modeling with Selective State Spaces," COLM 2024 (Outstanding Paper). arXiv:2312.00752

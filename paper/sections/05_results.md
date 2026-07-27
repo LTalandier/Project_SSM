@@ -123,8 +123,9 @@ indistinguishable from in-situ PAT's $8\times10^{-4}$.
 
 We state the consequence plainly, because the fair-comparison design exists precisely to force it:
 **at 5% calibration accuracy on this task, training in situ buys essentially nothing over
-calibrate-then-deploy.** The demonstration claim — the first on-device-trained recurrent photonic
-recurrence — stands regardless; it is a claim about *what was done*, not about beating an
+calibrate-then-deploy.** The demonstration claim — the first dissipative-resonator recurrence
+whose poles and couplings train on-device — stands regardless; it is a claim about *what was
+done*, not about beating an
 alternative. The question this raises — *under what conditions does the advantage appear?* — we
 then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
 PR-16; both frozen before the runs).

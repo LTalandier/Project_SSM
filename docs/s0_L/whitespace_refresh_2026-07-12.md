@@ -1,5 +1,9 @@
 # White-space refresh — 2026-07-12 (S0.8 assembly; pre-submission sweep #1)
 
+> **⚠ SUPERSEDED IN PART (2026-07-27):** the Wu eLight disposition below ("inference-only,
+> trains nothing") was REFUTED by the registered page-level read — the paper's ORNN chip is
+> SPGD-trained in situ. W0 retracted; W1 stands. See `whitespace_page_reads_2026-07-27.md`.
+
 **Author:** Supervisor (single-session mode — search executed by a delegated web agent under
 the PR-15 qualifier frame; not independently reviewed; disclosed). **Refreshes:**
 `debt1_whitespace_search.md` (PR-15, 2026-06-09) under the same three qualifiers: (i) on a

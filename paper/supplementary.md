@@ -73,11 +73,14 @@ hardware-realism ledger); prose always writes figures as "Fig. Fn".
 
 ## Assembly residue (tracked)
 
-- ✅ Lucas rulings RESOLVED 2026-07-26 by delegation: **title = candidate 1** (question
-  form, `paper/outline.md`) · **scope = W0 claimed in prose with W1 as the precise core
-  sentence** (§1.1 as edited; E-2026-07-12-1).
-- Final pre-submission sweep: white-space re-run + the 4 registered page-level reads (S3).
-- S0.7 exclusions ledger (laser wall-plug, locking, control compute, packaging),
-  primary-sourced.
-- Venue formatting + [CITE-*] → numbered bibliography conversion (`paper/references.md` is
-  the key map).
+- ✅ Lucas rulings RESOLVED 2026-07-26 by delegation: **title = candidate 1**; scope initially
+  W0-in-prose — **superseded 2026-07-27: W1 only** (the registered Wu eLight page read refuted
+  the W0 clearance; `docs/s0_L/whitespace_page_reads_2026-07-27.md`, E-2026-07-27-1).
+- ✅ The 4 registered page-level reads PERFORMED 2026-07-27 (3 clear, Wu refuted) + fresh
+  June–July sweep (no new attack). **Still registered before submission:** Zhang eLight 6:6
+  page read; one last sweep re-run (July 2026 not yet indexed); UNVERIFIED-direct rows of the
+  exclusions ledger.
+- ✅ S0.7 exclusions ledger primary-sourced: `docs/s0_7/exclusions_ledger.md` (§7.1 states the
+  integrated-class ~0.5–1 W consequence).
+- ✅ [CITE-*] → numbered bibliography + assembled manuscript: `analysis/build_manuscript.py` →
+  `paper/p1_manuscript.md`. Venue-specific formatting (LaTeX, journal template) remains.

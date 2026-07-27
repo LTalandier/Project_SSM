@@ -1,8 +1,10 @@
 # §1 — Introduction
 
-**Status:** DRAFT v2 (2026-07-26, single-session mode — not independently reviewed; disclosed).
-**Scope ruling:** W0-in-prose with W1 as the precise core sentence — adopted 2026-07-26 by
-PI-delegated ruling (E-2026-07-12-1 resolved; Lucas: "you can chose the title and W0/W1").
+**Status:** DRAFT v3 (2026-07-27, single-session mode — not independently reviewed; disclosed).
+**Scope ruling:** **W1 only** — re-ruled 2026-07-27 under the same standing delegation after the
+registered Wu eLight page-level read REFUTED the prior clearance (its ORNN chip is SPGD-trained
+in situ → W0's broad form is attacked; W1 survives cleanly, Wu cited as nearest neighbor).
+Supersedes the 2026-07-26 W0-in-prose ruling; memo `docs/s0_L/whitespace_page_reads_2026-07-27.md`.
 **Sources of record:** `docs/s0_L/whitespace_claim_wording.md` · PR-15/15.1 (the two-modality white-space search +
 kill-criterion) · `paper/outline.md` claims table · §2–§5 drafts. **Open flags:** [CITE-*] keys resolved via `paper/references.md` (2026-07-12; white-space
 refresh folded into §1.1 — Wu/Zhao boundary audits RESOLVED, both clear); a final refresh sweep
@@ -17,7 +19,7 @@ processors, on-chip training is now routine enough to have families: model-free 
 methods [CITE-Spall; CITE-SPSA-photonic], hybrid physical-forward/digital-backward methods
 [CITE-Wright-2022], and in-situ adjoint methods that read gradients from interference
 [CITE-Hughes-2018]. But the systems that most need on-device training — *recurrent* photonic
-processors, whose memory lives in the physics — have not received it. Photonic reservoir
+processors, whose memory lives in the physics — have barely begun to receive it. Photonic reservoir
 computing deliberately avoids the problem: the recurrence is fixed, random, and only a readout is
 trained [CITE-reservoir-reviews]. Where internal parameters of a photonic recurrence have been
 adjusted at all, it has been by calibration or regime-tuning rather than task-driven training
@@ -33,26 +35,33 @@ passes [CITE-Boehm-class]. A two-modality literature search with a pre-registere
 That sentence is this program's target, with each qualifier load-bearing: *on a computational
 task* excludes the servo/calibration lineage; *physical parameters of the recurrence* excludes
 hybrid-digital state carriage; *weight-tied recurrence* excludes feedforward meshes folded in
-time. A refresh of the search at assembly (2026-07-12; memo in supplementary) confirms the gap
-against the strongest 2025–26 neighbors, which we dispatch by name because each is the
-"nearest miss" along one qualifier: on-chip all-photonic backpropagation is now demonstrated —
-for a *feedforward* network [CITE-Ashtiani-2026]; microring weight banks have been trained in
-situ through on-chip optical backprop — as *feedforward* layers [CITE-Zhao-2025]; a
-monolithic optical *recurrent* accelerator exists — for inference, training nothing on-device,
-with its recurrent state relayed opto-electronically [CITE-Wu-eLight-2025]; a time-synthetic
-fiber-loop network trains in situ — with per-step distinct programmed parameters, i.e.
-unrolled feedforward rather than a weight-tied recurrence [CITE-time-synthetic]; and an
-optoelectronic delay reservoir has had recurrence-defining parameters optimized in situ — by
-Bayesian search rather than gradient-based/-estimating training, through a digital feedback
-loop [CITE-OERC-insitu]. No coupled-resonator lattice has had its couplings learned on-device
-by any method. As far as both searches and the assembly refresh can establish, the gap is in
-fact broader than the boxed sentence: no physical photonic system of *any* architecture has yet
-had its recurrent parameters — the parameters defining its recurrence — updated on the physical
-device by gradient-based or gradient-estimating training on a computational task. We state the
-claim in that broad form, and keep the boxed dissipative-resonator sentence as its precise
-instantiation: it is exactly the system this program builds, so the claim and the contribution
-remain the same sentence. (The claim is time-indexed: the search refresh re-runs once more
-immediately before submission, with four registered page-level reads; supplementary.)
+time. Refreshes of the search at assembly (2026-07-12) and a page-level verification round
+(2026-07-27; memos in supplementary) map the boundary against the strongest 2025–26 neighbors,
+which we dispatch by name because each is the "nearest miss" along one qualifier — and one of
+them moved the boundary. The **nearest neighbor** is the monolithic optical recurrent
+accelerator of Wu et al. [CITE-Wu-eLight-2025]: its ORNN chip *is* trained in situ, by a
+model-free perturbative method (SPGD, two physical evaluations per update) on a classification
+task, with a weight-tied mesh applied across wavelength-encoded time steps — to our knowledge
+the first in-situ-trained optical recurrent network of any kind, and we cite it as such. What
+it does not do is train the parameters in the boxed sentence: its trained weights are
+interferometer-mesh voltages, its recurrent state is re-generated electronically at every step
+through a photodetector–modulator relay, and its resonators are calibrated once and held
+static — the continuous-time dissipative-resonator recurrence, whose *poles and couplings are
+themselves the memory*, remains untrained. The remaining near-misses each fall along one
+qualifier: on-chip all-photonic backpropagation is now demonstrated — for a *feedforward*
+network [CITE-Ashtiani-2026]; microring weight banks have been trained in situ through on-chip
+optical backprop — as *feedforward* layers [CITE-Zhao-2025]; a time-synthetic fiber-loop
+network trains in situ — with per-step distinct programmed parameters, i.e. unrolled
+feedforward rather than a weight-tied recurrence [CITE-time-synthetic]; a
+modulation-and-weighting microring array trains weights sitting *inside* an analog recurrent
+loop on-device — by particle-swarm search, explicitly without gradients
+[CITE-Zhang-eLight-2026]; an optoelectronic delay reservoir has had recurrence-defining
+parameters optimized in situ — by Bayesian search, through a digital feedback loop
+[CITE-OERC-insitu]; and a silicon photonic reservoir equalizer is "trained in hardware" — its
+readout only, by an evolution strategy, the reservoir couplings fixed by fabrication
+[CITE-spatial-RC]. No coupled-resonator lattice has had its couplings learned on-device by any
+method. (The claim is time-indexed: the search refresh re-runs once more immediately before
+submission, with the registered page-level reads listed in supplementary.)
 
 ## 1.2 Why a state-space model, and why silicon nitride
 

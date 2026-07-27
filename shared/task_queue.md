@@ -8,6 +8,8 @@ Task format: see `.claude/skills/executor/SKILL.md`.
 
 ---
 
+## ✅ DONE — P1 finalization (2026-07-27): **figures F8+S1/S2/S3/S5 made** (`analysis/make_sfigures.py`) + captions (`paper/figure_captions.md`) · **manuscript assembled** (`analysis/build_manuscript.py` → `paper/p1_manuscript.md`, numbered bib, 35 refs) · **4 registered page reads PERFORMED: Wu eLight REFUTED → scope re-ruled W1-only** (E-2026-07-27-1; §1.1/abstract/§5.5 re-scoped; Wu = nearest neighbor cited loudly) · **fresh sweep: no new attack** (Zhang eLight 6:6 = new nearest miss, PSO-cleared, read registered; Zhao×Wu merge watch) · **S0.7 exclusions ledger primary-sourced** (`docs/s0_7/exclusions_ledger.md`; §7.1 integrated-class ~0.5–1 W consequence stated). Remaining pre-submission: Zhang read, final sweep re-run, UNVERIFIED-direct re-checks, venue/LaTeX formatting. P2 send = Lucas.
+
 ## ✅ DONE — P1 PI rulings (2026-07-26, delegated — Lucas: "you can chose the title and W0/W1"): **title = candidate 1** (question form, recorded CHOSEN in `paper/outline.md`) · **white-space scope = W0-in-prose + W1-core-sentence** (§1.1 ▢ removed; abstract + §1.3 refreshed to post-S0.9 §5.5). E-2026-07-12-1 RESOLVED — **P1 has no open PI gates**; remaining items non-PI (S-figs, venue formatting, final refresh sweep + 4 page reads, S0.7 exclusions ledger). P2 send still Lucas's physical action.
 
 ## ✅ DONE — S0.9 (2026-07-24): **mismatch tie ROBUST to 30% (stronger null); drift produces a real sub-2× in-situ edge specific to UNCORRELATED drift a re-lock can't catch (1.84×, CI excludes 0; ~3–4× at peak drift)** — no formal 2× advantage declared, but the advantage case is now directional + mechanism-identified. §5.5 upgraded. See `results/s0_9/s0_9.md` + results_log. ≈€0.75 cloud, servers deleted.

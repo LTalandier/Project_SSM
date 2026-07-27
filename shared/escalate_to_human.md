@@ -18,6 +18,32 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### ✅ E-2026-07-27-1 — **White-space scope RE-RULED W1-only: the registered Wu eLight page read REFUTED the W0 clearance** (resolved same day under the standing delegation; recorded here so you see it)
+
+> **What happened:** the 4 registered pre-submission page-level reads ran (delegated agents,
+> P1 finalization). Three cleared (Zhao SI feedforward-only; arXiv:2507.02297 per-step-distinct
+> verbatim; SPIM-EP digital loop). **Wu eLight 5:7 did NOT:** the paper's second chip (ORNN)
+> **is trained in situ** by SPGD (two-evaluation perturbation + Adam — SPSA-family,
+> gradient-estimating) on Japanese-vowels classification, weight-tied mesh across
+> wavelength-encoded steps, *analog* O/E/O state relay. The 2026-07-12 "inference-only"
+> disposition described only the paper's other chip. **Consequence: W0's broad form is
+> attacked under the natural reading; W1 is untouched** (Wu trains mesh-weight voltages, not
+> resonator poles/couplings; its MRRs are static; discrete-time electronic state regeneration).
+> **Ruling (same standing delegation as 2026-07-26): retract W0, claim W1 only, cite Wu
+> loudly as the nearest neighbor** — the exact retreat the June freeze-low-reclaim-high memo
+> pre-planned; cost = one paragraph, pre-publication, zero external exposure. §1.1, abstract,
+> §5.5, references, claims table all edited; memo `docs/s0_L/whitespace_page_reads_2026-07-27.md`.
+> **Also from the fresh sweep (no new attack):** Zhang et al. eLight 6:6 = new nearest miss
+> (in-situ PSO-trained recurrent MRR loop — clears only on the gradient-method qualifier;
+> page read registered); watch a possible Zhao×Wu merge (same HUST group). **If you disagree
+> with the W1-only ruling, the W0 route needs an author query to Wu et al. on whether the
+> recurrent mesh W is in the trained voltage set U — say so and I draft it.**
+
+**Filed + resolved:** 2026-07-27 (Supervisor, by delegation). **Status: ✅ RESOLVED — FYI +
+optional override.**
+
+---
+
 ### ✅ E-2026-07-12-1 — **RESOLVED 2026-07-26 by delegation (Lucas: "you can chose the title and W0/W1")** — Supervisor rulings recorded: (1) title = candidate 1 · (2) W0-in-prose + W1-core-sentence
 
 > **RESOLVED 2026-07-26.** Lucas delegated both rulings. Supervisor adopted the standing

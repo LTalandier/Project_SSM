@@ -79,7 +79,7 @@ def extract_abstract():
         elif quote and not l.strip():
             break
     text = " ".join(quote)
-    text = text.replace("[PR-15 search + 2026-07-12 refresh]", "(§1, §8)")
+    text = text.replace("[PR-15 search + page-verified refreshes]", "(§1, §8)")
     return text
 
 

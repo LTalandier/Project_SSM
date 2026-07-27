@@ -21,10 +21,12 @@ ultra-low-loss SiN microrings*.)
 
 ## Draft abstract (▢-FILLED at S0.8 from landed gates, 2026-07-12; numbers frozen-source)
 
-> Recurrent photonic processors promise low-latency, low-energy sequence processing, but no
-> recurrent photonic system has ever had its recurrence-defining parameters — pole positions
-> and inter-ring couplings — trained on the physical device by any gradient-based or
-> gradient-estimating method [PR-15 search + 2026-07-12 refresh]. We ask whether such in-situ
+> Recurrent photonic processors promise low-latency, low-energy sequence processing, and the
+> first optical recurrent network has recently been trained in situ — yet no continuous-time
+> dissipative-resonator recurrence has ever had the parameters that define it — pole positions
+> and inter-resonator couplings, the physics that *is* the memory — trained on the physical
+> device by any gradient-based or gradient-estimating method [PR-15 search + page-verified
+> refreshes]. We ask whether such in-situ
 > training is feasible for a structured photonic state-space model: an oscillatory
 > (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i)
 > derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring
@@ -62,7 +64,7 @@ drift verdict; these are the paper's most falsifiable sentences.)
 
 | # | Claim | Evidence source | Status |
 |---|-------|-----------------|--------|
-| C1 | White-space: no prior in-situ gradient-based/-estimating training of recurrent-internal photonic params | PR-15 two-modality search, `docs/s0_L/` (+ S0.8 refresh sweep) | ✅ one-sided PASS on record |
+| C1 | White-space (**W1 scope, re-ruled 2026-07-27**): no prior in-situ gradient-based/-estimating training of a continuous-time dissipative-resonator recurrence (poles + couplings) | PR-15 search + refresh 2026-07-12 + page-read round 2026-07-27 (`docs/s0_L/whitespace_page_reads_2026-07-27.md`) | ✅ W1 one-sided PASS; **W0 retracted** (Wu eLight ORNN = SPGD-trained in situ → cited as nearest neighbor) |
 | C2 | Oscillatory SSM ↔ SiN ring lattice mapping + realizable pole region | S0.1, `docs/s0_1/` (B1–B3) | ✅ done |
 | C3 | Idealized model reproduces oscillatory-SSM task accuracy within pre-registered margin | Gate (i), PR-1/PR-2/PR-3 in-house ceiling | ✅ S0.2 closed (G1 PASS; G3 anchor void → in-house ceiling) |
 | C4 | ≥1 method trains to pre-registered accuracy at realistic SiN noise | Gate (ii), PR-8/PR-9, S0.5 bake-off | ✅ **PASS 2026-07-07 — PAT-both AND SPSA 8/8 to target at C-2** (`results/s0_5/bakeoff.md`) |
