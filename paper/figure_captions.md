@@ -17,7 +17,7 @@ the foundry-floor cell sits at the task-span line; at the registered g_f = 0.9 a
 clear it with margin.
 
 **Figure F2 — The dissipative substrate's operating map.** (a) Settled saturating net loss
-κ_net(r) versus the fixed-gain plane, the lasing crossing r*, the registered clamp band
+κ_net(r) versus the fixed-gain plane, the lasing crossing r\*, the registered clamp band
 (r_min = 0.1606 with margin m_κ = 0.05, Δr = 0.02), and the initialization point θ₀. (b)
 Off-resonance de-saturation at r_min versus θ₀ — the quantified anchor-risk (vii): a detuned
 ring at r_min reaches κ_net = −0.48 κ_i, which is why the clamp is referenced on-resonance
@@ -45,9 +45,9 @@ ranking answers the pre-registered promotion question in the negative: neither e
 beats both workhorses.
 
 **Figure F6 — Damping is a first-order design knob.** Final SER versus uniform pinned
-overcoupling r (plateaued endpoints spanning ×302), the deep-overcoupling optimum r* = 2.0
+overcoupling r (plateaued endpoints spanning ×302), the deep-overcoupling optimum r\* = 2.0
 (κ_net ≈ 4.1 κ_i — *excess* memory is harmful for this task), and the trainable-κ_ext box
-(R-ii): boxes containing r* train to the 5 × 10⁻⁴ ceiling, beating every uniform pin — the
+(R-ii): boxes containing r\* train to the 5 × 10⁻⁴ ceiling, beating every uniform pin — the
 heterogeneous damping profile is found by training, not designed.
 
 **Figure F7 — The systems envelope.** (a) Training-energy inversion: SPSA trains the C-2 cell
@@ -62,7 +62,7 @@ alongside: the niche is conditional, as §7 states.
 **Figure F8 — What breaks the offline tie (pre-registered follow-ups, §5.5).** (a)
 Calibration-mismatch sweep, 5→30%-class (8 seeds): in-situ PAT holds at the ceiling
 (7.8 × 10⁻⁴, flat) and offline-deploy degrades only mildly, never failing target — crossover
-m* = none; the tie is robust to calibration error. (b) Deploy-then-drift, common-mode regime
+m\* = none; the tie is robust to calibration error. (b) Deploy-then-drift, common-mode regime
 (σ_step = 0.40 κ_i per step on all detunings coherently): the offline laser re-lock absorbs
 the drift and keeps pace with in-situ retraining. (c) Independent per-ring drift: the re-lock
 cannot fix per-ring pole scatter; in-situ retraining holds near-ceiling while the re-locking
