@@ -98,7 +98,7 @@ $\mathbf{r_\text{min} = 0.1606}$ (crossing $+$ registered margins), enforced as 
 clamp; the θ₀ hold value is $r_0 = 0.3$. Damping, in the D-LinOSS sense, is deliberately *not* a
 frozen cell: it is the trainable per-ring net loss the estimators explore through
 $\kappa_\text{ext}$ over this box at fixed $g_\text{rt}$ (the R-ii disposition), characterized
-separately (§6 ▢).
+separately (§6).
 
 Drive is normalized by an intracavity-energy budget (O2): the registered $\bar P_0 = 1$ mW bus
 drive corresponds to $E_0 = 1.069\times10^8$ intracavity photons at θ₀, and the digital encoder
@@ -114,7 +114,7 @@ The registered remedy is a measured, minimal multi-point input map: S0.4-0 searc
 under a pre-registered every-ring controllability gate (each ring's gradient $\ge 10^{-3}$ of the
 maximum, min over five drive seeds) and resolved **B = taps {3, 12, 21, 30}** at $K=4$ (32/32
 rings pass, worst $1.42\times10^{-3}$; no $K\le3$ set passes). The four E/O drive channels this
-costs are charged to the systems envelope (§7 ▢) — multi-point drive raises exactly the
+costs are charged to the systems envelope (§7) — multi-point drive raises exactly the
 conversion overhead the envelope exists to price. Two protocol rulings made during the
 measurement (gate referenced to the maximum ring; min-over-seeds robustness) both strengthen the
 gate and are recorded for review. One anchor risk stays open (vii): the calibration's floor

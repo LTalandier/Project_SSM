@@ -23,7 +23,7 @@ the first-light training route with PAT layered on once the twin is characterize
 The multi-project-wafer path is concrete: the registered cells were chosen to be
 foundry-realizable (C-1 at generic-foundry loss; C-2 bounded by a demonstrated MPW result
 [CITE-Cui-2023]), and the actuation map of §2 uses only standard thermo-optic tuners. The E/O
-overhead the four-tap drive and the eval protocol add is exactly what §7's envelope prices ▢.
+overhead the four-tap drive and the eval protocol add is exactly what §7's envelope prices.
 
 ## 9.2 What would change our mind
 
@@ -45,7 +45,7 @@ The frozen architecture is deliberately the unselective LTI core — poles and c
 photonics builds natively. The selectivity axis (input-dependent dynamics in the Mamba direction
 [CITE-Mamba]) maps onto the same lattice as input-dependent $C$ then $B$ actuation and is
 scoped for a later stage only behind its own gate (per-step tuning without per-state DACs);
-nothing in this paper's claims depends on it. Likewise the damping operating point (§6 ▢) and
+nothing in this paper's claims depends on it. Likewise the damping operating point (§6) and
 the D-LinOSS accuracy question ride the *trainable* κ_ext axis established here rather than new
 hardware.
 

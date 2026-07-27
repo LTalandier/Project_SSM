@@ -89,7 +89,7 @@ a $\chi^{(3)}$ four-wave-mixing conjugation stage with the full penalty chain �
 through the ring ports ($\eta_\text{ex} = 2\kappa_\text{ext}/\kappa_\text{net} = 0.86$ at θ₀),
 single-pass spiral conversion ($(\gamma_\text{nl} P_p L)^2 \approx -16.7$ dB at 0.3 W pump,
 0.5 m; $\gamma_\text{nl} \approx 0.97\,\text{W}^{-1}\text{m}^{-1}$ for tight-confinement SiN
-[CITE-SiN-FWM]), and timing decay — totalling **−22.4 dB per conjugation**, plus the
+[CITE-SiN-FWM]), and timing decay — totalling **−22.4 dB per conjugation** (Fig. S3), plus the
 phase-insensitive parametric quantum floor. A page-level check at assembly found published
 *ultra-low-loss-geometry* demonstrations at $\gamma \approx 0.29$–$0.51\,\text{W}^{-1}
 \text{m}^{-1}$ (with CW power handling demonstrated to 7 W) [CITE-SiN-FWM]; our 0.97 assumes a

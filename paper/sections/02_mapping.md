@@ -53,7 +53,7 @@ $\kappa_\mathrm{tot} > 0$ by construction — the physical substrate implements 
 stability parameterization. We deliberately claim the broader class and treat LinOSS as its
 special case, with one consequence made explicit now: published LinOSS/D-LinOSS benchmark results
 validate only the $\mu = 0$ diagonal reduction, and transfer to the coupled realization is
-verified in-house against a BPTT-on-substrate ceiling (§[REF-methods/PR-3]) rather than assumed.
+verified in-house against a BPTT-on-substrate ceiling (§5.1) rather than assumed.
 
 Discretization is exact, not approximate: for piecewise-constant input the zero-order-hold
 (van-Loan matrix-exponential) step gives discrete poles $z = e^{s\,dt}$ to machine precision, with
@@ -93,10 +93,10 @@ time is $1/\kappa_i = 2Q_i/\omega_0$ — twice the photon-energy lifetime, a con
 uses consistently. Across the registered platform range this gives **3.29 ns (329 round trips)**
 at the foundry-conservative corner ($Q_i = 2\times10^6$) to **49.4 ns (4937 round trips)** at the
 class-leading corner ($Q_i = 3\times10^7$): a 15× memory span that is the platform's dominant
-figure of merit and the reason this program is on SiN [REF-intro]. Net optical gain moves
+figure of merit and the reason this program is on SiN (§1). Net optical gain moves
 $\kappa_\mathrm{tot} \to 0$ and hence $|z| \to 1$, extending memory past the passive floor at the
 cost of saturation and amplified-spontaneous-emission noise — deferred to the substrate model
-(§[REF-substrate]).
+(§3).
 
 **Frequency is FSR-bounded.** The detuning axis aliases at one free spectral range:
 $|\beta_j\,dt| \leq \pi$ with $dt = 1/\mathrm{FSR}$. The reachable imaginary axis is one FSR wide.
@@ -109,7 +109,7 @@ product is bounded by the passive memory length (tested). At the foundry corner 
 from 274 round trips at drop efficiency 0.028 (deep undercoupling,
 $\kappa_\mathrm{ext} = 0.1\kappa_i$) to 16 round trips at 0.91 (deep overcoupling, $10\kappa_i$);
 the same Pareto shape holds at the class-leading corner with the memory axis scaled ~15×. The
-operating point is not chosen here: it is pre-registered (§[REF-substrate], PR-4), and
+operating point is not chosen here: it is pre-registered (§3, PR-4), and
 $\kappa_\mathrm{ext}$ is itself a pole-real-part actuator, so a trainable-$\kappa_\mathrm{ext}$
 policy folds the readout trade into the recurrence training.
 
@@ -127,12 +127,11 @@ subtractive process splits 21–75 % of resonances *already at* $Q_i \lesssim 2.
 average doublet separations of 180–320 MHz depending on etch mask [CITE-SUBTRACTIVE] — i.e.
 modal-coupling rates $\gamma/2\pi \approx 90$–$160$ MHz under the standard
 $2\gamma$-separation convention [CITE-modal-coupling], a mapping we state here because the
-source tabulates separations, not rates (page-verified 2026-07-12). ⚠ *The assembled crossover
-curve brackets published SiN
-data points — no single published SiN crossover exists, and no $\gamma$ is published for the
-specific target processes; primary-source verification is registered before submission (F5).*
+source tabulates separations, not rates (page-verified 2026-07-12). *The assembled crossover curve brackets published SiN data
+points — no single published SiN crossover exists, and no $\gamma$ is published for the
+specific target processes; primary-source verification is registered before submission.*
 Two consequences propagate forward: the substrate model carries a roughness-gated CW/CCW doublet
-knob, default ON except at the clean-damascene corner (§[REF-substrate]); and a platform tension
+knob, default ON except at the clean-damascene corner (§3); and a platform tension
 is on record — the best-memory (highest-$Q$) platforms are the most splitting-prone, while the
 splitting-safe low-$Q$ foundry corner is memory-poor. Overcoupling suppresses the visible
 doublet, so the $\kappa_\mathrm{ext}$ policy and the splitting risk are coupled: the max-memory
@@ -156,7 +155,7 @@ The last row is the load-bearing exclusion. Training only the injection/readout 
 residues — while the poles stay fixed is precisely reservoir computing with a trained linear
 head, and prior photonic work in that regime (including reinforcement-learning-tuned readouts
 [CITE-BUENO-BRUNNER]) does not train the recurrence. The partition this program registers
-(§[REF-methods], PR-2/PR-6) is that a method earns the in-situ-training claim only if it updates
+(§4, PR-2/PR-6) is that a method earns the in-situ-training claim only if it updates
 the pole-defining set $\{\delta_j,\ \kappa_{\mathrm{tot},j},\ \mu_{jk}\}$ on the device, and
 every method in the bake-off trains the same partition. Notably, the minimal set is *gain-free*
 and all-thermo-optic — heaters and tunable couplers only — which is what makes it drift-stable
@@ -169,13 +168,3 @@ its realizable pole region is bounded and known, and every recurrence-defining p
 physical actuator. Whether those parameters can be *trained through the physics* — with realistic
 gain saturation, ASE noise, and measurement cost — is the question the rest of this paper is
 built to answer.
-
----
-
-*Draft notes (not for the manuscript):* Fig. F1 = pole-region figure (replot of
-`results/s0_1/` assets: memory vs $Q_i$, FSR band, $\kappa_\mathrm{ext}$ Pareto, backscatter
-crossover band). Citations to fill: S4D (Gu et al.), DSS (Gupta et al.), LinOSS (Rusch &
-Rus), D-LinOSS, Haus CMT, Kondratiev Nat. Commun. 12, 235 (2021), subtractive-roughness
-arXiv:2511.02198 ⚠verify, Bueno/Brunner readout-RL line. Cross-refs [REF-*] resolve when
-§1/§3/§4 exist. Tone check at S0.8: "the question the rest of this paper is built to answer"
-— keep only if §5–§7 deliver.

@@ -42,8 +42,7 @@ An early gate required reproducing a published LinOSS benchmark as an external a
 the authors' own code on their published seeds reproduced their headline within noise on one
 dataset but not on the long-sequence EigenWorms task, where we traced a numerical-precision
 failure mode in the training loss (an absorbing zero-gradient state in fp32) that makes the
-published number seed-unstable [▢ P2 disposition — a separate reproducibility note is drafted;
-its release is a PI decision]. The gate was adjudicated purpose-served-with-anchor-void: all
+published number seed-unstable (Fig. S1; a separate reproducibility note is in preparation). The gate was adjudicated purpose-served-with-anchor-void: all
 downstream accuracy references in this program are therefore **in-house BPTT-on-substrate
 ceilings** measured under our own protocol (§5.1), never transferred published numbers. We flag
 fp32-sensitivity generally: our substrate runs float64, and the eval-floor granularity of §5 is
@@ -63,10 +62,15 @@ mitigation; it is auditable in the supplementary commit trail regardless of who 
 
 ## 8.5 Scope limits we chose
 
-The task family is deliberately narrow (continuous-signal channel equalization plus a synthetic
-memory family ▢ S0.5-full), the comparison is at one mismatch level (5%-class; the sensitivity
-axis is registered, not yet run), drift is unmodelled at the bake-off cadence, and the C-3
-128-ring cell never gates anything. The systems-advantage question — whether any of this pays
-once conversion overhead is counted — is §7's, and at the time of this draft it is open, with
-the strongest current evidence (the offline tie, §5.5) pointing *against* an in-situ advantage
-at the modelled mismatch level. We consider stating that plainly to be the paper's job.
+The task family is deliberately narrow (continuous-signal channel equalization plus a
+synthetic memory family; the registered secondary task is deferred), and the C-3 128-ring cell
+never gates anything. Two axes the bake-off itself held fixed were measured afterward in
+pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (swept to 30%-class — the
+tie holds) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
+two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,
+and the tested drift magnitude is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than
+worst-case. The systems-advantage question — whether any of this pays once conversion overhead
+is counted — is §7's; the strongest current evidence is §5.5's sharpened verdict: no advantage
+from calibration accuracy at any tested mismatch, and a statistically significant but
+sub-threshold edge specific to uncorrelated drift. We consider stating that plainly to be the
+paper's job.

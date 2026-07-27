@@ -126,7 +126,8 @@ drift verdict; these are the paper's most falsifiable sentences.)
 | F5 ✅ | Ranking bars: device passes (per-seed dots) + digital side-ledger hatched; RHEL censored | S0.5 |
 | F6 ✅ | Damping: pinned vs boxed curves, ceiling line, r*=2.0, plateau flags | S0.6 |
 | F7 ✅ | (a) training-energy inversion (conversion OPT/CONS + PAT digital 13–44 J); (b) inference pJ/sample vs N at 2 GS/s vs 4 baselines | S0.7 |
-| S-figs ▢ | G3 dossier; twin-mismatch (PR-5); echo penalties (PR-11); PR-14 slot; RHEL R1 recovery | various (plan in `paper/supplementary.md`) |
+| F8 ✅ | (a) mismatch sweep 5–30%: tie robust, m\*=none; (b) common-mode drift absorbed by re-lock; (c) independent drift: in-situ edge (made 2026-07-27, `analysis/make_sfigures.py`) | S0.9 |
+| S-figs ✅ | S1 G3 dossier · S2 twin-mismatch C-1 · S3 echo chain+ceilings · S5 RHEL R1 recovery (all made 2026-07-27, `analysis/make_sfigures.py`); S4 = reserved slot (PR-14, deferred) | various |
 
 ## Writing order (Supervisor)
 

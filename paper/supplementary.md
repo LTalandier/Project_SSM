@@ -57,15 +57,19 @@ is platform-stable. The test suite (150 tests at S0.5-close) pins substrate bit-
 gates (e.g. adjoint pass-2 forward identity, ledger counts). Total cloud spend for all
 Stage-0 compute: <€10 (disclosed per-phase in `shared/results_log.md`).
 
-## S6 — S-figures (planned)
+## S6 — S-figures (✅ MADE 2026-07-27, `analysis/make_sfigures.py` → `paper/figures/S*.{png,pdf}`; frozen result files only)
 
 | S-fig | content | source |
 |---|---|---|
-| S1 | G3 anchor-instability dossier summary | S0.2 record (PR-1.1) |
-| S2 | PAT twin-mismatch decomposition at C-1 (perfect / M-par / M-struct) | `results/s0_5/bakeoff_diag_c1.json` |
-| S3 | echo sub-model penalty chain + mechanism menu (A/B/C) | PR-11, `docs/s0_4/pr11_echo_submodel_recon.md` |
-| S4 | PR-14 gradient bias/variance | deferred (S0.5-full) — slot reserved |
-| S5 | RHEL non-dissipative-limit recovery (R1 cosine sequence) | `results/s0_4c/` |
+| S1 ✅ | G3 anchor-instability dossier: official-code EigenWorms val trajectories (published seeds, collapse events visible) + final test acc vs published 95.0±4.4 (rerun 90.56, σ 9.34) | `results/s0_2/gate_i/xcheck_official/` |
+| S2 ✅ | PAT twin-mismatch decomposition at C-1 (perfect / M-par / M-struct ≡ ceiling) + rhel-ideal control | `results/s0_5/bakeoff_diag_c1.json` |
+| S3 ✅ | echo conjugation-chain waterfall (−22.4 dB, mechanism A) + per-cell Q_L ceilings / transit survival (mechanisms B/C) | `results/s0_4c/pr11_recon_calc.json` |
+| S4 ▢ | PR-14 gradient bias/variance | deferred (S0.5-full) — slot reserved |
+| S5 ✅ | RHEL non-dissipative-limit recovery (R1 cosine −0.75→+1.0000 vs κ_net·T·dt) | `results/s0_4c/smoke.json` |
+
+Main-figure addendum: **F8** (S0.9 mismatch+drift, 3 panels) added 2026-07-27 alongside F1–F7;
+generator `analysis/make_sfigures.py`. Note: figure "F8" is distinct from finding-ID F8 (the
+hardware-realism ledger); prose always writes figures as "Fig. Fn".
 
 ## Assembly residue (tracked)
 

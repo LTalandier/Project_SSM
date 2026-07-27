@@ -100,7 +100,7 @@ conjugation, plus the phase-insensitive parametric noise floor (§4, PR-11; [CIT
 RHEL does not reach target on any seed; its final SER of $0.14$ is *worse than the readout-only
 baseline* (a $+0.118$ readout differential). Two controls locate the cause. A floor check confirms
 the estimator is correct: as the substrate is made progressively less dissipative, the RHEL
-gradient converges to the exact reference (direction cosine $\to 1.0000$) — the non-dissipative
+gradient converges to the exact reference (direction cosine $\to 1.0000$; Fig. S5) — the non-dissipative
 limit RHEL's theorem assumes. And an idealized-conjugator control at the smaller C-1 cell — a
 *perfect* echo, no conjugation loss or noise — *does* reach target ($5.7\times10^{-3} \le
 7.3\times10^{-3}$). So the failure at the headline cell is neither broken mechanics nor the
@@ -129,7 +129,7 @@ alternative. The question this raises — *under what conditions does the advant
 then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
 PR-16; both frozen before the runs).
 
-**Calibration accuracy is not the axis.** Sweeping the shared mismatch level from 5% to 30%-class
+**Calibration accuracy is not the axis** (Fig. F8a). Sweeping the shared mismatch level from 5% to 30%-class
 (in-situ and offline drawing from one frozen family at every level, §5.1), in-situ training holds
 at the ceiling ($7.8\times10^{-4}$, flat) while offline degrades only mildly ($1.0$–$1.2\times
 10^{-3}$) and *never fails the accuracy target* — the tie is robust to 30% calibration error. The
@@ -138,7 +138,7 @@ a factor of two: on this task the offline arm's on-device head recalibration abs
 parametric error, so a wrong recurrence with a well-fit head still equalizes. In-situ *recurrence*
 training does not earn its keep against calibration error alone.
 
-**Drift is the axis — specifically the part a re-lock cannot catch.** We then let the substrate
+**Drift is the axis — specifically the part a re-lock cannot catch** (Fig. F8b,c). We then let the substrate
 *drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
 resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [CITE-Dacha-2025]),
 deployed after convergence, with each arm allowed its on-device response — offline recalibrates the
@@ -163,7 +163,7 @@ on-chip drift is* becomes the sharpest Stage-1 measurement (§9).
 ## 5.6 What the diagnostics add
 
 Two mechanism rows, at three seeds each on C-1, support the mismatch narrative without inflating
-it. Decomposing PAT's twin mismatch — perfect twin, parametric-error twin, structural-omission
+it (Fig. S2). Decomposing PAT's twin mismatch — perfect twin, parametric-error twin, structural-omission
 twin (dropping the gain self-consistency channel) — all three reach the C-1 ceiling identically:
 PAT absorbs both mismatch families at this cell. We flag explicitly that this does **not**
 extrapolate to C-2, where the dropped gain channel was measured to carry ~8% of the gradient
