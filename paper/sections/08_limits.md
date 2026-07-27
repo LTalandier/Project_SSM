@@ -58,7 +58,11 @@ performed both execution and review, under standing PI delegation; every artifac
 period is so labelled in the ledger, and the S0.4b/c/S0.5 findings — including the two honest
 nulls (the offline tie; RHEL's failure) — should be read with that reduced independence in mind.
 The pre-registration discipline (thresholds frozen and committed before runs) is the structural
-mitigation; it is auditable in the supplementary commit trail regardless of who held the pen.
+mitigation — with the caveat stated plainly: from the single-session date onward the registrar
+and the registrant are the same agent, so the commit trail is self-graded until it is
+externally anchored. The repository, including the full ledger and its commit history, is
+published (externally timestamped) before submission precisely so that the freeze-before-run
+ordering can be verified by anyone rather than trusted.
 
 ## 8.5 Scope limits we chose
 

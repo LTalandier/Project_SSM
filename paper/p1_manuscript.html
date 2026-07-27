@@ -19,13 +19,12 @@ h2, h3 { page-break-after: avoid; }
 img, blockquote { page-break-inside: avoid; }
 </style>
 <script>
-MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
-            svg: { fontCache: 'global' } };
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head><body><h1>Can a photonic state-space model be trained on-chip? A pre-registered four-method bake-off on a realistic silicon-nitride ring substrate</h1>
 <p><em>Lucas Talandier — independent researcher, Paris</em></p>
-<p><strong>Abstract.</strong> Recurrent photonic processors promise low-latency, low-energy sequence processing, and the first optical recurrent network has recently been trained in situ — yet no continuous-time dissipative-resonator recurrence has ever had the parameters that define it — pole positions and inter-resonator couplings, the physics that <em>is</em> the memory — trained on the physical device by any gradient-based or gradient-estimating method (§1, §8). We ask whether such in-situ training is feasible for a structured photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i) derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring lattice and bound its realizable pole region; (ii) build one shared dissipative substrate model — finite Q, saturating gain, amplified-spontaneous-emission noise — with all parameters pre-registered before any training run; and (iii) run a four-method in-situ-training bake-off — SPSA, physics-aware training (PAT), recurrent in-situ adjoint, and Hamiltonian-echo learning (RHEL) — under a pre-registered fairness contract, scored on sample-efficiency-to-target-accuracy at matched device-pass cost. At realistic SiN noise, three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy than SPSA&rsquo;s entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget, its echo defeated by the very dissipation the recurrence needs. A measured participation profile shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising to all 32 with four input taps — a controllability constraint, and conversion cost, that any hardware implementation inherits. Trained damping is a first-order design knob (×300 in error across the feasible box), and training finds a heterogeneous damping profile that beats every uniform setting. An end-to-end envelope including electro-optic conversion and DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power heater class) — while an equally-calibrated offline-train-then-deploy baseline statistically ties in-situ training at calibration errors up to 30%-class; the tie breaks only under uncorrelated per-ring drift, where in-situ retraining holds a statistically significant, drift-growing edge that a global laser re-lock cannot absorb (1.84× time-integrated, below our pre-registered 2× bar, so no formal advantage is declared): the demonstration is in-data; the advantage case is directional and drift-specific, and we say so. We release the pre-registration ledger, substrate model, and all training code.</p>
+<p><strong>Abstract.</strong> Recurrent photonic processors promise low-latency, low-energy sequence processing, and the first optical recurrent network has recently been trained in situ — yet no continuous-time dissipative-resonator recurrence has ever had the parameters that define it — pole positions and inter-resonator couplings, the physics that <em>is</em> the memory — trained on the physical device by any gradient-based or gradient-estimating method (§1, §8). We ask whether such in-situ training is feasible for a structured photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i) derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring lattice and bound its realizable pole region; (ii) build one shared dissipative substrate model — finite Q, saturating gain, amplified-spontaneous-emission noise — with all parameters pre-registered before any training run; and (iii) run a four-method in-situ-training bake-off — SPSA, physics-aware training (PAT), recurrent in-situ adjoint, and Hamiltonian-echo learning (RHEL) — under a pre-registered fairness contract, scored on sample-efficiency-to-target-accuracy at matched device-pass cost. At realistic SiN noise, three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy than SPSA&rsquo;s entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget — a quantified feasibility bound, not a race entry: its echo is defeated by the very dissipation the recurrence needs. A measured participation profile shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising to all 32 with four input taps — a controllability constraint, and conversion cost, that any hardware implementation inherits. Trained damping is a first-order design knob (×300 in error across the feasible box), and training finds a heterogeneous damping profile that beats every uniform setting. An end-to-end envelope including electro-optic conversion and DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power heater class) — while an equally-calibrated offline-train-then-deploy baseline statistically ties in-situ training at calibration errors up to 30%-class; the tie breaks only under uncorrelated per-ring drift, where in-situ retraining holds a statistically significant, drift-growing edge that a global laser re-lock cannot absorb (1.84× time-integrated, below our pre-registered 2× bar, so no formal advantage is declared): the demonstration is in-data; the advantage case is directional and drift-specific, and we say so. We release the pre-registration ledger, substrate model, and all training code.</p>
 <h2>1. Introduction</h2>
 <h3>1.1 The gap</h3>
 <p>Photonic neural networks have learned to train themselves. In feedforward meshes and diffractive
@@ -577,9 +576,12 @@ parameters that <em>define</em> the recurrence — the per-ring detunings, the t
 and the inter-ring couplings $\{\delta_j, \kappa_{\text{ext},j}, \mu_{jk}\}$ — are trained on the
 (simulated) physical substrate, through physical-operation-only gradient methods with fresh
 injected noise on every pass, to within the pre-registered margin of the exact-gradient ceiling.
-To our knowledge this is the first demonstration, by any method, of a recurrent photonic system
-whose recurrence-internal parameters are updated by on-device gradient-based or gradient-estimating
-training (the white-space claim, §1; [32]).</p>
+To our knowledge this is the first demonstration — <strong>in simulation, on a pre-registered
+realistic substrate model</strong> — of a continuous-time dissipative-resonator recurrence whose poles
+and couplings are updated by device-protocol gradient-based or gradient-estimating training
+(the white-space claim, §1; [32]). The on-chip counterpart does not exist
+yet; it is what Stage 1 is designed to earn (§9), and every use of &ldquo;demonstration&rdquo; in this
+paper carries this qualifier.</p>
 <h3>5.3 The ranking: sample-efficiency at matched device-pass cost</h3>
 <p>The primary metric is sample-efficiency: device passes to reach target, one physical pass being
 one sequence through the substrate in any direction (PR-7). Ranked lexicographically by success
@@ -604,7 +606,7 @@ folded into the rank:</p>
 <td>505,600</td>
 </tr>
 <tr>
-<td><strong>adjoint</strong> (physical reverse pass)</td>
+<td><strong>adjoint</strong>† (physical reverse pass)</td>
 <td>8/8</td>
 <td>73,600</td>
 <td>$5\times10^{-4}$</td>
@@ -618,7 +620,7 @@ folded into the rank:</p>
 <td>0</td>
 </tr>
 <tr>
-<td><strong>RHEL</strong> (Hamiltonian echo)</td>
+<td><strong>RHEL</strong>‡ (Hamiltonian echo)</td>
 <td>0/8</td>
 <td>censored at $B$</td>
 <td>$1.4\times10^{-1}$</td>
@@ -626,6 +628,11 @@ folded into the rank:</p>
 </tr>
 </tbody>
 </table>
+<p>† <em>Charged as-if-realizable: no recurrent physical reverse pass has been demonstrated on any
+platform (debt #4, §8.2); this row is an optimistic bound on a hypothetical implementation and
+competes with chip-proven routes only in that idealized sense (§4).</em> ‡ <em>Reported as a measured
+feasibility bound on echo learning in dissipative substrates, not as a competitive entry —
+see §5.4.</em></p>
 <p>All three ordered pairs among the passing routes separate with paired-by-seed bootstrap 95%
 confidence intervals excluding zero (PAT−SPSA $=-137{,}600$ passes, CI $[-155{,}200,-123{,}200]$;
 adjoint−PAT $=+35{,}200$, CI $[+35{,}200,+36{,}800]$; adjoint−SPSA $=-102{,}400$, CI
@@ -641,12 +648,21 @@ plan.</p>
 PAT on device passes, and clearing the bar requires clearly beating <em>both</em> workhorses. The
 hardware roadmap therefore stays on PAT and SPSA — the outcome the guardrail was built to protect,
 now settled by data rather than assertion.</p>
-<h3>5.4 RHEL under an honest echo</h3>
-<p>The fourth route, recurrent Hamiltonian echo learning (RHEL), is the one whose physical primitive
-SiN is least suited to supply. Rather than an idealized conjugation operator, we model the echo as
-a concrete $\chi^{(3)}$ four-wave-mixing phase-conjugation stage with its measured penalty chain —
-extraction, single-pass spiral conversion at 0.3 W pump, timing decay — totalling $-22.4$ dB per
-conjugation, plus the phase-insensitive parametric noise floor (§4, PR-11; [31]).</p>
+<h3>5.4 RHEL: a feasibility bound on echo learning in dissipative substrates</h3>
+<p>The fourth route, recurrent Hamiltonian echo learning (RHEL), is best read not as a contestant
+but as a <em>measured feasibility bound</em> — and we say plainly that its headline outcome was
+foreseeable in direction, if not in magnitude, before the run: the theorem behind the echo
+assumes a non-dissipative system, and the registered operating point sits at
+$\kappa_\text{net} T\, dt \approx 27$, two orders beyond the $\lesssim 0.1$ regime where our
+own recovery curve shows the update aligning with the true gradient (Fig. S5). What the
+bake-off adds is the <em>quantified boundary</em> — where echo learning breaks on a dissipative
+substrate, by how much, and through which mechanism — under the same fairness contract as the
+routes that pass; that, not a horse race it could not win, is the result we consider citable.
+RHEL is also the route whose physical primitive SiN is least suited to supply. Rather than an
+idealized conjugation operator, we model the echo as a concrete $\chi^{(3)}$ four-wave-mixing
+phase-conjugation stage with its measured penalty chain — extraction, single-pass spiral
+conversion at 0.3 W pump, timing decay — totalling $-22.4$ dB per conjugation, plus the
+phase-insensitive parametric noise floor (§4, PR-11; [31]).</p>
 <p>RHEL does not reach target on any seed; its final SER of $0.14$ is <em>worse than the readout-only
 baseline</em> (a $+0.118$ readout differential). Two controls locate the cause. A floor check confirms
 the estimator is correct: as the substrate is made progressively less dissipative, the RHEL
@@ -924,7 +940,11 @@ performed both execution and review, under standing PI delegation; every artifac
 period is so labelled in the ledger, and the S0.4b/c/S0.5 findings — including the two honest
 nulls (the offline tie; RHEL&rsquo;s failure) — should be read with that reduced independence in mind.
 The pre-registration discipline (thresholds frozen and committed before runs) is the structural
-mitigation; it is auditable in the supplementary commit trail regardless of who held the pen.</p>
+mitigation — with the caveat stated plainly: from the single-session date onward the registrar
+and the registrant are the same agent, so the commit trail is self-graded until it is
+externally anchored. The repository, including the full ledger and its commit history, is
+published (externally timestamped) before submission precisely so that the freeze-before-run
+ordering can be verified by anyone rather than trusted.</p>
 <h3>8.5 Scope limits we chose</h3>
 <p>The task family is deliberately narrow (continuous-signal channel equalization plus a
 synthetic memory family; the registered secondary task is deferred), and the C-3 128-ring cell

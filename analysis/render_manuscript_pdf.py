@@ -40,10 +40,9 @@ img, blockquote { page-break-inside: avoid; }
 
 MATHJAX = """
 <script>
-MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
-            svg: { fontCache: 'global' } };
+MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 """
 
 

@@ -39,8 +39,9 @@ ultra-low-loss SiN microrings*.)
 > three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed
 > workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA
 > (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy
-> than SPSA's entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget, its echo
-> defeated by the very dissipation the recurrence needs. A measured participation profile
+> than SPSA's entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget — a quantified
+> feasibility bound, not a race entry: its echo is defeated by the very dissipation the
+> recurrence needs. A measured participation profile
 > shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising
 > to all 32 with four input taps — a controllability constraint, and conversion cost, that
 > any hardware implementation inherits. Trained damping is a first-order design knob (×300
@@ -76,8 +77,8 @@ drift verdict; these are the paper's most falsifiable sentences.)
 
 ## Section plan (source → prose; ✍ = writable now)
 
-1. **Introduction** ✍ DRAFT v2 (`sections/01_intro.md`, 2026-07-26; scope RULED: W0-in-prose +
-   W1-core-sentence; search refresh required pre-submission) — the in-situ-training gap for *recurrent* photonics; why SSMs (LinOSS
+1. **Introduction** ✍ DRAFT v3 (`sections/01_intro.md`, 2026-07-27; scope RULED: **W1 only**,
+   W0 retracted after the Wu page read; final sweep re-run pre-submission) — the in-situ-training gap for *recurrent* photonics; why SSMs (LinOSS
    line) are the right recurrence class for rings; the sharpened white-space sentence
    (exact PR-15 wording from `docs/s0_L/whitespace_claim_wording.md`); contributions list =
    claims table. Pre-empt: reservoir computing, Bueno/Brunner RL line, internal-param

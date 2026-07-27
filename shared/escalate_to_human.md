@@ -42,6 +42,16 @@ Escalate (don't decide autonomously):
 **Filed + resolved:** 2026-07-27 (Supervisor, by delegation). **Status: ✅ RESOLVED — FYI +
 optional override.**
 
+### E-2026-07-27-2 — **YOUR ACTION (from your own review): external timestamping of the pre-registration trail before submission**
+
+Your point that self-graded pre-registration (single-session, PI = registrant) only counts if
+externally anchored is now stated in §8.4, which commits to publishing the repository +
+commit history before submission. **The publish action is yours:** either (a) flip
+`Project_SSM` public on GitHub (github.com/LTalandier — one click, keeps history = the
+timestamp), or (b) an OSF registration snapshot. Recommendation: (a), plus pushing `main`
+beforehand (I commit but never push, per standing rule). Until one of these happens the
+§8.4 sentence is a forward commitment. **Status: OPEN — Lucas.**
+
 ---
 
 ### ✅ E-2026-07-12-1 — **RESOLVED 2026-07-26 by delegation (Lucas: "you can chose the title and W0/W1")** — Supervisor rulings recorded: (1) title = candidate 1 · (2) W0-in-prose + W1-core-sentence

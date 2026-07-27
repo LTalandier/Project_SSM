@@ -54,9 +54,12 @@ parameters that *define* the recurrence — the per-ring detunings, the tunable 
 and the inter-ring couplings $\{\delta_j, \kappa_{\text{ext},j}, \mu_{jk}\}$ — are trained on the
 (simulated) physical substrate, through physical-operation-only gradient methods with fresh
 injected noise on every pass, to within the pre-registered margin of the exact-gradient ceiling.
-To our knowledge this is the first demonstration, by any method, of a recurrent photonic system
-whose recurrence-internal parameters are updated by on-device gradient-based or gradient-estimating
-training (the white-space claim, §1; [CITE-whitespace-lanes]).
+To our knowledge this is the first demonstration — **in simulation, on a pre-registered
+realistic substrate model** — of a continuous-time dissipative-resonator recurrence whose poles
+and couplings are updated by device-protocol gradient-based or gradient-estimating training
+(the white-space claim, §1; [CITE-whitespace-lanes]). The on-chip counterpart does not exist
+yet; it is what Stage 1 is designed to earn (§9), and every use of "demonstration" in this
+paper carries this qualifier.
 
 ## 5.3 The ranking: sample-efficiency at matched device-pass cost
 
@@ -68,9 +71,15 @@ folded into the rank:
 | route | success | median device passes → target | final SER (median) | digital ledger |
 |---|---|---|---|---|
 | **PAT** (twin-backward) | 8/8 | **38,400** | $8\times10^{-4}$ | 505,600 |
-| **adjoint** (physical reverse pass) | 8/8 | 73,600 | $5\times10^{-4}$ | 0 |
+| **adjoint**† (physical reverse pass) | 8/8 | 73,600 | $5\times10^{-4}$ | 0 |
 | **SPSA** (model-free) | 8/8 | 176,000 | $1.3\times10^{-3}$ | 0 |
-| **RHEL** (Hamiltonian echo) | 0/8 | censored at $B$ | $1.4\times10^{-1}$ | 0 |
+| **RHEL**‡ (Hamiltonian echo) | 0/8 | censored at $B$ | $1.4\times10^{-1}$ | 0 |
+
+† *Charged as-if-realizable: no recurrent physical reverse pass has been demonstrated on any
+platform (debt #4, §8.2); this row is an optimistic bound on a hypothetical implementation and
+competes with chip-proven routes only in that idealized sense (§4).* ‡ *Reported as a measured
+feasibility bound on echo learning in dissipative substrates, not as a competitive entry —
+see §5.4.*
 
 All three ordered pairs among the passing routes separate with paired-by-seed bootstrap 95%
 confidence intervals excluding zero (PAT−SPSA $=-137{,}600$ passes, CI $[-155{,}200,-123{,}200]$;
@@ -89,13 +98,22 @@ PAT on device passes, and clearing the bar requires clearly beating *both* workh
 hardware roadmap therefore stays on PAT and SPSA — the outcome the guardrail was built to protect,
 now settled by data rather than assertion.
 
-## 5.4 RHEL under an honest echo
+## 5.4 RHEL: a feasibility bound on echo learning in dissipative substrates
 
-The fourth route, recurrent Hamiltonian echo learning (RHEL), is the one whose physical primitive
-SiN is least suited to supply. Rather than an idealized conjugation operator, we model the echo as
-a concrete $\chi^{(3)}$ four-wave-mixing phase-conjugation stage with its measured penalty chain —
-extraction, single-pass spiral conversion at 0.3 W pump, timing decay — totalling $-22.4$ dB per
-conjugation, plus the phase-insensitive parametric noise floor (§4, PR-11; [CITE-SiN-FWM]).
+The fourth route, recurrent Hamiltonian echo learning (RHEL), is best read not as a contestant
+but as a *measured feasibility bound* — and we say plainly that its headline outcome was
+foreseeable in direction, if not in magnitude, before the run: the theorem behind the echo
+assumes a non-dissipative system, and the registered operating point sits at
+$\kappa_\text{net} T\, dt \approx 27$, two orders beyond the $\lesssim 0.1$ regime where our
+own recovery curve shows the update aligning with the true gradient (Fig. S5). What the
+bake-off adds is the *quantified boundary* — where echo learning breaks on a dissipative
+substrate, by how much, and through which mechanism — under the same fairness contract as the
+routes that pass; that, not a horse race it could not win, is the result we consider citable.
+RHEL is also the route whose physical primitive SiN is least suited to supply. Rather than an
+idealized conjugation operator, we model the echo as a concrete $\chi^{(3)}$ four-wave-mixing
+phase-conjugation stage with its measured penalty chain — extraction, single-pass spiral
+conversion at 0.3 W pump, timing decay — totalling $-22.4$ dB per conjugation, plus the
+phase-insensitive parametric noise floor (§4, PR-11; [CITE-SiN-FWM]).
 
 RHEL does not reach target on any seed; its final SER of $0.14$ is *worse than the readout-only
 baseline* (a $+0.118$ readout differential). Two controls locate the cause. A floor check confirms
