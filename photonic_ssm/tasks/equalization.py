@@ -33,20 +33,28 @@ _ISI_TAPS = {
 }
 TARGET_DELAY = 2          # recover d(n−2)
 
+# PR-17 §17.4 (frozen 2026-07-27) — T-A-L: the frozen channel plus a −6 dB
+# replica of its past-tap profile delayed by 7 symbols (a second reflection).
+# c_L[k] = c[k] for k ≤ 7; c_L[7+m] = 0.5·c[m], m = 1..7. Span 7 → 14.
+TA_LONG_TAPS = dict(_ISI_TAPS)
+TA_LONG_TAPS.update({7 + m: 0.5 * _ISI_TAPS[m] for m in range(1, 8)})
+
 
 class JaegerHaasChannel:
     """The frozen T-A channel. `apply` maps a 4-PAM symbol stream d(n) to the
-    received signal u(n) at the registered SNR."""
+    received signal u(n) at the registered SNR. `taps=None` = the frozen
+    PR-2 T-A ISI profile (bit-identical); PR-17 passes TA_LONG_TAPS."""
 
-    def __init__(self, snr_dB: float = 28.0):
+    def __init__(self, snr_dB: float = 28.0, taps: dict | None = None):
         self.snr_dB = float(snr_dB)
+        self.taps = _ISI_TAPS if taps is None else taps
 
     def q(self, d: torch.Tensor) -> torch.Tensor:
         """Linear-ISI output q(n) = Σ_lag c[lag]·d(n−lag) (centered; edges use
         zero-padding via roll-and-mask). d: (T,) real."""
         T = d.shape[0]
         out = torch.zeros_like(d)
-        for lag, c in _ISI_TAPS.items():
+        for lag, c in self.taps.items():
             shifted = torch.zeros_like(d)
             if lag >= 0:
                 if lag < T:
@@ -72,7 +80,7 @@ class JaegerHaasChannel:
 
 
 def make_ta_dataset(n_symbols: int, snr_dB: float = 28.0,
-                    seed: int | None = None
+                    seed: int | None = None, taps: dict | None = None
                     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     """Generate one T-A sequence. Returns (u, target, d):
       u      : (T,) received signal (the substrate drive).
@@ -86,7 +94,7 @@ def make_ta_dataset(n_symbols: int, snr_dB: float = 28.0,
     idx = torch.randint(0, 4, (n_symbols,), generator=g)
     levels = torch.tensor(PAM_LEVELS, dtype=torch.float64)
     d = levels[idx]
-    ch = JaegerHaasChannel(snr_dB)
+    ch = JaegerHaasChannel(snr_dB, taps=taps)
     u = ch.apply(d, generator=g)
     target = torch.zeros_like(d)
     if TARGET_DELAY < n_symbols:

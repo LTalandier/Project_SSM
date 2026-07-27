@@ -13,7 +13,8 @@ import math
 
 import torch
 
-from .harness import EVAL_SEED_BASE, eval_ser, train  # noqa: F401
+from .harness import (EVAL_SEED_BASE, ase_gen, eval_ser, fresh_batch,  # noqa: F401
+                      train)
 
 # --- drift magnitude anchor (PR-16 §16.1) --------------------------------
 SIGMA_24H_KI = 24.0            # σ(24 h) in units of κ_i, from 341 MHz/24h @ C-2
@@ -59,7 +60,7 @@ ARMS = {
 
 def deploy_then_drift(arm: str, run_seed: int, regime: str, K: int,
                       b_updates: int, sigma_step: float, n_converge: int,
-                      cell: str = "C-2"):
+                      cell: str = "C-2", n_eval_batches: int = 2):
     """Converge at t=0, then step K times: apply a drift increment to δ, let
     the arm adapt for `b_updates` on the (now-drifted) device, evaluate SER.
     Returns {arm, regime, ser0, ser_traj:[(k, ser)], device_passes,
@@ -79,7 +80,7 @@ def deploy_then_drift(arm: str, run_seed: int, regime: str, K: int,
         y0 = sub.forward_intensity(encode_drive(u0).unsqueeze(-1),
                                    generator=ase_gen(run_seed, 0, 0))
         y_scale0 = float(y0.mean()) + 1e-30
-    ser0 = eval_ser(sub, head, y_scale0)
+    ser0 = eval_ser(sub, head, y_scale0, n_batches=n_eval_batches)
 
     rng = torch.Generator().manual_seed(run_seed + 777)
     ser_traj, delta_rms = [], []
@@ -97,7 +98,18 @@ def deploy_then_drift(arm: str, run_seed: int, regime: str, K: int,
         led, sub, head = train(drift_method, cell, run_seed * 1000 + k,
                                b_updates, warm=(sub, head),
                                eval_every=b_updates, return_state=True)
-        ser_k = led["eval_trace"][-1][2] if led["eval_trace"] else float("nan")
+        if n_eval_batches != 2:            # PR-17 eval-F per-step evaluation
+            with torch.no_grad():
+                from .harness import encode_drive as _enc
+                uk, _ = fresh_batch(run_seed * 1000 + k, 0)
+                yk = sub.forward_intensity(_enc(uk).unsqueeze(-1),
+                                           generator=ase_gen(run_seed * 1000
+                                                             + k, 0, 0))
+                y_scale_k = float(yk.mean()) + 1e-30
+            ser_k = eval_ser(sub, head, y_scale_k, n_batches=n_eval_batches)
+        else:
+            ser_k = led["eval_trace"][-1][2] if led["eval_trace"] \
+                else float("nan")
         ser_traj.append((k, ser_k))
         total_passes += led["device_passes"]
     return {"arm": arm, "regime": regime, "cell": cell, "run_seed": run_seed,

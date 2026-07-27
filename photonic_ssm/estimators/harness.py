@@ -42,6 +42,8 @@ U_REF = 6.0          # fixed encoder input range [−U_REF, U_REF] (S0.4a spec)
 HEAD_LAGS = 8        # PR-2 registered tap window {y(n−m), m=0..7}
 WARMUP = 16          # PR-2/T-A edge transient skipped in loss + SER
 T_SYMBOLS = 256      # S0.4a smoke sequence length
+TASK_TAPS = None     # PR-17: None = frozen T-A; set to TA_LONG_TAPS for T-A-L
+EVAL_FINE_BATCHES = 52   # PR-17 eval-F: 52*8*240 = 99,840 scored symbols
 BATCH = 8            # PR-6 §D batch (= device passes per forward eval, PR-7)
 SNR_DB = 28.0        # PR-2 headline cell
 RESOLVED_TAPS = (2, 11, 20, 29)   # S0.4-0 resolved B {3,12,21,30}, 0-based
@@ -113,7 +115,8 @@ def fresh_batch(run_seed: int, it: int):
     us, ts = [], []
     for b in range(BATCH):
         u, tgt, _ = make_ta_dataset(T_SYMBOLS, SNR_DB,
-                                    seed=run_seed * 1_000_003 + it * 101 + b)
+                                    seed=run_seed * 1_000_003 + it * 101 + b,
+                                    taps=TASK_TAPS)
         us.append(u)
         ts.append(tgt)
     return torch.stack(us), torch.stack(ts)
@@ -148,7 +151,8 @@ def eval_ser(sub, head, y_scale, n_batches: int = 2) -> float:
             us, ts = [], []
             for b in range(BATCH):
                 u, tgt, _ = make_ta_dataset(
-                    T_SYMBOLS, SNR_DB, seed=EVAL_SEED_BASE + j * 101 + b)
+                    T_SYMBOLS, SNR_DB, seed=EVAL_SEED_BASE + j * 101 + b,
+                    taps=TASK_TAPS)
                 us.append(u)
                 ts.append(tgt)
             u_raw, target = torch.stack(us), torch.stack(ts)
@@ -161,6 +165,19 @@ def eval_ser(sub, head, y_scale, n_batches: int = 2) -> float:
                 total += symbol_error_rate(pred[b], target[b], warmup=WARMUP)
                 n += 1
     return total / n
+
+
+def final_fine_ser(sub, head, run_seed: int,
+                   n_batches: int = EVAL_FINE_BATCHES) -> float:
+    """PR-17 eval-F: re-measure y_scale on the current device (the ser0
+    convention of drift.deploy_then_drift), then eval on the extended reserved
+    streams. Evaluation only — no training state is touched."""
+    with torch.no_grad():
+        u0, _ = fresh_batch(run_seed, 0)
+        y0 = sub.forward_intensity(encode_drive(u0).unsqueeze(-1),
+                                   generator=ase_gen(run_seed, 0, 0))
+        y_scale = float(y0.mean()) + 1e-30
+    return eval_ser(sub, head, y_scale, n_batches=n_batches)
 
 
 def train(method: str, cell_label: str, run_seed: int, n_updates: int,
