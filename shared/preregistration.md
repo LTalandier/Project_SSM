@@ -1655,3 +1655,62 @@ few €). **Pre-register (commit this block) → build + smoke → Lucas ratifie
 - **Margins RATIFIED as written** (Lucas 2026-07-24): S0.9a and S0.9b both use the **2× advantage
   factor + CI-excludes-0**; grids as registered (m∈{1,2,3,4,6}; regimes common/independent; offline
   head/relock; {pat,spsa} in-situ). This addendum is committed BEFORE the runs it governs.
+
+## PR-17 — ⬜ **PROPOSED** (2026-07-27) — S0.10: fine-grained evaluation (eval-F) + damping-transfer task (T-A-L). Committed BEFORE the runs it governs.
+
+**Origin:** PI review of the assembled manuscript (Lucas, 2026-07-27): (1) the 3840-symbol eval
+floor (per-seed resolution 2.6×10⁻⁴) is too coarse for the near-ceiling comparisons — the §5.5
+tie, the 1.84× drift ratio, and the §5.6 decomposition all live inside a two-symbol-error band;
+(2) §6's "excess memory is harmful" is near-tautological with a single 7-tap task — a
+longer-span task showing the damping optimum *move* turns it into a claim.
+
+### 17.1 eval-F protocol
+`eval_ser(n_batches=52)`: the same reserved held-out construction (EVAL_SEED_BASE stream
+families, never trained), extended from the frozen j∈{0,1} to j∈{0..51} → 52×8×240 = **99,840
+scored symbols per evaluation; per-seed resolution 1.002×10⁻⁵** (26× finer). No change to any
+training stream, budget, or seed.
+
+### 17.2 Re-evaluated units (frozen specs replicated VERBATIM; only the reported evaluation is finer)
+- **a-fine (80):** the S0.9a command lines of `results/s0_9/shard_*.txt` exactly (methods
+  {pat-both, offline-deploy} × m∈{1,2,3,4,6} × the 8 frozen seeds × n_up=31,600), + one eval-F
+  final evaluation on the trained state.
+- **b-fine (64):** the S0.9b units exactly (PR-16 §16.7 frozen: σ_step=0.40κᵢ, K=12, b=4000,
+  n_converge 20,000/15,800), with ser0 and all K per-step evaluations at eval-F
+  (y_scale re-measured on the current drifted device before each evaluation, as ser0 does).
+- **diag-fine (12):** the S0.5 C-1 diagnostic units exactly ({pat-perfect, pat-M-par,
+  pat-M-struct} × 31,600 + rhel-ideal × 7,900; seeds {11,23,47}), + eval-F final.
+- **ceiling-fine (8):** BPTT C-2 saturating, seeds {11,23,47,61,83,101,127,151} × 12,000
+  updates (the frozen ceiling protocol), + eval-F final. **Diagnostic reference only** — the
+  pre-registered target SER_target = 5.65×10⁻³ and every gate/rank verdict remain defined on
+  the frozen coarse protocol and are NOT recomputed.
+
+### 17.3 Rules of record
+Coarse (3840-symbol) numbers remain the numbers of record for every pre-registered gate,
+target, and ranking (PR-8/PR-9 untouched). **eval-F becomes the protocol of record for the
+near-ceiling comparisons only**: §5.5 (S0.9a/b, Fig. F8), §5.6 (Fig. S2), and S0.10b. The
+S0.9 verdict rules are re-applied VERBATIM at eval-F (advantage iff ≥2× and paired-bootstrap
+CI excludes 0; time-integrated mean-over-K median metric). **If any coarse and fine verdict
+differ, BOTH are reported in the paper.**
+
+### 17.4 T-A-L task definition (frozen here)
+T-A-L = the frozen T-A Jaeger–Haas channel (PR-2: same 4-PAM alphabet, same nonlinearity, same
+SNR 28 dB, same target d(n−2)) **plus a −6 dB replica of its past-tap profile delayed by 7
+symbols** (a second reflection): c_L[k] = c[k] for k ≤ 7, and c_L[7+m] = 0.5·c[m] for
+m = 1..7, i.e. frozen added taps {8: +0.09, 9: −0.05, 10: +0.0455, 11: −0.025, 12: +0.02,
+13: +0.015, 14: +0.005}. Memory span: 7 → 14 past symbols. WARMUP=16 still covers the
+transient (14+2 = 16 ≤ 16). Implementation: `taps` override threaded through
+`make_ta_dataset`; default `None` = bit-identical frozen T-A (gate test).
+
+### 17.5 S0.10b sweep design + registered prediction
+Pinned arm only, BPTT (exact gradient — locates the optimum without estimator noise), C-2,
+r ∈ {0.2, 0.3, 0.5, 1.0, 2.0, 3.0} (the S0.6 grid), seeds {11,23,47,61,83,101,127,151},
+U_MAX = 12,000, S0.6 plateau flag verbatim, final evaluation at eval-F. **Registered
+prediction: the T-A-L damping optimum moves to lighter damping (r*_L < 2.0).** Claim-upgrade
+rule (frozen): §6 gains the transfer claim iff, over plateaued points, the T-A-L minimizer
+r*_L ≠ 2.0 AND median SER at r*_L < 0.7 × median SER at r = 2.0 on T-A-L (a 30% separation);
+otherwise the §6 wording stays and the null is reported. (The T-A curve at these r is already
+on record from S0.6 — no rerun.)
+
+### 17.6 Budget
+212 units, 3×cpx51-class, expected ≲7 h, ≲€2 (same envelope class as S0.9; servers deleted
+after; single-threaded workers, OMP/MKL/OPENBLAS=1).
