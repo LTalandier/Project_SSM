@@ -1714,3 +1714,19 @@ on record from S0.6 — no rerun.)
 ### 17.6 Budget
 212 units, 3×cpx51-class, expected ≲7 h, ≲€2 (same envelope class as S0.9; servers deleted
 after; single-threaded workers, OMP/MKL/OPENBLAS=1).
+
+### 17.7 ERRATUM (2026-07-28, registered before the rerun it governs)
+The first S0.10 execution (212/212 units, servers deleted) exposed an **implementation bug in
+the eval-F helper**: it re-measured the intensity normalization y_scale on the *trained*
+device, while the head was trained against the *training-time* y_scale — the head and its
+scale are one decoder. Every arm that materially moves κ_ext (PAT, free BPTT, RHEL-ideal, and
+underdamped T-A-L points) therefore returned chance-level fine SER while its coarse SER sat
+at ceiling (the coarse numbers, S0.9-identical, prove training was intact). **Valid and kept
+as registered:** all runs_b drift units (the per-step re-measure is the registered ser0
+convention and tracks a near-unchanged device; fine tints match coarse within 10–20%) and the
+runs_a offline-deploy arm (its head is recalibrated against the deploy-time re-measured scale
+— the same quantity). **Invalid and rerun under the fixed decoder-consistent eval** (train()
+now exposes `y_scale`; gate test: eval at the trained scale reproduces the trace eval to
+<1e-12): a-fine pat-both (40), diag-fine (12), ceiling-fine (8), talong (48) = 108 units.
+No frozen spec, seed, budget, or verdict rule changes — only the evaluation-scale convention
+is corrected to the one every training-time eval already used.

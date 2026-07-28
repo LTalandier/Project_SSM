@@ -167,16 +167,15 @@ def eval_ser(sub, head, y_scale, n_batches: int = 2) -> float:
     return total / n
 
 
-def final_fine_ser(sub, head, run_seed: int,
+def final_fine_ser(sub, head, y_scale: float,
                    n_batches: int = EVAL_FINE_BATCHES) -> float:
-    """PR-17 eval-F: re-measure y_scale on the current device (the ser0
-    convention of drift.deploy_then_drift), then eval on the extended reserved
-    streams. Evaluation only — no training state is touched."""
-    with torch.no_grad():
-        u0, _ = fresh_batch(run_seed, 0)
-        y0 = sub.forward_intensity(encode_drive(u0).unsqueeze(-1),
-                                   generator=ase_gen(run_seed, 0, 0))
-        y_scale = float(y0.mean()) + 1e-30
+    """PR-17 eval-F on the extended reserved streams, at the head's TRAINED
+    normalization y_scale (train() ledger key "y_scale"). S0.10 erratum
+    (2026-07-28): the original version re-measured y_scale on the trained
+    device, which breaks every arm that moves kappa_ext (the head and its
+    scale are one decoder); drift.deploy_then_drift is unaffected (its
+    per-step re-measure tracks a near-unchanged device, the registered ser0
+    convention)."""
     return eval_ser(sub, head, y_scale, n_batches=n_batches)
 
 
@@ -439,5 +438,7 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
             for b in range(BATCH)) / BATCH
     led["in_situ_r"] = (sub.kappa_ext.detach() / ki).tolist()
     if return_state:
-        return led, sub, head
-    return led
+        led["y_scale"] = y_scale       # the head's trained normalization —
+        return led, sub, head          # REQUIRED for any post-hoc eval (S0.10
+    led["y_scale"] = y_scale           # erratum: re-measuring it breaks arms
+    return led                         # that move kappa_ext)

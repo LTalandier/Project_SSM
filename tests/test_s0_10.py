@@ -43,3 +43,16 @@ def test_eval_fine_batch_count():
     from photonic_ssm.estimators.harness import (
         BATCH, EVAL_FINE_BATCHES, T_SYMBOLS, WARMUP)
     assert EVAL_FINE_BATCHES * BATCH * (T_SYMBOLS - WARMUP) == 99_840
+
+
+def test_train_exposes_head_scale_and_fine_eval_uses_it():
+    """S0.10 erratum gate: train() must expose the head's trained y_scale, and
+    eval at that scale must reproduce the trace eval (same protocol) — the
+    re-measured-scale bug gave chance-level SER on kappa-moving arms."""
+    from photonic_ssm.estimators.harness import eval_ser, train
+    led, sub, head = train("bptt", "C-1", run_seed=5, n_updates=100,
+                           eval_every=100, N=8, return_state=True)
+    assert "y_scale" in led and led["y_scale"] > 0
+    ser_trace = led["eval_trace"][-1][2]
+    ser_re = eval_ser(sub, head, led["y_scale"], n_batches=2)
+    assert abs(ser_re - ser_trace) < 1e-12

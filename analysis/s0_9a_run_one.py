@@ -41,7 +41,7 @@ def main():
            "wall_s": round(time.time() - t0, 1)}
     outdir = "results/s0_10/runs_a" if fine else "results/s0_9/runs_a"
     if fine:
-        row["final_ser_fine"] = final_fine_ser(sub, head, seed)
+        row["final_ser_fine"] = final_fine_ser(sub, head, led["y_scale"])
         row["wall_s"] = round(time.time() - t0, 1)
     os.makedirs(outdir, exist_ok=True)
     tag = f"{method}_m{m:g}_{seed}"

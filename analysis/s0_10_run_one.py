@@ -53,7 +53,7 @@ def main():
     row = {"kind": kind, "tag": tag,
            "final_ser_coarse": median(evs[-3:]),
            "final_ser_fine": final_fine_ser(
-               sub, head, seed),
+               sub, head, led["y_scale"]),
            # S0.6 plateau flag verbatim (talong claim rule needs it);
            # None for traces too short to evaluate it (smoke only)
            "plateaued": (bool((median(evs[-13:-10]) - median(evs[-3:]))
