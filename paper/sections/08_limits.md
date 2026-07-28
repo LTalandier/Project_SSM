@@ -74,7 +74,9 @@ tie holds) and drift (a literature-calibrated random walk under a deploy-then-dr
 two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,
 and the tested drift magnitude is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than
 worst-case. The systems-advantage question — whether any of this pays once conversion overhead
-is counted — is §7's; the strongest current evidence is §5.5's sharpened verdict: no advantage
-from calibration accuracy at any tested mismatch, and a statistically significant but
-sub-threshold edge specific to uncorrelated drift. We consider stating that plainly to be the
-paper's job.
+is counted — is §7's; the strongest current evidence is §5.5's mechanism triple: no advantage
+from calibration accuracy at any tested mismatch, none under common-mode drift, and a
+declared pre-registered $2.42\times$ advantage specific to uncorrelated per-ring drift —
+whose real-hardware relevance rests entirely on how uncorrelated actual on-chip drift is, an
+unmeasured quantity we elevate to the sharpest Stage-1 experiment (§9). We consider stating
+that plainly to be the paper's job.

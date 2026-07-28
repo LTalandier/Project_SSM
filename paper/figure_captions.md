@@ -48,7 +48,11 @@ beats both workhorses.
 overcoupling r (plateaued endpoints spanning ×302), the deep-overcoupling optimum r\* = 2.0
 (κ_net ≈ 4.1 κ_i — *excess* memory is harmful for this task), and the trainable-κ_ext box
 (R-ii): boxes containing r\* train to the 5 × 10⁻⁴ ceiling, beating every uniform pin — the
-heterogeneous damping profile is found by training, not designed.
+heterogeneous damping profile is found by training, not designed. Dashed red: the T-A-L
+transfer test (14-tap span, eval-F; PR-17) — the registered prediction that the optimum moves
+to lighter damping *failed*; the harder task raises the floor everywhere while the optimum
+stays in the deep-overcoupling plateau (r = 2–3 within 13%), so the heavy-damping optimum is
+robust to a ×2 task-memory span (§6).
 
 **Figure F7 — The systems envelope.** (a) Training-energy inversion: SPSA trains the C-2 cell
 all-in for ~2.6 mJ (optimistic conversion accounting; 99 mJ conservative) while PAT's device
@@ -59,16 +63,19 @@ measured embedded-GPU (Jetson sustained) and Brainwave batch-1 lines at all N an
 DSP-ASIC class at N = 128 — while never beating the Jetson *peak-spec* line, which we report
 alongside: the niche is conditional, as §7 states.
 
-**Figure F8 — What breaks the offline tie (pre-registered follow-ups, §5.5).** (a)
-Calibration-mismatch sweep, 5→30%-class (8 seeds): in-situ PAT holds at the ceiling
-(7.8 × 10⁻⁴, flat) and offline-deploy degrades only mildly, never failing target — crossover
-m\* = none; the tie is robust to calibration error. (b) Deploy-then-drift, common-mode regime
-(σ_step = 0.40 κ_i per step on all detunings coherently): the offline laser re-lock absorbs
-the drift and keeps pace with in-situ retraining. (c) Independent per-ring drift: the re-lock
-cannot fix per-ring pole scatter; in-situ retraining holds near-ceiling while the re-locking
-offline baseline degrades with accumulated drift (time-integrated ratio 1.84×, paired-bootstrap
-CI excluding zero — below the pre-registered 2× advantage threshold, so reported as a
-directional edge, not a declared advantage). Dashed/dotted lines: target and ceiling.
+**Figure F8 — What breaks the offline tie (pre-registered follow-ups, §5.5; eval-F protocol
+of record, PR-17).** (a) Calibration-mismatch sweep, 5→30%-class (8 seeds): in-situ PAT
+(8.4–8.6 × 10⁻⁴) and offline-deploy (8.7–9.0 × 10⁻⁴) are statistically indistinguishable at
+every level (ratio ≤ 1.05, every paired-bootstrap CI including zero) — crossover m\* = none.
+(b) Deploy-then-drift, common-mode regime (σ_step = 0.40 κ_i per step on all detunings
+coherently): the offline laser re-lock absorbs the drift and keeps pace (ratio 1.34, CI
+including zero). (c) Independent per-ring drift: the re-lock cannot fix per-ring pole scatter;
+in-situ retraining holds near-ceiling while the re-locking offline baseline degrades with
+accumulated drift — **time-integrated ratio 2.42×, CI [+0.71, +2.84] × 10⁻³ excluding zero,
+clearing the pre-registered 2× advantage threshold** (the coarse-floor estimate, 1.84×, sat
+below the bar and is co-reported per the frozen both-protocols rule). The in-situ SPSA curve
+is context only (per-step re-convergence transient; no registered verdict involves it).
+Dashed/dotted lines: target and the eval-F BPTT ceiling.
 
 ---
 
@@ -78,12 +85,13 @@ trajectories of the *official* LinOSS-IM code on the published EigenWorms seeds 
 mode). (b) Final test accuracy per seed against the published 95.0 ± 4.4%: rerun mean 90.56%,
 σ 9.34 ≈ 2.1× the published dispersion (per-seed 97.22 / 83.33 / 97.22 / 97.22 / 77.78).
 
-**Figure S2 — Twin-mismatch decomposition at C-1 (§5.6).** Final SER (3 seeds) for PAT with a
-perfect twin, a parametric-error (M-par) twin, and a structural-omission (M-struct) twin — all
-three at the C-1 BPTT ceiling, i.e. mismatch channels ≈ 0 *at this cell only* (the dropped gain
-channel grows to ~8% of gradient direction at C-2, §5.6) — and the idealized-conjugator RHEL
-control, which reaches the C-1 target and thereby localizes RHEL's C-2 failure to echo physics,
-not mechanics.
+**Figure S2 — Twin-mismatch decomposition at C-1 (§5.6; eval-F).** Final SER (3 seeds) for
+PAT with a perfect twin, a parametric-error (M-par) twin, and a structural-omission (M-struct)
+twin: perfect and M-struct land identically (1.11 × 10⁻³) while the fine floor resolves a
+small M-par excess (1.31 × 10⁻³, +18% — invisible at the coarse floor). Mismatch channels
+remain ≈ 0 at this cell only (the dropped gain channel grows to ~8% of gradient direction at
+C-2, §5.6). The idealized-conjugator RHEL control clears the C-1 target with a thin margin
+(7.2 vs 7.3 × 10⁻³), localizing RHEL's C-2 failure to echo physics, not mechanics.
 
 **Figure S3 — The concrete echo sub-model (PR-11, §4).** (a) Conjugation-chain waterfall at
 the frozen operating point (mechanism A, shared spiral bank): ring-port extraction η_ex²,

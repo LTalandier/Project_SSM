@@ -53,19 +53,21 @@ def save(fig, name):
 
 # ---------------------------------------------------------------- F8 (S0.9)
 def f8():
-    a = jload("results/s0_9/analysis.json")
-    target, ceiling = a["ser_target"], a["ceiling"]
+    # S0.10 (PR-17): eval-F protocol of record for this comparison
+    a = jload("results/s0_10/analysis.json")
+    target = a["ser_target"]
+    ceiling = a["ceiling_fine"]["bptt"]["median_fine"]   # eval-F reference
     fig, axes = plt.subplots(1, 3, figsize=(9.6, 2.9))
 
     # (a) mismatch sweep
     ax = axes[0]
-    levels = a["s0_9a_mismatch_sweep"]["levels"]
+    levels = a["s0_10a_mismatch_fine"]["levels"]
     ms = sorted(int(k) for k in levels)
     pct = [5 * m for m in ms]
     for arm, key, col in (("in-situ PAT", "insitu", COL["insitu-pat"]),
                           ("offline-deploy + head-recal", "offline",
                            COL["offline-relock"])):
-        med = [levels[str(m)][f"{key}_median"] for m in ms]
+        med = [levels[str(m)][f"{key}_median"] for m in ms]  # eval-F medians
         ax.plot(pct, med, "o-", color=col, label=arm, ms=4, zorder=3)
         for m, x in zip(ms, pct):
             seeds = levels[str(m)][f"{key}_per_seed"]
@@ -74,19 +76,20 @@ def f8():
     ax.axhline(target, color="0.3", lw=0.8, ls="--")
     ax.axhline(ceiling, color="0.3", lw=0.8, ls=":")
     ax.text(30.5, target, "target", va="center", fontsize=7, color="0.3")
-    ax.text(30.5, ceiling, "ceiling", va="center", fontsize=7, color="0.3")
+    ax.text(30.5, ceiling, "ceiling (eval-F)", va="center", fontsize=7,
+            color="0.3")
     ax.set_yscale("log")
-    ax.set_ylim(3e-4, 1.2e-2)
+    ax.set_ylim(4e-4, 1.2e-2)
     ax.set_xticks(pct)
     ax.set_xlabel("calibration-mismatch class (%)")
     ax.set_ylabel("median SER (8 seeds)")
-    ax.set_title("(a) tie is robust to calibration error\n(crossover $m^*$ = none)")
+    ax.set_title("(a) tie robust to calibration error at eval-F\n(crossover $m^*$ = none; all CIs include 0)")
     ax.legend(frameon=False, loc="upper left")
 
     # (b),(c) drift trajectories
     for ax, regime, panel in ((axes[1], "common", "(b)"),
                               (axes[2], "independent", "(c)")):
-        reg = a["s0_9b_drift"]["regimes"][regime]
+        reg = a["s0_10b_drift_fine"]["regimes"][regime]
         for arm in ("insitu-pat", "insitu-spsa", "offline-relock",
                     "offline-head"):
             traj = reg[arm]["median_traj"]
@@ -161,6 +164,7 @@ def s1():
 # ---------------------------------------------------------------- S2 (C-1 diag)
 def s2():
     d = jload("results/s0_5/bakeoff_diag_c1.json")
+    fine = jload("results/s0_10/analysis.json")["diag_c1_fine"]
     ceiling, target = d["_ref"]["c1_ceiling"], d["_ref"]["c1_target"]
     arms = ["pat-perfect", "pat-M-par", "pat-M-struct", "rhel-ideal"]
     labels = ["PAT\nperfect twin", "PAT\nM-par twin", "PAT\nM-struct twin",
@@ -169,23 +173,23 @@ def s2():
     fig, ax = plt.subplots(figsize=(4.4, 2.9))
     xs = np.arange(len(arms))
     for x, arm, c in zip(xs, arms, cols):
-        med = d[arm]["final_ser_median"]
+        med = fine[arm]["median_fine"]                 # eval-F (PR-17)
         ax.bar(x, med, width=0.62, color=c)
-        seeds = d[arm]["final_ser_per_seed"]
+        seeds = fine[arm]["per_seed_fine"]
         ax.plot([x] * len(seeds), seeds, "k.", ms=5, alpha=0.6, zorder=3)
     ax.axhline(ceiling, color="0.3", lw=0.9, ls=":")
     ax.axhline(target, color="0.3", lw=0.9, ls="--")
-    ax.text(len(arms) - 0.4, ceiling * 1.05, "C-1 ceiling (BPTT)",
+    ax.text(len(arms) - 0.4, ceiling * 1.05, "C-1 ceiling (BPTT, coarse floor)",
             fontsize=6.5, color="0.3", ha="right", va="bottom")
     ax.text(len(arms) - 0.4, target * 1.05, "C-1 target", fontsize=6.5,
             color="0.3", ha="right", va="bottom")
     ax.set_yscale("log")
     ax.set_xticks(xs)
     ax.set_xticklabels(labels, fontsize=7)
-    ax.set_ylabel("final SER (median, 3 seeds)")
-    ax.set_title("C-1 diagnostic: twin-mismatch decomposition\n"
-                 "(mismatch channels $\\approx$ 0 at C-1 only; "
-                 "M-struct grows with cell)")
+    ax.set_ylabel("final SER at eval-F (median, 3 seeds)")
+    ax.set_title("C-1 diagnostic: twin-mismatch decomposition (eval-F)\n"
+                 "(M-struct $\\equiv$ perfect; small M-par excess resolves; "
+                 "channels grow with cell)")
     fig.tight_layout()
     save(fig, "S2_twin_mismatch_c1")
 

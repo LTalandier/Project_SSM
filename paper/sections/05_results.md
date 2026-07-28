@@ -27,7 +27,18 @@ physical training method — it reads gradients the device cannot expose — but
 task admits at this cell. On the headline cell (C-2: 32 rings, $Q_i = 6.8\times10^6$; 4-PAM
 channel equalization at 28 dB, §3), BPTT drives the symbol-error rate to a median of
 $5.2\times10^{-4}$ across eight seeds (seven of eight at $5\times10^{-4}$ — two errors in the
-3840-symbol evaluation set, the quantization floor). **The frozen substrate has ample capacity
+3840-symbol evaluation set, the quantization floor). Because that floor is too coarse for
+comparisons *between* near-ceiling arms — a two-symbol band can manufacture or erase a
+"statistically real" difference — every such comparison in this section (§5.5, §5.6) was
+re-scored under a pre-registered fine protocol (**eval-F**, PR-17: the same reserved held-out
+streams extended to 99,840 scored symbols, per-seed resolution $1.0\times10^{-5}$), with the
+frozen coarse protocol remaining the protocol of record for every gate, target, and ranking
+verdict, and both reported wherever they differ. At eval-F the BPTT reference itself settles at
+$9.8\times10^{-4}$ (the coarse $5.2\times10^{-4}$ was a lucky-two-errors reading — an
+illustration of exactly the floor hazard). One implementation erratum in the eval-F tooling
+(an evaluation-normalization inconsistency, caught the same day by its chance-level signature,
+registered, fixed under a machine-precision gate test, and re-run) is documented in the ledger
+(PR-17 §17.7). **The frozen substrate has ample capacity
 for the task; the open question is purely which physical training routes reach it, and at what
 cost.** The pre-registered target follows mechanically: a method *reaches target* if its
 held-out SER falls to $\text{SER}_\text{target} = 1.25\times\text{ceiling} + 0.005 = 5.65\times
@@ -149,47 +160,65 @@ then answered with two pre-registered follow-up experiments rather than leaving 
 PR-16; both frozen before the runs).
 
 **Calibration accuracy is not the axis** (Fig. F8a). Sweeping the shared mismatch level from 5% to 30%-class
-(in-situ and offline drawing from one frozen family at every level, §5.1), in-situ training holds
-at the ceiling ($7.8\times10^{-4}$, flat) while offline degrades only mildly ($1.0$–$1.2\times
-10^{-3}$) and *never fails the accuracy target* — the tie is robust to 30% calibration error. The
-differences are statistically real (paired-bootstrap CI excludes zero up to 20%) but never approach
-a factor of two: on this task the offline arm's on-device head recalibration absorbs static
-parametric error, so a wrong recurrence with a well-fit head still equalizes. In-situ *recurrence*
-training does not earn its keep against calibration error alone.
+(in-situ and offline drawing from one frozen family at every level, §5.1), the two arms are —
+at the eval-F floor — statistically indistinguishable at *every* level: in-situ holds at
+$8.4$–$8.6\times10^{-4}$, offline at $8.7$–$9.0\times10^{-4}$ (ratio $\le 1.05$, every
+paired-bootstrap CI including zero), and offline *never fails the accuracy target*. The
+coarse-floor reading had shown small "statistically real" differences (CI excluding zero up to
+20%) — a floor artifact that dissolves at 26× resolution, which is precisely why the fine
+protocol was registered. On this task the offline arm's on-device head recalibration absorbs
+static parametric error completely: a wrong recurrence with a well-fit head still equalizes,
+and in-situ *recurrence* training does not earn its keep against calibration error at any
+tested magnitude.
 
 **Drift is the axis — specifically the part a re-lock cannot catch** (Fig. F8b,c). We then let the substrate
 *drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
 resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [CITE-Dacha-2025]),
 deployed after convergence, with each arm allowed its on-device response — offline recalibrates the
 head and re-locks the laser (a single global detuning re-centering); in-situ retrains the
-recurrence. The pre-registered contrast holds cleanly. Under **common-mode** drift (whole-chip
-thermal wander) the laser re-lock absorbs it and offline keeps pace ($1.0$ vs $0.8\times10^{-3}$,
-no advantage). Under **independent** per-ring drift the re-lock *cannot* fix the scrambled
-pole scatter, and in-situ retraining pulls ahead: $1.0\times10^{-3}$ versus the re-locking
-offline's $1.8\times10^{-3}$, a $1.84\times$ separation with paired-bootstrap CI excluding zero —
-and the gap *grows with accumulated drift* (reaching $\sim$3–4× at the largest drift step). This
-$1.84\times$ time-integrated figure sits just below our pre-registered $2\times$ threshold, so we
-**do not declare a formal advantage** on the frozen metric; what the data show is a *statistically
-significant, mechanism-identified, drift-growing* in-situ edge that is specific to the uncorrelated
-drift a global lock leaves behind. A larger drift magnitude or an end-of-deployment metric would
-cross the threshold, but neither was pre-registered, so we name them rather than claim them.
+recurrence. The pre-registered contrast holds cleanly, and at the eval-F protocol of record the
+verdict is now formal. Under **common-mode** drift (whole-chip thermal wander) the laser
+re-lock absorbs it and offline keeps pace ($0.98$ vs $0.73\times10^{-3}$ time-integrated,
+ratio $1.34$, CI including zero — no advantage). Under **independent** per-ring drift the
+re-lock *cannot* fix the scrambled pole scatter, and in-situ retraining pulls ahead:
+$0.82\times10^{-3}$ versus the re-locking offline's $1.98\times10^{-3}$ time-integrated — a
+$\mathbf{2.42\times}$ separation with paired-bootstrap CI $[+0.71, +2.84]\times10^{-3}$
+excluding zero, **clearing the pre-registered $2\times$ advantage threshold: this is the one
+comparison in the paper where in-situ training formally beats the strong offline baseline.**
+Per the both-protocols rule (PR-17 §17.3) we co-report that the coarse-floor estimate of the
+same quantity was $1.84\times$ — *below* the bar; the finer floor did not manufacture the
+effect (the trajectories are the same data) but resolved the offline degradation that
+two-symbol granularity had been compressing. The gap *grows with accumulated drift* (~3–4× at
+the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
+the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
+(and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
+whose couplings move during the step) inflate its early trajectory, and no registered verdict
+involves it; and the deploy-time $\mathrm{SER}(t{=}0)$ diagnostic of the in-situ arms shares
+that convention and is not used in any comparison.
 
-Reporting a null where the design was built to detect an advantage is the honest core of §5.5, not
-a hedge around it: in-situ training's value here is not calibration robustness (null to 30%) but
-tracking the uncorrelated drift a laser lock cannot — and quantifying *how uncorrelated real
-on-chip drift is* becomes the sharpest Stage-1 measurement (§9).
+The section's shape is now a mechanism triple, each leg pre-registered: calibration error —
+null, to 30% (the head absorbs it); common-mode drift — null (the re-lock absorbs it);
+uncorrelated per-ring drift — a declared $2.42\times$ advantage (nothing else can absorb it).
+In-situ training's value on this substrate is not calibration robustness; it is tracking the
+drift a laser lock cannot see — and quantifying *how uncorrelated real on-chip drift is*
+becomes the sharpest Stage-1 measurement (§9).
 
 ## 5.6 What the diagnostics add
 
 Two mechanism rows, at three seeds each on C-1, support the mismatch narrative without inflating
-it (Fig. S2). Decomposing PAT's twin mismatch — perfect twin, parametric-error twin, structural-omission
-twin (dropping the gain self-consistency channel) — all three reach the C-1 ceiling identically:
-PAT absorbs both mismatch families at this cell. We flag explicitly that this does **not**
+it (Fig. S2; eval-F). Decomposing PAT's twin mismatch — perfect twin, parametric-error twin,
+structural-omission twin (dropping the gain self-consistency channel) — the perfect and
+M-struct twins land identically ($1.11\times10^{-3}$), and the fine floor resolves a small
+M-par excess ($1.31\times10^{-3}$, +18% relative — invisible at the coarse floor, where all
+three had read as one number): PAT absorbs the structural omission completely and the
+parametric family almost completely at this cell. We flag explicitly that this does **not**
 extrapolate to C-2, where the dropped gain channel was measured to carry ~8% of the gradient
 direction (§4, the adjoint cosine dropping from 0.994 to 0.925 with cell size); the C-2 mismatch
-sensitivity is a Stage-0.5-full measurement, not an inference from C-1. And the idealized-RHEL row
-is the control cited in §5.4. Neither row is a headline; both are the pre-registered controls that
-let the headlines mean what they say.
+sensitivity is a Stage-0.5-full measurement, not an inference from C-1. The idealized-RHEL row
+is the control cited in §5.4 — at eval-F it still clears the C-1 target, barely
+($7.2\times10^{-3} \le 7.3\times10^{-3}$), which we note because a two-symbol coarse floor
+could not have resolved how thin that margin is. Neither row is a headline; both are the
+pre-registered controls that let the headlines mean what they say.
 
 ## 5.7 Controllability: what "N = 32" actually means
 

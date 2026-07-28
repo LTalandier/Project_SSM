@@ -333,6 +333,14 @@ def f6():
                     color=col, lw=1.2, ms=4, capsize=2, label=lab,
                     markerfacecolor="white", markeredgecolor=col)
         ax.plot(rs[plateau], med[plateau], mk, ms=4, color=col, zorder=5)
+    try:                                # PR-17 T-A-L overlay (S0.10)
+        tl = jload("results/s0_10/analysis.json")["talong"]["curve"]
+        rs = np.array(sorted(float(r) for r in tl))
+        med = np.array([tl[f"{r:g}"]["median_fine"] for r in rs])
+        ax.plot(rs, med, "^--", color="#d62728", lw=1.1, ms=4,
+                label="pinned, T-A-L (14-tap span, eval-F)")
+    except FileNotFoundError:
+        pass
     ax.axhline(CEILING, color="0.25", lw=0.7, ls=":")
     ax.text(0.205, CEILING * 1.25, "§5 ceiling", fontsize=7, color="0.25")
     ax.axvline(0.3, color="0.6", lw=0.7, ls=":")

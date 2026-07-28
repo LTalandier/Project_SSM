@@ -1436,3 +1436,17 @@ honored; smoke i–iii green).
 ---
 
 **S0.0a — Tooling recon (2026-06-07, Executor):** report at [`shared/tooling_recon.md`](tooling_recon.md) — `equalization_ringbank.py` is **not** a head start for the S0.1 mapping (all `pnn-multilayer` ring code is static/CW transfer functions; the dynamical CMT core is new code either way), but SPSA + pass-accounting, rate-equation gain (autograd-checkpointed), SiN platform registry, drift machinery, ridge readout and sweep scaffolding are liftable → recommendation: **(a) selective salvage** (≈1 day port vs ≈3–5 days extra for clean start). Read-only; no code written. Awaiting Lucas's D-1/D-2 rulings.
+
+## S0.10 (2026-07-28) — eval-F fine floor + T-A-L transfer (PR-17 + §17.7 erratum)
+- 212 units + 108 corrected rerun; ≈€2.3; servers deleted. Scale-convention erratum caught
+  same-day (chance-level signature), registered BEFORE rerun, fixed under machine-precision
+  gate test (159/159 → 160 incl. new gate).
+- **Mismatch tie: statistically indistinguishable at ALL 5–30% at eval-F** (ratio ≤1.05, all
+  CIs incl 0) — coarse-floor "real differences" were floor artifacts. m* = None.
+- **DRIFT ADVANTAGE FORMALLY DECLARED: independent-regime 2.42× (CI excl 0) clears the frozen
+  2× bar at eval-F**; coarse 1.84× co-reported; common-mode 1.34× no advantage.
+- Ceiling-fine 9.8e-4 (coarse 5.2e-4 lucky-floor); diag-fine M-par +18% resolved; rhel-ideal
+  clears C-1 target by thin margin.
+- **T-A-L: registered prediction FAILED** (optimum did not move lighter; heavy plateau r=2–3
+  within 13%; 30% rule not fired) — §6 reports failure + span-robustness null.
+Memo: `results/s0_10/s0_10.md`. Paper: §5.1/5.5/5.6/6/1.3/8.5 + abstract + F6/F8/S2.

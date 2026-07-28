@@ -80,6 +80,10 @@ hardware-realism ledger); prose always writes figures as "Fig. Fn".
   June–July sweep (no new attack). **Still registered before submission:** Zhang eLight 6:6
   page read; one last sweep re-run (July 2026 not yet indexed); UNVERIFIED-direct rows of the
   exclusions ledger.
+- ✅ Eval-floor + damping-transfer follow-up (PR-17, S0.10): pre-reg `241204a` → runs →
+  erratum §17.7 `ccc4385` (registered before the corrected rerun) → verdicts in
+  `results/s0_10/s0_10.md`; §5.5 drift advantage declared at eval-F, T-A-L prediction failed
+  (reported failed).
 - ✅ S0.7 exclusions ledger primary-sourced: `docs/s0_7/exclusions_ledger.md` (§7.1 states the
   integrated-class ~0.5–1 W consequence).
 - ✅ [CITE-*] → numbered bibliography + assembled manuscript: `analysis/build_manuscript.py` →

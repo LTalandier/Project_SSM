@@ -49,17 +49,19 @@ ultra-low-loss SiN microrings*.)
 > beats every uniform setting. An end-to-end envelope including electro-optic conversion and
 > DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power
 > heater class) — while an equally-calibrated offline-train-then-deploy baseline
-> statistically ties in-situ training at calibration errors up to 30%-class; the tie breaks
-> only under uncorrelated per-ring drift, where in-situ retraining holds a statistically
-> significant, drift-growing edge that a global laser re-lock cannot absorb (1.84×
-> time-integrated, below our pre-registered 2× bar, so no formal advantage is declared):
-> the demonstration is in-data; the advantage case is directional and drift-specific, and we
-> say so. We release the pre-registration ledger, substrate model, and all training code.
+> statistically ties in-situ training at calibration errors up to 30%-class and under
+> common-mode drift (a laser re-lock absorbs it); the tie breaks only under uncorrelated
+> per-ring drift, which no global re-lock can absorb — there in-situ retraining holds a
+> **declared, pre-registered 2.42× advantage** (paired-bootstrap CI excluding zero at the
+> registered fine evaluation floor; the coarse-floor estimate, 1.84×, sat below the frozen
+> 2× bar and is co-reported), a gap that grows with accumulated drift: the demonstration is
+> in-data; the advantage is real but drift-specific, and we say exactly where it lives. We
+> release the pre-registration ledger, substrate model, and all training code.
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
 participation → S0.4-0 · damping → S0.6/PR-12 R-ii · niche + offline-tie/drift → S0.7 +
-§5.5 as upgraded by S0.9 (PR-5 §E + PR-16). The abstract states the null and the sub-2×
-drift verdict; these are the paper's most falsifiable sentences.)
+§5.5 as upgraded by S0.9 (PR-5 §E + PR-16). The abstract states the calibration null and the declared
+drift advantage with both protocols; these are the paper's most falsifiable sentences.)
 
 ## Claims → evidence table
 

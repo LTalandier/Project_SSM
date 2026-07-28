@@ -108,12 +108,13 @@ shipped as supplementary material (§3.7). Concretely:
    foundry-class noise cell. The ranking (PAT < adjoint < SPSA on device passes; RHEL censored,
    and worse than readout-only under an honest echo) settles the hardware roadmap on PAT/SPSA
    without promotion of the exotic routes. And the comparison the fair design was built to
-   expose lands as a sharpened null with one directional exception: calibrate-then-deploy
-   ties in-situ training at calibration errors all the way to 30%-class — calibration
-   accuracy is not the axis on which in-situ training pays — while uncorrelated per-ring
-   drift, which a global laser re-lock cannot absorb, gives in-situ retraining a
-   statistically significant edge that grows with accumulated drift yet stays below our
-   pre-registered 2× advantage bar, so no formal advantage is declared (§5.5, §7).
+   expose lands as a mechanism triple: calibrate-then-deploy ties in-situ training at
+   calibration errors all the way to 30%-class (statistically indistinguishable at the
+   registered fine evaluation floor) and under common-mode drift, which a laser re-lock
+   absorbs — while under uncorrelated per-ring drift, which nothing offline can absorb,
+   in-situ retraining holds a **declared, pre-registered 2.42× advantage** (CI excluding
+   zero, clearing the frozen 2× bar; the coarse-floor estimate 1.84× is co-reported), a gap
+   that grows with accumulated drift (§5.5, §7).
 5. **Limits, stated as limits** (§8): robustness is measured against modelled imperfections
    only; the anchor risks, verification debts, and the single-session review period are
    disclosed with the same specificity as the results.

@@ -42,3 +42,20 @@ bake-off *is* finding the damping operating point (the θ₀ hold value, pinned,
 seventy-seven times worse than the trained substrate). Since the offline baseline finds $r^*$ on
 its calibrated model just as well (§5.5), the damping result strengthens the trainability story
 without moving the advantage question.
+
+**Does the optimum track task memory? A registered prediction, failed.** Because "excess memory
+is harmful" measured on one 7-tap task is close to tautological, we froze a transfer test
+(PR-17 §17.4–17.5): a second task, T-A-L — the same channel plus a −6 dB replica of its
+past-tap profile delayed by 7 symbols, doubling the memory span to 14 — with the registered
+prediction that the pinned-damping optimum moves to *lighter* damping ($r^*_L < 2.0$), and a
+frozen 30%-separation rule for upgrading the claim. **The prediction failed.** The T-A-L
+optimum does not move toward lighter damping at all: the curve keeps falling to the heavy edge
+of the grid ($2.2\times10^{-3}$ at $r = 3$ vs $2.5\times10^{-3}$ at $r = 2$, eval-F, within
+13% — the separation rule does not fire; Fig. F6, dashed). What doubling the task span
+actually did was raise the error floor everywhere (the harder channel) while leaving the
+optimal damping regime where it was. The honest reading: on this substrate and task class the
+heavy-damping optimum is *robust* to a ×2 change in task memory span — the optimum is set by
+the bandwidth/interference trade of the equalization family, not by naive span-matching — and
+the "damping tunes memory to the task" sentence above must be read at that class level, not as
+a per-task tracking law. A task family engineered to *need* long coherent memory (rather than
+a longer ISI to cancel) remains the right probe, and is registered residue, not a claim.
