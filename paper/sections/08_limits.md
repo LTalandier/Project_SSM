@@ -39,10 +39,14 @@ carried as a label.
 ## 8.3 The benchmark anchor we do not use
 
 An early gate required reproducing a published LinOSS benchmark as an external anchor. Running
-the authors' own code on their published seeds reproduced their headline within noise on one
-dataset but not on the long-sequence EigenWorms task, where we traced a numerical-precision
-failure mode in the training loss (an absorbing zero-gradient state in fp32) that makes the
-published number seed-unstable (Fig. S1; a separate reproducibility note is in preparation). The gate was adjudicated purpose-served-with-anchor-void: all
+the authors' own code on their published seeds reproduced the Heartbeat headline within its
+band; on the long-sequence EigenWorms task the rerun mean itself lands within one published
+standard deviation ($90.6$ vs $95.0 \pm 4.4$) — what fails is not the mean but the
+*dispersion* (per-seed $\sigma = 9.3$, $2.1\times$ the published value, from a bimodal
+seed population) and the mechanism behind it: a numerical-precision failure mode in the
+training loss (an absorbing zero-gradient state in fp32) that makes the published number
+seed-unstable rather than unreproducible (Fig. S1; a separate reproducibility note is in
+preparation). The gate was adjudicated purpose-served-with-anchor-void: all
 downstream accuracy references in this program are therefore **in-house BPTT-on-substrate
 ceilings** measured under our own protocol (§5.1), never transferred published numbers. We flag
 fp32-sensitivity generally: our substrate runs float64, and the eval-floor granularity of §5 is

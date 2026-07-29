@@ -19,44 +19,35 @@ ultra-low-loss SiN microrings*.)
 
 ---
 
-## Draft abstract (▢-FILLED at S0.8 from landed gates, 2026-07-12; numbers frozen-source)
+## Draft abstract (▢-FILLED at S0.8; restructured 2026-07-29 per PI review — 328 words, front-loaded; numbers frozen-source)
 
-> Recurrent photonic processors promise low-latency, low-energy sequence processing, and the
-> first optical recurrent network has recently been trained in situ — yet no continuous-time
-> dissipative-resonator recurrence has ever had the parameters that define it — pole positions
-> and inter-resonator couplings, the physics that *is* the memory — trained on the physical
-> device by any gradient-based or gradient-estimating method [PR-15 search + page-verified
-> refreshes]. We ask whether such in-situ
-> training is feasible for a structured photonic state-space model: an oscillatory
-> (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i)
-> derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring
-> lattice and bound its realizable pole region; (ii) build one shared dissipative substrate
-> model — finite Q, saturating gain, amplified-spontaneous-emission noise — with all
-> parameters pre-registered before any training run; and (iii) run a four-method
-> in-situ-training bake-off — SPSA, physics-aware training (PAT), recurrent in-situ adjoint,
-> and Hamiltonian-echo learning (RHEL) — under a pre-registered fairness contract, scored on
-> sample-efficiency-to-target-accuracy at matched device-pass cost. At realistic SiN noise,
-> three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed
-> workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA
-> (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy
-> than SPSA's entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget — a quantified
-> feasibility bound, not a race entry: its echo is defeated by the very dissipation the
-> recurrence needs. A measured participation profile
-> shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising
-> to all 32 with four input taps — a controllability constraint, and conversion cost, that
-> any hardware implementation inherits. Trained damping is a first-order design knob (×300
-> in error across the feasible box), and training finds a heterogeneous damping profile that
-> beats every uniform setting. An end-to-end envelope including electro-optic conversion and
-> DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power
-> heater class) — while an equally-calibrated offline-train-then-deploy baseline
-> statistically ties in-situ training at calibration errors up to 30%-class and under
-> common-mode drift (a laser re-lock absorbs it); the tie breaks only under uncorrelated
-> per-ring drift, which no global re-lock can absorb — there in-situ retraining holds a
-> **declared, pre-registered 2.42× advantage** (paired-bootstrap CI excluding zero at the
-> registered fine evaluation floor; the coarse-floor estimate, 1.84×, sat below the frozen
-> 2× bar and is co-reported), a gap that grows with accumulated drift: the demonstration is
-> in-data; the advantage is real but drift-specific, and we say exactly where it lives. We
-> release the pre-registration ledger, substrate model, and all training code.
+> No physical photonic system has yet had the parameters that define a continuous-time
+> dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics
+> that *is* the memory — trained on the device by gradient-based or gradient-estimating
+> methods. (The nearest neighbor, an in-situ-trained optical recurrent network, trains
+> interferometer weights around an optoelectronic relay; its resonators stay fixed.) We ask
+> whether such training is feasible for a photonic state-space model: an oscillatory
+> (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We derive the
+> SSM↔ring mapping and its realizable pole region, build one shared dissipative substrate
+> model (finite Q, saturating gain, amplifier noise), and run a four-method training bake-off —
+> SPSA, physics-aware training (PAT), recurrent adjoint, Hamiltonian-echo learning — with
+> every threshold pre-registered before the run that consumes it. **The demonstration is
+> in-data: both hardware-committed methods train the recurrence to within margin of the
+> exact-gradient ceiling on 8/8 seeds at realistic noise.** PAT needs 4.6× fewer device passes
+> than model-free SPSA, but the energy metric inverts the rank: SPSA trains all-in for
+> ~2.6 mJ where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a
+> quantified feasibility bound: the substrate's own dissipation defeats the echo. A measured
+> controllability profile (a single drive trains ≈3 of 32 rings; four taps recover all 32)
+> and a ×300 damping spread make the input map and the damping point first-class design axes.
+> Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
+> training is statistically indistinguishable to 30% calibration error and under common-mode
+> drift; its advantage appears exactly where nothing offline can follow: under uncorrelated
+> per-ring drift it holds a declared, pre-registered 2.42× advantage that grows with
+> accumulated drift. An end-to-end envelope finds a conditional low-latency inference niche,
+> gated on the low-power heater class *and* integrated-class laser, locking, control, and
+> packaging. One registered prediction — that the damping optimum tracks task memory span —
+> failed, and is reported as failed. We release the pre-registration ledger, substrate model,
+> and all training code.
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
 participation → S0.4-0 · damping → S0.6/PR-12 R-ii · niche + offline-tie/drift → S0.7 +

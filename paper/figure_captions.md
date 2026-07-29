@@ -71,9 +71,11 @@ every level (ratio ≤ 1.05, every paired-bootstrap CI including zero) — cross
 coherently): the offline laser re-lock absorbs the drift and keeps pace (ratio 1.34, CI
 including zero). (c) Independent per-ring drift: the re-lock cannot fix per-ring pole scatter;
 in-situ retraining holds near-ceiling while the re-locking offline baseline degrades with
-accumulated drift — **time-integrated ratio 2.42×, CI [+0.71, +2.84] × 10⁻³ excluding zero,
-clearing the pre-registered 2× advantage threshold** (the coarse-floor estimate, 1.84×, sat
-below the bar and is co-reported per the frozen both-protocols rule). The in-situ SPSA curve
+accumulated drift — **time-integrated ratio 2.42×, difference-CI [+0.71, +2.84] × 10⁻³
+excluding zero: both conditions of the frozen decision rule (PR-16: median ratio ≥ 2 AND
+difference-CI excludes 0) hold** (the coarse-floor estimate, 1.84×, sat below the bar and is
+co-reported per the frozen both-protocols rule; the ratio's own CI [1.7, 4.6] is reported in
+§5.5). The in-situ SPSA curve
 is context only (per-step re-convergence transient; no registered verdict involves it).
 Dashed/dotted lines: target and the eval-F BPTT ceiling.
 

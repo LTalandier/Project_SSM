@@ -181,15 +181,32 @@ verdict is now formal. Under **common-mode** drift (whole-chip thermal wander) t
 re-lock absorbs it and offline keeps pace ($0.98$ vs $0.73\times10^{-3}$ time-integrated,
 ratio $1.34$, CI including zero — no advantage). Under **independent** per-ring drift the
 re-lock *cannot* fix the scrambled pole scatter, and in-situ retraining pulls ahead:
-$0.82\times10^{-3}$ versus the re-locking offline's $1.98\times10^{-3}$ time-integrated — a
-$\mathbf{2.42\times}$ separation with paired-bootstrap CI $[+0.71, +2.84]\times10^{-3}$
-excluding zero, **clearing the pre-registered $2\times$ advantage threshold: this is the one
-comparison in the paper where in-situ training formally beats the strong offline baseline.**
-Per the both-protocols rule (PR-17 §17.3) we co-report that the coarse-floor estimate of the
-same quantity was $1.84\times$ — *below* the bar; the finer floor did not manufacture the
-effect (the trajectories are the same data) but resolved the offline degradation that
-two-symbol granularity had been compressing. The gap *grows with accumulated drift* (~3–4× at
-the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
+$0.82\times10^{-3}$ versus the re-locking offline's $1.98\times10^{-3}$ time-integrated.
+The frozen decision rule — PR-16, ratified 2026-07-24 *before any drift run existed*, and
+re-applied verbatim at eval-F by PR-17 §17.3 — declares an advantage iff the offline median
+is $\ge 2\times$ the in-situ median **and** the paired-by-seed bootstrap 95% CI of the
+difference excludes zero. **Both conditions hold (ratio $2.42$; difference CI
+$[+0.71, +2.84]\times10^{-3}$): this is the one comparison in the paper where in-situ
+training formally beats the strong offline baseline.** Because that rule joins a
+point-estimate threshold to a difference-CI, we also report what it does not itself
+guarantee: the *ratio's* own bootstrap CI is $[1.7, 4.6]$, including values below 2 (17% of
+resamples) — the declared advantage is a threshold-crossing under a rule frozen in advance,
+not a 95%-confidence claim that the true ratio exceeds 2.
+
+A verdict that flips from failed (coarse, $1.84\times$) to passed (fine, $2.42\times$) under
+a protocol change is the classic post-hoc pattern, so we set out the ordering with dates and
+commits rather than asserting it. The decision rule froze before any drift datum (PR-16,
+2026-07-22/24). The coarse estimate — below the bar — was on record when the fine protocol
+was registered (PR-17, commit `241204a`, 2026-07-27, *before any eval-F measurement*; the
+same commit froze the rule that coarse and fine verdicts are both reported wherever they
+differ). The fine drift numbers are fresh replications of the frozen S0.9b unit specifications
+at the same seeds — an independent re-draw agreeing in direction — not a re-scoring of stored
+outputs. And the change is not directionally selective, which is the strongest single fact:
+**the same 26×-finer floor *erased* a statistically significant in-situ edge in the
+calibration sweep (Fig. F8a, every CI now including zero) and *established* one here — it
+moved every near-ceiling comparison toward higher resolution, and the drift comparison is
+simply the one that crossed.** The gap *grows with accumulated drift* (~3–4× at the largest
+drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
 (and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
 whose couplings move during the step) inflate its early trajectory, and no registered verdict

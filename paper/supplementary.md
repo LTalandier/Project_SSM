@@ -71,6 +71,26 @@ Main-figure addendum: **F8** (S0.9 mismatch+drift, 3 panels) added 2026-07-27 al
 generator `analysis/make_sfigures.py`. Note: figure "F8" is distinct from finding-ID F8 (the
 hardware-realism ledger); prose always writes figures as "Fig. Fn".
 
+## S7 — eval-F erratum audit (PR-17 §17.7)
+
+The eval-F re-scoring shipped with one implementation erratum, disclosed in §5.1 and made
+auditable here rather than attested. **Bug:** the fine-evaluation helper re-measured the
+output normalization $y_\text{scale}$ on the *trained* device; the trained readout is
+calibrated to the *training-time* normalization — head and scale are one decoder. **Signature
+(before, first pass):** chance-level fine SER on exactly the arms that move
+$\kappa_\text{ext}$, with coarse SER at ceiling — e.g. in-situ PAT (m=1) fine $0.667$ vs
+coarse $7.8\times10^{-4}$; BPTT ceiling fine $0.742$ vs coarse $5.2\times10^{-4}$ — while
+scale-consistent arms (offline-deploy; all drift units, whose registered per-step re-measure
+tracks a near-unchanged device) were unaffected. **Fix:** `train()` exposes the head's trained
+normalization (`y_scale` ledger key); the fine evaluation consumes it. **Gate test** (in the
+released suite): evaluation at the trained scale reproduces the in-training trace evaluation
+to $<10^{-12}$. **After (corrected rerun):** in-situ PAT (m=1) fine $8.5\times10^{-4}$;
+BPTT ceiling fine $9.8\times10^{-4}$. **Ordering:** registration `241204a` → first pass →
+erratum registered + fix committed `ccc4385` *before* the 108-unit corrected rerun → results
+`017547b`; first-pass outputs quarantined in the results tree (`invalid_scalebug/`), not
+overwritten. The valid-by-construction subsets (drift units; offline arms) are identical in
+both passes.
+
 ## Assembly residue (tracked)
 
 - ✅ Lucas rulings RESOLVED 2026-07-26 by delegation: **title = candidate 1**; scope initially

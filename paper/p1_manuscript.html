@@ -24,7 +24,7 @@ MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head><body><h1>Can a photonic state-space model be trained on-chip? A pre-registered four-method bake-off on a realistic silicon-nitride ring substrate</h1>
 <p><em>Lucas Talandier — independent researcher, Paris</em></p>
-<p><strong>Abstract.</strong> Recurrent photonic processors promise low-latency, low-energy sequence processing, and the first optical recurrent network has recently been trained in situ — yet no continuous-time dissipative-resonator recurrence has ever had the parameters that define it — pole positions and inter-resonator couplings, the physics that <em>is</em> the memory — trained on the physical device by any gradient-based or gradient-estimating method (§1, §8). We ask whether such in-situ training is feasible for a structured photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We (i) derive the mapping from the discrete oscillatory SSM to a physically realizable coupled-ring lattice and bound its realizable pole region; (ii) build one shared dissipative substrate model — finite Q, saturating gain, amplified-spontaneous-emission noise — with all parameters pre-registered before any training run; and (iii) run a four-method in-situ-training bake-off — SPSA, physics-aware training (PAT), recurrent in-situ adjoint, and Hamiltonian-echo learning (RHEL) — under a pre-registered fairness contract, scored on sample-efficiency-to-target-accuracy at matched device-pass cost. At realistic SiN noise, three of the four reach the pre-registered target on 8/8 seeds — both hardware-committed workhorses among them — with PAT needing 4.6× fewer device passes than model-free SPSA (38,400 vs 176,000) but a digital-twin side-ledger four orders of magnitude more energy than SPSA&rsquo;s entire training bill (13–44 J vs 2.6 mJ); RHEL is censored at budget — a quantified feasibility bound, not a race entry: its echo is defeated by the very dissipation the recurrence needs. A measured participation profile shows the single-drive lattice trains an effective dimension of ≈3 of N=32 rings, rising to all 32 with four input taps — a controllability constraint, and conversion cost, that any hardware implementation inherits. Trained damping is a first-order design knob (×300 in error across the feasible box), and training finds a heterogeneous damping profile that beats every uniform setting. An end-to-end envelope including electro-optic conversion and DAC/ADC overhead finds a conditional low-latency niche (GS/s line rates, N ≳ 32, low-power heater class) — while an equally-calibrated offline-train-then-deploy baseline statistically ties in-situ training at calibration errors up to 30%-class and under common-mode drift (a laser re-lock absorbs it); the tie breaks only under uncorrelated per-ring drift, which no global re-lock can absorb — there in-situ retraining holds a <strong>declared, pre-registered 2.42× advantage</strong> (paired-bootstrap CI excluding zero at the registered fine evaluation floor; the coarse-floor estimate, 1.84×, sat below the frozen 2× bar and is co-reported), a gap that grows with accumulated drift: the demonstration is in-data; the advantage is real but drift-specific, and we say exactly where it lives. We release the pre-registration ledger, substrate model, and all training code.</p>
+<p><strong>Abstract.</strong> No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that <em>is</em> the memory — trained on the device by gradient-based or gradient-estimating methods. (The nearest neighbor, an in-situ-trained optical recurrent network, trains interferometer weights around an optoelectronic relay; its resonators stay fixed.) We ask whether such training is feasible for a photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We derive the SSM↔ring mapping and its realizable pole region, build one shared dissipative substrate model (finite Q, saturating gain, amplifier noise), and run a four-method training bake-off — SPSA, physics-aware training (PAT), recurrent adjoint, Hamiltonian-echo learning — with every threshold pre-registered before the run that consumes it. <strong>The demonstration is in-data: both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.</strong> PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains all-in for ~2.6 mJ where PAT&rsquo;s digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound: the substrate&rsquo;s own dissipation defeats the echo. A measured controllability profile (a single drive trains ≈3 of 32 rings; four taps recover all 32) and a ×300 damping spread make the input map and the damping point first-class design axes. Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift; its advantage appears exactly where nothing offline can follow: under uncorrelated per-ring drift it holds a declared, pre-registered 2.42× advantage that grows with accumulated drift. An end-to-end envelope finds a conditional low-latency inference niche, gated on the low-power heater class <em>and</em> integrated-class laser, locking, control, and packaging. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. We release the pre-registration ledger, substrate model, and all training code.</p>
 <h2>1. Introduction</h2>
 <h3>1.1 The gap</h3>
 <p>Photonic neural networks have learned to train themselves. In feedforward meshes and diffractive
@@ -725,15 +725,31 @@ verdict is now formal. Under <strong>common-mode</strong> drift (whole-chip ther
 re-lock absorbs it and offline keeps pace ($0.98$ vs $0.73\times10^{-3}$ time-integrated,
 ratio $1.34$, CI including zero — no advantage). Under <strong>independent</strong> per-ring drift the
 re-lock <em>cannot</em> fix the scrambled pole scatter, and in-situ retraining pulls ahead:
-$0.82\times10^{-3}$ versus the re-locking offline&rsquo;s $1.98\times10^{-3}$ time-integrated — a
-$\mathbf{2.42\times}$ separation with paired-bootstrap CI $[+0.71, +2.84]\times10^{-3}$
-excluding zero, <strong>clearing the pre-registered $2\times$ advantage threshold: this is the one
-comparison in the paper where in-situ training formally beats the strong offline baseline.</strong>
-Per the both-protocols rule (PR-17 §17.3) we co-report that the coarse-floor estimate of the
-same quantity was $1.84\times$ — <em>below</em> the bar; the finer floor did not manufacture the
-effect (the trajectories are the same data) but resolved the offline degradation that
-two-symbol granularity had been compressing. The gap <em>grows with accumulated drift</em> (~3–4× at
-the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
+$0.82\times10^{-3}$ versus the re-locking offline&rsquo;s $1.98\times10^{-3}$ time-integrated.
+The frozen decision rule — PR-16, ratified 2026-07-24 <em>before any drift run existed</em>, and
+re-applied verbatim at eval-F by PR-17 §17.3 — declares an advantage iff the offline median
+is $\ge 2\times$ the in-situ median <strong>and</strong> the paired-by-seed bootstrap 95% CI of the
+difference excludes zero. <strong>Both conditions hold (ratio $2.42$; difference CI
+$[+0.71, +2.84]\times10^{-3}$): this is the one comparison in the paper where in-situ
+training formally beats the strong offline baseline.</strong> Because that rule joins a
+point-estimate threshold to a difference-CI, we also report what it does not itself
+guarantee: the <em>ratio&rsquo;s</em> own bootstrap CI is $[1.7, 4.6]$, including values below 2 (17% of
+resamples) — the declared advantage is a threshold-crossing under a rule frozen in advance,
+not a 95%-confidence claim that the true ratio exceeds 2.</p>
+<p>A verdict that flips from failed (coarse, $1.84\times$) to passed (fine, $2.42\times$) under
+a protocol change is the classic post-hoc pattern, so we set out the ordering with dates and
+commits rather than asserting it. The decision rule froze before any drift datum (PR-16,
+2026-07-22/24). The coarse estimate — below the bar — was on record when the fine protocol
+was registered (PR-17, commit <code>241204a</code>, 2026-07-27, <em>before any eval-F measurement</em>; the
+same commit froze the rule that coarse and fine verdicts are both reported wherever they
+differ). The fine drift numbers are fresh replications of the frozen S0.9b unit specifications
+at the same seeds — an independent re-draw agreeing in direction — not a re-scoring of stored
+outputs. And the change is not directionally selective, which is the strongest single fact:
+<strong>the same 26×-finer floor <em>erased</em> a statistically significant in-situ edge in the
+calibration sweep (Fig. F8a, every CI now including zero) and <em>established</em> one here — it
+moved every near-ceiling comparison toward higher resolution, and the drift comparison is
+simply the one that crossed.</strong> The gap <em>grows with accumulated drift</em> (~3–4× at the largest
+drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
 (and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
 whose couplings move during the step) inflate its early trajectory, and no registered verdict
@@ -969,10 +985,14 @@ the on-resonance floor calibration under worst-case de-saturation (anchor-risk v
 carried as a label.</p>
 <h3>8.3 The benchmark anchor we do not use</h3>
 <p>An early gate required reproducing a published LinOSS benchmark as an external anchor. Running
-the authors&rsquo; own code on their published seeds reproduced their headline within noise on one
-dataset but not on the long-sequence EigenWorms task, where we traced a numerical-precision
-failure mode in the training loss (an absorbing zero-gradient state in fp32) that makes the
-published number seed-unstable (Fig. S1; a separate reproducibility note is in preparation). The gate was adjudicated purpose-served-with-anchor-void: all
+the authors&rsquo; own code on their published seeds reproduced the Heartbeat headline within its
+band; on the long-sequence EigenWorms task the rerun mean itself lands within one published
+standard deviation ($90.6$ vs $95.0 \pm 4.4$) — what fails is not the mean but the
+<em>dispersion</em> (per-seed $\sigma = 9.3$, $2.1\times$ the published value, from a bimodal
+seed population) and the mechanism behind it: a numerical-precision failure mode in the
+training loss (an absorbing zero-gradient state in fp32) that makes the published number
+seed-unstable rather than unreproducible (Fig. S1; a separate reproducibility note is in
+preparation). The gate was adjudicated purpose-served-with-anchor-void: all
 downstream accuracy references in this program are therefore <strong>in-house BPTT-on-substrate
 ceilings</strong> measured under our own protocol (§5.1), never transferred published numbers. We flag
 fp32-sensitivity generally: our substrate runs float64, and the eval-floor granularity of §5 is
@@ -1116,9 +1136,11 @@ every level (ratio ≤ 1.05, every paired-bootstrap CI including zero) — cross
 coherently): the offline laser re-lock absorbs the drift and keeps pace (ratio 1.34, CI
 including zero). (c) Independent per-ring drift: the re-lock cannot fix per-ring pole scatter;
 in-situ retraining holds near-ceiling while the re-locking offline baseline degrades with
-accumulated drift — <strong>time-integrated ratio 2.42×, CI [+0.71, +2.84] × 10⁻³ excluding zero,
-clearing the pre-registered 2× advantage threshold</strong> (the coarse-floor estimate, 1.84×, sat
-below the bar and is co-reported per the frozen both-protocols rule). The in-situ SPSA curve
+accumulated drift — <strong>time-integrated ratio 2.42×, difference-CI [+0.71, +2.84] × 10⁻³
+excluding zero: both conditions of the frozen decision rule (PR-16: median ratio ≥ 2 AND
+difference-CI excludes 0) hold</strong> (the coarse-floor estimate, 1.84×, sat below the bar and is
+co-reported per the frozen both-protocols rule; the ratio&rsquo;s own CI [1.7, 4.6] is reported in
+§5.5). The in-situ SPSA curve
 is context only (per-step re-convergence transient; no registered verdict involves it).
 Dashed/dotted lines: target and the eval-F BPTT ceiling.</p>
 <p><img alt="S1" src="figures/S1_g3_anchor_dossier.png" /></p>
