@@ -112,9 +112,10 @@ shipped as supplementary material (§3.7). Concretely:
    calibration errors all the way to 30%-class (statistically indistinguishable at the
    registered fine evaluation floor) and under common-mode drift, which a laser re-lock
    absorbs — while under uncorrelated per-ring drift, which nothing offline can absorb,
-   in-situ retraining holds a **declared, pre-registered 2.42× advantage** (CI excluding
-   zero, clearing the frozen 2× bar; the coarse-floor estimate 1.84× is co-reported), a gap
-   that grows with accumulated drift (§5.5, §7).
+   in-situ retraining holds a **declared, pre-registered 2.42× advantage** (both conditions
+   of the frozen rule hold — point ratio ≥ 2× *and* difference-CI excluding zero; the
+   coarse-floor estimate 1.84× is co-reported), a gap that grows with accumulated drift
+   (§5.5, §7).
 5. **Limits, stated as limits** (§8): robustness is measured against modelled imperfections
    only; the anchor risks, verification debts, and the single-session review period are
    disclosed with the same specificity as the results.

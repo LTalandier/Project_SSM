@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 PAPER = os.path.join(ROOT, "paper")
 
 TITLE = ("Can a photonic state-space model be trained on-chip? "
-         "A pre-registered four-method bake-off on a realistic "
+         "A pre-registered in-situ-training bake-off on a realistic "
          "silicon-nitride ring substrate")
 AUTHOR = "Lucas Talandier — independent researcher, Paris"
 
@@ -69,18 +69,24 @@ def strip_header(text, fname):
 
 # ---------------------------------------------------------------- abstract
 def extract_abstract():
+    """Blockquote under '## Draft abstract'; bare '>' lines are paragraph
+    breaks (the round-3 abstract is multi-paragraph + footnote)."""
     lines = read("outline.md").splitlines()
     i = next(i for i, l in enumerate(lines)
              if l.startswith("## Draft abstract"))
-    quote = []
+    paras, cur = [], []
     for l in lines[i + 1:]:
         if l.startswith("> "):
-            quote.append(l[2:])
-        elif quote and not l.strip():
+            cur.append(l[2:])
+        elif l.strip() == ">":
+            if cur:
+                paras.append(" ".join(cur))
+                cur = []
+        elif cur or paras:
             break
-    text = " ".join(quote)
-    text = text.replace("[PR-15 search + page-verified refreshes]", "(§1, §8)")
-    return text
+    if cur:
+        paras.append(" ".join(cur))
+    return "\n\n".join(paras)
 
 
 # ---------------------------------------------------------------- captions
@@ -106,7 +112,8 @@ def main():
     body_parts = [strip_header(read(os.path.join("sections", f)), f)
                   for f in SECTIONS]
     abstract = extract_abstract()
-    full = abstract + "\n\n" + "\n\n".join(body_parts)
+    SENTINEL = "\n\nABSXXBODYSPLIT\n\n"
+    full = abstract + SENTINEL + "\n\n".join(body_parts)
 
     order, missing = [], set()
 
@@ -129,16 +136,8 @@ def main():
                   repl, full)
 
     bib = "\n".join(f"{i+1}. {refs[k]}" for i, k in enumerate(order))
-    manuscript = "\n\n".join([
-        f"# {TITLE}",
-        f"*{AUTHOR}*",
-        f"**Abstract.** {abstract if '[CITE' not in abstract else abstract}",
-        # abstract inside `full` was only used for key ordering; rebuild body
-    ])
-    # rebuild: abstract came first in `full`; split it back out
-    abs_len_marker = full.index("\n\n")
-    abstract_numbered = full[:abs_len_marker]
-    body_numbered = full[abs_len_marker:].strip()
+    abstract_numbered, body_numbered = (s.strip()
+                                       for s in full.split("ABSXXBODYSPLIT"))
     manuscript = "\n\n".join([
         f"# {TITLE}",
         f"*{AUTHOR}*",

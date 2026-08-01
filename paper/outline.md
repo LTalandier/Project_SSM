@@ -5,54 +5,59 @@
 slots stay EMPTY until their pre-registered runs produce them (the governing PR-ID is named
 on every slot). Critic reviews the manuscript at S0.8 as usual.
 
-**Title — CHOSEN 2026-07-26 (PI-delegated ruling, E-2026-07-12-1):**
+**Title — CHOSEN 2026-07-26 (PI-delegated ruling, E-2026-07-12-1); amended 2026-08-01
+(round-3 review, same delegation — "four-method" dropped: the body charges one entrant as
+an as-if-realizable bound and reads one as a feasibility bound, so counting four contestants
+on the cover overstates the field):**
 
-> ***Can a photonic state-space model be trained on-chip? A pre-registered four-method
+> ***Can a photonic state-space model be trained on-chip? A pre-registered in-situ-training
 > bake-off on a realistic silicon-nitride ring substrate***
 
-(Candidate 1; the question form is honest about Stage 0 being simulation, and
-"pre-registered" is a differentiator worth putting on the cover. Rejected alternates kept
-for the record: 2. *In-situ trainability of dissipative photonic state-space models: SPSA,
-physics-aware training, adjoint, and Hamiltonian-echo compared under realistic noise*;
-3. *Toward the first in-situ-trained recurrent photonic system: a simulation bake-off on
-ultra-low-loss SiN microrings*.)
+(Candidate 1, question form; "pre-registered" is a differentiator worth putting on the cover.
+Rejected alternates kept for the record: 2. *In-situ trainability of dissipative photonic
+state-space models: SPSA, physics-aware training, adjoint, and Hamiltonian-echo compared
+under realistic noise*; 3. *Toward the first in-situ-trained recurrent photonic system: a
+simulation bake-off on ultra-low-loss SiN microrings*.)
 
 ---
 
-## Draft abstract (▢-FILLED at S0.8; restructured 2026-07-29 per PI review — 328 words, front-loaded; numbers frozen-source)
+## Draft abstract (▢-FILLED at S0.8; recompressed 2026-08-01 per round-3 review — ~250 words, three paragraphs, result at sentence two, Wu concession footnoted; both abstract-level caveats — ratio CI, integrated realization — carried)
 
 > No physical photonic system has yet had the parameters that define a continuous-time
 > dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics
 > that *is* the memory — trained on the device by gradient-based or gradient-estimating
-> methods. (The nearest neighbor, an in-situ-trained optical recurrent network, trains
-> interferometer weights around an optoelectronic relay; its resonators stay fixed.) We ask
-> whether such training is feasible for a photonic state-space model: an oscillatory
-> (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We derive the
-> SSM↔ring mapping and its realizable pole region, build one shared dissipative substrate
-> model (finite Q, saturating gain, amplifier noise), and run a four-method training bake-off —
-> SPSA, physics-aware training (PAT), recurrent adjoint, Hamiltonian-echo learning — with
-> every threshold pre-registered before the run that consumes it. **The demonstration is
-> in-data: both hardware-committed methods train the recurrence to within margin of the
-> exact-gradient ceiling on 8/8 seeds at realistic noise.** PAT needs 4.6× fewer device passes
-> than model-free SPSA, but the energy metric inverts the rank: SPSA trains all-in for
-> ~2.6 mJ where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a
-> quantified feasibility bound: the substrate's own dissipation defeats the echo. A measured
-> controllability profile (a single drive trains ≈3 of 32 rings; four taps recover all 32)
-> and a ×300 damping spread make the input map and the damping point first-class design axes.
+> methods.¹ We ask whether such training is feasible for a photonic state-space model on
+> ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered
+> dissipative substrate model, both hardware-committed methods train the recurrence to within
+> margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was
+> frozen before the run that consumed it.
+>
+> We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate
+> (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs
+> 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank:
+> SPSA trains all-in for ~2.6 mJ where PAT's digital twin costs 13–44 J. Hamiltonian-echo
+> learning is censored — a quantified feasibility bound, the substrate's own dissipation
+> defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
+> four taps recover all 32) makes the input map a first-class design axis.
+>
 > Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
 > training is statistically indistinguishable to 30% calibration error and under common-mode
-> drift; its advantage appears exactly where nothing offline can follow: under uncorrelated
-> per-ring drift it holds a declared, pre-registered 2.42× advantage that grows with
-> accumulated drift. An end-to-end envelope finds a conditional low-latency inference niche,
-> gated on the low-power heater class *and* integrated-class laser, locking, control, and
-> packaging. One registered prediction — that the damping optimum tracks task memory span —
-> failed, and is reported as failed. We release the pre-registration ledger, substrate model,
-> and all training code.
+> drift. Its advantage appears only where nothing offline can follow: under uncorrelated
+> per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a
+> frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a
+> conditional low-latency niche, gated on the low-power heater class *and* on
+> integrated-class laser, locking, control, and packaging. One registered prediction — that
+> the damping optimum tracks task memory span — failed, and is reported as failed. The
+> pre-registration ledger, substrate model, and training code are released with the paper.
+>
+> ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains
+> interferometer weights around an optoelectronic relay; its resonators stay fixed.*
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
-participation → S0.4-0 · damping → S0.6/PR-12 R-ii · niche + offline-tie/drift → S0.7 +
-§5.5 as upgraded by S0.9 (PR-5 §E + PR-16). The abstract states the calibration null and the declared
-drift advantage with both protocols; these are the paper's most falsifiable sentences.)
+participation → S0.4-0 · niche + offline-tie/drift → S0.7 + §5.5 as upgraded by S0.9/S0.10
+(PR-5 §E + PR-16 + PR-17). The abstract carries the ratio-CI caveat as one clause and the
+Wu concession as a footnote — it preempts the objection without leading with it. The ×300
+damping spread stays in §6; the failed-prediction sentence represents that section.)
 
 ## Claims → evidence table
 

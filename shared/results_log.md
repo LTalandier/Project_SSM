@@ -1450,3 +1450,21 @@ honored; smoke i–iii green).
 - **T-A-L: registered prediction FAILED** (optimum did not move lighter; heavy plateau r=2–3
   within 13%; 30% rule not fired) — §6 reports failure + span-robustness null.
 Memo: `results/s0_10/s0_10.md`. Paper: §5.1/5.5/5.6/6/1.3/8.5 + abstract + F6/F8/S2.
+
+## S0.10-R3 — round-3 review close-out (2026-08-01, single-session; spec PR-17 §17.8 @ `a8d7ab9` BEFORE the run)
+- **§17.8a resolution-vs-re-draw: CLOSED from stored data, zero compute.** S0.10 reruns are
+  bit-identical reproductions of S0.9 (delta_rms_ki 64/64 drift units; coarse final_ser
+  80/80 mismatch units) → coarse 1.84× / fine 2.42× = same trajectories, two floors.
+  No re-draw confound; symmetry defense survives on both halves (F8a dissolution also
+  pure resolution). §5.5 rewritten: bit-identity first, commits second, symmetry third.
+- **§17.8b ceiling paradox: budget effect, resolved by measurement.** 12k-update reference
+  vs arms' 31.6k (PR-5 §E); inversion within seed noise (paired CI [−0.1,+3.1]e-4 incl 0).
+  **Matched BPTT @ 31,600, 8 seeds: fine median 8.11e-4** (7.3–8.9e-4) — registered
+  expectation confirmed (at/below 12k ref and arms). F8 reference line = matched budget.
+  1×cpx51 ~52 min ≈€0.12, server deleted, list verified empty.
+- Editorial: adjoint−PAT degenerate CI = 1,600-pass grid bound (8/8 sign-consistent,
+  stated); §5.2 floor margins both protocols (21×/11×); target robustness (eval-F target
+  6.23e-3, no verdict changes); §5.6 n=3 hedges; §6 near-chance fix; title
+  "four-method"→"in-situ-training"; abstract ~250 w 3-paragraph (Wu footnoted, ratio-CI
+  clause); §8.4 publication-precedes-circulation; F-namespace collision resolved.
+- Tests 160/160. Manuscript + PDF rebuilt (35 refs; text layer verified, 0 TeX leftovers).

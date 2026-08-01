@@ -35,7 +35,19 @@ streams extended to 99,840 scored symbols, per-seed resolution $1.0\times10^{-5}
 frozen coarse protocol remaining the protocol of record for every gate, target, and ranking
 verdict, and both reported wherever they differ. At eval-F the BPTT reference itself settles at
 $9.8\times10^{-4}$ (the coarse $5.2\times10^{-4}$ was a lucky-two-errors reading — an
-illustration of exactly the floor hazard). One implementation erratum in the eval-F tooling
+illustration of exactly the floor hazard). One scope note, so no reader has to discover it:
+this reference is *protocol-local*. It is measured under the bake-off contract — 12,000
+updates at the registered cadence — and it bounds the §5.3 ranking, which runs under that
+same contract. The follow-up experiments of §5.5 run their own frozen specification (PR-5 §E)
+with a $2.6\times$ larger update budget (31,600), and at eval-F their converged arms settle
+slightly *below* the 12,000-update number ($8.4$–$9.0\times10^{-4}$ vs $9.8\times10^{-4}$; the
+paired inversion is within seed noise, CI $[-0.1, +3.1]\times10^{-4}$ including zero). A
+reference matched to the follow-up budget — BPTT at 31,600 updates, registered as a
+review-added diagnostic with its expected direction stated in advance (PR-17 §17.8) — lands
+at $8.1\times10^{-4}$ (8 seeds, per-seed $7.3$–$8.9\times10^{-4}$): at or below every
+follow-up arm, restoring the expected ordering. It, not the bake-off number, is the
+reference line drawn in Fig. F8. An arm sitting below the 12,000-update number is a budget
+effect, not a physical estimator beating exact gradients. One implementation erratum in the eval-F tooling
 (an evaluation-normalization inconsistency, caught the same day by its chance-level signature,
 registered, fixed under a machine-precision gate test, and re-run) is documented in the ledger
 (PR-17 §17.7). **The frozen substrate has ample capacity
@@ -43,7 +55,8 @@ for the task; the open question is purely which physical training routes reach i
 cost.** The pre-registered target follows mechanically: a method *reaches target* if its
 held-out SER falls to $\text{SER}_\text{target} = 1.25\times\text{ceiling} + 0.005 = 5.65\times
 10^{-3}$ at any evaluation point within the device-pass budget (the additive guard dominates at a
-floor-level ceiling, by design — PR-3 §B). The budget $B = 252{,}800$ device passes is twice the
+floor-level ceiling, by design — PR-3 §B; had the rule consumed the eval-F ceiling instead,
+the target would be $6.23\times10^{-3}$ and no reach-target verdict in this paper changes). The budget $B = 252{,}800$ device passes is twice the
 BPTT convergence point measured in a seed-7 sizing pilot excluded from the eight scored seeds.
 
 A note this cell settles for free: the ceiling is *identical* under fixed-gain and saturating-gain
@@ -55,8 +68,10 @@ The pre-registered M3 sensitivity trigger is therefore un-triggerable at this ce
 
 Two decompositions of the Stage-0 gate were pre-registered (PR-9). **Capacity (ii-a):** the
 ceiling must clear a task-utility floor set at half the readout-only error — the reservoir
-baseline that freezes the recurrence and trains only the digital head. It clears it by
-$21.5\times$ ($5.2\times10^{-4}$ vs the reservoir's $2.2\times10^{-2}$). **Trainability (ii-b):**
+baseline that freezes the recurrence and trains only the digital head. The baseline stalls at
+$2.2\times10^{-2}$, putting the floor at $1.1\times10^{-2}$; the ceiling clears it by
+$21\times$ at the coarse protocol of record ($5.2\times10^{-4}$) and by $11\times$ at eval-F
+($9.8\times10^{-4}$). **Trainability (ii-b):**
 at least one of the two hardware-committed routes — physics-aware training (PAT) or SPSA — must
 reach target on at least five of eight seeds.
 
@@ -95,9 +110,16 @@ see §5.4.*
 All three ordered pairs among the passing routes separate with paired-by-seed bootstrap 95%
 confidence intervals excluding zero (PAT−SPSA $=-137{,}600$ passes, CI $[-155{,}200,-123{,}200]$;
 adjoint−PAT $=+35{,}200$, CI $[+35{,}200,+36{,}800]$; adjoint−SPSA $=-102{,}400$, CI
-$[-120{,}000,-88{,}000]$). The three routes trade the same axes the theory predicts they should.
+$[-120{,}000,-88{,}000]$). The adjoint−PAT interval is degenerate — its point estimate sits on
+its own lower bound, one 1,600-pass step wide — and we say why rather than let it read as
+precision: passes-to-target lives on a 1,600-pass evaluation grid (PR-3's no-interpolation
+rule), the eight paired differences all fall within two grid steps ($+33{,}600$ to $+36{,}800$,
+positive on 8/8 seeds), and a bootstrap over values that concentrated collapses onto the grid.
+It should be read as a sign-consistent separation bounded by the grid resolution, not as a
+distributional interval. The three routes trade the same axes the theory predicts they should.
 **PAT** is cheapest on the physical device but spends a $13\times$-larger digital ledger and
-carries the full burden of characterizing a differentiable twin (§4, F8). **The adjoint** matches
+carries the full burden of characterizing a differentiable twin (§4; hardware ledger,
+supplementary S2). **The adjoint** matches
 the exact-gradient ceiling in accuracy at zero digital cost and $1.9\times$ PAT's device passes —
 though its count charges one physical reverse pass *as if* realizable, which no recurrent photonic
 system has yet demonstrated (a caveat we quarantine, §4). **SPSA** costs $4.6\times$ PAT's device
@@ -147,7 +169,7 @@ offline-train-then-deploy route — train the full parameter set digitally on a 
 then deploy through actuation maps, recalibrating only the digital head on-device — was given the
 *same* 5%-class calibration errors as PAT's twin (the mismatch families are drawn from one frozen
 set, so the comparison cannot be rigged by giving in-situ training a secretly-wronger competitor;
-PR-5 F7.3). At that mismatch level it reaches $1.0\times10^{-3}$ — statistically
+PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ — statistically
 indistinguishable from in-situ PAT's $8\times10^{-4}$.
 
 We state the consequence plainly, because the fair-comparison design exists precisely to force it:
@@ -194,19 +216,27 @@ resamples) — the declared advantage is a threshold-crossing under a rule froze
 not a 95%-confidence claim that the true ratio exceeds 2.
 
 A verdict that flips from failed (coarse, $1.84\times$) to passed (fine, $2.42\times$) under
-a protocol change is the classic post-hoc pattern, so we set out the ordering with dates and
-commits rather than asserting it. The decision rule froze before any drift datum (PR-16,
-2026-07-22/24). The coarse estimate — below the bar — was on record when the fine protocol
-was registered (PR-17, commit `241204a`, 2026-07-27, *before any eval-F measurement*; the
-same commit froze the rule that coarse and fine verdicts are both reported wherever they
-differ). The fine drift numbers are fresh replications of the frozen S0.9b unit specifications
-at the same seeds — an independent re-draw agreeing in direction — not a re-scoring of stored
-outputs. And the change is not directionally selective, which is the strongest single fact:
-**the same 26×-finer floor *erased* a statistically significant in-situ edge in the
-calibration sweep (Fig. F8a, every CI now including zero) and *established* one here — it
-moved every near-ceiling comparison toward higher resolution, and the drift comparison is
-simply the one that crossed.** The gap *grows with accumulated drift* (~3–4× at the largest
-drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
+a protocol change is the classic post-hoc pattern, so we dismantle it factor by factor.
+First, the movement is *not* confounded with a fresh noise draw. The eval-F drift numbers
+come from re-executing the frozen S0.9b unit specifications, and the re-executed trajectories
+are **bit-identical** to the originals: the dynamics are deterministic given the registered
+seed, evaluation draws only from reserved streams that never touch the training randomness
+(the coarse evaluation set is the first 2 of the fine protocol's 52 batches), and the
+evaluation-independent device-state fingerprint matches the stored originals exactly on all
+64 drift units — as does the coarse final SER on all 80 calibration-sweep units (ledger
+§17.8). The coarse→fine change therefore carries exactly one factor, the evaluation floor:
+the *same physical trajectories* score $1.84\times$ at 3,840 symbols and $2.42\times$ at
+99,840. Second, the ordering, with dates and commits rather than assertion: the decision rule
+froze before any drift datum existed (PR-16, 2026-07-22/24), and the coarse estimate — below
+the bar — was on record when the fine protocol was registered (PR-17, commit `241204a`,
+2026-07-27, *before any eval-F measurement*; the same commit froze the rule that coarse and
+fine verdicts are both reported wherever they differ). Third, the change is not directionally
+selective: **the same 26×-finer floor *erased* a statistically significant edge in
+*in-situ's* favor in the calibration sweep (Fig. F8a, every CI now including zero) and
+*established* one here — and by the same bit-identity check, that dissolution too is pure
+resolution.** It moved every near-ceiling comparison toward higher resolution; the drift
+comparison is simply the one that crossed. The gap *grows with accumulated drift* (~3–4× at
+the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
 (and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
 whose couplings move during the step) inflate its early trajectory, and no registered verdict
@@ -225,9 +255,12 @@ becomes the sharpest Stage-1 measurement (§9).
 Two mechanism rows, at three seeds each on C-1, support the mismatch narrative without inflating
 it (Fig. S2; eval-F). Decomposing PAT's twin mismatch — perfect twin, parametric-error twin,
 structural-omission twin (dropping the gain self-consistency channel) — the perfect and
-M-struct twins land identically ($1.11\times10^{-3}$), and the fine floor resolves a small
-M-par excess ($1.31\times10^{-3}$, +18% relative — invisible at the coarse floor, where all
-three had read as one number): PAT absorbs the structural omission completely and the
+M-struct twins are indistinguishable: identical medians ($1.11\times10^{-3}$), per-seed
+values agreeing to within $2\times10^{-5}$ (two symbols even at eval-F). The fine floor
+resolves a small M-par excess ($1.31\times10^{-3}$ median, +18% relative; the paired excess
+is positive on all three seeds, $+0.2$ to $+2.0\times10^{-4}$, though at $n=3$ that is a
+consistent sign, not a confidence interval — invisible at the coarse floor, where all
+three arms had read as one number): PAT absorbs the structural omission completely and the
 parametric family almost completely at this cell. We flag explicitly that this does **not**
 extrapolate to C-2, where the dropped gain channel was measured to carry ~8% of the gradient
 direction (§4, the adjoint cosine dropping from 0.994 to 0.925 with cell size); the C-2 mismatch

@@ -29,7 +29,7 @@ Simultaneous-perturbation stochastic approximation [CITE-Spall] perturbs the ent
 partition by $\pm c\Delta$ (a random sign vector), measures the scalar loss twice, and forms a
 descent direction from the difference: **2 device passes per update**, no model, no twin, no
 added hardware beyond the plant's own actuators and its single readout (the simplest row of the
-hardware ledger, F8). Perturbations at the clamp boundary are one-sided. SPSA is
+hardware ledger, supplementary S2). Perturbations at the clamp boundary are one-sided. SPSA is
 chip-demonstrated [CITE-SPSA-photonic] and inherits the crosstalk-robustness observed in our
 prior thermo-optic work [CITE-pnn-multilayer]; its known weakness — gradient variance growing
 with parameter count — is precisely what the sample-efficiency metric prices.

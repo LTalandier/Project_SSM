@@ -16,8 +16,8 @@ eight seeds each, at the headline cell under the convergence-controlled protocol
 
 **The damping value matters enormously.** With $\kappa_\text{ext}$ *pinned* (only detunings and
 inter-ring couplings training), the converged error spans a factor of ~300 across the feasible
-box: near-chance performance at light damping ($r = 0.2$: SER 0.39) falling to $1.3\times10^{-3}$
-at the optimum — which sits at **deep overcoupling** ($r^* = 2.0$, $\kappa_\text{net} \approx
+box: SER 0.39 at light damping ($r = 0.2$ — not chance, which is 0.75 on 4-PAM, but two of
+every five symbols wrong) falling to $1.3\times10^{-3}$ at the optimum — which sits at **deep overcoupling** ($r^* = 2.0$, $\kappa_\text{net} \approx
 4.1\kappa_i$, about 5.5 samples of memory at 2 GS/s). The direction is instructive: the
 equalization task needs only a 7-tap span, and the long memory the light-damping regime supplies
 (30–45 samples) is actively harmful — stale symbols interfere. "More memory" is not free

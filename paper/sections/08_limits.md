@@ -64,9 +64,12 @@ nulls (the offline tie; RHEL's failure) — should be read with that reduced ind
 The pre-registration discipline (thresholds frozen and committed before runs) is the structural
 mitigation — with the caveat stated plainly: from the single-session date onward the registrar
 and the registrant are the same agent, so the commit trail is self-graded until it is
-externally anchored. The repository, including the full ledger and its commit history, is
-published (externally timestamped) before submission precisely so that the freeze-before-run
-ordering can be verified by anyone rather than trusted.
+externally anchored. That anchor is a precondition, not an afterthought: the repository,
+including the full ledger and its commit history, must be published — externally timestamped —
+*before this manuscript circulates*, because a timestamp that follows disclosure certifies
+nothing. At this draft's date that publication is the single open action, held by the PI;
+submission is gated on it, and the freeze-before-run ordering is then verifiable by anyone
+rather than trusted.
 
 ## 8.5 Scope limits we chose
 

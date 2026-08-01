@@ -42,6 +42,10 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | Ceiling addendum (SER_target, Δ_M3) | `4fca58d` | bake-off `15405fd`, C-1 diagnostics `ac0f1d2` |
 | S0.6 damping spec (arms, grid, C7 rule) | `5a7f28b` | results `7808596` |
 | S0.7 training-envelope accounting rules | `bd37703` | results `dc2d561`/`fae0512` |
+| PR-16 drift advantage rule (pre-drift-run) | ledger 2026-07-22/24 | S0.9 drift runs |
+| PR-17 eval-F + T-A-L spec | `241204a` | S0.10 runs `017547b` |
+| PR-17 §17.7 erratum (registered pre-rerun) | `ccc4385` | corrected rerun `017547b` |
+| PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run (this revision's results commit) |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## S5 — Reproducibility statement (draft)
@@ -68,8 +72,10 @@ Stage-0 compute: <€10 (disclosed per-phase in `shared/results_log.md`).
 | S5 ✅ | RHEL non-dissipative-limit recovery (R1 cosine −0.75→+1.0000 vs κ_net·T·dt) | `results/s0_4c/smoke.json` |
 
 Main-figure addendum: **F8** (S0.9 mismatch+drift, 3 panels) added 2026-07-27 alongside F1–F7;
-generator `analysis/make_sfigures.py`. Note: figure "F8" is distinct from finding-ID F8 (the
-hardware-realism ledger); prose always writes figures as "Fig. Fn".
+generator `analysis/make_sfigures.py`. Namespace ruling (round-3 review): in the paper "F8"
+names *only* the figure; the hardware-realism ledger is always cited as supplementary S2
+(its internal finding-ID "F8" stays a docs-tree label), and internal ledger sub-labels such
+as PR-5 "§F7.3" are cited as their parent PR block only.
 
 ## S7 — eval-F erratum audit (PR-17 §17.7)
 
@@ -108,3 +114,8 @@ both passes.
   integrated-class ~0.5–1 W consequence).
 - ✅ [CITE-*] → numbered bibliography + assembled manuscript: `analysis/build_manuscript.py` →
   `paper/p1_manuscript.md`. Venue-specific formatting (LaTeX, journal template) remains.
+- ✅ Round-3 review (2026-08-01): ceiling declared protocol-local + matched-budget reference
+  run (PR-17 §17.8b, drawn in Fig. F8); resolution-vs-re-draw decomposition closed by
+  bit-identity (§17.8a); degenerate adjoint−PAT interval explained as grid-bound; title
+  count dropped; abstract recompressed (~250 w, 3 paragraphs, Wu footnoted, ratio-CI +
+  integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).

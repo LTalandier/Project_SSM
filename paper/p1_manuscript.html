@@ -22,9 +22,12 @@ img, blockquote { page-break-inside: avoid; }
 MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head><body><h1>Can a photonic state-space model be trained on-chip? A pre-registered four-method bake-off on a realistic silicon-nitride ring substrate</h1>
+</head><body><h1>Can a photonic state-space model be trained on-chip? A pre-registered in-situ-training bake-off on a realistic silicon-nitride ring substrate</h1>
 <p><em>Lucas Talandier — independent researcher, Paris</em></p>
-<p><strong>Abstract.</strong> No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that <em>is</em> the memory — trained on the device by gradient-based or gradient-estimating methods. (The nearest neighbor, an in-situ-trained optical recurrent network, trains interferometer weights around an optoelectronic relay; its resonators stay fixed.) We ask whether such training is feasible for a photonic state-space model: an oscillatory (LinOSS-class) coupled-microring recurrence on ultra-low-loss silicon nitride. We derive the SSM↔ring mapping and its realizable pole region, build one shared dissipative substrate model (finite Q, saturating gain, amplifier noise), and run a four-method training bake-off — SPSA, physics-aware training (PAT), recurrent adjoint, Hamiltonian-echo learning — with every threshold pre-registered before the run that consumes it. <strong>The demonstration is in-data: both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.</strong> PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains all-in for ~2.6 mJ where PAT&rsquo;s digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound: the substrate&rsquo;s own dissipation defeats the echo. A measured controllability profile (a single drive trains ≈3 of 32 rings; four taps recover all 32) and a ×300 damping spread make the input map and the damping point first-class design axes. Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift; its advantage appears exactly where nothing offline can follow: under uncorrelated per-ring drift it holds a declared, pre-registered 2.42× advantage that grows with accumulated drift. An end-to-end envelope finds a conditional low-latency inference niche, gated on the low-power heater class <em>and</em> integrated-class laser, locking, control, and packaging. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. We release the pre-registration ledger, substrate model, and all training code.</p>
+<p><strong>Abstract.</strong> No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that <em>is</em> the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: <strong>on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.</strong> Every threshold was frozen before the run that consumed it.</p>
+<p>We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains all-in for ~2.6 mJ where PAT&rsquo;s digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate&rsquo;s own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis.</p>
+<p>Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio&rsquo;s own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche, gated on the low-power heater class <em>and</em> on integrated-class laser, locking, control, and packaging. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.</p>
+<p>¹ <em>The nearest neighbor, an in-situ-trained optical recurrent network, trains interferometer weights around an optoelectronic relay; its resonators stay fixed.</em></p>
 <h2>1. Introduction</h2>
 <h3>1.1 The gap</h3>
 <p>Photonic neural networks have learned to train themselves. In feedforward meshes and diffractive
@@ -120,9 +123,10 @@ shipped as supplementary material (§3.7). Concretely:</p>
    calibration errors all the way to 30%-class (statistically indistinguishable at the
    registered fine evaluation floor) and under common-mode drift, which a laser re-lock
    absorbs — while under uncorrelated per-ring drift, which nothing offline can absorb,
-   in-situ retraining holds a <strong>declared, pre-registered 2.42× advantage</strong> (CI excluding
-   zero, clearing the frozen 2× bar; the coarse-floor estimate 1.84× is co-reported), a gap
-   that grows with accumulated drift (§5.5, §7).</li>
+   in-situ retraining holds a <strong>declared, pre-registered 2.42× advantage</strong> (both conditions
+   of the frozen rule hold — point ratio ≥ 2× <em>and</em> difference-CI excluding zero; the
+   coarse-floor estimate 1.84× is co-reported), a gap that grows with accumulated drift
+   (§5.5, §7).</li>
 <li><strong>Limits, stated as limits</strong> (§8): robustness is measured against modelled imperfections
    only; the anchor risks, verification debts, and the single-session review period are
    disclosed with the same specificity as the results.</li>
@@ -462,7 +466,7 @@ would hide exactly the distinction the comparison exists to draw.</p>
 partition by $\pm c\Delta$ (a random sign vector), measures the scalar loss twice, and forms a
 descent direction from the difference: <strong>2 device passes per update</strong>, no model, no twin, no
 added hardware beyond the plant&rsquo;s own actuators and its single readout (the simplest row of the
-hardware ledger, F8). Perturbations at the clamp boundary are one-sided. SPSA is
+hardware ledger, supplementary S2). Perturbations at the clamp boundary are one-sided. SPSA is
 chip-demonstrated [2] and inherits the crosstalk-robustness observed in our
 prior thermo-optic work [28]; its known weakness — gradient variance growing
 with parameter count — is precisely what the sample-efficiency metric prices.</p>
@@ -562,7 +566,19 @@ streams extended to 99,840 scored symbols, per-seed resolution $1.0\times10^{-5}
 frozen coarse protocol remaining the protocol of record for every gate, target, and ranking
 verdict, and both reported wherever they differ. At eval-F the BPTT reference itself settles at
 $9.8\times10^{-4}$ (the coarse $5.2\times10^{-4}$ was a lucky-two-errors reading — an
-illustration of exactly the floor hazard). One implementation erratum in the eval-F tooling
+illustration of exactly the floor hazard). One scope note, so no reader has to discover it:
+this reference is <em>protocol-local</em>. It is measured under the bake-off contract — 12,000
+updates at the registered cadence — and it bounds the §5.3 ranking, which runs under that
+same contract. The follow-up experiments of §5.5 run their own frozen specification (PR-5 §E)
+with a $2.6\times$ larger update budget (31,600), and at eval-F their converged arms settle
+slightly <em>below</em> the 12,000-update number ($8.4$–$9.0\times10^{-4}$ vs $9.8\times10^{-4}$; the
+paired inversion is within seed noise, CI $[-0.1, +3.1]\times10^{-4}$ including zero). A
+reference matched to the follow-up budget — BPTT at 31,600 updates, registered as a
+review-added diagnostic with its expected direction stated in advance (PR-17 §17.8) — lands
+at $8.1\times10^{-4}$ (8 seeds, per-seed $7.3$–$8.9\times10^{-4}$): at or below every
+follow-up arm, restoring the expected ordering. It, not the bake-off number, is the
+reference line drawn in Fig. F8. An arm sitting below the 12,000-update number is a budget
+effect, not a physical estimator beating exact gradients. One implementation erratum in the eval-F tooling
 (an evaluation-normalization inconsistency, caught the same day by its chance-level signature,
 registered, fixed under a machine-precision gate test, and re-run) is documented in the ledger
 (PR-17 §17.7). <strong>The frozen substrate has ample capacity
@@ -570,7 +586,8 @@ for the task; the open question is purely which physical training routes reach i
 cost.</strong> The pre-registered target follows mechanically: a method <em>reaches target</em> if its
 held-out SER falls to $\text{SER}_\text{target} = 1.25\times\text{ceiling} + 0.005 = 5.65\times
 10^{-3}$ at any evaluation point within the device-pass budget (the additive guard dominates at a
-floor-level ceiling, by design — PR-3 §B). The budget $B = 252{,}800$ device passes is twice the
+floor-level ceiling, by design — PR-3 §B; had the rule consumed the eval-F ceiling instead,
+the target would be $6.23\times10^{-3}$ and no reach-target verdict in this paper changes). The budget $B = 252{,}800$ device passes is twice the
 BPTT convergence point measured in a seed-7 sizing pilot excluded from the eight scored seeds.</p>
 <p>A note this cell settles for free: the ceiling is <em>identical</em> under fixed-gain and saturating-gain
 substrate models ($\Delta_{M3}=0$). The gain-model class — the largest modelling uncertainty in
@@ -579,8 +596,10 @@ The pre-registered M3 sensitivity trigger is therefore un-triggerable at this ce
 <h3>5.2 Gate ii: the recurrence trains on the device</h3>
 <p>Two decompositions of the Stage-0 gate were pre-registered (PR-9). <strong>Capacity (ii-a):</strong> the
 ceiling must clear a task-utility floor set at half the readout-only error — the reservoir
-baseline that freezes the recurrence and trains only the digital head. It clears it by
-$21.5\times$ ($5.2\times10^{-4}$ vs the reservoir&rsquo;s $2.2\times10^{-2}$). <strong>Trainability (ii-b):</strong>
+baseline that freezes the recurrence and trains only the digital head. The baseline stalls at
+$2.2\times10^{-2}$, putting the floor at $1.1\times10^{-2}$; the ceiling clears it by
+$21\times$ at the coarse protocol of record ($5.2\times10^{-4}$) and by $11\times$ at eval-F
+($9.8\times10^{-4}$). <strong>Trainability (ii-b):</strong>
 at least one of the two hardware-committed routes — physics-aware training (PAT) or SPSA — must
 reach target on at least five of eight seeds.</p>
 <p><strong>Both reach target on all eight.</strong> This is the load-bearing result of the program: the
@@ -648,9 +667,16 @@ see §5.4.</em></p>
 <p>All three ordered pairs among the passing routes separate with paired-by-seed bootstrap 95%
 confidence intervals excluding zero (PAT−SPSA $=-137{,}600$ passes, CI $[-155{,}200,-123{,}200]$;
 adjoint−PAT $=+35{,}200$, CI $[+35{,}200,+36{,}800]$; adjoint−SPSA $=-102{,}400$, CI
-$[-120{,}000,-88{,}000]$). The three routes trade the same axes the theory predicts they should.
+$[-120{,}000,-88{,}000]$). The adjoint−PAT interval is degenerate — its point estimate sits on
+its own lower bound, one 1,600-pass step wide — and we say why rather than let it read as
+precision: passes-to-target lives on a 1,600-pass evaluation grid (PR-3&rsquo;s no-interpolation
+rule), the eight paired differences all fall within two grid steps ($+33{,}600$ to $+36{,}800$,
+positive on 8/8 seeds), and a bootstrap over values that concentrated collapses onto the grid.
+It should be read as a sign-consistent separation bounded by the grid resolution, not as a
+distributional interval. The three routes trade the same axes the theory predicts they should.
 <strong>PAT</strong> is cheapest on the physical device but spends a $13\times$-larger digital ledger and
-carries the full burden of characterizing a differentiable twin (§4, F8). <strong>The adjoint</strong> matches
+carries the full burden of characterizing a differentiable twin (§4; hardware ledger,
+supplementary S2). <strong>The adjoint</strong> matches
 the exact-gradient ceiling in accuracy at zero digital cost and $1.9\times$ PAT&rsquo;s device passes —
 though its count charges one physical reverse pass <em>as if</em> realizable, which no recurrent photonic
 system has yet demonstrated (a caveat we quarantine, §4). <strong>SPSA</strong> costs $4.6\times$ PAT&rsquo;s device
@@ -694,7 +720,7 @@ offline-train-then-deploy route — train the full parameter set digitally on a 
 then deploy through actuation maps, recalibrating only the digital head on-device — was given the
 <em>same</em> 5%-class calibration errors as PAT&rsquo;s twin (the mismatch families are drawn from one frozen
 set, so the comparison cannot be rigged by giving in-situ training a secretly-wronger competitor;
-PR-5 F7.3). At that mismatch level it reaches $1.0\times10^{-3}$ — statistically
+PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ — statistically
 indistinguishable from in-situ PAT&rsquo;s $8\times10^{-4}$.</p>
 <p>We state the consequence plainly, because the fair-comparison design exists precisely to force it:
 <strong>at 5% calibration accuracy on this task, training in situ buys essentially nothing over
@@ -737,19 +763,27 @@ guarantee: the <em>ratio&rsquo;s</em> own bootstrap CI is $[1.7, 4.6]$, includin
 resamples) — the declared advantage is a threshold-crossing under a rule frozen in advance,
 not a 95%-confidence claim that the true ratio exceeds 2.</p>
 <p>A verdict that flips from failed (coarse, $1.84\times$) to passed (fine, $2.42\times$) under
-a protocol change is the classic post-hoc pattern, so we set out the ordering with dates and
-commits rather than asserting it. The decision rule froze before any drift datum (PR-16,
-2026-07-22/24). The coarse estimate — below the bar — was on record when the fine protocol
-was registered (PR-17, commit <code>241204a</code>, 2026-07-27, <em>before any eval-F measurement</em>; the
-same commit froze the rule that coarse and fine verdicts are both reported wherever they
-differ). The fine drift numbers are fresh replications of the frozen S0.9b unit specifications
-at the same seeds — an independent re-draw agreeing in direction — not a re-scoring of stored
-outputs. And the change is not directionally selective, which is the strongest single fact:
-<strong>the same 26×-finer floor <em>erased</em> a statistically significant in-situ edge in the
-calibration sweep (Fig. F8a, every CI now including zero) and <em>established</em> one here — it
-moved every near-ceiling comparison toward higher resolution, and the drift comparison is
-simply the one that crossed.</strong> The gap <em>grows with accumulated drift</em> (~3–4× at the largest
-drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
+a protocol change is the classic post-hoc pattern, so we dismantle it factor by factor.
+First, the movement is <em>not</em> confounded with a fresh noise draw. The eval-F drift numbers
+come from re-executing the frozen S0.9b unit specifications, and the re-executed trajectories
+are <strong>bit-identical</strong> to the originals: the dynamics are deterministic given the registered
+seed, evaluation draws only from reserved streams that never touch the training randomness
+(the coarse evaluation set is the first 2 of the fine protocol&rsquo;s 52 batches), and the
+evaluation-independent device-state fingerprint matches the stored originals exactly on all
+64 drift units — as does the coarse final SER on all 80 calibration-sweep units (ledger
+§17.8). The coarse→fine change therefore carries exactly one factor, the evaluation floor:
+the <em>same physical trajectories</em> score $1.84\times$ at 3,840 symbols and $2.42\times$ at
+99,840. Second, the ordering, with dates and commits rather than assertion: the decision rule
+froze before any drift datum existed (PR-16, 2026-07-22/24), and the coarse estimate — below
+the bar — was on record when the fine protocol was registered (PR-17, commit <code>241204a</code>,
+2026-07-27, <em>before any eval-F measurement</em>; the same commit froze the rule that coarse and
+fine verdicts are both reported wherever they differ). Third, the change is not directionally
+selective: <strong>the same 26×-finer floor <em>erased</em> a statistically significant edge in
+<em>in-situ&rsquo;s</em> favor in the calibration sweep (Fig. F8a, every CI now including zero) and
+<em>established</em> one here — and by the same bit-identity check, that dissolution too is pure
+resolution.</strong> It moved every near-ceiling comparison toward higher resolution; the drift
+comparison is simply the one that crossed. The gap <em>grows with accumulated drift</em> (~3–4× at
+the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
 (and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
 whose couplings move during the step) inflate its early trajectory, and no registered verdict
@@ -765,9 +799,12 @@ becomes the sharpest Stage-1 measurement (§9).</p>
 <p>Two mechanism rows, at three seeds each on C-1, support the mismatch narrative without inflating
 it (Fig. S2; eval-F). Decomposing PAT&rsquo;s twin mismatch — perfect twin, parametric-error twin,
 structural-omission twin (dropping the gain self-consistency channel) — the perfect and
-M-struct twins land identically ($1.11\times10^{-3}$), and the fine floor resolves a small
-M-par excess ($1.31\times10^{-3}$, +18% relative — invisible at the coarse floor, where all
-three had read as one number): PAT absorbs the structural omission completely and the
+M-struct twins are indistinguishable: identical medians ($1.11\times10^{-3}$), per-seed
+values agreeing to within $2\times10^{-5}$ (two symbols even at eval-F). The fine floor
+resolves a small M-par excess ($1.31\times10^{-3}$ median, +18% relative; the paired excess
+is positive on all three seeds, $+0.2$ to $+2.0\times10^{-4}$, though at $n=3$ that is a
+consistent sign, not a confidence interval — invisible at the coarse floor, where all
+three arms had read as one number): PAT absorbs the structural omission completely and the
 parametric family almost completely at this cell. We flag explicitly that this does <strong>not</strong>
 extrapolate to C-2, where the dropped gain channel was measured to carry ~8% of the gradient
 direction (§4, the adjoint cosine dropping from 0.994 to 0.925 with cell size); the C-2 mismatch
@@ -821,8 +858,8 @@ feasible box?&rdquo; — and the experiment separates the two readings with two 
 eight seeds each, at the headline cell under the convergence-controlled protocol of §5.1.</p>
 <p><strong>The damping value matters enormously.</strong> With $\kappa_\text{ext}$ <em>pinned</em> (only detunings and
 inter-ring couplings training), the converged error spans a factor of ~300 across the feasible
-box: near-chance performance at light damping ($r = 0.2$: SER 0.39) falling to $1.3\times10^{-3}$
-at the optimum — which sits at <strong>deep overcoupling</strong> ($r^* = 2.0$, $\kappa_\text{net} \approx
+box: SER 0.39 at light damping ($r = 0.2$ — not chance, which is 0.75 on 4-PAM, but two of
+every five symbols wrong) falling to $1.3\times10^{-3}$ at the optimum — which sits at <strong>deep overcoupling</strong> ($r^* = 2.0$, $\kappa_\text{net} \approx
 4.1\kappa_i$, about 5.5 samples of memory at 2 GS/s). The direction is instructive: the
 equalization task needs only a 7-tap span, and the long memory the light-damping regime supplies
 (30–45 samples) is actively harmful — stale symbols interfere. &ldquo;More memory&rdquo; is not free
@@ -1008,9 +1045,12 @@ nulls (the offline tie; RHEL&rsquo;s failure) — should be read with that reduc
 The pre-registration discipline (thresholds frozen and committed before runs) is the structural
 mitigation — with the caveat stated plainly: from the single-session date onward the registrar
 and the registrant are the same agent, so the commit trail is self-graded until it is
-externally anchored. The repository, including the full ledger and its commit history, is
-published (externally timestamped) before submission precisely so that the freeze-before-run
-ordering can be verified by anyone rather than trusted.</p>
+externally anchored. That anchor is a precondition, not an afterthought: the repository,
+including the full ledger and its commit history, must be published — externally timestamped —
+<em>before this manuscript circulates</em>, because a timestamp that follows disclosure certifies
+nothing. At this draft&rsquo;s date that publication is the single open action, held by the PI;
+submission is gated on it, and the freeze-before-run ordering is then verifiable by anyone
+rather than trusted.</p>
 <h3>8.5 Scope limits we chose</h3>
 <p>The task family is deliberately narrow (continuous-signal channel equalization plus a
 synthetic memory family; the registered secondary task is deferred), and the C-3 128-ring cell
@@ -1030,7 +1070,7 @@ that plainly to be the paper&rsquo;s job.</p>
 <h3>9.1 What the first chip must be</h3>
 <p>The bake-off fixes the Stage-1 chip&rsquo;s training stack by evidence rather than taste: <strong>PAT and
 SPSA, nothing else in the loop.</strong> Neither exotic route earned promotion (§5.3), and the hardware
-ledger (supplementary F8) shows why that is unlikely to reverse on hardware grounds alone: the
+ledger (supplementary S2) shows why that is unlikely to reverse on hardware grounds alone: the
 adjoint adds circulators, phase-coherent reverse injection, and an unsolved separation of the
 counter-propagating field from the backscatter doublet; RHEL adds a pumped conjugator bank whose
 power budget (≈9.6 W at 32 rings) exceeds the entire rest of the system. SPSA&rsquo;s row is the
@@ -1139,10 +1179,13 @@ in-situ retraining holds near-ceiling while the re-locking offline baseline degr
 accumulated drift — <strong>time-integrated ratio 2.42×, difference-CI [+0.71, +2.84] × 10⁻³
 excluding zero: both conditions of the frozen decision rule (PR-16: median ratio ≥ 2 AND
 difference-CI excludes 0) hold</strong> (the coarse-floor estimate, 1.84×, sat below the bar and is
-co-reported per the frozen both-protocols rule; the ratio&rsquo;s own CI [1.7, 4.6] is reported in
+co-reported per the frozen both-protocols rule; coarse and fine score the <em>same bit-identical
+trajectories</em> at two floors — ledger §17.8; the ratio&rsquo;s own CI [1.7, 4.6] is reported in
 §5.5). The in-situ SPSA curve
 is context only (per-step re-convergence transient; no registered verdict involves it).
-Dashed/dotted lines: target and the eval-F BPTT ceiling.</p>
+Dashed/dotted lines: the pre-registered target and the matched-budget BPTT reference
+(31,600 updates, the arms&rsquo; own training budget — PR-17 §17.8; the bake-off&rsquo;s 12,000-update
+ceiling is protocol-local to §5.3 and is not drawn).</p>
 <p><img alt="S1" src="figures/S1_g3_anchor_dossier.png" /></p>
 <p><strong>Figure S1 — The benchmark anchor we do not use (G3 dossier, §8.3).</strong> (a) Validation-accuracy
 trajectories of the <em>official</em> LinOSS-IM code on the published EigenWorms seeds (our rerun,

@@ -56,7 +56,11 @@ def f8():
     # S0.10 (PR-17): eval-F protocol of record for this comparison
     a = jload("results/s0_10/analysis.json")
     target = a["ser_target"]
-    ceiling = a["ceiling_fine"]["bptt"]["median_fine"]   # eval-F reference
+    # PR-17 §17.8b: the reference line is the matched-budget BPTT (31,600
+    # updates — the arms' own budget); the 12,000-update bake-off ceiling is
+    # protocol-local to §5.3 and would sit above arms it does not bound.
+    ref = a["ceiling_matched"]["bptt31600"]["median_fine"]
+    ref_lbl = "BPTT ref (matched budget)"
     fig, axes = plt.subplots(1, 3, figsize=(9.6, 2.9))
 
     # (a) mismatch sweep
@@ -74,9 +78,9 @@ def f8():
             ax.plot([x + (0.35 if key == "offline" else -0.35)] * len(seeds),
                     seeds, ".", color=col, alpha=0.35, ms=4, zorder=2)
     ax.axhline(target, color="0.3", lw=0.8, ls="--")
-    ax.axhline(ceiling, color="0.3", lw=0.8, ls=":")
+    ax.axhline(ref, color="0.3", lw=0.8, ls=":")
     ax.text(30.5, target, "target", va="center", fontsize=7, color="0.3")
-    ax.text(30.5, ceiling, "ceiling (eval-F)", va="center", fontsize=7,
+    ax.text(30.5, ref, ref_lbl, va="center", fontsize=7,
             color="0.3")
     ax.set_yscale("log")
     ax.set_ylim(4e-4, 1.2e-2)
@@ -97,7 +101,7 @@ def f8():
             ax.plot(ks, traj, "o-", color=COL[arm], label=LBL[arm],
                     ms=3, lw=1.1)
         ax.axhline(target, color="0.3", lw=0.8, ls="--")
-        ax.axhline(ceiling, color="0.3", lw=0.8, ls=":")
+        ax.axhline(ref, color="0.3", lw=0.8, ls=":")
         ax.set_yscale("log")
         ax.set_ylim(3e-4, 3e-2)
         ax.set_xlabel("drift step $k$ ($\\sigma_{step}=0.40\\,\\kappa_i$)")

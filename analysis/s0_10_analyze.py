@@ -159,6 +159,10 @@ def main():
            "s0_10b_drift_fine": analyze_b(g),
            "diag_c1_fine": analyze_simple("diagc1"),
            "ceiling_fine": analyze_simple("ceiling"),
+           # PR-17 §17.8b: BPTT at the S0.9a follow-up budget (31,600 updates)
+           # — the reference the §5.5 arms are commensurable with (empty dict
+           # until the ceiling_matched units run)
+           "ceiling_matched": analyze_simple("ceiling_matched"),
            "talong": analyze_talong()}
     with open(f"{R}/analysis.json", "w") as fh:
         json.dump(out, fh, indent=1)

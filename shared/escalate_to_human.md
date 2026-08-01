@@ -52,6 +52,13 @@ timestamp), or (b) an OSF registration snapshot. Recommendation: (a), plus pushi
 beforehand (I commit but never push, per standing rule). Until one of these happens the
 §8.4 sentence is a forward commitment. **Status: OPEN — Lucas.**
 
+**Re-ping 2026-08-01 (round-3 review sharpened this):** the timestamp only certifies the
+freeze-before-run ordering if it **precedes any circulation of the manuscript** — a
+timestamp that follows disclosure certifies nothing. It is now doubly load-bearing: §5.5's
+entire flip-pattern defense cites commit dates (`241204a`, `ccc4385`, `a8d7ab9`) that a
+referee must be able to verify, and §8.4 states publication as a precondition. **Please push
+`main` + flip the repo public before this PDF goes to anyone beyond this review loop.**
+
 ---
 
 ### ✅ E-2026-07-12-1 — **RESOLVED 2026-07-26 by delegation (Lucas: "you can chose the title and W0/W1")** — Supervisor rulings recorded: (1) title = candidate 1 · (2) W0-in-prose + W1-core-sentence

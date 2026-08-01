@@ -74,10 +74,13 @@ in-situ retraining holds near-ceiling while the re-locking offline baseline degr
 accumulated drift — **time-integrated ratio 2.42×, difference-CI [+0.71, +2.84] × 10⁻³
 excluding zero: both conditions of the frozen decision rule (PR-16: median ratio ≥ 2 AND
 difference-CI excludes 0) hold** (the coarse-floor estimate, 1.84×, sat below the bar and is
-co-reported per the frozen both-protocols rule; the ratio's own CI [1.7, 4.6] is reported in
+co-reported per the frozen both-protocols rule; coarse and fine score the *same bit-identical
+trajectories* at two floors — ledger §17.8; the ratio's own CI [1.7, 4.6] is reported in
 §5.5). The in-situ SPSA curve
 is context only (per-step re-convergence transient; no registered verdict involves it).
-Dashed/dotted lines: target and the eval-F BPTT ceiling.
+Dashed/dotted lines: the pre-registered target and the matched-budget BPTT reference
+(31,600 updates, the arms' own training budget — PR-17 §17.8; the bake-off's 12,000-update
+ceiling is protocol-local to §5.3 and is not drawn).
 
 ---
 
