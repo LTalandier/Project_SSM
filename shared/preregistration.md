@@ -1730,3 +1730,28 @@ now exposes `y_scale`; gate test: eval at the trained scale reproduces the trace
 <1e-12): a-fine pat-both (40), diag-fine (12), ceiling-fine (8), talong (48) = 108 units.
 No frozen spec, seed, budget, or verdict rule changes — only the evaluation-scale convention
 is corrected to the one every training-time eval already used.
+
+### 17.8 Round-3 review addenda (2026-08-01, registered before the run below)
+
+**(a) Resolution-vs-re-draw decomposition — analysis-only disclosure (stored data, no new
+runs).** External review asked whether the coarse→fine movement of the drift verdict
+(1.84×→2.42×) confounds the finer evaluation floor with a fresh noise draw. Checked against
+stored outputs: the S0.10 reruns are **bit-identical reproductions** of the S0.9 trajectories,
+not re-draws — the device-state fingerprint (`delta_rms_ki`, eval-independent) matches the
+S0.9b files exactly on **64/64 drift units**, and the fresh coarse `final_ser` matches the
+S0.9a values exactly on **80/80 mismatch units** (dynamics are deterministic given the
+registered seed; eval draws from reserved streams that do not touch the training RNG; the
+coarse symbol set is the j∈{0,1} subset of the fine j∈{0..51} set). The coarse→fine movement
+therefore carries exactly one factor: the evaluation floor. This holds symmetrically for the
+F8a dissolution (in-situ-favoring edge erased) and the F8c resolution (advantage declared).
+
+**(b) Matched-budget reference (kind `ceiling_matched`) — spec.** The §5.1 BPTT reference is
+protocol-local: it runs the bake-off budget (12,000 updates) while the §5.5 follow-up arms run
+the PR-5 §E sweep budget (31,600 updates); at eval-F the arms' point medians sit below the
+12k reference (paired (ref−arm) median +1.65×10⁻⁴, 95% CI [−0.10, +3.10]×10⁻⁴ — includes 0).
+To give the follow-ups a same-protocol reference: **BPTT, C-2, n_updates=31,600, eval_every
+=100, seeds {11,23,47,61,83,101,127,151}, coarse + eval-F both reported.** Consumed by no
+gate or verdict; purpose = §5.1 scope disclosure + the F8 reference line. Review-added
+diagnostic, disclosed as such. Falsifiable expectation: the matched reference lands at or
+below the 12k reference, in or below the arms' 8.4–9.0×10⁻⁴ band; if it lands *above* the
+arms, the budget explanation is wrong and §5.1 must say so.

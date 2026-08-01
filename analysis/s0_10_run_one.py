@@ -39,6 +39,13 @@ def main():
         led, sub, head = train("bptt", "C-2", run_seed=seed, n_updates=12000,
                                eval_every=100, return_state=True)
         tag = f"bptt_{seed}"
+    elif kind == "ceiling_matched":
+        # PR-17 §17.8: BPTT reference at the S0.9a follow-up budget (31,600
+        # updates, PR-5 §E), so the §5.5 arms have a same-protocol reference.
+        seed = int(sys.argv[2])
+        led, sub, head = train("bptt", "C-2", run_seed=seed, n_updates=31600,
+                               eval_every=100, return_state=True)
+        tag = f"bptt31600_{seed}"
     elif kind == "talong":
         rval, seed = float(sys.argv[2]), int(sys.argv[3])
         harness.TASK_TAPS = TA_LONG_TAPS          # PR-17 §17.4 task override
