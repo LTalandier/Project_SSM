@@ -64,14 +64,12 @@ nulls (the offline tie; RHEL's failure) — should be read with that reduced ind
 The pre-registration discipline (thresholds frozen and committed before runs) is the structural
 mitigation — with the caveat stated plainly: from the single-session date onward the registrar
 and the registrant are the same agent, so the commit trail is self-graded until it is
-externally anchored. That anchor is a precondition, not an afterthought: the repository,
-including the full ledger and its commit history, must be published — externally timestamped —
-*before this manuscript circulates*, because a timestamp that follows disclosure certifies
-nothing. At this draft's date that publication is the single open action, held by the PI;
-submission is gated on it, and the freeze-before-run ordering is then verifiable by anyone
-rather than trusted.
-<!-- AT SUBMISSION (do not ship present tense): replace the sentence above with past tense +
-the actual publication date and repository URL once the repo is public (E-2026-07-27-2). -->
+externally anchored. That anchor was treated as a precondition, not an afterthought — a
+timestamp that follows disclosure certifies nothing — and it is in place: the repository,
+including the full ledger and its complete commit history, was published (externally
+timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
+circulated beyond the review recorded here. The freeze-before-run ordering claimed
+throughout this paper is therefore verifiable by anyone rather than trusted.
 
 ## 8.5 Scope limits we chose
 

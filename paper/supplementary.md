@@ -25,7 +25,7 @@ cannot win promotion-rule (b) (strictly-simpler hardware) by construction.
 qualifiers load-bearing; five named near-misses dispatched in §1.1; four page-level reads
 registered for the final pre-submission sweep).
 
-## N4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`)
+## N4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`; **public at `github.com/LTalandier/Project_SSM` since 2026-08-02** — every commit hash below is externally verifiable)
 
 Rule being evidenced: **every threshold/spec commit predates the run that consumes it.**
 
@@ -45,7 +45,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-16 drift advantage rule (pre-drift-run) | ledger 2026-07-22/24 | S0.9 drift runs |
 | PR-17 eval-F + T-A-L spec | `241204a` | S0.10 runs `017547b` |
 | PR-17 §17.7 erratum (registered pre-rerun) | `ccc4385` | corrected rerun `017547b` |
-| PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run (this revision's results commit) |
+| PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run `967429d` |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## N5 — Reproducibility statement (draft)
@@ -122,6 +122,5 @@ both passes.
   bit-identity (§17.8a); degenerate adjoint−PAT interval explained as grid-bound; title
   count dropped; abstract recompressed (~250 w, 3 paragraphs, Wu footnoted, ratio-CI +
   integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).
-- ⏳ **§8.4 tense swap at timestamp** (round-4): once the repository is public, replace §8.4's
-  "single open action, held by the PI" sentence with past tense + the actual publication
-  date and archive URL (an in-file HTML comment marks the spot).
+- ✅ **§8.4 tense swap DONE 2026-08-02**: repo public at `github.com/LTalandier/Project_SSM`
+  (E-2026-07-27-2 resolved); §8.4 states the publication in past tense with date + URL.

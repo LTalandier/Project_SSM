@@ -1038,14 +1038,12 @@ nulls (the offline tie; RHEL's failure) — should be read with that reduced ind
 The pre-registration discipline (thresholds frozen and committed before runs) is the structural
 mitigation — with the caveat stated plainly: from the single-session date onward the registrar
 and the registrant are the same agent, so the commit trail is self-graded until it is
-externally anchored. That anchor is a precondition, not an afterthought: the repository,
-including the full ledger and its commit history, must be published — externally timestamped —
-*before this manuscript circulates*, because a timestamp that follows disclosure certifies
-nothing. At this draft's date that publication is the single open action, held by the PI;
-submission is gated on it, and the freeze-before-run ordering is then verifiable by anyone
-rather than trusted.
-<!-- AT SUBMISSION (do not ship present tense): replace the sentence above with past tense +
-the actual publication date and repository URL once the repo is public (E-2026-07-27-2). -->
+externally anchored. That anchor was treated as a precondition, not an afterthought — a
+timestamp that follows disclosure certifies nothing — and it is in place: the repository,
+including the full ledger and its complete commit history, was published (externally
+timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
+circulated beyond the review recorded here. The freeze-before-run ordering claimed
+throughout this paper is therefore verifiable by anyone rather than trusted.
 
 ### 8.5 Scope limits we chose
 
@@ -1279,7 +1277,7 @@ regime: the C-2 failure is dissipative-echo bias, not implementation error.
 29. Pourcel, Ernoult, "Learning long range dependencies through time reversal symmetry breaking," arXiv:2506.05259 (2025)
 30. López-Pastor, Marquardt, "Self-Learning Machines Based on Hamiltonian Echo Backpropagation," Phys. Rev. X 13, 031020 (2023). arXiv:2103.04992
 31. Riemensberger, Kuznetsov, Liu, He, Wang, Kippenberg, "A photonic integrated continuous-travelling-wave parametric amplifier," Nature 612, 56–61 (2022); Krückel et al., "Continuous wave-pumped wavelength conversion in low-loss silicon nitride waveguides," Opt. Lett. 40(6), 875–878 (2015)
-32. this work: PR-15 two-modality search + refresh memos (`docs/s0_L/debt1_whitespace_search.md`, `docs/s0_L/whitespace_refresh_2026-07-12.md`), supplementary
+32. this work: PR-15 two-modality search + refresh memos, supplementary N3; public repository `github.com/LTalandier/Project_SSM`
 33. Dacha, Zhao, McNulty, Bhatt, Lipson, Gaeta, "Frequency-stable nanophotonic microcavities via integrated thermometry," Nature Photonics (2025). arXiv:2506.21692
 34. Gao, Rios-Navarro, Chen, Liu, Delbruck, "EdgeDRNN: Recurrent Neural Network Accelerator for Edge Inference," IEEE JETCAS 10(4), 419–432 (2020). arXiv:2012.13600
 35. Gu, Dao, "Mamba: Linear-Time Sequence Modeling with Selective State Spaces," COLM 2024 (Outstanding Paper). arXiv:2312.00752

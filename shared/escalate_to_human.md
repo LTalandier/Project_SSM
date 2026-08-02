@@ -42,7 +42,7 @@ Escalate (don't decide autonomously):
 **Filed + resolved:** 2026-07-27 (Supervisor, by delegation). **Status: ✅ RESOLVED — FYI +
 optional override.**
 
-### E-2026-07-27-2 — **YOUR ACTION (from your own review): external timestamping of the pre-registration trail before submission**
+### E-2026-07-27-2 — ✅ **RESOLVED 2026-08-02**: repo public at github.com/LTalandier/Project_SSM (Lucas re-authenticated `gh` in-session and delegated creation+push; full history through `f5bfa5a` pushed 18:14 UTC, unauthenticated visibility verified; §8.4 swapped to past tense). Original entry kept below for the record.
 
 Your point that self-graded pre-registration (single-session, PI = registrant) only counts if
 externally anchored is now stated in §8.4, which commits to publishing the repository +
