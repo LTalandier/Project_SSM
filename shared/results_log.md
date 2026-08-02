@@ -1477,3 +1477,13 @@ Supplementary S5 disclosure corrected from "<€10" to ≈€18. Lucas's €70 i
 NOT attributable to this project's activity log — under investigation (other project /
 Robot / Storage Box / VAT); does not affect the paper's disclosed figure, which is
 project-scoped and now activity-log-exact.
+
+## Cost reconciliation, FINAL (2026-08-02, invoice 082001051122)
+The €70 is fully explained — no unknown servers: invoice bills exactly our 16 CPX51
+lifecycles, 183 h, at **€0.3814/h — the post-2026-06-15 price, ≈3.9× the rate all
+in-session estimates assumed.** Split: productive ≈84 h ≈ €32 · s06-4 leak 99 h ≈ €38 ·
+total €69.94 excl. VAT (€83.93 incl. 20%). Hours were reconstructed correctly; the price
+assumption was stale — all prior per-run € figures in this log understate by ×3.9.
+Supplementary S5 corrected to invoice-exact. Separate finding: account project "Default"
+bills a CX23 (€4.49/mo) that is NOT Project_SSM's — flagged to Lucas (console-only access).
+Going forward: verify `hcloud server-type describe` pricing before quoting any run cost.
