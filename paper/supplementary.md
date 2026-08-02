@@ -59,7 +59,9 @@ reserved noise streams (`EVAL_SEED_BASE = 900001`) never drawn during training. 
 randomness is seeded per unit; eval SER at the quantization floor (2 errors / 3840 symbols)
 is platform-stable. The test suite (150 tests at S0.5-close) pins substrate bit-identity
 gates (e.g. adjoint pass-2 forward identity, ledger counts). Total cloud spend for all
-Stage-0 compute: <€10 (disclosed per-phase in `shared/results_log.md`).
+Stage-0 compute: ≈€8 of productive runs (≈79 cpx51-hours, reconstructed from the provider
+activity log and disclosed per-phase in `shared/results_log.md`), plus one disclosed
+idle-server incident (≈99 h ≈ €10) — ≈€18 total.
 
 ## S6 — S-figures (✅ MADE 2026-07-27, `analysis/make_sfigures.py` → `paper/figures/S*.{png,pdf}`; frozen result files only)
 

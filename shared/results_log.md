@@ -1468,3 +1468,12 @@ Memo: `results/s0_10/s0_10.md`. Paper: §5.1/5.5/5.6/6/1.3/8.5 + abstract + F6/F
   "four-method"→"in-situ-training"; abstract ~250 w 3-paragraph (Wu footnoted, ratio-CI
   clause); §8.4 publication-precedes-circulation; F-namespace collision resolved.
 - Tests 160/160. Manuscript + PDF rebuilt (35 refs; text layer verified, 0 TeX leftovers).
+
+## Cost reconciliation (2026-08-02, from Hetzner activity-log export)
+July server-hours reconstructed exactly: S0.5 bake-off 10.9h · S0.6 4.5h + **s06-4 leak
+99.0h (≈€10 — worse than the ≈€5 logged)** · S0.9 14.4h · S0.10 40.8h + rerun 7.6h ·
+matched-ref (Aug) 0.9h. **Project total ≈178h ≈ €17.6** (runs ≈€8, leak ≈€10).
+Supplementary S5 disclosure corrected from "<€10" to ≈€18. Lucas's €70 invoice has ≈€52
+NOT attributable to this project's activity log — under investigation (other project /
+Robot / Storage Box / VAT); does not affect the paper's disclosed figure, which is
+project-scoped and now activity-log-exact.
