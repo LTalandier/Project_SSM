@@ -1,31 +1,31 @@
 # P1 supplementary material — assembly plan + provenance table
 
 **Status:** S0.8 assembly, 2026-07-12 (single-session mode; disclosed in §8.4).
-**Contents at submission:** (S1) the pre-registration ledger, (S2) the per-method hardware
-ledger, (S3) the white-space search dossier, (S4) the registration→run provenance table,
-(S5) reproducibility statement, (S6) S-figures.
+**Contents at submission:** (N1) the pre-registration ledger, (N2) the per-method hardware
+ledger, (N3) the white-space search dossier, (N4) the registration→run provenance table,
+(N5) reproducibility statement, (N6) S-figures, (N7) eval-F erratum audit.
 
-## S1 — Pre-registration ledger
+## N1 — Pre-registration ledger
 
 `shared/preregistration.md`, included verbatim. Every PR-block carries its status history
 (PROPOSED → AMEND → SIGNED/FROZEN) and the commit that froze it; the two S0.4-close addenda
 (sizing; ceiling) are dated *before* the runs they govern. The ledger is the paper's §3.7
 "ledger-as-method" object.
 
-## S2 — Per-method hardware ledger (F8)
+## N2 — Per-method hardware ledger
 
 `docs/s0_4/f8_hardware_ledger.md`: per-route observables, actuators, added components, and
 calibration burdens (SPSA simplest → RHEL heaviest); the structural note that adjoint/RHEL
 cannot win promotion-rule (b) (strictly-simpler hardware) by construction.
 
-## S3 — White-space search dossier
+## N3 — White-space search dossier
 
 `docs/s0_L/debt1_whitespace_search.md` (PR-15 two-modality search + kill-criterion, 2026-06-09)
 + `docs/s0_L/whitespace_refresh_2026-07-12.md` (assembly refresh: W1 clean, W0 survives with
 qualifiers load-bearing; five named near-misses dispatched in §1.1; four page-level reads
 registered for the final pre-submission sweep).
 
-## S4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`)
+## N4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`)
 
 Rule being evidenced: **every threshold/spec commit predates the run that consumes it.**
 
@@ -48,7 +48,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run (this revision's results commit) |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
-## S5 — Reproducibility statement (draft)
+## N5 — Reproducibility statement (draft)
 
 All simulations are float64 PyTorch on CPU. Runs executed on a **mixed platform set** —
 local x86-64 Linux and Hetzner cpx51 (shared x86-64) cloud instances — with identical code,
@@ -64,7 +64,7 @@ incl.)**, of which ≈84 h ≈ €32 productive runs (per-phase in `shared/resul
 ≈99 h ≈ €38 one disclosed idle-server incident. (Provider cloud prices rose ≈3.9× for
 instances created after 2026-06-15; earlier in-session estimates used the old rate.)
 
-## S6 — S-figures (✅ MADE 2026-07-27, `analysis/make_sfigures.py` → `paper/figures/S*.{png,pdf}`; frozen result files only)
+## N6 — S-figures (✅ MADE 2026-07-27, `analysis/make_sfigures.py` → `paper/figures/S*.{png,pdf}`; frozen result files only)
 
 | S-fig | content | source |
 |---|---|---|
@@ -76,11 +76,11 @@ instances created after 2026-06-15; earlier in-session estimates used the old ra
 
 Main-figure addendum: **F8** (S0.9 mismatch+drift, 3 panels) added 2026-07-27 alongside F1–F7;
 generator `analysis/make_sfigures.py`. Namespace ruling (round-3 review): in the paper "F8"
-names *only* the figure; the hardware-realism ledger is always cited as supplementary S2
+names *only* the figure; the hardware-realism ledger is always cited as supplementary note N2 (round-4: supplementary sections renamed S→N so "S2" names only Figure S2)
 (its internal finding-ID "F8" stays a docs-tree label), and internal ledger sub-labels such
 as PR-5 "§F7.3" are cited as their parent PR block only.
 
-## S7 — eval-F erratum audit (PR-17 §17.7)
+## N7 — eval-F erratum audit (PR-17 §17.7)
 
 The eval-F re-scoring shipped with one implementation erratum, disclosed in §5.1 and made
 auditable here rather than attested. **Bug:** the fine-evaluation helper re-measured the
@@ -122,3 +122,6 @@ both passes.
   bit-identity (§17.8a); degenerate adjoint−PAT interval explained as grid-bound; title
   count dropped; abstract recompressed (~250 w, 3 paragraphs, Wu footnoted, ratio-CI +
   integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).
+- ⏳ **§8.4 tense swap at timestamp** (round-4): once the repository is public, replace §8.4's
+  "single open action, held by the PI" sentence with past tense + the actual publication
+  date and archive URL (an in-file HTML comment marks the spot).

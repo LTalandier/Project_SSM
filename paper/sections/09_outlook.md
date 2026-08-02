@@ -10,7 +10,7 @@ proposal §6–§8. **Open flags:** [CITE-*] keys resolved via `paper/references
 
 The bake-off fixes the Stage-1 chip's training stack by evidence rather than taste: **PAT and
 SPSA, nothing else in the loop.** Neither exotic route earned promotion (§5.3), and the hardware
-ledger (supplementary S2) shows why that is unlikely to reverse on hardware grounds alone: the
+ledger (supplementary note N2) shows why that is unlikely to reverse on hardware grounds alone: the
 adjoint adds circulators, phase-coherent reverse injection, and an unsolved separation of the
 counter-propagating field from the backscatter doublet; RHEL adds a pumped conjugator bank whose
 power budget (≈9.6 W at 32 rings) exceeds the entire rest of the system. SPSA's row is the

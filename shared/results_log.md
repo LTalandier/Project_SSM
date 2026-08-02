@@ -1487,3 +1487,15 @@ assumption was stale — all prior per-run € figures in this log understate by
 Supplementary S5 corrected to invoice-exact. Separate finding: account project "Default"
 bills a CX23 (€4.49/mo) that is NOT Project_SSM's — flagged to Lucas (console-only access).
 Going forward: verify `hcloud server-type describe` pricing before quoting any run cost.
+
+## Round-4 review fixes (2026-08-02)
+- §5.1 reframed: BPTT = **budget-scoped reference, not capacity ceiling** ("bounds what the
+  task admits" removed; §17.8 measured BPTT still improving past the bake-off budget); B's
+  "convergence point" qualified as the pilot's budget-local coarse-trace flatness rule.
+- Matched-reference margin stated before a referee measures it: 0.3–0.9e-4 below static
+  arms, one resolution unit below drift tint 8.2e-4, per-seed spreads overlap —
+  "median-level and thin," a scope statement not a separation.
+- Supplementary sections renamed S→N (N1–N7): "S2" now names only Figure S2.
+- §5.2 baseline protocol stated (coarse; ~85 errors/3,840, floor-insensitive).
+- §5.5 subsample framing: coarse = strict subsample of fine → "underpowered, not
+  contradicted." §8.4 tense-swap marked (HTML comment + N-residue item).

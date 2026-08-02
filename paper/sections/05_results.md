@@ -23,8 +23,11 @@ central claim is a *threshold-crossing* claim, and a threshold chosen after seei
 worthless.
 
 The reference is backpropagation-through-time on the substrate itself (BPTT), which is not a
-physical training method — it reads gradients the device cannot expose — but bounds what the
-task admits at this cell. On the headline cell (C-2: 32 rings, $Q_i = 6.8\times10^6$; 4-PAM
+physical training method — it reads gradients the device cannot expose — and is the strongest
+gradient access the substrate model admits. It is a *budget-scoped reference*, not a capacity
+ceiling: what BPTT reaches within a stated update budget is what training can be held to at
+that budget — and the §17.8 diagnostic below measured BPTT still improving past the
+bake-off budget, so no asymptotic-capacity claim is made, and none is needed. On the headline cell (C-2: 32 rings, $Q_i = 6.8\times10^6$; 4-PAM
 channel equalization at 28 dB, §3), BPTT drives the symbol-error rate to a median of
 $5.2\times10^{-4}$ across eight seeds (seven of eight at $5\times10^{-4}$ — two errors in the
 3840-symbol evaluation set, the quantization floor). Because that floor is too coarse for
@@ -33,21 +36,25 @@ comparisons *between* near-ceiling arms — a two-symbol band can manufacture or
 re-scored under a pre-registered fine protocol (**eval-F**, PR-17: the same reserved held-out
 streams extended to 99,840 scored symbols, per-seed resolution $1.0\times10^{-5}$), with the
 frozen coarse protocol remaining the protocol of record for every gate, target, and ranking
-verdict, and both reported wherever they differ. At eval-F the BPTT reference itself settles at
+verdict, and both reported wherever they differ. At eval-F the BPTT reference itself reads
 $9.8\times10^{-4}$ (the coarse $5.2\times10^{-4}$ was a lucky-two-errors reading — an
 illustration of exactly the floor hazard). One scope note, so no reader has to discover it:
 this reference is *protocol-local*. It is measured under the bake-off contract — 12,000
 updates at the registered cadence — and it bounds the §5.3 ranking, which runs under that
 same contract. The follow-up experiments of §5.5 run their own frozen specification (PR-5 §E)
-with a $2.6\times$ larger update budget (31,600), and at eval-F their converged arms settle
+with a $2.6\times$ larger update budget (31,600), and at eval-F their trained arms land
 slightly *below* the 12,000-update number ($8.4$–$9.0\times10^{-4}$ vs $9.8\times10^{-4}$; the
 paired inversion is within seed noise, CI $[-0.1, +3.1]\times10^{-4}$ including zero). A
 reference matched to the follow-up budget — BPTT at 31,600 updates, registered as a
 review-added diagnostic with its expected direction stated in advance (PR-17 §17.8) — lands
-at $8.1\times10^{-4}$ (8 seeds, per-seed $7.3$–$8.9\times10^{-4}$): at or below every
-follow-up arm, restoring the expected ordering. It, not the bake-off number, is the
-reference line drawn in Fig. F8. An arm sitting below the 12,000-update number is a budget
-effect, not a physical estimator beating exact gradients. One implementation erratum in the eval-F tooling
+at $8.1\times10^{-4}$ (8 seeds, per-seed $7.3$–$8.9\times10^{-4}$), and it, not the bake-off
+number, is the reference line drawn in Fig. F8. We state the margin rather than leave it to
+be measured: the restoration of the expected ordering is *median-level and thin* — the
+matched reference sits $0.3$–$0.9\times10^{-4}$ below the calibration-sweep arms and one
+per-seed resolution unit below the drift arm's time-integrated $8.2\times10^{-4}$, with its
+per-seed spread overlapping the arms' — a scope statement (with matched budget, no physical
+arm sits meaningfully below exact gradients), not a separation. An arm sitting below the
+12,000-update number is a budget effect, not a physical estimator beating exact gradients. One implementation erratum in the eval-F tooling
 (an evaluation-normalization inconsistency, caught the same day by its chance-level signature,
 registered, fixed under a machine-precision gate test, and re-run) is documented in the ledger
 (PR-17 §17.7). **The frozen substrate has ample capacity
@@ -57,7 +64,10 @@ held-out SER falls to $\text{SER}_\text{target} = 1.25\times\text{ceiling} + 0.0
 10^{-3}$ at any evaluation point within the device-pass budget (the additive guard dominates at a
 floor-level ceiling, by design — PR-3 §B; had the rule consumed the eval-F ceiling instead,
 the target would be $6.23\times10^{-3}$ and no reach-target verdict in this paper changes). The budget $B = 252{,}800$ device passes is twice the
-BPTT convergence point measured in a seed-7 sizing pilot excluded from the eight scored seeds.
+BPTT convergence point measured in a seed-7 sizing pilot excluded from the eight scored seeds
+— where "convergence" means the pilot's registered flatness rule, a budget-local criterion:
+the §17.8 matched run kept improving at the fine floor past that point, which the flatness
+rule (defined on the coarse trace) could not resolve.
 
 A note this cell settles for free: the ceiling is *identical* under fixed-gain and saturating-gain
 substrate models ($\Delta_{M3}=0$). The gain-model class — the largest modelling uncertainty in
@@ -69,9 +79,10 @@ The pre-registered M3 sensitivity trigger is therefore un-triggerable at this ce
 Two decompositions of the Stage-0 gate were pre-registered (PR-9). **Capacity (ii-a):** the
 ceiling must clear a task-utility floor set at half the readout-only error — the reservoir
 baseline that freezes the recurrence and trains only the digital head. The baseline stalls at
-$2.2\times10^{-2}$, putting the floor at $1.1\times10^{-2}$; the ceiling clears it by
-$21\times$ at the coarse protocol of record ($5.2\times10^{-4}$) and by $11\times$ at eval-F
-($9.8\times10^{-4}$). **Trainability (ii-b):**
+$2.2\times10^{-2}$ (scored at the coarse protocol; at ~85 errors per 3,840-symbol evaluation
+it sits far from the quantization floor, so eval-F cannot move it materially), putting the
+floor at $1.1\times10^{-2}$; the reference clears it by $21\times$ at the coarse protocol of
+record ($5.2\times10^{-4}$) and by $11\times$ at eval-F ($9.8\times10^{-4}$). **Trainability (ii-b):**
 at least one of the two hardware-committed routes — physics-aware training (PAT) or SPSA — must
 reach target on at least five of eight seeds.
 
@@ -119,7 +130,7 @@ It should be read as a sign-consistent separation bounded by the grid resolution
 distributional interval. The three routes trade the same axes the theory predicts they should.
 **PAT** is cheapest on the physical device but spends a $13\times$-larger digital ledger and
 carries the full burden of characterizing a differentiable twin (§4; hardware ledger,
-supplementary S2). **The adjoint** matches
+supplementary note N2). **The adjoint** matches
 the exact-gradient ceiling in accuracy at zero digital cost and $1.9\times$ PAT's device passes —
 though its count charges one physical reverse pass *as if* realizable, which no recurrent photonic
 system has yet demonstrated (a caveat we quarantine, §4). **SPSA** costs $4.6\times$ PAT's device
@@ -221,7 +232,8 @@ First, the movement is *not* confounded with a fresh noise draw. The eval-F drif
 come from re-executing the frozen S0.9b unit specifications, and the re-executed trajectories
 are **bit-identical** to the originals: the dynamics are deterministic given the registered
 seed, evaluation draws only from reserved streams that never touch the training randomness
-(the coarse evaluation set is the first 2 of the fine protocol's 52 batches), and the
+(the coarse evaluation set is the first 2 of the fine protocol's 52 batches — a strict
+subsample, so the coarse reading was underpowered, not contradicted), and the
 evaluation-independent device-state fingerprint matches the stored originals exactly on all
 64 drift units — as does the coarse final SER on all 80 calibration-sweep units (ledger
 §17.8). The coarse→fine change therefore carries exactly one factor, the evaluation floor:

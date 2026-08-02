@@ -70,6 +70,8 @@ including the full ledger and its commit history, must be published — external
 nothing. At this draft's date that publication is the single open action, held by the PI;
 submission is gated on it, and the freeze-before-run ordering is then verifiable by anyone
 rather than trusted.
+<!-- AT SUBMISSION (do not ship present tense): replace the sentence above with past tense +
+the actual publication date and repository URL once the repo is public (E-2026-07-27-2). -->
 
 ## 8.5 Scope limits we chose
 
