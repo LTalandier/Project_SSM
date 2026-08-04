@@ -1755,3 +1755,74 @@ gate or verdict; purpose = §5.1 scope disclosure + the F8 reference line. Revie
 diagnostic, disclosed as such. Falsifiable expectation: the matched reference lands at or
 below the 12k reference, in or below the arms' 8.4–9.0×10⁻⁴ band; if it lands *above* the
 arms, the budget explanation is wrong and §5.1 must say so.
+
+---
+
+## PR-18 — 🔒 REGISTERED (2026-08-04, single-session mode; pre-run) — converged-operating-point diagnostics (S0.11)
+
+> Round-5 walkthrough (external-review conversation, 2026-08-04) crossed §5.7 with §6: the
+> controllability gate and participation profile were resolved **at θ₀** (r₀=0.3, μ_c=0.3κᵢ,
+> κ_net=0.7κᵢ), while the trained solutions live elsewhere (§6 pinned optimum r\*=2.0,
+> κ_net≈4.1κᵢ; boxed winners heterogeneous). A per-hop gradient-attenuation model
+> (μ/κ_net)^(2·hops) predicts the θ₀ gate profile within ~25% and predicts collapse
+> (~8×10⁻¹⁰ ≪ 10⁻³ at 4 hops) at the pinned optimum **if μ stays at init** — whether training
+> repairs its own controllability (via μ growth and/or profile heterogeneity) or converges
+> with most rings gradient-dark is unmeasured. Also unmeasured: anchor-risk (vii) at the
+> achieved solutions. This block freezes the diagnostics + interpretation rules **before any
+> measurement is computed**.
+
+### 18.1 Targets (all four reported regardless of outcome; no selective reporting)
+Deterministic state-capture reproductions (`train(...)` identical registered args +
+`return_state=True`) of stored converged runs, seeds {11,23,47,61,83,101,127,151}:
+- **pinned2** — S0.6 arm B at r\*=2.0: `train("bptt","C-2",seed,12000,eval_every=100,r0=2.0,pin_kext=True)`
+- **boxed3** — S0.6 arm A widest box: `train("bptt","C-2",seed,12000,eval_every=100,r0=√(0.1606·3.0),r_hi=3.0)`
+- **patC2** — bake-off gate-ii route: `train("pat-both","C-2",seed,31600,eval_every=100)`
+- **spsaC2** — bake-off gate-ii route: `train("spsa","C-2",seed,15800,eval_every=100)`
+Stage order: {pinned2, boxed3} then {patC2, spsaC2}. Local CPU only (≈15 core-hours, €0).
+
+### 18.2 Reproduction gate (before any measurement is read)
+Primary: **bit-identity** vs the stored JSON — `eval_trace` exact, `final_ser` exact
+(+ `final_r` exact where stored). Fallback (if cross-platform float drift breaks bit-identity):
+protocol-identical reproduction; the deviation is reported per unit and every downstream
+number is then labelled *reproduced-solution*, not *stored-solution*. Fingerprint verdict
+recorded per unit.
+
+### 18.3 Measurements (verbatim S0.4-0 protocol, on the converged device)
+On the returned trained substrate with `ase_variance_scale=0` (the registered noiseless
+calibration convention; device identity, disorder seed, taps, and trained {δ, κ_ext, μ}
+untouched):
+- **(i) Gradient gate at solution:** per-ring |∂L/∂δ_j| ratio-to-max, **min over the recorded
+  drive seeds {7,19,41,101,271}**, loss `mse_zero` primary / `mse_target` co-reported,
+  GATE_RATIO 10⁻³ — the S0.4-0 §B functions unmodified. Report count ≥ gate, worst ratio,
+  full per-ring profile.
+- **(ii) Participation at solution:** `participation_profile` counts ≥ {10⁻¹, 10⁻², 10⁻³}.
+- **(iii) Converged parameters:** per-ring r_j, δ_j/κᵢ, per-link μ_j/κᵢ (init references:
+  μ_c=0.3κᵢ; r₀ per arm), per-ring operating κ_net,j/κᵢ.
+- **(iv) vii endpoint row:** hypothetical δ-aware de-saturation at the **achieved** (δ_j, r_j)
+  — the S0.4-0 Item-3 Lorentzian convention (passive κ_tot in the build-up, the substrate's
+  own gain model g₀/P_sat): κ_net^δ-aware_j = κᵢ − g₀/(1+P̄(δ_j,r_j)/P_sat) + 2κ_ext,j.
+  Primary: min over rings at achieved δ_j. Secondary: min over the δ∈[−κᵢ,κᵢ] band at
+  achieved r_j.
+
+### 18.4 Interpretation rules (frozen now)
+On the 8-seed **median count ≥ 10⁻³ (measurement i)** per target set:
+- **maintained** ≥ 30/32 → §5.7 gains one sentence stating the at-solution check passed;
+- **collapsed** ≤ 16/32 → the "N = 32 carries the measured profile" rule extends to
+  solutions: §5.7 gains an at-solution paragraph, §7.2's N-scaling niche argument gains a
+  caveat, and §5.2's *interpretation* sentence is softened (the gate itself is SER-based and
+  unaffected);
+- intermediate → reported as measured, no verdict word.
+Mechanism readings (not mutually exclusive; all stats reported regardless): *repair-by-μ* iff
+median converged μ ≥ 2μ_c; *repair-by-profile* iff the gate holds without μ-repair and the
+converged r profile is non-uniform (sd(r_j) > 0.15); *dark-but-converged* iff a set trains to
+its stored SER while collapsed — reported as a finding (most parameters received no usable
+gradient by convergence), not explained away.
+**vii endpoint rule:** min over {sets, seeds, rings} of κ_net^δ-aware at achieved (δ_j, r_j)
+> 0 → §3.6/§8.2 add the empirical note that trained endpoints never enter the exposed corner
+(worst margin quoted; *endpoint* closure only — mid-training trajectories are not stored and
+stay open); ≤ 0 → vii is a measured at-solution exposure and §3.6/§8.2 must say so.
+
+### 18.5 Consumption
+Consumed by: §5.7 (at-solution paragraph or sentence), §6 (mechanism sentence), §3.6/§8.2
+(vii note), the round-5 walkthrough record. Gates/verdicts of §5.2–§5.5 are not re-scored by
+this block.
