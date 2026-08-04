@@ -1,0 +1,97 @@
+{
+ "theta0_reference": {
+  "gate": 32,
+  "worst": 0.00142,
+  "part": [
+   4,
+   26,
+   32
+  ]
+ },
+ "sets": {
+  "pinned2": {
+   "n": 8,
+   "fingerprints": [
+    "bit"
+   ],
+   "fp_all_bit": true,
+   "gate_count_median": 20.0,
+   "gate_count_range": [
+    20,
+    20
+   ],
+   "gate_counts": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "gate_count_mse_target_median": 20.0,
+   "worst_ratio_median": 5.438372131101884e-07,
+   "participation_median": [
+    4.0,
+    12.0,
+    20.0
+   ],
+   "mu_median_over_seeds": 0.29981379491779697,
+   "mu_min": 0.165762,
+   "mu_max": 0.350814,
+   "r_sd_median": 0.0,
+   "vii_min_achieved": 3.62889009727748,
+   "vii_min_band": 3.6289927570097738,
+   "verdict_18_4": "intermediate",
+   "mechanism": {
+    "repair_by_mu": false,
+    "repair_by_profile": false,
+    "dark_but_converged": false
+   }
+  },
+  "boxed3": {
+   "n": 8,
+   "fingerprints": [
+    "bit"
+   ],
+   "fp_all_bit": true,
+   "gate_count_median": 30.0,
+   "gate_count_range": [
+    30,
+    30
+   ],
+   "gate_counts": [
+    30,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30,
+    30
+   ],
+   "gate_count_mse_target_median": 30.0,
+   "worst_ratio_median": 0.0002297874306938831,
+   "participation_median": [
+    8.0,
+    15.0,
+    22.0
+   ],
+   "mu_median_over_seeds": 0.2924212815875239,
+   "mu_min": -0.074068,
+   "mu_max": 0.396147,
+   "r_sd_median": 0.20269022711099421,
+   "vii_min_achieved": 1.284340070353862,
+   "vii_min_band": 1.2984569369612744,
+   "verdict_18_4": "maintained",
+   "mechanism": {
+    "repair_by_mu": false,
+    "repair_by_profile": true,
+    "dark_but_converged": false
+   }
+  }
+ },
+ "vii_min_overall": 1.284340070353862,
+ "vii_endpoint_closed": true
+}

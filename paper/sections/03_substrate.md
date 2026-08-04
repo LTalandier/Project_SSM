@@ -80,8 +80,13 @@ task's 7-tap span at the operating point; marginal only at its passive floor).
 
 Surface roughness couples the CW/CCW modes at rate $\gamma$ (11.8 MHz at C-2, damascene-clean
 process class; 90 MHz at C-1), splitting each ring resonance into a doublet — at high $Q_i$ the
-splitting is *resolved* ($\gamma/\kappa_\text{net} \approx 16.6$ at C-2/θ₀), so the substrate is
+splitting is *resolved*: at C-2/θ₀ the separation clears the §2.4 criterion with
+$2\gamma/\kappa_\text{net} \approx 2.4$, and at the S0.4-0 lasing-floor calibration point
+(clause (a), $\kappa_\text{net} = 0.05\,\kappa_i$) the ratio reaches
+$\gamma/\kappa_\text{net} = 16.6$ — so the substrate is
 the full $2N$-mode doublet lattice **always**, not an N-mode idealization with a correction term.
+(An earlier draft quoted the floor ratio at θ₀; the operating points are distinct and both are
+given here.)
 This choice was consequential: the S0.4-0 calibration measured the drive build-up at the lasing
 floor to be $\times0.42$ of the hold value — the doublet plus chain hybridization *quench* the
 single-pole build-up that two independent prior estimates (×37 and ×91) had presumed, mooting

@@ -2,7 +2,8 @@
 
 **Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
 **Sources of record:** `results/s0_6/{damping.md,damping.json,runs/}` (spec pre-registered at
-`5a7f28b`) · PR-12 🔒 R-ii · PR-3 §A eval protocol. **Open flags:** [CITE-*] keys resolved via `paper/references.md`; figure F6 = `paper/figures/F6_damping.*`.
+`5a7f28b`) · PR-12 🔒 R-ii · PR-3 §A eval protocol · PR-18/S0.11 at-solution diagnostics
+(reg. `b585623` pre-run; `results/s0_11/`). **Open flags:** [CITE-*] keys resolved via `paper/references.md`; figure F6 = `paper/figures/F6_damping.*`.
 
 ---
 
@@ -17,8 +18,9 @@ eight seeds each, at the headline cell under the convergence-controlled protocol
 **The damping value matters enormously.** With $\kappa_\text{ext}$ *pinned* (only detunings and
 inter-ring couplings training), the converged error spans a factor of ~300 across the feasible
 box: SER 0.39 at light damping ($r = 0.2$ — not chance, which is 0.75 on 4-PAM, but two of
-every five symbols wrong) falling to $1.3\times10^{-3}$ at the optimum — which sits at **deep overcoupling** ($r^* = 2.0$, $\kappa_\text{net} \approx
-4.1\kappa_i$, about 5.5 samples of memory at 2 GS/s). The direction is instructive: the
+every five symbols wrong) falling to $1.3\times10^{-3}$ at the optimum — which sits at **deep overcoupling** ($r^* = 2.0$; measured
+operating $\kappa_\text{net} = 3.7\kappa_i$ at the converged solutions, the fixed-gain
+estimate being $4.1\kappa_i$; about 6 samples of memory at 2 GS/s). The direction is instructive: the
 equalization task needs only a 7-tap span, and the long memory the light-damping regime supplies
 (30–45 samples) is actively harmful — stale symbols interfere. "More memory" is not free
 performance in a dissipative recurrence; damping tunes memory *to the task*, which is precisely
@@ -34,6 +36,27 @@ single design value can express. Boxes that exclude the good regime fail exactly
 **confirmed**: the designer's damping obligation is to make the feasible box *contain* the good
 regime; the operating point itself is the trained substrate's job.
 
+**Why the pin loses: controllability at the solutions (PR-18).** A pre-registered diagnostic
+(PR-18; S0.11) reproduced both arms' converged states bit-identically (16/16 seed-runs,
+eval-trace-exact) and re-ran the S0.4-0 controllability gate *at the solutions* rather than at
+θ₀. The uniform pin pays for its damping in gradient reach: at $r^* = 2.0$ only **20 of 32**
+rings keep gradients above the registered $10^{-3}$-of-max gate — the three inter-tap interior
+segments (rings 6–9, 15–18, 24–27) go gradient-dark (worst ratio $5\times10^{-7}$), and the
+trained couplings do not rescue them (converged $\mu$ median exactly at its $0.3\kappa_i$
+init; no link grows past $0.35\kappa_i$). The boxed winner escapes the trade: every seed
+converges to the *same* structure — the four **driven** rings damped hard ($r \approx 1.3$)
+and the 28 undriven rings held light ($r \approx 0.7$, operating
+$\kappa_\text{net} \approx 1.5\kappa_i$) — which keeps **30 of 32** rings above the gate
+(worst $2.3\times10^{-4}$; the two residual dark rings sit at segment midpoints) while still
+damping where the input lands. The heterogeneous profile above is therefore not an
+overparameterization curiosity: it is the mechanism by which the trained substrate buys
+task-optimal damping *and* its own trainability at once — a combination a uniform design
+value structurally cannot express, and a second, sharper reading of the ×2.5
+pinned-vs-trained gap. (Settled-amplitude participation decouples from gradient reach at the
+solutions — winner counts $\{8, 15, 22\}$ of 32 above $\{10^{-1}, 10^{-2}, 10^{-3}\}$ vs
+$\{4, 26, 32\}$ at θ₀ — the trainability-relevant quantity is the gradient gate; both are
+reported in S0.11.)
+
 Two honest footnotes. The slow mid-grid configurations ($r = 0.3$–$0.5$) had not fully plateaued
 at the training ceiling, so the ×300 spread is a budget-bounded statement — but both endpoints
 and all winning configurations converged, and the R-ii verdict uses converged points only. And
@@ -41,7 +64,12 @@ the result recolors §5 slightly: a large share of what in-situ training accompl
 bake-off *is* finding the damping operating point (the θ₀ hold value, pinned, yields 0.038 —
 seventy-seven times worse than the trained substrate). Since the offline baseline finds $r^*$ on
 its calibrated model just as well (§5.5), the damping result strengthens the trainability story
-without moving the advantage question.
+without moving the advantage question. It also recolors §2's motivation: the optimum sits deep
+in the heavily-damped regime, far from the weakly-damped near-conservative corner where the
+oscillatory (LinOSS) parameterization is most distinctive relative to plain diagonal SSMs — on
+this task class the substrate's results are evidence about the broader dissipative
+diagonal-SSM class that §2.2 deliberately claims, with LinOSS as its boundary case, not
+evidence for LinOSS-specific expressivity.
 
 **Does the optimum track task memory? A registered prediction, failed.** Because "excess memory
 is harmful" measured on one 7-tap task is close to tautological, we froze a transfer test

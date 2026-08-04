@@ -1499,3 +1499,31 @@ Going forward: verify `hcloud server-type describe` pricing before quoting any r
 - §5.2 baseline protocol stated (coarse; ~85 errors/3,840, floor-insensitive).
 - §5.5 subsample framing: coarse = strict subsample of fine → "underpowered, not
   contradicted." §8.4 tense-swap marked (HTML comment + N-residue item).
+
+## S0.11 — converged-operating-point diagnostics, stage 1 (2026-08-04, PR-18 reg. b585623 pre-run)
+Round-5 walkthrough crossed §5.7 (controllability resolved at θ₀) with §6 (solutions live
+elsewhere). Stage 1 = the two §6 arms, 8 seeds each; **fingerprints 16/16 bit-identical**
+(eval-trace-exact reproductions of the stored runs — measurements are of the stored
+solutions, not lookalikes).
+- **pinned2 (r\*=2.0):** gate at solution **20/32** (all seeds; frozen rule: intermediate),
+  worst ratio 5.4e-7; dark rings = the three inter-tap interiors {6–9, 15–18, 24–27};
+  μ median exactly 0.300κᵢ (init; max link 0.35κᵢ) → **repair-by-μ REFUTED**; measured
+  operating κ_net = 3.68κᵢ (paper's 4.1κᵢ was the fixed-gain estimate; §6 corrected).
+- **boxed3 (winner, 5.2e-4):** gate at solution **30/32** (all seeds; frozen rule:
+  **maintained**), worst 2.3e-4 (residual dark: segment midpoints {16, 26}); every seed
+  converges to the same structure — tap rings {3,12,21,30} damped to r≈1.3, the 28 undriven
+  rings light r≈0.69 (κ_net≈1.5κᵢ), μ median 0.292 (no growth; two links near ring 30 flip
+  sign, small |μ|) → **repair-by-profile CONFIRMED** (sd(r)=0.20). Mechanism now stated in
+  §6: heterogeneity buys damping AND trainability; the uniform pin structurally cannot.
+- **Participation decouples from gradient reach:** winner settled-amplitude counts
+  {8,15,22}/32 vs θ₀ {4,26,32}; gradient gate is the trainability-relevant profile.
+- **vii endpoint (stage-1):** min δ-aware κ_net at achieved (δ_j, r_j) = **+1.284κᵢ**
+  (pinned2 +3.63κᵢ) — trained endpoints nowhere near the exposed corner. Overall closure
+  pends stage 2.
+- Stage 2 (bake-off gate-ii arms patC2/spsaC2 ≡ §5.5 m1 in-situ devices) running.
+- Same commit: three round-5 text errata — §2.2 κ_tot = κᵢ+2κ_ext (add-drop; code/§2.4/§3.2
+  agree, definition was wrong); §3.4 doublet ratio 16.6 was the clause-(a) floor number
+  (κ_net=0.05κᵢ), θ₀ honest value 2γ/κ_net≈2.4 (still resolved; erratum disclosed in-text);
+  §2.2 validation scope (simulator-not-model); §2.1→§6 LinOSS-regime tension stated.
+Raw: `results/s0_11/{runs/,s0_11.json,s0_11.md}` · runner `analysis/s0_11_run_one.py` ·
+aggregate `analysis/s0_11_analyze.py`.

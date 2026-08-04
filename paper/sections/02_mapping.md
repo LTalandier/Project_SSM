@@ -22,7 +22,9 @@ trainable parameter. Crucially for what follows, the LinOSS construction is vali
 nonnegative-diagonal (dissipative) state matrix: stability does not require conservative dynamics,
 only that every mode decay. A physical substrate that is *lossy but slowly so* is therefore
 in-regime by construction — the loss is not an error term to be fought but the damping parameter
-of the model class itself.
+of the model class itself. (Where in the damping range the trained optimum actually lands — and
+what that does to the LinOSS-specific part of this motivation — is measured, not assumed; see
+§6.)
 
 ## 2.2 One ring is one trainable complex pole
 
@@ -32,8 +34,10 @@ The mode amplitude $a_j$ of a silicon-nitride microring obeys temporal coupled-m
 $$\dot a_j = (i\delta_j - \kappa_{\mathrm{tot},j})\,a_j
 + i\sum_{k\neq j}\mu_{jk}\,a_k + \sqrt{2\kappa_{\mathrm{ext},j}}\,u(t),$$
 
-with $\kappa_{\mathrm{tot},j} = \kappa_{i,j} + \kappa_{\mathrm{ext},j}$ the amplitude decay rate
-(intrinsic + external), $\delta_j$ the detuning of the drive from the ring resonance, and
+with $\kappa_{\mathrm{tot},j} = \kappa_{i,j} + 2\kappa_{\mathrm{ext},j}$ the amplitude decay rate
+(intrinsic + both bus ports of the add–drop registry ring, each loading the mode at
+$\kappa_\mathrm{ext}$; the drive enters through one port, hence the single
+$\sqrt{2\kappa_{\mathrm{ext}}}$ injection term), $\delta_j$ the detuning of the drive from the ring resonance, and
 $\mu_{jk}$ the inter-ring coupling. A single uncoupled ring is therefore exactly one **complex**
 Laplace pole,
 
@@ -60,7 +64,7 @@ Discretization is exact, not approximate: for piecewise-constant input the zero-
 $dt$ the round-trip time. The per-step memory retention is $|z| = e^{-\kappa_\mathrm{tot} dt}$;
 long memory is literally $|z| \to 1$.
 
-**Validation.** The mapping is validated at three independent levels (test-anchored; all
+**Validation.** The mapping is validated at three levels (test-anchored; all
 thresholds pre-specified): (i) *by construction* — uncoupled system poles match the CMT reference
 to $<10^{-3}$ and discrete $|z|$ to $<10^{-9}$; (ii) *in the CW limit* — the dynamical model's
 steady state recovers independently derived static transfer functions with error scaling as
@@ -69,7 +73,10 @@ $4.4\times10^{-5}$ at $\mathcal{F} = 10473$; the registry rings sit at $\mathcal
 $1.5\times10^4$, where the CMT pole is an excellent model; (iii) *in the time domain* — against an
 independent RK45 integration, ringdown matches the closed form to $<10^{-9}$ and both pole
 coordinates ($\kappa$ and $\delta$) re-fitted from the trajectory recover the set values to
-$<10^{-5}$.
+$<10^{-5}$. All three are *internal* checks — independent implementations and limits of the
+same coupled-mode model class — so they certify that the simulator faithfully computes the
+model it claims, not that the model captures a fabricated device; the latter is a hardware
+question, scoped honestly in §8.1.
 
 ## 2.3 Coupling rings: the structured off-diagonal generalization
 
