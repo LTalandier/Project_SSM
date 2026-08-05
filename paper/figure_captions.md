@@ -108,5 +108,6 @@ off-chip transit amplitude survival (mechanism C).
 **Figure S5 — RHEL recovers its own theorem's limit (§5.4).** Cosine between the RHEL update
 and the exact BPTT gradient as the substrate is made progressively less dissipative: −0.75 at
 κ_net T dt ≈ 1.0, monotonically to +1.0000 at 0.03 — exact recovery of the non-dissipative
-limit. The registered C-2 operating point sits at κ_net T dt ≈ 27, far beyond the anti-aligned
+limit. The registered C-2 operating point sits at κ_net T dt ≈ 8 (the C-1 control cell at
+≈ 27), far beyond the anti-aligned
 regime: the C-2 failure is dissipative-echo bias, not implementation error.

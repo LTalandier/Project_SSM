@@ -1570,3 +1570,15 @@ defers the statistics to the F8a sweep. Added: the re-lock-is-not-a-strawman sen
 (per-ring re-trim requires per-ring observability = the in-situ stack by another name;
 registered arms = the two coherent extremes). §7.4 "millijoules" → "tens of millijoules"
 (consistency with the cluster-C scope fix).
+
+## Round-5 cluster E fixes (2026-08-05) — §5.4 + S5 caption
+Second transplant-class error found (same class as §3.4's 16.6): §5.4 and the S5 caption
+quoted **κ_net·T·dt ≈ 27 and "forgets within nine steps" at the C-2 headline — those are
+C-1's numbers** (C-1: 2.13e8 rad/s × 128 ns = 27.2, memory 9.4 samples). C-2/θ₀: **8.0**,
+memory ≈ 32 of 256 samples. Argument survives (8 is still ~80× beyond the ≲0.1 recovery
+regime); both cells now quoted, erratum disclosed in-text. Also re-cast the C-1
+idealized-conjugator control per the recorded S0.4c diagnosis: it "reaches target" but
+**converges to the head-only level — perfect-echo recurrence contribution ≈ 0** (bias
+binding, chain second-order), which strengthens the bound (no conjugator quality rescues
+echo learning in-regime; the honest echo is actively harmful, +0.118 readout differential).
+Verified: −22.4 dB chain (recon JSON), 0.14/+0.118 arithmetic, R1 recovery rows, c2_spot.

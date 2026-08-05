@@ -150,9 +150,11 @@ now settled by data rather than assertion.
 The fourth route, recurrent Hamiltonian echo learning (RHEL), is best read not as a contestant
 but as a *measured feasibility bound* — and we say plainly that its headline outcome was
 foreseeable in direction, if not in magnitude, before the run: the theorem behind the echo
-assumes a non-dissipative system, and the registered operating point sits at
-$\kappa_\text{net} T\, dt \approx 27$, two orders beyond the $\lesssim 0.1$ regime where our
-own recovery curve shows the update aligning with the true gradient (Fig. S5). What the
+assumes a non-dissipative system, and the headline operating point sits at
+$\kappa_\text{net} T\, dt \approx 8$ (the C-1 control cell at $\approx 27$) — one to two
+orders beyond the $\lesssim 0.1$ regime where our
+own recovery curve shows the update aligning with the true gradient (Fig. S5). (An earlier
+draft quoted the C-1 ratio at the headline cell; both are given here.) What the
 bake-off adds is the *quantified boundary* — where echo learning breaks on a dissipative
 substrate, by how much, and through which mechanism — under the same fairness contract as the
 routes that pass; that, not a horse race it could not win, is the result we consider citable.
@@ -167,11 +169,15 @@ baseline* (a $+0.118$ readout differential). Two controls locate the cause. A fl
 the estimator is correct: as the substrate is made progressively less dissipative, the RHEL
 gradient converges to the exact reference (direction cosine $\to 1.0000$; Fig. S5) — the non-dissipative
 limit RHEL's theorem assumes. And an idealized-conjugator control at the smaller C-1 cell — a
-*perfect* echo, no conjugation loss or noise — *does* reach target ($5.7\times10^{-3} \le
-7.3\times10^{-3}$). So the failure at the headline cell is neither broken mechanics nor the
-conjugation chain: it is dissipative-echo bias, the irreducible mismatch between an echo that
-assumes time-reversal and a substrate that forgets its state within roughly nine of the
-sequence's steps. This is the honest instantiation of the platform argument (§1, §5.4 of the
+*perfect* echo, no conjugation loss or noise — formally reaches the C-1 target
+($5.7\times10^{-3} \le 7.3\times10^{-3}$ coarse; $7.2\times10^{-3}$ at eval-F, §5.6) but
+converges to the head-only level: the recorded S0.4c diagnosis is that even a perfect echo's
+*recurrence* contribution is $\approx 0$ in this regime — the digital head does the passing.
+The conjugation chain is therefore second-order, and the failure at the headline cell is
+dissipative-echo bias itself: the irreducible mismatch between an echo that
+assumes time-reversal and a substrate whose 256-sample sequence spans $\approx 8$ amplitude
+memory lifetimes (memory $\approx 32$ samples at C-2; the honest echo's updates are then not
+merely useless but harmful — the $+0.118$ readout differential above). This is the honest instantiation of the platform argument (§1, §5.4 of the
 proposal): silicon nitride's low loss improves RHEL's *noise* budget, but the *dissipation* the
 recurrence itself requires is fatal to the echo at the operating point. RHEL-on-SiN stays a
 simulation result.
