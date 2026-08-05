@@ -35,7 +35,7 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate
 > (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs
 > 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank:
-> SPSA trains all-in for ~2.6 mJ where PAT's digital twin costs 13–44 J. Hamiltonian-echo
+> SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo
 > learning is censored — a quantified feasibility bound, the substrate's own dissipation
 > defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
 > four taps recover all 32) makes the input map a first-class design axis.

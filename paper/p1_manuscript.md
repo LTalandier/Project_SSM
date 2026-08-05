@@ -4,7 +4,7 @@
 
 **Abstract.** No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that consumed it.
 
-We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains all-in for ~2.6 mJ where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis.
+We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis.
 
 Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche, gated on the low-power heater class *and* on integrated-class laser, locking, control, and packaging. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
 
@@ -142,7 +142,9 @@ trainable parameter. Crucially for what follows, the LinOSS construction is vali
 nonnegative-diagonal (dissipative) state matrix: stability does not require conservative dynamics,
 only that every mode decay. A physical substrate that is *lossy but slowly so* is therefore
 in-regime by construction — the loss is not an error term to be fought but the damping parameter
-of the model class itself.
+of the model class itself. (Where in the damping range the trained optimum actually lands — and
+what that does to the LinOSS-specific part of this motivation — is measured, not assumed; see
+§6.)
 
 ### 2.2 One ring is one trainable complex pole
 
@@ -152,8 +154,10 @@ The mode amplitude $a_j$ of a silicon-nitride microring obeys temporal coupled-m
 $$\dot a_j = (i\delta_j - \kappa_{\mathrm{tot},j})\,a_j
 + i\sum_{k\neq j}\mu_{jk}\,a_k + \sqrt{2\kappa_{\mathrm{ext},j}}\,u(t),$$
 
-with $\kappa_{\mathrm{tot},j} = \kappa_{i,j} + \kappa_{\mathrm{ext},j}$ the amplitude decay rate
-(intrinsic + external), $\delta_j$ the detuning of the drive from the ring resonance, and
+with $\kappa_{\mathrm{tot},j} = \kappa_{i,j} + 2\kappa_{\mathrm{ext},j}$ the amplitude decay rate
+(intrinsic + both bus ports of the add–drop registry ring, each loading the mode at
+$\kappa_\mathrm{ext}$; the drive enters through one port, hence the single
+$\sqrt{2\kappa_{\mathrm{ext}}}$ injection term), $\delta_j$ the detuning of the drive from the ring resonance, and
 $\mu_{jk}$ the inter-ring coupling. A single uncoupled ring is therefore exactly one **complex**
 Laplace pole,
 
@@ -180,7 +184,7 @@ Discretization is exact, not approximate: for piecewise-constant input the zero-
 $dt$ the round-trip time. The per-step memory retention is $|z| = e^{-\kappa_\mathrm{tot} dt}$;
 long memory is literally $|z| \to 1$.
 
-**Validation.** The mapping is validated at three independent levels (test-anchored; all
+**Validation.** The mapping is validated at three levels (test-anchored; all
 thresholds pre-specified): (i) *by construction* — uncoupled system poles match the CMT reference
 to $<10^{-3}$ and discrete $|z|$ to $<10^{-9}$; (ii) *in the CW limit* — the dynamical model's
 steady state recovers independently derived static transfer functions with error scaling as
@@ -189,7 +193,10 @@ $4.4\times10^{-5}$ at $\mathcal{F} = 10473$; the registry rings sit at $\mathcal
 $1.5\times10^4$, where the CMT pole is an excellent model; (iii) *in the time domain* — against an
 independent RK45 integration, ringdown matches the closed form to $<10^{-9}$ and both pole
 coordinates ($\kappa$ and $\delta$) re-fitted from the trajectory recover the set values to
-$<10^{-5}$.
+$<10^{-5}$. All three are *internal* checks — independent implementations and limits of the
+same coupled-mode model class — so they certify that the simulator faithfully computes the
+model it claims, not that the model captures a fabricated device; the latter is a hardware
+question, scoped honestly in §8.1.
 
 ### 2.3 Coupling rings: the structured off-diagonal generalization
 
@@ -362,8 +369,13 @@ task's 7-tap span at the operating point; marginal only at its passive floor).
 
 Surface roughness couples the CW/CCW modes at rate $\gamma$ (11.8 MHz at C-2, damascene-clean
 process class; 90 MHz at C-1), splitting each ring resonance into a doublet — at high $Q_i$ the
-splitting is *resolved* ($\gamma/\kappa_\text{net} \approx 16.6$ at C-2/θ₀), so the substrate is
+splitting is *resolved*: at C-2/θ₀ the separation clears the §2.4 criterion with
+$2\gamma/\kappa_\text{net} \approx 2.4$, and at the S0.4-0 lasing-floor calibration point
+(clause (a), $\kappa_\text{net} = 0.05\,\kappa_i$) the ratio reaches
+$\gamma/\kappa_\text{net} = 16.6$ — so the substrate is
 the full $2N$-mode doublet lattice **always**, not an N-mode idealization with a correction term.
+(An earlier draft quoted the floor ratio at θ₀; the operating points are distinct and both are
+given here.)
 This choice was consequential: the S0.4-0 calibration measured the drive build-up at the lasing
 floor to be $\times0.42$ of the hold value — the doublet plus chain hybridization *quench* the
 single-pole build-up that two independent prior estimates (×37 and ×91) had presumed, mooting
@@ -403,7 +415,18 @@ gate and are recorded for review. One anchor risk stays open (vii): the calibrat
 numbers are computed on-resonance; a detuned ring at $r_\text{min}$ can reach
 $\kappa_\text{net} = -0.48\kappa_i$ under worst-case de-saturation, and a δ-aware floor would sit
 at $0.2547$ — the conformance check that would settle it was measured to be not-cheap and is
-carried as a labelled risk, not silently absorbed.
+carried as a labelled risk, not silently absorbed. A pre-registered endpoint diagnostic
+(PR-18; S0.11) later measured the label against the trained solutions themselves: under the
+same δ-aware hypothetical, three of eight SPSA seeds end with at least one ring in the
+super-threshold corner (min $\kappa_\text{net} = -0.06\,\kappa_i$; rings at $r = 0.17$–$0.22$
+with $|\delta| = 0.65$–$1.0\,\kappa_i$), while PAT's endpoints stay sub-threshold
+($+0.31\,\kappa_i$ at achieved detunings) and both §6 arms sit far from the corner
+($\geq +1.3\,\kappa_i$). The exposure lives in the hypothetical, not the runs (the as-built
+substrate is δ-independent in gain and never lases, and the measured doublet quench of §3.4
+suggests the single-pole build-up it assumes is pessimistic) — but the label is no longer
+vacuous, and every exposed endpoint sits below the δ-aware clamp $r \approx 0.2547$, which is
+therefore the concrete mitigation Stage 1 inherits. Mid-training trajectories are not stored;
+the measurement binds endpoints only.
 
 ### 3.7 The ledger as method
 
@@ -622,9 +645,10 @@ paper carries this qualifier.
 The primary metric is sample-efficiency: device passes to reach target, one physical pass being
 one sequence through the substrate in any direction (PR-7). Ranked lexicographically by success
 fraction then median passes (PR-8), with the digital-compute side-ledger co-reported but never
-folded into the rank:
+folded into the rank (converting both ledgers to joules *inverts* this ranking — §7.3; the
+two-ledger principle exists precisely so that neither metric is presented as the truth):
 
-| route | success | median device passes → target | final SER (median) | digital ledger |
+| route | success | median device passes → target | final SER (median) | digital ledger (at budget $B$) |
 |---|---|---|---|---|
 | **PAT** (twin-backward) | 8/8 | **38,400** | $8\times10^{-4}$ | 505,600 |
 | **adjoint**† (physical reverse pass) | 8/8 | 73,600 | $5\times10^{-4}$ | 0 |
@@ -647,9 +671,11 @@ rule), the eight paired differences all fall within two grid steps ($+33{,}600$ 
 positive on 8/8 seeds), and a bootstrap over values that concentrated collapses onto the grid.
 It should be read as a sign-consistent separation bounded by the grid resolution, not as a
 distributional interval. The three routes trade the same axes the theory predicts they should.
-**PAT** is cheapest on the physical device but spends a $13\times$-larger digital ledger and
-carries the full burden of characterizing a differentiable twin (§4; hardware ledger,
-supplementary note N2). **The adjoint** matches
+**PAT** is cheapest on the physical device but pays for it digitally — two twin passes
+(forward + backward) for every physical pass, a side-ledger of 505,600 digital passes over
+the full budget (the co-reported column above; the device-pass column is to-target, so the
+two columns are deliberately not a ratio) — and carries the full burden of characterizing a
+differentiable twin (§4; hardware ledger, supplementary note N2). **The adjoint** matches
 the exact-gradient ceiling in accuracy at zero digital cost and $1.9\times$ PAT's device passes —
 though its count charges one physical reverse pass *as if* realizable, which no recurrent photonic
 system has yet demonstrated (a caveat we quarantine, §4). **SPSA** costs $4.6\times$ PAT's device
@@ -666,9 +692,11 @@ now settled by data rather than assertion.
 The fourth route, recurrent Hamiltonian echo learning (RHEL), is best read not as a contestant
 but as a *measured feasibility bound* — and we say plainly that its headline outcome was
 foreseeable in direction, if not in magnitude, before the run: the theorem behind the echo
-assumes a non-dissipative system, and the registered operating point sits at
-$\kappa_\text{net} T\, dt \approx 27$, two orders beyond the $\lesssim 0.1$ regime where our
-own recovery curve shows the update aligning with the true gradient (Fig. S5). What the
+assumes a non-dissipative system, and the headline operating point sits at
+$\kappa_\text{net} T\, dt \approx 8$ (the C-1 control cell at $\approx 27$) — one to two
+orders beyond the $\lesssim 0.1$ regime where our
+own recovery curve shows the update aligning with the true gradient (Fig. S5). (An earlier
+draft quoted the C-1 ratio at the headline cell; both are given here.) What the
 bake-off adds is the *quantified boundary* — where echo learning breaks on a dissipative
 substrate, by how much, and through which mechanism — under the same fairness contract as the
 routes that pass; that, not a horse race it could not win, is the result we consider citable.
@@ -683,11 +711,15 @@ baseline* (a $+0.118$ readout differential). Two controls locate the cause. A fl
 the estimator is correct: as the substrate is made progressively less dissipative, the RHEL
 gradient converges to the exact reference (direction cosine $\to 1.0000$; Fig. S5) — the non-dissipative
 limit RHEL's theorem assumes. And an idealized-conjugator control at the smaller C-1 cell — a
-*perfect* echo, no conjugation loss or noise — *does* reach target ($5.7\times10^{-3} \le
-7.3\times10^{-3}$). So the failure at the headline cell is neither broken mechanics nor the
-conjugation chain: it is dissipative-echo bias, the irreducible mismatch between an echo that
-assumes time-reversal and a substrate that forgets its state within roughly nine of the
-sequence's steps. This is the honest instantiation of the platform argument (§1, §5.4 of the
+*perfect* echo, no conjugation loss or noise — formally reaches the C-1 target
+($5.7\times10^{-3} \le 7.3\times10^{-3}$ coarse; $7.2\times10^{-3}$ at eval-F, §5.6) but
+converges to the head-only level: the recorded S0.4c diagnosis is that even a perfect echo's
+*recurrence* contribution is $\approx 0$ in this regime — the digital head does the passing.
+The conjugation chain is therefore second-order, and the failure at the headline cell is
+dissipative-echo bias itself: the irreducible mismatch between an echo that
+assumes time-reversal and a substrate whose 256-sample sequence spans $\approx 8$ amplitude
+memory lifetimes (memory $\approx 32$ samples at C-2; the honest echo's updates are then not
+merely useless but harmful — the $+0.118$ readout differential above). This is the honest instantiation of the platform argument (§1, §5.4 of the
 proposal): silicon nitride's low loss improves RHEL's *noise* budget, but the *dissipation* the
 recurrence itself requires is fatal to the echo at the operating point. RHEL-on-SiN stays a
 simulation result.
@@ -699,8 +731,10 @@ offline-train-then-deploy route — train the full parameter set digitally on a 
 then deploy through actuation maps, recalibrating only the digital head on-device — was given the
 *same* 5%-class calibration errors as PAT's twin (the mismatch families are drawn from one frozen
 set, so the comparison cannot be rigged by giving in-situ training a secretly-wronger competitor;
-PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ — statistically
-indistinguishable from in-situ PAT's $8\times10^{-4}$.
+PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ against in-situ PAT's
+$8\times10^{-4}$ (coarse protocol of record — a one-to-two-symbol gap the coarse floor
+scores as formally real; at eval-F, where the floor can actually resolve it, the two arms
+are statistically indistinguishable, CI including zero — the F8a sweep below).
 
 We state the consequence plainly, because the fair-comparison design exists precisely to force it:
 **at 5% calibration accuracy on this task, training in situ buys essentially nothing over
@@ -728,7 +762,10 @@ tested magnitude.
 resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [33]),
 deployed after convergence, with each arm allowed its on-device response — offline recalibrates the
 head and re-locks the laser (a single global detuning re-centering); in-situ retrains the
-recurrence. The pre-registered contrast holds cleanly, and at the eval-F protocol of record the
+recurrence. (The re-lock is not a strawman: it is the strongest response available without
+per-ring observability — any per-ring re-trim requires per-ring on-device measurement and
+actuation feedback, which is the in-situ stack by another name; the registered arms are the
+two coherent extremes.) The pre-registered contrast holds cleanly, and at the eval-F protocol of record the
 verdict is now formal. Under **common-mode** drift (whole-chip thermal wander) the laser
 re-lock absorbs it and offline keeps pace ($0.98$ vs $0.73\times10^{-3}$ time-integrated,
 ratio $1.34$, CI including zero — no advantage). Under **independent** per-ring drift the
@@ -809,9 +846,11 @@ magnitude collapses geometrically with distance from the drive — by ring 32 it
 twenty-five orders of magnitude below the maximum — and the *participation profile* (settled
 per-ring amplitude relative to the maximum) counts only $\{1, 3, 5\}$ of 32 rings above
 $\{10^{-1}, 10^{-2}, 10^{-3}\}$. A nominally 32-ring lattice driven at one port is, effectively,
-a three-ring computer with 29 passengers. This is the in-data form of the program's
-reservoir-falsifier: it is *why* the readout-only baseline stalls at $2.2\times10^{-2}$ (§5.2),
-and it is a controllability property of the chain physics, not of any training method.
+a three-ring computer with 29 passengers — a controllability property of the chain physics, not
+of any training method. (The §5.2 readout-only baseline is a *separate* falsifier, not this
+one's consequence: that baseline runs under the resolved four-tap map — full amplitude
+participation — and still stalls at $2.2\times10^{-2}$. What it lacks is trained poles, not
+drive coverage; an earlier draft wrongly attributed its stall to single-tap starvation.)
 
 The pre-registered remedy is a measured, minimal input map: the smallest tap set (capped at
 $K = 4$) under which *every* ring's gradient clears $10^{-3}$ of the maximum. The resolved map,
@@ -828,6 +867,21 @@ were adopted before the finalists were evaluated. The price of controllability i
 honestly where it lands: four drive E/O channels instead of one, priced in the systems envelope
 (§7) — trainability of the deep lattice is bought with exactly the conversion overhead the
 advantage question (§7.4) must then carry.
+
+Resolved at θ₀, the map's guarantee is *a priori* for the initialization only — so a
+pre-registered diagnostic (PR-18; S0.11) reproduced the winning routes' converged solutions
+bit-identically (and both §6 arms'; 32/32 seed-runs eval-trace-exact) and re-ran this
+section's gate *at the solutions*. The demonstration routes maintain it: PAT clears **32/32 on
+every seed** with worst ratio $1.7\times10^{-3}$ — the θ₀-class margin — and SPSA holds a
+median of 30.5/32 (range 29–32). The mechanism is the one §6 identifies: every trained arm,
+on every seed, converges to the *same* actuator structure — the four driven rings damped to
+$r \approx 1.3$ while the undriven rings stay near their initialization
+($\mathrm{sd}(r) \approx 0.33$) — heterogeneity that buys damping where the input lands
+without severing gradient transport. The counterexample is the §6 uniform pin ($r^* = 2.0$),
+which trains to $1.3\times10^{-3}$ with only 20/32 rings above the gate (the three inter-tap
+interiors dark; §6). "$N = 32$ carries the measured profile" therefore extends from the
+initialization to the winning routes' solutions; a uniform-damping design in the same box
+does not inherit that extension.
 
 ### 5.8 Secondary diagnostic (registered, deferred)
 
@@ -854,8 +908,9 @@ eight seeds each, at the headline cell under the convergence-controlled protocol
 **The damping value matters enormously.** With $\kappa_\text{ext}$ *pinned* (only detunings and
 inter-ring couplings training), the converged error spans a factor of ~300 across the feasible
 box: SER 0.39 at light damping ($r = 0.2$ — not chance, which is 0.75 on 4-PAM, but two of
-every five symbols wrong) falling to $1.3\times10^{-3}$ at the optimum — which sits at **deep overcoupling** ($r^* = 2.0$, $\kappa_\text{net} \approx
-4.1\kappa_i$, about 5.5 samples of memory at 2 GS/s). The direction is instructive: the
+every five symbols wrong) falling to $1.3\times10^{-3}$ at the optimum — which sits at **deep overcoupling** ($r^* = 2.0$; measured
+operating $\kappa_\text{net} = 3.7\kappa_i$ at the converged solutions, the fixed-gain
+estimate being $4.1\kappa_i$; about 6 samples of memory at 2 GS/s). The direction is instructive: the
 equalization task needs only a 7-tap span, and the long memory the light-damping regime supplies
 (30–45 samples) is actively harmful — stale symbols interfere. "More memory" is not free
 performance in a dissipative recurrence; damping tunes memory *to the task*, which is precisely
@@ -871,6 +926,28 @@ single design value can express. Boxes that exclude the good regime fail exactly
 **confirmed**: the designer's damping obligation is to make the feasible box *contain* the good
 regime; the operating point itself is the trained substrate's job.
 
+**Why the pin loses: controllability at the solutions (PR-18).** A pre-registered diagnostic
+(PR-18; S0.11) reproduced both arms' converged states bit-identically (16/16 seed-runs,
+eval-trace-exact) and re-ran the S0.4-0 controllability gate *at the solutions* rather than at
+θ₀. The uniform pin pays for its damping in gradient reach: at $r^* = 2.0$ only **20 of 32**
+rings keep gradients above the registered $10^{-3}$-of-max gate — the three inter-tap interior
+segments (rings 6–9, 15–18, 24–27) go gradient-dark (worst ratio $5\times10^{-7}$), and the
+trained couplings do not rescue them (converged $\mu$ median exactly at its $0.3\kappa_i$
+init; no link grows past $0.35\kappa_i$). The boxed winner escapes the trade: every seed
+converges to the *same* structure — the four **driven** rings damped hard ($r \approx 1.3$)
+and the 28 undriven rings held light ($r \approx 0.7$, operating
+$\kappa_\text{net} \approx 1.5\kappa_i$) — which keeps **30 of 32** rings above the gate
+(worst $2.3\times10^{-4}$; the two residual dark rings sit at segment midpoints) while still
+damping where the input lands. The heterogeneous profile above is therefore not an
+overparameterization curiosity: it is the mechanism by which the trained substrate buys
+task-optimal damping *and* its own trainability at once — a combination a uniform design
+value structurally cannot express, and a second, sharper reading of the ×2.5
+pinned-vs-trained gap. The structure is not an artifact of this arm: the bake-off's winning
+routes converge to the same tap-heavy profile at their solutions (§5.7). (Settled-amplitude participation decouples from gradient reach at the
+solutions — winner counts $\{8, 15, 22\}$ of 32 above $\{10^{-1}, 10^{-2}, 10^{-3}\}$ vs
+$\{4, 26, 32\}$ at θ₀ — the trainability-relevant quantity is the gradient gate; both are
+reported in S0.11.)
+
 Two honest footnotes. The slow mid-grid configurations ($r = 0.3$–$0.5$) had not fully plateaued
 at the training ceiling, so the ×300 spread is a budget-bounded statement — but both endpoints
 and all winning configurations converged, and the R-ii verdict uses converged points only. And
@@ -878,7 +955,12 @@ the result recolors §5 slightly: a large share of what in-situ training accompl
 bake-off *is* finding the damping operating point (the θ₀ hold value, pinned, yields 0.038 —
 seventy-seven times worse than the trained substrate). Since the offline baseline finds $r^*$ on
 its calibrated model just as well (§5.5), the damping result strengthens the trainability story
-without moving the advantage question.
+without moving the advantage question. It also recolors §2's motivation: the optimum sits deep
+in the heavily-damped regime, far from the weakly-damped near-conservative corner where the
+oscillatory (LinOSS) parameterization is most distinctive relative to plain diagonal SSMs — on
+this task class the substrate's results are evidence about the broader dissipative
+diagonal-SSM class that §2.2 deliberately claims, with LinOSS as its boundary case, not
+evidence for LinOSS-specific expressivity.
 
 **Does the optimum track task memory? A registered prediction, failed.** Because "excess memory
 is harmful" measured on one 7-tap task is close to tautological, we froze a transfer test
@@ -956,8 +1038,15 @@ pre-registered target at the headline cell costs, at the optimistic corner:
 PAT reaches target in the fewest device passes but its digital twin bill exceeds SPSA's *entire
 training energy* by roughly four orders of magnitude — and our FLOP estimate is charitable to
 PAT (real accelerator utilization on a 64-dimensional complex recurrence sits far below peak).
-SPSA — no model, no twin, no added hardware — trains the physical recurrence to target for
-**about 2.6 millijoules, all-in**, at the optimistic corner (99 mJ at the vendor-part corner).
+The nominal winner of this table is the adjoint (1.1 mJ) — but its row is charged as-if-realizable
+(§5.3), so among demonstrated routes the energy story is SPSA's: no model, no twin, no added
+hardware, the physical recurrence trained to target for **about 2.6 millijoules in the budgeted
+conversion stack** at the optimistic corner (99 mJ at the vendor-part corner). Scope, so no one
+has to derive it: the §7.1 exclusions are per-time holds, and SPSA's 176,000 passes occupy
+22.5 ms of wall time — class-B heater hold adds ≈4 mJ and an integrated-class laser ≈5–14 mJ —
+so the honest figure is *tens of millijoules, not single digits*; the four-orders inversion
+against PAT's 13–44 J is insensitive to this, and a benchtop laser would break the training-energy
+claim exactly as it breaks the inference niche (§7.1).
 RHEL's echo, censored on accuracy grounds anyway, is also energy-dominated by its own conjugator
 pump (×42 its conversion stack per update). For Stage 1 this sharpens §9's ordering: SPSA is not
 merely the simplest route but by far the cheapest to *run as training*, and PAT's role is best
@@ -975,7 +1064,7 @@ inference-mode niche exists but is gated by a heater class the named foundry flo
 supply, and rests on sustained-vs-peak baseline conventions we document rather than hide. What
 survives all of it: a recurrent photonic SSM at GS/s line rates with class-B actuation is
 energy-competitive at scale for streaming workloads, can be *trained through its own physics for
-millijoules* when calibration is unavailable or stale, and offers latency headroom no digital
+tens of millijoules* when calibration is unavailable or stale, and offers latency headroom no digital
 baseline in our set approaches. Whether the conjunction of those conditions describes a market
 or only an experiment is a Stage-1 question, and §9 designs the experiment to answer it.
 
@@ -1008,7 +1097,10 @@ and the white-space claim itself is one-sided evidence from a pre-registered sea
 re-swept before submission (debt #1). The S0.4-0 calibration retired one internal debt (the
 drive build-up controversy resolved by measurement: ×0.42, doublet-quenched) and left one open:
 the on-resonance floor calibration under worst-case de-saturation (anchor-risk vii, §3.6),
-carried as a label.
+carried as a label — and later made concrete by the PR-18 endpoint diagnostic: three of eight
+SPSA solutions end with a ring in the hypothetically super-threshold corner (min
+$-0.06\,\kappa_i$; §3.6), an endpoint-only measurement whose Stage-1 mitigation is the
+already-computed δ-aware clamp ($r \approx 0.2547$).
 
 ### 8.3 The benchmark anchor we do not use
 
@@ -1241,7 +1333,8 @@ off-chip transit amplitude survival (mechanism C).
 **Figure S5 — RHEL recovers its own theorem's limit (§5.4).** Cosine between the RHEL update
 and the exact BPTT gradient as the substrate is made progressively less dissipative: −0.75 at
 κ_net T dt ≈ 1.0, monotonically to +1.0000 at 0.03 — exact recovery of the non-dissipative
-limit. The registered C-2 operating point sits at κ_net T dt ≈ 27, far beyond the anti-aligned
+limit. The registered C-2 operating point sits at κ_net T dt ≈ 8 (the C-1 control cell at
+≈ 27), far beyond the anti-aligned
 regime: the C-2 failure is dissipative-echo bias, not implementation error.
 
 ## References
