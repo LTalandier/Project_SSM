@@ -46,6 +46,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-17 eval-F + T-A-L spec | `241204a` | S0.10 runs `017547b` |
 | PR-17 §17.7 erratum (registered pre-rerun) | `ccc4385` | corrected rerun `017547b` |
 | PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run `967429d` |
+| PR-18 converged-operating-point diagnostics (S0.11) | `b585623` | stage-1 `ae1073f` / stage-2 `d108d5f` |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## N5 — Reproducibility statement (draft)
@@ -124,3 +125,8 @@ both passes.
   integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).
 - ✅ **§8.4 tense swap DONE 2026-08-02**: repo public at `github.com/LTalandier/Project_SSM`
   (E-2026-07-27-2 resolved); §8.4 states the publication in past tense with date + URL.
+- ✅ Round-5 walkthrough clusters A–B (2026-08-04/05): PR-18 at-solution diagnostics
+  registered→run→consumed (32/32 bit-identical; §5.7/§6 mechanism + §3.6/§8.2 vii exposure);
+  errata fixed: §2.2 κ_tot, §3.4 floor-vs-θ₀ ratio, §5.7 head-only attribution, §5.3
+  digital-ledger scoping; §2.1/§2.2/§6 scope wordings. Clusters C–E pending. Candidate
+  S-figure (converged r/gate profiles) undecided — PI call at venue-format time.
