@@ -1,0 +1,13 @@
+OpenTimestamps anchor — Project_SSM pre-registration trail
+
+repository: github.com/LTalandier/Project_SSM (branch main)
+git HEAD at stamping: ec2d4e39e13dc01b892b05823f108cb6d3a07079
+stamped: 2026-08-05 (UTC)
+
+This file, timestamped via OpenTimestamps calendar servers, anchors the
+existence of commit ec2d4e39e13dc01b892b05823f108cb6d3a07079 and therefore of every commit in its ancestry
+(the SHA-1 chain), including the full pre-registration ledger
+(shared/preregistration.md) whose freeze-before-run ordering the paper
+claims. The stamp proves existed-by (the attestation date), not created-at;
+internal commit dates remain self-reported, bounded by this anchor and by
+the GitHub-push dates.

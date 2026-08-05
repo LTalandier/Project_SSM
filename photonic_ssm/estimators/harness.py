@@ -186,7 +186,7 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           gain_mode: Optional[str] = None,
           r0: Optional[float] = None, r_hi: Optional[float] = None,
           pin_kext: bool = False, mismatch_scale: float = 1.0,
-          warm=None, return_state: bool = False):
+          warm=None, return_state: bool = False, taps_only: bool = False):
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
     "pat-M-struct","pat-both","spsa","adjoint","rhel","rhel-ideal",
     "head-only"}. Smoke HPs from the S0.4a spec; the equal-HP *search* is
@@ -220,6 +220,15 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
     # only {δ, μ} train. Arm A / default: the full P2 partition.
     in_situ = ([sub.delta, sub.mu_chain] if pin_kext
                else [sub.delta, sub.kappa_ext, sub.mu_chain])
+    if taps_only:
+        # PR-18 §18.6a control: only the driven rings' {δ, κ_ext} receive
+        # gradient; all μ and all interior parameters stay at init (Adam
+        # never moves a parameter whose gradient is exactly zero).
+        dmask = torch.zeros(sub.N, dtype=sub.delta.dtype)
+        dmask[list(sub.input_taps)] = 1.0
+        sub.delta.register_hook(lambda g: g * dmask)
+        sub.kappa_ext.register_hook(lambda g: g * dmask)
+        sub.mu_chain.register_hook(lambda g: torch.zeros_like(g))
     opt_head = torch.optim.Adam(head.parameters(), lr=lr_head)
     method_base = method.split("-")[0]
 
