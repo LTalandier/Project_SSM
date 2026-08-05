@@ -47,6 +47,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-17 §17.7 erratum (registered pre-rerun) | `ccc4385` | corrected rerun `017547b` |
 | PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run `967429d` |
 | PR-18 converged-operating-point diagnostics (S0.11) | `b585623` | stage-1 `ae1073f` / stage-2 `d108d5f` |
+| PR-18 §18.6 follow-ups: taps-only control + N_eff ablation (S0.11b) | `ec2d4e3` | verdicts `21c9bb2` |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## N5 — Reproducibility statement (draft)
@@ -125,8 +126,13 @@ both passes.
   integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).
 - ✅ **§8.4 tense swap DONE 2026-08-02**: repo public at `github.com/LTalandier/Project_SSM`
   (E-2026-07-27-2 resolved); §8.4 states the publication in past tense with date + URL.
-- ✅ Round-5 walkthrough clusters A–B (2026-08-04/05): PR-18 at-solution diagnostics
-  registered→run→consumed (32/32 bit-identical; §5.7/§6 mechanism + §3.6/§8.2 vii exposure);
-  errata fixed: §2.2 κ_tot, §3.4 floor-vs-θ₀ ratio, §5.7 head-only attribution, §5.3
-  digital-ledger scoping; §2.1/§2.2/§6 scope wordings. Clusters C–E pending. Candidate
-  S-figure (converged r/gate profiles) undecided — PI call at venue-format time.
+- ✅ Round-5 walkthrough COMPLETE, clusters A–E (2026-08-04/05): PR-18 §18.1–18.5 + §18.6
+  registered→run→consumed (all reproductions bit-identical); §5.7/§6 mechanism + §3.6/§8.2
+  vii exposure + §9.1 Stage-1 δ-aware-clamp design input; six errata fixed (§2.2 κ_tot,
+  §3.4 floor-ratio transplant, §5.7 head-only attribution, §5.3 ledger scoping, §5.5 m1
+  protocol-mixing, §5.4+S5 C-1→C-2 transplant); §7.3 energy scope (tens of mJ); §18.6
+  verdicts: taps-only control → A-discovers narrowly (abstract clause restored,
+  "estimator-independent"); N_eff = 6–8 → §7.2 bounds its own N-scaling premise + abstract
+  niche condition; §8.4 review-as-measurement sentence. OTS anchor in `timestamps/`
+  (upgrade `.ots` at submission). Candidate S-figure (converged profiles + ablation
+  curves) undecided — PI call at venue-format time.

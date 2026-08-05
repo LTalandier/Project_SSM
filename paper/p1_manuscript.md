@@ -4,9 +4,9 @@
 
 **Abstract.** No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that consumed it.
 
-We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on a universal damp-the-driven-rings profile.
+We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on an estimator-independent damp-the-driven-rings profile whose interior contribution survives a registered taps-only falsifier, narrowly.
 
-Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche, gated on the low-power heater class *and* on integrated-class laser, locking, control, and packaging. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
+Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche, gated on the low-power heater class, on integrated-class laser, locking, control, and packaging — and on workloads that exercise the state dimension: a registered ablation finds the deployed equalizer's output rides on 6–8 of 32 rings. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
 
 ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains interferometer weights around an optoelectronic relay; its resonators stay fixed.*
 
@@ -883,6 +883,22 @@ interiors dark; §6). "$N = 32$ carries the measured profile" therefore extends 
 initialization to the winning routes' solutions; a uniform-damping design in the same box
 does not inherit that extension.
 
+Two registered follow-ups bound what that means (PR-18 §18.6). *Output* participation is far
+narrower than gradient reach: ranking rings by readout contribution ($|c_j|\,\bar a_j$) and
+zeroing them cumulatively with the decoder frozen, the deployed solutions hold within 2× of
+their own error floor until ~24–26 of 32 readouts are gone — the delivered function rides on
+$N_\text{eff} \approx$ **6–8 rings** (median 6 for PAT, 7 for SPSA; a registered head-refit
+row recovers none of it) — a number §7.2 must and does carry. And the interior's contribution
+to the trained solution is real but thin: a taps-only control (only the four driven rings'
+$\{\delta, \kappa_\text{ext}\}$ trainable, all else pinned at init) reaches within 12% of the
+full partition at eval-F, the full partition better by a paired CI of
+$[+0.25, +1.55]\times10^{-4}$ excluding zero — the pre-registered "discovers" reading, earned
+by a modest margin. The tap damping carries most of the solution, and the restricted arm is
+not the full one truncated: its taps compensate asymmetrically ($r \approx \{1.52, 1.30,
+0.74, 1.34\}$, seed-consistent, vs the full arm's near-uniform $\approx 1.3$). The coarse
+floor, for the record, *inverts* this control's ordering (taps-only reads two symbols better
+at 3,840; eval-F resolves the true one) — §5.1's floor hazard, illustrated once more.
+
 ### 5.8 Secondary diagnostic (registered, deferred)
 
 PR-14 — the bias/variance decomposition of each estimator's gradient against the BPTT reference
@@ -943,7 +959,9 @@ overparameterization curiosity: it is the mechanism by which the trained substra
 task-optimal damping *and* its own trainability at once — a combination a uniform design
 value structurally cannot express, and a second, sharper reading of the ×2.5
 pinned-vs-trained gap. The structure is not an artifact of this arm: the bake-off's winning
-routes converge to the same tap-heavy profile at their solutions (§5.7). (Settled-amplitude participation decouples from gradient reach at the
+routes converge to the same tap-heavy profile at their solutions (§5.7), and a registered
+taps-only control bounds how much of the performance the structure's interior carries —
+real but thin (§5.7): "discovers" survives its own falsifier, narrowly. (Settled-amplitude participation decouples from gradient reach at the
 solutions — winner counts $\{8, 15, 22\}$ of 32 above $\{10^{-1}, 10^{-2}, 10^{-3}\}$ vs
 $\{4, 26, 32\}$ at θ₀ — the trainability-relevant quantity is the gradient gate; both are
 reported in S0.11.)
@@ -1008,7 +1026,16 @@ by up to ~15× in energy per sample at N = 128 and 2 GS/s, with end-to-end laten
 tens of nanoseconds per sample against the baseline's milliseconds — but only when three
 conditions hold simultaneously: line rates ≳0.5 GS/s (every scenario loses everything at
 0.1 GS/s), N ≳ 32 (conversion is N-independent; digital cost scales with N — the structural
-effect the architecture banks on), and **suspended low-power heaters** (~1 mW/π, class B). Under
+effect the architecture banks on), and **suspended low-power heaters** (~1 mW/π, class B).
+One measured caveat now bounds the middle condition: at the headline cell the deployed
+equalizer's *output* rides on $N_\text{eff} \approx 6$–$8$ of 32 rings (readout ablation on
+the stored solutions, PR-18 §18.6b; head-refit recovers none of the zeroed readouts). The
+digital baselines in this comparison are priced at the nominal N, but a baseline built to
+the *function* would carry ~6–8 states and shrink its cost accordingly — so the N-scaling
+premise holds only for workloads that actually exercise the state dimension, which the
+7-tap equalization family does not. The niche verdict inherits that scope condition
+(§8.5's narrow-task-family limit, here quantified), and a task engineered to *need* N
+states — the registered long-coherent-memory residue — is what would discharge it. Under
 the registered worst-case holding convention the foundry-standard heater class loses to every
 baseline everywhere in the window at the deployable corner; the demonstrated-foundry path
 therefore does not reach the energy niche as computed — a Stage-1 platform constraint stated as
@@ -1135,7 +1162,13 @@ timestamp that follows disclosure certifies nothing — and it is in place: the 
 including the full ledger and its complete commit history, was published (externally
 timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
 circulated beyond the review recorded here. The freeze-before-run ordering claimed
-throughout this paper is therefore verifiable by anyone rather than trusted.
+throughout this paper is therefore verifiable by anyone rather than trusted. The
+post-assembly external review recorded in the ledger (five rounds, 2026-08-01 through
+2026-08-05) doubles as a measurement of this structure: it found six errata — control-cell
+numbers transplanted into headline contexts, a cross-scope ratio, a protocol-mixing claim —
+all in unregistered connective prose, and none touching a pre-registered number, rule, or
+verdict. The discipline held exactly where it was applied and failed only in the seams it
+did not cover.
 
 ### 8.5 Scope limits we chose
 
@@ -1168,7 +1201,11 @@ quiet asset — zero added components, zero model burden — so the minimal viab
 the §3 plant (N = 8–32 rings, foundry-floor Q suffices per C-1's gate), thermo-optic {δ,
 κ_ext, μ} actuation, one drop-port readout chain, the four-tap drive map of §3.6, and SPSA as
 the first-light training route with PAT layered on once the twin is characterized to the
-5%-class the mismatch protocol assumed.
+5%-class the mismatch protocol assumed. One operating rule is fixed by measurement in
+advance rather than discovered on hardware: SPSA is the route whose converged solutions walk
+rings toward the hypothetically super-threshold corner (three of eight seeds; §3.6), so the
+first-light SPSA runs under the δ-aware clamp $r \geq 0.2547$ — the PR-18 endpoint
+diagnostic converted anchor-risk (vii) from a limitations label into this design input.
 
 The multi-project-wafer path is concrete: the registered cells were chosen to be
 foundry-realizable (C-1 at generic-foundry loss; C-2 bounded by a demonstrated MPW result
