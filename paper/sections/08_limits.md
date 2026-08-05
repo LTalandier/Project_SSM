@@ -72,7 +72,13 @@ timestamp that follows disclosure certifies nothing — and it is in place: the 
 including the full ledger and its complete commit history, was published (externally
 timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
 circulated beyond the review recorded here. The freeze-before-run ordering claimed
-throughout this paper is therefore verifiable by anyone rather than trusted.
+throughout this paper is therefore verifiable by anyone rather than trusted. The
+post-assembly external review recorded in the ledger (five rounds, 2026-08-01 through
+2026-08-05) doubles as a measurement of this structure: it found six errata — control-cell
+numbers transplanted into headline contexts, a cross-scope ratio, a protocol-mixing claim —
+all in unregistered connective prose, and none touching a pre-registered number, rule, or
+verdict. The discipline held exactly where it was applied and failed only in the seams it
+did not cover.
 
 ## 8.5 Scope limits we chose
 

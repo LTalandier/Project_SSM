@@ -18,7 +18,11 @@ quiet asset — zero added components, zero model burden — so the minimal viab
 the §3 plant (N = 8–32 rings, foundry-floor Q suffices per C-1's gate), thermo-optic {δ,
 κ_ext, μ} actuation, one drop-port readout chain, the four-tap drive map of §3.6, and SPSA as
 the first-light training route with PAT layered on once the twin is characterized to the
-5%-class the mismatch protocol assumed.
+5%-class the mismatch protocol assumed. One operating rule is fixed by measurement in
+advance rather than discovered on hardware: SPSA is the route whose converged solutions walk
+rings toward the hypothetically super-threshold corner (three of eight seeds; §3.6), so the
+first-light SPSA runs under the δ-aware clamp $r \geq 0.2547$ — the PR-18 endpoint
+diagnostic converted anchor-risk (vii) from a limitations label into this design input.
 
 The multi-project-wafer path is concrete: the registered cells were chosen to be
 foundry-realizable (C-1 at generic-foundry loss; C-2 bounded by a demonstrated MPW result

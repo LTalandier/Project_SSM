@@ -38,9 +38,7 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo
 > learning is censored — a quantified feasibility bound, the substrate's own dissipation
 > defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
-> four taps recover all 32) makes the input map a first-class design axis — and the winning
-> routes' trained solutions preserve it, converging on a universal damp-the-driven-rings
-> profile.
+> four taps recover all 32) makes the input map a first-class design axis.
 >
 > Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
 > training is statistically indistinguishable to 30% calibration error and under common-mode
@@ -54,6 +52,10 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 >
 > ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains
 > interferometer weights around an optoelectronic relay; its resonators stay fixed.*
+
+<!-- At-solution clause PULLED 2026-08-05 pending the PR-18 §18.6a taps-only control
+(reviewer two-readings objection: "discovers" vs gradient-starvation); if the frozen rule
+fires, restore with "estimator-independent" in place of "universal". -->
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
 participation → S0.4-0 + PR-18/S0.11 (at-solution) · niche + offline-tie/drift → S0.7 + §5.5 as upgraded by S0.9/S0.10

@@ -1826,3 +1826,45 @@ stay open); ≤ 0 → vii is a measured at-solution exposure and §3.6/§8.2 mus
 Consumed by: §5.7 (at-solution paragraph or sentence), §6 (mechanism sentence), §3.6/§8.2
 (vii note), the round-5 walkthrough record. Gates/verdicts of §5.2–§5.5 are not re-scored by
 this block.
+
+### 18.6 Round-5 reviewer follow-ups (2026-08-05, registered pre-run)
+
+External review raised two readings the 18.1–18.4 data cannot separate, and one metric
+mismatch. Motivating stored-data context (zero compute, computed pre-registration): across
+boxed_{0.5,1.0,2.0,3.0} the interior median sits within 0.002 of *its own arm's init*
+(0.281/0.403/0.569/0.695 vs r₀ = 0.283/0.401/0.567/0.694) while tap rings saturate at
+≈ 1.26–1.31 wherever the box allows (clipped at the box ceiling for r_hi ≤ 1.0); SER tracks
+the tap damping. "Interior never moves off init anywhere" is what *both* readings predict.
+
+**(a) Taps-only training control — "discovers" vs "starved".** Reading A: training discovers
+damp-the-driven-rings with a transparent interior. Reading B: training moves only what it has
+gradient on; the interior profile is inherited, not chosen. Control run: `pat-both`, C-2,
+31,600 updates, eval_every=100, seeds {11,23,47,61,83,101,127,151}, trainable partition
+restricted to the four driven rings' {δ_j, κ_ext,j} (gradient-masked to taps {3,12,21,30};
+ALL μ and all interior δ/κ_ext pinned at init; head trains normally; clamp unchanged).
+**Frozen rule:** reading A (and the word "discovers") is earned iff full-partition patC2
+beats taps-only with paired-by-seed bootstrap 95% CI of (SER_tapsonly − SER_full) excluding
+zero **at eval-F** (the near-ceiling comparison protocol; coarse co-reported). If the CI
+includes zero → reading B adopted in prose: the abstract clause (pulled in this commit,
+pending this rule) STAYS OUT, and §5.7/§6 state the split finding — tap damping is trained
+(box-independent saturation ≈ 1.3), the interior profile is inherited from initialization.
+If the CI excludes zero → the abstract clause returns with **"estimator-independent"**
+replacing "universal" (the measured scope: three estimators, one task, one cell, one
+topology). Taps-only converged tap-parameters are co-reported (do taps still ride to ≈1.3?).
+
+**(b) N_eff readout ablation — §7.2's actual metric.** Gradient-aliveness (18.3-i) answers
+trainability; §7.2's N-scaling argument needs *output participation* (a ring at 10⁻³ of max
+amplitude contributes ~10⁻⁶ to y = |Σc_j a_j|²). On each stored winning-route solution
+(patC2, spsaC2 × 8 seeds): rank rings by ascending |c_j|·ā_j (ā_j = settled CW amplitude,
+the S0.4-0 participation convention), zero readout entries c_j cumulatively in that order
+(device dynamics untouched; decoder frozen: trained head + trained y_scale, the §17.7
+one-decoder rule), evaluate coarse SER (protocol of record) at each k. **N_drop\* = max k
+with SER ≤ SER_target = 5.65×10⁻³; N_eff = 32 − N_drop\*.** One robustness row: at
+k = N_drop\*+1, retrain the head only (2,000 Adam updates, lr_head = 3e-2, standard stream)
+and report whether target is recovered. Consumption: §7.2 gains one sentence quoting median
+N_eff and range, whatever they are (no verdict rule — the integer is the deliverable);
+§5.7 one clause. The §7.2 "≥30/32 gradient-alive" defense is NOT added (wrong metric).
+
+**(c) State serialization.** Every 18.6 unit writes the full converged device+decoder state
+(δ, κ_ext, μ, c_readout, head state, y_scale) to `results/s0_11/states/` so future
+diagnostics never re-train these solutions again. Reproduction gate unchanged (§18.2).
