@@ -94,6 +94,6 @@ inference-mode niche exists but is gated by a heater class the named foundry flo
 supply, and rests on sustained-vs-peak baseline conventions we document rather than hide. What
 survives all of it: a recurrent photonic SSM at GS/s line rates with class-B actuation is
 energy-competitive at scale for streaming workloads, can be *trained through its own physics for
-millijoules* when calibration is unavailable or stale, and offers latency headroom no digital
+tens of millijoules* when calibration is unavailable or stale, and offers latency headroom no digital
 baseline in our set approaches. Whether the conjunction of those conditions describes a market
 or only an experiment is a Stage-1 question, and §9 designs the experiment to answer it.

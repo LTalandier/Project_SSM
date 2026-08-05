@@ -1559,3 +1559,14 @@ not single digits; inversion insensitive; benchtop laser breaks the claim — no
 (2) §5.3 gained the forward-ref to the §7.3 inversion (a §5-only reader left with "PAT
 cheapest"); (3) §7.3 now names the adjoint as the table's nominal winner (with its
 realizability dagger) before crediting SPSA as the demonstrated-route winner.
+
+## Round-5 cluster D fixes (2026-08-05) — §5.5/§7.4
+Verified against `results/s0_9/analysis.json`: m1 medians replicate S0.5 (m1_validation row),
+offline below target at every level incl. 30%, common-mode 0.98/0.73 ratio 1.34, independent
+0.82/1.98 ratio 2.42 ✓. One bug: §5.5's intro called the m=1 coarse pair (1.0e-3 vs 8e-4)
+"statistically indistinguishable" — the coarse CI is [+2.6e-4, +2.6e-4], degenerate but
+EXCLUDING zero; indistinguishability is an eval-F fact. Intro now labels the protocol and
+defers the statistics to the F8a sweep. Added: the re-lock-is-not-a-strawman sentence
+(per-ring re-trim requires per-ring observability = the in-situ stack by another name;
+registered arms = the two coherent extremes). §7.4 "millijoules" → "tens of millijoules"
+(consistency with the cluster-C scope fix).

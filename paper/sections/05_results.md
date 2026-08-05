@@ -183,8 +183,10 @@ offline-train-then-deploy route — train the full parameter set digitally on a 
 then deploy through actuation maps, recalibrating only the digital head on-device — was given the
 *same* 5%-class calibration errors as PAT's twin (the mismatch families are drawn from one frozen
 set, so the comparison cannot be rigged by giving in-situ training a secretly-wronger competitor;
-PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ — statistically
-indistinguishable from in-situ PAT's $8\times10^{-4}$.
+PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ against in-situ PAT's
+$8\times10^{-4}$ (coarse protocol of record — a one-to-two-symbol gap the coarse floor
+scores as formally real; at eval-F, where the floor can actually resolve it, the two arms
+are statistically indistinguishable, CI including zero — the F8a sweep below).
 
 We state the consequence plainly, because the fair-comparison design exists precisely to force it:
 **at 5% calibration accuracy on this task, training in situ buys essentially nothing over
@@ -212,7 +214,10 @@ tested magnitude.
 resonance drift ($\approx 341$ MHz over 24 h $\approx 24\,\kappa_i$ at C-2 [CITE-Dacha-2025]),
 deployed after convergence, with each arm allowed its on-device response — offline recalibrates the
 head and re-locks the laser (a single global detuning re-centering); in-situ retrains the
-recurrence. The pre-registered contrast holds cleanly, and at the eval-F protocol of record the
+recurrence. (The re-lock is not a strawman: it is the strongest response available without
+per-ring observability — any per-ring re-trim requires per-ring on-device measurement and
+actuation feedback, which is the in-situ stack by another name; the registered arms are the
+two coherent extremes.) The pre-registered contrast holds cleanly, and at the eval-F protocol of record the
 verdict is now formal. Under **common-mode** drift (whole-chip thermal wander) the laser
 re-lock absorbs it and offline keeps pace ($0.98$ vs $0.73\times10^{-3}$ time-integrated,
 ratio $1.34$, CI including zero — no advantage). Under **independent** per-ring drift the
