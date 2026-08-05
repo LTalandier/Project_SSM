@@ -38,7 +38,9 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo
 > learning is censored — a quantified feasibility bound, the substrate's own dissipation
 > defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
-> four taps recover all 32) makes the input map a first-class design axis.
+> four taps recover all 32) makes the input map a first-class design axis — and the winning
+> routes' trained solutions preserve it, converging on a universal damp-the-driven-rings
+> profile.
 >
 > Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
 > training is statistically indistinguishable to 30% calibration error and under common-mode
@@ -54,7 +56,7 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > interferometer weights around an optoelectronic relay; its resonators stay fixed.*
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
-participation → S0.4-0 · niche + offline-tie/drift → S0.7 + §5.5 as upgraded by S0.9/S0.10
+participation → S0.4-0 + PR-18/S0.11 (at-solution) · niche + offline-tie/drift → S0.7 + §5.5 as upgraded by S0.9/S0.10
 (PR-5 §E + PR-16 + PR-17). The abstract carries the ratio-CI caveat as one clause and the
 Wu concession as a footnote — it preempts the objection without leading with it. The ×300
 damping spread stays in §6; the failed-prediction sentence represents that section.)
