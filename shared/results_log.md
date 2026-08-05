@@ -1548,3 +1548,14 @@ SIGSTOP pause requested by Lucas — compute time unaffected).
   · spsaC2 maintained/profile-repair · pinned2 intermediate (20/32, 12 dark, μ unmoved) ·
   repair-by-μ refuted everywhere · §7.2 caveat branch NOT fired.
 Raw: `results/s0_11/` (32 units + s0_11.{json,md}).
+
+## Round-5 cluster C fixes (2026-08-05) — §7.3/§5.3
+Arithmetic verified: per-pass conversion consistent across methods (14.8 nJ OPT / 563 nJ
+CONS per pass; to-target totals reproduce), FLOP→J range ✓, RHEL ×42 back-computes (4
+passes/update), inversion holds at CONS (99 mJ ≪ 13 J). Three prose fixes: (1) §7.3
+"all-in" was scope-inaccurate — SPSA's 22.5 ms wall time makes the §7.1 per-time holds
+material (+≈4 mJ class-B heaters, +≈5–14 mJ integrated laser → honest figure tens of mJ,
+not single digits; inversion insensitive; benchtop laser breaks the claim — now stated);
+(2) §5.3 gained the forward-ref to the §7.3 inversion (a §5-only reader left with "PAT
+cheapest"); (3) §7.3 now names the adjoint as the table's nominal winner (with its
+realizability dagger) before crediting SPSA as the demonstrated-route winner.

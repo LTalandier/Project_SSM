@@ -68,8 +68,15 @@ pre-registered target at the headline cell costs, at the optimistic corner:
 PAT reaches target in the fewest device passes but its digital twin bill exceeds SPSA's *entire
 training energy* by roughly four orders of magnitude — and our FLOP estimate is charitable to
 PAT (real accelerator utilization on a 64-dimensional complex recurrence sits far below peak).
-SPSA — no model, no twin, no added hardware — trains the physical recurrence to target for
-**about 2.6 millijoules, all-in**, at the optimistic corner (99 mJ at the vendor-part corner).
+The nominal winner of this table is the adjoint (1.1 mJ) — but its row is charged as-if-realizable
+(§5.3), so among demonstrated routes the energy story is SPSA's: no model, no twin, no added
+hardware, the physical recurrence trained to target for **about 2.6 millijoules in the budgeted
+conversion stack** at the optimistic corner (99 mJ at the vendor-part corner). Scope, so no one
+has to derive it: the §7.1 exclusions are per-time holds, and SPSA's 176,000 passes occupy
+22.5 ms of wall time — class-B heater hold adds ≈4 mJ and an integrated-class laser ≈5–14 mJ —
+so the honest figure is *tens of millijoules, not single digits*; the four-orders inversion
+against PAT's 13–44 J is insensitive to this, and a benchtop laser would break the training-energy
+claim exactly as it breaks the inference niche (§7.1).
 RHEL's echo, censored on accuracy grounds anyway, is also energy-dominated by its own conjugator
 pump (×42 its conversion stack per update). For Stage 1 this sharpens §9's ordering: SPSA is not
 merely the simplest route but by far the cheapest to *run as training*, and PAT's role is best

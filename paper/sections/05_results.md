@@ -103,7 +103,8 @@ paper carries this qualifier.
 The primary metric is sample-efficiency: device passes to reach target, one physical pass being
 one sequence through the substrate in any direction (PR-7). Ranked lexicographically by success
 fraction then median passes (PR-8), with the digital-compute side-ledger co-reported but never
-folded into the rank:
+folded into the rank (converting both ledgers to joules *inverts* this ranking — §7.3; the
+two-ledger principle exists precisely so that neither metric is presented as the truth):
 
 | route | success | median device passes → target | final SER (median) | digital ledger (at budget $B$) |
 |---|---|---|---|---|
