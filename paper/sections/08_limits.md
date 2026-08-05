@@ -34,7 +34,10 @@ and the white-space claim itself is one-sided evidence from a pre-registered sea
 re-swept before submission (debt #1). The S0.4-0 calibration retired one internal debt (the
 drive build-up controversy resolved by measurement: ×0.42, doublet-quenched) and left one open:
 the on-resonance floor calibration under worst-case de-saturation (anchor-risk vii, §3.6),
-carried as a label.
+carried as a label — and later made concrete by the PR-18 endpoint diagnostic: three of eight
+SPSA solutions end with a ring in the hypothetically super-threshold corner (min
+$-0.06\,\kappa_i$; §3.6), an endpoint-only measurement whose Stage-1 mitigation is the
+already-computed δ-aware clamp ($r \approx 0.2547$).
 
 ## 8.3 The benchmark anchor we do not use
 

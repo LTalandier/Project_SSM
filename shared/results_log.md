@@ -1527,3 +1527,24 @@ solutions, not lookalikes).
   §2.2 validation scope (simulator-not-model); §2.1→§6 LinOSS-regime tension stated.
 Raw: `results/s0_11/{runs/,s0_11.json,s0_11.md}` · runner `analysis/s0_11_run_one.py` ·
 aggregate `analysis/s0_11_analyze.py`.
+
+## S0.11 stage 2 — bake-off arms at solution (2026-08-05; PR-18 rules applied as frozen)
+Fingerprints **16/16 bit** (32/32 across both stages; thawed units' wall_s includes a ~14 h
+SIGSTOP pause requested by Lucas — compute time unaffected).
+- **patC2 (pat-both ≡ §5.5 m1 devices): gate 32/32 on every seed**, worst ratio 1.66e-3
+  (θ₀-class margin 1.42e-3) → maintained. **spsaC2: median 30.5/32** (range 29–32) →
+  maintained. §5.2 interpretation unchanged per rule; §5.7 gains the at-solution paragraph.
+- **Universal actuator structure:** all three trained-κ_ext arms (boxed3, patC2, spsaC2),
+  24/24 seed-runs, converge to taps {3,12,21,30} → r ≈ 1.2–1.35 with undriven rings near
+  their init (bake-off ~0.3, boxed ~0.69); sd(r) ≈ 0.33. μ never grows (medians 0.28–0.29;
+  SPSA spreads links to [−0.34, +0.57]). §6 mechanism generalized; §5.7 + §6 cross-refs added.
+- **vii endpoint rule FIRED (≤0 branch):** min δ-aware κ_net = **−0.063κᵢ** — 3/8 SPSA
+  seeds end with ≥1 ring super-threshold under the S0.4-0 single-pole hypothetical
+  (exposed rings r 0.167–0.222, |δ| 0.65–1.04κᵢ; seeds 47/83/127). PAT min +0.311 achieved
+  (+0.048 band); §6 arms ≥ +1.28. Every exposed endpoint lies below the δ-aware clamp
+  0.2547 → named as the Stage-1 mitigation. §3.6 + §8.2 updated per the frozen rule
+  (exposure stated; hypothetical-vs-runs scoping + endpoint-only limit stated).
+- Verdict summary (18.4): boxed3 maintained/profile-repair · patC2 maintained/profile-repair
+  · spsaC2 maintained/profile-repair · pinned2 intermediate (20/32, 12 dark, μ unmoved) ·
+  repair-by-μ refuted everywhere · §7.2 caveat branch NOT fired.
+Raw: `results/s0_11/` (32 units + s0_11.{json,md}).

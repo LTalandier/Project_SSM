@@ -126,7 +126,18 @@ gate and are recorded for review. One anchor risk stays open (vii): the calibrat
 numbers are computed on-resonance; a detuned ring at $r_\text{min}$ can reach
 $\kappa_\text{net} = -0.48\kappa_i$ under worst-case de-saturation, and a δ-aware floor would sit
 at $0.2547$ — the conformance check that would settle it was measured to be not-cheap and is
-carried as a labelled risk, not silently absorbed.
+carried as a labelled risk, not silently absorbed. A pre-registered endpoint diagnostic
+(PR-18; S0.11) later measured the label against the trained solutions themselves: under the
+same δ-aware hypothetical, three of eight SPSA seeds end with at least one ring in the
+super-threshold corner (min $\kappa_\text{net} = -0.06\,\kappa_i$; rings at $r = 0.17$–$0.22$
+with $|\delta| = 0.65$–$1.0\,\kappa_i$), while PAT's endpoints stay sub-threshold
+($+0.31\,\kappa_i$ at achieved detunings) and both §6 arms sit far from the corner
+($\geq +1.3\,\kappa_i$). The exposure lives in the hypothetical, not the runs (the as-built
+substrate is δ-independent in gain and never lases, and the measured doublet quench of §3.4
+suggests the single-pole build-up it assumes is pessimistic) — but the label is no longer
+vacuous, and every exposed endpoint sits below the δ-aware clamp $r \approx 0.2547$, which is
+therefore the concrete mitigation Stage 1 inherits. Mid-training trajectories are not stored;
+the measurement binds endpoints only.
 
 ## 3.7 The ledger as method
 

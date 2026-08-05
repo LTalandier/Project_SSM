@@ -105,7 +105,7 @@ one sequence through the substrate in any direction (PR-7). Ranked lexicographic
 fraction then median passes (PR-8), with the digital-compute side-ledger co-reported but never
 folded into the rank:
 
-| route | success | median device passes → target | final SER (median) | digital ledger |
+| route | success | median device passes → target | final SER (median) | digital ledger (at budget $B$) |
 |---|---|---|---|---|
 | **PAT** (twin-backward) | 8/8 | **38,400** | $8\times10^{-4}$ | 505,600 |
 | **adjoint**† (physical reverse pass) | 8/8 | 73,600 | $5\times10^{-4}$ | 0 |
@@ -128,9 +128,11 @@ rule), the eight paired differences all fall within two grid steps ($+33{,}600$ 
 positive on 8/8 seeds), and a bootstrap over values that concentrated collapses onto the grid.
 It should be read as a sign-consistent separation bounded by the grid resolution, not as a
 distributional interval. The three routes trade the same axes the theory predicts they should.
-**PAT** is cheapest on the physical device but spends a $13\times$-larger digital ledger and
-carries the full burden of characterizing a differentiable twin (§4; hardware ledger,
-supplementary note N2). **The adjoint** matches
+**PAT** is cheapest on the physical device but pays for it digitally — two twin passes
+(forward + backward) for every physical pass, a side-ledger of 505,600 digital passes over
+the full budget (the co-reported column above; the device-pass column is to-target, so the
+two columns are deliberately not a ratio) — and carries the full burden of characterizing a
+differentiable twin (§4; hardware ledger, supplementary note N2). **The adjoint** matches
 the exact-gradient ceiling in accuracy at zero digital cost and $1.9\times$ PAT's device passes —
 though its count charges one physical reverse pass *as if* realizable, which no recurrent photonic
 system has yet demonstrated (a caveat we quarantine, §4). **SPSA** costs $4.6\times$ PAT's device
@@ -290,9 +292,11 @@ magnitude collapses geometrically with distance from the drive — by ring 32 it
 twenty-five orders of magnitude below the maximum — and the *participation profile* (settled
 per-ring amplitude relative to the maximum) counts only $\{1, 3, 5\}$ of 32 rings above
 $\{10^{-1}, 10^{-2}, 10^{-3}\}$. A nominally 32-ring lattice driven at one port is, effectively,
-a three-ring computer with 29 passengers. This is the in-data form of the program's
-reservoir-falsifier: it is *why* the readout-only baseline stalls at $2.2\times10^{-2}$ (§5.2),
-and it is a controllability property of the chain physics, not of any training method.
+a three-ring computer with 29 passengers — a controllability property of the chain physics, not
+of any training method. (The §5.2 readout-only baseline is a *separate* falsifier, not this
+one's consequence: that baseline runs under the resolved four-tap map — full amplitude
+participation — and still stalls at $2.2\times10^{-2}$. What it lacks is trained poles, not
+drive coverage; an earlier draft wrongly attributed its stall to single-tap starvation.)
 
 The pre-registered remedy is a measured, minimal input map: the smallest tap set (capped at
 $K = 4$) under which *every* ring's gradient clears $10^{-3}$ of the maximum. The resolved map,
@@ -309,6 +313,21 @@ were adopted before the finalists were evaluated. The price of controllability i
 honestly where it lands: four drive E/O channels instead of one, priced in the systems envelope
 (§7) — trainability of the deep lattice is bought with exactly the conversion overhead the
 advantage question (§7.4) must then carry.
+
+Resolved at θ₀, the map's guarantee is *a priori* for the initialization only — so a
+pre-registered diagnostic (PR-18; S0.11) reproduced the winning routes' converged solutions
+bit-identically (and both §6 arms'; 32/32 seed-runs eval-trace-exact) and re-ran this
+section's gate *at the solutions*. The demonstration routes maintain it: PAT clears **32/32 on
+every seed** with worst ratio $1.7\times10^{-3}$ — the θ₀-class margin — and SPSA holds a
+median of 30.5/32 (range 29–32). The mechanism is the one §6 identifies: every trained arm,
+on every seed, converges to the *same* actuator structure — the four driven rings damped to
+$r \approx 1.3$ while the undriven rings stay near their initialization
+($\mathrm{sd}(r) \approx 0.33$) — heterogeneity that buys damping where the input lands
+without severing gradient transport. The counterexample is the §6 uniform pin ($r^* = 2.0$),
+which trains to $1.3\times10^{-3}$ with only 20/32 rings above the gate (the three inter-tap
+interiors dark; §6). "$N = 32$ carries the measured profile" therefore extends from the
+initialization to the winning routes' solutions; a uniform-damping design in the same box
+does not inherit that extension.
 
 ## 5.8 Secondary diagnostic (registered, deferred)
 

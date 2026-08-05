@@ -52,7 +52,8 @@ damping where the input lands. The heterogeneous profile above is therefore not 
 overparameterization curiosity: it is the mechanism by which the trained substrate buys
 task-optimal damping *and* its own trainability at once — a combination a uniform design
 value structurally cannot express, and a second, sharper reading of the ×2.5
-pinned-vs-trained gap. (Settled-amplitude participation decouples from gradient reach at the
+pinned-vs-trained gap. The structure is not an artifact of this arm: the bake-off's winning
+routes converge to the same tap-heavy profile at their solutions (§5.7). (Settled-amplitude participation decouples from gradient reach at the
 solutions — winner counts $\{8, 15, 22\}$ of 32 above $\{10^{-1}, 10^{-2}, 10^{-3}\}$ vs
 $\{4, 26, 32\}$ at θ₀ — the trainability-relevant quantity is the gradient gate; both are
 reported in S0.11.)
