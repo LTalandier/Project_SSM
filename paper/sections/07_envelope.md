@@ -38,7 +38,16 @@ by up to ~15× in energy per sample at N = 128 and 2 GS/s, with end-to-end laten
 tens of nanoseconds per sample against the baseline's milliseconds — but only when three
 conditions hold simultaneously: line rates ≳0.5 GS/s (every scenario loses everything at
 0.1 GS/s), N ≳ 32 (conversion is N-independent; digital cost scales with N — the structural
-effect the architecture banks on), and **suspended low-power heaters** (~1 mW/π, class B). Under
+effect the architecture banks on), and **suspended low-power heaters** (~1 mW/π, class B).
+One measured caveat now bounds the middle condition: at the headline cell the deployed
+equalizer's *output* rides on $N_\text{eff} \approx 6$–$8$ of 32 rings (readout ablation on
+the stored solutions, PR-18 §18.6b; head-refit recovers none of the zeroed readouts). The
+digital baselines in this comparison are priced at the nominal N, but a baseline built to
+the *function* would carry ~6–8 states and shrink its cost accordingly — so the N-scaling
+premise holds only for workloads that actually exercise the state dimension, which the
+7-tap equalization family does not. The niche verdict inherits that scope condition
+(§8.5's narrow-task-family limit, here quantified), and a task engineered to *need* N
+states — the registered long-coherent-memory residue — is what would discharge it. Under
 the registered worst-case holding convention the foundry-standard heater class loses to every
 baseline everywhere in the window at the deployable corner; the demonstrated-foundry path
 therefore does not reach the energy niche as computed — a Stage-1 platform constraint stated as

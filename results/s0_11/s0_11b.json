@@ -1,0 +1,74 @@
+{
+ "tapsonly_control": {
+  "full_fine_by_seed": [
+   0.0009014423076923077,
+   0.0008814102564102565,
+   0.0007612179487179489,
+   0.0008413461538461541,
+   0.0008613782051282053,
+   0.0007612179487179489,
+   0.0008012820512820517,
+   0.0009214743589743591
+  ],
+  "tapsonly_fine_by_seed": [
+   0.0009915865384615382,
+   0.0010016025641025638,
+   0.0008313301282051285,
+   0.0010216346153846152,
+   0.0009615384615384612,
+   0.0009114583333333331,
+   0.0009515224358974356,
+   0.0008914262820512819
+  ],
+  "full_fine_median": 0.0008513621794871797,
+  "tapsonly_fine_median": 0.0009565304487179484,
+  "paired_ci_tapsonly_minus_full_fine": [
+   2.5040064102563797e-05,
+   0.00015524839743589678
+  ],
+  "median_diff_fine": 0.00011017628205128144,
+  "full_coarse_median": 0.00078125,
+  "tapsonly_coarse_median": 0.0006510416666666667,
+  "verdict_18_6a": "A-discovers"
+ },
+ "neff_patC2": {
+  "n_eff_by_seed": [
+   6,
+   5,
+   6,
+   6,
+   5,
+   6,
+   6,
+   5
+  ],
+  "n_eff_median": 6.0,
+  "n_eff_range": [
+   5,
+   6
+  ],
+  "refit_recovers_any": false,
+  "k_hold_2x_baseline_median": 26.0,
+  "fingerprints_all_bit": true
+ },
+ "neff_spsaC2": {
+  "n_eff_by_seed": [
+   8,
+   7,
+   8,
+   8,
+   7,
+   7,
+   7,
+   7
+  ],
+  "n_eff_median": 7.0,
+  "n_eff_range": [
+   7,
+   8
+  ],
+  "refit_recovers_any": false,
+  "k_hold_2x_baseline_median": 24.0,
+  "fingerprints_all_bit": true
+ }
+}

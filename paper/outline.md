@@ -38,24 +38,29 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo
 > learning is censored — a quantified feasibility bound, the substrate's own dissipation
 > defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
-> four taps recover all 32) makes the input map a first-class design axis.
+> four taps recover all 32) makes the input map a first-class design axis — and the winning
+> routes' trained solutions preserve it, converging on an estimator-independent
+> damp-the-driven-rings profile whose interior contribution survives a registered
+> taps-only falsifier, narrowly.
 >
 > Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
 > training is statistically indistinguishable to 30% calibration error and under common-mode
 > drift. Its advantage appears only where nothing offline can follow: under uncorrelated
 > per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a
 > frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a
-> conditional low-latency niche, gated on the low-power heater class *and* on
-> integrated-class laser, locking, control, and packaging. One registered prediction — that
+> conditional low-latency niche, gated on the low-power heater class, on
+> integrated-class laser, locking, control, and packaging — and on workloads that exercise
+> the state dimension: a registered ablation finds the deployed equalizer's output rides on
+> 6–8 of 32 rings. One registered prediction — that
 > the damping optimum tracks task memory span — failed, and is reported as failed. The
 > pre-registration ledger, substrate model, and training code are released with the paper.
 >
 > ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains
 > interferometer weights around an optoelectronic relay; its resonators stay fixed.*
 
-<!-- At-solution clause PULLED 2026-08-05 pending the PR-18 §18.6a taps-only control
-(reviewer two-readings objection: "discovers" vs gradient-starvation); if the frozen rule
-fires, restore with "estimator-independent" in place of "universal". -->
+<!-- At-solution clause pulled 2026-08-05 pending PR-18 §18.6a, RESTORED same day with
+"estimator-independent" wording after the frozen rule fired (paired CI [+0.25,+1.55]e-4
+excludes 0, A-discovers); N_eff 6–8 niche condition added per §18.6b consumption. -->
 
 (Sentence→gate map: trainability → Gate ii (PR-8/9) · ranking/energy → S0.5 + S0.7 ·
 participation → S0.4-0 + PR-18/S0.11 (at-solution) · niche + offline-tie/drift → S0.7 + §5.5 as upgraded by S0.9/S0.10

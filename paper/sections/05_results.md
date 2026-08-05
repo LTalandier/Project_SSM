@@ -341,6 +341,22 @@ interiors dark; §6). "$N = 32$ carries the measured profile" therefore extends 
 initialization to the winning routes' solutions; a uniform-damping design in the same box
 does not inherit that extension.
 
+Two registered follow-ups bound what that means (PR-18 §18.6). *Output* participation is far
+narrower than gradient reach: ranking rings by readout contribution ($|c_j|\,\bar a_j$) and
+zeroing them cumulatively with the decoder frozen, the deployed solutions hold within 2× of
+their own error floor until ~24–26 of 32 readouts are gone — the delivered function rides on
+$N_\text{eff} \approx$ **6–8 rings** (median 6 for PAT, 7 for SPSA; a registered head-refit
+row recovers none of it) — a number §7.2 must and does carry. And the interior's contribution
+to the trained solution is real but thin: a taps-only control (only the four driven rings'
+$\{\delta, \kappa_\text{ext}\}$ trainable, all else pinned at init) reaches within 12% of the
+full partition at eval-F, the full partition better by a paired CI of
+$[+0.25, +1.55]\times10^{-4}$ excluding zero — the pre-registered "discovers" reading, earned
+by a modest margin. The tap damping carries most of the solution, and the restricted arm is
+not the full one truncated: its taps compensate asymmetrically ($r \approx \{1.52, 1.30,
+0.74, 1.34\}$, seed-consistent, vs the full arm's near-uniform $\approx 1.3$). The coarse
+floor, for the record, *inverts* this control's ordering (taps-only reads two symbols better
+at 3,840; eval-F resolves the true one) — §5.1's floor hazard, illustrated once more.
+
 ## 5.8 Secondary diagnostic (registered, deferred)
 
 PR-14 — the bias/variance decomposition of each estimator's gradient against the BPTT reference

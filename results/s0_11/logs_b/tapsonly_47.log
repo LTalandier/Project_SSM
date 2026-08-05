@@ -1,0 +1,4 @@
+/home/lucas/Documents/Project_SSM/analysis/s0_11b_run_one.py:112: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  row["tap_r"] = [round(float(sub.kappa_ext[j] / ki), 4) for j in taps]
+done tapsonly_47: fp=new-arm coarse 7.81e-04 fine 8.31e-04 tap_r [1.5114, 1.2976, 0.741, 1.3379] [11741.0s]

@@ -1,0 +1,1 @@
+{"set": "tapsonly", "seed": 83, "registered": "PR-18 \u00a718.6 (ec2d4e3)", "smoke": false, "fingerprint": "new-arm", "final_ser_coarse": 0.0005208333333333333, "final_ser_fine": 0.0009615384615384612, "tap_r": [1.515, 1.2993, 0.7449, 1.3406], "tap_delta_over_ki": [-1.0907, -0.0651, 0.0909, 0.2626], "interior_moved_max": 0.0, "wall_s": 11754.4}

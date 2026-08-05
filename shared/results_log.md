@@ -1582,3 +1582,26 @@ idealized-conjugator control per the recorded S0.4c diagnosis: it "reaches targe
 binding, chain second-order), which strengthens the bound (no conjugator quality rescues
 echo learning in-regime; the honest echo is actively harmful, +0.118 readout differential).
 Verified: −22.4 dB chain (recon JSON), 0.14/+0.118 arithmetic, R1 recovery rows, c2_spot.
+
+## S0.11b — PR-18 §18.6 verdicts (2026-08-05; both frozen rules fired, both informative)
+24/24 units; reproduced solutions bit-identical 16/16 (patC2 seed-127 straggler included);
+states serialized to `results/s0_11/states/` (no future re-training).
+- **(a) taps-only control → A-DISCOVERS, narrowly.** Full partition beats taps-only at
+  eval-F: medians 8.51e-4 vs 9.57e-4 (+12%), paired CI (tapsonly−full) **[+0.25, +1.55]e-4
+  excludes 0** → "discovers" earned per the frozen rule; abstract clause RESTORED with
+  "estimator-independent" wording. Honesty carried into §5.7: tap damping does most of the
+  work (taps-only within 12% of full); restricted arm is a different solution, not a
+  truncation (taps compensate asymmetrically r≈{1.52,1.30,0.74,1.34}, seed-consistent).
+  Floor-hazard bonus: the COARSE floor inverts this ordering (taps-only 6.5e-4 vs full
+  7.8e-4) — eval-F resolves it; noted in §5.7.
+- **(b) N_eff ablation → 6–8, not ~26.** patC2 median N_eff 6 (range [5,6]), spsaC2 7
+  ([7,8]); head-refit (2,000 upd) recovers NOTHING (0/15 rows); SER holds ≤2× its own floor
+  out to k≈24–26 drops then cliffs. Consumed per rule: §7.2 now bounds its own N-scaling
+  premise (function-built digital baseline carries ~6–8 states; premise holds only for
+  workloads that exercise N; 7-tap family does not; long-coherent-memory residue = the
+  discharge path); abstract niche sentence gains the condition. Reviewer's ~26 guess was
+  the drop count (n_drop*≈26), not N_eff.
+- OTS anchor: HEAD `ec2d4e3` stamped to public calendars (`timestamps/`), pending
+  attestation; upgrade at submission. OSF second anchor = Lucas action.
+Raw: `results/s0_11/{runs_b/,states/,s0_11b.json,s0_11b.md}` · runner
+`analysis/s0_11b_run_one.py` · analyzer `analysis/s0_11b_analyze.py`.
