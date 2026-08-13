@@ -102,6 +102,66 @@ def make_ta_dataset(n_symbols: int, snr_dB: float = 28.0,
     return u, target, d
 
 
+# ------------------------------------------------------------------ #
+# PR-19 (🔒 SIGNED 2026-08-13) — T-D: unipolar despread-31.
+# m-sequence of the primitive polynomial x⁵+x²+1 over GF(2), state 11111,
+# Fibonacci recurrence s_n = s_{n−5} ⊕ s_{n−2}; the resulting 31-chip code is
+# pinned verbatim below and gate-tested (length 31, weight 16, all 31 cyclic
+# 5-bit windows distinct = the m-sequence property).
+# ------------------------------------------------------------------ #
+
+def _mseq31() -> list:
+    s = [1, 1, 1, 1, 1]
+    for n in range(5, 31):
+        s.append(s[n - 5] ^ s[n - 2])
+    return s
+
+
+MSEQ31 = _mseq31()
+TD_L = 31                    # chips per symbol (PR-19 §19.1)
+TD_DECISION_CHIP = 30        # decision position: last chip of the symbol
+
+
+def make_td_dataset(n_symbols: int = 64, snr_dB: float = 28.0,
+                    seed: int | None = None, taps: dict | None = None
+                    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """PR-19 T-D sequence. Returns (u, target, mask):
+      u      : (31·n_symbols,) received chip stream — each 4-PAM symbol spread
+               by MSEQ31, off-chips at the lowest PAM level a(0) = −3 (no new
+               encoder levels), then the frozen Jaeger–Haas channel at chip
+               rate (ISI + cubic + AWGN, verbatim).
+      target : symbol PAM level at decision positions (last chip), 0 elsewhere.
+      mask   : bool, True at decision positions.
+    Same streaming-seed convention as make_ta_dataset."""
+    g = None
+    if seed is not None:
+        g = torch.Generator().manual_seed(int(seed))
+    idx = torch.randint(0, 4, (n_symbols,), generator=g)
+    levels = torch.tensor(PAM_LEVELS, dtype=torch.float64)
+    d_sym = levels[idx]
+    code = torch.tensor(MSEQ31, dtype=torch.float64)
+    chips = d_sym[:, None] * code[None, :] \
+        + PAM_LEVELS[0] * (1.0 - code)[None, :]
+    d = chips.reshape(-1)
+    ch = JaegerHaasChannel(snr_dB, taps=taps)
+    u = ch.apply(d, generator=g)
+    target = torch.zeros_like(d)
+    mask = torch.zeros(d.shape[0], dtype=torch.bool)
+    pos = torch.arange(n_symbols) * TD_L + TD_DECISION_CHIP
+    target[pos] = d_sym
+    mask[pos] = True
+    return u, target, mask
+
+
+def symbol_error_rate_td(pred: torch.Tensor, target: torch.Tensor,
+                         mask: torch.Tensor, warmup_symbols: int = 2) -> float:
+    """SER at the T-D decision positions, skipping the first `warmup_symbols`
+    symbols (the ISI/settling transient; PR-19 §19.1)."""
+    p = pred[mask][warmup_symbols:]
+    t = target[mask][warmup_symbols:]
+    return float((nearest_pam(p) != t).double().mean())
+
+
 def nearest_pam(x: torch.Tensor) -> torch.Tensor:
     """Nearest-4-PAM decision (the SER decision rule)."""
     levels = torch.tensor(PAM_LEVELS, dtype=x.dtype, device=x.device)

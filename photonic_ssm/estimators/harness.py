@@ -32,7 +32,8 @@ import torch
 from ..substrate import cells as cellmod
 from ..substrate import normalization as O2
 from ..substrate.dissipative_ring import DissipativeRingSubstrate
-from ..tasks.equalization import make_ta_dataset, symbol_error_rate
+from ..tasks.equalization import (make_ta_dataset, make_td_dataset,
+                                  symbol_error_rate, symbol_error_rate_td)
 from .adjoint import AdjointEstimator
 from .pat import MPAR_LEVELS, PATEstimator, scaled_mpar
 from .rhel import RHELEstimator
@@ -47,6 +48,11 @@ EVAL_FINE_BATCHES = 52   # PR-17 eval-F: 52*8*240 = 99,840 scored symbols
 BATCH = 8            # PR-6 §D batch (= device passes per forward eval, PR-7)
 SNR_DB = 28.0        # PR-2 headline cell
 RESOLVED_TAPS = (2, 11, 20, 29)   # S0.4-0 resolved B {3,12,21,30}, 0-based
+# PR-19 (🔒 2026-08-13) T-D protocol constants (§19.1):
+TD_SYMBOLS = 64          # symbols/episode → 31·64 = 1,984 chips
+TD_WARMUP_SYM = 2        # scored symbols/sequence = 62
+TD_EVAL_COARSE = 8       # 8·8·62 = 3,968 scored symbols (coarse of record)
+TD_EVAL_FINE = 202       # 202·8·62 = 100,192 (eval-F)
 
 
 def encode_drive(u: torch.Tensor) -> torch.Tensor:
@@ -179,6 +185,55 @@ def final_fine_ser(sub, head, y_scale: float,
     return eval_ser(sub, head, y_scale, n_batches=n_batches)
 
 
+def fresh_batch_td(run_seed: int, it: int):
+    """PR-19 T-D stream — the fresh_batch seeding convention verbatim.
+    Returns (u, target, mask); mask is sequence-fixed (decision positions)."""
+    us, ts, mask = [], [], None
+    for b in range(BATCH):
+        u, tgt, m = make_td_dataset(TD_SYMBOLS, SNR_DB,
+                                    seed=run_seed * 1_000_003 + it * 101 + b,
+                                    taps=TASK_TAPS)
+        us.append(u)
+        ts.append(tgt)
+        mask = m
+    return torch.stack(us), torch.stack(ts), mask
+
+
+def eval_ser_td(sub, head, y_scale, n_batches: int = TD_EVAL_COARSE) -> float:
+    """PR-19 T-D held-out eval — the eval_ser reserved-stream protocol
+    verbatim (EVAL_SEED_BASE streams, never trained; coarse = first 8 of the
+    202 fine batches, the strict-subsample property preserved)."""
+    total = 0.0
+    n = 0
+    with torch.no_grad():
+        for j in range(n_batches):
+            us, ts, mask = [], [], None
+            for b in range(BATCH):
+                u, tgt, m = make_td_dataset(
+                    TD_SYMBOLS, SNR_DB, seed=EVAL_SEED_BASE + j * 101 + b,
+                    taps=TASK_TAPS)
+                us.append(u)
+                ts.append(tgt)
+                mask = m
+            u_raw, target = torch.stack(us), torch.stack(ts)
+            y = sub.forward_intensity(
+                encode_drive(u_raw).unsqueeze(-1),
+                generator=torch.Generator().manual_seed(
+                    EVAL_SEED_BASE + 7 * j))
+            pred = head(y / y_scale)
+            for b in range(BATCH):
+                total += symbol_error_rate_td(pred[b], target[b], mask,
+                                              warmup_symbols=TD_WARMUP_SYM)
+                n += 1
+    return total / n
+
+
+def final_fine_ser_td(sub, head, y_scale,
+                      n_batches: int = TD_EVAL_FINE) -> float:
+    """PR-19 eval-F for T-D, at the trained normalization (§17.7 rule)."""
+    return eval_ser_td(sub, head, y_scale, n_batches=n_batches)
+
+
 def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           N: Optional[int] = None, lr_phys_frac: float = 1e-3,
           lr_head: float = 3e-2, spsa_c_frac: float = 0.01,
@@ -186,7 +241,8 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
           gain_mode: Optional[str] = None,
           r0: Optional[float] = None, r_hi: Optional[float] = None,
           pin_kext: bool = False, mismatch_scale: float = 1.0,
-          warm=None, return_state: bool = False, taps_only: bool = False):
+          warm=None, return_state: bool = False, taps_only: bool = False,
+          task: str = "ta"):
     """One training run. `method` ∈ {"bptt","pat-perfect","pat-M-par",
     "pat-M-struct","pat-both","spsa","adjoint","rhel","rhel-ideal",
     "head-only"}. Smoke HPs from the S0.4a spec; the equal-HP *search* is
@@ -195,6 +251,11 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
     `warm=(sub, head)` (S0.9b) continues on an EXISTING substrate+head instead
     of constructing fresh (the deploy-then-drift loop); `return_state` also
     returns (led, sub, head)."""
+    if task not in ("ta", "td"):
+        raise ValueError(task)
+    if task == "td" and not (method == "bptt" or method.startswith("pat")):
+        # PR-19 §19.2: T-D arms are BPTT and PAT only (task-property question).
+        raise ValueError(f"task='td' supports bptt/pat-* only, got {method}")
     torch.manual_seed(run_seed)
     if warm is not None:               # S0.9b: continue on a live (drifted) device
         sub, head = warm
@@ -210,7 +271,10 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
 
     # Fixed per-seed output normalization (common across methods: same θ₀ +
     # same data stream + a method-independent ASE tag).
-    u0, _ = fresh_batch(run_seed, 0)
+    if task == "td":
+        u0, _, _ = fresh_batch_td(run_seed, 0)
+    else:
+        u0, _ = fresh_batch(run_seed, 0)
     with torch.no_grad():
         y0 = sub.forward_intensity(encode_drive(u0).unsqueeze(-1),
                                    generator=ase_gen(run_seed, 0, 0))
@@ -321,12 +385,18 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
         raise ValueError(method)
 
     for it in range(1, n_updates + 1):
-        u_raw, target = fresh_batch(run_seed, it)
+        if task == "td":
+            u_raw, target, tmask = fresh_batch_td(run_seed, it)
+        else:
+            u_raw, target = fresh_batch(run_seed, it)
+            tmask = None
         u = encode_drive(u_raw).unsqueeze(-1)
 
         if method == "bptt":
             y = sub.forward_intensity(u, generator=ase_gen(run_seed, it, 1))
-            loss = mse_loss(head(y / y_scale), target)
+            pred = head(y / y_scale)
+            loss = (mse_loss(pred[:, tmask], target[:, tmask])
+                    if tmask is not None else mse_loss(pred, target))
             opt_head.zero_grad()
             for p in in_situ:
                 p.grad = None
@@ -339,7 +409,9 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
             loss_val = float(loss.detach())
         elif method_base == "pat":
             def pat_loss(y_pat):
-                return mse_loss(head(y_pat / y_scale), target)
+                pred = head(y_pat / y_scale)
+                return (mse_loss(pred[:, tmask], target[:, tmask])
+                        if tmask is not None else mse_loss(pred, target))
             opt_head.zero_grad()
             for p in in_situ:
                 p.grad = None
@@ -426,7 +498,9 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
             else:                                    # bptt reference
                 passes_now = 0
             led["eval_trace"].append(
-                (it, passes_now, eval_ser(sub, head, y_scale)))
+                (it, passes_now,
+                 (eval_ser_td if task == "td" else eval_ser)(
+                     sub, head, y_scale)))
 
     # Ledger totals (PR-7).
     if method_base in ("pat", "adjoint", "rhel"):
@@ -437,14 +511,24 @@ def train(method: str, cell_label: str, run_seed: int, n_updates: int,
         led["digital_passes"] = 0
 
     # Final SER on one fresh held-out batch (context, ungated at S0.4a).
-    u_raw, target = fresh_batch(run_seed, 999_983)
+    if task == "td":
+        u_raw, target, tmask_f = fresh_batch_td(run_seed, 999_983)
+    else:
+        u_raw, target = fresh_batch(run_seed, 999_983)
+        tmask_f = None
     with torch.no_grad():
         y = sub.forward_intensity(encode_drive(u_raw).unsqueeze(-1),
                                   generator=ase_gen(run_seed, 999_983, 5))
         pred = head(y / y_scale)
-        led["ser_final"] = sum(
-            symbol_error_rate(pred[b], target[b], warmup=WARMUP)
-            for b in range(BATCH)) / BATCH
+        if tmask_f is not None:
+            led["ser_final"] = sum(
+                symbol_error_rate_td(pred[b], target[b], tmask_f,
+                                     warmup_symbols=TD_WARMUP_SYM)
+                for b in range(BATCH)) / BATCH
+        else:
+            led["ser_final"] = sum(
+                symbol_error_rate(pred[b], target[b], warmup=WARMUP)
+                for b in range(BATCH)) / BATCH
     led["in_situ_r"] = (sub.kappa_ext.detach() / ki).tolist()
     if return_state:
         led["y_scale"] = y_scale       # the head's trained normalization —
