@@ -1868,3 +1868,90 @@ N_eff and range, whatever they are (no verdict rule — the integer is the deliv
 **(c) State serialization.** Every 18.6 unit writes the full converged device+decoder state
 (δ, κ_ext, μ, c_readout, head state, y_scale) to `results/s0_11/states/` so future
 diagnostics never re-train these solutions again. Reproduction gate unchanged (§18.2).
+
+---
+
+## PR-19 — ⬜ PROPOSED-FOR-SIGNATURE (2026-08-13) — long-coherent-memory task T-D (S0.12)
+
+> **Provenance:** proposed at external review (round-6 prompt, 2026-08-13); the discharge
+> path for the N_eff finding (PR-18 §18.6b, consumed in §7.2). Builds on the PR-18
+> taps-only and readout-ablation controls. Task chosen by PI from the STEP-1 candidates
+> memo (`docs/s0_12/pr19_task_candidates.md`): **T-D**, unipolar despread-31. Nothing in
+> this block runs before PI signature; the seed-7 pilot (§19.6) runs first and its
+> wall-clock projection is reported before any fleet.
+
+### 19.1 Task T-D (frozen)
+Source = the frozen T-A 4-PAM alphabet and statistics. Each symbol $s_k$ is spread over
+**L = 31 chips** at the sample rate (2 GS/s; chip = sample; symbol rate 64.5 MS/s) by the
+fixed m-sequence from primitive polynomial $x^5+x^2+1$ over GF(2), initial state 11111
+(chips $c_l \in \{0,1\}$, weight 16, fully determined). **Unipolar map, no new encoder
+levels:** chip amplitude $x[n] = a(s_k)$ if $c_{l(n)}=1$ else $a(0)$, with $a(\cdot)$ the
+frozen 4-PAM amplitude map, $l(n) = n \bmod 31$ aligned to symbol boundaries. Channel =
+the frozen T-A 7-tap ISI at 28 dB, applied at chip rate, unchanged. Decision positions =
+last chip of each symbol ($l = 30$); loss = MSE to the symbol level at decision positions
+(masked elsewhere); SER scored per symbol. Episode = **64 symbols = 1,984 chips**
+(WARMUP = 2 symbols); batch 8 → 496 scored symbols/pass. Protocols: **coarse = 3,968
+scored symbols (8 eval passes), eval-F = 100,192 (202)** — the PR-3/PR-17 floor logic
+transfers with these counts. Realizability row: span 31 chips = 15.5 ns ≤ max amplitude
+memory ≈ 53 chips at the light edge of the registered box (κ_net ≈ 0.42κᵢ at r_min) —
+the box contains the regime the task demands; θ₀ memory ≈ 32 chips sits at the span.
+
+### 19.2 Cell, seeds, arms
+C-2, seeds {11,23,47,61,83,101,127,151}; **pilot seed 7 excluded from scoring**. Arms:
+(i) **pinned-damping sweep** (§6 protocol verbatim): BPTT, r ∈ {0.2, 0.3, 0.5, 1.0, 2.0,
+3.0}, plateau flag as S0.6 — measures the T-D optimum $r^*_D$; (ii) **BPTT free-partition
+reference** — the on-task ceiling, run at the same update budget as (iii) (the §5.1
+matched-budget scope convention, no protocol-local mismatch by construction);
+(iii) **PAT (pat-both, full partition)** — the demonstration route. No four-method
+re-run (task-property question, not a method question). Substrate constructor, fairness
+contract, noise conventions: PR-6 verbatim.
+
+### 19.3 Target rule
+PR-3 form, mechanical: $\text{SER}_\text{target} = 1.25 \times \text{ceiling}_{TD} +
+0.005$, ceiling = arm-(ii) 8-seed median at the coarse protocol of record (eval-F
+co-reported). The ceiling addendum commits before any to-target statistic is final
+(the S0.4-close pattern). U_MAX and budget set by the pilot (§19.6) and addended
+pre-fleet.
+
+### 19.4 Registered joint prediction + decision rules (frozen now)
+**One mechanism, two observables.** Memory ≥ 31 chips requires κ_net ≲ 1.0 κᵢ, and by the
+per-hop gradient mechanism (μ/κ_net)^(2·hops) the same move raises gradient reach — so a
+lighter optimum and a higher N_eff are the *same* prediction:
+- **P1 (damping):** $r^*_D \leq 1.0$. Upgrade rule (§17.5 form): over plateaued points,
+  the T-D minimizer satisfies $r^*_D \leq 1.0$ AND median SER at $r^*_D$ < 0.7 × median
+  SER at r = 2.0. Fails → reported failed; with T-A-L that is the two-probes-no-movement
+  pattern, stated as such (T-A-L's head-reach confound is removed here: span 31 ≫ the
+  8-lag head).
+- **P2 (N_eff, measured on arm-(iii) solutions by the §18.6b path VERBATIM — ascending
+  $|c_j|\bar a_j$ zeroing, frozen decoder, target-crossing integer, 2,000-update
+  head-refit row):** **rise** iff median N_eff ≥ 16; **no-rise** iff ≤ 10; 11–15 =
+  intermediate, reported as measured, no verdict word. T-A comparator: 6–8.
+- **P0 (solvability):** if arm-(ii) BPTT fails target at every damping point, T-D is
+  unsolvable on this architecture — consumed as the architectural negative below, and
+  P1/P2 are moot (reported as such, not silently dropped).
+
+### 19.5 Consumption texts (pre-written; the applicable one is inserted verbatim-modulo-numbers)
+- **RISE →** §7.2: "On the registered long-coherent-memory task the deployed function
+  rides on N_eff = ⟨X⟩ of 32 (vs 6–8 on equalization): the N-scaling premise is back on
+  measured ground for workloads of this class, and the niche verdict's state-dimension
+  condition is discharged where the niche needs it." §6: second data point per P1's own
+  outcome. §8.5: scope narrowed accordingly.
+- **NO-RISE (task passes, N_eff ≤ 10) →** §7.2: "A second task family engineered to need
+  long coherent memory still concentrates its output on ≤10 of 32 rings. The ~15× at
+  N = 128 was computed against a baseline priced at nominal N; a baseline built to the
+  function would shrink by roughly the same factor — **the advantage is unmeasured in
+  magnitude, not merely conditional.**" (Not softened.) §6/§8.5 per P1's outcome.
+- **UNSOLVABLE (P0) →** §7.2 + §8.5: "A nearest-neighbor coupled-ring chain could not
+  realize the flat-spectrum length-31 kernel at any damping in the registered box — a
+  measured architectural limit of the chain topology for long-coherent-memory workloads;
+  parallel-bank and non-chain topologies are the untested alternative." §6: P1 moot,
+  stated.
+- Intermediate N_eff (11–15) → numbers quoted in §7.2 with no verdict word; both
+  neighboring texts' claims withheld.
+
+### 19.6 Pilot + sizing (runs only after signature)
+Seed 7 (excluded): solvability probe at light damping (BPTT), convergence flatness →
+U_MAX (×1.5 margin, S0.4-close form), per-unit wall-clock at the ×7.75 chips-per-pass
+cost. **Projection reported to the PI before any fleet commits** (compute-spend
+escalation rules apply if cloud is proposed). Fleet: 6×8 pinned + 8 ceiling + 8 PAT = 56
+units + pilot. All states serialized (§18.6c); N_eff code path reused verbatim.
