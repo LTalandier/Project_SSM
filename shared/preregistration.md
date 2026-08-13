@@ -1871,7 +1871,12 @@ diagnostics never re-train these solutions again. Reproduction gate unchanged (�
 
 ---
 
-## PR-19 — ⬜ PROPOSED-FOR-SIGNATURE (2026-08-13) — long-coherent-memory task T-D (S0.12)
+## PR-19 — 🔒 **SIGNED** (2026-08-13, Lucas: "sign PR-19") — long-coherent-memory task T-D (S0.12)
+
+> **Status history:** PROPOSED-FOR-SIGNATURE 2026-08-13 (`d473437`, from the PI-approved
+> STEP-1 candidates memo, T-D chosen "go T-D") → **SIGNED same day, no edits between
+> proposal and signature.** Pilot (§19.6) authorized; fleet still gated on the pilot's
+> wall-clock projection being reported to the PI.
 
 > **Provenance:** proposed at external review (round-6 prompt, 2026-08-13); the discharge
 > path for the N_eff finding (PR-18 §18.6b, consumed in §7.2). Builds on the PR-18
