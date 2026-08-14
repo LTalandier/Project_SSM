@@ -1960,3 +1960,25 @@ U_MAX (×1.5 margin, S0.4-close form), per-unit wall-clock at the ×7.75 chips-p
 cost. **Projection reported to the PI before any fleet commits** (compute-spend
 escalation rules apply if cloud is proposed). Fleet: 6×8 pinned + 8 ceiling + 8 PAT = 56
 units + pilot. All states serialized (§18.6c); N_eff code path reused verbatim.
+
+### 🔒 19.6a PILOT ADDENDUM (2026-08-14; measured, committed pre-fleet)
+Evidence: `results/s0_12/pilot_seed7.json` (BPTT free, seed 7, U = 12,000).
+- **P0 (solvability): PASSES emphatically** — SER 0 at 1,000 updates' next eval
+  (2.5×10⁻⁴ at 1,000 → 0 from 2,000 on), **zero errors in the full 100,192-symbol eval-F**.
+- **U_MAX = 3,000** (flatness from ~2,000; ×1.5 margin, S0.4-close form). All arms
+  (pinned sweep, ceiling, PAT) run U = 3,000, eval_every = 100.
+- **Measured rate** (probe + pilot CPU-time consistent): ≈ 4.25 s/update single-threaded
+  → ≈ 3.6 h/unit at U_MAX; 64 units ≈ 230 core-hours. (The naive ×7.75 chips estimate
+  under-priced the autograd-depth cost; measured ×~70 vs T-A.)
+- **Floor disclosure, pre-fleet:** despreading's ~16-chip integration gain makes the frozen
+  28 dB trivially clean — the T-D ceiling will sit at or near SER 0, so §19.4-P1's
+  minimizer will be a **degenerate all-zero plateau on the light side** (the rule can still
+  fire via the heavy-side contrast, and is reported as floor-degenerate if it does);
+  §19.4-P2 (N_eff vs the mechanical target) is unaffected — the ablation crossing is
+  measured against SER_target = 1.25×ceiling + 0.005 ≥ 0.005 regardless. Any harder-SNR
+  sensitivity row is a separate registration if proposed after the sweep; none is
+  registered now.
+- **Pilot profile note (context, 1 seed, ungated):** the converged free-BPTT solution
+  stays at near-init damping — taps r ≈ 0.31–0.37, interior ≈ 0.30 — i.e. the T-A
+  tap-heavy structure (taps → 1.3) does NOT appear on T-D; the actuator structure is
+  task-dependent. The sweep and PAT arms decide P1/P2; this note pre-registers no verdict.
