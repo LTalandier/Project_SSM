@@ -995,7 +995,22 @@ heavy-damping optimum is *robust* to a ×2 change in task memory span — the op
 the bandwidth/interference trade of the equalization family, not by naive span-matching — and
 the "damping tunes memory to the task" sentence above must be read at that class level, not as
 a per-task tracking law. A task family engineered to *need* long coherent memory (rather than
-a longer ISI to cancel) remains the right probe, and is registered residue, not a claim.
+a longer ISI to cancel) remains the right probe.
+
+That probe has since run (PR-19; S0.12, post-assembly): a spread-spectrum task whose
+decisions integrate 31 chips — a span far beyond the 8-lag head's reach — with the
+registered prediction that the optimum moves light ($r^*_D \leq 1.0$). The prediction
+**failed by degeneracy**: at the frozen SNR the task's integration gain leaves every grid
+point at zero error — even $r = 3$, whose ~5-sample memory the mechanism said should be
+fatal, clears on partial-correlation margin — so the separation rule could not fire
+(ledger §19.6b). Two facts survive the floor. The trained actuator structure is
+*task-dependent*: on T-D every arm stays at its initialization (taps $\approx 0.34$,
+interior $\approx 0.30$; eight seeds plus the pilot) where T-A drove its taps to
+$\approx 1.3$ — a reading itself bounded by the floor, since at zero error the gradients
+vanish early and freeze the parameters where they stand. And the damping-tracks-memory
+hypothesis now stands at zero for three: two informative nulls (T-A, T-A-L) and one
+degenerate (T-D). We leave it as a hypothesis this substrate has three times declined to
+confirm.
 
 ## 7. Does it pay? The systems envelope
 
@@ -1033,9 +1048,19 @@ the stored solutions, PR-18 §18.6b; head-refit recovers none of the zeroed read
 digital baselines in this comparison are priced at the nominal N, but a baseline built to
 the *function* would carry ~6–8 states and shrink its cost accordingly — so the N-scaling
 premise holds only for workloads that actually exercise the state dimension, which the
-7-tap equalization family does not. The niche verdict inherits that scope condition
-(§8.5's narrow-task-family limit, here quantified), and a task engineered to *need* N
-states — the registered long-coherent-memory residue — is what would discharge it. Under
+7-tap equalization family does not. The registered long-coherent-memory follow-up
+(PR-19: unipolar despread-31, run to discharge exactly this condition) did **not**
+discharge it: a second task family engineered to need long coherent memory still
+concentrates its output on ≤10 of 32 rings — measured $N_\text{eff} = 4$, every seed,
+with a head-refit recovering the target from as few as 3 readout rings. The ~15× at
+N = 128 was computed against a baseline priced at nominal N; a baseline built to the
+function would shrink by roughly the same factor — **the advantage is unmeasured in
+magnitude, not merely conditional.** Scope, stated with the verdict: at the frozen 28 dB
+the despread task's ~16-chip integration gain leaves the entire damping grid error-free
+(ledger §19.6a/b), so this $N_\text{eff}$ is floor-dominated — but the burden has flipped:
+demonstrating a workload that genuinely exercises N ≳ 32 states on this substrate (e.g.
+the same family at a registered harder operating point) is what would restore the
+premise, and no such demonstration exists in this program's data. Under
 the registered worst-case holding convention the foundry-standard heater class loses to every
 baseline everywhere in the window at the deployable corner; the demonstrated-foundry path
 therefore does not reach the energy niche as computed — a Stage-1 platform constraint stated as
@@ -1174,7 +1199,11 @@ did not cover.
 
 The task family is deliberately narrow (continuous-signal channel equalization plus a
 synthetic memory family; the registered secondary task is deferred), and the C-3 128-ring cell
-never gates anything. Two axes the bake-off itself held fixed were measured afterward in
+never gates anything. A registered long-coherent-memory follow-up (PR-19, despread-31) ran
+post-assembly and is consumed in §6/§7.2; its chief surviving lesson is methodological — a
+follow-up task's operating point must be registered against its own processing gain (the
+frozen 28 dB left the entire damping grid error-free) — and the harder-operating-point
+variant remains an open registration, not a claim. Two axes the bake-off itself held fixed were measured afterward in
 pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (swept to 30%-class — the
 tie holds) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
 two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,

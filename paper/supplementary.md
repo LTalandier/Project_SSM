@@ -48,6 +48,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run `967429d` |
 | PR-18 converged-operating-point diagnostics (S0.11) | `b585623` | stage-1 `ae1073f` / stage-2 `d108d5f` |
 | PR-18 §18.6 follow-ups: taps-only control + N_eff ablation (S0.11b) | `ec2d4e3` | verdicts `21c9bb2` |
+| PR-19 T-D long-coherent-memory (S0.12) | signed `e96e76c`; addenda `b55b135`/`a4e6a70` | fleet+verdicts `f7b395a` |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## N5 — Reproducibility statement (draft)
@@ -59,12 +60,16 @@ identical registered seeds, and per-unit idempotent runners (`analysis/s0_5_run_
 stages (`analysis/s0_5_bakeoff.py`) are deterministic over the run files. Evaluation uses
 reserved noise streams (`EVAL_SEED_BASE = 900001`) never drawn during training. Training
 randomness is seeded per unit; eval SER at the quantization floor (2 errors / 3840 symbols)
-is platform-stable. The test suite (150 tests at S0.5-close) pins substrate bit-identity
-gates (e.g. adjoint pass-2 forward identity, ledger counts). Total cloud spend for all
-Stage-0 compute, invoice-exact: 183 shared-vCPU server-hours ≈ **€70 excl. VAT (€84
-incl.)**, of which ≈84 h ≈ €32 productive runs (per-phase in `shared/results_log.md`) and
-≈99 h ≈ €38 one disclosed idle-server incident. (Provider cloud prices rose ≈3.9× for
-instances created after 2026-06-15; earlier in-session estimates used the old rate.)
+is platform-stable. The test suite (150 tests at S0.5-close; 165 at S0.12) pins substrate
+bit-identity gates (e.g. adjoint pass-2 forward identity, ledger counts). Total cloud
+spend for all Stage-0 compute through S0.10, invoice-exact: 183 shared-vCPU server-hours ≈
+**€70 excl. VAT (€84 incl.)**, of which ≈84 h ≈ €32 productive runs (per-phase in
+`shared/results_log.md`) and ≈99 h ≈ €38 one disclosed idle-server incident. (Provider
+cloud prices rose ≈3.9× for instances created after 2026-06-15; earlier in-session
+estimates used the old rate.) The post-assembly PR-19 follow-up (S0.12) added ≈132
+server-hours ≈ **€50 excl. VAT** (rate-exact €0.3814/h; includes one server lost to a
+hang with its 12 units re-run, and an ssh-outage delay) — Stage-0 total ≈ 315 h ≈
+**€120 excl. VAT (≈€145 incl.)**.
 
 ## N6 — S-figures (✅ MADE 2026-07-27, `analysis/make_sfigures.py` → `paper/figures/S*.{png,pdf}`; frozen result files only)
 
@@ -136,3 +141,9 @@ both passes.
   niche condition; §8.4 review-as-measurement sentence. OTS anchor in `timestamps/`
   (upgrade `.ots` at submission). Candidate S-figure (converged profiles + ablation
   curves) undecided — PI call at venue-format time.
+- ✅ PR-19/S0.12 (2026-08-13→17, PI-signed): T-D despread-31 fleet run + consumed —
+  P0 solvable (ceiling 0.000), P1 failed by degeneracy (grid ties at zero; §6
+  zero-for-three), P2 no-rise (N_eff = 4; §7.2 unsoftened restatement + burden-flip),
+  §8.5 operating-point lesson. Harder-SNR T-D variant = open registration if pursued.
+  Abstract NOT re-touched for S0.12 (post-assembly follow-up; §7.2/§6 carry it) — PI may
+  revisit at venue-format time.
