@@ -1982,3 +1982,14 @@ Evidence: `results/s0_12/pilot_seed7.json` (BPTT free, seed 7, U = 12,000).
   stays at near-init damping — taps r ≈ 0.31–0.37, interior ≈ 0.30 — i.e. the T-A
   tap-heavy structure (taps → 1.3) does NOT appear on T-D; the actuator structure is
   task-dependent. The sweep and PAT arms decide P1/P2; this note pre-registers no verdict.
+
+### 🔒 19.6b CEILING ADDENDUM (2026-08-17; committed before any to-target statistic)
+Arm-(ii) BPTT free, 8 seeds: **ceiling_TD = 0.000** at the coarse protocol of record
+(0.000 at eval-F as well — zero errors in 8 × 100,192 symbols). Mechanically:
+$\text{SER}_\text{target} = 1.25 \times 0.000 + 0.005 = \mathbf{5.00\times10^{-3}}$ (the
+additive guard alone, PR-3 §B by design). Floor context (extends the §19.6a disclosure):
+at the frozen 28 dB the task is easy *everywhere on the grid* — even the heaviest pin
+(r = 3.0, ~5-sample memory) reads 0 at eval-F, since partial-correlation gain at this SNR
+still clears any measurable floor. Both P1's grid and P2's crossing are therefore
+floor-dominated; verdicts are applied exactly as frozen, with this scope stated wherever
+they are consumed.
