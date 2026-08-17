@@ -45,9 +45,19 @@ the stored solutions, PR-18 §18.6b; head-refit recovers none of the zeroed read
 digital baselines in this comparison are priced at the nominal N, but a baseline built to
 the *function* would carry ~6–8 states and shrink its cost accordingly — so the N-scaling
 premise holds only for workloads that actually exercise the state dimension, which the
-7-tap equalization family does not. The niche verdict inherits that scope condition
-(§8.5's narrow-task-family limit, here quantified), and a task engineered to *need* N
-states — the registered long-coherent-memory residue — is what would discharge it. Under
+7-tap equalization family does not. The registered long-coherent-memory follow-up
+(PR-19: unipolar despread-31, run to discharge exactly this condition) did **not**
+discharge it: a second task family engineered to need long coherent memory still
+concentrates its output on ≤10 of 32 rings — measured $N_\text{eff} = 4$, every seed,
+with a head-refit recovering the target from as few as 3 readout rings. The ~15× at
+N = 128 was computed against a baseline priced at nominal N; a baseline built to the
+function would shrink by roughly the same factor — **the advantage is unmeasured in
+magnitude, not merely conditional.** Scope, stated with the verdict: at the frozen 28 dB
+the despread task's ~16-chip integration gain leaves the entire damping grid error-free
+(ledger §19.6a/b), so this $N_\text{eff}$ is floor-dominated — but the burden has flipped:
+demonstrating a workload that genuinely exercises N ≳ 32 states on this substrate (e.g.
+the same family at a registered harder operating point) is what would restore the
+premise, and no such demonstration exists in this program's data. Under
 the registered worst-case holding convention the foundry-standard heater class loses to every
 baseline everywhere in the window at the deployable corner; the demonstrated-foundry path
 therefore does not reach the energy niche as computed — a Stage-1 platform constraint stated as

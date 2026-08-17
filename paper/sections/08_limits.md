@@ -84,7 +84,11 @@ did not cover.
 
 The task family is deliberately narrow (continuous-signal channel equalization plus a
 synthetic memory family; the registered secondary task is deferred), and the C-3 128-ring cell
-never gates anything. Two axes the bake-off itself held fixed were measured afterward in
+never gates anything. A registered long-coherent-memory follow-up (PR-19, despread-31) ran
+post-assembly and is consumed in §6/§7.2; its chief surviving lesson is methodological — a
+follow-up task's operating point must be registered against its own processing gain (the
+frozen 28 dB left the entire damping grid error-free) — and the harder-operating-point
+variant remains an open registration, not a claim. Two axes the bake-off itself held fixed were measured afterward in
 pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (swept to 30%-class — the
 tie holds) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
 two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,

@@ -89,4 +89,19 @@ heavy-damping optimum is *robust* to a ×2 change in task memory span — the op
 the bandwidth/interference trade of the equalization family, not by naive span-matching — and
 the "damping tunes memory to the task" sentence above must be read at that class level, not as
 a per-task tracking law. A task family engineered to *need* long coherent memory (rather than
-a longer ISI to cancel) remains the right probe, and is registered residue, not a claim.
+a longer ISI to cancel) remains the right probe.
+
+That probe has since run (PR-19; S0.12, post-assembly): a spread-spectrum task whose
+decisions integrate 31 chips — a span far beyond the 8-lag head's reach — with the
+registered prediction that the optimum moves light ($r^*_D \leq 1.0$). The prediction
+**failed by degeneracy**: at the frozen SNR the task's integration gain leaves every grid
+point at zero error — even $r = 3$, whose ~5-sample memory the mechanism said should be
+fatal, clears on partial-correlation margin — so the separation rule could not fire
+(ledger §19.6b). Two facts survive the floor. The trained actuator structure is
+*task-dependent*: on T-D every arm stays at its initialization (taps $\approx 0.34$,
+interior $\approx 0.30$; eight seeds plus the pilot) where T-A drove its taps to
+$\approx 1.3$ — a reading itself bounded by the floor, since at zero error the gradients
+vanish early and freeze the parameters where they stand. And the damping-tracks-memory
+hypothesis now stands at zero for three: two informative nulls (T-A, T-A-L) and one
+degenerate (T-D). We leave it as a hypothesis this substrate has three times declined to
+confirm.

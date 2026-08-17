@@ -1,0 +1,96 @@
+{
+ "ser_target": 0.005,
+ "ceiling": {
+  "coarse_median": 0.0,
+  "fine_median": 0.0
+ },
+ "sweep": {
+  "0.2": {
+   "coarse_median": 0.0,
+   "fine_median": 0.0,
+   "n_plateaued": 0
+  },
+  "0.3": {
+   "coarse_median": 0.0,
+   "fine_median": 0.0,
+   "n_plateaued": 8
+  },
+  "0.5": {
+   "coarse_median": 0.0,
+   "fine_median": 0.0,
+   "n_plateaued": 8
+  },
+  "1.0": {
+   "coarse_median": 0.0,
+   "fine_median": 0.0,
+   "n_plateaued": 8
+  },
+  "2.0": {
+   "coarse_median": 0.0,
+   "fine_median": 0.0,
+   "n_plateaued": 8
+  },
+  "3.0": {
+   "coarse_median": 0.0,
+   "fine_median": 0.0,
+   "n_plateaued": 8
+  }
+ },
+ "P1": {
+  "minimizers_fine": [
+   "0.3",
+   "0.5",
+   "1.0",
+   "2.0",
+   "3.0"
+  ],
+  "min_fine": 0.0,
+  "median_at_r2": 0.0,
+  "fires": false,
+  "verdict": "FAILED (rule cannot fire: grid ties at the floor; third damping-prediction failure, floor-degenerate per \u00a719.6a/b)"
+ },
+ "P2": {
+  "n_eff_by_seed": [
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4
+  ],
+  "n_eff_median": 4.0,
+  "n_eff_range": [
+   4,
+   4
+  ],
+  "branch": "no-rise",
+  "ta_comparator": "6-8"
+ },
+ "refit": {
+  "recon_all_match": true,
+  "recovers_any": true,
+  "gate_counts": [
+   31,
+   31,
+   31,
+   31,
+   31,
+   31,
+   31,
+   31
+  ],
+  "gate_median": 31.0
+ },
+ "profile_pat": {
+  "tap_r_median": 0.33506776354801016,
+  "interior_r_median": 0.29890911265948994,
+  "mu_median": 0.29789
+ },
+ "profile_ceiling": {
+  "tap_r_median": 0.32957844109351636,
+  "interior_r_median": 0.29974387823408194,
+  "mu_median": 0.297835
+ }
+}

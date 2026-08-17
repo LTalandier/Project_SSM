@@ -1605,3 +1605,32 @@ states serialized to `results/s0_11/states/` (no future re-training).
   attestation; upgrade at submission. OSF second anchor = Lucas action.
 Raw: `results/s0_11/{runs_b/,states/,s0_11b.json,s0_11b.md}` · runner
 `analysis/s0_11b_run_one.py` · analyzer `analysis/s0_11b_analyze.py`.
+
+## S0.12 — PR-19 T-D fleet + verdicts (2026-08-15→17; reg. e96e76c, addenda b55b135/a4e6a70)
+64/64 units (48 pinned + 8 ceiling + 8 PAT) after an eventful execution: local 16-way
+proved bandwidth-bound (measured 48 s/upd vs 4.25 solo — models wrong twice before
+measuring; wave-1 abandoned at 2/3, sunk ~26 h ×16 CPU), rerun on cloud; Hetzner ash ssh
+outage trapped two servers overnight; s12-5 wedged mid-fleet and was rebooted+deleted, its
+12 units re-run. All servers deleted, twice-verified empty. **Cloud cost: ≈132 server-h ×
+€0.3814 ≈ €50 excl. VAT** (over the €30-40 checkpoints; itemized: 3×34.6 h + 1×28.2 h).
+**VERDICTS (frozen rules, floor scope per §19.6a/b):**
+- **P0:** solvable, emphatically (ceiling 0.000 coarse AND eval-F; target = 5.00e-3).
+- **P1: FAILED BY DEGENERACY** — every grid point 0 at eval-F incl. r=3.0 (the ~16-chip
+  integration gain at 28 dB clears everything; separation rule cannot fire). Third
+  damping-prediction failure: two informative nulls + one degenerate. §6 consumed.
+- **P2: NO-RISE** — N_eff = 4 (8/8 seeds identical; refit recovers target from 3 rings —
+  unlike T-A where refit recovered nothing); floor-dominated, stated. §7.2 consumed with
+  the pre-written unsoftened restatement: **"the advantage is unmeasured in magnitude,
+  not merely conditional"** + burden-flipped sentence (no workload in this program's data
+  exercises N ≳ 32).
+- Profiles: task-dependent actuator structure CONFIRMED 8/8+pilot (T-D all-near-init vs
+  T-A taps→1.3), floor-bounded reading disclosed. At-solution gradient gate 31/32 median
+  (decoupling from output-participation replicated: gate 31 vs N_eff 4).
+- Reconstruction-from-serialized-states bit-matched 8/8 (the §18.6c investment pays).
+- §8.5 consumed (operating-point-vs-processing-gain lesson; harder-SNR variant = open
+  registration, not a claim).
+Ops lessons: per-update cost must be MEASURED per (task, parallelism) — chips-ratio and
+solo-rate estimates were ×9 and ×5 wrong; watchers must be killed when superseded (a
+stale watcher nearly tore down mid-rerun — saved by its own got<48 guard); teardown now
+always script-guaranteed with a 12 h failsafe.
+Raw: `results/s0_12/{runs,states,refit,logs}/ + s0_12.{json,md} + pilot_seed7.json`.
