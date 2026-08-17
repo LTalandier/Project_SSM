@@ -47,14 +47,19 @@ the *function* would carry ~6–8 states and shrink its cost accordingly — so 
 premise holds only for workloads that actually exercise the state dimension, which the
 7-tap equalization family does not. The registered long-coherent-memory follow-up
 (PR-19: unipolar despread-31, run to discharge exactly this condition) did **not**
-discharge it: a second task family engineered to need long coherent memory still
-concentrates its output on ≤10 of 32 rings — measured $N_\text{eff} = 4$, every seed,
-with a head-refit recovering the target from as few as 3 readout rings. The ~15× at
-N = 128 was computed against a baseline priced at nominal N; a baseline built to the
-function would shrink by roughly the same factor — **the advantage is unmeasured in
-magnitude, not merely conditional.** Scope, stated with the verdict: at the frozen 28 dB
-the despread task's ~16-chip integration gain leaves the entire damping grid error-free
-(ledger §19.6a/b), so this $N_\text{eff}$ is floor-dominated — but the burden has flipped:
+discharge it — and produced no second measurement of concentration either. At the frozen
+28 dB the task's ~16-chip integration gain leaves the entire damping grid error-free
+(ledger §19.6a/b), and on a task solved with that much margin the readout-ablation count
+measures the margin, not the substrate's utilization: the recorded $N_\text{eff} = 4$
+(every seed; a head-refit recovers the target from as few as 3 rings, where on the
+equalization task the same refit recovers nothing) is a statement about task slack,
+uninformative about concentration in either direction. (The pre-written no-rise text,
+drafted for an informative null, asserted the concentration reading; it is withdrawn by
+ledger amendment §19.6c.) PR-19 therefore leaves the premise exactly where §18.6b put
+it — the one informative $N_\text{eff}$ measurement in this program is the 6–8 above.
+The ~15× at N = 128 was computed against a baseline priced at nominal N; a baseline
+built to the function would shrink by roughly the same factor — **the advantage is
+unmeasured in magnitude, not merely conditional** — and the burden has flipped:
 demonstrating a workload that genuinely exercises N ≳ 32 states on this substrate (e.g.
 the same family at a registered harder operating point) is what would restore the
 premise, and no such demonstration exists in this program's data. Under
@@ -78,11 +83,15 @@ digital side-ledger is always co-reported and never merged. The envelope is wher
 pays off, because converting both ledgers to joules **inverts the ranking**. Training to the
 pre-registered target at the headline cell costs, at the optimistic corner:
 
-| route | conversion energy | digital compute | total |
+| route | conversion energy | digital compute | total‡ |
 |---|---|---|---|
 | PAT | 0.57 mJ | **≈13–44 J** (twin ledger, 1.3×10¹³ FLOP at named accelerator classes) | ≈13–44 J |
 | adjoint | 1.1 mJ | 0 | 1.1 mJ (†realizability) |
 | **SPSA** | **2.6 mJ** | 0 | **2.6 mJ** |
+
+‡Budgeted conversion stack only; the §7.1 per-time holds add ≈4 mJ (class-B heater) +
+≈5–14 mJ (integrated-class laser) over SPSA's 22.5 ms — the honest class figure is tens
+of millijoules (scope note below).
 
 PAT reaches target in the fewest device passes but its digital twin bill exceeds SPSA's *entire
 training energy* by roughly four orders of magnitude — and our FLOP estimate is charitable to

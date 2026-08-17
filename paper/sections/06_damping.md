@@ -97,11 +97,14 @@ registered prediction that the optimum moves light ($r^*_D \leq 1.0$). The predi
 **failed by degeneracy**: at the frozen SNR the task's integration gain leaves every grid
 point at zero error — even $r = 3$, whose ~5-sample memory the mechanism said should be
 fatal, clears on partial-correlation margin — so the separation rule could not fire
-(ledger §19.6b). Two facts survive the floor. The trained actuator structure is
-*task-dependent*: on T-D every arm stays at its initialization (taps $\approx 0.34$,
-interior $\approx 0.30$; eight seeds plus the pilot) where T-A drove its taps to
-$\approx 1.3$ — a reading itself bounded by the floor, since at zero error the gradients
-vanish early and freeze the parameters where they stand. And the damping-tracks-memory
-hypothesis now stands at zero for three: two informative nulls (T-A, T-A-L) and one
-degenerate (T-D). We leave it as a hypothesis this substrate has three times declined to
-confirm.
+(ledger §19.6b). The floor bounds the structural reading too: at zero error the
+gradients vanish early and freeze the parameters where they stand, and that is what is
+observed — on T-D every arm ends essentially at its initialization (taps $\approx 0.34$,
+interior $\approx 0.30$; eight seeds plus the pilot), where T-A drove its taps to
+$\approx 1.3$. The contrast says the §5.7 profile is induced by the task only in the
+weak sense that a task solved at initialization induces nothing; it is not a second,
+independent instance of structure discovery. The damping-tracks-memory hypothesis
+accordingly stands at zero for two genuine tests — one informative null (T-A-L) and one
+degenerate attempt (T-D), with T-A the observation that generated it, not a test of it.
+We leave it as a hypothesis one probe has declined to confirm and a second could not
+reach.

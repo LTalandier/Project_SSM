@@ -73,12 +73,21 @@ including the full ledger and its complete commit history, was published (extern
 timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
 circulated beyond the review recorded here. The freeze-before-run ordering claimed
 throughout this paper is therefore verifiable by anyone rather than trusted. The
-post-assembly external review recorded in the ledger (five rounds, 2026-08-01 through
-2026-08-05) doubles as a measurement of this structure: it found six errata — control-cell
-numbers transplanted into headline contexts, a cross-scope ratio, a protocol-mixing claim —
-all in unregistered connective prose, and none touching a pre-registered number, rule, or
-verdict. The discipline held exactly where it was applied and failed only in the seams it
-did not cover.
+post-assembly external review recorded in the ledger (seven rounds, 2026-08-01 through
+2026-08-17) doubles as a measurement of this structure. Its first five rounds found six
+errata — control-cell numbers transplanted into headline contexts, a cross-scope ratio,
+a protocol-mixing claim — all in unregistered connective prose, none touching a
+pre-registered number, rule, or verdict. The seventh found the failure mode that
+diagnosis could not exclude: a pre-written consumption text (PR-19's no-rise branch),
+drafted for an informative outcome, was applied verbatim to a floor-degenerate one and
+presented an uninformative $N_\text{eff}$ as confirming evidence — an error inside
+registered prose (though not inside any number, rule, or verdict), and one that
+overstated the paper's *caveat* rather than its claim, which is why it survived six
+rounds; it is withdrawn by ledger amendment (§19.6c), with two same-root instances in
+connective prose and stale values inside rendered figure annotations corrected
+alongside. The discipline held where it was applied; its seams — connective prose,
+outcome branches its texts did not anticipate, and derived artifacts — are now named
+from measurement rather than assumed absent.
 
 ## 8.5 Scope limits we chose
 

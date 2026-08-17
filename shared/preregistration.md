@@ -1993,3 +1993,27 @@ at the frozen 28 dB the task is easy *everywhere on the grid* — even the heavi
 still clears any measurable floor. Both P1's grid and P2's crossing are therefore
 floor-dominated; verdicts are applied exactly as frozen, with this scope stated wherever
 they are consumed.
+
+### 🔒 19.6c ROUND-7 AMENDMENT (2026-08-17; post-consumption, review-driven — frozen blocks above untouched)
+The round-7 external review found the §19.5 NO-RISE text's evidentiary frame ("still
+concentrates its output on ≤10 of 32 rings") degenerate under the §19.6a/b floor: on a
+task solved with ~16-chip integration margin at every grid point, the §18.6b ablation
+crossing measures task slack, not substrate utilization — a small N_eff is guaranteed by
+the margin regardless of concentration (internal demonstration: the T-D head-refit
+recovers target from 3 rings where T-A's recovers nothing, 0/15 — same procedure,
+opposite outcome). §19.6a's "P2 is unaffected" holds only mechanically (the crossing
+integer is well-defined); its reading as concentration evidence does not survive the
+floor, and §19.6b's "scope stated wherever consumed" was insufficient where the frozen
+sentence itself asserted that reading. Amendments (applied text only): §7.2 drops the
+"still concentrates" clause and states PR-19 is evidence-free on N_eff in either
+direction (the informative measurement remains §18.6b's 6–8 on T-A); §6 inverts to
+floor-explanation-first (the §19.6a pilot-note phrase "task-dependent" is bounded the
+same way) and re-counts damping-tracks-memory as zero-for-two genuine tests (T-A-L
+informative null, T-D degenerate; T-A is the generating observation — matching
+§19.4-P1's own "two-probes" framing), not zero-for-three. Standing unchanged: the P2
+branch rule and its mechanical firing (median N_eff = 4 ≤ 10 → no-rise), the P1
+failed-by-degeneracy verdict, the unsoftened "unmeasured in magnitude, not merely
+conditional" sentence, and the burden-flip. Same root, derived artifacts: round-5-
+corrected values had persisted inside rendered figure annotations (F6 label ≈5.5
+samples → ≈6 at measured 3.7 κᵢ; S5 in-image title ≈27 → C-2 ≈8; F7 caption "all-in" →
+budgeted-stack scope); regenerated with this amendment.

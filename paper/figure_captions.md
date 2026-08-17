@@ -46,7 +46,8 @@ beats both workhorses.
 
 **Figure F6 — Damping is a first-order design knob.** Final SER versus uniform pinned
 overcoupling r (plateaued endpoints spanning ×302), the deep-overcoupling optimum r\* = 2.0
-(κ_net ≈ 4.1 κ_i — *excess* memory is harmful for this task), and the trainable-κ_ext box
+(measured κ_net = 3.7 κ_i at the converged solutions, 4.1 fixed-gain estimate — *excess*
+memory is harmful for this task), and the trainable-κ_ext box
 (R-ii): boxes containing r\* train to the 5 × 10⁻⁴ ceiling, beating every uniform pin — the
 heterogeneous damping profile is found by training, not designed. Dashed red: the T-A-L
 transfer test (14-tap span, eval-F; PR-17) — the registered prediction that the optimum moves
@@ -55,7 +56,8 @@ stays in the deep-overcoupling plateau (r = 2–3 within 13%), so the heavy-damp
 robust to a ×2 task-memory span (§6).
 
 **Figure F7 — The systems envelope.** (a) Training-energy inversion: SPSA trains the C-2 cell
-all-in for ~2.6 mJ (optimistic conversion accounting; 99 mJ conservative) while PAT's device
+for ~2.6 mJ in the budgeted conversion stack (optimistic corner; 99 mJ vendor-part; tens of
+mJ once the §7.1 per-time holds are charged, §7.3) while PAT's device
 side is 0.57 mJ but its digital twin backward costs 13–44 J — the energy metric inverts the
 device-pass ranking. (b) Inference energy per sample versus state dimension N at 2 GS/s against the named digital
 baselines: the photonic envelope (optimistic corner, low-power heater class) clears the

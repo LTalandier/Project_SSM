@@ -1634,3 +1634,25 @@ solo-rate estimates were ×9 and ×5 wrong; watchers must be killed when superse
 stale watcher nearly tore down mid-rerun — saved by its own got<48 guard); teardown now
 always script-guaranteed with a 12 h failsafe.
 Raw: `results/s0_12/{runs,states,refit,logs}/ + s0_12.{json,md} + pilot_seed7.json`.
+
+## Round-7 review consumption (2026-08-17, single-session mode)
+**Finding (verified against files + data):** PR-19's N_eff = 4 is floor-degenerate — a
+readout-ablation crossing on an at-floor task measures task slack, not substrate
+utilization (internal proof: T-D head-refit recovers target from 3 rings vs T-A's 0/15 —
+same procedure, opposite outcome = the margin talking). The §19.5 NO-RISE frame ("still
+concentrates ≤10/32") was drafted pre-run for an informative null and applied verbatim
+to the degenerate outcome → mis-presented no-evidence as confirmation. **First erratum
+inside registered prose** (still not inside any number, rule, or verdict; it overstated
+the paper's caveat, not its claim — why it survived six rounds). Amendment §19.6c
+(frozen blocks untouched): §7.2 now evidence-free-on-N_eff (informative measurement
+remains §18.6b's 6–8); §6 floor-first inversion (the S0.12 entry's "task-dependent
+CONFIRMED" above is bounded accordingly — a task solved at init induces nothing) +
+zero-for-TWO recount (T-A = generating observation; matches §19.4-P1's own two-probes
+framing). Same-root artifacts regenerated: F6 label 5.5→6 samples at measured 3.7κᵢ,
+S5 in-image title 27→C-2 8, F7 caption de-"all-in"d. Stragglers: §7.3 total column now
+carries the ‡ per-time-holds footnote; abstract niche clause carries "magnitude is
+unmeasured"; §5.7 undriven-band center stated (median r 0.299/0.304 vs r₀ = 0.3, band
+sd 0.05/0.07 — profile sd 0.33 is tap-excursion-carried; computed from
+`results/s0_11/states/`); "ample capacity"→headroom; §8.4 → seven rounds through
+2026-08-17 with the two new seam classes named. Blocker unchanged: repo PRIVATE (Lucas)
+— §8.4/N4 past-tense publication claims require re-public before circulation.

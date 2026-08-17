@@ -57,7 +57,7 @@ arm sits meaningfully below exact gradients), not a separation. An arm sitting b
 12,000-update number is a budget effect, not a physical estimator beating exact gradients. One implementation erratum in the eval-F tooling
 (an evaluation-normalization inconsistency, caught the same day by its chance-level signature,
 registered, fixed under a machine-precision gate test, and re-run) is documented in the ledger
-(PR-17 §17.7). **The frozen substrate has ample capacity
+(PR-17 §17.7). **The frozen substrate has headroom
 for the task; the open question is purely which physical training routes reach it, and at what
 cost.** The pre-registered target follows mechanically: a method *reaches target* if its
 held-out SER falls to $\text{SER}_\text{target} = 1.25\times\text{ceiling} + 0.005 = 5.65\times
@@ -331,11 +331,16 @@ pre-registered diagnostic (PR-18; S0.11) reproduced the winning routes' converge
 bit-identically (and both §6 arms'; 32/32 seed-runs eval-trace-exact) and re-ran this
 section's gate *at the solutions*. The demonstration routes maintain it: PAT clears **32/32 on
 every seed** with worst ratio $1.7\times10^{-3}$ — the θ₀-class margin — and SPSA holds a
-median of 30.5/32 (range 29–32). The mechanism is the one §6 identifies: every trained arm,
-on every seed, converges to the *same* actuator structure — the four driven rings damped to
-$r \approx 1.3$ while the undriven rings stay near their initialization
-($\mathrm{sd}(r) \approx 0.33$) — heterogeneity that buys damping where the input lands
-without severing gradient transport. The counterexample is the §6 uniform pin ($r^* = 2.0$),
+median of 30.5/32 (range 29–32). The mechanism is the one §6 identifies: both winning routes,
+on every seed, converge to the *same* actuator structure — the four driven rings damped to
+$r \approx 1.3$ (median 1.29 PAT, 1.32 SPSA) while the undriven rings sit *at* their
+initialization (median $r \approx 0.30$ against $r_0 = 0.3$, within-band sd 0.05–0.07;
+the whole-profile $\mathrm{sd}(r) \approx 0.33$ reported in S0.11 is carried almost
+entirely by the four-tap excursion) — heterogeneity that buys damping where the input
+lands without severing gradient transport. The §6 boxed arm shares the shape but not the
+interior level (its undriven rings float to $r \approx 0.7$); "same structure" is a
+claim about the two winning routes, whose converged profiles are estimator-independent,
+not about all trained arms sharing one interior value. The counterexample is the §6 uniform pin ($r^* = 2.0$),
 which trains to $1.3\times10^{-3}$ with only 20/32 rings above the gate (the three inter-tap
 interiors dark; §6). "$N = 32$ carries the measured profile" therefore extends from the
 initialization to the winning routes' solutions; a uniform-damping design in the same box

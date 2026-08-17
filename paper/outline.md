@@ -48,10 +48,11 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > drift. Its advantage appears only where nothing offline can follow: under uncorrelated
 > per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a
 > frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a
-> conditional low-latency niche, gated on the low-power heater class, on
-> integrated-class laser, locking, control, and packaging — and on workloads that exercise
-> the state dimension: a registered ablation finds the deployed equalizer's output rides on
-> 6–8 of 32 rings. One registered prediction — that
+> conditional low-latency niche — gated on the low-power heater class, on
+> integrated-class laser, locking, control, and packaging, and on workloads that exercise
+> the state dimension — whose magnitude is unmeasured: a registered ablation finds the
+> deployed equalizer's output rides on 6–8 of 32 rings, and no workload in our data
+> exercises more. One registered prediction — that
 > the damping optimum tracks task memory span — failed, and is reported as failed. The
 > pre-registration ledger, substrate model, and training code are released with the paper.
 >

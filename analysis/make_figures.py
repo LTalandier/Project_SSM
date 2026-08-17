@@ -345,8 +345,8 @@ def f6():
     ax.text(0.205, CEILING * 1.25, "§5 ceiling", fontsize=7, color="0.25")
     ax.axvline(0.3, color="0.6", lw=0.7, ls=":")
     ax.text(0.3, 0.62, " $\\theta_0$", fontsize=7, color="0.5")
-    ax.annotate("$r^* = 2.0$ (deep overcoupling,\n$\\approx$5.5 samples "
-                "memory)", xy=(2.0, 1.3e-3), xytext=(0.55, 2.2e-2),
+    ax.annotate("$r^* = 2.0$ (deep overcoupling,\n$\\approx$6 samples memory at\n"
+                "measured $\\kappa_{net} = 3.7\\kappa_i$)", xy=(2.0, 1.3e-3), xytext=(0.55, 2.2e-2),
                 fontsize=7, arrowprops=dict(arrowstyle="-|>", color="0.3",
                                             lw=0.8))
     ax.set_xscale("log")

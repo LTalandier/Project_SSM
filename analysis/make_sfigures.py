@@ -270,8 +270,8 @@ def s5():
     ax.set_xlabel("dissipation per window  $\\kappa_{net} T\\, dt$")
     ax.set_ylabel("cosine(RHEL update, BPTT gradient)")
     ax.set_title("R1: exact recovery of the non-dissipative limit\n"
-                 "(operating point sits at $\\kappa_{net} T dt \\approx 27$, "
-                 "far right)")
+                 "(C-2 operating point $\\kappa_{net} T dt \\approx 8$, "
+                 "C-1 $\\approx 27$ — off-scale right)")
     ax.set_ylim(-1.05, 1.15)
     fig.tight_layout()
     save(fig, "S5_rhel_r1_recovery")
