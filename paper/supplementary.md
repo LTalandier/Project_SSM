@@ -48,7 +48,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-17 §17.8 decomposition + matched-reference spec | `a8d7ab9` | matched run `967429d` |
 | PR-18 converged-operating-point diagnostics (S0.11) | `b585623` | stage-1 `ae1073f` / stage-2 `d108d5f` |
 | PR-18 §18.6 follow-ups: taps-only control + N_eff ablation (S0.11b) | `ec2d4e3` | verdicts `21c9bb2` |
-| PR-19 T-D long-coherent-memory (S0.12) | signed `e96e76c`; addenda `b55b135`/`a4e6a70` | fleet+verdicts `f7b395a` |
+| PR-19 T-D long-coherent-memory (S0.12) | signed `e96e76c`; addenda `b55b135`/`a4e6a70` | fleet+verdicts `f7b395a`; §19.6c round-7 amendment `a28e2d2` (no-rise frame withdrawn as floor-degenerate; rule/verdict stand) |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## N5 — Reproducibility statement (draft)
@@ -147,3 +147,16 @@ both passes.
   §8.5 operating-point lesson. Harder-SNR T-D variant = open registration if pursued.
   Abstract NOT re-touched for S0.12 (post-assembly follow-up; §7.2/§6 carry it) — PI may
   revisit at venue-format time.
+- ✅ Round-7 review (2026-08-17): PR-19's N_eff = 4 recognized as **floor-degenerate** —
+  the §19.5 no-rise frame ("still concentrates") was drafted for an informative null and
+  is withdrawn by ledger amendment `§19.6c` (`a28e2d2`; frozen blocks untouched — the
+  first erratum inside registered prose, though not inside any number, rule, or verdict).
+  §7.2 now states PR-19 is evidence-free on N_eff (the informative measurement remains
+  §18.6b's 6–8); §6 inverted floor-first and re-counted zero-for-two (T-A = the
+  generating observation, per §19.4-P1's own two-probes framing); §8.4 updated to seven
+  rounds with the seam classes named. Same-root figure artifacts regenerated (F6 label
+  ≈6 samples at measured 3.7 κᵢ; S5 in-image title C-2 ≈8; F7 caption budgeted-stack
+  scope + §7.3 ‡ footnote). §5.7 undriven-band center stated (median r ≈ 0.30 = init);
+  abstract niche clause carries "magnitude is unmeasured"; "ample capacity" → headroom.
+  Refs [10]/[13]/[15]/[25]/[33] (Ashtiani/Zhang/Ghent-reservoir/Rukh/Dacha) remain on
+  the pre-submission page-verification sweep.

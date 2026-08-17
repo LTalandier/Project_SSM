@@ -6,7 +6,7 @@
 
 We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on an estimator-independent damp-the-driven-rings profile whose interior contribution survives a registered taps-only falsifier, narrowly.
 
-Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche, gated on the low-power heater class, on integrated-class laser, locking, control, and packaging — and on workloads that exercise the state dimension: a registered ablation finds the deployed equalizer's output rides on 6–8 of 32 rings. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
+Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche — gated on the low-power heater class, on integrated-class laser, locking, control, and packaging, and on workloads that exercise the state dimension — whose magnitude is unmeasured: a registered ablation finds the deployed equalizer's output rides on 6–8 of 32 rings, and no workload in our data exercises more. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
 
 ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains interferometer weights around an optoelectronic relay; its resonators stay fixed.*
 
@@ -599,7 +599,7 @@ arm sits meaningfully below exact gradients), not a separation. An arm sitting b
 12,000-update number is a budget effect, not a physical estimator beating exact gradients. One implementation erratum in the eval-F tooling
 (an evaluation-normalization inconsistency, caught the same day by its chance-level signature,
 registered, fixed under a machine-precision gate test, and re-run) is documented in the ledger
-(PR-17 §17.7). **The frozen substrate has ample capacity
+(PR-17 §17.7). **The frozen substrate has headroom
 for the task; the open question is purely which physical training routes reach it, and at what
 cost.** The pre-registered target follows mechanically: a method *reaches target* if its
 held-out SER falls to $\text{SER}_\text{target} = 1.25\times\text{ceiling} + 0.005 = 5.65\times
@@ -873,11 +873,16 @@ pre-registered diagnostic (PR-18; S0.11) reproduced the winning routes' converge
 bit-identically (and both §6 arms'; 32/32 seed-runs eval-trace-exact) and re-ran this
 section's gate *at the solutions*. The demonstration routes maintain it: PAT clears **32/32 on
 every seed** with worst ratio $1.7\times10^{-3}$ — the θ₀-class margin — and SPSA holds a
-median of 30.5/32 (range 29–32). The mechanism is the one §6 identifies: every trained arm,
-on every seed, converges to the *same* actuator structure — the four driven rings damped to
-$r \approx 1.3$ while the undriven rings stay near their initialization
-($\mathrm{sd}(r) \approx 0.33$) — heterogeneity that buys damping where the input lands
-without severing gradient transport. The counterexample is the §6 uniform pin ($r^* = 2.0$),
+median of 30.5/32 (range 29–32). The mechanism is the one §6 identifies: both winning routes,
+on every seed, converge to the *same* actuator structure — the four driven rings damped to
+$r \approx 1.3$ (median 1.29 PAT, 1.32 SPSA) while the undriven rings sit *at* their
+initialization (median $r \approx 0.30$ against $r_0 = 0.3$, within-band sd 0.05–0.07;
+the whole-profile $\mathrm{sd}(r) \approx 0.33$ reported in S0.11 is carried almost
+entirely by the four-tap excursion) — heterogeneity that buys damping where the input
+lands without severing gradient transport. The §6 boxed arm shares the shape but not the
+interior level (its undriven rings float to $r \approx 0.7$); "same structure" is a
+claim about the two winning routes, whose converged profiles are estimator-independent,
+not about all trained arms sharing one interior value. The counterexample is the §6 uniform pin ($r^* = 2.0$),
 which trains to $1.3\times10^{-3}$ with only 20/32 rings above the gate (the three inter-tap
 interiors dark; §6). "$N = 32$ carries the measured profile" therefore extends from the
 initialization to the winning routes' solutions; a uniform-damping design in the same box
@@ -1003,14 +1008,17 @@ registered prediction that the optimum moves light ($r^*_D \leq 1.0$). The predi
 **failed by degeneracy**: at the frozen SNR the task's integration gain leaves every grid
 point at zero error — even $r = 3$, whose ~5-sample memory the mechanism said should be
 fatal, clears on partial-correlation margin — so the separation rule could not fire
-(ledger §19.6b). Two facts survive the floor. The trained actuator structure is
-*task-dependent*: on T-D every arm stays at its initialization (taps $\approx 0.34$,
-interior $\approx 0.30$; eight seeds plus the pilot) where T-A drove its taps to
-$\approx 1.3$ — a reading itself bounded by the floor, since at zero error the gradients
-vanish early and freeze the parameters where they stand. And the damping-tracks-memory
-hypothesis now stands at zero for three: two informative nulls (T-A, T-A-L) and one
-degenerate (T-D). We leave it as a hypothesis this substrate has three times declined to
-confirm.
+(ledger §19.6b). The floor bounds the structural reading too: at zero error the
+gradients vanish early and freeze the parameters where they stand, and that is what is
+observed — on T-D every arm ends essentially at its initialization (taps $\approx 0.34$,
+interior $\approx 0.30$; eight seeds plus the pilot), where T-A drove its taps to
+$\approx 1.3$. The contrast says the §5.7 profile is induced by the task only in the
+weak sense that a task solved at initialization induces nothing; it is not a second,
+independent instance of structure discovery. The damping-tracks-memory hypothesis
+accordingly stands at zero for two genuine tests — one informative null (T-A-L) and one
+degenerate attempt (T-D), with T-A the observation that generated it, not a test of it.
+We leave it as a hypothesis one probe has declined to confirm and a second could not
+reach.
 
 ## 7. Does it pay? The systems envelope
 
@@ -1050,14 +1058,19 @@ the *function* would carry ~6–8 states and shrink its cost accordingly — so 
 premise holds only for workloads that actually exercise the state dimension, which the
 7-tap equalization family does not. The registered long-coherent-memory follow-up
 (PR-19: unipolar despread-31, run to discharge exactly this condition) did **not**
-discharge it: a second task family engineered to need long coherent memory still
-concentrates its output on ≤10 of 32 rings — measured $N_\text{eff} = 4$, every seed,
-with a head-refit recovering the target from as few as 3 readout rings. The ~15× at
-N = 128 was computed against a baseline priced at nominal N; a baseline built to the
-function would shrink by roughly the same factor — **the advantage is unmeasured in
-magnitude, not merely conditional.** Scope, stated with the verdict: at the frozen 28 dB
-the despread task's ~16-chip integration gain leaves the entire damping grid error-free
-(ledger §19.6a/b), so this $N_\text{eff}$ is floor-dominated — but the burden has flipped:
+discharge it — and produced no second measurement of concentration either. At the frozen
+28 dB the task's ~16-chip integration gain leaves the entire damping grid error-free
+(ledger §19.6a/b), and on a task solved with that much margin the readout-ablation count
+measures the margin, not the substrate's utilization: the recorded $N_\text{eff} = 4$
+(every seed; a head-refit recovers the target from as few as 3 rings, where on the
+equalization task the same refit recovers nothing) is a statement about task slack,
+uninformative about concentration in either direction. (The pre-written no-rise text,
+drafted for an informative null, asserted the concentration reading; it is withdrawn by
+ledger amendment §19.6c.) PR-19 therefore leaves the premise exactly where §18.6b put
+it — the one informative $N_\text{eff}$ measurement in this program is the 6–8 above.
+The ~15× at N = 128 was computed against a baseline priced at nominal N; a baseline
+built to the function would shrink by roughly the same factor — **the advantage is
+unmeasured in magnitude, not merely conditional** — and the burden has flipped:
 demonstrating a workload that genuinely exercises N ≳ 32 states on this substrate (e.g.
 the same family at a registered harder operating point) is what would restore the
 premise, and no such demonstration exists in this program's data. Under
@@ -1081,11 +1094,15 @@ digital side-ledger is always co-reported and never merged. The envelope is wher
 pays off, because converting both ledgers to joules **inverts the ranking**. Training to the
 pre-registered target at the headline cell costs, at the optimistic corner:
 
-| route | conversion energy | digital compute | total |
+| route | conversion energy | digital compute | total‡ |
 |---|---|---|---|
 | PAT | 0.57 mJ | **≈13–44 J** (twin ledger, 1.3×10¹³ FLOP at named accelerator classes) | ≈13–44 J |
 | adjoint | 1.1 mJ | 0 | 1.1 mJ (†realizability) |
 | **SPSA** | **2.6 mJ** | 0 | **2.6 mJ** |
+
+‡Budgeted conversion stack only; the §7.1 per-time holds add ≈4 mJ (class-B heater) +
+≈5–14 mJ (integrated-class laser) over SPSA's 22.5 ms — the honest class figure is tens
+of millijoules (scope note below).
 
 PAT reaches target in the fewest device passes but its digital twin bill exceeds SPSA's *entire
 training energy* by roughly four orders of magnitude — and our FLOP estimate is charitable to
@@ -1188,12 +1205,21 @@ including the full ledger and its complete commit history, was published (extern
 timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
 circulated beyond the review recorded here. The freeze-before-run ordering claimed
 throughout this paper is therefore verifiable by anyone rather than trusted. The
-post-assembly external review recorded in the ledger (five rounds, 2026-08-01 through
-2026-08-05) doubles as a measurement of this structure: it found six errata — control-cell
-numbers transplanted into headline contexts, a cross-scope ratio, a protocol-mixing claim —
-all in unregistered connective prose, and none touching a pre-registered number, rule, or
-verdict. The discipline held exactly where it was applied and failed only in the seams it
-did not cover.
+post-assembly external review recorded in the ledger (seven rounds, 2026-08-01 through
+2026-08-17) doubles as a measurement of this structure. Its first five rounds found six
+errata — control-cell numbers transplanted into headline contexts, a cross-scope ratio,
+a protocol-mixing claim — all in unregistered connective prose, none touching a
+pre-registered number, rule, or verdict. The seventh found the failure mode that
+diagnosis could not exclude: a pre-written consumption text (PR-19's no-rise branch),
+drafted for an informative outcome, was applied verbatim to a floor-degenerate one and
+presented an uninformative $N_\text{eff}$ as confirming evidence — an error inside
+registered prose (though not inside any number, rule, or verdict), and one that
+overstated the paper's *caveat* rather than its claim, which is why it survived six
+rounds; it is withdrawn by ledger amendment (§19.6c), with two same-root instances in
+connective prose and stale values inside rendered figure annotations corrected
+alongside. The discipline held where it was applied; its seams — connective prose,
+outcome branches its texts did not anticipate, and derived artifacts — are now named
+from measurement rather than assumed absent.
 
 ### 8.5 Scope limits we chose
 
@@ -1327,7 +1353,8 @@ beats both workhorses.
 
 **Figure F6 — Damping is a first-order design knob.** Final SER versus uniform pinned
 overcoupling r (plateaued endpoints spanning ×302), the deep-overcoupling optimum r\* = 2.0
-(κ_net ≈ 4.1 κ_i — *excess* memory is harmful for this task), and the trainable-κ_ext box
+(measured κ_net = 3.7 κ_i at the converged solutions, 4.1 fixed-gain estimate — *excess*
+memory is harmful for this task), and the trainable-κ_ext box
 (R-ii): boxes containing r\* train to the 5 × 10⁻⁴ ceiling, beating every uniform pin — the
 heterogeneous damping profile is found by training, not designed. Dashed red: the T-A-L
 transfer test (14-tap span, eval-F; PR-17) — the registered prediction that the optimum moves
@@ -1338,7 +1365,8 @@ robust to a ×2 task-memory span (§6).
 ![F7](figures/F7_envelope.png)
 
 **Figure F7 — The systems envelope.** (a) Training-energy inversion: SPSA trains the C-2 cell
-all-in for ~2.6 mJ (optimistic conversion accounting; 99 mJ conservative) while PAT's device
+for ~2.6 mJ in the budgeted conversion stack (optimistic corner; 99 mJ vendor-part; tens of
+mJ once the §7.1 per-time holds are charged, §7.3) while PAT's device
 side is 0.57 mJ but its digital twin backward costs 13–44 J — the energy metric inverts the
 device-pass ranking. (b) Inference energy per sample versus state dimension N at 2 GS/s against the named digital
 baselines: the photonic envelope (optimistic corner, low-power heater class) clears the
