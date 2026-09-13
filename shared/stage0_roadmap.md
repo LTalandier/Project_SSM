@@ -5,6 +5,7 @@ APPROVE-WITH-EDITS) folded in; **Lucas signed off 2026-06-08** ("accept all, sco
 **Source of truth:** `photonic-ssm-proposal-v0_5.md` §6 (Stage 0), §3 (mapping), §4 (pole region),
 §5 (training), §7 (gain), §10 (advantage). This roadmap decomposes Stage 0 into executable phases; it
 adds no scope beyond the proposal without a decision logged in `decisions_needed.md`.
+**Successor (proposed 2026-09-13, not yet approved):** `stage0b_roadmap.md` — the product question P1 did not ask (inline scope, non-volatile actuators, informative N_eff, retrain-vs-lock).
 **Companion file:** `preregistration.md` — every tunable margin/gate/cell/budget freezes there *before*
 its run (Critic F12). PR-IDs below point into it.
 

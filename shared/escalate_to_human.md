@@ -18,6 +18,29 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### ⬜ E-2026-09-13-1 — **Approve the Stage 0b roadmap (v0.1) — the product question P1 did not ask**
+
+> **What it is:** `shared/stage0b_roadmap.md`. Simulation + envelope only, no chip, no P1 edits.
+> Four phases behind one kill gate: **S0b.0** re-prices the §7 envelope under an *inline* scope
+> (no local laser, no E/O in, receiver's O/E shared), with the four former exclusions *charged*,
+> a non-volatile actuator class C added, and the DSP baseline priced per tap to the function
+> (€0 compute; if no cell clears even at OPT the stage ends there). Then, in parallel:
+> **S0b.1** an informative N_eff on a long-span dispersive-ISI task T-E with a registered
+> SNR ceiling-band rule so the §19.6c floor degeneracy cannot recur (≈€50–80); **S0b.2**
+> PAT/SPSA trained through quantized, write-limited actuators — the open problem that decides
+> whether heater hold can go (≈€40–60); **S0b.3** retraining duty cycle vs locking power
+> (≈€15–25). **S0b.4** applies the PR-20 verdict rule (CONS corner, ≥3×, N_eff ≥ 16, all
+> exclusions charged) → **P5**, positive or negative in the same form.
+> **Framing:** trainable optical *LTI filter* with state (S4/LinOSS-class), not "Mamba in glass" —
+> per the 2026-09-13 software-SSM check (shipping SSMs are selective; rings are time-invariant).
+> **Prior:** negative; the point is to measure the corners P1 left unmeasured *before* any wafer
+> spend, per the 2026-09-13 ruling (not worth building as specified; worth researching whether a
+> differently specified version is).
+> **Your calls:** (1) approve v0.1 + S0b.0 (€0); (2) P1 sequencing — default is *submit P1 first*,
+> Stage 0b becomes P5; (3) each later phase's spend comes back separately per the standing rule.
+> **Unchanged and still blocking P1:** repo re-public + P2 send.
+
+
 ### ✅ E-2026-07-27-1 — **White-space scope RE-RULED W1-only: the registered Wu eLight page read REFUTED the W0 clearance** (resolved same day under the standing delegation; recorded here so you see it)
 
 > **What happened:** the 4 registered pre-submission page-level reads ran (delegated agents,
