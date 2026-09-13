@@ -1,7 +1,7 @@
 # Stage 0b Roadmap — The product question P1 did not ask (simulation + envelope; no chip)
 
-**Owner:** Supervisor (single-session mode). **Status:** **v0.1 PROPOSED (2026-09-13)** — awaits
-Lucas's approval (E-2026-09-13-1). Nothing here runs before that; nothing here touches P1.
+**Owner:** Supervisor (single-session mode). **Status:** **v0.1 APPROVED for S0b.0 (Lucas, "Ok go", 2026-09-13; E-2026-09-13-1 item 1)** — S0b.0
+runs now (€0); S0b.1–S0b.3 spend returns to Lucas at the post-S0b.0 continuation gate. Nothing here touches P1.
 **Source of truth:** P1 §7 (the frozen envelope and its four exclusions), `docs/s0_7/exclusions_ledger.md`
 (primary-sourced overhead numbers), PR-18/PR-19 (§18.6b N_eff path; §19.6c floor-degeneracy lesson),
 and the 2026-09-13 PI discussion that scoped this stage. **Companion file:** `preregistration.md` —
@@ -221,7 +221,7 @@ S0b.1, S0b.2, S0b.3 are independent and can run in parallel once S0b.0 passes.
 - **PR-23** — S0b.3: retraining schedule ladder, maintenance-power rule, locking comparator rows.
 
 ## Decision gates owned by Lucas
-- ⬜ **E-2026-09-13-1 — approve this roadmap (v0.1) and the S0b.0 spend (€0).** Nothing runs before.
+- ✅ **E-2026-09-13-1 — approve this roadmap (v0.1) and the S0b.0 spend (€0).** Approved 2026-09-13 ("Ok go"); P1 sequencing = submit-first default, S0b.0 runs before the submission decision (Lucas's 2026-09-13 reading: run the free gate first, then decide P1).
 - ⬜ **Continuation gate after S0b.0:** the OPT-corner clearance verdict + PR-21/22/23 freezes +
   the compute envelope (total ≈ €105–165 excl. VAT for S0b.1–S0b.3; each phase escalated
   separately per standing rule).

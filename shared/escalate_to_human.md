@@ -18,7 +18,7 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### ⬜ E-2026-09-13-1 — **Approve the Stage 0b roadmap (v0.1) — the product question P1 did not ask**
+### ✅ E-2026-09-13-1 — **Approve the Stage 0b roadmap (v0.1) — the product question P1 did not ask** — APPROVED 2026-09-13 ("Ok go"): S0b.0 running (€0); P1 sequencing: S0b.0 first, then the submission decision; §8.4/N4 re-worded to "public at submission" + OTS anchor; repo flip + P2 email deferred to the day P1 moves
 
 > **What it is:** `shared/stage0b_roadmap.md`. Simulation + envelope only, no chip, no P1 edits.
 > Four phases behind one kill gate: **S0b.0** re-prices the §7 envelope under an *inline* scope

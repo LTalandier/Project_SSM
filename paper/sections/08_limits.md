@@ -68,11 +68,15 @@ The pre-registration discipline (thresholds frozen and committed before runs) is
 mitigation — with the caveat stated plainly: from the single-session date onward the registrar
 and the registrant are the same agent, so the commit trail is self-graded until it is
 externally anchored. That anchor was treated as a precondition, not an afterthought — a
-timestamp that follows disclosure certifies nothing — and it is in place: the repository,
-including the full ledger and its complete commit history, was published (externally
-timestamped) at `github.com/LTalandier/Project_SSM` on 2026-08-02, before this manuscript
-circulated beyond the review recorded here. The freeze-before-run ordering claimed
-throughout this paper is therefore verifiable by anyone rather than trusted. The
+timestamp that follows disclosure certifies nothing — and it is in place in two parts: the ledger
+head was anchored by an OpenTimestamps proof (`timestamps/head_2026-08-05.txt.ots`,
+committed before the external review recorded here), which certifies existence-by-date
+independently of who can read the repository; and the repository itself, including the
+full ledger and its complete commit history, is made public at
+`github.com/LTalandier/Project_SSM` at submission (it was first published 2026-08-02 and
+withdrawn to private on 2026-08-04 for the PI's content review, which is why the date of
+record is the submission date rather than the earlier one). The freeze-before-run ordering
+claimed throughout this paper is therefore verifiable by anyone rather than trusted. The
 post-assembly external review recorded in the ledger (seven rounds, 2026-08-01 through
 2026-08-17) doubles as a measurement of this structure. Its first five rounds found six
 errata — control-cell numbers transplanted into headline contexts, a cross-scope ratio,

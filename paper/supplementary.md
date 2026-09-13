@@ -25,7 +25,7 @@ cannot win promotion-rule (b) (strictly-simpler hardware) by construction.
 qualifiers load-bearing; five named near-misses dispatched in §1.1; four page-level reads
 registered for the final pre-submission sweep).
 
-## N4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`; **public at `github.com/LTalandier/Project_SSM` since 2026-08-02** — every commit hash below is externally verifiable)
+## N4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`; **public at `github.com/LTalandier/Project_SSM` at submission; ledger head anchored by OpenTimestamps `timestamps/head_2026-08-05.txt.ots`** — every commit hash below is externally verifiable once the repository is public, and the anchor certifies existence-by-date regardless)
 
 Rule being evidenced: **every threshold/spec commit predates the run that consumes it.**
 
@@ -131,6 +131,9 @@ both passes.
   integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).
 - ✅ **§8.4 tense swap DONE 2026-08-02**: repo public at `github.com/LTalandier/Project_SSM`
   (E-2026-07-27-2 resolved); §8.4 states the publication in past tense with date + URL.
+  **Amended 2026-09-13:** repo private since 2026-08-04 (PI content review); §8.4/N4 now say
+  "public at submission" + the OTS anchor as the visibility-independent certificate; the
+  past-tense date claim is withdrawn until the re-flip (then re-dated to the re-flip date).
 - ✅ Round-5 walkthrough COMPLETE, clusters A–E (2026-08-04/05): PR-18 §18.1–18.5 + §18.6
   registered→run→consumed (all reproductions bit-identical); §5.7/§6 mechanism + §3.6/§8.2
   vii exposure + §9.1 Stage-1 δ-aware-clamp design input; six errata fixed (§2.2 κ_tot,
