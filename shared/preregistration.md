@@ -2017,3 +2017,77 @@ conditional" sentence, and the burden-flip. Same root, derived artifacts: round-
 corrected values had persisted inside rendered figure annotations (F6 label ≈5.5
 samples → ≈6 at measured 3.7 κᵢ; S5 in-image title ≈27 → C-2 ≈8; F7 caption "all-in" →
 budgeted-stack scope); regenerated with this amendment.
+
+---
+
+## PR-20 — 🔒 **FROZEN** (2026-09-13, single-session mode; committed BEFORE `analysis/s0b_0_envelope.py` runs) — S0b.0 inline-scope re-envelope + Stage-0b verdict rule
+
+**Governs:** S0b.0 (`shared/stage0b_roadmap.md`), the kill gate of Stage 0b, and the verdict rule reused
+at S0b.4. **Source rows:** `docs/s0b/s0b_0_ledger.md` (retrieved and statused 2026-09-13) + the PR-10
+frozen rows it re-uses. Arithmetic only — no simulation. Lucas's approval: E-2026-09-13-1 ("Ok go").
+
+### 20.1 Scope: inline receiver stage
+- The signal is already optical at the device input: **E/O in = 0**; the transmitter's laser and
+  modulator are the link's (stated, not hidden).
+- **Shared stages cancel on both sides:** photodiode + TIA + ADC are paid by the digital receiver
+  whether or not the photonic stage exists; charged only if the photonic stage forces a different ADC
+  (rate/ENOB) — not the case for a same-rate LTI filter; row carried at 0 with the condition stated.
+- **Comparison object:** photonic-stage static + maintenance power ÷ line rate, vs the digital
+  equalizer *block* it replaces, priced per tap. Everything else is shared (cancels) or the link's.
+- Line-rate window: the S0.1 registered 0.1–2 GS/s (grid {0.1, 1, 2} GS/s, unchanged from S0.7).
+
+### 20.2 What the photonic stage pays (all rows charged; ledger row in brackets)
+1. **Actuator hold per control channel** × N × CH_PER_RING (PR-10: 2 OPT / 4 CONS):
+   A = 60/175 + 2 mW; B = 1 + 2 mW; **C-pz** = 0.1 (OPT, UNSOURCED) / 2 (CONS, frozen DAC row) mW
+   + 20–300 nW actuator [§1C-pz]; **C-pcm** = 0 (non-volatile; write electronics off at inference —
+   retention not quantified, flagged) [§1C-pcm]; **hybrid** = 4 driven rings C-pz + the rest C-pcm
+   (P1 §5.7: only the taps move).
+2. **Drift management (the locking exclusion, charged):** common-mode option ∈ {TEC 180 mW [§3,
+   VERIFIED]; global heater 10/50 mW [§3, UNSOURCED]; actuator-tracked lock 1.3/13 mW [§3, duty
+   UNSOURCED; classes A, B, C-pz only — C-pcm and hybrid cannot track continuous drift]} **plus** the
+   uncorrelated residual by **periodic retraining** at cadence T_r ∈ {1, 10, 100, 1000} s:
+   P = E_ep/T_r + 0.13 W × 22.5 ms/T_r, E_ep = 2.6 / 99 mJ (§7.3 SPSA stack) [§3]. Default cell
+   T_r = 100 s (the drift anchor gives ≈ 1 h per C-2 linewidth); the ladder is reported.
+3. **Gain pump (the fifth unbudgeted item):** configuration **passive** (undoped rings, g = 0, the
+   model's own passive variant; pump = 0) vs **pumped** (0.8/17 mW electrical per ring + 0/180 mW
+   pump-module TEC) [§2, derived from two UNSOURCED inputs]. Passive is the product configuration;
+   pumped is reported.
+4. **Control compute at inference:** 0 unless a lock/retrain loop runs (then inside rows 2).
+5. **Packaging:** insertion-loss co-condition 0.3 (OPT) / 3.0 (CONS) dB, two facets [§4]; a cell that
+   clears on energy with > 3 dB is "clears-with-loss-penalty", never "clears".
+
+### 20.3 Digital block, priced to the function
+- E_digital = N_taps × e_tap, **e_tap = 0.05 (OPT) / 0.15 (CONS) pJ per tap per sample** [§5, the
+  load-bearing row: Credo 802.3ck TX-FIR 0.075 and RX-FFE/DFE 0.10 pJ/tap/sample, Horowitz-scaled
+  floor 0.02–0.06]; sensitivity band [0.03, 0.25].
+- N_taps grid {4, 8, 16, 32, 64, 128}; the P1 point (7-tap task, N_eff 6–8) is marked at 8.
+- Secondary rows for continuity only: Brainwave 287 GFLOPS/W and Jetson at 14·N ops/sample (C5);
+  the P1 DSP-block row (25–170 pJ/bit × ENOB) — reported, not load-bearing.
+
+### 20.4 Reachability
+- Single-ring amplitude memory at the lightest registered damping r_min = 0.1606 (S0.4-0):
+  κ_net,min = (1 + 2 r_min) κ_i passive, (0.1 + 2 r_min) κ_i pumped; κ_i from the registry
+  (C-1 3.04×10⁸, C-2 8.94×10⁷, C-3 2.03×10⁷ rad/s; N = 8/32/128 ↔ C-1/C-2/C-3 per PR-4 R2).
+  **N_reach = ⌊f_s / κ_net,min⌋**; cells with N_taps > N_reach are **UNREACHABLE** regardless of
+  energy. Convention flagged conservative-to-the-lattice (hop delays could extend it; S0b.1 measures).
+
+### 20.5 Verdict rules (frozen; reused verbatim at S0b.4)
+- **Cell clears** iff E_digital / E_photonic ≥ 3 at that corner, the cell is reachable, and the
+  packaging co-condition ≤ 3 dB.
+- **Stage-0b product window exists** iff at **CONS**, at least one reachable cell with **N_taps ≥ 16**
+  clears with all rows 20.2 charged, under a drift option S0b.3 can deliver (retrain-based cells are
+  "conditional-on-S0b.3" until S0b.3 measures the cadence).
+- **S0b.0 kill:** if the **maximum** E_digital/E_photonic over all **OPT** cells with class ∈ {C-pz,
+  C-pcm, hybrid}, passive or pumped, any drift option (UNSOURCED rows included), T_r = 1000 s, at the
+  best reachable N_taps, is **< 3**, the product door is closed by arithmetic and S0b.1–S0b.3 do not
+  run. If ≥ 3, the surviving cells define the grid S0b.1–S0b.3 must hit.
+- **Sensitivity re-statement (mandatory in the memo):** the same maxima with every UNSOURCED row
+  removed (global heater and tracked-lock options dropped → TEC only; C-pz OPT hold → 2 mW; e_tap at
+  the sensitivity band ends). The verdict of record is the frozen-row one; the sensitivity is
+  reported next to it, S0.7 exclusions-ledger style.
+- Every number carries its ledger row and status. No row is added or changed after this block
+  without a dated addendum.
+
+### 20.6 Output
+`results/s0b_0/envelope.md` (tables + verdict + sensitivity), `envelope.json`, one PNG; memo
+committed with `git add -f`; results_log entry; continuation-gate escalation to Lucas.
