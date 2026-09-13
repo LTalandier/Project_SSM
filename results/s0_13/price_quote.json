@@ -1,0 +1,21 @@
+{
+  "queried_utc": "2026-09-13T21:01:08.444099+00:00",
+  "server_type": "cpx62",
+  "location_price": {
+    "location": "fsn1",
+    "price_hourly": {
+      "net": "0.2083000000",
+      "gross": "0.2499600000000000"
+    },
+    "price_monthly": {
+      "net": "129.9900000000",
+      "gross": "155.9880000000000000"
+    },
+    "included_traffic": 21990232555520,
+    "price_per_tb_traffic": {
+      "net": "1.0000000000",
+      "gross": "1.2000000000000000"
+    }
+  },
+  "status": "provider quote, not an invoice"
+}
