@@ -41,9 +41,9 @@ Three pre-registered forks, with their triggers on record: (i) **adjoint promoti
 Stage-1-adjacent demonstration retires debt #4 (a physical recurrent reverse pass), the PR-9
 criterion re-opens with the S0.5 data as prior; the sim says it would arrive at ceiling-grade
 accuracy at 2× PAT's device cost, zero digital. (ii) **The in-situ advantage** — the offline
-tie (§5.5) at 5%-class mismatch sets the burden: in-situ training earns its place on hardware
+absence of a resolved difference (§5.5) across five 5–30%-class mismatch levels sets the burden: in-situ training earns its place on hardware
 only if a measured differential justifies it: independent drift is one modeled
-candidate; higher-mismatch robustness and total training-energy comparisons remain unresolved. The Stage-1 experiment should be *designed to
+candidate; mismatch beyond the corrected grid and total training-energy comparisons remain unresolved. The Stage-1 experiment should be *designed to
 measure exactly this differential* — same chip, offline-deploy vs PAT/SPSA arms — rather than
 assume it. (iii) **RHEL** — nothing on SiN; the sim verdict (dissipation-fatal at the operating
 point even with a perfect conjugator) would need a *conservative* platform regime, not a better

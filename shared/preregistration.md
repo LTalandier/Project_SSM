@@ -2127,3 +2127,29 @@ retains PR-5 §E/PR-17's seeds, budget, evaluation, and statistical rule. Fresh
 hash provenance. New source-versioned outputs only under `results/s0_13/`.
 No corrected result is asserted by this entry. Both outcomes will be reported;
 the old withdrawal remains in force until the corrected analysis is complete.
+
+
+### S0.13 correction consumption — 2026-09-13 (post-run; frozen rules unchanged)
+
+Bounded protocol committed at `bda989f`; corrected results at `174558c`. All 32
+higher-mismatch PAT units and the single m=1 seed-11 anchor completed. The anchor
+reproduces the full 316-point coarse trace, final coarse/fine SER, and both pass
+ledgers exactly. Forty unchanged offline and eight PAT m=1 units are reused;
+the anchor is not an additional replicate. Source and state hashes are retained
+in `results/s0_13/` and the reproduction archive. This is implementation repair
+after discovery of the bug, not a newly blinded experiment.
+
+At PR-17 eval-F, offline/PAT ratios at m={1,2,3,4,6} are
+{1.0529,1.0349,1.0058,1.0233,0.9943}; all paired difference intervals include zero.
+No level meets the registered advantage rule; m* is absent. Neither arm's median
+fails the target. Coarse ratios are {1.3333,1.3333,1.5000,1.5000,1.3333}; no coarse
+level clears the advantage rule either. An unresolved difference is not evidence
+of equivalence. Historical invalid m>1 PAT outputs remain withdrawn; S0.13 supplies
+new corrected evidence for the complete tested grid. No thresholds, seeds, budgets,
+or stopping rules were changed. The base bake-off and drift result are unchanged.
+
+Fleet: 3.006 aggregate CPX62 server-hours; approximately EUR 1 gross with per-node
+hour rounding, plus small IPv4 charges (estimate, not invoice). All four servers
+and all primary addresses were removed after retrieval. No hardware or higher-rate
+study was opened. P1 incorporates the correction and PR-20 negative envelope;
+standalone P5 publication is deferred, and P2 contact remains separate.

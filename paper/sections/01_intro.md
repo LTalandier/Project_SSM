@@ -109,10 +109,9 @@ shipped as supplementary material (§3.7). Concretely:
    foundry-class noise cell. The ranking (PAT < adjoint < SPSA on device passes; RHEL censored,
    and worse than readout-only under an honest echo) settles the hardware roadmap on PAT/SPSA
    without promotion of the exotic routes. And the comparison the fair design was built to
-   expose lands as a mechanism triple: calibrate-then-deploy ties in-situ training at
-   the base 5%-class calibration error (the higher-mismatch comparison is withdrawn
-   after an implementation audit; §5.5) and under common-mode drift, which a laser re-lock
-   absorbs — while under uncorrelated per-ring drift, which nothing offline can absorb,
+   expose shows no resolved calibration difference at five levels spanning
+   5–30%-class error after the corrected binding rerun (§5.5), and no advantage
+   under common-mode drift, which a laser re-lock absorbs — while under uncorrelated per-ring drift, which a global laser re-lock cannot absorb,
    in-situ retraining holds a **declared, pre-registered 2.42× advantage** (both conditions
    of the frozen rule hold — point ratio ≥ 2× *and* difference-CI excluding zero; the
    coarse-floor estimate 1.84× is co-reported), a gap that grows with accumulated drift
@@ -121,9 +120,9 @@ shipped as supplementary material (§3.7). Concretely:
    only; the anchor risks, verification debts, and the single-session review period are
    disclosed with the same specificity as the results.
 
-Our position on novelty is deliberately narrow. PAT and SPSA are chip-proven; we do not
-re-validate them. What has never existed is a *recurrent, dissipative* photonic system trained
-through its own physics — and a demonstration that the recurrence-defining parameters of a
-realistic SiN lattice can be so trained, under pre-registered thresholds and honest costing, is
-the contribution. Whether it *pays* is a separate question (§7), and this paper reports the
-current answer to that question as it falls, not as we might wish it.
+Our contribution is a simulation test of training the pole positions and couplings
+that define a dissipative SiN memory lattice, under registered thresholds and
+explicit cost accounting. PAT and SPSA have prior chip demonstrations; the
+literature distinction is the specific recurrence in §1.1. A physical demonstration
+of this architecture remains future work. Its systems value is assessed separately
+in §7, including the negative inline follow-up.

@@ -61,6 +61,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-18 converged-operating-point diagnostics (S0.11) | `b585623` | stage-1 `ae1073f` / stage-2 `d108d5f` |
 | PR-18 §18.6 follow-ups: taps-only control + N_eff ablation (S0.11b) | `ec2d4e3` | verdicts `21c9bb2` |
 | PR-19 T-D long-coherent-memory (S0.12) | signed `e96e76c`; addenda `b55b135`/`a4e6a70` | fleet+verdicts `f7b395a`; §19.6c round-7 amendment `a28e2d2` (no-rise frame withdrawn as floor-degenerate; rule/verdict stand) |
+| PAT command-binding correction (S0.13; original PR-5/PR-17 thresholds retained) | code `04c67a6`; bounded rerun protocol `bda989f` | results `174558c`; exact m=1 anchor, all 33 units complete |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
 ## N5 — Reproducibility statement
@@ -82,6 +83,14 @@ estimates used the old rate.) The post-assembly PR-19 follow-up (S0.12) added �
 server-hours ≈ **€50 excl. VAT** (rate-exact €0.3814/h; includes one server lost to a
 hang with its 12 units re-run, and an ssh-outage delay) — Stage-0 total ≈ 315 h ≈
 **€120 excl. VAT (≈€145 incl.)**.
+
+The S0.13 correction used four temporary CPX62 servers and 3.006 server-hours in
+aggregate. At the retrieved rate, rounding each server up to one billed hour gives
+approximately **€1 incl. VAT**, plus small IPv4 charges; this is an estimate, not an
+invoice. All servers and addresses were removed after retrieval. Per-unit Python
+and Torch versions, source hashes, and cleanup evidence accompany the correction.
+The revised suite has 174 tests. The checksum-verified reproduction archive now
+includes the corrected run records, trained states, and exact source bundle.
 
 ## N6 — Supplementary figures
 
@@ -158,7 +167,7 @@ both passes.
   verdicts: taps-only control → A-discovers narrowly (abstract clause restored,
   "estimator-independent"); N_eff = 6–8 → §7.2 bounds its own N-scaling premise + abstract
   niche condition; §8.4 review-as-measurement sentence. OTS anchor in `timestamps/`
-  (upgrade `.ots` at submission). Candidate S-figure (converged profiles + ablation
+  (receipt upgraded 2026-09-13; local Bitcoin-node verification remains documented in `timestamps/README.md`). Candidate S-figure (converged profiles + ablation
   curves) undecided — PI call at venue-format time.
 - ✅ PR-19/S0.12 (2026-08-13→17, PI-signed): T-D despread-31 fleet run + consumed —
   P0 solvable (ceiling 0.000), P1 failed by degeneracy (grid ties at zero; §6
@@ -187,15 +196,29 @@ The twin constructor scaled intrinsic loss and backscatter, but command binding
 used m=1 values for detuning offset, external coupling, and inter-ring coupling.
 At m=6 the command offsets/factors were 0.05 κ_i, 1.05, and 0.95 instead of
 0.30 κ_i, 1.30, and 0.70. Offline deployment used the intended scaled values.
-The m>1 comparisons and the claimed tie through 30% are withdrawn. F8a now shows
-only m=1. Historical S0.9a/S0.10a files, including `runs_a_patboth`, remain unchanged
-in the reproduction archive; they must not be mistaken for corrected runs.
-`results/s0_10/analysis.json` is likewise the historical summary. The m=1 bake-off,
-diagnostics, and separate drift results are not affected by this scaling defect.
-The corrected binding stores each twin's scaled levels; a regression checks values
-and command Jacobians at m=0,1,2,6. No corrected higher-mismatch training run has
-been performed for this revision. Future such runs need distinct output paths and
-code-version metadata; existing idempotent runners must not reuse historical paths.
+The original m>1 comparisons and the claimed tie through 30% were withdrawn.
+Historical S0.9a/S0.10a files, including `runs_a_patboth`, remain unchanged in the
+reproduction archive and remain invalid for those comparisons. The m=1 bake-off,
+diagnostics, and separate drift results are unaffected. The corrected binding
+stores each twin's scaled levels; regressions check values and command Jacobians
+at m=0,1,2,6.
+
+**Correction completed (S0.13).** Protocol `bda989f` preceded 32 fresh PAT units
+at m={2,3,4,6} and all eight original seeds, plus one m=1 seed-11 anchor. Each unit
+used 31,600 updates, the original hyperparameters, and PR-17 fine evaluation at the
+trained normalization. All 33 units finished, with no seed replacement or tuning.
+The anchor exactly reproduced all 316 coarse evaluations, coarse/fine SER, and
+pass ledgers, supporting reuse of 40 unaffected offline and eight PAT m=1 records.
+The anchor is not an extra statistical replicate. Source commit, versions, input
+hashes, and trained-state hashes are retained. Results are recorded at `174558c`;
+this is a post-result implementation repair, not a new blind registration.
+
+`results/s0_13/analysis.json` replaces only the affected mismatch block and records
+the imported S0.10 drift/reference blocks by provenance. All five fine intervals
+include zero; ratios range from 0.994 to 1.053. Neither coarse nor fine evaluation
+finds a registered crossover. Figure F8a now shows the corrected complete grid.
+The fine result resolves no difference at the tested levels; it does not prove
+equivalence. The original withdrawal and defect remain part of this audit trail.
 
 **Energy and timing.** The reported 22.528 ms is 176,000 × 256 / (2 GS/s), the
 optical sequence duration. It excludes parameter writes, settling, reset gaps,

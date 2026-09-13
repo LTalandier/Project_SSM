@@ -18,6 +18,24 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-09-13-3 — correction and publication disposition resolved in session
+
+Lucas's "okay let's do this" accepted the bounded corrected higher-mismatch rerun,
+followed by P1 submission preparation; standalone P5 deferred, negative envelope
+retained in P1, hardware/higher-rate work paused, P2 contact separate. S0.13 is
+complete (`bda989f` protocol → `174558c` results): exact anchor, no fine mismatch
+difference resolved at any tested level, no registered crossover, all resources
+removed, approximately €1 gross server-cost estimate plus address charges.
+
+P1 submission files are prepared (`paper/SUBMISSION.md`). No authenticated arXiv
+session is available here; author submission/license selection and the linked
+submission-day repository release remain external steps, not a new rerun decision.
+No arXiv receipt, public-release date, or P2 email is claimed.
+
+The item below is retained as the original proposal; this disposition supersedes
+its P5/P1 sequencing and automatic P2-email suggestion.
+
+
 ### ◐ E-2026-09-13-2 — **Stage 0b closed at S0b.0 by arithmetic (kill fired); three calls for you**
 
 **2026-09-13 follow-up:** Lucas authorized the audit repairs and preparation. P5

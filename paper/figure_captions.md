@@ -63,10 +63,12 @@ nominal-N inference comparison at 2 GS/s. The later function-matched inline enve
 finds no energy-advantage window under PR-20 (§7.4); this panel is historical context.
 
 **Figure F8 — What breaks the offline tie (pre-registered follow-ups, §5.5; eval-F protocol
-of record, PR-17).** (a) The unaffected base 5%-class mismatch comparison (8 seeds):
-PAT and offline-deploy are statistically indistinguishable. Higher-level points
-are omitted because PAT's command-binding errors were not scaled as registered;
-the previous 30%-robustness interpretation is withdrawn (N8).
+of record, PR-17).** (a) The complete corrected 5–30%-class calibration sweep
+(S0.13): eight seeds per arm and level, 32 fresh PAT units, 48 unchanged controls,
+and a separate exact m=1 reproducibility anchor. All five paired difference
+intervals include zero; offline/PAT ratios span 0.994–1.053. No registered
+advantage is declared. Lines are medians; dots show individual seeds. The
+historical higher-mismatch PAT outputs remain invalid and are not plotted (N8).
 
 (b) Deploy-then-drift, common-mode regime (σ_step = 0.40 κ_i per step on all detunings
 coherently): the offline laser re-lock absorbs the drift and keeps pace (ratio 1.34, CI

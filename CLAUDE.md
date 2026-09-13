@@ -1,5 +1,12 @@
 # Photonic State-Space Model on Silicon Nitride
 
+**Current state, 2026-09-13:** read `shared/PROJECT_HANDOFF.md` for the live state.
+S0.13's corrected mismatch sweep is complete, P1 submission files are prepared,
+and Stage 0b/hardware development remains closed. The Stage-0 setup text below is
+historical context; it must not restart completed work or restore withdrawn claims.
+Actual arXiv submission and the submission-day public release are still pending.
+
+
 ## What this is
 
 A research program to build a **trained, structured photonic state-space model (SSM)** — an

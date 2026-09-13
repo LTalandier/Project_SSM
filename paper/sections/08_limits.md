@@ -103,13 +103,13 @@ post-assembly and is consumed in §6/§7.2; its chief surviving lesson is method
 follow-up task's operating point must be registered against its own processing gain (the
 frozen 28 dB left the entire damping grid error-free) — and the harder-operating-point
 variant remains an open registration, not a claim. Two axes the bake-off itself held fixed were measured afterward in
-pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (higher-level comparisons withdrawn after the
-command-binding defect was found; supplementary N8) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
+pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (corrected after the
+command-binding defect was found, using the same frozen rule; supplementary N8) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
 two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,
 and the tested drift magnitude is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than
 worst-case. The systems-advantage question — whether any of this pays once conversion overhead
 is counted — is §7's; the strongest current evidence is §5.5's mechanism triple: no advantage
-at the base 5%-class calibration mismatch, none under common-mode drift, and a
+at any of five tested calibration levels spanning 5–30%, none under common-mode drift, and a
 declared pre-registered $2.42\times$ advantage specific to uncorrelated per-ring drift —
 whose real-hardware relevance rests entirely on how uncorrelated actual on-chip drift is, an
 unmeasured quantity we elevate to the sharpest Stage-1 experiment (§9). We consider stating
@@ -117,5 +117,7 @@ that plainly to be the paper's job.
 
 The subsequent repository audit (2026-09-13; supplementary N8) found an implementation
 defect in the higher-mismatch sweep and an optical-time versus wall-time error in
-the energy interpretation. Those claims are withdrawn. This audit was implemented
-and checked in one session and is not an independent review.
+the energy interpretation. The invalid higher-mismatch comparisons were withdrawn
+and replaced by a bounded, versioned correction rerun (S0.13); all five fine
+intervals still include zero. Total-training-energy claims remain withdrawn. This
+audit and correction were implemented and checked in one session, without independent review.

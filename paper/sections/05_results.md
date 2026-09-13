@@ -192,29 +192,49 @@ set, so the comparison cannot be rigged by giving in-situ training a secretly-wr
 PR-5). At that mismatch level it reaches $1.0\times10^{-3}$ against in-situ PAT's
 $8\times10^{-4}$ (coarse protocol of record — a one-to-two-symbol gap the coarse floor
 scores as formally real; at eval-F, where the floor can actually resolve it, the two arms
-are statistically indistinguishable, CI including zero — the F8a sweep below).
+show no resolved difference, CI including zero — the F8a sweep below).
 
 We state the consequence plainly, because the fair-comparison design exists precisely to force it:
-**at 5% calibration accuracy on this task, training in situ buys essentially nothing over
-calibrate-then-deploy.** The demonstration claim — the first dissipative-resonator recurrence
-whose poles and couplings train on-device — stands regardless; it is a claim about *what was
-done*, not about beating an
-alternative. The question this raises — *under what conditions does the advantage appear?* — we
+**at 5% calibration accuracy on this task, we resolve no performance benefit for
+in-situ training over calibrate-then-deploy.** This does not establish equivalence
+or rule out smaller benefits. The result established here is simulated trainability
+of the recurrence-defining parameters; a physical demonstration remains future work. The question this raises — *under what conditions does the advantage appear?* — we
 then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
 PR-16; both frozen before the runs).
 
-**Higher-mismatch comparison withdrawn (2026-09-13 erratum; Fig. F8a).** The
-registered sweep intended to scale five calibration/actuation errors together from
-5% to 30%-class. A code audit found that PAT scaled intrinsic-loss and backscatter
-errors, but its command binding kept the detuning offset and both coupling errors
-at their original 5%-class values. The offline arm scaled all five terms. Thus the
-higher-level comparisons did not implement the registered shared mismatch family.
-Their previous interpretation as a tie through 30% is withdrawn. Historical outputs
-are retained for audit, not used as evidence for that claim. The binding is corrected
-and regression-tested, but no corrected higher-mismatch training runs are reported.
-The m=1 (5%-class) comparison is unchanged; its paired interval includes zero.
-The base-scale bake-off and the separate drift experiment also use m=1 and are
-unaffected by this scaling defect. Supplementary note N8 records the disposition.
+**Corrected calibration sweep: no resolved advantage through the registered 30%-class
+point (S0.13; Fig. F8a).** The original sweep failed to scale three of PAT's five
+registered mismatch terms in command binding. Its higher-mismatch comparisons
+were withdrawn, and the code was corrected. A bounded correction protocol was
+committed before the rerun (`bda989f`): 32 fresh PAT units at m={2,3,4,6}, with
+all eight original seeds, unchanged training budgets and PR-17 evaluation. The
+40 unchanged offline units and eight PAT m=1 units were reused. An additional
+m=1 seed-11 run reproduced every coarse evaluation, final coarse/fine SER, and
+pass ledger exactly. This anchor is a reproducibility check, not a ninth replicate.
+The correction is post-result bug repair, not a newly blinded experiment; the
+thresholds and bootstrap rule were not changed. Results are recorded at `174558c`.
+
+At eval-F (99,840 symbols), all five paired-by-seed difference intervals include
+zero. Offline/PAT median ratios range from 0.994 to 1.053; neither arm's median
+fails the registered accuracy target. No mismatch crossover clears the frozen
+rule (ratio ≥2 and difference-CI lower bound >0). These data resolve no difference
+at the tested levels; they do not establish statistical equivalence.
+
+| mismatch class | PAT median SER ×10⁻³ | offline median SER ×10⁻³ | offline/PAT | paired 95% CI of (offline−PAT) ×10⁻³ |
+|---|---:|---:|---:|---|
+| 5% | 0.851 | 0.896 | 1.053 | [-0.050, 0.100] |
+| 10% | 0.861 | 0.891 | 1.035 | [-0.060, 0.120] |
+| 15% | 0.861 | 0.866 | 1.006 | [-0.045, 0.080] |
+| 20% | 0.861 | 0.881 | 1.023 | [-0.045, 0.100] |
+| 30% | 0.881 | 0.876 | 0.994 | [-0.090, 0.070] |
+
+The coarse protocol is co-reported: ratios are 1.33–1.50, with positive difference
+intervals at 5–20% and an interval touching zero at 30%; none reaches the 2×
+advantage threshold. Coarse and fine metrics in each corrected unit use the same
+trained model and normalization. The old higher-mismatch outputs remain invalid
+historical records, not replications of the corrected runs. Supplementary N8 and
+`results/s0_13/analysis.json` retain the correction and input-hash trail. The m=1
+bake-off and separate drift experiment are unaffected by the binding defect.
 
 **Drift is the axis — specifically the part a re-lock cannot catch** (Fig. F8b,c). We then let the substrate
 *drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
@@ -250,7 +270,8 @@ seed, evaluation draws only from reserved streams that never touch the training 
 (the coarse evaluation set is the first 2 of the fine protocol's 52 batches — a strict
 subsample, so the coarse reading was underpowered, not contradicted), and the
 evaluation-independent device-state fingerprint matches the stored originals exactly on all
-64 drift units — as does the coarse final SER on all 80 calibration-sweep units (ledger
+64 drift units — as did the coarse final SER on all 80 historical calibration-sweep units
+before the S0.13 binding correction (ledger
 §17.8). The coarse→fine change therefore carries exactly one factor, the evaluation floor:
 the *same physical trajectories* score $1.84\times$ at 3,840 symbols and $2.42\times$ at
 99,840. Second, the ordering, with dates and commits rather than assertion: the decision rule
@@ -258,8 +279,9 @@ froze before any drift datum existed (PR-16, 2026-07-22/24), and the coarse esti
 the bar — was on record when the fine protocol was registered (PR-17, commit `241204a`,
 2026-07-27, *before any eval-F measurement*; the same commit froze the rule that coarse and
 fine verdicts are both reported wherever they differ). Third, at the unaffected m=1 calibration point, the finer evaluation erased a
-coarse-floor difference in in-situ's favor. Higher-mismatch points are withdrawn
-for the separate implementation defect above and no longer support this argument. The drift comparison crossed the
+coarse-floor difference in in-situ's favor. The higher-mismatch correction above
+is a separate intervention and is not used to claim bit-identity with the invalid
+historical implementation. The drift comparison crossed the
 registered threshold at the finer resolution. The gap *grows with accumulated drift* (~3–4× at
 the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
@@ -268,9 +290,9 @@ whose couplings move during the step) inflate its early trajectory, and no regis
 involves it; and the deploy-time $\mathrm{SER}(t{=}0)$ diagnostic of the in-situ arms shares
 that convention and is not used in any comparison.
 
-The surviving comparisons distinguish a base-scale calibration tie and a common-mode
-drift tie from a declared $2.42\times$ advantage under independent per-ring drift.
-Robustness at higher calibration mismatch remains unresolved. The relevance of the
+The corrected comparisons show no resolved calibration difference at the five tested
+5–30%-class levels and no common-mode drift advantage, alongside a declared
+$2.42\times$ advantage under independent per-ring drift. The relevance of the
 drift advantage to hardware depends on the correlation of actual on-chip drift,
 which has not been measured for this architecture.
 

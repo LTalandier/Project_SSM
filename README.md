@@ -12,21 +12,29 @@ cell has **E_digital/E_photonic = 0.64**, below parity and the 3× advantage bar
 The photonic estimate is 1.56× the digital energy. Hardware development and the
 higher-rate residue are paused; S0b.1–S0b.3 were not run.
 
-The repository audit found a PAT mismatch-scaling defect. It is fixed, but the
-historical m>1 comparisons are **withdrawn**, with no corrected runs claimed.
-The base 5%-class comparison and separate drift result are unaffected by this
-bug. Total training-energy claims based on optical duration alone are also
-withdrawn; the conversion and digital-twin component budgets remain.
-See [supplementary N8](paper/supplementary.md) for the audit trail.
+The PAT command-binding defect is corrected and its bounded S0.13 rerun is
+complete: 32 fresh higher-mismatch units plus one exact m=1 reproducibility anchor.
+At five tested calibration-error levels spanning 5–30%, all fine paired intervals
+include zero; offline/PAT ratios range from 0.994 to 1.053. No registered advantage
+or crossover is found. An unresolved difference does not prove equivalence.
+Historical invalid runs remain withdrawn and identifiable in the archive.
 
-- [P1 manuscript](paper/p1_manuscript.md) and [PDF](paper/p1_manuscript.pdf)
-- [P5 negative-envelope draft](paper/p5_negative_envelope.md)
+P1 includes the corrected result and the negative inline envelope. Full training
+energy remains unmeasured; conversion and digital-twin component budgets remain.
+See [supplementary N8](paper/supplementary.md) for the correction trail.
+
+- [P1 manuscript](paper/p1_manuscript.md) and [PDF with supplementary notes](paper/p1_manuscript.pdf)
+- [arXiv source ZIP](paper/submission/p1_arxiv_source.zip) and [submission instructions](paper/SUBMISSION.md)
+- [Corrected mismatch result](results/s0_13/reading.md)
+- [P5 negative-envelope draft](paper/p5_negative_envelope.md) (standalone publication deferred)
 - [Stage 0b result](results/s0b_0/reading.md) (restore the bundle if absent)
 - [Pre-registration and post-run errata](shared/preregistration.md)
 - [Current handoff](shared/PROJECT_HANDOFF.md)
 
-Submission/public release remains pending. No email or publication is part of
-the repair workflow.
+P1 is prepared for arXiv submission. The authenticated author upload and submission-day
+repository release remain pending; the repository is still private. P2 contact is separate.
+The correction used approximately €1 of cloud server time including VAT with hour rounding
+(estimate, plus small address charges); all temporary servers and addresses were removed.
 
 ## Setup and verification
 
@@ -35,12 +43,13 @@ python3 -m pip install -r requirements.txt
 python3 -m pytest -q
 python3 scripts/reproduce_paper.py verify
 python3 scripts/reproduce_paper.py restore
+python3 analysis/s0_13_analyze.py
 python3 analysis/make_figures.py
 python3 analysis/make_sfigures.py
 python3 analysis/build_manuscript.py
 ```
 
-The revised suite has **169 tests**. The package runtime is PyTorch-only;
+The revised suite has **174 tests**. The package runtime is PyTorch-only;
 analysis, rendering, and independent numerical reference tests have additional
 dependencies. Versions used for this audit are recorded in
 [the reproduction environment](paper/repro/environment.txt).

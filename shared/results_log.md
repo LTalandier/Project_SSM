@@ -1704,3 +1704,20 @@ sd 0.05/0.07 — profile sd 0.33 is tap-excursion-carried; computed from
 `results/s0_11/states/`); "ample capacity"→headroom; §8.4 → seven rounds through
 2026-08-17 with the two new seam classes named. Blocker unchanged: repo PRIVATE (Lucas)
 — §8.4/N4 past-tense publication claims require re-public before circulation.
+
+
+## S0.13 — PAT mismatch correction completed (2026-09-13)
+
+Protocol `bda989f` → corrected result `174558c`; `results/s0_13/reading.md` gives
+all five fine estimates/intervals and the coarse co-report. Thirty-two fresh PAT
+units plus one exact m=1 anchor completed; 48 unchanged controls reused. All fine
+intervals include zero; ratios 0.994–1.053. No registered crossover, no target
+failure; unresolved differences are not equivalence. Invalid historical m>1 runs
+remain withdrawn. No rule, seed, budget, or hyperparameter was changed.
+
+Four CPX62 servers, 3.006 aggregate server-hours; approximately €1 gross after
+per-node hour rounding plus small IPv4 charges (estimate, not invoice). All
+servers and primary IPs deleted after retrieval; `cleanup.json` records API checks.
+Exact source bundle and all trained states are preserved in the reproduction
+archive. P1 and F8 incorporate the correction; PR-20 stays negative. P5 standalone
+publication is deferred, product hardware remains paused, P2 contact separate.

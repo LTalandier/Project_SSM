@@ -6,3 +6,5 @@ scipy==1.17.1
 matplotlib==3.10.8
 numpy==2.4.3
 Markdown==3.5.2
+
+Submission export: Pandoc 3.9 (pypandoc_binary 1.17), XeTeX 0.999995 / TeX Live 2023

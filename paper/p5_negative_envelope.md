@@ -1,7 +1,7 @@
 # Thermal-management cost closes a registered inline SiN equalizer energy window
 
 *Lucas Talandier — draft companion note to P1, 2026-09-13. Model calculation;
-not submitted. Source provenance is in the accompanying ledger; a publication
+not submitted; standalone publication deferred in favor of including the result in P1. Source provenance is in the accompanying ledger; a publication
 bibliography and independent source review remain release tasks.*
 
 ## Abstract

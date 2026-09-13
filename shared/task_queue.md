@@ -1,9 +1,12 @@
 # Task Queue
 
-**Current status (2026-09-13):** Stage 0b closed at its arithmetic gate; no
-product simulation or hardware task active. Repository repairs completed in the
-main session: see `PROJECT_HANDOFF.md` and supplementary N8. Older task entries
-below are execution history, not current instructions.
+**Current status (2026-09-13):** S0.13 correction complete (`174558c`), exact anchor,
+no registered mismatch advantage at any tested 5–30% level; all compute removed.
+P1 incorporates the correction and PR-20 negative result. Submission package is
+prepared; author arXiv submission and submission-day repository release remain.
+Standalone P5 is deferred; hardware/higher-rate work paused; P2 contact separate.
+See `PROJECT_HANDOFF.md`. Older entries below are execution history, including
+superseded interpretations, not current instructions.
 
 Supervisor assigns tasks here. The Executor reads and executes the task marked **ACTIVE**, then
 **stops and waits**. The Supervisor marks a task **COMPLETED** (date + one-line summary) before

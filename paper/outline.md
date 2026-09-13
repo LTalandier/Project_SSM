@@ -45,8 +45,9 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > taps-only falsifier, narrowly.
 >
 > Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
-> training is statistically indistinguishable at the base 5%-class calibration error and under common-mode
-> drift. Its advantage appears only where nothing offline can follow: under uncorrelated
+> training shows no resolved advantage at five calibration-error levels spanning 5–30% after a
+> corrected command-binding rerun, or under common-mode
+> drift. Under uncorrelated
 > per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a
 > frozen rule; the ratio's own CI spans [1.7, 4.6]). A registered inline-envelope follow-up finds
 > no energy-advantage window at 0.1–2 GS/s against a per-tap digital equalizer
@@ -137,7 +138,7 @@ damping spread stays in §6; the failed-prediction sentence represents that sect
 | F5 ✅ | Ranking bars: device passes (per-seed dots) + digital side-ledger hatched; RHEL censored | S0.5 |
 | F6 ✅ | Damping: pinned vs boxed curves, ceiling line, r*=2.0, plateau flags | S0.6 |
 | F7 ✅ | (a) partial training budgets (conversion OPT/CONS + PAT digital 13–44 J); (b) inference pJ/sample vs N at 2 GS/s vs 4 baselines | S0.7 |
-| F8 ✅ | (a) base 5%-class mismatch tie; higher levels withdrawn (N8); (b) common-mode drift absorbed by re-lock; (c) independent drift: in-situ edge (made 2026-07-27, `analysis/make_sfigures.py`) | S0.9 |
+| F8 ✅ | (a) corrected 5–30%-class mismatch sweep, no resolved difference (S0.13/N8); (b) common-mode drift absorbed by re-lock; (c) independent drift: in-situ edge (made 2026-07-27, `analysis/make_sfigures.py`) | S0.9 |
 | S-figs ✅ | S1 G3 dossier · S2 twin-mismatch C-1 · S3 echo chain+ceilings · S5 RHEL R1 recovery (all made 2026-07-27, `analysis/make_sfigures.py`); S4 = reserved slot (PR-14, deferred) | various |
 
 ## Writing order (Supervisor)

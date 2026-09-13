@@ -102,6 +102,8 @@ def main():
                 archive.writestr(info, p.read_bytes())
         shutil.copyfile(work / 'main.tex', out / 'main.tex')
         shutil.copyfile(work / 'main.pdf', out / 'p1_with_supplement.pdf')
+        if out == (PAPER / 'submission').resolve():
+            shutil.copyfile(work / 'main.pdf', PAPER / 'p1_manuscript.pdf')
         (out / 'build_report.json').write_text(json.dumps({
             'pandoc': version, 'source_date_epoch': epoch, 'fonts': fonts,
             'overfull_boxes': re.findall(r'Overfull[^\n]+', log),

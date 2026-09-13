@@ -1,41 +1,66 @@
 # Reproducing the revised paper
 
-`results.tar.gz` contains the local JSON result records, NumPy benchmark metric
-arrays, and result memos needed to rebuild the figures. `manifest.json` records
-SHA-256 checksums for every file and the archive. This is a data snapshot, not a
-claim that every experiment was rerun with the repaired code. The historical
-source commit is recorded in the manifest; the corrections are described in N8.
+`results.tar.gz` contains the result JSONs, benchmark metric arrays, and memos used
+by the figures. It also includes S0.13's 33 trained states and exact source bundle.
+`manifest.json` records every file's SHA-256 and the archive checksum. This is a
+snapshot of multiple experimental generations, not a claim that all historical
+experiments were rerun with the current code. The corrections are described in N7/N8.
 
-From a clean checkout, with the Python dependencies installed:
+From a results-free checkout, install `requirements.txt`, then:
 
 ```bash
 python3 scripts/reproduce_paper.py verify
 python3 scripts/reproduce_paper.py restore
+python3 analysis/s0_13_analyze.py
 python3 analysis/make_figures.py
 python3 analysis/make_sfigures.py
 python3 analysis/build_manuscript.py
-python3 analysis/render_manuscript_pdf.py
 python3 -m pytest -q
 ```
 
-Restore verifies every member before writing, and refuses to replace differing
-local results. The figure commands read the historical data; they do not train
-models. F8 includes only the unaffected m=1 mismatch point and the drift panels.
-N7's `invalid_scalebug/` outputs and N8's higher-mismatch records are retained for
-audit. Neither is valid evidence for the withdrawn claims. Do not resume repaired
-mismatch experiments into old output directories: idempotent runners would skip
-historical files. Any future rerun needs a new directory and source-version record.
+Restore checks every member before writing and refuses to overwrite differing
+local results. The analysis verifies the full correction grid, source revisions,
+saved-state hashes, historical controls, and exact m=1 reproducibility anchor.
+Figure F8 reads `results/s0_13/analysis.json`: corrected mismatch results and
+explicitly retained S0.10 drift/reference blocks. All 12 figures can be rebuilt
+without training. N7's `invalid_scalebug/` outputs and the original m>1 PAT outputs
+remain in the archive for audit; they remain invalid evidence.
 
-HTML rendering needs the `Markdown` dependency. It currently loads MathJax from a
-CDN, so browser PDF rendering needs access to that resource. The checked-in PDF is
-a convenience output, not byte-for-byte reproducible: browser, font, and PDF metadata
-versions affect it. For PDF, print the HTML with Chromium after MathJax has finished.
+For the submission PDF and editable source:
 
-This bundle reproduces figures from stored results. It does not include the full
-EigenWorms dataset, external official-code checkout, or cloud provisioning state
-needed to rerun training. Those are separate requirements described by the existing
-`scripts/` and `photonic_ssm/linoss/` code. Runtime dependencies are not yet locked;
-`environment.txt` records the environment used for this revision's checks.
+```bash
+python3 analysis/build_arxiv.py
+```
 
-Maintainer snapshot command (after auditing local outputs):
+See `paper/SUBMISSION.md` for Pandoc/XeLaTeX dependencies and the generated source
+ZIP. The default build also updates `paper/p1_manuscript.pdf`, including the
+scientific supplementary notes. HTML remains an optional preview via
+`python3 analysis/render_manuscript_pdf.py`; it loads MathJax from a CDN and is not
+the submission PDF route. PDF bytes depend on TeX/font versions and commit metadata;
+figure PNGs and manuscript Markdown are checked separately for exact reproduction.
+
+## Rerunning the correction experiment
+
+This is separate from regenerating figures. Extract
+`results/s0_13/source_bundle.tar.gz` into a new empty directory; it includes
+`source_manifest.json`, the pinned runner, and all package code. Use Python 3.12,
+PyTorch 2.11.0+cpu, and one CPU thread per process. From that directory:
+
+```bash
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 analysis/s0_13_mismatch_rerun.py 11 2
+```
+
+The frozen grid and anchor are listed in `docs/s0_13_rerun_protocol.md`. One unit
+runs 31,600 updates and then the 99,840-symbol fine evaluation; the completed run
+JSON records its environment and state checksum. The runner validates the source
+manifest and writes only the separate S0.13 paths. Do not resume into historical
+S0.9/S0.10 directories. Stored states support fine-evaluation recovery without
+retraining, but a full independent rerun must start with empty output directories.
+
+The archive does not include the full EigenWorms dataset or its external official
+code checkout; rerunning that earlier benchmark has separate prerequisites.
+`environment.txt` records the local analysis environment. Historical experiment
+versions and registered commits remain documented in the provenance notes.
+
+Maintainer snapshot command, after outputs and cleanup records are final:
 `python3 scripts/reproduce_paper.py pack`.

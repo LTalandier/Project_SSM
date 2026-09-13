@@ -1,5 +1,14 @@
 # Publication plan — Project_SSM
 
+**Current disposition, 2026-09-13 (supersedes the historical plan below):**
+Lucas approved one bounded corrected mismatch rerun, then P1 arXiv preparation.
+S0.13 is complete with an exact anchor and no advantage at any tested mismatch
+level. P1 includes this correction and the PR-20 negative inline result. Standalone
+P5 publication is deferred. Hardware and higher-rate work remain paused; P2
+contact is separate. The review PDF, source ZIP, and metadata are documented in
+`paper/SUBMISSION.md`; authenticated author submission and linked public release
+are the remaining external steps.
+
 **Status:** ⬜ PROPOSED (2026-07-07, Supervisor) — responds to Lucas's goal directive
 (2026-07-07): *"make something publishable (and hopefully buildable) from this project —
 it can be anything with SSM and photonics."*

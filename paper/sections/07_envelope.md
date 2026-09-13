@@ -129,7 +129,8 @@ hold. Thus the photonic estimate is **1.56 times the digital energy**, missing
 both parity and the registered 3-times advantage threshold. Removing the unsourced
 optimistic rows lowers the best ratio to 0.23 (about 4.35 times the digital energy).
 The conservative product-window maximum is 0.38. The PR-20 kill gate fires;
-S0b.1–S0b.3 were not run, and no new simulation or fabrication spend followed.
+S0b.1–S0b.3 were not run, and no product-simulation or fabrication spend followed.
+The separate S0.13 correction rerun repairs P1 evidence; it does not reopen Stage 0b.
 The full ledger and results accompany the paper in `docs/s0b/` and `results/s0b_0/`.
 
 Thermal management dominates the most favorable cell even with zero actuator hold.

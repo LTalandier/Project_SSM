@@ -1,7 +1,7 @@
 # P1 submission preparation
 
-The correction sweep is in progress; the final package must consume its adjudicated
-result before upload. Standalone P5 publication is deferred, with the negative
+The correction sweep is complete (`174558c`): the anchor matches exactly, all
+33 units completed, and no tested mismatch level clears the advantage rule. Standalone P5 publication is deferred, with the negative
 inline result retained in P1. P2 contact is a separate action.
 
 ## Files and build
@@ -23,7 +23,8 @@ All fonts are selected by filename from standard Latin Modern packages.
 
 Outputs under `paper/submission/`:
 
-- `p1_with_supplement.pdf`: main manuscript, figures, references, and scientific
+- `p1_with_supplement.pdf` (also copied to `paper/p1_manuscript.pdf` by the default build):
+  main manuscript, figures, references, and scientific
   supplementary notes. Editorial assembly history stays in the repository.
 - `p1_arxiv_source.zip`: `main.tex`, 12 PNG figures, and `anc/` supporting records.
   No intermediate TeX files or prebuilt PDF are included in the upload ZIP.
@@ -42,7 +43,8 @@ in-situ-training bake-off on a realistic silicon-nitride ring substrate
 
 Author: Lucas Talandier (independent researcher, Paris)
 
-Suggested primary category: `physics.optics`. No journal reference or DOI exists
+Suggested primary category: `physics.optics`. Comments: 31 pages, 12 figures;
+includes supplementary notes and ancillary reproducibility records. No journal reference or DOI exists
 for P1. `arxiv_abstract.txt` contains ASCII metadata text under 1,920 characters;
 it is an abridgement of the manuscript abstract.
 

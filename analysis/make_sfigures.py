@@ -1,7 +1,7 @@
 # NEW (P1 finalization, 2026-07-27) — main figure F8 (S0.9) + supplementary
 # figures S1/S2/S3/S5 for the P1 manuscript. Same discipline as make_figures.py:
 # every number is read from the frozen result files; nothing originates here.
-#   F8  S0.9: mismatch-robust tie + drift trajectories (PR-5 SE / PR-16)
+#   F8  S0.13 corrected mismatch sweep + unchanged drift (PR-5 §E / PR-16)
 #   S1  G3 anchor-instability dossier: official-code EigenWorms reruns   (S0.2)
 #   S2  PAT twin-mismatch decomposition at C-1 (+ rhel-ideal control)    (S0.5)
 #   S3  PR-11 echo conjugation chain + per-cell feasibility ceilings     (S0.4c)
@@ -53,8 +53,10 @@ def save(fig, name):
 
 # ---------------------------------------------------------------- F8 (S0.9)
 def f8():
-    # S0.10 (PR-17): eval-F protocol of record for this comparison
-    a = jload("results/s0_10/analysis.json")
+    # S0.13 repairs only the mismatch block; drift/reference blocks retain S0.10 provenance.
+    a = jload("results/s0_13/analysis.json")
+    if a.get("correction", {}).get("status") != "complete":
+        raise ValueError("F8 requires the complete, anchor-validated S0.13 analysis")
     target = a["ser_target"]
     # PR-17 §17.8b: the reference line is the matched-budget BPTT (31,600
     # updates — the arms' own budget); the 12,000-update bake-off ceiling is
@@ -66,7 +68,7 @@ def f8():
     # (a) mismatch sweep
     ax = axes[0]
     levels = a["s0_10a_mismatch_fine"]["levels"]
-    ms = [1]  # N8: historical m>1 comparisons invalidated; no corrected runs yet
+    ms = [1, 2, 3, 4, 6]  # complete registered grid; historical m>1 PAT files are not consumed
     pct = [5 * m for m in ms]
     for arm, key, col in (("in-situ PAT", "insitu", COL["insitu-pat"]),
                           ("offline-deploy + head-recal", "offline",
@@ -85,10 +87,10 @@ def f8():
     ax.set_yscale("log")
     ax.set_ylim(4e-4, 1.2e-2)
     ax.set_xticks(pct)
-    ax.set_xlim(4, 7)
+    ax.set_xlim(3.5, 31.5)
     ax.set_xlabel("calibration-mismatch class (%)")
     ax.set_ylabel("median SER (8 seeds)")
-    ax.set_title("(a) base 5%-class mismatch tie\nhigher levels withdrawn (N8)")
+    ax.set_title("(a) corrected calibration sweep (S0.13)")
     ax.legend(frameon=False, loc="upper left")
 
     # (b),(c) drift trajectories
