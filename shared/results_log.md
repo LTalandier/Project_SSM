@@ -15,6 +15,33 @@ Per result, report:
 
 ---
 
+
+## Stage 0b — S0b.0 inline-scope re-envelope: KILL FIRED (2026-09-13, single-session mode; €0)
+
+**Governing block:** PR-20 (frozen `ee137c4` before the run). **Script:** `analysis/s0b_0_envelope.py` →
+`results/s0b_0/{envelope.md,envelope.json,s0b_0_ratio_vs_taps.png}` + `reading.md`. **Ledger:**
+`docs/s0b/s0b_0_ledger.md` (every row statused; the four retrieval subagents were rate-limited before
+doing anything, so all rows were fetched and read in the main session — PDFs via pdftotext).
+
+**Result.** Max E_digital/E_photonic over every OPT-corner class-C cell (passive/pumped, every drift
+option incl. two UNSOURCED optimistic ones, retrain at 1000 s, best reachable taps) = **0.64** at
+C-pcm/passive/10-mW-global-heater, N = 128 (C-3), 2 GS/s, 64 taps — 5.0 vs 3.2 pJ/sample. Bar 3.
+CONS window max 0.38. UNSOURCED rows removed: 0.23 (OPT) / 0.18 (CONS). **Stage 0b closed at S0b.0;
+S0b.1–S0b.3 not run.**
+
+**Why (weight order):** (1) common-mode thermal hold (14 pm/K; 8 mK per C-2 linewidth) is the binding
+term once actuation is non-volatile — 10 mW optimistic = 5 pJ/sample at 2 GS/s; (2) ratio ∝ f_s²,
+and the registered 0.1–2 GS/s window cannot amortize even 10 mW; (3) the function-matched per-tap
+baseline (0.05–0.15 pJ/tap/sample, Credo 802.3ck + Horowitz-scaled) is 30–100× cheaper than P1's
+DSP-block row; (4) the Er pump (fifth exclusion, 0.8–17 mW/ring electrical) forces a passive device,
+memory ×0.1; (5) PCM on a high-Q ring: 1 µm full-overlap cell = Q ×0.28 and 100 MHz/level vs 14 MHz
+linewidth — only a weak-overlap design is even posable. Retraining term ≤ 1 mW: not the issue.
+
+**P1 consequence:** §7.1 "four known exclusions" → **five** (the substrate's own gain pump was
+missing); direction against photonic; no verdict changes. Exclusions ledger §5 + supplementary
+checklist carry it. **Residue:** the f_s² lever reopens the arithmetic at ≳ 10 GS/s if hold ≤ 10 mW
+and ≥ 64 taps are needed — outside the S0.1 window, trainability unmeasured, escalated (E-2026-09-13-2).
+
 ## S0.9 — attacking the offline-tie null: **mismatch tie ROBUST to 30%; drift produces a real sub-2× in-situ edge specific to uncorrelated drift** (2026-07-24, single-session mode; pre-registered PR-5 §E + PR-16 before runs)
 
 **Config:** 144 units, 3× cpx51 (ash), single-threaded, ~5 h, ≈€0.75, servers deleted. Margins

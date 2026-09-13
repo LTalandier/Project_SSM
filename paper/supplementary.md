@@ -129,6 +129,9 @@ both passes.
   bit-identity (§17.8a); degenerate adjoint−PAT interval explained as grid-bound; title
   count dropped; abstract recompressed (~250 w, 3 paragraphs, Wu footnoted, ratio-CI +
   integrated-realization caveats carried); F-namespace collision resolved (figure-only F8).
+- ✅ **Fifth exclusion added 2026-09-13 (Stage-0b S0b.0 retrieval):** the substrate's Er:Si₃N₄ gain pump
+  was missing from §7.1's exclusion list; now listed with its derived magnitude (exclusions ledger §5;
+  `docs/s0b/s0b_0_ledger.md` §2). Direction against the photonic side; no verdict changes.
 - ✅ **§8.4 tense swap DONE 2026-08-02**: repo public at `github.com/LTalandier/Project_SSM`
   (E-2026-07-27-2 resolved); §8.4 states the publication in past tense with date + URL.
   **Amended 2026-09-13:** repo private since 2026-08-04 (PI content review); §8.4/N4 now say

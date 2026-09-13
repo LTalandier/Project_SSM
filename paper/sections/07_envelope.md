@@ -19,15 +19,19 @@ implementation on the axis the niche cares about. We price this at two frozen co
 best published device class; CONS = named vendor parts at ENOB-at-speed, never nominal bits),
 against named baselines (Microsoft Brainwave's author-stated batch-1 streaming efficiency; a
 coherent-DSP ASIC class; Jetson AGX Orin), with every number traced to a frozen source row and
-the four known exclusions (laser wall-plug, locking, control compute, packaging) explicitly
+the five known exclusions (laser wall-plug, the substrate's Er:Si₃N₄ gain pump, locking, control compute, packaging) explicitly
 unbudgeted — they only shrink positive cells, so negative findings are robust to them. An
 assembly-time retrieval bounds their magnitude from primary sources (supplementary ledger): the
 integrated-class stack — hybrid-laser wall-plug 0.2–0.6 W at mW-class on-chip power, TEC hold
 0.18 W, microcontroller-class control 0.13 W, FPGA-class locking up to ~10 W — totals of order
 0.5–1 W, the *same order as the budgeted N = 128 photonic power itself* (~0.9 W at 2 GS/s).
+The fifth item — the 1480/980 nm pump the substrate's g = 0.9 κᵢ erbium stage needs at every
+ring — was missing from the original list and was added at the Stage-0b re-envelope (supplementary
+ledger; 0.8–17 mW electrical per ring near transparency, derived): 26–550 mW at N = 32, the same
+order again, and larger at N = 128.
 Charging it would compress the positive cells' margin (§7.2) toward single digits, and a
 benchtop realization (40–100 W laser and instrument lock) would erase the niche outright. The
-niche verdict below therefore carries an integrated-realization condition on all four excluded
+niche verdict below therefore carries an integrated-realization condition on all five excluded
 items, alongside the heater-class condition it already states.
 
 ## 7.2 Inference: a conditional niche, gated by the heater class

@@ -1,7 +1,10 @@
 # Stage 0b Roadmap — The product question P1 did not ask (simulation + envelope; no chip)
 
-**Owner:** Supervisor (single-session mode). **Status:** **v0.1 APPROVED for S0b.0 (Lucas, "Ok go", 2026-09-13; E-2026-09-13-1 item 1)** — S0b.0
-runs now (€0); S0b.1–S0b.3 spend returns to Lucas at the post-S0b.0 continuation gate. Nothing here touches P1.
+**Owner:** Supervisor (single-session mode). **Status:** **CLOSED AT S0b.0 (2026-09-13) — the kill gate fired.** PR-20 frozen at `ee137c4`, run same
+day: max E_digital/E_photonic over every optimistic class-C cell = **0.64** (bar 3; 0.23 with UNSOURCED rows
+removed); CONS window max 0.38. S0b.1–S0b.3 **not run** (€0 spent). Reading: `results/s0b_0/reading.md`.
+The one P1 edit made: §7.1 four → five exclusions (the substrate's Er pump, found here). Residue (f_s² lever
+outside the registered 0.1–2 GS/s window) escalated as E-2026-09-13-2, not pursued.
 **Source of truth:** P1 §7 (the frozen envelope and its four exclusions), `docs/s0_7/exclusions_ledger.md`
 (primary-sourced overhead numbers), PR-18/PR-19 (§18.6b N_eff path; §19.6c floor-degeneracy lesson),
 and the 2026-09-13 PI discussion that scoped this stage. **Companion file:** `preregistration.md` —
@@ -58,7 +61,7 @@ S0b.1 is where that number stops being a toy or is shown to be one.
 
 ## Phase decomposition
 
-### S0b.0 — Envelope re-scope (the kill gate; no new physics code; ~2–3 days)
+### S0b.0 — Envelope re-scope (the kill gate) ✅ DONE 2026-09-13 — **KILL FIRED** (max ratio 0.64 at OPT/class C; thermal hold, not actuation, is the binding term; per-tap baseline 30–100× harsher than P1's block row; Er pump = fifth exclusion). See `results/s0b_0/{envelope.md,reading.md}`.
 - **Goal:** re-price the §7 envelope under an **inline receiver scope** with the four exclusions
   *charged*, at three actuator classes, against a **function-matched** digital baseline — and state
   whether any cell can go positive at all. This is the cheapest phase and the one most likely to end
@@ -95,7 +98,7 @@ S0b.1 is where that number stops being a toy or is shown to be one.
   count, actuator class) grid S0b.1–S0b.3 must hit.
 - **Cost:** €0 compute. Runtime: the retrieval for the actuator ledger dominates.
 
-### S0b.1 — Capacity: an informative N_eff on a product workload (PR-21)
+### S0b.1 — Capacity: an informative N_eff on a product workload (PR-21) — ⛔ NOT RUN (S0b.0 kill)
 - **Goal:** the measurement P1 §7.2 says would restore the N-scaling premise — a workload on which
   the trained device's output measurably rides on ≥ 16 of 32 rings — done so that the §19.6c floor
   degeneracy **cannot recur**.
@@ -136,7 +139,7 @@ S0b.1 is where that number stops being a toy or is shown to be one.
 - **Cost:** PR-19-scale — ≈ 130–200 server-hours ≈ €50–80 excl. VAT (pilot + 4 arms × 8 seeds ×
   up to 3 spans; ceiling ladder adds ≈ 30%). Servers deleted and independently verified after use.
 
-### S0b.2 — Training through write-limited, quantized actuators (PR-22)
+### S0b.2 — Training through write-limited, quantized actuators (PR-22) — ⛔ NOT RUN (S0b.0 kill)
 - **Goal:** whether PAT and SPSA still reach target when the actuators are class C: **quantized to
   L levels per π, each write costs registered energy, and the total write count is budgeted** —
   the open problem that decides whether the heater-hold term can be removed *without losing the
@@ -162,7 +165,7 @@ S0b.1 is where that number stops being a toy or is shown to be one.
 - **Cost:** ≈ 100–150 server-hours ≈ €40–60 (T-A cell, 2 routes × 5 levels × 2 configurations ×
   8 seeds, reduced budgets).
 
-### S0b.3 — Retraining instead of locking (PR-23)
+### S0b.3 — Retraining instead of locking (PR-23) — ⛔ NOT RUN (answered by arithmetic in S0b.0: ≤ 1 mW, not the binding term)
 - **Goal:** the drift lever already in-data, priced. Under the S0.9 drift model (per-ring Wiener
   drift calibrated to the 341 MHz/24 h anchor; uncorrelated + common-mode regimes), find the
   **retraining duty cycle** (updates per unit wall-clock) that holds SER at target *without* a lock
@@ -179,7 +182,7 @@ S0b.1 is where that number stops being a toy or is shown to be one.
 - **Gate:** informational; feeds S0b.4 as the locking-term replacement or as its confirmation.
 - **Cost:** ≈ 40–60 server-hours ≈ €15–25 (S0.9-scale).
 
-### S0b.4 — Full re-envelope, verdict, write-up (P5)
+### S0b.4 — Full re-envelope, verdict, write-up (P5) — verdict NEGATIVE at S0b.0; write-up = `results/s0b_0/reading.md` + exclusions-ledger §5; P5 as a negative note is Lucas's call
 - **Goal:** apply the PR-20 stage verdict rule to measured inputs: N_eff and function-matched tap
   count (S0b.1), actuator class C resolution/write energy or its failure (S0b.2), locking term or
   its replacement (S0b.3), all four former exclusions charged, CONS corner, inline scope.

@@ -18,6 +18,27 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### ⬜ E-2026-09-13-2 — **Stage 0b closed at S0b.0 by arithmetic (kill fired); three calls for you**
+
+> **Result:** under PR-20 (frozen before the run), the most favourable inline, non-volatile-actuated,
+> passive ring-lattice equalizer reaches **0.64×** the energy of the per-tap digital block it would
+> replace (bar: 3×; 0.23× with the two unsourced optimistic rows removed). The binding term is the
+> **common-mode thermal hold** (SiN 14 pm/K; a C-2 linewidth is 8 mK), not actuation; the registered
+> 0.1–2 GS/s window cannot amortize even a 10 mW hold. `results/s0b_0/reading.md` has the full reading.
+> €0 spent. S0b.1–S0b.3 not run.
+> **Found on the way:** P1 §7.1 listed four exclusions; the substrate's own **Er:Si₃N₄ pump** is a fifth
+> (0.8–17 mW electrical per ring, derived). Fixed in §7.1 + exclusions ledger §5 + supplementary
+> (direction against photonic; no verdict changes). Manuscript + PDF rebuilt.
+> **Your calls:** (1) **P5** — publish the negative envelope as a short note ("inline photonic equalizer
+> on SiN: the thermal-hold floor vs a per-tap digital baseline")? It is the honest companion to P1 §7
+> and costs only writing. (2) **The one residue** — the ratio scales as f_s², so the arithmetic reopens
+> at ≳ 10 GS/s *if* hold ≤ 10 mW and the workload needs ≥ 64 taps; that is outside the S0.1-registered
+> window and trainability there is unmeasured. Opening it = a PR-20a addendum + an S0.1 re-mapping
+> (scope change). My recommendation: **do not**, unless a collaborator brings a concrete ≥ 10 GS/s
+> inline workload. (3) **P1 sequencing** now that S0b.0 is done: submit (arXiv first) — repo flip +
+> P2 email on the day it moves.
+
+
 ### ✅ E-2026-09-13-1 — **Approve the Stage 0b roadmap (v0.1) — the product question P1 did not ask** — APPROVED 2026-09-13 ("Ok go"): S0b.0 running (€0); P1 sequencing: S0b.0 first, then the submission decision; §8.4/N4 re-worded to "public at submission" + OTS anchor; repo flip + P2 email deferred to the day P1 moves
 
 > **What it is:** `shared/stage0b_roadmap.md`. Simulation + envelope only, no chip, no P1 edits.

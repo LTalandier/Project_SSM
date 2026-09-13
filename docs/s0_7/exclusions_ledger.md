@@ -61,10 +61,23 @@ is the *same order as the budgeted N = 128 photonic power itself* (~0.9 W at 450
 2 GS/s). Charging it compresses the positive cells' ~15× Brainwave margin toward single digits;
 a benchtop realization (40–100 W laser + instrument lock) erases the niche outright. The §7
 niche verdict therefore carries a fourth condition alongside the heater class: an
-integrated-class realization of all four excluded items. Direction of every number is against
+integrated-class realization of all five excluded items (§5 below, added 2026-09-13). Direction of every number is against
 the photonic side, consistent with the registered only-shrinks-positive-cells rule — negative
 findings are unaffected.
 
 **Dropped as unsourceable (recorded per protocol):** "DFB WPE 18%@10 mW → 35%@250 mW"
 (search-attributed to arXiv:2310.01615; the paper does not contain it); per-ring lock-electronics
 power in the Jayatilleka papers (not reported).
+
+## 5. Gain pump — the fifth excluded item (ADDENDUM 2026-09-13, found at the Stage-0b re-envelope)
+
+The S0.7 envelope charged conversion + heaters; the substrate's Er:Si₃N₄ gain stage (g = 0.9 κᵢ at
+every ring, PR-4 §G) needs a 1480/980 nm pump that no row above carried. Rows and statuses in
+`docs/s0b/s0b_0_ledger.md` §2 (Liu et al. Science 2022 absorption/gain/lifetime VERIFIED; transparency
+intensity derived from two UNSOURCED inputs; Lumentum 5050 WPE ≥ 13.9 % VERIFIED from datasheet
+maxima). **Magnitude:** 0.24–2.4 mW optical ⇒ **0.8–17 mW electrical per ring**, i.e. 26–550 mW at
+N = 32 plus a cooled pump module (0.18 W TEC). Direction: against the photonic side (shrinks positive
+cells only) — the registered only-shrinks rule holds, negative findings unaffected. **Consequence for
+§7.1:** "four known exclusions" → five; the integrated-realization condition covers all five. The
+S0b.0 re-envelope (`results/s0b_0/`, PR-20) prices both the pumped and the passive (undoped)
+configurations; the product configuration is passive.
