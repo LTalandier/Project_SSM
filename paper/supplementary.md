@@ -1,13 +1,16 @@
-# P1 supplementary material — assembly plan + provenance table
+# P1 supplementary material
 
-**Status:** S0.8 assembly, 2026-07-12 (single-session mode; disclosed in §8.4).
+**Status:** submission preparation, 2026-09-13 (single-session review disclosed in §8.4).
 **Contents at submission:** (N1) the pre-registration ledger, (N2) the per-method hardware
 ledger, (N3) the white-space search dossier, (N4) the registration→run provenance table,
-(N5) reproducibility statement, (N6) S-figures, (N7) eval-F erratum audit.
+(N5) reproducibility statement, (N6) S-figures, (N7) eval-F erratum audit,
+(N8) repository audit and correction history.
 
 ## N1 — Pre-registration ledger
 
-`shared/preregistration.md`, included verbatim. Every PR-block carries its status history
+`shared/preregistration.md`, included verbatim among the arXiv ancillary records.
+
+Ancillary filename: `shared__preregistration.md`. Every PR-block carries its status history
 (PROPOSED → AMEND → SIGNED/FROZEN) and the commit that froze it; the two S0.4-close addenda
 (sizing; ceiling) are dated *before* the runs they govern. The ledger is the paper's §3.7
 "ledger-as-method" object.
@@ -23,9 +26,18 @@ cannot win promotion-rule (b) (strictly-simpler hardware) by construction.
 `docs/s0_L/debt1_whitespace_search.md` (PR-15 two-modality search + kill-criterion, 2026-06-09)
 + `docs/s0_L/whitespace_refresh_2026-07-12.md` (assembly refresh: W1 clean, W0 survives with
 qualifiers load-bearing; five named near-misses dispatched in §1.1; four page-level reads
-registered for the final pre-submission sweep).
+registered for the final pre-submission sweep). The 2026-07-27 page-read memo
+and `docs/s0_L/source_refresh_2026-09-13.md` complete the dated record; the latter
+checks Zhang, Ashtiani, Van Assche, Rukh, and Dacha against primary full texts and
+records a fresh bounded search. These dossiers are included as ancillary records.
 
-## N4 — Registration → run provenance (git, repository `Project_SSM`, branch `main`; **public at `github.com/LTalandier/Project_SSM` at submission; ledger head anchored by OpenTimestamps `timestamps/head_2026-08-05.txt.ots`** — every commit hash below is externally verifiable once the repository is public, and the anchor certifies existence-by-date regardless)
+## N4 — Registration and run provenance
+
+The repository `Project_SSM` (branch `main`) is released at
+`github.com/LTalandier/Project_SSM` at submission. The OpenTimestamps anchor is
+`timestamps/head_2026-08-05.txt.ots`. Public access makes the recorded commit
+ordering inspectable; the timestamp establishes existence of the anchored material,
+not independently verified experiment execution times.
 
 Rule being evidenced: **every threshold/spec commit predates the run that consumes it.**
 
@@ -51,7 +63,7 @@ Rule being evidenced: **every threshold/spec commit predates the run that consum
 | PR-19 T-D long-coherent-memory (S0.12) | signed `e96e76c`; addenda `b55b135`/`a4e6a70` | fleet+verdicts `f7b395a`; §19.6c round-7 amendment `a28e2d2` (no-rise frame withdrawn as floor-degenerate; rule/verdict stand) |
 | paper section drafts (post-results) | `9e8b4c4`, `db3a8c7`, `14aedff`, `77a93ca`, `436ebbf` | — |
 
-## N5 — Reproducibility statement (draft)
+## N5 — Reproducibility statement
 
 All simulations are float64 PyTorch on CPU. Runs executed on a **mixed platform set** —
 local x86-64 Linux and Hetzner cpx51 (shared x86-64) cloud instances — with identical code,
@@ -71,15 +83,15 @@ server-hours ≈ **€50 excl. VAT** (rate-exact €0.3814/h; includes one serve
 hang with its 12 units re-run, and an ssh-outage delay) — Stage-0 total ≈ 315 h ≈
 **€120 excl. VAT (≈€145 incl.)**.
 
-## N6 — S-figures (✅ MADE 2026-07-27, `analysis/make_sfigures.py` → `paper/figures/S*.{png,pdf}`; frozen result files only)
+## N6 — Supplementary figures
 
 | S-fig | content | source |
 |---|---|---|
-| S1 ✅ | G3 anchor-instability dossier: official-code EigenWorms val trajectories (published seeds, collapse events visible) + final test acc vs published 95.0±4.4 (rerun 90.56, σ 9.34) | `results/s0_2/gate_i/xcheck_official/` |
-| S2 ✅ | PAT twin-mismatch decomposition at C-1 (perfect / M-par / M-struct ≡ ceiling) + rhel-ideal control | `results/s0_5/bakeoff_diag_c1.json` |
-| S3 ✅ | echo conjugation-chain waterfall (−22.4 dB, mechanism A) + per-cell Q_L ceilings / transit survival (mechanisms B/C) | `results/s0_4c/pr11_recon_calc.json` |
-| S4 ▢ | PR-14 gradient bias/variance | deferred (S0.5-full) — slot reserved |
-| S5 ✅ | RHEL non-dissipative-limit recovery (R1 cosine −0.75→+1.0000 vs κ_net·T·dt) | `results/s0_4c/smoke.json` |
+| S1 | G3 anchor-instability dossier: official-code EigenWorms val trajectories (published seeds, collapse events visible) + final test acc vs published 95.0±4.4 (rerun 90.56, σ 9.34) | `results/s0_2/gate_i/xcheck_official/` |
+| S2 | PAT twin-mismatch decomposition at C-1 (perfect / M-par / M-struct ≡ ceiling) + rhel-ideal control | `results/s0_5/bakeoff_diag_c1.json` |
+| S3 | echo conjugation-chain waterfall (−22.4 dB, mechanism A) + per-cell Q_L ceilings / transit survival (mechanisms B/C) | `results/s0_4c/pr11_recon_calc.json` |
+| S4 (deferred) | PR-14 gradient bias/variance | deferred (S0.5-full) — slot reserved |
+| S5 | RHEL non-dissipative-limit recovery (R1 cosine −0.75→+1.0000 vs κ_net·T·dt) | `results/s0_4c/smoke.json` |
 
 Main-figure addendum: **F8** (S0.9 mismatch+drift, 3 panels) added 2026-07-27 alongside F1–F7;
 generator `analysis/make_sfigures.py`. Namespace ruling (round-3 review): in the paper "F8"
@@ -113,9 +125,9 @@ both passes.
   W0-in-prose — **superseded 2026-07-27: W1 only** (the registered Wu eLight page read refuted
   the W0 clearance; `docs/s0_L/whitespace_page_reads_2026-07-27.md`, E-2026-07-27-1).
 - ✅ The 4 registered page-level reads PERFORMED 2026-07-27 (3 clear, Wu refuted) + fresh
-  June–July sweep (no new attack). **Still registered before submission:** Zhang eLight 6:6
-  page read; one last sweep re-run (July 2026 not yet indexed); UNVERIFIED-direct rows of the
-  exclusions ledger.
+  June–July sweep (no new attack). **Completed 2026-09-13:** Zhang and the five named primary-paper checks,
+  a bounded final search, and exclusions-source refresh; the TTX1995 row remains
+  unverified and excluded from quantitative support (`docs/s0_L/source_refresh_2026-09-13.md`).
 - ✅ Eval-floor + damping-transfer follow-up (PR-17, S0.10): pre-reg `241204a` → runs →
   erratum §17.7 `ccc4385` (registered before the corrected rerun) → verdicts in
   `results/s0_10/s0_10.md`; §5.5 drift advantage declared at eval-F, T-A-L prediction failed
@@ -123,7 +135,8 @@ both passes.
 - ✅ S0.7 exclusions ledger primary-sourced: `docs/s0_7/exclusions_ledger.md` (§7.1 states the
   integrated-class ~0.5–1 W consequence).
 - ✅ [CITE-*] → numbered bibliography + assembled manuscript: `analysis/build_manuscript.py` →
-  `paper/p1_manuscript.md`. Venue-specific formatting (LaTeX, journal template) remains.
+  `paper/p1_manuscript.md`. XeLaTeX source and a source ZIP are generated by `analysis/build_arxiv.py`;
+  journal-specific formatting remains a later step.
 - ✅ Round-3 review (2026-08-01): ceiling declared protocol-local + matched-budget reference
   run (PR-17 §17.8b, drawn in Fig. F8); resolution-vs-re-draw decomposition closed by
   bit-identity (§17.8a); degenerate adjoint−PAT interval explained as grid-bound; title
@@ -164,8 +177,8 @@ both passes.
   ≈6 samples at measured 3.7 κᵢ; S5 in-image title C-2 ≈8; F7 caption budgeted-stack
   scope + §7.3 ‡ footnote). §5.7 undriven-band center stated (median r ≈ 0.30 = init);
   abstract niche clause carries "magnitude is unmeasured"; "ample capacity" → headroom.
-  Refs [10]/[13]/[15]/[25]/[33] (Ashtiani/Zhang/Ghent-reservoir/Rukh/Dacha) remain on
-  the pre-submission page-verification sweep.
+  Refs [10]/[13]/[15]/[25]/[33] (Ashtiani/Zhang/Ghent-reservoir/Rukh/Dacha) were
+  checked in the 2026-09-13 source refresh; the Van Assche final-publication metadata was updated.
 
 ## N8 — Repository audit erratum (2026-09-13)
 

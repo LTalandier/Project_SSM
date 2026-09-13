@@ -25,7 +25,9 @@ def digest(data):
 
 def pack():
     paths = sorted(p for p in (ROOT / 'results').rglob('*')
-                   if p.is_file() and p.suffix in EXTENSIONS)
+                   if p.is_file() and (p.suffix in EXTENSIONS
+                       or (p.parent == ROOT / 'results/s0_13/states' and p.suffix == '.pt')
+                       or p == ROOT / 'results/s0_13/source_bundle.tar.gz'))
     if not paths:
         raise SystemExit('No local result files to archive')
     entries = []
@@ -43,7 +45,7 @@ def pack():
     manifest = {
         'schema': 'paper-results.v1',
         'historical_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-        'scope': 'Local JSON/NPY/Markdown results; includes historical invalid runs. See supplementary N7/N8.',
+        'scope': 'Local JSON/NPY/Markdown results plus S0.13 states/source bundle; includes historical invalid runs. See supplementary N7/N8.',
         'archive_sha256': digest(ARCHIVE.read_bytes()),
         'files': entries,
     }

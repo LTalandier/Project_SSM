@@ -4,6 +4,19 @@ Updated 2026-09-13 following the repository audit and user-authorized repairs.
 This snapshot supersedes the stale July S0.4 onboarding state. Frozen methods and
 post-run corrections remain in `shared/preregistration.md`; history is in Git.
 
+## Active correction run (2026-09-13)
+
+Lucas approved one bounded corrected higher-mismatch sweep, followed by P1
+submission preparation. P5 standalone publication is deferred; its negative result
+stays in P1. P2 contact remains separate. Protocol: `docs/s0_13_rerun_protocol.md`,
+committed before launch at `bda989f`. Outputs: `results/s0_13/`.
+Four temporary Hetzner servers (IDs 165721972, 165721979, 165721988, 165721993)
+run 32 corrected PAT units plus one m=1 anchor. Local supervisor
+`/tmp/ssm_cloud_rerun.py` retrieves states/results and deletes each server; global
+three-hour deadline and under-€5 cap. Inspect `results/s0_13/fleet.json` for live
+state. Do not launch replacements or consume an incomplete grid. The summaries
+below describe the pre-rerun state until the correction is adjudicated.
+
 ## State and conclusions
 
 - Stage 0 simulation study is complete through S0.12; P1 source is under `paper/`.

@@ -23,7 +23,7 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 
 ## Draft abstract (▢-FILLED at S0.8; recompressed 2026-08-01 per round-3 review — ~250 words, three paragraphs, result at sentence two, Wu concession footnoted; both abstract-level caveats — ratio CI, integrated realization — carried)
 
-> No physical photonic system has yet had the parameters that define a continuous-time
+> To our knowledge, no physical photonic system has yet had the parameters that define a continuous-time
 > dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics
 > that *is* the memory — trained on the device by gradient-based or gradient-estimating
 > methods.¹ We ask whether such training is feasible for a photonic state-space model on

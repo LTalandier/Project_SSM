@@ -36,7 +36,8 @@ That sentence is this program's target, with each qualifier load-bearing: *on a 
 task* excludes the servo/calibration lineage; *physical parameters of the recurrence* excludes
 hybrid-digital state carriage; *weight-tied recurrence* excludes feedforward meshes folded in
 time. Refreshes of the search at assembly (2026-07-12) and a page-level verification round
-(2026-07-27; memos in supplementary) map the boundary against the strongest 2025–26 neighbors,
+(2026-07-27), followed by primary-source checks and a bounded search on
+2026-09-13 (memos in supplementary), map the boundary against the strongest 2025–26 neighbors,
 which we dispatch by name because each is the "nearest miss" along one qualifier — and one of
 them moved the boundary. The **nearest neighbor** is the monolithic optical recurrent
 accelerator of Wu et al. [CITE-Wu-eLight-2025]: its ORNN chip *is* trained in situ, by a

@@ -27,11 +27,11 @@ wall-plug in the integrated class** (incl. TEC hold); **40–100 W in the bencht
 
 | number | source | status |
 |---|---|---|
-| PDH lock-box: Toptica DigiLock 110 ≈13.5 W max | DigiLock 110 manual (±15 V rails) | UNVERIFIED-direct |
+| PDH lock-box: Toptica DigiLock 110 ≈13.5 W max | DigiLock 110 manual (±15 V rails) | PAGE VERIFIED 2026-09-13, PDF p.73; derived 15×(0.7+0.2) W maximum rail bound |
 | Moku:Lab 20 W typ / Moku:Go 15 W typ (Laser Lock Box platform) | Liquid Instruments KB "Moku Power Consumption" | VERIFIED |
-| FPGA PDH: Red Pitaya STEMlab 125-14 ≤10 W (5 V/2 A); Linien lock software | Red Pitaya docs; Wiegand et al., Rev. Sci. Instrum. 93, 063001 (2022) | UNVERIFIED-direct (RP); VERIFIED (Linien) |
+| FPGA PDH: Red Pitaya STEMlab 125-14 ≤10 W (5 V/2 A); Linien lock software | Red Pitaya docs; Wiegand et al., Rev. Sci. Instrum. 93, 063001 (2022) | PAGE VERIFIED 2026-09-13 (original RP board); VERIFIED (Linien) |
 | Ring locking demos (Si, heater power only): 31 rings locked at 212 mW total (≈6.8 mW/ring); 14-ring CROW at 64.9 mW (≈4.6 mW/ring); control electronics power not reported (bench instruments) | Jayatilleka et al., Optica 6(1), 84–91 (2019) | VERIFIED (all three numbers) |
-| SiN thermo-optic holding: conventional P_π ≈ 20–30 mW; 8 mW/π silicon-rich folded spiral; ~1 mW/π class (dense spiral / suspended) | arXiv:2111.07890 (quote verified); Nejadriahi et al., Opt. Lett. 46(18), 4646 (2021); Opt. Lett. 50(11), 3768 (2025) | VERIFIED / VERIFIED / UNVERIFIED-direct |
+| SiN thermo-optic holding: conventional P_π ≈ 20–30 mW; 8 mW/π silicon-rich folded spiral; ~1 mW/π class (dense spiral / suspended) | arXiv:2111.07890 (quote verified); Nejadriahi et al., Opt. Lett. 46(18), 4646 (2021); Opt. Lett. 50(11), 3768 (2025) | VERIFIED / VERIFIED / PAGE VERIFIED 2026-09-13 (0.98 mW/π suspended device) |
 
 **Note:** the Jayatilleka numbers are silicon photoconductive-heater results — quote SiN holding
 power from the P_π rows, and the lock-*electronics* overhead from the instrument rows.
@@ -40,7 +40,7 @@ power from the P_π rows, and the lock-*electronics* overhead from the instrumen
 
 | number | source | status |
 |---|---|---|
-| MCU class: STM32F407 238 µA/MHz ⇒ ≈0.13 W at full 168 MHz (upper bound; kHz loop needs far less) | ST DS8626 | UNVERIFIED-direct |
+| MCU class: STM32F407 238 µA/MHz ⇒ ≈0.13 W at 168 MHz and assumed 3.3 V (low-current operating point, NOT an upper bound) | ST product page / DS8626 | PAGE VERIFIED 2026-09-13; current stated as "as low as", power derived |
 | FPGA class: Red Pitaya ≤10 W; Moku:Go 15 W typ | above | as above |
 | SBC class: RPi 4B measured 2.7 W idle / 6.4 W full load (PSU spec 5 V/3 A) | RPi 4B datasheet RP-008341-DS §4.1 (VERIFIED) + pidramble.com measurements (VERIFIED, independent) | VERIFIED |
 
@@ -49,9 +49,9 @@ power from the P_π rows, and the lock-*electronics* overhead from the instrumen
 | number | source | status |
 |---|---|---|
 | SiN edge coupling: 0.15 dB/facet (UHNA-7) and ≈1.5 dB/facet (SMF-28) published best | Micromachines 16 (2025), PMC12734521 | VERIFIED |
-| LIGENTEC process ≈1 dB/facet (lensed fiber); <1.5 dB via photonic wire bonds | arXiv:2504.00311v2 (secondhand statement); LIGENTEC PR 2024-09-16 | VERIFIED (quote) / UNVERIFIED-direct |
-| MPW grating couplers (honest floor): CORNERSTONE 300 nm SiN <10 dB/grating (TE, 1.57 µm) | CORNERSTONE platform documentation | UNVERIFIED-direct |
-| TEC holding at near-ambient: 0.18 W typ (butterfly, T_case 25 °C); module class Qmax 5.8 W | Thorlabs 21060-D02 (VERIFIED); TEC Microsystems 1ML06-017-03 (UNVERIFIED-direct) | mixed |
+| LIGENTEC process ≈1 dB/facet (lensed fiber); <1.5 dB via photonic wire bonds | arXiv:2504.00311v2 (secondhand statement); LIGENTEC PR 2024-09-16 | VERIFIED (quote) / PAGE VERIFIED 2026-09-13 (manufacturer claim) |
+| MPW grating couplers (honest floor): CORNERSTONE 300 nm SiN <10 dB/grating (TE, 1.55 µm) | CORNERSTONE platform documentation | PAGE VERIFIED 2026-09-13 |
+| TEC holding at near-ambient: 0.18 W typ (butterfly, T_case 25 °C); module class Qmax 5.8 W | Thorlabs 21060-D02 (VERIFIED); TEC Microsystems 1ML06-017-03 (PDF p.2) | PAGE VERIFIED 2026-09-13; Qmax is cooling capacity, not electrical power |
 
 ## Consequence for §7 (stated in-text)
 
@@ -81,3 +81,9 @@ cells only) — the registered only-shrinks rule holds, negative findings unaffe
 §7.1:** "four known exclusions" → five; the integrated-realization condition covers all five. The
 S0b.0 re-envelope (`results/s0b_0/`, PR-20) prices both the pumped and the passive (undoped)
 configurations; the product configuration is passive.
+
+
+**2026-09-13 source refresh:** see `docs/s0_L/source_refresh_2026-09-13.md` for
+primary links and page locations. TTX1995 remains unverified and is not quantitative
+support for manuscript claims. The MCU 0.13 W row is an operating-point estimate,
+not the previously asserted upper bound. Frozen arithmetic inputs are unchanged.

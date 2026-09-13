@@ -1,0 +1,60 @@
+# P1 submission preparation
+
+The correction sweep is in progress; the final package must consume its adjudicated
+result before upload. Standalone P5 publication is deferred, with the negative
+inline result retained in P1. P2 contact is a separate action.
+
+## Files and build
+
+The maintained sources are `outline.md`, `sections/`, `references.md`,
+`figure_captions.md`, and `supplementary.md`. Rebuild the manuscript after editing:
+
+```bash
+python3 analysis/build_manuscript.py
+python3 analysis/build_arxiv.py
+```
+
+The second command needs Pandoc (tested 3.9; available through
+`python3 -m pip install pypandoc_binary==1.17`), XeLaTeX with TeX Live packages
+(tested Ubuntu `texlive-xetex` 2023), and Poppler `pdffonts`. The Python script
+also accepts `--pandoc /path/to/pandoc` and `--output-dir /path/to/output`.
+The source ZIP compiles directly with XeLaTeX; Pandoc is not needed by arXiv.
+All fonts are selected by filename from standard Latin Modern packages.
+
+Outputs under `paper/submission/`:
+
+- `p1_with_supplement.pdf`: main manuscript, figures, references, and scientific
+  supplementary notes. Editorial assembly history stays in the repository.
+- `p1_arxiv_source.zip`: `main.tex`, 12 PNG figures, and `anc/` supporting records.
+  No intermediate TeX files or prebuilt PDF are included in the upload ZIP.
+- `main.tex`: editable generated source, with figure paths relative to the ZIP root.
+- `build_report.json`: source-file checksums, fonts, layout warnings, and ZIP hash.
+
+The PDF build rejects missing characters, font substitutions, Type 3 fonts, and
+unembedded fonts. Layout warnings are recorded for visual review. Source ZIP bytes
+are deterministic for identical inputs. PDF metadata uses the current commit's
+SOURCE_DATE_EPOCH; a different TeX installation can still produce different bytes.
+
+## arXiv entry
+
+Title: Can a photonic state-space model be trained on-chip? A pre-registered
+in-situ-training bake-off on a realistic silicon-nitride ring substrate
+
+Author: Lucas Talandier (independent researcher, Paris)
+
+Suggested primary category: `physics.optics`. No journal reference or DOI exists
+for P1. `arxiv_abstract.txt` contains ASCII metadata text under 1,920 characters;
+it is an abridgement of the manuscript abstract.
+
+Use the source ZIP with compiler **XeLaTeX**, inspect arXiv's compiled PDF, and
+complete the author account's submission and license selection. This workspace
+has no authenticated arXiv session. No submission receipt or public arXiv ID is
+claimed. The repository remains private until the agreed submission-day release.
+Record the actual release date and submission receipt after those actions happen.
+P2 is not an automatic email task in this preparation workflow.
+
+Official requirements checked 2026-09-13:
+[TeX submission](https://info.arxiv.org/help/submit_tex.html),
+[TeX Live and XeLaTeX](https://info.arxiv.org/help/faq/texlive.html),
+[ancillary records](https://info.arxiv.org/help/ancillary_files.html), and
+[ASCII metadata and abstract length](https://info.arxiv.org/help/prep.html).

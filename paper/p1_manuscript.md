@@ -2,7 +2,7 @@
 
 *Lucas Talandier — independent researcher, Paris*
 
-**Abstract.** No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that consumed it.
+**Abstract.** To our knowledge, no physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that consumed it.
 
 We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA. The partial energy budget assigns SPSA 2.6 mJ in conversion energy and PAT 13–44 J in digital-twin energy; total training energy remains unmeasured. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on an estimator-independent damp-the-driven-rings profile whose interior contribution survives a registered taps-only falsifier, narrowly.
 
@@ -36,7 +36,8 @@ That sentence is this program's target, with each qualifier load-bearing: *on a 
 task* excludes the servo/calibration lineage; *physical parameters of the recurrence* excludes
 hybrid-digital state carriage; *weight-tied recurrence* excludes feedforward meshes folded in
 time. Refreshes of the search at assembly (2026-07-12) and a page-level verification round
-(2026-07-27; memos in supplementary) map the boundary against the strongest 2025–26 neighbors,
+(2026-07-27), followed by primary-source checks and a bounded search on
+2026-09-13 (memos in supplementary), map the boundary against the strongest 2025–26 neighbors,
 which we dispatch by name because each is the "nearest miss" along one qualifier — and one of
 them moved the boundary. The **nearest neighbor** is the monolithic optical recurrent
 accelerator of Wu et al. [9]: its ORNN chip *is* trained in situ, by a
@@ -1490,7 +1491,7 @@ regime: the C-2 failure is dissipative-echo bias, not implementation error.
 12. Wu, Ren et al., "Time-synthetic optical neural networks with stable programmable gain," arXiv:2507.02297 (retitled from "A scalable and programmable optical neural network in a time-synthetic dimension")
 13. Zhang, Wang, Lederman, Shastri, Prucnal et al., "Compact, reconfigurable, and scalable photonic neurons by modulation-and-weighting microring resonators," eLight 6, 6 (2026). arXiv:2505.11369
 14. "In-situ optimization of an optoelectronic reservoir computer with digital delayed feedback," ACS Photonics (2025). arXiv:2502.11126
-15. "Real-time optical signal equalization with a silicon photonic spatially distributed reservoir computer," Nat. Photonics (2026). arXiv:2503.19911 (Ghent/imec)
+15. Van Assche, Masaad, Gooskens, Sackesyn, Van Kerrebrouck, Yin, Bienstman, "Real-time optical signal equalization with a silicon photonic spatially distributed reservoir computer," Nat. Photonics 20, 1062–1069 (2026), 10.1038/s41566-026-01968-2. arXiv:2503.19911
 16. Gu, Goel, Ré, "Efficiently Modeling Long Sequences with Structured State Spaces," ICLR 2022. arXiv:2111.00396
 17. Gu, Gupta, Goel, Ré, "On the Parameterization and Initialization of Diagonal State Space Models," NeurIPS 2022. arXiv:2206.11893
 18. Rusch, Rus, "Oscillatory State-Space Models," ICLR 2025 (Oral). arXiv:2410.03943
