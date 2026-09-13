@@ -36,10 +36,13 @@ items, alongside the heater-class condition it already states.
 
 ## 7.2 Inference: a conditional niche, gated by the heater class
 
-The lite envelope's verdict stands: **a plausible low-latency niche exists, conditionally.** At
+The original lite envelope suggested **a conditional low-latency niche**. The later
+function-matched inline follow-up (§7.4) closes the registered product window; the
+original calculation is reported below for provenance. At
 the registered scale grid, the photonic side clears the strongest streaming baseline (Brainwave)
-by up to ~15× in energy per sample at N = 128 and 2 GS/s, with end-to-end latency bounded at
-tens of nanoseconds per sample against the baseline's milliseconds — but only when three
+by up to ~15× in energy per sample at N = 128 and 2 GS/s, with an optical latency lower-bound estimate of
+tens of nanoseconds per sample, compared with the baseline's reported milliseconds;
+this is not a measured end-to-end latency advantage — but only when three
 conditions hold simultaneously: line rates ≳0.5 GS/s (every scenario loses everything at
 0.1 GS/s), N ≳ 32 (conversion is N-independent; digital cost scales with N — the structural
 effect the architecture banks on), and **suspended low-power heaters** (~1 mW/π, class B).
@@ -80,52 +83,74 @@ two Jetson-class devices (ratios ≈263× and ≈229×), with the source's own c
 layers. One boundary cell (the DSP-class
 comparison at N = 32) clears by ~1% and is treated as a tie.
 
-## 7.3 Training: the energy metric inverts the sample-efficiency ranking
+## 7.3 Training: partial energy budgets, unresolved wall-clock cost
 
-The bake-off's primary metric (§5) counts device passes, under a registered principle that the
-digital side-ledger is always co-reported and never merged. The envelope is where that principle
-pays off, because converting both ledgers to joules **inverts the ranking**. Training to the
-pre-registered target at the headline cell costs, at the optimistic corner:
+The device-pass and digital ledgers yield the following component estimates at the
+optimistic corner. These are not total training energies.
 
-| route | conversion energy | digital compute | total‡ |
-|---|---|---|---|
-| PAT | 0.57 mJ | **≈13–44 J** (twin ledger, 1.3×10¹³ FLOP at named accelerator classes) | ≈13–44 J |
-| adjoint | 1.1 mJ | 0 | 1.1 mJ (†realizability) |
-| **SPSA** | **2.6 mJ** | 0 | **2.6 mJ** |
+| route | conversion energy | digital-twin compute estimate |
+|---|---|---|
+| PAT | 0.57 mJ | ≈13–44 J |
+| adjoint | 1.1 mJ | 0 in the idealized physical-adjoint ledger |
+| SPSA | 2.6 mJ | no digital twin |
 
-‡Budgeted conversion stack only; the §7.1 per-time holds add ≈4 mJ (class-B heater) +
-≈5–14 mJ (integrated-class laser) over SPSA's 22.5 ms — the honest class figure is tens
-of millijoules (scope note below).
+PAT's digital estimate uses the registered FLOP model and named accelerator-efficiency
+classes; it is not a measured implementation. The physical-adjoint row remains conditional
+on realizing the reverse pass. SPSA's vendor-part conversion estimate is 99 mJ.
 
-PAT reaches target in the fewest device passes but its digital twin bill exceeds SPSA's *entire
-training energy* by roughly four orders of magnitude — and our FLOP estimate is charitable to
-PAT (real accelerator utilization on a 64-dimensional complex recurrence sits far below peak).
-The nominal winner of this table is the adjoint (1.1 mJ) — but its row is charged as-if-realizable
-(§5.3), so among demonstrated routes the energy story is SPSA's: no model, no twin, no added
-hardware, the physical recurrence trained to target for **about 2.6 millijoules in the budgeted
-conversion stack** at the optimistic corner (99 mJ at the vendor-part corner). Scope, so no one
-has to derive it: the §7.1 exclusions are per-time holds, and SPSA's 176,000 passes occupy
-22.5 ms of wall time — class-B heater hold adds ≈4 mJ and an integrated-class laser ≈5–14 mJ —
-so the honest figure is *tens of millijoules, not single digits*; the four-orders inversion
-against PAT's 13–44 J is insensitive to this, and a benchtop laser would break the training-energy
-claim exactly as it breaks the inference niche (§7.1).
-RHEL's echo, censored on accuracy grounds anyway, is also energy-dominated by its own conjugator
-pump (×42 its conversion stack per update). For Stage 1 this sharpens §9's ordering: SPSA is not
-merely the simplest route but by far the cheapest to *run as training*, and PAT's role is best
-cast as the high-device-throughput option for settings where digital compute is free and device
-time is scarce — which is a real regime (a shared testbed), but a different claim than
-"efficient."
+SPSA's 176,000 passes, each containing 256 samples at 2 GS/s, occupy **22.528 ms
+of optical sequence time**. This is a lower bound on training duration, not elapsed
+wall time. The earlier wording treated it as wall time and inferred a total of tens
+of millijoules; that total-energy claim is withdrawn (supplementary N8).
+A complete estimate must include parameter writes and actuator settling between
+perturbations, measurement and controller latency, reset gaps, and the laser, gain-pump,
+locking, packaging, and thermal-hold power over the full duration. In symbols,
+$E_{\rm train}=E_{\rm conversion}+E_{\rm digital}+E_{\rm writes}
++\int_0^{t_{\rm wall}}P_{\rm hold}(t)\,dt$, without double-counting components.
+Those timing and write-energy quantities have not been established for a device.
 
-## 7.4 The advantage question, answered as far as the data allows
+The component ledger makes PAT's digital-twin cost visible and motivates measuring
+SPSA's full hardware loop. It does not establish a four-orders-of-magnitude advantage
+in total training energy. RHEL's registered pump adder is likewise a component estimate;
+its accuracy censoring is unchanged.
 
-Assembling §5.5, §6, and this section: the *demonstration* is in-data; the *advantage* is
-conditional and partly open. In-situ training buys nothing over calibrate-then-deploy at
-5%-class calibration accuracy (§5.5) — and much of what training achieves on this task is
-finding the damping operating point, which a well-calibrated offline model also finds (§6). The
-inference-mode niche exists but is gated by a heater class the named foundry flow does not
-supply, and rests on sustained-vs-peak baseline conventions we document rather than hide. What
-survives all of it: a recurrent photonic SSM at GS/s line rates with class-B actuation is
-energy-competitive at scale for streaming workloads, can be *trained through its own physics for
-tens of millijoules* when calibration is unavailable or stale, and offers latency headroom no digital
-baseline in our set approaches. Whether the conjunction of those conditions describes a market
-or only an experiment is a Stage-1 question, and §9 designs the experiment to answer it.
+## 7.4 Registered inline follow-up: no energy-advantage window
+
+The later Stage 0b envelope (PR-20, frozen at `ee137c4` before calculation;
+results `8931d6c`) replaces the block-level comparison with the per-tap digital
+equalizer an inline device would replace. It charges the registered actuator,
+common-mode thermal-management, gain-pump, and maintenance rows. This is a
+calculated model envelope, not measured hardware performance.
+
+Across the registered 0.1–2 GS/s grid, the best optimistic class-C cell has
+$E_{\rm digital}/E_{\rm photonic}=0.64$: 3.2 pJ/sample digital versus approximately
+5.0 pJ/sample photonic at 2 GS/s, 64 taps, passive C-3, and 10 mW global thermal
+hold. Thus the photonic estimate is **1.56 times the digital energy**, missing
+both parity and the registered 3-times advantage threshold. Removing the unsourced
+optimistic rows lowers the best ratio to 0.23 (about 4.35 times the digital energy).
+The conservative product-window maximum is 0.38. The PR-20 kill gate fires;
+S0b.1–S0b.3 were not run, and no new simulation or fabrication spend followed.
+The full ledger and results accompany the paper in `docs/s0b/` and `results/s0b_0/`.
+
+Thermal management dominates the most favorable cell even with zero actuator hold.
+The frozen minimum-damping model gives a pumped-to-passive memory ratio of
+$(1+2r_{\min})/(0.1+2r_{\min})=3.14$ at $r_{\min}=0.1606$; removing gain does
+not give a tenfold reduction at this operating point. These corrections change
+interpretation, not the frozen arithmetic or gate.
+
+The maintenance term inherits §7.3's optical-time lower bound. Accounting for
+longer control and settling time can only increase modeled photonic energy at a
+fixed retraining cadence, so it cannot reverse this negative gate. It does mean
+that the calculation has not established that practical retraining is cheap or
+that the chosen cadence maintains accuracy.
+
+For fixed power and fixed workload tap count the energy ratio grows linearly with
+sample rate. Quadratic scaling is an approximation only while usable tap count
+also grows proportionally with rate; finite tap-grid limits and task capacity
+interrupt that scaling. Higher-rate scenarios are outside PR-20 and have no
+trainability result. They remain dormant pending a concrete workload and collaborator.
+
+The earlier §7.2 nominal-dimension envelope is retained as the historical calculation.
+This function-matched follow-up supersedes its positive product interpretation
+within the registered inline window. The simulation trainability result survives;
+energy-competitive hardware has not been demonstrated.

@@ -18,11 +18,16 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### ⬜ E-2026-09-13-2 — **Stage 0b closed at S0b.0 by arithmetic (kill fired); three calls for you**
+### ◐ E-2026-09-13-2 — **Stage 0b closed at S0b.0 by arithmetic (kill fired); three calls for you**
+
+**2026-09-13 follow-up:** Lucas authorized the audit repairs and preparation. P5
+is drafted locally; the higher-rate residue and hardware work remain paused. P1
+now includes the negative result and N8 withdrawals. Submission, repo visibility,
+and P2 email remain unperformed; this is preparation, not an outward release.
 
 > **Result:** under PR-20 (frozen before the run), the most favourable inline, non-volatile-actuated,
-> passive ring-lattice equalizer reaches **0.64×** the energy of the per-tap digital block it would
-> replace (bar: 3×; 0.23× with the two unsourced optimistic rows removed). The binding term is the
+> passive ring-lattice equalizer reaches **E_digital/E_photonic = 0.64**, consuming **1.56×**
+> the digital energy (advantage bar: 3; ratio 0.23 with unsourced optimistic rows removed). The binding term is the
 > **common-mode thermal hold** (SiN 14 pm/K; a C-2 linewidth is 8 mK), not actuation; the registered
 > 0.1–2 GS/s window cannot amortize even a 10 mW hold. `results/s0b_0/reading.md` has the full reading.
 > €0 spent. S0b.1–S0b.3 not run.

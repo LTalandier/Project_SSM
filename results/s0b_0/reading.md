@@ -16,7 +16,9 @@ exist (max 0.38). With UNSOURCED rows removed the maxima fall to 0.23 (OPT) and 
    an isolated-package heater (UNSOURCED, optimistic). Even the optimistic 10 mW at 2 GS/s is
    5 pJ/sample — more than a 64-tap digital equalizer costs at 7-nm-class energy per tap.
 2. **The registered line-rate window.** A fixed-power device's energy per sample is P/f_s, and its
-   reachable tap count is T_mem·f_s, so the ratio scales as **f_s²**. At the S0.1-registered
+   reachable tap count may grow as T_mem·f_s, giving an approximate **f_s²**
+   ratio only while that growth is usable and below the tap-grid cap. For fixed taps
+   the ratio scales linearly with f_s. At the S0.1-registered
    0.1–2 GS/s the photonic side cannot amortize even 10 mW. This is the one lever outside the frozen
    grid (see residue below).
 3. **The per-tap pricing.** P1's DSP baseline was a coherent-DSP *block* (25–170 pJ/bit × ENOB
@@ -25,8 +27,9 @@ exist (max 0.38). With UNSOURCED rows removed the maxima fall to 0.23 (OPT) and 
    matched baseline is 30–100× cheaper than the block P1 compared against. P1's ~15× at N = 128 was
    already stated as "unmeasured in magnitude"; S0b.0 measures it: negative.
 4. **The gain pump** (found this session: a fifth unbudgeted item in P1 §7). Pumped rings cost 0.8–17 mW
-   electrical each (derived) — 26–550 mW at N = 32, plus a cooled pump module. The product device must
-   be passive (undoped: unpumped Er absorbs 2 dB/cm), which shortens memory ~10× and pushes 64 taps
+   electrical each (derived) — 26–550 mW at N = 32, plus a cooled pump module. The best registered cell is
+   passive (undoped: unpumped Er absorbs 2 dB/cm), which shortens memory **3.14× at r_min = 0.1606**
+   under PR-20: (1 + 2r_min)/(0.1 + 2r_min) and pushes 64 taps
    to the aspirational C-3 corner.
 5. **Phase-change actuators on a high-Q ring** (ledger §1C-pcm, derived): a 1 µm full-overlap Sb₂Se₃
    cell adds 0.02 dB per round trip against 0.0078 dB intrinsic at C-2 (Q ×0.28) and its 65 levels
@@ -36,13 +39,15 @@ exist (max 0.38). With UNSOURCED rows removed the maxima fall to 0.23 (OPT) and 
 
 ## What did not matter
 - The retraining term: at the drift anchor (one C-2 linewidth per ≈ 1 h), T_r ≈ 10²–10³ s costs
-  ≤ 0.03 mW (OPT) / ≤ 1 mW (CONS). S0b.3's question is answered by arithmetic: retraining is cheap;
-  it just does not address the common-mode term that dominates.
+  ≤ 0.03 mW (OPT) / ≤ 1 mW (CONS). These are partial-budget lower bounds: the 22.5 ms controller duty assumes optical
+  sequence time equals wall time and excludes writes and settling. Practical retraining
+  cost and cadence remain unmeasured. Larger maintenance costs only worsen the kill gate.
 - Actuator class beyond "not thermal": C-pz vs C-pcm differ by the hold-electronics row, which is
   second-order next to the thermal hold.
 
 ## Residue (flagged, not a result)
-The ratio's f_s² scaling means the arithmetic reopens the door at line rates ≳ 10 GS/s *if* the common-
+The fixed-tap linear (and, while usable taps grow, approximately quadratic) rate
+scaling suggests the arithmetic could reopen the door at line rates ≳ 10 GS/s *if* the common-
 mode hold is ≤ 10 mW and the workload needs ≥ 64 taps: at 10 GS/s the C-3 passive reach is ≈ 370 taps,
 a 128-tap digital block costs 6.4–19 pJ/sample, and a 10 mW stage costs 1 pJ/sample. Whether the ring
 lattice can be *trained* at a per-step decay exp(−κ_net dt) ≈ 0.999 — the S4D/LinOSS mapping regime of
@@ -58,7 +63,7 @@ is Lucas's call (E-2026-09-13-2). Nothing in Stage 0's data supports it either w
   against the photonic side (shrinks positive cells only), so P1's negative findings and its
   "unmeasured in magnitude" verdict are unaffected; the list and the integrated-realization condition
   now say five. Recorded in `docs/s0_7/exclusions_ledger.md` §5 and the supplementary checklist.
-- **Stage 1:** the 2026-09-13 ruling stands and is now quantified: the first in-situ-trained recurrent
-  photonic system is worth building as a *first*, on a collaborator's bench, not as a technology.
+- **Stage 1:** the 2026-09-13 ruling stands and is now quantified: hardware development is paused. A collaborator-led research demonstrator would
+  need a concrete objective and a new decision; no product or fabrication spend is authorized.
 - **P5:** a negative envelope note is publishable ("inline photonic equalizer on SiN: the thermal-hold
   floor vs a per-tap digital baseline") and is the honest companion to P1 §7. Lucas's call.

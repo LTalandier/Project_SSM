@@ -113,6 +113,7 @@ def build_twin(sub: DissipativeRingSubstrate, family: str,
     del twin.delta, twin.kappa_ext, twin.mu_chain
     twin._family = family
     twin._mpar = mpar
+    twin._mpar_levels = lv
     return twin
 
 
@@ -124,9 +125,10 @@ def bind_command(twin: DissipativeRingSubstrate,
     then flow to the substrate's parameters."""
     if twin._mpar:
         ki = float(sub.kappa_i)
-        twin.delta = sub.delta + MPAR_LEVELS["delta_offset_ki"] * ki
-        twin.kappa_ext = sub.kappa_ext * MPAR_LEVELS["kext_actuation"]
-        twin.mu_chain = sub.mu_chain * MPAR_LEVELS["mu_actuation"]
+        lv = twin._mpar_levels
+        twin.delta = sub.delta + lv["delta_offset_ki"] * ki
+        twin.kappa_ext = sub.kappa_ext * lv["kext_actuation"]
+        twin.mu_chain = sub.mu_chain * lv["mu_actuation"]
     else:
         twin.delta = sub.delta
         twin.kappa_ext = sub.kappa_ext

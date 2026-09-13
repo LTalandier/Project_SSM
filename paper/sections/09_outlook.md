@@ -6,7 +6,13 @@ proposal §6–§8. **Open flags:** [CITE-*] keys resolved via `paper/references
 
 ---
 
-## 9.1 What the first chip must be
+## 9.1 Hardware development paused
+
+The PR-20 inline-envelope kill gate (§7.4) closes the registered product route.
+No wafer or further product-development spend is planned. The following architecture
+is a possible collaborator-led research demonstrator, not an approved fabrication plan.
+A higher-rate study remains dormant until a concrete workload and collaborator justify
+a new registration.
 
 The bake-off fixes the Stage-1 chip's training stack by evidence rather than taste: **PAT and
 SPSA, nothing else in the loop.** Neither exotic route earned promotion (§5.3), and the hardware
@@ -36,8 +42,8 @@ Stage-1-adjacent demonstration retires debt #4 (a physical recurrent reverse pas
 criterion re-opens with the S0.5 data as prior; the sim says it would arrive at ceiling-grade
 accuracy at 2× PAT's device cost, zero digital. (ii) **The in-situ advantage** — the offline
 tie (§5.5) at 5%-class mismatch sets the burden: in-situ training earns its place on hardware
-only where calibration is worse than 5%-class, drifts on deployment timescales, or where the
-envelope penalizes the twin's digital ledger. The Stage-1 experiment should be *designed to
+only if a measured differential justifies it: independent drift is one modeled
+candidate; higher-mismatch robustness and total training-energy comparisons remain unresolved. The Stage-1 experiment should be *designed to
 measure exactly this differential* — same chip, offline-deploy vs PAT/SPSA arms — rather than
 assume it. (iii) **RHEL** — nothing on SiN; the sim verdict (dissipation-fatal at the operating
 point even with a perfect conjugator) would need a *conservative* platform regime, not a better
@@ -59,5 +65,6 @@ The program set out to answer a narrow question with unusual bookkeeping: can th
 dissipative photonic recurrence be trained through itself, and at what honest cost? In
 simulation, under pre-registered thresholds: yes — by the two methods a chip can already run,
 at device-pass costs now quantified, with the exotic routes priced out by data and the
-advantage-over-offline question left honestly open. The next sentence worth writing requires a
-chip.
+independent-drift advantage bounded by its simulation assumptions. The function-matched
+inline envelope is negative within the registered window. A chip would test physical
+trainability, but these results do not justify product development or fabrication spend.

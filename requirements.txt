@@ -14,3 +14,6 @@ scipy>=1.10
 # photonic_ssm/ so the torch-only package invariant holds). Used by
 # analysis/s0_1_pole_region.py to render the pole-region/B2/B3 figures.
 matplotlib>=3.5
+
+# manuscript HTML rendering only
+Markdown>=3.4

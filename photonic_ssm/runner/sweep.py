@@ -37,6 +37,7 @@ import argparse
 import json
 import multiprocessing as mp
 import os
+import tempfile
 import time
 from typing import Callable, Iterable, Optional, Sequence
 
@@ -53,15 +54,28 @@ def load_existing(path: str) -> list[dict]:
         return []
     with open(path) as f:
         data = json.load(f)
-    return data.get("records", data) if isinstance(data, (list, dict)) else []
+    records = data.get("records") if isinstance(data, dict) else data
+    if not isinstance(records, list) or not all(isinstance(r, dict) for r in records):
+        raise ValueError(f"Invalid sweep records in {path}")
+    return records
 
 
 def save_records(path: str, records: list[dict],
                  schema: str = "sweep.v1") -> None:
     parent = os.path.dirname(os.path.abspath(path))
     os.makedirs(parent, exist_ok=True)
-    with open(path, "w") as f:
-        json.dump({"records": records, "schema": schema}, f, indent=2)
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", dir=parent,
+                                         prefix=".sweep-", delete=False) as f:
+            temp_path = f.name
+            json.dump({"records": records, "schema": schema}, f, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(temp_path, path)
+    finally:
+        if temp_path is not None and os.path.exists(temp_path):
+            os.unlink(temp_path)
 
 
 def standard_argparser(description: str = "") -> argparse.ArgumentParser:

@@ -66,7 +66,7 @@ def f8():
     # (a) mismatch sweep
     ax = axes[0]
     levels = a["s0_10a_mismatch_fine"]["levels"]
-    ms = sorted(int(k) for k in levels)
+    ms = [1]  # N8: historical m>1 comparisons invalidated; no corrected runs yet
     pct = [5 * m for m in ms]
     for arm, key, col in (("in-situ PAT", "insitu", COL["insitu-pat"]),
                           ("offline-deploy + head-recal", "offline",
@@ -79,15 +79,16 @@ def f8():
                     seeds, ".", color=col, alpha=0.35, ms=4, zorder=2)
     ax.axhline(target, color="0.3", lw=0.8, ls="--")
     ax.axhline(ref, color="0.3", lw=0.8, ls=":")
-    ax.text(30.5, target, "target", va="center", fontsize=7, color="0.3")
-    ax.text(30.5, ref, ref_lbl, va="center", fontsize=7,
+    ax.text(5.15, target, "target", va="center", fontsize=7, color="0.3")
+    ax.text(5.15, ref * 0.78, ref_lbl, va="center", fontsize=7,
             color="0.3")
     ax.set_yscale("log")
     ax.set_ylim(4e-4, 1.2e-2)
     ax.set_xticks(pct)
+    ax.set_xlim(4, 7)
     ax.set_xlabel("calibration-mismatch class (%)")
     ax.set_ylabel("median SER (8 seeds)")
-    ax.set_title("(a) tie robust to calibration error at eval-F\n(crossover $m^*$ = none; all CIs include 0)")
+    ax.set_title("(a) base 5%-class mismatch tie\nhigher levels withdrawn (N8)")
     ax.legend(frameon=False, loc="upper left")
 
     # (b),(c) drift trajectories

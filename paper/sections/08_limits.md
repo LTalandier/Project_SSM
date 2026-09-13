@@ -75,8 +75,9 @@ independently of who can read the repository; and the repository itself, includi
 full ledger and its complete commit history, is made public at
 `github.com/LTalandier/Project_SSM` at submission (it was first published 2026-08-02 and
 withdrawn to private on 2026-08-04 for the PI's content review, which is why the date of
-record is the submission date rather than the earlier one). The freeze-before-run ordering
-claimed throughout this paper is therefore verifiable by anyone rather than trusted. The
+record is the submission date rather than the earlier one). Public release will make the recorded commit ordering inspectable. The timestamp
+certifies existence of the anchored material; it does not independently establish
+the actual execution times of experiments. The
 post-assembly external review recorded in the ledger (seven rounds, 2026-08-01 through
 2026-08-17) doubles as a measurement of this structure. Its first five rounds found six
 errata — control-cell numbers transplanted into headline contexts, a cross-scope ratio,
@@ -102,14 +103,19 @@ post-assembly and is consumed in §6/§7.2; its chief surviving lesson is method
 follow-up task's operating point must be registered against its own processing gain (the
 frozen 28 dB left the entire damping grid error-free) — and the harder-operating-point
 variant remains an open registration, not a claim. Two axes the bake-off itself held fixed were measured afterward in
-pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (swept to 30%-class — the
-tie holds) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
+pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (higher-level comparisons withdrawn after the
+command-binding defect was found; supplementary N8) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
 two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,
 and the tested drift magnitude is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than
 worst-case. The systems-advantage question — whether any of this pays once conversion overhead
 is counted — is §7's; the strongest current evidence is §5.5's mechanism triple: no advantage
-from calibration accuracy at any tested mismatch, none under common-mode drift, and a
+at the base 5%-class calibration mismatch, none under common-mode drift, and a
 declared pre-registered $2.42\times$ advantage specific to uncorrelated per-ring drift —
 whose real-hardware relevance rests entirely on how uncorrelated actual on-chip drift is, an
 unmeasured quantity we elevate to the sharpest Stage-1 experiment (§9). We consider stating
 that plainly to be the paper's job.
+
+The subsequent repository audit (2026-09-13; supplementary N8) found an implementation
+defect in the higher-mismatch sweep and an optical-time versus wall-time error in
+the energy interpretation. Those claims are withdrawn. This audit was implemented
+and checked in one session and is not an independent review.

@@ -203,17 +203,18 @@ alternative. The question this raises — *under what conditions does the advant
 then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
 PR-16; both frozen before the runs).
 
-**Calibration accuracy is not the axis** (Fig. F8a). Sweeping the shared mismatch level from 5% to 30%-class
-(in-situ and offline drawing from one frozen family at every level, §5.1), the two arms are —
-at the eval-F floor — statistically indistinguishable at *every* level: in-situ holds at
-$8.4$–$8.6\times10^{-4}$, offline at $8.7$–$9.0\times10^{-4}$ (ratio $\le 1.05$, every
-paired-bootstrap CI including zero), and offline *never fails the accuracy target*. The
-coarse-floor reading had shown small "statistically real" differences (CI excluding zero up to
-20%) — a floor artifact that dissolves at 26× resolution, which is precisely why the fine
-protocol was registered. On this task the offline arm's on-device head recalibration absorbs
-static parametric error completely: a wrong recurrence with a well-fit head still equalizes,
-and in-situ *recurrence* training does not earn its keep against calibration error at any
-tested magnitude.
+**Higher-mismatch comparison withdrawn (2026-09-13 erratum; Fig. F8a).** The
+registered sweep intended to scale five calibration/actuation errors together from
+5% to 30%-class. A code audit found that PAT scaled intrinsic-loss and backscatter
+errors, but its command binding kept the detuning offset and both coupling errors
+at their original 5%-class values. The offline arm scaled all five terms. Thus the
+higher-level comparisons did not implement the registered shared mismatch family.
+Their previous interpretation as a tie through 30% is withdrawn. Historical outputs
+are retained for audit, not used as evidence for that claim. The binding is corrected
+and regression-tested, but no corrected higher-mismatch training runs are reported.
+The m=1 (5%-class) comparison is unchanged; its paired interval includes zero.
+The base-scale bake-off and the separate drift experiment also use m=1 and are
+unaffected by this scaling defect. Supplementary note N8 records the disposition.
 
 **Drift is the axis — specifically the part a re-lock cannot catch** (Fig. F8b,c). We then let the substrate
 *drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
@@ -256,12 +257,10 @@ the *same physical trajectories* score $1.84\times$ at 3,840 symbols and $2.42\t
 froze before any drift datum existed (PR-16, 2026-07-22/24), and the coarse estimate — below
 the bar — was on record when the fine protocol was registered (PR-17, commit `241204a`,
 2026-07-27, *before any eval-F measurement*; the same commit froze the rule that coarse and
-fine verdicts are both reported wherever they differ). Third, the change is not directionally
-selective: **the same 26×-finer floor *erased* a statistically significant edge in
-*in-situ's* favor in the calibration sweep (Fig. F8a, every CI now including zero) and
-*established* one here — and by the same bit-identity check, that dissolution too is pure
-resolution.** It moved every near-ceiling comparison toward higher resolution; the drift
-comparison is simply the one that crossed. The gap *grows with accumulated drift* (~3–4× at
+fine verdicts are both reported wherever they differ). Third, at the unaffected m=1 calibration point, the finer evaluation erased a
+coarse-floor difference in in-situ's favor. Higher-mismatch points are withdrawn
+for the separate implementation defect above and no longer support this argument. The drift comparison crossed the
+registered threshold at the finer resolution. The gap *grows with accumulated drift* (~3–4× at
 the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
 (and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
@@ -269,12 +268,11 @@ whose couplings move during the step) inflate its early trajectory, and no regis
 involves it; and the deploy-time $\mathrm{SER}(t{=}0)$ diagnostic of the in-situ arms shares
 that convention and is not used in any comparison.
 
-The section's shape is now a mechanism triple, each leg pre-registered: calibration error —
-null, to 30% (the head absorbs it); common-mode drift — null (the re-lock absorbs it);
-uncorrelated per-ring drift — a declared $2.42\times$ advantage (nothing else can absorb it).
-In-situ training's value on this substrate is not calibration robustness; it is tracking the
-drift a laser lock cannot see — and quantifying *how uncorrelated real on-chip drift is*
-becomes the sharpest Stage-1 measurement (§9).
+The surviving comparisons distinguish a base-scale calibration tie and a common-mode
+drift tie from a declared $2.42\times$ advantage under independent per-ring drift.
+Robustness at higher calibration mismatch remains unresolved. The relevance of the
+drift advantage to hardware depends on the correlation of actual on-chip drift,
+which has not been measured for this architecture.
 
 ## 5.6 What the diagnostics add
 

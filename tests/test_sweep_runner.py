@@ -98,3 +98,34 @@ def test_jsonl_log_roundtrip(tmp_path):
     assert entries[1]["metric"] == 1
     assert entries[2]["config"]["seed"] == 2
     assert all("timestamp" in e for e in entries)
+
+
+def test_resume_legacy_list(tmp_path):
+    path = tmp_path / 'legacy.json'
+    path.write_text(json.dumps([{'x': 1}]))
+    assert run_sweep([{'x': 1}], _must_not_run_job, str(path),
+                     key_fields=KEY, quiet=True) == [{'x': 1}]
+
+
+def test_failed_save_preserves_previous_results(tmp_path):
+    path = str(tmp_path / 'sweep.json')
+    save_records(path, [{'x': 1}])
+    before = open(path, 'rb').read()
+    with pytest.raises(TypeError):
+        save_records(path, [{'x': object()}])
+    assert open(path, 'rb').read() == before
+    assert load_existing(path) == [{'x': 1}]
+    assert not list(tmp_path.glob('.sweep-*'))
+
+
+def test_failed_replace_preserves_previous_results(tmp_path, monkeypatch):
+    from photonic_ssm.runner import sweep
+    path = str(tmp_path / 'sweep.json')
+    save_records(path, [{'x': 1}])
+    def fail_replace(*args):
+        raise OSError('simulated interrupted replacement')
+    monkeypatch.setattr(sweep.os, 'replace', fail_replace)
+    with pytest.raises(OSError):
+        save_records(path, [{'x': 2}])
+    assert load_existing(path) == [{'x': 1}]
+    assert not list(tmp_path.glob('.sweep-*'))

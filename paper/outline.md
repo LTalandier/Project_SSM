@@ -34,8 +34,9 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 >
 > We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate
 > (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs
-> 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank:
-> SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo
+> 4.6× fewer device passes than model-free SPSA. The partial energy budget assigns SPSA
+> 2.6 mJ in conversion energy and PAT 13–44 J in digital-twin energy; total training
+> energy remains unmeasured. Hamiltonian-echo
 > learning is censored — a quantified feasibility bound, the substrate's own dissipation
 > defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
 > four taps recover all 32) makes the input map a first-class design axis — and the winning
@@ -44,13 +45,12 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 > taps-only falsifier, narrowly.
 >
 > Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
-> training is statistically indistinguishable to 30% calibration error and under common-mode
+> training is statistically indistinguishable at the base 5%-class calibration error and under common-mode
 > drift. Its advantage appears only where nothing offline can follow: under uncorrelated
 > per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a
-> frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a
-> conditional low-latency niche — gated on the low-power heater class, on
-> integrated-class laser, locking, control, and packaging, and on workloads that exercise
-> the state dimension — whose magnitude is unmeasured: a registered ablation finds the
+> frozen rule; the ratio's own CI spans [1.7, 4.6]). A registered inline-envelope follow-up finds
+> no energy-advantage window at 0.1–2 GS/s against a per-tap digital equalizer
+> (best digital/photonic ratio 0.64). Capacity remains a separate limitation: a registered ablation finds the
 > deployed equalizer's output rides on 6–8 of 32 rings, and no workload in our data
 > exercises more. One registered prediction — that
 > the damping optimum tracks task memory span — failed, and is reported as failed. The
@@ -80,7 +80,7 @@ damping spread stays in §6; the failed-prediction sentence represents that sect
 | C5 | Method ranking at matched device-pass cost (+ digital-ledger co-report) | PR-6/PR-7, S0.5 | ✅ **PAT 38.4k < adjoint 73.6k < SPSA 176k; RHEL censored; no promotion; + offline-tie null** |
 | C6 | Effective participating dimension / controllability constraint + multi-tap remedy | PR-6 §B v3, S0.4-0 participation profile | ✅ measured (3/32 → 32/32 at K=4 taps {3,12,21,30}); §5.7 DRAFTED 2026-07-12 |
 | C7 | Damping operating point improves accuracy (D-LinOSS, R-ii trainable-κ_ext framing) | PR-12, S0.6 | ✅ **×302 spread; r*=2.0; R-ii CONFIRMED (boxed 0.0005 beats pin 0.0013)** |
-| C8 | Systems-advantage envelope verdict incl. conversion overhead | PR-10 lite (✅ conditional-positive) → S0.7-full | ✅ **core done: lite verdict stands + training-energy inversion (SPSA 2.6 mJ vs PAT 13–44 J); exclusions ledger → S0.8 list** |
+| C8 | Systems-advantage envelope verdict incl. conversion overhead | PR-10 lite (✅ conditional-positive) → S0.7-full | ✅ **Stage 0b follow-up negative in registered window; training costs are partial budgets, not total energy (§7/N8)** |
 | C9 | RHEL-on-SiN feasibility via concrete χ³-FWM echo sub-model (or explicit off-chip admission) | PR-11, S0.4c | ✅ **template B: censored + worse-than-readout under honest echo; dissipative-echo bias (idealized-C_op control isolates); F22 record** |
 
 ## Section plan (source → prose; ✍ = writable now)
@@ -121,7 +121,7 @@ damping spread stays in §6; the failed-prediction sentence represents that sect
    mode-splitting could reorder methods on hardware. Plus: G3 anchor status (one careful
    paragraph; expanded treatment → P2 if Lucas rules GO), fp32 sensitivity, single-seed
    caveats where they exist.
-9. **Outlook: Stage 1** ✍ DRAFT v1 (`sections/09_outlook.md`, 2026-07-08) — MPW path (CORNERSTONE/LIGENTEC), PAT/SPSA hardware-committed,
+9. **Outlook: hardware paused after PR-20** ✍ revised (`sections/09_outlook.md`, 2026-07-08) — MPW path (CORNERSTONE/LIGENTEC), PAT/SPSA hardware-committed,
    promotion rule for adjoint/RHEL (PR-9), what the first on-chip demonstration would
    require. Frame per F22: the novelty is the recurrent dissipative setting, not
    re-validating chip-proven PAT/SPSA.
@@ -136,8 +136,8 @@ damping spread stays in §6; the failed-prediction sentence represents that sect
 | F4 ✅ | **Headline:** median SER vs device passes, 6 arms + target/ceiling/budget lines, IQR bands, C-2 8 seeds | S0.5 |
 | F5 ✅ | Ranking bars: device passes (per-seed dots) + digital side-ledger hatched; RHEL censored | S0.5 |
 | F6 ✅ | Damping: pinned vs boxed curves, ceiling line, r*=2.0, plateau flags | S0.6 |
-| F7 ✅ | (a) training-energy inversion (conversion OPT/CONS + PAT digital 13–44 J); (b) inference pJ/sample vs N at 2 GS/s vs 4 baselines | S0.7 |
-| F8 ✅ | (a) mismatch sweep 5–30%: tie robust, m\*=none; (b) common-mode drift absorbed by re-lock; (c) independent drift: in-situ edge (made 2026-07-27, `analysis/make_sfigures.py`) | S0.9 |
+| F7 ✅ | (a) partial training budgets (conversion OPT/CONS + PAT digital 13–44 J); (b) inference pJ/sample vs N at 2 GS/s vs 4 baselines | S0.7 |
+| F8 ✅ | (a) base 5%-class mismatch tie; higher levels withdrawn (N8); (b) common-mode drift absorbed by re-lock; (c) independent drift: in-situ edge (made 2026-07-27, `analysis/make_sfigures.py`) | S0.9 |
 | S-figs ✅ | S1 G3 dossier · S2 twin-mismatch C-1 · S3 echo chain+ceilings · S5 RHEL R1 recovery (all made 2026-07-27, `analysis/make_sfigures.py`); S4 = reserved slot (PR-14, deferred) | various |
 
 ## Writing order (Supervisor)

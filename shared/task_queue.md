@@ -1,5 +1,10 @@
 # Task Queue
 
+**Current status (2026-09-13):** Stage 0b closed at its arithmetic gate; no
+product simulation or hardware task active. Repository repairs completed in the
+main session: see `PROJECT_HANDOFF.md` and supplementary N8. Older task entries
+below are execution history, not current instructions.
+
 Supervisor assigns tasks here. The Executor reads and executes the task marked **ACTIVE**, then
 **stops and waits**. The Supervisor marks a task **COMPLETED** (date + one-line summary) before
 assigning the next. New tasks go at the top, below this header.

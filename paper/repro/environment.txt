@@ -1,0 +1,8 @@
+Python 3.12.3
+Linux-7.0.0-31-generic-x86_64-with-glibc2.39
+torch==2.11.0+cpu
+pytest==9.0.2
+scipy==1.17.1
+matplotlib==3.10.8
+numpy==2.4.3
+Markdown==3.5.2

@@ -3,9 +3,10 @@
 **Owner:** Supervisor (single-session mode). **Status:** **CLOSED AT S0b.0 (2026-09-13) — the kill gate fired.** PR-20 frozen at `ee137c4`, run same
 day: max E_digital/E_photonic over every optimistic class-C cell = **0.64** (bar 3; 0.23 with UNSOURCED rows
 removed); CONS window max 0.38. S0b.1–S0b.3 **not run** (€0 spent). Reading: `results/s0b_0/reading.md`.
-The one P1 edit made: §7.1 four → five exclusions (the substrate's Er pump, found here). Residue (f_s² lever
-outside the registered 0.1–2 GS/s window) escalated as E-2026-09-13-2, not pursued.
-**Source of truth:** P1 §7 (the frozen envelope and its four exclusions), `docs/s0_7/exclusions_ledger.md`
+P1 now includes the negative follow-up (§7.4), the fifth exclusion (gain pump), and
+the N8 audit corrections. Higher-rate work is dormant; scaling is linear at fixed
+taps and approximately quadratic only while usable tap count grows with rate.
+**Source of truth:** P1 §7 (the original envelope and its five disclosed exclusions), `docs/s0_7/exclusions_ledger.md`
 (primary-sourced overhead numbers), PR-18/PR-19 (§18.6b N_eff path; §19.6c floor-degeneracy lesson),
 and the 2026-09-13 PI discussion that scoped this stage. **Companion file:** `preregistration.md` —
 PR-20 … PR-23 freeze there before the run each governs.

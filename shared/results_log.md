@@ -16,6 +16,27 @@ Per result, report:
 ---
 
 
+
+## Repository audit repairs (2026-09-13, second session; Supervisor-verified and committed same day)
+
+**Defect (real, verified against pre-change code):** `pat.bind_command` read the module-level
+m = 1 `MPAR_LEVELS` for the detuning offset and both coupling actuation errors while `build_twin`
+scaled only loss/backscatter/gain terms with `mismatch_scale`; the offline arm (`harness.py`)
+scaled all five via `scaled_mpar(m)`. So every m > 1 point of the PR-5 §E sweep compared a
+partially-scaled PAT twin against a fully-scaled offline model — not the registered shared family.
+**Disposition:** "tie clean to 30%" **withdrawn** (§5.5, §1, §8, abstract, F8a omits m > 1; N8;
+post-run erratum block in the ledger). m = 1 is bit-identical (`scaled_mpar(1) == MPAR_LEVELS`), so
+the base tie, the bake-off and the drift result stand. No corrected higher-m runs claimed.
+**Second withdrawal:** §7.3's "tens of mJ all-in / four-orders inversion" treated SPSA's 22.5 ms
+optical-sequence time as wall time (heater settling alone puts wall time at seconds); total-energy
+and ranking claims withdrawn, component budgets kept. **P1 §7.4 added** (PR-20 negative, with the
+reading's own corrections: 0.64 ⇒ photonic 1.56× digital; memory ratio 3.14 not 10; rate scaling
+linear at fixed taps). §9 reframed: hardware paused. **Also:** sweep persistence now atomic
+(temp + os.replace; legacy list records load; malformed payloads raise); `paper/repro/` bundle
+(991 result files, SHA-256 manifest, 852 KB) + `scripts/reproduce_paper.py`; P5 draft
+`paper/p5_negative_envelope.md`. **Verification this session:** 169 tests pass (rerun), bundle
+verifies 991/991, defect and offline-arm scaling confirmed by reading both code paths.
+
 ## Stage 0b — S0b.0 inline-scope re-envelope: KILL FIRED (2026-09-13, single-session mode; €0)
 
 **Governing block:** PR-20 (frozen `ee137c4` before the run). **Script:** `analysis/s0b_0_envelope.py` →

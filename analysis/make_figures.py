@@ -394,8 +394,8 @@ def f7():
     ax0.set_ylim(1e-4, 3e3)
     ax0.set_xticks(x)
     ax0.set_xticklabels([LBL[m] for m in methods])
-    ax0.set_ylabel("training energy to target (J)")
-    ax0.set_title("(a) training: the energy metric inverts the rank",
+    ax0.set_ylabel("budgeted energy components (J)")
+    ax0.set_title("(a) partial training budget; total unmeasured",
                   fontsize=8, loc="left")
     ax0.legend(frameon=False, fontsize=6.8, loc="center right")
 
@@ -423,7 +423,7 @@ def f7():
     ax1.set_xticklabels([str(n) for n in Ns])
     ax1.set_xlabel("state dimension $N$")
     ax1.set_ylabel("energy per sample (pJ), 2 GS/s")
-    ax1.set_title("(b) inference envelope at 2 GS/s", fontsize=8,
+    ax1.set_title("(b) historical nominal-N envelope", fontsize=8,
                   loc="left")
     ax1.legend(frameon=False, fontsize=6.5, loc="upper left")
     save(fig, "F7_envelope")

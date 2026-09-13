@@ -4,9 +4,9 @@
 
 **Abstract.** No physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that consumed it.
 
-We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA, but the energy metric inverts the rank: SPSA trains for tens of millijoules all-in where PAT's digital twin costs 13–44 J. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on an estimator-independent damp-the-driven-rings profile whose interior contribution survives a registered taps-only falsifier, narrowly.
+We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA. The partial energy budget assigns SPSA 2.6 mJ in conversion energy and PAT 13–44 J in digital-twin energy; total training energy remains unmeasured. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on an estimator-independent damp-the-driven-rings profile whose interior contribution survives a registered taps-only falsifier, narrowly.
 
-Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable to 30% calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). An end-to-end envelope finds a conditional low-latency niche — gated on the low-power heater class, on integrated-class laser, locking, control, and packaging, and on workloads that exercise the state dimension — whose magnitude is unmeasured: a registered ablation finds the deployed equalizer's output rides on 6–8 of 32 rings, and no workload in our data exercises more. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
+Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ training is statistically indistinguishable at the base 5%-class calibration error and under common-mode drift. Its advantage appears only where nothing offline can follow: under uncorrelated per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a frozen rule; the ratio's own CI spans [1.7, 4.6]). A registered inline-envelope follow-up finds no energy-advantage window at 0.1–2 GS/s against a per-tap digital equalizer (best digital/photonic ratio 0.64). Capacity remains a separate limitation: a registered ablation finds the deployed equalizer's output rides on 6–8 of 32 rings, and no workload in our data exercises more. One registered prediction — that the damping optimum tracks task memory span — failed, and is reported as failed. The pre-registration ledger, substrate model, and training code are released with the paper.
 
 ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains interferometer weights around an optoelectronic relay; its resonators stay fixed.*
 
@@ -109,8 +109,8 @@ shipped as supplementary material (§3.7). Concretely:
    and worse than readout-only under an honest echo) settles the hardware roadmap on PAT/SPSA
    without promotion of the exotic routes. And the comparison the fair design was built to
    expose lands as a mechanism triple: calibrate-then-deploy ties in-situ training at
-   calibration errors all the way to 30%-class (statistically indistinguishable at the
-   registered fine evaluation floor) and under common-mode drift, which a laser re-lock
+   the base 5%-class calibration error (the higher-mismatch comparison is withdrawn
+   after an implementation audit; §5.5) and under common-mode drift, which a laser re-lock
    absorbs — while under uncorrelated per-ring drift, which nothing offline can absorb,
    in-situ retraining holds a **declared, pre-registered 2.42× advantage** (both conditions
    of the frozen rule hold — point ratio ≥ 2× *and* difference-CI excluding zero; the
@@ -745,17 +745,18 @@ alternative. The question this raises — *under what conditions does the advant
 then answered with two pre-registered follow-up experiments rather than leaving it open (PR-5 §E,
 PR-16; both frozen before the runs).
 
-**Calibration accuracy is not the axis** (Fig. F8a). Sweeping the shared mismatch level from 5% to 30%-class
-(in-situ and offline drawing from one frozen family at every level, §5.1), the two arms are —
-at the eval-F floor — statistically indistinguishable at *every* level: in-situ holds at
-$8.4$–$8.6\times10^{-4}$, offline at $8.7$–$9.0\times10^{-4}$ (ratio $\le 1.05$, every
-paired-bootstrap CI including zero), and offline *never fails the accuracy target*. The
-coarse-floor reading had shown small "statistically real" differences (CI excluding zero up to
-20%) — a floor artifact that dissolves at 26× resolution, which is precisely why the fine
-protocol was registered. On this task the offline arm's on-device head recalibration absorbs
-static parametric error completely: a wrong recurrence with a well-fit head still equalizes,
-and in-situ *recurrence* training does not earn its keep against calibration error at any
-tested magnitude.
+**Higher-mismatch comparison withdrawn (2026-09-13 erratum; Fig. F8a).** The
+registered sweep intended to scale five calibration/actuation errors together from
+5% to 30%-class. A code audit found that PAT scaled intrinsic-loss and backscatter
+errors, but its command binding kept the detuning offset and both coupling errors
+at their original 5%-class values. The offline arm scaled all five terms. Thus the
+higher-level comparisons did not implement the registered shared mismatch family.
+Their previous interpretation as a tie through 30% is withdrawn. Historical outputs
+are retained for audit, not used as evidence for that claim. The binding is corrected
+and regression-tested, but no corrected higher-mismatch training runs are reported.
+The m=1 (5%-class) comparison is unchanged; its paired interval includes zero.
+The base-scale bake-off and the separate drift experiment also use m=1 and are
+unaffected by this scaling defect. Supplementary note N8 records the disposition.
 
 **Drift is the axis — specifically the part a re-lock cannot catch** (Fig. F8b,c). We then let the substrate
 *drift*: a random walk on the ring detunings calibrated to a measured free-running silicon-nitride
@@ -798,12 +799,10 @@ the *same physical trajectories* score $1.84\times$ at 3,840 symbols and $2.42\t
 froze before any drift datum existed (PR-16, 2026-07-22/24), and the coarse estimate — below
 the bar — was on record when the fine protocol was registered (PR-17, commit `241204a`,
 2026-07-27, *before any eval-F measurement*; the same commit froze the rule that coarse and
-fine verdicts are both reported wherever they differ). Third, the change is not directionally
-selective: **the same 26×-finer floor *erased* a statistically significant edge in
-*in-situ's* favor in the calibration sweep (Fig. F8a, every CI now including zero) and
-*established* one here — and by the same bit-identity check, that dissolution too is pure
-resolution.** It moved every near-ceiling comparison toward higher resolution; the drift
-comparison is simply the one that crossed. The gap *grows with accumulated drift* (~3–4× at
+fine verdicts are both reported wherever they differ). Third, at the unaffected m=1 calibration point, the finer evaluation erased a
+coarse-floor difference in in-situ's favor. Higher-mismatch points are withdrawn
+for the separate implementation defect above and no longer support this argument. The drift comparison crossed the
+registered threshold at the finer resolution. The gap *grows with accumulated drift* (~3–4× at
 the largest drift step), exactly as the mechanism predicts. Two protocol notes for honesty:
 the in-situ SPSA arm is plotted for context only — its per-step re-convergence transient
 (and, within eval-F, a registered per-step scale-re-measure convention that penalizes an arm
@@ -811,12 +810,11 @@ whose couplings move during the step) inflate its early trajectory, and no regis
 involves it; and the deploy-time $\mathrm{SER}(t{=}0)$ diagnostic of the in-situ arms shares
 that convention and is not used in any comparison.
 
-The section's shape is now a mechanism triple, each leg pre-registered: calibration error —
-null, to 30% (the head absorbs it); common-mode drift — null (the re-lock absorbs it);
-uncorrelated per-ring drift — a declared $2.42\times$ advantage (nothing else can absorb it).
-In-situ training's value on this substrate is not calibration robustness; it is tracking the
-drift a laser lock cannot see — and quantifying *how uncorrelated real on-chip drift is*
-becomes the sharpest Stage-1 measurement (§9).
+The surviving comparisons distinguish a base-scale calibration tie and a common-mode
+drift tie from a declared $2.42\times$ advantage under independent per-ring drift.
+Robustness at higher calibration mismatch remains unresolved. The relevance of the
+drift advantage to hardware depends on the correlation of actual on-chip drift,
+which has not been measured for this architecture.
 
 ### 5.6 What the diagnostics add
 
@@ -1047,10 +1045,13 @@ items, alongside the heater-class condition it already states.
 
 ### 7.2 Inference: a conditional niche, gated by the heater class
 
-The lite envelope's verdict stands: **a plausible low-latency niche exists, conditionally.** At
+The original lite envelope suggested **a conditional low-latency niche**. The later
+function-matched inline follow-up (§7.4) closes the registered product window; the
+original calculation is reported below for provenance. At
 the registered scale grid, the photonic side clears the strongest streaming baseline (Brainwave)
-by up to ~15× in energy per sample at N = 128 and 2 GS/s, with end-to-end latency bounded at
-tens of nanoseconds per sample against the baseline's milliseconds — but only when three
+by up to ~15× in energy per sample at N = 128 and 2 GS/s, with an optical latency lower-bound estimate of
+tens of nanoseconds per sample, compared with the baseline's reported milliseconds;
+this is not a measured end-to-end latency advantage — but only when three
 conditions hold simultaneously: line rates ≳0.5 GS/s (every scenario loses everything at
 0.1 GS/s), N ≳ 32 (conversion is N-independent; digital cost scales with N — the structural
 effect the architecture banks on), and **suspended low-power heaters** (~1 mW/π, class B).
@@ -1091,55 +1092,77 @@ two Jetson-class devices (ratios ≈263× and ≈229×), with the source's own c
 layers. One boundary cell (the DSP-class
 comparison at N = 32) clears by ~1% and is treated as a tie.
 
-### 7.3 Training: the energy metric inverts the sample-efficiency ranking
+### 7.3 Training: partial energy budgets, unresolved wall-clock cost
 
-The bake-off's primary metric (§5) counts device passes, under a registered principle that the
-digital side-ledger is always co-reported and never merged. The envelope is where that principle
-pays off, because converting both ledgers to joules **inverts the ranking**. Training to the
-pre-registered target at the headline cell costs, at the optimistic corner:
+The device-pass and digital ledgers yield the following component estimates at the
+optimistic corner. These are not total training energies.
 
-| route | conversion energy | digital compute | total‡ |
-|---|---|---|---|
-| PAT | 0.57 mJ | **≈13–44 J** (twin ledger, 1.3×10¹³ FLOP at named accelerator classes) | ≈13–44 J |
-| adjoint | 1.1 mJ | 0 | 1.1 mJ (†realizability) |
-| **SPSA** | **2.6 mJ** | 0 | **2.6 mJ** |
+| route | conversion energy | digital-twin compute estimate |
+|---|---|---|
+| PAT | 0.57 mJ | ≈13–44 J |
+| adjoint | 1.1 mJ | 0 in the idealized physical-adjoint ledger |
+| SPSA | 2.6 mJ | no digital twin |
 
-‡Budgeted conversion stack only; the §7.1 per-time holds add ≈4 mJ (class-B heater) +
-≈5–14 mJ (integrated-class laser) over SPSA's 22.5 ms — the honest class figure is tens
-of millijoules (scope note below).
+PAT's digital estimate uses the registered FLOP model and named accelerator-efficiency
+classes; it is not a measured implementation. The physical-adjoint row remains conditional
+on realizing the reverse pass. SPSA's vendor-part conversion estimate is 99 mJ.
 
-PAT reaches target in the fewest device passes but its digital twin bill exceeds SPSA's *entire
-training energy* by roughly four orders of magnitude — and our FLOP estimate is charitable to
-PAT (real accelerator utilization on a 64-dimensional complex recurrence sits far below peak).
-The nominal winner of this table is the adjoint (1.1 mJ) — but its row is charged as-if-realizable
-(§5.3), so among demonstrated routes the energy story is SPSA's: no model, no twin, no added
-hardware, the physical recurrence trained to target for **about 2.6 millijoules in the budgeted
-conversion stack** at the optimistic corner (99 mJ at the vendor-part corner). Scope, so no one
-has to derive it: the §7.1 exclusions are per-time holds, and SPSA's 176,000 passes occupy
-22.5 ms of wall time — class-B heater hold adds ≈4 mJ and an integrated-class laser ≈5–14 mJ —
-so the honest figure is *tens of millijoules, not single digits*; the four-orders inversion
-against PAT's 13–44 J is insensitive to this, and a benchtop laser would break the training-energy
-claim exactly as it breaks the inference niche (§7.1).
-RHEL's echo, censored on accuracy grounds anyway, is also energy-dominated by its own conjugator
-pump (×42 its conversion stack per update). For Stage 1 this sharpens §9's ordering: SPSA is not
-merely the simplest route but by far the cheapest to *run as training*, and PAT's role is best
-cast as the high-device-throughput option for settings where digital compute is free and device
-time is scarce — which is a real regime (a shared testbed), but a different claim than
-"efficient."
+SPSA's 176,000 passes, each containing 256 samples at 2 GS/s, occupy **22.528 ms
+of optical sequence time**. This is a lower bound on training duration, not elapsed
+wall time. The earlier wording treated it as wall time and inferred a total of tens
+of millijoules; that total-energy claim is withdrawn (supplementary N8).
+A complete estimate must include parameter writes and actuator settling between
+perturbations, measurement and controller latency, reset gaps, and the laser, gain-pump,
+locking, packaging, and thermal-hold power over the full duration. In symbols,
+$E_{\rm train}=E_{\rm conversion}+E_{\rm digital}+E_{\rm writes}
++\int_0^{t_{\rm wall}}P_{\rm hold}(t)\,dt$, without double-counting components.
+Those timing and write-energy quantities have not been established for a device.
 
-### 7.4 The advantage question, answered as far as the data allows
+The component ledger makes PAT's digital-twin cost visible and motivates measuring
+SPSA's full hardware loop. It does not establish a four-orders-of-magnitude advantage
+in total training energy. RHEL's registered pump adder is likewise a component estimate;
+its accuracy censoring is unchanged.
 
-Assembling §5.5, §6, and this section: the *demonstration* is in-data; the *advantage* is
-conditional and partly open. In-situ training buys nothing over calibrate-then-deploy at
-5%-class calibration accuracy (§5.5) — and much of what training achieves on this task is
-finding the damping operating point, which a well-calibrated offline model also finds (§6). The
-inference-mode niche exists but is gated by a heater class the named foundry flow does not
-supply, and rests on sustained-vs-peak baseline conventions we document rather than hide. What
-survives all of it: a recurrent photonic SSM at GS/s line rates with class-B actuation is
-energy-competitive at scale for streaming workloads, can be *trained through its own physics for
-tens of millijoules* when calibration is unavailable or stale, and offers latency headroom no digital
-baseline in our set approaches. Whether the conjunction of those conditions describes a market
-or only an experiment is a Stage-1 question, and §9 designs the experiment to answer it.
+### 7.4 Registered inline follow-up: no energy-advantage window
+
+The later Stage 0b envelope (PR-20, frozen at `ee137c4` before calculation;
+results `8931d6c`) replaces the block-level comparison with the per-tap digital
+equalizer an inline device would replace. It charges the registered actuator,
+common-mode thermal-management, gain-pump, and maintenance rows. This is a
+calculated model envelope, not measured hardware performance.
+
+Across the registered 0.1–2 GS/s grid, the best optimistic class-C cell has
+$E_{\rm digital}/E_{\rm photonic}=0.64$: 3.2 pJ/sample digital versus approximately
+5.0 pJ/sample photonic at 2 GS/s, 64 taps, passive C-3, and 10 mW global thermal
+hold. Thus the photonic estimate is **1.56 times the digital energy**, missing
+both parity and the registered 3-times advantage threshold. Removing the unsourced
+optimistic rows lowers the best ratio to 0.23 (about 4.35 times the digital energy).
+The conservative product-window maximum is 0.38. The PR-20 kill gate fires;
+S0b.1–S0b.3 were not run, and no new simulation or fabrication spend followed.
+The full ledger and results accompany the paper in `docs/s0b/` and `results/s0b_0/`.
+
+Thermal management dominates the most favorable cell even with zero actuator hold.
+The frozen minimum-damping model gives a pumped-to-passive memory ratio of
+$(1+2r_{\min})/(0.1+2r_{\min})=3.14$ at $r_{\min}=0.1606$; removing gain does
+not give a tenfold reduction at this operating point. These corrections change
+interpretation, not the frozen arithmetic or gate.
+
+The maintenance term inherits §7.3's optical-time lower bound. Accounting for
+longer control and settling time can only increase modeled photonic energy at a
+fixed retraining cadence, so it cannot reverse this negative gate. It does mean
+that the calculation has not established that practical retraining is cheap or
+that the chosen cadence maintains accuracy.
+
+For fixed power and fixed workload tap count the energy ratio grows linearly with
+sample rate. Quadratic scaling is an approximation only while usable tap count
+also grows proportionally with rate; finite tap-grid limits and task capacity
+interrupt that scaling. Higher-rate scenarios are outside PR-20 and have no
+trainability result. They remain dormant pending a concrete workload and collaborator.
+
+The earlier §7.2 nominal-dimension envelope is retained as the historical calculation.
+This function-matched follow-up supersedes its positive product interpretation
+within the registered inline window. The simulation trainability result survives;
+energy-competitive hardware has not been demonstrated.
 
 ## 8. Limits of this model
 
@@ -1211,8 +1234,9 @@ independently of who can read the repository; and the repository itself, includi
 full ledger and its complete commit history, is made public at
 `github.com/LTalandier/Project_SSM` at submission (it was first published 2026-08-02 and
 withdrawn to private on 2026-08-04 for the PI's content review, which is why the date of
-record is the submission date rather than the earlier one). The freeze-before-run ordering
-claimed throughout this paper is therefore verifiable by anyone rather than trusted. The
+record is the submission date rather than the earlier one). Public release will make the recorded commit ordering inspectable. The timestamp
+certifies existence of the anchored material; it does not independently establish
+the actual execution times of experiments. The
 post-assembly external review recorded in the ledger (seven rounds, 2026-08-01 through
 2026-08-17) doubles as a measurement of this structure. Its first five rounds found six
 errata — control-cell numbers transplanted into headline contexts, a cross-scope ratio,
@@ -1238,21 +1262,32 @@ post-assembly and is consumed in §6/§7.2; its chief surviving lesson is method
 follow-up task's operating point must be registered against its own processing gain (the
 frozen 28 dB left the entire damping grid error-free) — and the harder-operating-point
 variant remains an open registration, not a claim. Two axes the bake-off itself held fixed were measured afterward in
-pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (swept to 30%-class — the
-tie holds) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
+pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (higher-level comparisons withdrawn after the
+command-binding defect was found; supplementary N8) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
 two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,
 and the tested drift magnitude is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than
 worst-case. The systems-advantage question — whether any of this pays once conversion overhead
 is counted — is §7's; the strongest current evidence is §5.5's mechanism triple: no advantage
-from calibration accuracy at any tested mismatch, none under common-mode drift, and a
+at the base 5%-class calibration mismatch, none under common-mode drift, and a
 declared pre-registered $2.42\times$ advantage specific to uncorrelated per-ring drift —
 whose real-hardware relevance rests entirely on how uncorrelated actual on-chip drift is, an
 unmeasured quantity we elevate to the sharpest Stage-1 experiment (§9). We consider stating
 that plainly to be the paper's job.
 
+The subsequent repository audit (2026-09-13; supplementary N8) found an implementation
+defect in the higher-mismatch sweep and an optical-time versus wall-time error in
+the energy interpretation. Those claims are withdrawn. This audit was implemented
+and checked in one session and is not an independent review.
+
 ## 9. Outlook: Stage 1
 
-### 9.1 What the first chip must be
+### 9.1 Hardware development paused
+
+The PR-20 inline-envelope kill gate (§7.4) closes the registered product route.
+No wafer or further product-development spend is planned. The following architecture
+is a possible collaborator-led research demonstrator, not an approved fabrication plan.
+A higher-rate study remains dormant until a concrete workload and collaborator justify
+a new registration.
 
 The bake-off fixes the Stage-1 chip's training stack by evidence rather than taste: **PAT and
 SPSA, nothing else in the loop.** Neither exotic route earned promotion (§5.3), and the hardware
@@ -1282,8 +1317,8 @@ Stage-1-adjacent demonstration retires debt #4 (a physical recurrent reverse pas
 criterion re-opens with the S0.5 data as prior; the sim says it would arrive at ceiling-grade
 accuracy at 2× PAT's device cost, zero digital. (ii) **The in-situ advantage** — the offline
 tie (§5.5) at 5%-class mismatch sets the burden: in-situ training earns its place on hardware
-only where calibration is worse than 5%-class, drifts on deployment timescales, or where the
-envelope penalizes the twin's digital ledger. The Stage-1 experiment should be *designed to
+only if a measured differential justifies it: independent drift is one modeled
+candidate; higher-mismatch robustness and total training-energy comparisons remain unresolved. The Stage-1 experiment should be *designed to
 measure exactly this differential* — same chip, offline-deploy vs PAT/SPSA arms — rather than
 assume it. (iii) **RHEL** — nothing on SiN; the sim verdict (dissipation-fatal at the operating
 point even with a perfect conjugator) would need a *conservative* platform regime, not a better
@@ -1305,8 +1340,9 @@ The program set out to answer a narrow question with unusual bookkeeping: can th
 dissipative photonic recurrence be trained through itself, and at what honest cost? In
 simulation, under pre-registered thresholds: yes — by the two methods a chip can already run,
 at device-pass costs now quantified, with the exotic routes priced out by data and the
-advantage-over-offline question left honestly open. The next sentence worth writing requires a
-chip.
+independent-drift advantage bounded by its simulation assumptions. The function-matched
+inline envelope is negative within the registered window. A chip would test physical
+trainability, but these results do not justify product development or fabrication spend.
 
 ## Figures
 
@@ -1372,22 +1408,21 @@ robust to a ×2 task-memory span (§6).
 
 ![F7](figures/F7_envelope.png)
 
-**Figure F7 — The systems envelope.** (a) Training-energy inversion: SPSA trains the C-2 cell
-for ~2.6 mJ in the budgeted conversion stack (optimistic corner; 99 mJ vendor-part; tens of
-mJ once the §7.1 per-time holds are charged, §7.3) while PAT's device
-side is 0.57 mJ but its digital twin backward costs 13–44 J — the energy metric inverts the
-device-pass ranking. (b) Inference energy per sample versus state dimension N at 2 GS/s against the named digital
-baselines: the photonic envelope (optimistic corner, low-power heater class) clears the
-measured embedded-GPU (Jetson sustained) and Brainwave batch-1 lines at all N and enters the
-DSP-ASIC class at N = 128 — while never beating the Jetson *peak-spec* line, which we report
-alongside: the niche is conditional, as §7 states.
+**Figure F7 — Historical systems-envelope components.** (a) Conversion-energy
+estimates (SPSA 2.6 mJ OPT / 99 mJ CONS; PAT 0.57 mJ OPT) and PAT's 13–44 J
+digital-twin estimate. Writes, settling, and full-duration holding costs are not
+included; the plot does not rank total training energy (§7.3, N8). (b) The original
+nominal-N inference comparison at 2 GS/s. The later function-matched inline envelope
+finds no energy-advantage window under PR-20 (§7.4); this panel is historical context.
 
 ![F8](figures/F8_mismatch_drift.png)
 
 **Figure F8 — What breaks the offline tie (pre-registered follow-ups, §5.5; eval-F protocol
-of record, PR-17).** (a) Calibration-mismatch sweep, 5→30%-class (8 seeds): in-situ PAT
-(8.4–8.6 × 10⁻⁴) and offline-deploy (8.7–9.0 × 10⁻⁴) are statistically indistinguishable at
-every level (ratio ≤ 1.05, every paired-bootstrap CI including zero) — crossover m\* = none.
+of record, PR-17).** (a) The unaffected base 5%-class mismatch comparison (8 seeds):
+PAT and offline-deploy are statistically indistinguishable. Higher-level points
+are omitted because PAT's command-binding errors were not scaled as registered;
+the previous 30%-robustness interpretation is withdrawn (N8).
+
 (b) Deploy-then-drift, common-mode regime (σ_step = 0.40 κ_i per step on all detunings
 coherently): the offline laser re-lock absorbs the drift and keeps pace (ratio 1.34, CI
 including zero). (c) Independent per-ring drift: the re-lock cannot fix per-ring pole scatter;

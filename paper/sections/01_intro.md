@@ -109,8 +109,8 @@ shipped as supplementary material (§3.7). Concretely:
    and worse than readout-only under an honest echo) settles the hardware roadmap on PAT/SPSA
    without promotion of the exotic routes. And the comparison the fair design was built to
    expose lands as a mechanism triple: calibrate-then-deploy ties in-situ training at
-   calibration errors all the way to 30%-class (statistically indistinguishable at the
-   registered fine evaluation floor) and under common-mode drift, which a laser re-lock
+   the base 5%-class calibration error (the higher-mismatch comparison is withdrawn
+   after an implementation audit; §5.5) and under common-mode drift, which a laser re-lock
    absorbs — while under uncorrelated per-ring drift, which nothing offline can absorb,
    in-situ retraining holds a **declared, pre-registered 2.42× advantage** (both conditions
    of the frozen rule hold — point ratio ≥ 2× *and* difference-CI excluding zero; the

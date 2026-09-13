@@ -141,7 +141,7 @@ both passes.
   registered→run→consumed (all reproductions bit-identical); §5.7/§6 mechanism + §3.6/§8.2
   vii exposure + §9.1 Stage-1 δ-aware-clamp design input; six errata fixed (§2.2 κ_tot,
   §3.4 floor-ratio transplant, §5.7 head-only attribution, §5.3 ledger scoping, §5.5 m1
-  protocol-mixing, §5.4+S5 C-1→C-2 transplant); §7.3 energy scope (tens of mJ); §18.6
+  protocol-mixing, §5.4+S5 C-1→C-2 transplant); §7.3 historical energy scope (subsequently withdrawn by N8); §18.6
   verdicts: taps-only control → A-discovers narrowly (abstract clause restored,
   "estimator-independent"); N_eff = 6–8 → §7.2 bounds its own N-scaling premise + abstract
   niche condition; §8.4 review-as-measurement sentence. OTS anchor in `timestamps/`
@@ -166,3 +166,40 @@ both passes.
   abstract niche clause carries "magnitude is unmeasured"; "ample capacity" → headroom.
   Refs [10]/[13]/[15]/[25]/[33] (Ashtiani/Zhang/Ghent-reservoir/Rukh/Dacha) remain on
   the pre-submission page-verification sweep.
+
+## N8 — Repository audit erratum (2026-09-13)
+
+**PAT mismatch scaling.** PR-5 §E required five parametric errors to scale with m.
+The twin constructor scaled intrinsic loss and backscatter, but command binding
+used m=1 values for detuning offset, external coupling, and inter-ring coupling.
+At m=6 the command offsets/factors were 0.05 κ_i, 1.05, and 0.95 instead of
+0.30 κ_i, 1.30, and 0.70. Offline deployment used the intended scaled values.
+The m>1 comparisons and the claimed tie through 30% are withdrawn. F8a now shows
+only m=1. Historical S0.9a/S0.10a files, including `runs_a_patboth`, remain unchanged
+in the reproduction archive; they must not be mistaken for corrected runs.
+`results/s0_10/analysis.json` is likewise the historical summary. The m=1 bake-off,
+diagnostics, and separate drift results are not affected by this scaling defect.
+The corrected binding stores each twin's scaled levels; a regression checks values
+and command Jacobians at m=0,1,2,6. No corrected higher-mismatch training run has
+been performed for this revision. Future such runs need distinct output paths and
+code-version metadata; existing idempotent runners must not reuse historical paths.
+
+**Energy and timing.** The reported 22.528 ms is 176,000 × 256 / (2 GS/s), the
+optical sequence duration. It excludes parameter writes, settling, reset gaps,
+measurement/controller latency, and holding power over those intervals. The earlier
+"tens of millijoules all-in" and total-energy ranking are withdrawn. Figure F7
+retains the conversion and digital-twin component budgets, explicitly labeled as
+partial. Stage 0b inherited this lower-bound duration for maintenance; its negative
+energy gate cannot improve when nonnegative missing costs are added at fixed cadence.
+
+**Stage 0b interpretation.** The unchanged PR-20 result is E_digital/E_photonic =
+0.64 (photonic 1.56× digital energy), or 0.23 with unsourced optimistic rows removed.
+The implemented pumped/passive memory ratio at r_min=0.1606 is 3.14. Quadratic rate
+scaling requires usable tap count to grow with rate; fixed-tap scaling is linear.
+The higher-rate residue has no trainability evidence and remains dormant.
+
+**Reproduction.** `paper/repro/README.md` documents the checksum-verified archive of
+local result records and benchmark metric arrays, and the commands to regenerate
+figures and manuscript. The archive includes invalid historical runs for audit;
+their presence does not reinstate withdrawn claims. This revision was reviewed in
+one session; automated tests are not an independent scientific review.

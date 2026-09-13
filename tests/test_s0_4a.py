@@ -125,3 +125,31 @@ def test_twin_shares_command_parameters():
     assert sub.delta.grad is not None and sub.delta.grad.abs().sum() > 0
     assert sub.kappa_ext.grad is not None
     assert sub.mu_chain.grad is not None
+
+
+def test_scaled_pat_command_binding_and_jacobian():
+    """PR-5 §E: physical constants AND all command errors follow the level.
+
+    Regression for N8: m=6 previously left three command errors at m=1.
+    Two live twins also ensure one estimator cannot change another's level.
+    """
+    from photonic_ssm.estimators.pat import bind_command
+    sub = _noiseless_sub(N=4)
+    for family in ('M-par', 'both'):
+        base = PATEstimator(sub, family, mismatch_scale=1)
+        for m in (0, 1, 2, 6):
+            est = PATEstimator(sub, family, mismatch_scale=m)
+            bind_command(est.twin, sub)
+            ki = float(sub.kappa_i)
+            torch.testing.assert_close(est.twin.delta, sub.delta + 0.05*m*ki)
+            torch.testing.assert_close(est.twin.kappa_ext, sub.kappa_ext*(1+0.05*m))
+            torch.testing.assert_close(est.twin.mu_chain, sub.mu_chain*(1-0.05*m))
+            assert abs(est.twin.loss_scale - sub.loss_scale*(1+0.05*m)) < 1e-12
+            torch.testing.assert_close(est.twin.gamma, sub.gamma*(1+0.05*m))
+            grads = torch.autograd.grad(
+                est.twin.delta.sum() + est.twin.kappa_ext.sum() + est.twin.mu_chain.sum(),
+                (sub.delta, sub.kappa_ext, sub.mu_chain))
+            for grad, factor in zip(grads, (1, 1+0.05*m, 1-0.05*m)):
+                torch.testing.assert_close(grad, torch.full_like(grad, factor))
+        bind_command(base.twin, sub)
+        torch.testing.assert_close(base.twin.kappa_ext, sub.kappa_ext*1.05)

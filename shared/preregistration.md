@@ -2091,3 +2091,29 @@ frozen rows it re-uses. Arithmetic only — no simulation. Lucas's approval: E-2
 ### 20.6 Output
 `results/s0b_0/envelope.md` (tables + verdict + sensitivity), `envelope.json`, one PNG; memo
 committed with `git add -f`; results_log entry; continuation-gate escalation to Lucas.
+
+## Post-run erratum — 2026-09-13: PAT mismatch command binding and cost interpretation
+
+This is a post-run correction, not a new pre-registration or a change to a frozen
+threshold. User authorized repairs following the repository review ("Ok do it please").
+
+- **PR-5 §E / PR-17 mismatch sweep:** `build_twin` scaled the intended level, but
+  `bind_command` read global m=1 constants for detuning and both coupling maps.
+  Offline deployment scaled all five errors. Comparisons at m>1 therefore did not
+  implement the registered shared family. The claim of a tie through 30% is
+  **withdrawn**, not reinterpreted as a new experiment. m=1 and the separate drift
+  experiment are unaffected. The code is fixed with a regression covering command
+  values and Jacobians at m=0/1/2/6. No corrected higher-level runs are claimed;
+  original files and summaries remain historical evidence, with disposition in N8.
+- **S0.7 training cost:** optical sequence duration is not wall-clock duration.
+  Total-energy and four-orders total-energy ranking claims are withdrawn; component
+  budgets remain. No timing or actuator costs are invented to fill the gap.
+- **PR-20:** gate, frozen constants, and computed ratios are unchanged. Ratio 0.64
+  means photonic energy is 1/0.64 times digital energy. The implemented minimum-
+  damping memory ratio is 3.14, not ten. Rate scaling is linear at fixed tap count,
+  approximately quadratic only while usable tap count also grows with rate.
+  Maintenance is a lower-bound component estimate, not measured retraining cost.
+  Additional nonnegative costs cannot improve the negative gate at fixed cadence.
+- **Disposition:** Stage 0b remains closed; higher-rate work and fabrication are
+  paused. P1 now includes the negative inline follow-up. Submission remains pending
+  final release review; this correction does not authorize publication or email.

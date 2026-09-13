@@ -55,20 +55,19 @@ to lighter damping *failed*; the harder task raises the floor everywhere while t
 stays in the deep-overcoupling plateau (r = 2–3 within 13%), so the heavy-damping optimum is
 robust to a ×2 task-memory span (§6).
 
-**Figure F7 — The systems envelope.** (a) Training-energy inversion: SPSA trains the C-2 cell
-for ~2.6 mJ in the budgeted conversion stack (optimistic corner; 99 mJ vendor-part; tens of
-mJ once the §7.1 per-time holds are charged, §7.3) while PAT's device
-side is 0.57 mJ but its digital twin backward costs 13–44 J — the energy metric inverts the
-device-pass ranking. (b) Inference energy per sample versus state dimension N at 2 GS/s against the named digital
-baselines: the photonic envelope (optimistic corner, low-power heater class) clears the
-measured embedded-GPU (Jetson sustained) and Brainwave batch-1 lines at all N and enters the
-DSP-ASIC class at N = 128 — while never beating the Jetson *peak-spec* line, which we report
-alongside: the niche is conditional, as §7 states.
+**Figure F7 — Historical systems-envelope components.** (a) Conversion-energy
+estimates (SPSA 2.6 mJ OPT / 99 mJ CONS; PAT 0.57 mJ OPT) and PAT's 13–44 J
+digital-twin estimate. Writes, settling, and full-duration holding costs are not
+included; the plot does not rank total training energy (§7.3, N8). (b) The original
+nominal-N inference comparison at 2 GS/s. The later function-matched inline envelope
+finds no energy-advantage window under PR-20 (§7.4); this panel is historical context.
 
 **Figure F8 — What breaks the offline tie (pre-registered follow-ups, §5.5; eval-F protocol
-of record, PR-17).** (a) Calibration-mismatch sweep, 5→30%-class (8 seeds): in-situ PAT
-(8.4–8.6 × 10⁻⁴) and offline-deploy (8.7–9.0 × 10⁻⁴) are statistically indistinguishable at
-every level (ratio ≤ 1.05, every paired-bootstrap CI including zero) — crossover m\* = none.
+of record, PR-17).** (a) The unaffected base 5%-class mismatch comparison (8 seeds):
+PAT and offline-deploy are statistically indistinguishable. Higher-level points
+are omitted because PAT's command-binding errors were not scaled as registered;
+the previous 30%-robustness interpretation is withdrawn (N8).
+
 (b) Deploy-then-drift, common-mode regime (σ_step = 0.40 κ_i per step on all detunings
 coherently): the offline laser re-lock absorbs the drift and keeps pace (ratio 1.34, CI
 including zero). (c) Independent per-ring drift: the re-lock cannot fix per-ring pole scatter;

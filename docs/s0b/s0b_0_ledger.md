@@ -96,3 +96,12 @@ every ring, PR-4 §G) needs a 1480/980 nm pump that no §7 row carries. Rows:
 - Delaney 2021 Δn/k page not read (science.org); carried UNVERIFIED-direct via Radford 2026.
 - PZT creep on Si₃N₄: no source found.
 - Global-heater hold power in an isolated package: no primary source; carried as UNSOURCED-assumption and removed in the PR-20 sensitivity re-statement.
+
+
+## Post-run scope correction (2026-09-13; inputs unchanged)
+
+The maintenance row uses 22.5 ms of optical sequence time, not measured wall time.
+Writes, actuator settling, and controller latency are omitted; practical maintenance
+energy and cadence remain unmeasured. At fixed cadence those nonnegative additions
+cannot improve the negative PR-20 gate. The implemented minimum-damping
+pumped/passive memory ratio is 3.14 at r_min=0.1606, not ten. See P1 N8.
