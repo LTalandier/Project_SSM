@@ -2117,3 +2117,13 @@ threshold. User authorized repairs following the repository review ("Ok do it pl
 - **Disposition:** Stage 0b remains closed; higher-rate work and fabrication are
   paused. P1 now includes the negative inline follow-up. Submission remains pending
   final release review; this correction does not authorize publication or email.
+
+## Post-run correction rerun — S0.13 (2026-09-13, approved before new runs)
+
+Lucas approved the bounded rerun after N8 ("okay let's do this"). The execution
+protocol is `docs/s0_13_rerun_protocol.md`, committed before the fresh runs. It
+retains PR-5 §E/PR-17's seeds, budget, evaluation, and statistical rule. Fresh
+32 PAT m>1 units plus one m=1 anchor; unaffected offline/base records reused with
+hash provenance. New source-versioned outputs only under `results/s0_13/`.
+No corrected result is asserted by this entry. Both outcomes will be reported;
+the old withdrawal remains in force until the corrected analysis is complete.
