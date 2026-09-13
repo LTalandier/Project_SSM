@@ -36,6 +36,14 @@ unembedded fonts. Layout warnings are recorded for visual review. Source ZIP byt
 are deterministic for identical inputs. PDF metadata uses the current commit's
 SOURCE_DATE_EPOCH; a different TeX installation can still produce different bytes.
 
+## Verified release checks
+
+`submission/verification.json` records the final checks: 174 tests pass; the
+1,065-file result archive verifies; a results-free clone reproduces all 12 PNG
+figures, the manuscript Markdown, and the corrected analysis JSON exactly. The
+extracted upload ZIP compiles by itself with XeLaTeX and passes font/glyph/layout
+checks. The corrected table, Figure F8, and N8 PDF pages were visually inspected.
+
 ## arXiv entry
 
 Title: Can a photonic state-space model be trained on-chip? A pre-registered
