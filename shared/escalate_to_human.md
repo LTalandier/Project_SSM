@@ -18,6 +18,28 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### ⬜ E-2026-09-14-1 — **"Move on with the research": door 1 answered, door 2 corrected and re-framed, Stage 0c proposed (€0 so far)**
+
+> **Door 1 (athermal):** overlay-athermal SiN rings exist at 0.1–2 pm/K (all UNVERIFIED-direct this
+> session; publisher pages 403). At the high-Q substrate that is still 0.06–1 K per linewidth — helps,
+> does not remove the hold term. **Door 2 corrected:** PR-20's reachability rule over-credited the
+> photonic side (an N-state filter matches ≤ N taps at any rate); the f_s² residue is **withdrawn**
+> (PR-20b, ledger §20.7), the S0b.0 kill is *more* robust, and P1 §7.4's hedge stays as is for v1
+> (sharper sentence → v2). **Re-framed door 2 = Stage 0c:** the *FSR-matched low-Q* ring lattice
+> (registered 100 GHz geometry, coupling 5–20 % instead of r ≤ 3) — thermal hold relaxes 40–150× (to
+> ~zero with an athermal overlay), and it is the classical all-pass equalizer regime. **Nearest
+> neighbor found (VERIFIED):** SJTU, Nat. Commun. 2024 — 8 silicon MRRs, FSR 99.5 GHz, heater + MZI
+> coupler per ring (our actuation set), 40 km CD at 0.3 pJ/bit incl. EDFA vs ≈ 0.6 pJ/bit for the
+> DSP's CD share: a static 2× edge, 14.8 dB loss. On SiN the loss and EDFA vanish; class-B heaters put
+> it at 1.5–4× (at the 3× bar); class A loses. Nobody has *trained* such a lattice in situ (pending a
+> proper sweep). Memo: `docs/s0c/fsr_matched_regime.md`.
+> **Your calls:** (1) approve **S0c.0** (€0: mapping memo, white-space sweep, PR-22 envelope with the
+> SJTU row as anchor, same 3×/CONS kill rule); (2) S0c.1 simulation (≈ €50–100) only if S0c.0 survives,
+> spend returns to you then. **Honest prior:** thin window at the bar; the defensible gain is the W1
+> science claim in a regime with a product neighbor and no thermal wall. **Door 3 (capacity, PR-21)**
+> is subsumed: in the FSR-matched regime capacity = η_IIR, measured by S0c.1.
+
+
 ### E-2026-09-13-3 — correction and publication disposition resolved in session
 
 Lucas's "okay let's do this" accepted the bounded corrected higher-mismatch rerun,

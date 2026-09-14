@@ -240,3 +240,11 @@ Single-session mode (self-review disclosed); pre-register before consuming; `res
 (explicit adds); commit **and push** after every commit; servers deleted and independently verified;
 4 seeds minimum, 8 for SPSA; the §19.6c lesson is now protocol: **every pre-written consumption text
 carries a degenerate branch**, and the premise each text assumes is named in the text.
+
+## Post-closure note (2026-09-14) — PR-20b and Stage 0c
+PR-20's reachability rule over-credited the photonic side (an N-state LTI filter matches ≤ N taps at any
+rate; ledger §20.7): the S0b.0 kill is *more* robust and the "f_s² lever" residue is withdrawn. The
+high-rate direction is re-framed as the **FSR-matched low-Q ring lattice** (registered 100 GHz rings at
+5–20 % coupling; thermal hold relaxed 40–150×; the classical all-pass equalizer regime, with a VERIFIED
+product neighbor). **Stage 0c PROPOSED** — memo `docs/s0c/fsr_matched_regime.md`, escalation
+E-2026-09-14-1; nothing registered or run.

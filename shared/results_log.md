@@ -17,6 +17,20 @@ Per result, report:
 
 
 
+
+## Stage 0c scoping (2026-09-14, €0): reachability correction (PR-20b), athermal retrieval, FSR-matched regime
+
+**PR-20b (ledger §20.7):** PR-20 §20.4's N_reach = ⌊f_s/κ_net,min⌋ over-credited the photonic side —
+an N-state LTI filter matches ≤ N FIR degrees of freedom at any rate; the S0b.0 kill is more robust;
+the f_s² residue is withdrawn (linear at fixed N). **Athermal SiN:** 0.1–2 pm/K demonstrated
+(TiO₂ hybrid, polymer, geometry; all UNVERIFIED-direct — 403s), 0.06–1 K/linewidth at high Q.
+**FSR-matched regime:** registered 100 GHz rings at K = 5–20 % give |λ| = 0.975–0.894 per round trip
+(memory 39–9 samples), linewidth 0.5–2 GHz, thermal hold 0.3–1.2 K per linewidth (40–150× relaxed).
+**Neighbor (VERIFIED, PMC11058204):** SJTU Nat. Commun. 2024, 8 Si MRRs FSR 99.5 GHz, heater + MZI
+coupler each, 40 km CD at 0.3 pJ/bit incl. EDFA vs ≈ 0.6 pJ/bit DSP-CD share; IL 14.8 dB. SiN class-B
+lattice arithmetic: 0.75–1.5 pJ/sample vs 32-tap digital 1.6–4.8 ⇒ 2.1–3.2× (at the bar). Memo
+`docs/s0c/fsr_matched_regime.md`; proposal E-2026-09-14-1. No runs, no registration yet.
+
 ## Repository audit repairs (2026-09-13, second session; Supervisor-verified and committed same day)
 
 **Defect (real, verified against pre-change code):** `pat.bind_command` read the module-level
