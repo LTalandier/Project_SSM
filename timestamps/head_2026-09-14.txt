@@ -1,0 +1,3 @@
+Project_SSM ledger head anchored 2026-09-14
+commit cdc42b15ab43e7db48fc2dee304665a56c50ef52
+covers: PR-20 (ee137c4) + S0b.0 run (8931d6c) + audit repairs (04c67a6) + S0.13 correction rerun (bda989f..cdc42b1)

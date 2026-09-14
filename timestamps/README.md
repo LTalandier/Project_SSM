@@ -16,3 +16,8 @@ ots verify timestamps/head_2026-08-05.txt.ots
 A verified proof establishes existence of the anchored material by the relevant
 block date. It does not independently establish the actual execution times of
 experiments, and this older anchor does not cover the September correction run.
+
+`head_2026-09-14.txt` (stamped 2026-09-14 from the Supervisor session) anchors commit
+`cdc42b1`, which covers PR-20, the S0b.0 run, the audit repairs, and the S0.13 correction rerun.
+Its `.ots` is a pending calendar receipt; run `ots upgrade timestamps/head_2026-09-14.txt.ots`
+after a few hours to retrieve the Bitcoin attestation, then commit the upgraded file.
