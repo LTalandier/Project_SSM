@@ -2153,3 +2153,25 @@ hour rounding, plus small IPv4 charges (estimate, not invoice). All four servers
 and all primary addresses were removed after retrieval. No hardware or higher-rate
 study was opened. P1 incorporates the correction and PR-20 negative envelope;
 standalone P5 publication is deferred, and P2 contact remains separate.
+
+### 🔒 20.7 PR-20b ADDENDUM (2026-09-14; post-run, interpretation only — frozen rows, grid, ratios and the kill verdict unchanged)
+
+**Reachability over-credited the photonic side.** §20.4 bounded the emulable tap count by single-ring
+amplitude memory × line rate, N_reach = ⌊f_s/κ_net,min⌋, flagged "conservative-to-the-lattice". It is
+the opposite for a broadband input: an N-state linear time-invariant filter has an impulse response
+that is a sum of N complex exponentials, so it can match at most ≈ N independent degrees of freedom of
+a FIR equalizer, whatever the line rate. Memory and bandwidth trade inside each pole (a pole of
+bandwidth Δf contributes memory ≈ 1/Δf; covering a band B with N poles gives Δf ≈ B/N and memory
+≈ N samples). **Corrected bound: N_reach ≤ N (the system order), with the IIR-vs-FIR efficiency of
+all-pass structures on smooth channel responses (chromatic dispersion) the only route to
+"N states ≈ more than N taps", to be measured, not assumed.** Consequences:
+- The S0b.0 kill is **more** robust: every clearing candidate used N_taps = 64 at N = 128 (fine) but
+  the N = 32 cells credited 16–53 taps that the order bound caps at ≤ 32; no cell's ratio rises.
+- The "f_s² lever" residue (reading.md; E-2026-09-13-2 item 2) is **withdrawn**: at fixed N the usable
+  tap count does not grow with rate, so the ratio scales linearly in f_s at best. §7.4's "quadratic only
+  while usable tap count grows" is now "quadratic never; linear at fixed N".
+- The high-rate direction is re-framed (Stage 0c proposal, `docs/s0c/`): not the high-Q substrate at
+  a faster clock, but the **FSR-matched low-Q ring lattice** (round trip ≈ symbol period, poles set by
+  coupling, the classical all-pass/lattice equalizer regime of Lenz & Madsen 1999), where thermal
+  sensitivity per linewidth relaxes ~100–1000× and the memory-vs-order question is the known
+  IIR-compensator one. That is a new registration (PR-22 series), not a reading of PR-20.
