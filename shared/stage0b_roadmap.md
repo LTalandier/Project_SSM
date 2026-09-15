@@ -246,5 +246,6 @@ PR-20's reachability rule over-credited the photonic side (an N-state LTI filter
 rate; ledger §20.7): the S0b.0 kill is *more* robust and the "f_s² lever" residue is withdrawn. The
 high-rate direction is re-framed as the **FSR-matched low-Q ring lattice** (registered 100 GHz rings at
 5–20 % coupling; thermal hold relaxed 40–150×; the classical all-pass equalizer regime, with a VERIFIED
-product neighbor). **Stage 0c PROPOSED** — memo `docs/s0c/fsr_matched_regime.md`, escalation
-E-2026-09-14-1; nothing registered or run.
+product neighbor). **Stage 0c S0c.0 DONE 2026-09-15** (PR-22 `7cd72f0`; €0): window 3.19× at the bar in the 100 GS/s edge cell
+(C-pcm + athermal only); S0c.1 "go, conditional" escalated as a science experiment (E-2026-09-15-1). Files:
+`docs/s0c/`, `results/s0c_0/`.

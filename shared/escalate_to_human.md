@@ -18,6 +18,24 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### ⬜ E-2026-09-15-1 — **S0c.0 done (€0): window at the bar, edge cell, three unverified conditions; S0c.1 = "go, conditional" — your spend call (≈ €50–100)**
+
+> **Result (PR-22, frozen before the run):** the FSR-matched low-Q lattice removes the thermal wall
+> and the erbium pump, and at the conservative corner it clears the 3× bar in exactly three cells:
+> phase-change (zero-hold) actuators + athermal overlay, N = 32, at 100 GS/s (the band-equals-FSR
+> edge) — **3.19×**. At 64 GS/s the same cell is 1.25×; class-B heaters top out at 1.4×. What binds:
+> the 3 dB conservative packaging loss trips an amplifier (300 mW, unsourced-typical) in every
+> conservative cell; heater hold; rate; and η_IIR (taps per ring, derived once from the SJTU device).
+> The kill gate did not fire but only because PR-22 let a 0.06 mW zero-hold/zero-drift corner count —
+> a rule defect I record as a lesson, not a result. Reading: `results/s0c_0/reading.md`.
+> **Recommendation:** run **S0c.1 as science** — in-situ trainability (PAT/SPSA vs BPTT ceiling) of an
+> 8–16-ring FSR-matched SiN lattice on a 64 GBd dispersive channel vs a matched-SER FIR. It measures
+> η_IIR under training, the one number every cell above assumes, and it is the W1 claim in the regime
+> with a product neighbor. ≈ €50–100 (PR-19 scale), registered as PR-23 before any run; a quantized
+> (PCM-level) arm only if the base arms train. **Not** recommended: any hardware step, any product
+> claim from S0c.0. Say go and I write PR-23 and bring the pilot sizing before the fleet.
+
+
 ### ⬜ E-2026-09-14-1 — **"Move on with the research": door 1 answered, door 2 corrected and re-framed, Stage 0c proposed (€0 so far)**
 
 > **Door 1 (athermal):** overlay-athermal SiN rings exist at 0.1–2 pm/K (all UNVERIFIED-direct this

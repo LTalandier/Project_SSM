@@ -18,6 +18,18 @@ Per result, report:
 
 
 
+
+## S0c.0 — FSR-matched inline envelope RUN (2026-09-15, PR-22 frozen 7cd72f0; €0)
+
+**Kill gate does not fire — degenerately** (OPT max ≈ 5,800× is the zero-hold C-pcm + athermal cell at
+0.06 mW; rule lesson: require a non-degenerate cell). **CONS window exists at 3.19 vs 3.0**, only for
+C-pcm + ATHERMAL, N = 32, at the flagged 100 GS/s band-edge (64 GS/s: 1.25×); class B 1.4×, C-pz 1.7×.
+Sensitivity (η = 2, e_tap band ends): 0.64–5.3 at CONS. **Binding terms:** CONS packaging 3 dB trips the
+amplifier row (300 mW) everywhere; actuator hold for anything but PCM; rate (∝ 1/f_s); η_IIR unmeasured.
+Thermal wall confirmed removed (ATHERMAL cells are the ones that clear). **Disposition per PR-22 go rule:
+S0c.1 "go, conditional"** — escalated E-2026-09-15-1 as a science experiment (trainability + η_IIR in
+the FSR-matched regime, ≈ €50–100), not a product test. Reading: `results/s0c_0/reading.md`.
+
 ## Stage 0c scoping (2026-09-14, €0): reachability correction (PR-20b), athermal retrieval, FSR-matched regime
 
 **PR-20b (ledger §20.7):** PR-20 §20.4's N_reach = ⌊f_s/κ_net,min⌋ over-credited the photonic side —
