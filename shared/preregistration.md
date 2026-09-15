@@ -2175,3 +2175,63 @@ all-pass structures on smooth channel responses (chromatic dispersion) the only 
   coupling, the classical all-pass/lattice equalizer regime of Lenz & Madsen 1999), where thermal
   sensitivity per linewidth relaxes ~100–1000× and the memory-vs-order question is the known
   IIR-compensator one. That is a new registration (PR-22 series), not a reading of PR-20.
+
+---
+
+## PR-22 — 🔒 **FROZEN** (2026-09-15, single-session mode; committed BEFORE `analysis/s0c_0_envelope.py` runs) — S0c.0 FSR-matched inline envelope + Stage-0c kill rule
+
+**Governs:** S0c.0-c (`docs/s0c/fsr_matched_regime.md` §5), the Stage-0c kill gate, and the S0c.1
+go/no-go. Lucas's approval of the €0 stage: "Go" (2026-09-15). Arithmetic only. Rows: PR-10 frozen
+rows, `docs/s0b/s0b_0_ledger.md` (actuators, drift, per-tap DSP), `docs/s0c/fsr_matched_regime.md`
+(athermal rows, neighbor), `docs/s0c/mapping_fsr_matched.md` (loss/memory arithmetic). PR-20 §20.1
+inline-scope conventions carry over verbatim (E/O in = 0; shared PD/ADC cancel; comparison object =
+photonic stage static power ÷ rate vs the digital equalizer block per tap).
+
+### 22.1 Grid
+N rings ∈ {8, 16, 32}; symbol rate f_s ∈ {32, 64, 100} GS/s (registered 100 GHz FSR; 100 GBd is the
+band-equals-FSR edge, flagged); power coupling K ∈ {5, 10, 20} %; actuator class ∈ {A, B, C-pz, C-pcm}
+(C-pcm admitted here: at GHz linewidths its ≈ 100 MHz/level resolution is ≈ 0.1 linewidth, fine; hold 0;
+it still cannot track drift, so its drift options are TEC/GHEAT/ATHERMAL); corner ∈ {OPT, CONS}. Gain: passive only (§3
+of the mapping memo).
+
+### 22.2 Rows charged (per corner; ledger row in brackets)
+1. **Actuator hold** N × CH × per-channel (CH = 2 OPT / 4 CONS; A 62/177, B 3/3, C-pz 0.1/2 [UNSOURCED
+   OPT], C-pcm 0/0 mW) [S0b ledger §1]. Full P_π charged (C4) — at low Q a full FSR of detuning range
+   may be needed.
+2. **Drift management**, common-mode option ∈ {TEC 180; GHEAT 10/50 [UNSOURCED]; TRACK 1.3/13
+   [UNSOURCED duty; A/B/C-pz only]; **ATHERMAL 0** (overlay at 0.1–2 pm/K ⇒ 7–140 K per GHz linewidth
+   ⇒ no hold [UNVERIFIED-direct rows; overlay loss irrelevant at low Q])} + retraining residual at
+   T_r = 100 s (S0b ledger §3, negligible; reported).
+3. **Insertion loss**: per-ring at resonance 0.62 / 0.31 / 0.15 dB at K = 5 / 10 / 20 % (mapping memo
+   §4) × N + packaging 0.3 / 3.0 dB. **If total > 3 dB an amplifier row is charged in energy**:
+   OPT 20 mW (300 mW EDFA/SOA-class shared over 15 WDM channels, the SJTU convention) / CONS 300 mW
+   (unshared) [UNSOURCED-typical]. No separate loss co-condition.
+4. **Control compute**: inside the drift rows.
+5. **Pump**: 0 (passive, undoped).
+
+### 22.3 Digital block (function-matched by construction)
+E_digital = η·N × e_tap, **η_IIR = 4 (OPT) / 2 (CONS)** taps per ring (derived from the SJTU device:
+8 rings ≈ 40 km at ~50 GBd ≈ 14 symbols spread ≈ 28–32 FIR taps; CONS halves it), e_tap = 0.05 / 0.15
+pJ/tap/sample [S0b ledger §5]; sensitivity band [0.03, 0.25] and η = 2 at both corners. Secondary
+anchor row: the DSP CD share 12.5 % × 5 pJ/bit = 0.625 pJ/bit × 2 bits/sample = 1.25 pJ/sample
+(SJTU's convention; VERIFIED) — reported, not load-bearing.
+
+### 22.4 Verdict rules (frozen)
+- **Cell clears** iff E_digital / E_photonic ≥ 3 at that corner (amplifier row already inside
+  E_photonic where IL > 3 dB).
+- **Stage-0c product window** iff at **CONS** at least one cell with class ∈ {B, C-pz, C-pcm} clears
+  with all rows charged (TEC or ATHERMAL drift; GHEAT/TRACK cells reported as conditional).
+- **S0c.0 kill:** if the maximum ratio over all **OPT** cells with class ∈ {B, C-pz, C-pcm}, any drift
+  option, is **< 3**, Stage 0c ends; S0c.1 is not run.
+- **S0c.1 go rule:** kill does not fire **and** the CONS window exists under at least one drift option
+  that is VERIFIED or UNVERIFIED-direct (TEC or ATHERMAL) — then the simulation phase (≈ €50–100) is
+  escalated with the surviving (N, f_s, K, class) cells as its grid. If the kill does not fire but the
+  CONS window exists only under UNSOURCED rows, S0c.1 is escalated as "conditional" with the sourcing
+  gap named.
+- **Sensitivity re-statement (mandatory):** UNSOURCED rows removed (GHEAT, TRACK, C-pz OPT hold → 2 mW,
+  amplifier row kept at CONS value); η = 2 both corners; e_tap band ends.
+- **Class A is reported** (the demonstrated-foundry path) but cannot carry the verdict, as in P1 §7.2.
+
+### 22.5 Output
+`results/s0c_0/envelope.md`, `envelope.json`, one PNG; committed with `git add -f`; results_log entry;
+S0c.1 escalation with the spend.
