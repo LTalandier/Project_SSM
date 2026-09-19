@@ -18,7 +18,28 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### ⬜ E-2026-09-15-1 — **S0c.0 done (€0): window at the bar, edge cell, three unverified conditions; S0c.1 = "go, conditional" — your spend call (≈ €50–100)**
+
+### E-2026-09-19-1 — staged audit/pilot authorized; €0 preflight completed, paid expansion stopped
+
+Lucas accepted the staged recommendation ("ok let's do it"): audit first,
+exploratory pilot cap €20, possible overall cap €100, no hardware. This resolves
+E-2026-09-15-1 in favor of staged investigation, not an unconditional full fleet.
+PR-23-P was frozen in `b7ca3b4` before the local run. It confirmed equivalent
+waveform/response objectives in the linear fully observed setting (max loss or
+gradient discrepancy 5.55e-16). Registered decision: stop paid expansion of this
+comparison. Eight-ring fits are poor (oracle NMSE .551–.645), not measured useful
+FIR efficiency. No PAT/drift result or product advantage is claimed. €0 cloud.
+
+The 2026-09-15 quotation below remains historical: **its 64 GS/s number is wrong**
+(stored value 2.0411); the budget, mapping, and sourcing corrections are in
+`docs/s0c/audit_2026-09-19.md`. The 3.19× scenario is not a validated product window.
+
+P1: Lucas proposes Zenodo instead of endorsement-dependent arXiv submission.
+`paper/zenodo/DEPOSIT.md` is ready for account upload; license choice pending.
+No external publication, repo flip, or email has occurred.
+
+
+### Resolved by E-2026-09-19-1 — E-2026-09-15-1 — **S0c.0 done (€0): window at the bar, edge cell, three unverified conditions; S0c.1 = "go, conditional" — your spend call (≈ €50–100)**
 
 > **Result (PR-22, frozen before the run):** the FSR-matched low-Q lattice removes the thermal wall
 > and the erbium pump, and at the conservative corner it clears the 3× bar in exactly three cells:

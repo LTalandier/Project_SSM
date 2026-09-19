@@ -1,5 +1,11 @@
 # P1 submission preparation
 
+**2026-09-19 route update:** Lucas proposed a Zenodo public preprint deposit to
+avoid the immediate arXiv endorsement dependency. Copy-ready metadata and links
+to the verified PDF + source ZIP are in [`zenodo/DEPOSIT.md`](zenodo/DEPOSIT.md).
+No deposit/DOI exists yet; license selection and the actual account upload remain.
+The arXiv instructions below remain available for later use.
+
 The correction sweep is complete (`174558c`): the anchor matches exactly, all
 33 units completed, and no tested mismatch level clears the advantage rule. Standalone P5 publication is deferred, with the negative
 inline result retained in P1. P2 contact is a separate action.

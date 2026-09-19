@@ -1,0 +1,16 @@
+{
+  "paper/submission/p1_with_supplement.pdf": {
+    "bytes": 1757454,
+    "sha256": "7f5b43fcafcba1fcfad0d4cae126f8dd68c1c7dec11fdc03ac8a6ab43efbfc4f"
+  },
+  "paper/submission/p1_arxiv_source.zip": {
+    "bytes": 10561368,
+    "sha256": "7bff498812bf640aa488e9dfd5491a5f9266ef896f461261000fb2b044f8da1e"
+  },
+  "verified_on": "2026-09-19",
+  "zip_crc": "pass",
+  "zip_members_match_build_manifest": true,
+  "zip_matches_validated_P1_snapshot": true,
+  "result_archive_verification": "1065 files verified",
+  "publication": "not deposited; license pending"
+}

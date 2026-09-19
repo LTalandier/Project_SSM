@@ -16,6 +16,30 @@ Per result, report:
 ---
 
 
+## 2026-09-19 — PR-22 audit and PR-23-P local exploratory preflight
+
+**Goal:** repair budget/model assumptions and test whether the proposed linear
+objective comparison can distinguish task training from response fitting.
+**Registration:** `b7ca3b4`, before pilot; seeds 11/22/33, 8 rings, 64 GBd,
+20 km CD, exact 100-GHz-FSR delay response, 300 BPTT/SPSA updates each.
+**Results:** BPTT final NMSE .645368/.550660/.550521; SPSA
+.785430/.731210/.776127. Best scalar/delay baseline .868623. Matching noiseless
+cyclic FIR lengths 4/5/5 and 2/3/2 respectively, not universal capacity bounds.
+**Gate:** waveform and response-fit objectives/gradients coincide (max 5.55e-16,
+tolerance 1e-10). Registered stop for paid expansion of this comparison.
+**Limits:** poor fits; BPTT is an oracle; no PAT/drift/noisy/SER/physical-budget
+experiment. No novelty or energy advantage. A future drift protocol is separate.
+**Audit:** corrected 64-GS/s ratio 2.0411; cross-cost 100-GS/s ratio 1.0631 at
+.05 pJ/tap; athermal propagation loss and amplifier unknowns invalidate a confident
+product verdict. Frozen original JSON unchanged.
+**Evidence:** `results/s0c_audit/`, `results/s0c_1_pilot/`,
+`docs/s0c/audit_2026-09-19.md`.
+**Compute:** local CPU, 2.72 seconds pilot, €0 cloud; no servers provisioned.
+**Validation:** 179 tests pass, two existing multiprocessing fork warnings;
+P1's 1,065 archived results verify and its source ZIP matches the prior snapshot.
+
+
+
 
 
 

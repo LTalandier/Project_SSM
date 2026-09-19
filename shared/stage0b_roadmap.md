@@ -249,3 +249,19 @@ high-rate direction is re-framed as the **FSR-matched low-Q ring lattice** (regi
 product neighbor). **Stage 0c S0c.0 DONE 2026-09-15** (PR-22 `7cd72f0`; €0): window 3.19× at the bar in the 100 GS/s edge cell
 (C-pcm + athermal only); S0c.1 "go, conditional" escalated as a science experiment (E-2026-09-15-1). Files:
 `docs/s0c/`, `results/s0c_0/`.
+
+
+## 2026-09-19 superseding interpretation — bounded Stage 0c preflight
+
+The PR-20b statement above that an N-state LTI system universally matches ≤N FIR
+taps is not a theorem for rational IIR approximation. Its interpretation is
+withdrawn; channel- and accuracy-specific equivalence must be measured. PR-22's
+athermal/loss and amplifier assumptions do not validate a product window. See
+`docs/s0c/audit_2026-09-19.md`. Original protocols and arithmetic are preserved.
+
+PR-23-P local preflight completed for €0 after user authorization; task MSE and
+adaptive response-fit MSE coincide in its linear fully observed setting. Paid
+expansion of that comparison stops under the registered rule. Poor noiseless
+fits do not settle the best possible ring capacity. Future work requires a
+concrete drift/observability question and a matched-budget adapting baseline;
+no hardware step, fleet, or complete S0c.1 result is authorized by these numbers.
