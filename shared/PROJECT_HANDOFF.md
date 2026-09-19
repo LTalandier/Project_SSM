@@ -1,7 +1,42 @@
 # Project_SSM — current handoff
 
-Updated 2026-09-19 after the Stage 0c audit and PR-23-P local preflight. This
+Updated 2026-09-20 after the P2 evidence audit and PR-23-C capacity diagnostic. This
 supersedes older active-run notes. P1's validated numerical snapshot is unchanged.
+
+## Latest work — 2026-09-20
+
+Lucas authorized continuing P2 preparation and the bounded capacity diagnostic.
+No email, deposit, hardware step, or cloud compute was executed.
+
+**PR-23-C:** frozen in `947d877` before 36 local fits (21.60 s, €0).
+All three nearby synthetic starts recover an exactly realizable response; distant
+starts fail, confirming local-minimum sensitivity. Best original-range K=.05–.20
+CD fit has dense normalized MSE .461321. One of 15 expanded K=.01–.95 starts
+reaches .00238687; its actual K values span .3282–.9500, all above .20. This is a
+constructive noiseless approximation outside the registered device window, not
+a product go, BER result, or proof the narrow range cannot work. Independent
+NumPy evaluation verifies the saved response. See `results/s0c_capacity/`.
+Next prerequisite for any drift protocol: a credible broad-coupling actuator/loss
+model and an explicit matched-observation adaptive baseline. No fleet launched.
+
+**P2:** revised `paper/p2_eigenworms_note.md` and unsent author email. Upstream
+main remains `05a8353` on retrieval. Archived five official runs give 90.5556%
+with population SD 8.3518 pp; old 9.3376 was sample SD and mismatched the upstream
+convention. Exact-gradient collapse cannot be assigned as the cause of this
+accuracy gap. Official local screen: 0/8 strict traps. Port local annex: 2/3
+finite-window zero-gradient suffixes; different protocols cannot be pooled.
+GPU driver/JAX CUDA runtime and a full paired stable-loss benchmark are missing.
+Do not claim definitive population dispersion, inevitable absorption, author
+contact already made, or corrected-loss benchmark recovery.
+Portable attachment: `paper/p2_evidence.zip`, rebuilt/checked from raw evidence;
+reviewer instructions and upstream provenance in `docs/p2/`. The attachment is
+a measurement audit, not a complete training reproduction package. Authors'
+professional addresses verified; **email remains unsent**, no response window
+started. P2 is ready for feedback, not an unconditional publication claim.
+
+**Validation:** 179 tests pass with two existing fork deprecation warnings;
+portable P2 audit reproduces in an empty directory; capacity source hashes match
+the pre-run commit. P1's licensed upload files are unchanged by this research turn.
 
 ## Current Stage 0c decision
 

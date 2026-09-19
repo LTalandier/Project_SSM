@@ -1,50 +1,46 @@
-# P2 author-contact email — DRAFT for Lucas to send (decision (a), 2026-07-07)
+# P2 author-contact draft — 2026-09-20 — NOT SENT
 
-**To:** T. Konstantin Rusch, Daniela Rus [fill: current addresses — Rusch's academic page / the
-arXiv:2410.03943 contact] · **From:** lucas.talandier@free.fr
-**Attach / link:** the dossier (rerun trails + parity dossier + diagnosis script — [fill: repo or
-archive link once Lucas creates it])
+To: T. Konstantin Rusch <tkrusch@tue.ellis.eu>; Daniela Rus <rus@csail.mit.edu>
+From: Lucas Talandier <lucas.talandier@free.fr>
+Attachment: `p2_evidence.zip` (portable audit bundle; includes the working note)
 
----
+Subject: LinOSS EigenWorms rerun and a probability-space loss diagnostic
 
-Subject: EigenWorms LinOSS-IM result — a reproducibility finding you may want to see first
+Dear Dr. Rusch and Prof. Rus,
 
-Dear Dr. Rusch, Dear Prof. Rus,
+While evaluating LinOSS as a reference for a photonic simulation project, I reran
+your EigenWorms configuration at commit 05a8353 using the five shipped seeds.
+The archived official-code runs scored 97.22, 83.33, 97.22, 97.22 and 77.78%,
+for a mean of 90.56% and population SD of 8.35 percentage points, compared with
+the paper's 95.0 ± 4.4%. My historical environment used an RTX 3090 and JAX
+0.4.28; the exact GPU driver and JAX CUDA runtime were not preserved, which limits
+how precisely I can reconstruct the comparison.
 
-I'm an independent photonics researcher using LinOSS as the architectural basis for a photonic
-state-space-model program, and as part of a pre-registered reproduction gate I re-ran your
-EigenWorms benchmark. I'm writing to share a finding with you before I make it public, in case
-you want to check it, correct me, or coordinate timing.
+Separately, I noticed that the classification loss applies log(p + 1e-8) to
+softmax probabilities. Its logit gradient is attenuated by p_true/(p_true+1e-8)
+and becomes zero if the true-class probability underflows. Instrumented diagnostic
+runs of my PyTorch port show finite windows of zero parameter gradients. However,
+the archived official-code CPU screen had zero strict traps in eight 4,000-step
+runs, and I do not claim that exact-gradient absorption explains the five-seed
+accuracy difference. Nor have I completed a paired full benchmark with a stable
+log-softmax replacement.
 
-Running your official repository unchanged — shipped EigenWorms config, your published seeds
-{2345, 3456, 4567, 5678, 6789} — on a 2026 stack (JAX 0.4.28, Ampere GPU, default settings), I
-obtain 90.56 % with per-seed σ = 9.34 pp (97.22 / 83.33 / 97.22 / 97.22 / 77.78), versus the
-published 95.0 ± 4.4.
+The attachment contains the raw metric arrays, diagnostic traces, source hashes,
+a numerical gradient probe and a short note separating these observations. I
+would appreciate any corrections, relevant environment details, or advice on a
+paired comparison that you consider informative.
 
-The mechanism appears to be in the objective rather than the model: −Σ y·log(softmax(z)+ε) has an
-absorbing zero-gradient region in float32 — once a logit gap exceeds ≈104 nats, softmax underflows
-exactly and the gradient is exactly zero on both saturated sides, so optimization freezes
-(collapsed runs show best-val = first eval and early-stop at exactly 12,000 steps). The standard
-log-softmax cross-entropy does not exhibit this. An independent PyTorch port with verified
-numerical parity (≈2×10⁻⁷) reproduces the collapse at material incidence, so which seeds collapse
-looks environment-sensitive while the mechanism itself is not.
+I would like to give you at least two weeks to respond before considering a
+public note, and can allow more time if useful. Nothing has been submitted as a
+standalone reproducibility note.
 
-To be clear about scope: your Heartbeat result reproduces cleanly on my stack, I am not suggesting
-anything beyond a subtle objective-implementation fragility, and my note says so explicitly. I
-attach the full dossier (per-seed trails, the parity evidence, and the analytical/numerical
-derivation). I intend to post a short, carefully-scoped reproducibility note to arXiv in about two
-weeks; I would genuinely welcome corrections before then, and I'd be happy to include a response
-or to note any fix you push to the repo.
+Thank you for your work and for taking a look.
 
-Thank you for LinOSS — the dissipative extension of it is load-bearing for my hardware program,
-which is rather the point of caring this much about the benchmark.
-
-Best regards,
 Lucas Talandier
-Independent researcher, Paris — github.com/LTalandier
+Independent researcher, Paris
 
 ---
 
-**Send checklist (Lucas):** [ ] create the public dossier repo/archive and fill the link ·
-[ ] fill recipient addresses · [ ] adjust the 14-day window if you prefer · [ ] send · [ ] log the
-date in `paper/p2_eigenworms_note.md` §"Fairness" and in E-2026-07-07-1.
+Addresses verified 2026-09-20; primary links in
+`docs/p2/source_refresh_2026-09-20.md`. This file is a draft, not a sent message.
+The response window starts only on an actual send date. No send date is recorded.

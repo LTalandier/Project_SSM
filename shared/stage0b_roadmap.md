@@ -265,3 +265,13 @@ expansion of that comparison stops under the registered rule. Poor noiseless
 fits do not settle the best possible ring capacity. Future work requires a
 concrete drift/observability question and a matched-budget adapting baseline;
 no hardware step, fleet, or complete S0c.1 result is authorized by these numbers.
+
+
+## 2026-09-20 — PR-23-C capacity diagnostic (local, €0)
+
+Known-response local recovery succeeds; distant recovery remains difficult.
+The best original coupling-range fit remains poor (dense NMSE .461321), while
+one broader-range start reaches .00238687 using K=.3282–.9500. This is a mathematical
+witness outside the PR-22 grid, not a reopened product gate. Next prerequisite:
+broad-coupling actuator/loss feasibility and a separately defined adaptive-drift
+experiment. Evidence and limitations: `results/s0c_capacity/reading.md`.

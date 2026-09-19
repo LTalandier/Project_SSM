@@ -16,6 +16,33 @@ Per result, report:
 ---
 
 
+## 2026-09-20 — PR-23-C capacity diagnostic and P2 evidence audit
+
+- **Capacity protocol:** pre-run `947d877`; 6 synthetic recoveries plus 30 CD fits,
+  all completed. Adam + L-BFGS, exact 8-ring model, original and broad coupling
+  ranges, 512 training/2048 midpoint verification frequencies.
+- **Capacity results:** all three near synthetic recoveries <1e-6; far recoveries
+  .359–.552. Best dense CD NMSE .461321 (K=.05–.20) versus .00238687
+  (K=.01–.95). Only one broad start clears .01. Its couplings are .3282–.9500.
+  No original-range go; broad mathematical witness only, no hardware/noise/energy
+  claim or impossibility inference from nonconvex failures.
+- **Compute:** 21.60 s local CPU, €0 cloud. Data: `results/s0c_capacity/`.
+- **P2 audit:** raw five-seed official metrics reproduce 90.5556% mean and 8.3518
+  pp population SD (9.3376 sample SD); upstream uses population SD. Archived
+  official local screen 0/8 strict traps; port annex 2/3 zero-gradient suffixes.
+  Corrected unsupported draft claims linking official accuracy to exact traps,
+  population variance conclusions, cross-framework incidence, and past contact.
+- **P2 sources:** upstream main at 05a835355439ee5500b2c8f891132c53adf020c0;
+  probability-space epsilon loss persists there. Main paper hardware includes
+  V100 and RTX 4090; exact historical JAX CUDA/driver unavailable.
+- **Artifacts:** `analysis/p2_audit.py`, `results/p2_audit/audit.json`,
+  `docs/p2/`, revised note/email and portable `paper/p2_evidence.zip`. No email
+  sent, no public note submitted, no full benchmark rerun.
+- **Checks:** 179 tests pass; independent NumPy dense-response verification;
+  preregistration/source hashes match pre-run commit; portable audit reproduces.
+
+
+
 ## 2026-09-19 — PR-22 audit and PR-23-P local exploratory preflight
 
 **Goal:** repair budget/model assumptions and test whether the proposed linear

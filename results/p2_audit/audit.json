@@ -1,0 +1,513 @@
+{
+  "date": "2026-09-20",
+  "official_commit": "05a835355439ee5500b2c8f891132c53adf020c0",
+  "official_five": [
+    {
+      "seed": 2345,
+      "test_accuracy": 0.9722222089767456,
+      "test_correct_out_of_36": 35,
+      "scheduled_step_count": 101,
+      "evaluation_count": 16,
+      "last_evaluation_step": 16000,
+      "best_val": 0.9428571462631226
+    },
+    {
+      "seed": 3456,
+      "test_accuracy": 0.8333333134651184,
+      "test_correct_out_of_36": 30,
+      "scheduled_step_count": 101,
+      "evaluation_count": 12,
+      "last_evaluation_step": 12000,
+      "best_val": 0.8857142925262451
+    },
+    {
+      "seed": 4567,
+      "test_accuracy": 0.9722222089767456,
+      "test_correct_out_of_36": 35,
+      "scheduled_step_count": 101,
+      "evaluation_count": 19,
+      "last_evaluation_step": 19000,
+      "best_val": 0.9142857193946838
+    },
+    {
+      "seed": 5678,
+      "test_accuracy": 0.9722222089767456,
+      "test_correct_out_of_36": 35,
+      "scheduled_step_count": 101,
+      "evaluation_count": 13,
+      "last_evaluation_step": 13000,
+      "best_val": 0.9714285731315613
+    },
+    {
+      "seed": 6789,
+      "test_accuracy": 0.7777777910232544,
+      "test_correct_out_of_36": 28,
+      "scheduled_step_count": 101,
+      "evaluation_count": 12,
+      "last_evaluation_step": 12000,
+      "best_val": 0.9714285731315613
+    }
+  ],
+  "mean_percent": 90.55555462837219,
+  "population_sd_pp_ddof0": 8.351830625268294,
+  "sample_sd_pp_ddof1": 9.33763050733224,
+  "published_sd_convention": "Upstream postprocess_results.py uses numpy.std default ddof=0.",
+  "port": {
+    "EigenWorms": {
+      "mean_percent": 71.11111223697662,
+      "seeds": [
+        {
+          "record": "summary",
+          "dataset": "EigenWorms",
+          "seed": 2345,
+          "test_acc": 0.1944444477558136,
+          "best_val": 0.17142857611179352,
+          "steps_run": 12000,
+          "wall_s": 1040.6
+        },
+        {
+          "record": "summary",
+          "dataset": "EigenWorms",
+          "seed": 3456,
+          "test_acc": 0.8888888955116272,
+          "best_val": 0.9142857193946838,
+          "steps_run": 15000,
+          "wall_s": 1302.4
+        },
+        {
+          "record": "summary",
+          "dataset": "EigenWorms",
+          "seed": 4567,
+          "test_acc": 0.944444477558136,
+          "best_val": 0.9142857193946838,
+          "steps_run": 18000,
+          "wall_s": 1559.8
+        },
+        {
+          "record": "summary",
+          "dataset": "EigenWorms",
+          "seed": 5678,
+          "test_acc": 0.9722222089767456,
+          "best_val": 0.9428571462631226,
+          "steps_run": 13000,
+          "wall_s": 1126.7
+        },
+        {
+          "record": "summary",
+          "dataset": "EigenWorms",
+          "seed": 6789,
+          "test_acc": 0.5555555820465088,
+          "best_val": 0.4285714328289032,
+          "steps_run": 12000,
+          "wall_s": 1038.4
+        }
+      ]
+    },
+    "Heartbeat": {
+      "mean_percent": 72.90322542190552,
+      "seeds": [
+        {
+          "record": "summary",
+          "dataset": "Heartbeat",
+          "seed": 2345,
+          "test_acc": 0.6935483813285828,
+          "best_val": 0.8196721076965332,
+          "steps_run": 28000,
+          "wall_s": 7282.9
+        },
+        {
+          "record": "summary",
+          "dataset": "Heartbeat",
+          "seed": 3456,
+          "test_acc": 0.7096773982048035,
+          "best_val": 0.7540983557701111,
+          "steps_run": 13000,
+          "wall_s": 3297.6
+        },
+        {
+          "record": "summary",
+          "dataset": "Heartbeat",
+          "seed": 4567,
+          "test_acc": 0.7419354915618896,
+          "best_val": 0.7377049326896667,
+          "steps_run": 23000,
+          "wall_s": 5917.9
+        },
+        {
+          "record": "summary",
+          "dataset": "Heartbeat",
+          "seed": 5678,
+          "test_acc": 0.7903226017951965,
+          "best_val": 0.7377049326896667,
+          "steps_run": 18000,
+          "wall_s": 4800.6
+        },
+        {
+          "record": "summary",
+          "dataset": "Heartbeat",
+          "seed": 6789,
+          "test_acc": 0.7096773982048035,
+          "best_val": 0.7540983557701111,
+          "steps_run": 13000,
+          "wall_s": 3339.4
+        }
+      ]
+    }
+  },
+  "official_local_screen": [
+    {
+      "seed": 7890,
+      "constancy_flags_val_train_loss": [
+        false,
+        false,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        0.7188348770141602,
+        0.23835334181785583,
+        0.16462305188179016,
+        0.11181215196847916
+      ],
+      "val_evals": [
+        0.800000011920929,
+        0.8285714387893677,
+        0.8571428656578064,
+        0.8857142925262451
+      ],
+      "train_evals": [
+        0.8666666150093079,
+        0.9757575392723083,
+        0.9939393401145935,
+        0.9939393401145935
+      ]
+    },
+    {
+      "seed": 8901,
+      "constancy_flags_val_train_loss": [
+        false,
+        false,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        0.4134175181388855,
+        0.14341001212596893,
+        0.007276793941855431,
+        0.0007076520123519003
+      ],
+      "val_evals": [
+        0.8857142925262451,
+        0.7428571581840515,
+        0.9142857193946838,
+        0.9142857193946838
+      ],
+      "train_evals": [
+        0.9575757384300232,
+        0.9575757384300232,
+        0.9999999403953552,
+        0.9999999403953552
+      ]
+    },
+    {
+      "seed": 9012,
+      "constancy_flags_val_train_loss": [
+        true,
+        true,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        10.014328956604004,
+        10.011630058288574,
+        10.048466682434082,
+        10.039260864257812
+      ],
+      "val_evals": [
+        0.5142857432365417,
+        0.4571428596973419,
+        0.4571428596973419,
+        0.4571428596973419
+      ],
+      "train_evals": [
+        0.46060603857040405,
+        0.45454543828964233,
+        0.45454543828964233,
+        0.45454543828964233
+      ]
+    },
+    {
+      "seed": 11111,
+      "constancy_flags_val_train_loss": [
+        false,
+        true,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        0.5695110559463501,
+        0.19078055024147034,
+        0.10659678280353546,
+        0.11534609645605087
+      ],
+      "val_evals": [
+        0.8571428656578064,
+        0.8857142925262451,
+        0.8285714387893677,
+        0.8285714387893677
+      ],
+      "train_evals": [
+        0.9696969389915466,
+        0.9939393401145935,
+        0.9939393401145935,
+        0.9939393401145935
+      ]
+    },
+    {
+      "seed": 22222,
+      "constancy_flags_val_train_loss": [
+        true,
+        true,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        15.9495267868042,
+        15.966177940368652,
+        15.970783233642578,
+        15.938549995422363
+      ],
+      "val_evals": [
+        0.1428571492433548,
+        0.1428571492433548,
+        0.1428571492433548,
+        0.1428571492433548
+      ],
+      "train_evals": [
+        0.13333332538604736,
+        0.13333332538604736,
+        0.13333332538604736,
+        0.13333332538604736
+      ]
+    },
+    {
+      "seed": 33333,
+      "constancy_flags_val_train_loss": [
+        false,
+        false,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        0.6187052130699158,
+        0.18724872171878815,
+        0.011891232803463936,
+        0.000761460221838206
+      ],
+      "val_evals": [
+        0.800000011920929,
+        0.8571428656578064,
+        0.8857142925262451,
+        0.8857142925262451
+      ],
+      "train_evals": [
+        0.9636363387107849,
+        0.9939393401145935,
+        0.9999999403953552,
+        0.9999999403953552
+      ]
+    },
+    {
+      "seed": 44444,
+      "constancy_flags_val_train_loss": [
+        false,
+        false,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        0.5488322973251343,
+        0.16527260839939117,
+        0.05810188129544258,
+        0.09888425469398499
+      ],
+      "val_evals": [
+        0.8285714387893677,
+        0.8857142925262451,
+        0.8285714387893677,
+        0.8857142925262451
+      ],
+      "train_evals": [
+        0.939393937587738,
+        0.9878787398338318,
+        0.9999999403953552,
+        0.9818181395530701
+      ]
+    },
+    {
+      "seed": 55555,
+      "constancy_flags_val_train_loss": [
+        false,
+        true,
+        false
+      ],
+      "strict_trap": false,
+      "loss_cycles": [
+        0.47755759954452515,
+        0.11348906904459,
+        0.0015311827883124352,
+        0.0004291602526791394
+      ],
+      "val_evals": [
+        0.8571428656578064,
+        0.8571428656578064,
+        0.8857142925262451,
+        0.8857142925262451
+      ],
+      "train_evals": [
+        0.939393937587738,
+        0.9999999403953552,
+        0.9999999403953552,
+        0.9999999403953552
+      ]
+    }
+  ],
+  "official_local_strict_traps": 0,
+  "port_local_annex": [
+    {
+      "seed": 7890,
+      "zero_gradient_suffix_start": null,
+      "last_observed_step": 599
+    },
+    {
+      "seed": 8901,
+      "zero_gradient_suffix_start": 1,
+      "last_observed_step": 599
+    },
+    {
+      "seed": 9012,
+      "zero_gradient_suffix_start": 555,
+      "last_observed_step": 599
+    }
+  ],
+  "gradient_probe_cpu_float32": [
+    {
+      "gap": 0,
+      "p_true": 0.5,
+      "epsilon_loss": 0.6931471824645996,
+      "epsilon_gradient_max": 0.5,
+      "logsoftmax_gradient_max": 0.5
+    },
+    {
+      "gap": 20,
+      "p_true": 2.06115369216775e-09,
+      "epsilon_loss": 18.2332763671875,
+      "epsilon_gradient_max": 0.1708919107913971,
+      "logsoftmax_gradient_max": 1.0
+    },
+    {
+      "gap": 80,
+      "p_true": 1.8048513285848406e-35,
+      "epsilon_loss": 18.42068099975586,
+      "epsilon_gradient_max": 1.804851351015477e-27,
+      "logsoftmax_gradient_max": 1.0
+    },
+    {
+      "gap": 104,
+      "p_true": 0.0,
+      "epsilon_loss": 18.42068099975586,
+      "epsilon_gradient_max": 0.0,
+      "logsoftmax_gradient_max": 1.0
+    },
+    {
+      "gap": 120,
+      "p_true": 0.0,
+      "epsilon_loss": 18.42068099975586,
+      "epsilon_gradient_max": 0.0,
+      "logsoftmax_gradient_max": 1.0
+    },
+    {
+      "gap": 160,
+      "p_true": 0.0,
+      "epsilon_loss": 18.42068099975586,
+      "epsilon_gradient_max": 0.0,
+      "logsoftmax_gradient_max": 1.0
+    }
+  ],
+  "probe_torch_version": "2.11.0+cpu",
+  "cloud_spend_eur": 0,
+  "limitations": [
+    "Official reruns have no per-step gradient instrumentation; descriptive accuracy gaps do not identify their cause.",
+    "Local official screen is 4000 steps, port annex is 600; do not pool their incidence or infer equality from a nonsignificant test.",
+    "GPU driver and JAX CUDA runtime version were not recovered; Torch CUDA version is not JAX runtime evidence.",
+    "No paired full benchmark rerun with stable log-softmax loss exists in this audit; the numerical probe is not that experiment."
+  ],
+  "evidence_sha256": {
+    "docs/p2/upstream/EigenWorms.json": "d89a3bf265ba11023b19132da00845da9f040ea5733d33e0c6f61dc8b604ae0d",
+    "docs/p2/upstream/LICENSE": "fbb9ca50636472e25b7155dd1d5a8315a71e716a8c93cb678ab2f7b23e2af563",
+    "docs/p2/upstream/LinOSS.py": "1d994a9148431efe00c29acdf745d33acc3fcbe73fa7b335e75c7745bde0b67a",
+    "docs/p2/upstream/postprocess_results.py": "34ac0177223ac63c349a3092af701f2041900202f44f33d9e1a129fc318fc145",
+    "docs/p2/upstream/train.py": "82129c04c796211d2efb8da66892addd436bd1305d01ae37b14fd0903f0f0efd",
+    "results/s0_2/gate_i/EigenWorms_seed2345.jsonl": "8e6c4320ee724ed8f8c0b091429ff447bfdd3166887ec39135648d4f93475309",
+    "results/s0_2/gate_i/EigenWorms_seed3456.jsonl": "508c1c9d58c2229a6f1c3d5ef0f4c0647fb109881d2cc7fe276f78e65920c06a",
+    "results/s0_2/gate_i/EigenWorms_seed4567.jsonl": "158a50818cd79b70965673bcd083fc66253dffef624e6f41fc6c026710e90a43",
+    "results/s0_2/gate_i/EigenWorms_seed5678.jsonl": "f13c33488239c8eb23d7031e35e834085d018b27f2033f22b237bc1b6ac182b8",
+    "results/s0_2/gate_i/EigenWorms_seed6789.jsonl": "274270e8c12fc841a27c2844419b89f1ca911b0566c7405a8749097aaea8ff9f",
+    "results/s0_2/gate_i/Heartbeat_seed2345.jsonl": "b770b3f9bfb9b75e186037f7cb02e3f89f0dacd43196fc17d6c5ac5a239a0daf",
+    "results/s0_2/gate_i/Heartbeat_seed3456.jsonl": "3e933a7ff01abf53dd543d2e61eb7e55fa22310b923876853f275adfc5954cf4",
+    "results/s0_2/gate_i/Heartbeat_seed4567.jsonl": "503e78be992f787d8baf76fd766abc7ed5019a3d41735f1b9599012290d191ac",
+    "results/s0_2/gate_i/Heartbeat_seed5678.jsonl": "b70b890b2491c12aa97fe214bead3a4b65952a54354d9333703d9ff0ac7ccb41",
+    "results/s0_2/gate_i/Heartbeat_seed6789.jsonl": "1ab704291bebf32b3919369af49ce05b804814c2484220fd3a026dbb2497b13f",
+    "results/s0_2/gate_i/logs/gpu_remote_driver.log": "7eebb9cd0de491fed2ba238e626be767131994465e8ed3911f8eab0ed5b68c5f",
+    "results/s0_2/gate_i/logs/parity_gpu.log": "eed71dd1dbf35d4e71eb984338f2fafe184f18689aca0212df53a9e0d1592c70",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_2345/all_train_metric.npy": "e8668f9b7ab010c625cb91104821109c45fea0aabb174d1c7e5775b2c45bba96",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_2345/all_val_metric.npy": "93c3e5b90c53655210f9f1d05f8253feafaf6bc39d09ac9398b44cc44106e069",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_2345/steps.npy": "7984a2d32880c30890c7b1e738000194653a7885823664161793af1967d10a54",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_2345/test_metric.npy": "3e7a167156f51a163e96568355a75a3646bb344bbfb53bd4ee525f0b83c73442",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_3456/all_train_metric.npy": "ea73c89b00cfbe950011e40f942ef8d9ec1beab3a16f715652f0384fa1792b12",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_3456/all_val_metric.npy": "6022e4006a4ed5aecf296d9356ca04504a00c2156aa3d85841df1b5d2e696301",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_3456/steps.npy": "7984a2d32880c30890c7b1e738000194653a7885823664161793af1967d10a54",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_3456/test_metric.npy": "b352ad9a48e5238c997c44f608eceed76ce2170cf9b66a70fd33c0216faf3648",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_4567/all_train_metric.npy": "53a1faa1218b72771ee2b142b5a928e531cd7e08a94fe85ab0c82c1849d9c12a",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_4567/all_val_metric.npy": "ac61127ee68c6171d7393aa16840b4ae708ad77b85653cf5b9f85e316e47e03e",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_4567/steps.npy": "7984a2d32880c30890c7b1e738000194653a7885823664161793af1967d10a54",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_4567/test_metric.npy": "3e7a167156f51a163e96568355a75a3646bb344bbfb53bd4ee525f0b83c73442",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_5678/all_train_metric.npy": "2b56e8619c397f0e06cc5d7a8e28f319dfa2309584b65c35c97ebec6f969c34e",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_5678/all_val_metric.npy": "318165c12a1f2c290b41c18e38d75c48844f7a0b89b2ccb492cfa6ae44bdcd4e",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_5678/steps.npy": "7984a2d32880c30890c7b1e738000194653a7885823664161793af1967d10a54",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_5678/test_metric.npy": "3e7a167156f51a163e96568355a75a3646bb344bbfb53bd4ee525f0b83c73442",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_6789/all_train_metric.npy": "49bf1914d7a990b302c72422e21c398bf10fc3aabc5af67886d1483a1f43ffb9",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_6789/all_val_metric.npy": "bb1838b794e78707fa2b7b67cf34d475328ef9f0f54c59d0af7d64411443edc3",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_6789/steps.npy": "7984a2d32880c30890c7b1e738000194653a7885823664161793af1967d10a54",
+    "results/s0_2/gate_i/xcheck_official/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_100000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_6789/test_metric.npy": "18b9ca39cbd51be95e7f0b486a66977a50cbf30ad2bab431227e9ea38aaf8dba",
+    "results/s0_2/gate_i/xcheck_official_local/PREDECLARATION.md": "fa5f0f7760901237f0e518a8336f326fc779620c185bd639ab473059d844900b",
+    "results/s0_2/gate_i/xcheck_official_local/config/LinOSS/EigenWorms.json": "ff9a64562fdd1731b62648f170e23ef9c5a02e634c6fce87a8351aafcbda2aa7",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed11111.log": "2f4d8ad43df43e5378052c007c98f05f503727eb5d4c51adfa4a78e74bd86c76",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed22222.log": "0ad31d395b74e3fe6bd19cc36b043581a3826d2b1e8e9454c9cb3a1e94d49825",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed33333.log": "89314d552ec9b392df231369c1dbcc168bf093c79e0534a84dbffaf3494a0a6d",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed44444.log": "38e3cc9ec9b5db0ded4bd516980fd21e477e38b1cbee78ea11e590f8004541b0",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed55555.log": "0d12d2a7ba8abc2cb1565e9b66041cf38a0e11b433f6243ee936e0acaaaced0c",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed7890.log": "caf67da51b270470c98e0175798817246f23c2cb72bb7ddb3fdd2d94e03c6ecf",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed8901.log": "e8f7b01337e537e3f69e1941686ed4dd1166020104afee86c5edc4e6c08d49a6",
+    "results/s0_2/gate_i/xcheck_official_local/logs/driver_seed9012.log": "cc374a2008594d894c3f45806ec350d7818d5cd3977b7bd03fd636e8238979b8",
+    "results/s0_2/gate_i/xcheck_official_local/ours_annex_screens/EigenWorms_annexscreen_seed7890.jsonl": "cc46e20643d7b04362dd5bc40baca9257334c894d758b4ed775a8590102c717e",
+    "results/s0_2/gate_i/xcheck_official_local/ours_annex_screens/EigenWorms_annexscreen_seed8901.jsonl": "890b221bf6fde2c74d7eb9223b52e8cb11a0c24f3e47399245c357508cf86721",
+    "results/s0_2/gate_i/xcheck_official_local/ours_annex_screens/EigenWorms_annexscreen_seed9012.jsonl": "2ef6570e1e75fd36dd5bc1396b16e1e4810294b6f29b004c798928e1d942be35",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_11111/all_train_metric.npy": "72fd578a3f4581522c8c833bd7baca23fe965f3bb25b1dcf10e47b72ca8321b9",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_11111/all_val_metric.npy": "e9347edf7059e82bdc3d3371e1f9ea8721a46867be74432613396233c6bb9c21",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_22222/all_train_metric.npy": "0d57c8a4aa88eb8d4845e1ba6d9e38fdf59573bebf58ebd83c02715ae02be717",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_22222/all_val_metric.npy": "e4e10c090544858bb476f51dec9963fd7b53be671a626a68d0850a6380aea1ff",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_33333/all_train_metric.npy": "13652460defcc421bd53e1cdec40f63a80e5c90986692ed85c90673d8dd3e462",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_33333/all_val_metric.npy": "02a18480b00934300e8d35372112bf15471459cedc526cb59cc53c56ec27d467",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_44444/all_train_metric.npy": "f2d51a834f3d98c0e947aab737500c09a5e33f7ada1dea8dac0da4dea2de46bf",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_44444/all_val_metric.npy": "917e854e2a6ddedfe79ac56a386941102e380c93c5eec705b97ae981f4ad63d4",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_55555/all_train_metric.npy": "5fb97271a0f7c353a288b7079a12a0cac530d30b38c6025ad12728057df083b1",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_55555/all_val_metric.npy": "0c3e1ed99966b5c75e4cf532f02f47fcf2b54c2ab2d2bae4753977d6297947b1",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_7890/all_train_metric.npy": "bbbddc2ecce9367ffbaf80b576ed5b33b73ac049ae9d15f88bb44b5a507713e1",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_7890/all_val_metric.npy": "1a4b39f44fc7c16e7e3bbc4085be3cebad79e4940556eea944ea92ebc0656439",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_8901/all_train_metric.npy": "f42f7d928d30532832e1342082c3c9160256c4634ccec2855ead5e698399ff5a",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_8901/all_val_metric.npy": "537c032f6a661c8d7d5cf41d02f828c967da5393b932cabdd7aab8d38983a957",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_9012/all_train_metric.npy": "6ca7a7b26d3e23f0af4eab5dd0c175acd37b3ebfb36cd21f2eb9b13084e1927c",
+    "results/s0_2/gate_i/xcheck_official_local/outputs/LinOSS_IM/EigenWorms/T_1.00_time_True_nsteps_4000_lr_0.001_num_blocks_2_hidden_dim_128_vf_depth_None_vf_width_None_ssm_dim_64_ssm_blocks_2_dt0_None_solver_Heun_stepsize_controller_ConstantStepSize_scale_0_lambd_None_seed_9012/all_val_metric.npy": "f158c6163b355a2284b6aa5847c2505a076abeeb9dc5f071e6c8903348480e2b"
+  }
+}

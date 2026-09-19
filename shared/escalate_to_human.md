@@ -19,6 +19,23 @@ Escalate (don't decide autonomously):
 ## OPEN FOR LUCAS
 
 
+### E-2026-09-20-1 — authorized continuation completed locally; no paid expansion
+
+Lucas: "ok let's continue then." P2 evidence package audited and corrected;
+capacity diagnostic PR-23-C frozen at `947d877` then completed for €0. Original
+coupling range fails the .01 approximation screen; one wider-range candidate
+passes (.00238687), requiring K=.3282–.9500. This does not authorize hardware or
+a product claim. Any drift experiment first needs actuator/loss feasibility for
+that broader range and a separately frozen matched-observation baseline.
+
+P2 author-contact attachment and draft are ready for review; no email has been
+sent and the 14-day response window has not begun. The draft now separates
+observed rerun variability from the saturation mechanism, reports consistent SD,
+and names unrecovered environment details. P1 deposit remains an account action;
+its licensed files have not been changed by this continuation.
+
+
+
 ### E-2026-09-19-1 — staged audit/pilot authorized; €0 preflight completed, paid expansion stopped
 
 Lucas accepted the staged recommendation ("ok let's do it"): audit first,
