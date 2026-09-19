@@ -1,5 +1,8 @@
 # Stage 0c proposal memo — the FSR-matched regime (2026-09-14, Supervisor; single-session mode)
 
+> **2026-09-19 audit:** Historical memo retained. Its current interpretation is superseded by
+> `docs/s0c/audit_2026-09-19.md` (arithmetic, mapping, budget, and prior-art corrections).
+
 **Status: PROPOSED, €0 spent, nothing registered yet.** This memo records (i) a correction to how
 Stage 0b bounded what a ring lattice can emulate, (ii) what the athermal literature offers, (iii) the
 regime the correction points at, with its arithmetic and its nearest published neighbor, and (iv) what a

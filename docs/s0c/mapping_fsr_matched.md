@@ -1,5 +1,8 @@
 # S0c.0-a — Mapping memo: the ring lattice in the FSR-matched, low-Q regime (2026-09-15)
 
+> **2026-09-19 audit:** Historical memo retained. Its current interpretation is superseded by
+> `docs/s0c/audit_2026-09-19.md` (arithmetic, mapping, budget, and prior-art corrections).
+
 **Purpose.** State how the P1 mapping (S0.1: coupled-mode ODE → ZOH-discretized diagonal SSM) carries
 over when the rings are operated at power coupling K = 5–20 % instead of the registered r = κ_ext/κ_i ≤ 3,
 what changes, what the existing code can and cannot be trusted for, and what the trainable set is.

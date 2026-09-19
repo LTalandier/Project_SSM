@@ -2235,3 +2235,68 @@ anchor row: the DSP CD share 12.5 % × 5 pJ/bit = 0.625 pJ/bit × 2 bits/sample 
 ### 22.5 Output
 `results/s0c_0/envelope.md`, `envelope.json`, one PNG; committed with `git add -f`; results_log entry;
 S0c.1 escalation with the spend.
+
+---
+
+## PR-22 audit addendum — 2026-09-19 (original registration and artifacts preserved)
+
+The user authorized the staged audit and bounded exploratory pilot on 2026-09-19.
+The original go rule is not a verified product gate. Its amplifier power is not a
+function of gain/noise, its digital comparator changes across corners, and its
+athermal option combines a different platform's drift with bare-SiN loss.
+The stored 64 GS/s ratio is 2.0411, not the 1.25 quoted in the reading/escalation.
+See `docs/s0c/audit_2026-09-19.md` and the separately generated audit outputs.
+No historical threshold or result is overwritten.
+
+## PR-23-P — FROZEN before pilot execution, 2026-09-19
+
+**Authorization:** staged repairs and pilot accepted by Lucas ("ok let's do it").
+Exploratory pilot cap €20; total possible follow-up cap €100; no hardware.
+This registration first runs a local, zero-cloud-cost numerical preflight. It is
+not the confirmatory S0c.1 drift experiment and cannot establish hardware novelty.
+
+**Question:** can the exact 8-ring model fit a dispersive channel, and is the
+proposed task-MSE-versus-response-fit comparison distinguishable at all in the
+linear, fully observed setting? A response baseline must adapt using the same
+observations and control budget. A frozen calibration is not the baseline.
+
+**Fixed model:** cascade of 8 single-bus rings; FSR 100 GHz; radius 242.2002619 um;
+loss 0.051 dB/cm (bare SiN only, no athermal claim); tunable power coupling
+0.05–0.20 and phase. Evaluate the exact continuous-frequency delay response on
+512 uniform FFT bins spanning 64 GHz, not a symbol-clock first-order recurrence.
+Coherent complex-field, ideal rectangular Nyquist band, noiseless cyclic block;
+CD D=17 ps/(nm km), lambda=1550 nm, L=20 km. These simplifications deliberately
+isolate model/optimization validity; no SER, receiver, drift or energy advantage
+can be inferred. Seeds 11,22,33. Initial phases cover the occupied band with
+seeded 0.05-rad perturbations; K=0.125 initially.
+
+**Procedure:** select a common integer receiver delay from 0..32 samples using
+the untrained responses, then hold it fixed per seed. Fit one complex receiver
+scalar analytically. Adam BPTT ceiling: 300 updates, learning rate 0.03. SPSA:
+300 updates, a=0.1/(1+i/50)^0.602, c=0.02/(1+i/50)^0.101; both phase and bounded
+coupler coordinates perturbed. No restarts, replacement seeds or tuning. Compare
+waveform MSE and spectrum-response MSE on identical flat-power pilot spectra.
+Check objective AND gradient equality at initial and final parameters (relative
+or absolute tolerance 1e-10). Parseval predicts equality here; this is a validation
+of the baseline question, not an unexpected discovery. Count two objective probes
+and two parameter writes per SPSA update; BPTT is an inaccessible oracle, with
+zero physical probes. No claim of a matched hardware test from this preflight.
+
+**FIR reference:** exact least-squares complex FIR on the same cyclic spectral
+channel; lengths 1..128, delay optimized over all cyclic shifts. Report the first
+length matching the ring's noiseless normalized MSE, or censored if none. This is
+an error- and channel-specific equivalence, not a universal taps/ring bound or
+energy estimate. Compare against the best scalar/delay-only channel correction.
+
+**Decision:** if task and response objectives/gradients coincide, do not expand
+this comparison into a paid fleet: it cannot separate task training from adaptive
+response fitting with the same estimator and information. A later drift pilot
+requires a separately frozen observation/noise/control model giving a concrete
+reason for different information or robustness, matched probe and write budgets,
+and PAT/SPSA versus an adaptive identification-and-synthesis baseline and BPTT.
+Do not infer that every possible task/response comparison is equivalent. If the
+model or optimization checks fail, stop and diagnose before further spend.
+
+**Outputs:** `results/s0c_1_pilot/`, audit, tests, source/hash provenance, runtime,
+all seed outcomes. Pre-run registration/model/script committed before execution;
+outcome appended afterward. No cloud servers provisioned for this phase.

@@ -1,5 +1,8 @@
 # S0c.0-b — White-space sweep in the FSR-matched regime (2026-09-15; PR-15 qualifiers applied verbatim)
 
+> **2026-09-19 audit:** Historical memo retained. Its current interpretation is superseded by
+> `docs/s0c/audit_2026-09-19.md` (arithmetic, mapping, budget, and prior-art corrections).
+
 **Claim under test (W1, unchanged wording):** recurrent parameters of a dissipative-resonator
 photonic system — poles and inter-ring couplings that define the recurrence — updated **on the
 physical device** by **gradient-based or gradient-estimating training on a task loss**. The registered

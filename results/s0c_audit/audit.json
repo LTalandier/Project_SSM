@@ -1,0 +1,374 @@
+{
+  "original_sha256": "744b709eb5616a9f71da2fa1f8bf3ef6655fd976e07d6a4895215cd32f43ff9a",
+  "crossed_comparator_costs": [
+    {
+      "K": 0.05,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.20410654800315922
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 0.3401775800052654
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 1.0205327400157962
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 1.7008879000263268
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.40821309600631844
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 0.6803551600105308
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 2.0410654800315924
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 3.4017758000526537
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.6378329625098725
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 1.0630549375164544
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 3.189164812549363
+    },
+    {
+      "K": 0.05,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 5.315274687582272
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.20410654800315922
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 0.3401775800052654
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 1.0205327400157962
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 1.7008879000263268
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.40821309600631844
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 0.6803551600105308
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 2.0410654800315924
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 3.4017758000526537
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.6378329625098725
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 1.0630549375164544
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 3.189164812549363
+    },
+    {
+      "K": 0.1,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 5.315274687582272
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.20410654800315922
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 0.3401775800052654
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 1.0205327400157962
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 32.0,
+      "old_ratio": 1.0205327400157962,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 1.7008879000263268
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.40821309600631844
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 0.6803551600105308
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 2.0410654800315924
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 64.0,
+      "old_ratio": 2.0410654800315924,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 3.4017758000526537
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.03,
+      "fixed_cost_ratio": 0.6378329625098725
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.05,
+      "fixed_cost_ratio": 1.0630549375164544
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.15,
+      "fixed_cost_ratio": 3.189164812549363
+    },
+    {
+      "K": 0.2,
+      "rate_GS_s": 100.0,
+      "old_ratio": 3.189164812549363,
+      "digital_pj_tap": 0.25,
+      "fixed_cost_ratio": 5.315274687582272
+    }
+  ],
+  "mapping": [
+    {
+      "loss_db_cm": 0.051,
+      "K": 0.05,
+      "roundtrip_amplitude": 0.9991068665968778,
+      "memory_efold_roundtrips": 37.67872004356985,
+      "cavity_fwhm_GHz": 0.8448497500737505,
+      "resonance_loss_db_per_ring": 0.6055132603158047,
+      "32_aligned_rings_plus_package_db": 22.37642433010575,
+      "illustrative_amplifier": {
+        "gain_db": 32.37642433010575,
+        "ase_mw": 0.04482166394818358,
+        "output_snr_db": 13.389291440773665,
+        "electrical_lower_bound_mw": 10.44243091741882,
+        "electrical_total_mw": null,
+        "within_illustrative_30db_gain_16dbm_output_limits": false,
+        "product_verdict": "UNDETERMINED: idle/efficiency/gain/NF/saturation and link target unverified"
+      }
+    },
+    {
+      "loss_db_cm": 0.051,
+      "K": 0.1,
+      "roundtrip_amplitude": 0.9991068665968778,
+      "memory_efold_roundtrips": 18.665843767106093,
+      "cavity_fwhm_GHz": 1.7057147300990876,
+      "resonance_loss_db_per_ring": 0.2947466119091887,
+      "32_aligned_rings_plus_package_db": 12.431891581094039,
+      "illustrative_amplifier": {
+        "gain_db": 22.43189158109404,
+        "ase_mw": 0.004532407535087593,
+        "output_snr_db": 22.570858358438684,
+        "electrical_lower_bound_mw": 9.988201097166884,
+        "electrical_total_mw": null,
+        "within_illustrative_30db_gain_16dbm_output_limits": true,
+        "product_verdict": "UNDETERMINED: idle/efficiency/gain/NF/saturation and link target unverified"
+      }
+    },
+    {
+      "loss_db_cm": 0.051,
+      "K": 0.2,
+      "roundtrip_amplitude": 0.9991068665968778,
+      "memory_efold_roundtrips": 8.891630819539424,
+      "cavity_fwhm_GHz": 3.5836612519716526,
+      "resonance_loss_db_per_ring": 0.1392707036636544,
+      "32_aligned_rings_plus_package_db": 7.456662517236941,
+      "illustrative_amplifier": {
+        "gain_db": 17.45666251723694,
+        "ase_mw": 0.0014358779232369304,
+        "output_snr_db": 26.133444806504336,
+        "electrical_lower_bound_mw": 9.834747441167181,
+        "electrical_total_mw": null,
+        "within_illustrative_30db_gain_16dbm_output_limits": true,
+        "product_verdict": "UNDETERMINED: idle/efficiency/gain/NF/saturation and link target unverified"
+      }
+    },
+    {
+      "loss_db_cm": 0.4,
+      "K": 0.05,
+      "roundtrip_amplitude": 0.993016401536415,
+      "memory_efold_roundtrips": 30.623420780408736,
+      "cavity_fwhm_GHz": 1.039525197339253,
+      "resonance_loss_db_per_ring": 4.8709440282552325,
+      "32_aligned_rings_plus_package_db": 158.87020890416744,
+      "illustrative_amplifier": {
+        "gain_db": 168.87020890416747,
+        "ase_mw": 1999612756160.2024,
+        "output_snr_db": -123.00945898590813,
+        "electrical_lower_bound_mw": 19996127561612.023,
+        "electrical_total_mw": null,
+        "within_illustrative_30db_gain_16dbm_output_limits": false,
+        "product_verdict": "UNDETERMINED: idle/efficiency/gain/NF/saturation and link target unverified"
+      }
+    },
+    {
+      "loss_db_cm": 0.4,
+      "K": 0.1,
+      "roundtrip_amplitude": 0.993016401536415,
+      "memory_efold_roundtrips": 16.753686502258933,
+      "cavity_fwhm_GHz": 1.9005036999032106,
+      "resonance_loss_db_per_ring": 2.325295725996336,
+      "32_aligned_rings_plus_package_db": 77.40946323188275,
+      "illustrative_amplifier": {
+        "gain_db": 87.40946323188275,
+        "ase_mw": 14284.706812871764,
+        "output_snr_db": -41.54871361515734,
+        "electrical_lower_bound_mw": 142857.06812869947,
+        "electrical_total_mw": null,
+        "within_illustrative_30db_gain_16dbm_output_limits": false,
+        "product_verdict": "UNDETERMINED: idle/efficiency/gain/NF/saturation and link target unverified"
+      }
+    },
+    {
+      "loss_db_cm": 0.4,
+      "K": 0.2,
+      "roundtrip_amplitude": 0.993016401536415,
+      "memory_efold_roundtrips": 8.433134307368261,
+      "cavity_fwhm_GHz": 3.7789452466588407,
+      "resonance_loss_db_per_ring": 1.0937343494980991,
+      "32_aligned_rings_plus_package_db": 37.99949918393917,
+      "illustrative_amplifier": {
+        "gain_db": 47.99949918393917,
+        "ase_mw": 1.636336996776776,
+        "output_snr_db": -2.1413807512242196,
+        "electrical_lower_bound_mw": 26.36321146017092,
+        "electrical_total_mw": null,
+        "within_illustrative_30db_gain_16dbm_output_limits": false,
+        "product_verdict": "UNDETERMINED: idle/efficiency/gain/NF/saturation and link target unverified"
+      }
+    }
+  ],
+  "decision": "No validated product window; frozen PR-22 arithmetic retained as historical scenario.",
+  "limitations": [
+    "0.4 dB/cm is a different athermal platform, transplanted here only as loss sensitivity.",
+    "Adding N on-resonance losses assumes coincident resonances; actual trained spectrum must be evaluated.",
+    "Amplifier inputs, targets, NF, efficiency, limits and receiver SNR are explicit sensitivity assumptions, not sourced product specifications.",
+    "No idle/control/thermal/actuator number or taps-per-ring equivalence has been validated for a co-integrated device."
+  ]
+}

@@ -10,12 +10,13 @@ and I would be grateful if you would consider endorsing me for physics.optics. Y
 
 The paper asks whether a recurrent photonic state-space model — a coupled silicon-nitride
 microring lattice — can have its recurrent parameters trained in situ, and runs a four-method
-bake-off (SPSA, physics-aware training, in-situ adjoint, Hamiltonian-echo learning) on one
+simulation bake-off (SPSA, physics-aware training, in-situ adjoint, Hamiltonian-echo learning) on one
 realistic dissipative substrate under pre-registered thresholds. Two methods reach target; a
 registered 2.42× advantage over calibrate-then-deploy appears only under uncorrelated drift;
 a function-matched energy envelope is negative and reported as such. Every threshold was
-frozen in a public ledger before the run that tested it, and the full commit history,
-timestamps, and a byte-exact reproduction bundle ship with the paper.
+committed in the ledger before the run that tested it. The repository becomes public
+at submission; the commit history, available timestamp evidence (with its coverage
+limits), and reproduction bundle accompany the paper.
 
 The PDF is attached; the repository is at github.com/LTalandier/Project_SSM. The endorsement
 code arXiv issued is:

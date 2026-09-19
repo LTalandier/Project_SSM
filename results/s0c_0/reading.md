@@ -1,5 +1,8 @@
 # S0c.0 reading (Supervisor, 2026-09-15) — the kill does not fire; the window is at the bar, in the edge cell, three unverified conditions deep
 
+> **2026-09-19 audit:** Historical memo retained. Its current interpretation is superseded by
+> `docs/s0c/audit_2026-09-19.md` (arithmetic, mapping, budget, and prior-art corrections).
+
 **Verdict of record (PR-22 §22.4, frozen at `7cd72f0` before the run):**
 - **Kill gate: does not fire** — but degenerately. The OPT maximum (ratio ≈ 5,800) is the C-pcm +
   athermal cell: a device with 0.06 mW of static power, i.e. zero hold, zero drift, no amplifier.
