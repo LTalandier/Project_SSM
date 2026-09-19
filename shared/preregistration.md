@@ -2300,3 +2300,56 @@ model or optimization checks fail, stop and diagnose before further spend.
 **Outputs:** `results/s0c_1_pilot/`, audit, tests, source/hash provenance, runtime,
 all seed outcomes. Pre-run registration/model/script committed before execution;
 outcome appended afterward. No cloud servers provisioned for this phase.
+
+---
+
+## PR-23-C — FROZEN before execution, 2026-09-20 — bounded capacity diagnostic
+
+Lucas accepted continuing P2 preparation and this diagnostic ("ok let's continue
+then"). Local CPU only, €0 cloud, at most 300 seconds of optimization. No hardware
+or fleet. This is an exploratory diagnostic of the poor PR-23-P fits, not a
+confirmatory training-advantage test. Previous pilot outcomes motivated it.
+
+**Controls:** same exact passive 8-ring cascade, 100 GHz FSR, bare-SiN loss
+0.051 dB/cm, radius 242.2002619 um. Complex128, one CPU thread. Fit 512 frequency
+bins over the 64-GHz Nyquist band, then evaluate without refitting the receiver
+scalar on 2048 midpoint bins over the same band. No noise, pulse shaping, SER,
+measurement or actuator-cost claim. Synthetic and CD fits normalize residual
+energy by target energy and fit a single complex scalar on the training grid.
+
+**Synthetic recovery:** for seeds 11/22/33, a known realizable 8-ring target has
+phases evenly spread over the band plus 0.2-rad seeded noise, and coupling logits
+0.6 times seeded standard normal, in K=.05–.20. Recover its *response*, not uniquely
+identifiable parameters, from (a) truth plus 0.05 normal coordinate perturbations
+and (b) independent random phases over one FSR and zero coupling logits. Report
+all six fits, plus the target-parameter numerical identity. Near-start recovery
+passes only if all three dense-grid NMSEs <=1e-6. Far starts diagnose local minima;
+they do not redefine the known feasible set.
+
+**CD fits:** PR-23-P's 20-km, 64-GBd linear coherent CD model. Seeds 11/22/33;
+initial phase grid plus 0.05-rad noise and zero coupling logits. Five initial
+receiver delays {0,8,16,24,32} samples per seed, optimized continuously and
+projected to [0,32]. Compare original K=.05–.20 against explicitly broadened
+K=.01–.95 (diagnostic only: this is not a validated actuator/device window).
+Total 30 CD fits; no additional seeds, restarts, channel lengths, or tuning.
+
+**Optimizer:** exact-model gradient oracle; Adam 1000 steps, lr=.03, followed by
+L-BFGS max_iter=100, max_eval=125, strong-Wolfe line search, lr=1, tolerance_grad
+1e-10, tolerance_change=1e-12. Project delay after Adam; use clamped delay inside
+L-BFGS evaluation. Retain the best finite candidate visited, report final/best
+loss and actual iterations. Any deadline-truncated fit is marked incomplete and
+cannot carry a gate. Select best completed CD candidate within each coupling
+range by training-grid loss; dense-grid check is not used to select candidates.
+
+**Decision:** synthetic near recovery failure blocks interpretation as capacity.
+If recovery passes and original-range best dense NMSE <=.01 (20 dB residual
+suppression, an engineering screening target only), a separately registered
+matched-observation adaptive-drift protocol may be designed. If only broad K
+passes, report restricted-design/optimization sensitivity, not a product go.
+If neither passes, stop expansion on this workload. A failed nonconvex search
+is not a proof of impossible approximation. No FIR taps/ring or energy advantage
+is inferred from this diagnostic.
+
+**Artifacts:** `analysis/s0c_capacity.py`, all outcomes/controls, source hashes,
+pre-run commit, wall time, and interpretation in `results/s0c_capacity/`. Commit
+this registration and script before the first outcome is computed.
