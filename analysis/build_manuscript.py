@@ -141,6 +141,7 @@ def main():
     manuscript = "\n\n".join([
         f"# {TITLE}",
         f"*{AUTHOR}*",
+        "Copyright © 2026 Lucas Talandier. Paper: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Accompanying code: MIT.",
         f"**Abstract.** {abstract_numbered}",
         body_numbered,
         figure_section(),

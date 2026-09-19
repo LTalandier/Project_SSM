@@ -91,7 +91,11 @@ def main():
             'The pre-registration ledger and literature dossiers are preserved verbatim.\n'
             'The results archive contains historical invalid records as disclosed in notes N7/N8.\n'
             'Code and full path layout: https://github.com/LTalandier/Project_SSM\n')
-        upload = [work / 'main.tex'] + [work / n for n in sorted(set(figure_names))] + sorted((work / 'anc').glob('*'))
+        for name, dest_name in [('LICENSE', 'LICENSE.txt'),
+                                ('LICENSING.md', 'LICENSING.md'),
+                                ('paper/LICENSE-CC-BY-4.0.txt', 'LICENSE-CC-BY-4.0.txt')]:
+            shutil.copyfile(ROOT / name, work / dest_name)
+        upload = [work / n for n in ['LICENSE.txt', 'LICENSING.md', 'LICENSE-CC-BY-4.0.txt']] + [work / 'main.tex'] + [work / n for n in sorted(set(figure_names))] + sorted((work / 'anc').glob('*'))
         out = args.output_dir.resolve()
         out.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(out / 'p1_arxiv_source.zip', 'w', compression=zipfile.ZIP_DEFLATED) as archive:

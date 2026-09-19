@@ -1,16 +1,25 @@
 {
   "paper/submission/p1_with_supplement.pdf": {
-    "bytes": 1757454,
-    "sha256": "7f5b43fcafcba1fcfad0d4cae126f8dd68c1c7dec11fdc03ac8a6ab43efbfc4f"
+    "bytes": 1757938,
+    "sha256": "b8b9aa45d77702591c7c5fa3c18e720e41645fd0fc4d210480f948a44e0d2540"
   },
   "paper/submission/p1_arxiv_source.zip": {
-    "bytes": 10561368,
-    "sha256": "7bff498812bf640aa488e9dfd5491a5f9266ef896f461261000fb2b044f8da1e"
+    "bytes": 10573304,
+    "sha256": "e6eace674eac325356dac19051f4701c2013a18fa892cde945fa0c1e058d9f61"
   },
   "verified_on": "2026-09-19",
   "zip_crc": "pass",
   "zip_members_match_build_manifest": true,
-  "zip_matches_validated_P1_snapshot": true,
+  "numerical_archive_matches_validated_P1_snapshot": true,
   "result_archive_verification": "1065 files verified",
-  "publication": "not deposited; license pending"
+  "paper_license": "CC-BY-4.0",
+  "code_license": "MIT",
+  "publication": "not deposited; licenses confirmed and applied",
+  "changes_from_previous_deposit_files": [
+    "Paper license notice",
+    "Three root license/coverage files in ZIP",
+    "Bundled registration ledger refreshed through PR-23-P",
+    "Timestamp README refreshed from repository (proof bytes unchanged)"
+  ],
+  "scientific_manuscript_unchanged_except_license_notice": true
 }

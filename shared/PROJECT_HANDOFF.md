@@ -76,7 +76,9 @@ does not cover S0.13 or independently establish experimental execution times.
 Lucas now proposes Zenodo for immediate public deposit instead of waiting for an
 arXiv endorser. `paper/zenodo/DEPOSIT.md` contains metadata and links to the two
 validated upload files; `checksums.json` verifies the P1 snapshot and ZIP members.
-The ZIP includes the result archive. License choice is pending. No authenticated
+The ZIP includes the result archive. Lucas confirmed CC BY 4.0 for the paper
+and MIT for code; both are applied, included in the rebuilt PDF/source ZIP, and
+described in `LICENSING.md`. Numerical archives are unchanged. No authenticated
 Zenodo connector is available, no record/DOI has been created, and no publication
 or repository visibility change occurred. The arXiv draft remains optional later.
 Complete the public repository release alongside the eventual deposit, consistent

@@ -12,7 +12,8 @@ not peer review. The arXiv draft remains available for a later submission.
    source, figures and ancillary audit/reproduction records. The arXiv-oriented
    filename is harmless on Zenodo. This ZIP already includes the 1,065-file
    result archive under `anc/paper__repro__results.tar.gz`; a duplicate upload is
-   unnecessary. It is the validated P1 snapshot, not today's Stage 0c results.
+   unnecessary. The numerical results remain the validated P1 snapshot; the bundled ledger
+   now also includes the later Stage 0c registrations, not their result files.
 
 `checksums.json` records these exact files and ZIP-integrity checks. The source
 ZIP does not contain the entire Git history or all current project source; public
@@ -56,16 +57,27 @@ included in this P1 snapshot.
 
 **Visibility:** public files.
 
-**License:** pending author choice. Proposed paper license: CC BY 4.0; proposed
-code license: MIT. No license has been applied by this preparation. Mixed
-paper/code coverage must be made explicit before publishing; the source ZIP
-contains code inside the archived reproduction material. Do not silently use
-Zenodo's default license for every object in the bundle.
+**Licenses (author confirmed 2026-09-19):** CC BY 4.0 for the paper and
+accompanying research material; MIT for project software. Add both applicable
+licenses to the record and include the following coverage statement in its
+description. The licenses apply to different components, not alternatively to
+the whole deposit.
+
+> Copyright © 2026 Lucas Talandier. The paper, original figures, scientific
+> supplementary text, and original accompanying result and audit records are
+> licensed under CC BY 4.0. Project-authored code, including code inside the
+> reproduction archives, and associated software documentation are licensed
+> under MIT. Third-party material retains its applicable terms. Full licenses
+> and component coverage are included in the source ZIP.
+
+The paper PDF includes the license notice. The ZIP contains `LICENSE.txt` (MIT),
+`LICENSE-CC-BY-4.0.txt`, and `LICENSING.md`. The enclosed numerical archives remain
+byte-identical to the previously verified results.
 
 ## Deposit sequence
 
 Create a new upload while signed in to Zenodo, upload the two files, enter the
-metadata above, choose the license, and save/preview the draft. Reserve a DOI if
+metadata and license coverage above, and save/preview the draft. Reserve a DOI if
 needed. Publishing registers the DOI; saving a draft does not. Record the actual
 public URL/DOI and publication date after publication. The planned repository
 release should happen alongside publication to satisfy the manuscript's data

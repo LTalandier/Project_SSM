@@ -3,7 +3,8 @@
 **2026-09-19 route update:** Lucas proposed a Zenodo public preprint deposit to
 avoid the immediate arXiv endorsement dependency. Copy-ready metadata and links
 to the verified PDF + source ZIP are in [`zenodo/DEPOSIT.md`](zenodo/DEPOSIT.md).
-No deposit/DOI exists yet; license selection and the actual account upload remain.
+Licenses are applied: CC BY 4.0 for the paper and MIT for code. No deposit/DOI
+exists yet; the actual account upload remains.
 The arXiv instructions below remain available for later use.
 
 The correction sweep is complete (`174558c`): the anchor matches exactly, all
@@ -33,6 +34,7 @@ Outputs under `paper/submission/`:
   main manuscript, figures, references, and scientific
   supplementary notes. Editorial assembly history stays in the repository.
 - `p1_arxiv_source.zip`: `main.tex`, 12 PNG figures, and `anc/` supporting records.
+  License texts and component coverage are included at the ZIP root.
   No intermediate TeX files or prebuilt PDF are included in the upload ZIP.
 - `main.tex`: editable generated source, with figure paths relative to the ZIP root.
 - `build_report.json`: source-file checksums, fonts, layout warnings, and ZIP hash.

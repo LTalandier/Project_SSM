@@ -1,10 +1,13 @@
 {
   "pandoc": "pandoc 3.9",
-  "source_date_epoch": "1789334468",
-  "fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nNTXZBV+LMRoman10-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      4  0\nFLJQNI+LMRoman10-Italic-Identity-H   CID Type 0C       Identity-H       yes yes yes      6  0\nJXLLKU+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      8  0\nZYHGAK+LatinModernMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     10  0\nKNYAXV+LMMono10-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     46  0\n",
+  "source_date_epoch": "1789822153",
+  "fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nSAIJBB+LMRoman10-Bold-Identity-H     CID Type 0C       Identity-H       yes yes yes      4  0\nYUGTPI+LMRoman10-Italic-Identity-H   CID Type 0C       Identity-H       yes yes yes      6  0\nRLPAYF+LMRoman10-Regular-Identity-H  CID Type 0C       Identity-H       yes yes yes      8  0\nLMROOK+LatinModernMath-Regular-Identity-H CID Type 0C       Identity-H       yes yes yes     12  0\nWTUXOB+LMMono10-Regular-Identity-H   CID Type 0C       Identity-H       yes yes yes     47  0\n",
   "overfull_boxes": [],
   "files": {
-    "main.tex": "6f334285ad512b3e0987a22cb415cc9c381ab35de685c42f2b310a1e1b20e890",
+    "LICENSE.txt": "5b92d7f17c49b4f998c10ac79347db1b9608ff437509c6d55627406433c92a8a",
+    "LICENSING.md": "8ed1eb3aeeb9053d59f499f80fc34a2c2a573c780cfdaaddae6510199c2e5a08",
+    "LICENSE-CC-BY-4.0.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+    "main.tex": "e629a0e87537661aee3f77fa18d491d53261aec1d725f284f9483db01f8f5e57",
     "figures/F1_architecture_pole_region.png": "ab060aeb1fa8cde90c4a5de353fa730d325d4c587f1fe0a67eb7b01d77f8bffb",
     "figures/F2_substrate_clamp.png": "0e35021e257937630261b0db4c26d5d4d7e895ca3746893dc1faeff601b6c738",
     "figures/F3_participation_profile.png": "3fc946800955ba36f0b09bcc56bdf0d090d0547bd6e780337cafa845577a51c8",
@@ -31,10 +34,10 @@
     "anc/paper__repro__README.md": "ce6129e61e029e0b1a0a65fdc93fca938251ef7ad87b37aea47e81fe8806acc5",
     "anc/paper__repro__manifest.json": "462a19eb60478ab82b20055874b7a0d8753a9d4f6d8b834b8374c6df58319062",
     "anc/paper__repro__results.tar.gz": "b7ea853d038ffe7f6b19693807f8b880af93e02ec45e1fe1f764a59d088eefaa",
-    "anc/shared__preregistration.md": "9c9513edeab3de0bdd21f786097b7e40dac717142ee5158737ede21e1cb5eea1",
-    "anc/timestamps__README.md": "e5779efbeb84dad60cba862b7a4201a16e6b568bd1c9a64e2187cc78b7cff0da",
+    "anc/shared__preregistration.md": "7ffb63283b35099313e9702582353fde0b60c6d02b1cba972d50a1beba07adb1",
+    "anc/timestamps__README.md": "d1d764696f3b46467099a27bb31ee1e9ce2f76b46800e478ff0816ea5c443151",
     "anc/timestamps__head_2026-08-05.txt": "66f1213574245a5c54ef6e28235ed41b3044ec5d5e2d121a70384592178f4ef1",
     "anc/timestamps__head_2026-08-05.txt.ots": "0b898c0c33d5502c06adccebe26d2541e9e8db572bea63f8fdbda6d479cd8eb9"
   },
-  "zip_sha256": "7bff498812bf640aa488e9dfd5491a5f9266ef896f461261000fb2b044f8da1e"
+  "zip_sha256": "e6eace674eac325356dac19051f4701c2013a18fa892cde945fa0c1e058d9f61"
 }

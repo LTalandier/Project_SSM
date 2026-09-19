@@ -78,3 +78,9 @@ The original proposal is `photonic-ssm-proposal-v0_5.md`; the TFLN v0.2 draft is
 historical. Current empirical conclusions and dated corrections take precedence
 over proposal aspirations. Salvaged components retain provenance headers from
 `pnn-multilayer @ e2eec80`.
+
+## Licenses
+
+The paper and accompanying research material are [CC BY 4.0](paper/LICENSE-CC-BY-4.0.txt);
+project software is [MIT](LICENSE). See [license coverage](LICENSING.md), including
+code inside reproduction archives.

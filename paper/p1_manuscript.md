@@ -2,6 +2,8 @@
 
 *Lucas Talandier — independent researcher, Paris*
 
+Copyright © 2026 Lucas Talandier. Paper: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Accompanying code: MIT.
+
 **Abstract.** To our knowledge, no physical photonic system has yet had the parameters that define a continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics that *is* the memory — trained on the device by gradient-based or gradient-estimating methods.¹ We ask whether such training is feasible for a photonic state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered dissipative substrate model, both hardware-committed methods train the recurrence to within margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that consumed it.
 
 We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6× fewer device passes than model-free SPSA. The partial energy budget assigns SPSA 2.6 mJ in conversion energy and PAT 13–44 J in digital-twin energy; total training energy remains unmeasured. Hamiltonian-echo learning is censored — a quantified feasibility bound, the substrate's own dissipation defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings; four taps recover all 32) makes the input map a first-class design axis — and the winning routes' trained solutions preserve it, converging on an estimator-independent damp-the-driven-rings profile whose interior contribution survives a registered taps-only falsifier, narrowly.

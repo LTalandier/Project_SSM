@@ -35,7 +35,8 @@ The 2026-09-15 quotation below remains historical: **its 64 GS/s number is wrong
 `docs/s0c/audit_2026-09-19.md`. The 3.19× scenario is not a validated product window.
 
 P1: Lucas proposes Zenodo instead of endorsement-dependent arXiv submission.
-`paper/zenodo/DEPOSIT.md` is ready for account upload; license choice pending.
+`paper/zenodo/DEPOSIT.md` is ready for account upload. Lucas subsequently confirmed
+CC BY 4.0 for the paper and MIT for code; notices and deposit files are updated.
 No external publication, repo flip, or email has occurred.
 
 

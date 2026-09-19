@@ -15,12 +15,18 @@
     "paper/figures/S2_twin_mismatch_c1.png": "7e6c95b71dbcf463dab94c03841abdc0fab1f80eda504fcc8c912a27133c4aa2",
     "paper/figures/S3_echo_chain.png": "4c8831201ca78569f396f80f2d0cba06b0603e755859368244322679ff4336c1",
     "paper/figures/S5_rhel_r1_recovery.png": "ba363062b1fb28620ee15e67b0b5e4f7740c98b9d7dee995d32b6c02754b8064",
-    "paper/p1_manuscript.md": "cb4bd939c95bad9748cf0fa89a6a4dcb0561aa52e0b115c2218c7696ea13173d",
+    "paper/p1_manuscript.md": "41880c65189d6f6b70c177fc51282b98574ae57982552262e4834b5b8edd57f0",
     "results/s0_13/analysis.json": "abf07f5b66c862ad3d96d600f835c085002776d7b26727f7547aa5d74c04e25f"
   },
-  "source_zip_sha256": "7bff498812bf640aa488e9dfd5491a5f9266ef896f461261000fb2b044f8da1e",
+  "source_zip_sha256": "e6eace674eac325356dac19051f4701c2013a18fa892cde945fa0c1e058d9f61",
   "standalone_upload_compile": "XeLaTeX twice; no missing glyphs, font substitutions, Type 3, unembedded fonts, or overfull boxes",
   "tests": "174 passed (2 existing multiprocessing fork deprecation warnings)",
   "cloud_cleanup": "provider API reported zero servers and zero primary IPs; results/s0_13/cleanup.json",
-  "publication": "not submitted; author arXiv account step remains"
+  "publication": "not deposited; Zenodo licenses confirmed and applied; account upload remains",
+  "license_packaging_update": {
+    "date": "2026-09-19",
+    "prior_source_zip_sha256": "7bff498812bf640aa488e9dfd5491a5f9266ef896f461261000fb2b044f8da1e",
+    "prior_manuscript_sha256": "cb4bd939c95bad9748cf0fa89a6a4dcb0561aa52e0b115c2218c7696ea13173d",
+    "scope": "Earlier test/reproduction evidence remains historical. This packaging update verified identical scientific Markdown after removing license notice, unchanged numerical archive and figures, all ZIP member hashes, license presence, successful PDF compilation and font/layout audit. Ancillary ledger and timestamp README refreshed from repository."
+  }
 }
