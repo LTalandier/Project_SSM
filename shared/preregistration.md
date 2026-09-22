@@ -2353,3 +2353,47 @@ is inferred from this diagnostic.
 **Artifacts:** `analysis/s0c_capacity.py`, all outcomes/controls, source hashes,
 pre-run commit, wall time, and interpretation in `results/s0c_capacity/`. Commit
 this registration and script before the first outcome is computed.
+
+---
+
+## PR-23-D — 2026-09-22, frozen before sensitivity calculation
+
+Lucas authorized continuation of wide-coupler feasibility work ("Ok continue").
+Local arithmetic only, €0 cloud; no reoptimization or hardware. Preserve PR-23-C
+controls and select its already reported best broad-range candidate. This is
+conditional sensitivity, not validation of a fabricated coupler or a new product gate.
+
+Model a symmetric passive lossy 2-port coupler S=s[[t,i sqrt(K)],[i sqrt(K),t]],
+where s=10^(-ell/20), t=sqrt(1-K). With ring return q, the exact section is
+H=s(t-s q)/(1-s t q). Coupler excess loss is inside feedback, not just appended
+attenuation. Ring propagation loss cases .051 (original), .17 (different SiN
+experiment), .4 dB/cm (different athermal experiment) are sensitivity transplants,
+not proven co-integrated platforms. ell per coupler in dB: 0,.02,.05,.10,.20,.40,
+.67,1.0. No coupling/phase retuning. 2048 midpoint frequencies over 64 GHz; same
+20-km CD and receiver delay. Fit only one receiver complex scalar per scenario,
+report its noise enhancement, mean/worst insertion loss, normalized MSE, and
+whether the existing .01 noiseless screening threshold still holds. Include
+3 dB packaging in signal/noise accounting; it does not change normalized shape
+error after scalar fitting. No BER prediction or amplifier power estimate.
+
+Ideal balanced-MZI mapping: K=sin²(theta/2). Account for its common phase theta/2
+in the ring trim, modulo 2pi, under an explicit zero cold-phase convention. Report
+required coupling phase, phase-trim equivalents, and conditional heater budgets
+at Ppi=1,15,60,100 mW plus the historical assumed 2 mW/control for 16 controls.
+These are scenarios; 15 and 100 are vendor bound/record labels, not measured
+power for this chip, and the 1 mW row is optimistic, not a verified implementation.
+Exclude unknown lock/amplifier/refresh overhead from totals and label them subtotals.
+Report pure digital comparison only at fixed illustrative 16/32/64 taps and
+.03/.05/.15 pJ/tap/sample, not as function-matched evidence or a verdict.
+
+For ideal single-arm MZI imbalance, Kmax=4u(1-u); report splitter balance needed
+for the saved max K. Bound arm-delay mismatch using |dK/dtheta|<=1/2 across
+±32 GHz: |delta K|<=pi*32GHz*|delta tau|. Report delay matching for a .01 absolute
+K tolerance (design assumption), not measured bandwidth. Quantize the coupling
+and ring-trim phases independently to 6/8/10/12-bit 2pi grids and reconstruct the
+coupled ring phase; report same shape-error metric at zero added coupler loss.
+These are separate sensitivities, not a combined operating-window test.
+
+Validate lossless equivalence, passivity, and the section response against an
+independent 2x2 feedback solve before reporting. Source status and missing
+co-integration/bandwidth/actuator evidence must accompany any next-step decision.
