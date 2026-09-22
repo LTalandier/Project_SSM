@@ -16,6 +16,28 @@ Per result, report:
 ---
 
 
+## 2026-09-22 — Supervisor verification of the 2026-09-19…22 batch (second session's work; €0)
+
+Verified, not trusted, before acceptance: (1) **PR-23-C broad candidate re-evaluated
+independently in NumPy** from `results/s0c_capacity/capacity.json` (own cascade, CD and
+receiver-scalar code, not `delay_ring.py`): training NMSE 0.00241329, dense 0.00238687,
+scalar 0.1648 − 0.9942j — matches the stored values to every printed digit. (2) **PR-23-D
+reproduces**: `analysis.s0c_coupler_feasibility` re-run gives a `sensitivity.json` identical
+except the run-time HEAD stamp (the script records the current HEAD as `pre_run_commit`; the
+committed value 8f58f6d is the true pre-run commit). (3) **181 tests pass** (`python3 -m pytest`).
+(4) **The 2026-09-19 audit's corrections to S0c.0 confirmed by recomputation:** the PR-22 CONS
+window paired the photonic-pessimistic corner with the digital-*pessimistic* price (0.15 pJ/tap),
+which favours the photonic side; crossed correctly (0.05 pJ/tap) the 100 GS/s edge cell is
+1.06×, not 3.19×, and the 64 GS/s cell is 2.04×, not the 1.25× in the S0c.0 reading — so the
+"thin conditional window" reported on 2026-09-15 was an artifact of crossed corners; the
+mapping memo's linewidth table (0.5/1.0/2.1 GHz) was inconsistent with its own formula (exact
+cavity FWHM 0.845/1.706/3.584 GHz at K = 5/10/20 %; memory 38/19/9 round trips stands).
+Commit ordering checked: each PR-23 freeze precedes its result commit. Lesson recorded: a
+conservative corner must cross the photonic-pessimistic physics with the digital-*optimistic*
+price; and the Parseval identity (task MSE ≡ |X|²-weighted response fit for a linear, fully
+observed plant) means W1 in this regime is a wording distinction until a drift/observability/
+nonlinearity difference is registered.
+
 ## 2026-09-22 — PR-23-D coupler feasibility and saved-candidate sensitivity
 
 - Frozen before calculation at `8f58f6d`; no training, local arithmetic, €0.
