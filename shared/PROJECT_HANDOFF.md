@@ -1,7 +1,41 @@
 # Project_SSM — current handoff
 
-Updated 2026-09-20 after the P2 evidence audit and PR-23-C capacity diagnostic. This
+Updated 2026-09-22 after the wide-coupler source audit and PR-23-D sensitivity. This
 supersedes older active-run notes. P1's validated numerical snapshot is unchanged.
+
+## Latest work — 2026-09-22
+
+Lucas authorized wide-coupler feasibility continuation. PR-23-D frozen at `8f58f6d`
+before 24 loss and 4 phase-quantization calculations. Local arithmetic, €0 cloud;
+no reoptimization, hardware, external contact or publication. P1/P2 upload and
+contact artifacts remain byte-identical to their previous versions.
+
+**Physical interpretation:** ideal balanced MZI can span the required K=.328–.950;
+existing SiN tunable-ring/MZI and MEMS publications support the device class, not
+one complete low-loss, broadband 100-GHz-FSR implementation. Coupler/phase-shifter
+length and group delay must fit the 10-ps round trip. Primary-source access and
+limitations: `docs/s0c/coupler_feasibility_2026-09-22.md`.
+
+**Saved-candidate sensitivity:** loss is inside the recurrence. At .051 dB/cm,
+.10 dB/coupler gives NMSE .006129 (passes .01 screen), .20 gives .015990 (fails).
+At .67, NMSE .125725 and mean IL 13.97 dB including 3-dB packaging. The latter
+is a scenario, not a prediction of the MEMS paper whose abstract gives .67-dB IL.
+Ideal phase quantization separately: 6 bits fails (.027364); 8 bits passes (.005064).
+No joint loss/precision robustness or retuned capacity has been measured.
+
+**Conditional costs:** MZI common phase compensated in ring trim; total 10.976
+pi-equivalents under zero cold-phase offsets. At assumed Ppi=15 mW: 164.64 mW
+heaters, 196.64 mW including historical assumed 2 mW/control, before lock/amp/etc.
+Vendor <15 mW claim is not a lower bound or a chip-specific measurement. Digital
+comparisons remain explicitly assumed tap counts, not function-matched evidence.
+
+**Decision:** no source-backed device or product go. Science remains conditional.
+Next model experiment could combine loss/quantization and reoptimize, but real
+platform evidence needs a compatible complex coupler response, footprint, loss
+versus setting and control-power budget. Do not infer a hardware impossibility
+from the frozen-candidate failure. Drift baseline still needs separate registration.
+Evidence: `results/s0c_coupler/`; independent feedback/MZI tests; 181 tests pass
+(two existing fork warnings). Pre-run source/input hashes verified.
 
 ## Latest work — 2026-09-20
 

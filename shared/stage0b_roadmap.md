@@ -275,3 +275,13 @@ one broader-range start reaches .00238687 using K=.3282–.9500. This is a mathe
 witness outside the PR-22 grid, not a reopened product gate. Next prerequisite:
 broad-coupling actuator/loss feasibility and a separately defined adaptive-drift
 experiment. Evidence and limitations: `results/s0c_capacity/reading.md`.
+
+
+## 2026-09-22 — PR-23-D wide-coupler feasibility (local arithmetic, €0)
+
+Balanced-MZI range is plausible; a complete source-backed implementation is still
+missing. Frozen candidate tolerates .10 dB symmetric coupler loss but fails at
+.20 dB under the .01 NMSE screen; 8-bit phase controls separately pass at zero
+added loss, 6-bit fail. Heater cost at the illustrative 15 mW/pi is 164.64 mW
+before control/lock/amp. No joint-window, hardware or product verdict. See
+`docs/s0c/coupler_feasibility_2026-09-22.md` and `results/s0c_coupler/`.

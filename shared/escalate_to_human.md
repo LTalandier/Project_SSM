@@ -18,6 +18,19 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-09-22-1 — authorized wide-coupler feasibility audit completed (€0)
+
+Lucas: "Ok continue." PR-23-D frozen at `8f58f6d`; no spend decision needed for
+this local arithmetic. Required K range is mathematically compatible with a
+balanced MZI; no complete sourced physical implementation yet. Saved design
+passes at .10 dB/coupler but fails at .20; separate ideal 8-bit quantization
+passes, 6-bit fails. At assumed 15 mW/pi the heater subtotal is 164.64 mW before
+controls/lock/amplification. These are not measured chip specifications or an
+energy verdict. Science continuation needs a joint loss/control model and a
+matched-observation drift protocol; no hardware or paid fleet launched. P1/P2
+release files and unsent contact status unchanged.
+
+
 
 ### E-2026-09-20-1 — authorized continuation completed locally; no paid expansion
 

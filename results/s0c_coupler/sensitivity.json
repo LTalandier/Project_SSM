@@ -1,0 +1,421 @@
+{
+  "protocol": "PR-23-D",
+  "date": "2026-09-22",
+  "cloud_spend_eur": 0,
+  "pre_run_commit": "8f58f6d792677ad71b07c4da19dfcd6be0eb5b7f",
+  "source_sha256": {
+    "analysis/s0c_coupler_feasibility.py": "0ba59dedc183ceaf795728cbb4543be1493e61776db2ced3c2563cfd3a59c5d7",
+    "shared/preregistration.md": "162e3fb67f4ed88769eb35e76282a3d9bae702a3ebe721cc2842dbda183a8639",
+    "results/s0c_capacity/capacity.json": "52d5ace95481ccacbdfcef49f17493c643fede3d5beec7ec3ead48dafafc0d48"
+  },
+  "couplings": [
+    0.5836644240381194,
+    0.6604457104202933,
+    0.503573374885351,
+    0.4985608109400045,
+    0.49729682540256553,
+    0.3282097296815903,
+    0.9499873210977776,
+    0.6415791284455669
+  ],
+  "coupler_phase_over_pi": [
+    0.5535141599986709,
+    0.6039824599950735,
+    0.5022749004718582,
+    0.49908378252307595,
+    0.49827909721977554,
+    0.3883601624783765,
+    0.8564151903714902,
+    0.5913821674632745
+  ],
+  "ring_trim_over_pi": [
+    1.748857430557979,
+    1.8632343454638378,
+    0.037027094757480054,
+    0.18568401567110449,
+    0.2624180574026702,
+    0.4106138322382087,
+    0.4878977019369054,
+    1.4872447664476045
+  ],
+  "total_heater_pi_units_zero_cold_phase": 10.976269164997387,
+  "ideal_splitter_u_interval_for_max_K": [
+    0.38818242657991725,
+    0.6118175734200828
+  ],
+  "max_arm_delay_ps_for_0_01_absolute_K_bound": 0.09947183943243458,
+  "loss_scenarios": [
+    {
+      "coupler_loss_db": 0,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.0023868683714681157,
+      "mean_insertion_loss_db_including_3db_package": 3.077641805714029,
+      "worst_insertion_loss_db_including_3db_package": 3.1446365607150706,
+      "receiver_noise_multiplier": 2.0264054168849404,
+      "receiver_noise_enhancement_db": 3.0672633771818756,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.02,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.0026324435175487586,
+      "mean_insertion_loss_db_including_3db_package": 3.4361913934390147,
+      "worst_insertion_loss_db_including_3db_package": 3.6773736284290655,
+      "receiver_noise_multiplier": 2.2002618883330993,
+      "receiver_noise_enhancement_db": 3.424743762262347,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.05,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.0034744814979232328,
+      "mean_insertion_loss_db_including_3db_package": 3.9698922296706507,
+      "worst_insertion_loss_db_including_3db_package": 4.476595925878082,
+      "receiver_noise_multiplier": 2.4858656161107677,
+      "receiver_noise_enhancement_db": 3.9547764733095656,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.1,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.006129155849984431,
+      "mean_insertion_loss_db_including_3db_package": 4.848446705801463,
+      "worst_insertion_loss_db_including_3db_package": 5.809279084421803,
+      "receiver_noise_multiplier": 3.0351112959559474,
+      "receiver_noise_enhancement_db": 4.821746210565157,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.2,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.01598998551593069,
+      "mean_insertion_loss_db_including_3db_package": 6.56500750238189,
+      "worst_insertion_loss_db_including_3db_package": 8.4793561068922,
+      "receiver_noise_multiplier": 4.461699005270416,
+      "receiver_noise_enhancement_db": 6.495002686014803,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.4,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.0520297152288289,
+      "mean_insertion_loss_db_including_3db_package": 9.84220670900129,
+      "worst_insertion_loss_db_including_3db_package": 13.85832801360712,
+      "receiver_noise_multiplier": 9.141456457752785,
+      "receiver_noise_enhancement_db": 9.61015394986961,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.67,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.1257253792878319,
+      "mean_insertion_loss_db_including_3db_package": 13.968786413696177,
+      "worst_insertion_loss_db_including_3db_package": 21.29037820558139,
+      "receiver_noise_multiplier": 21.80351499281236,
+      "receiver_noise_enhancement_db": 13.385265128214455,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 1.0,
+      "propagation_db_cm": 0.051,
+      "nmse": 0.23221270081115233,
+      "mean_insertion_loss_db_including_3db_package": 18.635642518432935,
+      "worst_insertion_loss_db_including_3db_package": 30.979897408705128,
+      "receiver_noise_multiplier": 56.0796346416776,
+      "receiver_noise_enhancement_db": 17.488051755431208,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.002598393703002589,
+      "mean_insertion_loss_db_including_3db_package": 3.257515645865286,
+      "worst_insertion_loss_db_including_3db_package": 3.4821350023892923,
+      "receiver_noise_multiplier": 2.111648498269497,
+      "receiver_noise_enhancement_db": 3.2462162789273536,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.02,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.0030729200170884264,
+      "mean_insertion_loss_db_including_3db_package": 3.6140729611213,
+      "worst_insertion_loss_db_including_3db_package": 4.014920660123384,
+      "receiver_noise_multiplier": 2.2912405628757244,
+      "receiver_noise_enhancement_db": 3.600706892089252,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.05,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.004256349507015362,
+      "mean_insertion_loss_db_including_3db_package": 4.1447943605764594,
+      "worst_insertion_loss_db_including_3db_package": 4.814283942102068,
+      "receiver_noise_multiplier": 2.585990837613774,
+      "receiver_noise_enhancement_db": 4.126269818046891,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.1,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.007471254722155063,
+      "mean_insertion_loss_db_including_3db_package": 5.018416270130361,
+      "worst_insertion_loss_db_including_3db_package": 6.147384769463496,
+      "receiver_noise_multiplier": 3.151989198318868,
+      "receiver_noise_enhancement_db": 4.985847205184857,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.2,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.01839835495810619,
+      "mean_insertion_loss_db_including_3db_package": 6.725297232875117,
+      "worst_insertion_loss_db_including_3db_package": 8.818995989325733,
+      "receiver_noise_multiplier": 4.618117736469411,
+      "receiver_noise_enhancement_db": 6.644650008304392,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.4,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.05621690762354051,
+      "mean_insertion_loss_db_including_3db_package": 9.984303744005572,
+      "worst_insertion_loss_db_including_3db_package": 14.204385452763342,
+      "receiver_noise_multiplier": 9.4037823144531,
+      "receiver_noise_enhancement_db": 9.733025672068324,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.67,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.1313208744305609,
+      "mean_insertion_loss_db_including_3db_package": 14.089820371467198,
+      "worst_insertion_loss_db_including_3db_package": 21.65540263660287,
+      "receiver_noise_multiplier": 22.276216118200825,
+      "receiver_noise_enhancement_db": 13.478414226531118,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 1.0,
+      "propagation_db_cm": 0.17,
+      "nmse": 0.23810613422067983,
+      "mean_insertion_loss_db_including_3db_package": 18.737082825084062,
+      "worst_insertion_loss_db_including_3db_package": 31.400953554820987,
+      "receiver_noise_multiplier": 56.96429927913828,
+      "receiver_noise_enhancement_db": 17.55602759469111,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.0035941745293740397,
+      "mean_insertion_loss_db_including_3db_package": 3.600061002830816,
+      "worst_insertion_loss_db_including_3db_package": 4.134589431106891,
+      "receiver_noise_multiplier": 2.282665937661346,
+      "receiver_noise_enhancement_db": 3.584423582506733,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.02,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.00450835617684398,
+      "mean_insertion_loss_db_including_3db_package": 3.9527801797585287,
+      "worst_insertion_loss_db_including_3db_package": 4.667562227027113,
+      "receiver_noise_multiplier": 2.473521199546804,
+      "receiver_noise_enhancement_db": 3.9331563687798115,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.05,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.006345407527518256,
+      "mean_insertion_loss_db_including_3db_package": 4.47776705135454,
+      "worst_insertion_loss_db_including_3db_package": 5.467338421770079,
+      "receiver_noise_multiplier": 2.7861991104986044,
+      "receiver_noise_enhancement_db": 4.450121492383246,
+      "passes_shape_only_screen": true
+    },
+    {
+      "coupler_loss_db": 0.1,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.010627756282110292,
+      "mean_insertion_loss_db_including_3db_package": 5.34190959847823,
+      "worst_insertion_loss_db_including_3db_package": 6.801483062178065,
+      "receiver_noise_multiplier": 3.384937717793926,
+      "receiver_noise_enhancement_db": 5.295506821593422,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.2,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.023567784890617206,
+      "mean_insertion_loss_db_including_3db_package": 7.03024051748386,
+      "worst_insertion_loss_db_including_3db_package": 9.476631607952275,
+      "receiver_noise_multiplier": 4.92794839472456,
+      "receiver_noise_enhancement_db": 6.926661512660061,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.4,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.06467871156437581,
+      "mean_insertion_loss_db_including_3db_package": 10.25457094262347,
+      "worst_insertion_loss_db_including_3db_package": 14.875626456138304,
+      "receiver_noise_multiplier": 9.917858629470514,
+      "receiver_noise_enhancement_db": 9.964179135055616,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 0.67,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.1422809619896672,
+      "mean_insertion_loss_db_including_3db_package": 14.320227977755344,
+      "worst_insertion_loss_db_including_3db_package": 22.365997409075405,
+      "receiver_noise_multiplier": 23.193583156614025,
+      "receiver_noise_enhancement_db": 13.653678476002693,
+      "passes_shape_only_screen": false
+    },
+    {
+      "coupler_loss_db": 1.0,
+      "propagation_db_cm": 0.4,
+      "nmse": 0.2494468297876124,
+      "mean_insertion_loss_db_including_3db_package": 18.930634194223007,
+      "worst_insertion_loss_db_including_3db_package": 32.228950509469755,
+      "receiver_noise_multiplier": 58.673890107421855,
+      "receiver_noise_enhancement_db": 17.684448831060596,
+      "passes_shape_only_screen": false
+    }
+  ],
+  "phase_quantization_scenarios": [
+    {
+      "bits_per_2pi_control": 6,
+      "nmse": 0.027364050905247694,
+      "mean_insertion_loss_db_including_3db_package": 3.0782285293266503,
+      "worst_insertion_loss_db_including_3db_package": 3.1520770001034637,
+      "receiver_noise_multiplier": 1.9759373485024283,
+      "receiver_noise_enhancement_db": 2.95773170195416,
+      "passes_shape_only_screen": false
+    },
+    {
+      "bits_per_2pi_control": 8,
+      "nmse": 0.0050639625560687015,
+      "mean_insertion_loss_db_including_3db_package": 3.0773625059863012,
+      "worst_insertion_loss_db_including_3db_package": 3.1430508848817267,
+      "receiver_noise_multiplier": 2.020837592731089,
+      "receiver_noise_enhancement_db": 3.055314122709423,
+      "passes_shape_only_screen": true
+    },
+    {
+      "bits_per_2pi_control": 10,
+      "nmse": 0.002409044384704355,
+      "mean_insertion_loss_db_including_3db_package": 3.0776514013505545,
+      "worst_insertion_loss_db_including_3db_package": 3.1444791702659436,
+      "receiver_noise_multiplier": 2.0263648489763506,
+      "receiver_noise_enhancement_db": 3.067176432116216,
+      "passes_shape_only_screen": true
+    },
+    {
+      "bits_per_2pi_control": 12,
+      "nmse": 0.0023956111646396116,
+      "mean_insertion_loss_db_including_3db_package": 3.0776523482768297,
+      "worst_insertion_loss_db_including_3db_package": 3.1446458699981585,
+      "receiver_noise_multiplier": 2.0263925771454954,
+      "receiver_noise_enhancement_db": 3.0672358592646325,
+      "passes_shape_only_screen": true
+    }
+  ],
+  "heater_subtotals": [
+    {
+      "Ppi_mw_scenario": 1,
+      "heater_mw": 10.976269164997387,
+      "assumed_control_mw": 32.0,
+      "subtotal_mw": 42.97626916499739,
+      "subtotal_pj_per_sample_64GSs": 0.6715042057030842
+    },
+    {
+      "Ppi_mw_scenario": 15,
+      "heater_mw": 164.6440374749608,
+      "assumed_control_mw": 32.0,
+      "subtotal_mw": 196.6440374749608,
+      "subtotal_pj_per_sample_64GSs": 3.0725630855462627
+    },
+    {
+      "Ppi_mw_scenario": 60,
+      "heater_mw": 658.5761498998432,
+      "assumed_control_mw": 32.0,
+      "subtotal_mw": 690.5761498998432,
+      "subtotal_pj_per_sample_64GSs": 10.79025234218505
+    },
+    {
+      "Ppi_mw_scenario": 100,
+      "heater_mw": 1097.6269164997386,
+      "assumed_control_mw": 32.0,
+      "subtotal_mw": 1129.6269164997386,
+      "subtotal_pj_per_sample_64GSs": 17.650420570308416
+    }
+  ],
+  "illustrative_digital_budgets_not_function_matched": [
+    {
+      "assumed_taps": 16,
+      "pj_per_tap": 0.03,
+      "digital_pj_per_sample": 0.48,
+      "max_total_optical_mw_for_3x_at_64GSs": 10.24
+    },
+    {
+      "assumed_taps": 16,
+      "pj_per_tap": 0.05,
+      "digital_pj_per_sample": 0.8,
+      "max_total_optical_mw_for_3x_at_64GSs": 17.066666666666666
+    },
+    {
+      "assumed_taps": 16,
+      "pj_per_tap": 0.15,
+      "digital_pj_per_sample": 2.4,
+      "max_total_optical_mw_for_3x_at_64GSs": 51.199999999999996
+    },
+    {
+      "assumed_taps": 32,
+      "pj_per_tap": 0.03,
+      "digital_pj_per_sample": 0.96,
+      "max_total_optical_mw_for_3x_at_64GSs": 20.48
+    },
+    {
+      "assumed_taps": 32,
+      "pj_per_tap": 0.05,
+      "digital_pj_per_sample": 1.6,
+      "max_total_optical_mw_for_3x_at_64GSs": 34.13333333333333
+    },
+    {
+      "assumed_taps": 32,
+      "pj_per_tap": 0.15,
+      "digital_pj_per_sample": 4.8,
+      "max_total_optical_mw_for_3x_at_64GSs": 102.39999999999999
+    },
+    {
+      "assumed_taps": 64,
+      "pj_per_tap": 0.03,
+      "digital_pj_per_sample": 1.92,
+      "max_total_optical_mw_for_3x_at_64GSs": 40.96
+    },
+    {
+      "assumed_taps": 64,
+      "pj_per_tap": 0.05,
+      "digital_pj_per_sample": 3.2,
+      "max_total_optical_mw_for_3x_at_64GSs": 68.26666666666667
+    },
+    {
+      "assumed_taps": 64,
+      "pj_per_tap": 0.15,
+      "digital_pj_per_sample": 9.6,
+      "max_total_optical_mw_for_3x_at_64GSs": 204.79999999999998
+    }
+  ],
+  "limitations": [
+    "No reoptimization: failures are frozen-candidate sensitivity, not hardware impossibility.",
+    "Symmetric frequency-flat coupler loss and matched arms are assumptions; measured complex S parameters are absent.",
+    "Receiver scalar cannot undo noise. Multipliers refer to additive noise after optical filtering.",
+    "Heater phase allocation assumes zero fabrication offsets and a specific MZI phase convention.",
+    "Actuation, propagation, packaging and athermal data are not co-integrated evidence.",
+    "No complete locking, amplification, DAC, refresh or task-matched digital energy budget."
+  ]
+}

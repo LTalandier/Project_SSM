@@ -16,6 +16,25 @@ Per result, report:
 ---
 
 
+## 2026-09-22 — PR-23-D coupler feasibility and saved-candidate sensitivity
+
+- Frozen before calculation at `8f58f6d`; no training, local arithmetic, €0.
+- Read primary SiN tunable-ring literature, MEMS abstract, vendor performance
+  tiers. No complete verified broadband, low-loss, compact actuator implementation.
+- Validated lossy section H=s(t-sq)/(1-stq) using independent 2x2 feedback solve,
+  passivity, lossless limit and balanced-MZI phase compensation.
+- 24 loss scenarios + 4 separate phase-quantization cases. Original propagation
+  loss: .10 dB/coupler passes shape threshold (NMSE .006129); .20 fails (.015990).
+  6-bit quantization fails (.027364); 8-bit passes (.005064), with zero added loss.
+- Conditional phase allocation 10.976 pi units. At 15 mW/pi, heater subtotal
+  164.64 mW; plus assumed controls 196.64 mW. Omitted costs explicitly named;
+  no energy advantage or function-matched DSP verdict.
+- Sources/interpretation: `docs/s0c/coupler_feasibility_2026-09-22.md`.
+  Outputs: `results/s0c_coupler/`; 181 tests pass, two existing fork warnings.
+  P1/P2 release files unchanged. No paid expansion, hardware or communication.
+
+
+
 ## 2026-09-20 — PR-23-C capacity diagnostic and P2 evidence audit
 
 - **Capacity protocol:** pre-run `947d877`; 6 synthetic recoveries plus 30 CD fits,
