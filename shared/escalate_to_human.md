@@ -23,7 +23,8 @@ Escalate (don't decide autonomously):
 Lucas: "Ok make the changes then we deposit a clean first version." Main text halved,
 moved detail in supplementary N9, §8.3/Figure S1 aligned with the audited P2 note. PDF and
 source ZIP rebuilt and checked (fonts embedded, no overfull boxes, 181 tests, 1,065-file
-archive verifies). **Your actions:** make the repository public, upload
+archive verifies). **Update 2026-09-29:** repository made public by Lucas (verified; public head `e8717c1`);
+release anchored in `timestamps/head_2026-09-29.txt`. **Remaining actions:** upload
 `paper/submission/p1_with_supplement.pdf` and `paper/submission/p1_arxiv_source.zip` with the
 metadata in `paper/zenodo/DEPOSIT.md`, publish, and send the P2 email. Report the flip date and
 DOI so the record can be closed.

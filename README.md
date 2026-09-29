@@ -39,7 +39,8 @@ validated energy window and no device-level go; it is recorded in `docs/s0c/` an
 - [Current handoff](shared/PROJECT_HANDOFF.md)
 
 P1 is prepared for a Zenodo preprint deposit; the source ZIP also remains usable for a later
-arXiv or journal submission. The deposit and the repository's public release happen together.
+arXiv or journal submission. The repository was made public on 2026-09-29, and `timestamps/head_2026-09-29.txt` anchors that
+head and the two deposit files.
 P2 author contact is separate.
 The correction used approximately €1 of cloud server time including VAT with hour rounding
 (estimate, plus small address charges); all temporary servers and addresses were removed.

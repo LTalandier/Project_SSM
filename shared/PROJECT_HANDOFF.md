@@ -20,8 +20,12 @@ zero-gradient mechanism; Heartbeat is attributed to the port. `analysis/make_sfi
 S1 fixed (ddof=0); no other PNG changed. README status updated for the Zenodo route and a
 one-line Stage 0c pointer (also one sentence in P1 §9.1). Long form stays at `a508a28`.
 
-**Still Lucas's:** flip the repository public, upload the two files in `paper/zenodo/`
-(checksums refreshed), send the P2 email. Then tell the session the flip date and DOI.
+**Repository made public by Lucas on 2026-09-29** (verified anonymously: `private: false`, public
+head `e8717c1`). `timestamps/head_2026-09-14.txt.ots` upgraded (Bitcoin heights 966992, 966993,
+967042); new anchor `timestamps/head_2026-09-29.txt(.ots)` covers `e8717c1` plus the SHA-256 of both
+deposit files, pending upgrade. **Still Lucas's:** Zenodo upload of the two files in
+`paper/submission/` per `paper/zenodo/DEPOSIT.md`, and the P2 email, now urgent because the P2
+note and draft are publicly visible. Then report the DOI to close the record.
 
 ## Latest work — 2026-09-22
 

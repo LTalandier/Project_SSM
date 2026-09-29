@@ -19,5 +19,11 @@ experiments, and this older anchor does not cover the September correction run.
 
 `head_2026-09-14.txt` (stamped 2026-09-14 from the Supervisor session) anchors commit
 `cdc42b1`, which covers PR-20, the S0b.0 run, the audit repairs, and the S0.13 correction rerun.
-Its `.ots` is a pending calendar receipt; run `ots upgrade timestamps/head_2026-09-14.txt.ots`
-after a few hours to retrieve the Bitcoin attestation, then commit the upgraded file.
+Its proof was upgraded on 2026-09-29 and now carries completed Bitcoin attestations at heights
+966992, 966993 and 967042. The original pending receipt remains in Git history.
+
+`head_2026-09-29.txt` anchors the public-release head `e8717c1` on the day the repository was made
+public again. It records the SHA-256 of the two deposit files, `p1_with_supplement.pdf` and
+`p1_arxiv_source.zip`, so the proof also covers the exact files deposited. Its `.ots` is a pending
+calendar receipt; run `ots upgrade timestamps/head_2026-09-29.txt.ots` after a few hours and
+commit the upgraded file.
