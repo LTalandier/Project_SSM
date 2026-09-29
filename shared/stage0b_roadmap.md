@@ -285,3 +285,14 @@ missing. Frozen candidate tolerates .10 dB symmetric coupler loss but fails at
 added loss, 6-bit fail. Heater cost at the illustrative 15 mW/pi is 164.64 mW
 before control/lock/amp. No joint-window, hardware or product verdict. See
 `docs/s0c/coupler_feasibility_2026-09-22.md` and `results/s0c_coupler/`.
+
+
+## 2026-09-29 — Stage 0c closed negative; project closed at Stage 0
+
+No validated energy window was found in the FSR-matched regime (S0c.0 audit), the
+task-versus-response comparison is not distinguishable for a linear, fully observed
+plant (PR-23-P), and the only good channel fit needs couplers beyond any sourced device
+(PR-23-C, PR-23-D). No drift protocol was registered, and none is planned. P1 was
+published on Zenodo the same day (DOI 10.5281/zenodo.23041523). Reopening requires a new registration
+with a concrete workload and, for hardware, a collaborator's chip.
+

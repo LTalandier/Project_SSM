@@ -1,4 +1,10 @@
-# P1 — Zenodo deposit draft
+# P1 — Zenodo deposit
+
+**Published 2026-09-29 by Lucas: DOI [10.5281/zenodo.23041523](https://doi.org/10.5281/zenodo.23041523), record
+<https://zenodo.org/records/23041523>.** Verified through the public API the same day: both files match
+`checksums.json` by MD5 and size, licenses CC BY 4.0 and MIT, related work and software
+repository linked, ORCID 0000-0002-4530-8477. The description includes an AI-assistance
+statement. The draft notes below are kept as prepared.
 
 Prepared 2026-09-19 at Lucas's suggestion. No record has been created or published;
 no DOI is reserved. Zenodo replaces the immediate arXiv route for public deposit,

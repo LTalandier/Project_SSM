@@ -4,7 +4,7 @@ A research codebase for a dissipative silicon-nitride coupled-ring recurrence,
 with PAT, SPSA, recurrent-adjoint, and Hamiltonian-echo estimators evaluated on
 one shared substrate. **No chip has been fabricated or trained in this project.**
 
-## Current status — 2026-09-29
+## Current status — 2026-09-29: P1 published, project closed at Stage 0
 
 Stage 0 produced the P1 simulation manuscript and follow-up experiments through
 S0.12. Stage 0b ended at its first arithmetic gate: the best registered inline
@@ -38,8 +38,8 @@ validated energy window and no device-level go; it is recorded in `docs/s0c/` an
 - [Pre-registration and post-run errata](shared/preregistration.md)
 - [Current handoff](shared/PROJECT_HANDOFF.md)
 
-P1 is prepared for a Zenodo preprint deposit; the source ZIP also remains usable for a later
-arXiv or journal submission. The repository was made public on 2026-09-29, and `timestamps/head_2026-09-29.txt` anchors that
+**P1 is published as a Zenodo preprint on 2026-09-29: DOI [10.5281/zenodo.23041523](https://doi.org/10.5281/zenodo.23041523)**
+([record](https://zenodo.org/records/23041523)). The source ZIP also remains usable for a later arXiv or journal submission. The repository was made public on 2026-09-29, and `timestamps/head_2026-09-29.txt` anchors that
 head and the two deposit files.
 P2 author contact is separate.
 The correction used approximately €1 of cloud server time including VAT with hour rounding

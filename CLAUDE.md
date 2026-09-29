@@ -1,10 +1,11 @@
 # Photonic State-Space Model on Silicon Nitride
 
-**Current state, 2026-09-13:** read `shared/PROJECT_HANDOFF.md` for the live state.
-S0.13's corrected mismatch sweep is complete, P1 submission files are prepared,
-and Stage 0b/hardware development remains closed. The Stage-0 setup text below is
+**Current state, 2026-09-29:** read `shared/PROJECT_HANDOFF.md` for the live state. P1 is
+published on Zenodo (DOI 10.5281/zenodo.23041523) and the repository is public. Stage 0b and Stage 0c
+closed negative; hardware development is not planned. The project is closed at Stage 0
+unless Lucas opens a new registration. The Stage-0 setup text below is
 historical context; it must not restart completed work or restore withdrawn claims.
-Actual arXiv submission and the submission-day public release are still pending.
+Remaining: the P2 author email (Lucas) and the pending OpenTimestamps upgrade of `timestamps/head_2026-09-29.txt.ots`.
 
 
 ## What this is

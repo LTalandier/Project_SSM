@@ -1,5 +1,9 @@
 # P1 submission preparation
 
+**2026-09-29: published on Zenodo, DOI 10.5281/zenodo.23041523 (<https://zenodo.org/records/23041523>),** from the condensed build
+recorded in `submission/verification.json`. The arXiv notes below remain for a possible later
+submission.
+
 **2026-09-19 route update:** Lucas proposed a Zenodo public preprint deposit to
 avoid the immediate arXiv endorsement dependency. Copy-ready metadata and links
 to the verified PDF + source ZIP are in [`zenodo/DEPOSIT.md`](zenodo/DEPOSIT.md).

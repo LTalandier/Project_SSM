@@ -18,7 +18,14 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
-### E-2026-09-29-1 — P1 condensed; clean first version ready to deposit (€0)
+### ✅ E-2026-09-29-1 — RESOLVED 2026-09-29: P1 published on Zenodo, DOI 10.5281/zenodo.23041523
+
+Lucas made the repository public and published the record (https://zenodo.org/records/23041523); files verified by MD5.
+**Still open for Lucas: send the P2 author email** (the P2 note is now publicly visible).
+Stage 0c is closed negative, which resolves the open continuation questions of
+E-2026-09-19-1, E-2026-09-20-1 and E-2026-09-22-1 in favor of no further work.
+
+Original entry: P1 condensed; clean first version ready to deposit (€0)
 
 Lucas: "Ok make the changes then we deposit a clean first version." Main text halved,
 moved detail in supplementary N9, §8.3/Figure S1 aligned with the audited P2 note. PDF and

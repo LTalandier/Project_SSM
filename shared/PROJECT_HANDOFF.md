@@ -1,6 +1,10 @@
 # Project_SSM — current handoff
 
-Updated 2026-09-29 after condensing P1 for its first public deposit. This supersedes
+Updated 2026-09-29: **P1 published on Zenodo, DOI 10.5281/zenodo.23041523 (https://zenodo.org/records/23041523); repository public;
+project closed at Stage 0.** Stage 0b and Stage 0c are closed negative; no runs, spend or
+hardware are planned. Open items: the P2 author email (Lucas; urgent because the P2 note is
+public) and upgrading `timestamps/head_2026-09-29.txt.ots` once its Bitcoin transactions confirm.
+Earlier today: P1 condensed for its first public deposit. This supersedes
 older active-run notes. P1's validated numerical snapshot is unchanged.
 
 ## Latest work — 2026-09-29

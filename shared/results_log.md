@@ -16,6 +16,14 @@ Per result, report:
 ---
 
 
+## 2026-09-29 — P1 published; project closed at Stage 0
+
+P1 condensed (989c8fd) and rebuilt (e8717c1); repository made public and the release anchored
+(78dbb64, `timestamps/head_2026-09-29.txt`). Lucas published the Zenodo record the same day:
+DOI 10.5281/zenodo.23041523. The API check confirmed both files by MD5 and size, CC BY 4.0 and MIT, ORCID,
+repository links and an AI-assistance statement. Stage 0c closed negative, no further runs.
+No compute spend. Open: P2 author email (Lucas); OTS upgrade of the 2026-09-29 anchor.
+
 ## 2026-09-22 — Supervisor verification of the 2026-09-19…22 batch (second session's work; €0)
 
 Verified, not trusted, before acceptance: (1) **PR-23-C broad candidate re-evaluated
