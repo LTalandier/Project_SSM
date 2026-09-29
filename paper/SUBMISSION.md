@@ -46,7 +46,9 @@ SOURCE_DATE_EPOCH; a different TeX installation can still produce different byte
 
 ## Verified release checks
 
-`submission/verification.json` records the final checks: 174 tests pass; the
+`submission/verification.json` records the checks. For the condensed 2026-09-29 revision
+(28 pages): 181 tests pass, the result archive verifies, the extracted ZIP compiles standalone,
+and only Figure S1 changed among the figures. The earlier release checks: 174 tests pass; the
 1,065-file result archive verifies; a results-free clone reproduces all 12 PNG
 figures, the manuscript Markdown, and the corrected analysis JSON exactly. The
 extracted upload ZIP compiles by itself with XeLaTeX and passes font/glyph/layout
@@ -59,7 +61,7 @@ in-situ-training bake-off on a realistic silicon-nitride ring substrate
 
 Author: Lucas Talandier (independent researcher, Paris)
 
-Suggested primary category: `physics.optics`. Comments: 31 pages, 12 figures;
+Suggested primary category: `physics.optics`. Comments: 28 pages, 12 figures;
 includes supplementary notes and ancillary reproducibility records. No journal reference or DOI exists
 for P1. `arxiv_abstract.txt` contains ASCII metadata text under 1,920 characters;
 it is an abridgement of the manuscript abstract.

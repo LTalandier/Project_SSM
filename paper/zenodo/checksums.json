@@ -1,13 +1,13 @@
 {
   "paper/submission/p1_with_supplement.pdf": {
-    "bytes": 1757938,
-    "sha256": "b8b9aa45d77702591c7c5fa3c18e720e41645fd0fc4d210480f948a44e0d2540"
+    "bytes": 1729918,
+    "sha256": "1a4e63db6fa724fbafd35989f50128d847b7dd429ba8497777fe5bd15fefa8e3"
   },
   "paper/submission/p1_arxiv_source.zip": {
-    "bytes": 10573304,
-    "sha256": "e6eace674eac325356dac19051f4701c2013a18fa892cde945fa0c1e058d9f61"
+    "bytes": 10568799,
+    "sha256": "8039c123e946aa70b4ecce31f937b0fcb027ddcbae12f312a9eeec4b6765a5de"
   },
-  "verified_on": "2026-09-19",
+  "verified_on": "2026-09-29",
   "zip_crc": "pass",
   "zip_members_match_build_manifest": true,
   "numerical_archive_matches_validated_P1_snapshot": true,
@@ -16,10 +16,16 @@
   "code_license": "MIT",
   "publication": "not deposited; licenses confirmed and applied",
   "changes_from_previous_deposit_files": [
-    "Paper license notice",
-    "Three root license/coverage files in ZIP",
-    "Bundled registration ledger refreshed through PR-23-P",
-    "Timestamp README refreshed from repository (proof bytes unchanged)"
+    "Main text condensed from ~15,700 to ~8,700 words; moved detail in supplementary N9",
+    "Section 8.3 and Figure S1 aligned with the 2026-09-20 P2 audit (population SD, cause not assigned)",
+    "Section 9.1 pointer to the separately registered Stage 0c exploration (not a P1 result)",
+    "Bundled registration ledger refreshed through PR-23-D"
   ],
-  "scientific_manuscript_unchanged_except_license_notice": true
+  "source_commit": "989c8fd36409aadb63afe65d9c9c021adb2d1c71",
+  "pages": 28,
+  "previous_files": {
+    "pdf_sha256": "b8b9aa45d77702591c7c5fa3c18e720e41645fd0fc4d210480f948a44e0d2540",
+    "zip_sha256": "e6eace674eac325356dac19051f4701c2013a18fa892cde945fa0c1e058d9f61"
+  },
+  "numerical_results_unchanged": true
 }

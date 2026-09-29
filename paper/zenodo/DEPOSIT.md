@@ -7,7 +7,7 @@ not peer review. The arXiv draft remains available for a later submission.
 ## Files to upload together
 
 1. [`p1_with_supplement.pdf`](../submission/p1_with_supplement.pdf) — main paper,
-   31 pages including scientific supplementary notes and 12 figures; set as preview.
+   28 pages including scientific supplementary notes and 12 figures; set as preview.
 2. [`p1_arxiv_source.zip`](../submission/p1_arxiv_source.zip) — editable XeLaTeX
    source, figures and ancillary audit/reproduction records. The arXiv-oriented
    filename is harmless on Zenodo. This ZIP already includes the 1,065-file

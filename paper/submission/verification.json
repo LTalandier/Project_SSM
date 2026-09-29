@@ -28,5 +28,19 @@
     "prior_source_zip_sha256": "7bff498812bf640aa488e9dfd5491a5f9266ef896f461261000fb2b044f8da1e",
     "prior_manuscript_sha256": "cb4bd939c95bad9748cf0fa89a6a4dcb0561aa52e0b115c2218c7696ea13173d",
     "scope": "Earlier test/reproduction evidence remains historical. This packaging update verified identical scientific Markdown after removing license notice, unchanged numerical archive and figures, all ZIP member hashes, license presence, successful PDF compilation and font/layout audit. Ancillary ledger and timestamp README refreshed from repository."
+  },
+  "condensed_revision": {
+    "date": "2026-09-29",
+    "source_commit": "989c8fd36409aadb63afe65d9c9c021adb2d1c71",
+    "manuscript_sha256": "7ba23060ff6db9edd431893b9fc7273ba311895b0dcd16c33130b67da5077251",
+    "S1_png_sha256": "9b797332f2394418fef8e9c4933871ec9913282f62e98c4647cc87a81163c316",
+    "other_figure_pngs": "byte-identical to the previous release (regenerated from the archive; only S1 changed, by the ddof=0 correction)",
+    "source_zip_sha256": "8039c123e946aa70b4ecce31f937b0fcb027ddcbae12f312a9eeec4b6765a5de",
+    "pdf_pages": 28,
+    "standalone_upload_compile": "extracted ZIP compiled twice with XeLaTeX; no missing glyphs, font warnings, Type 3 or unembedded fonts, or overfull boxes",
+    "tests": "181 passed (2 existing multiprocessing fork deprecation warnings)",
+    "result_archive": "1065 files verified",
+    "text_checks": "all 35 references cited; numeric diff old vs new shows only intended new numbers; all section and N-note cross-references resolve; independent read-only old-vs-new review run and its findings applied",
+    "numerical_results": "unchanged"
   }
 }
