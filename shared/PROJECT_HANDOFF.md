@@ -1,7 +1,27 @@
 # Project_SSM — current handoff
 
-Updated 2026-09-22 after the wide-coupler source audit and PR-23-D sensitivity. This
-supersedes older active-run notes. P1's validated numerical snapshot is unchanged.
+Updated 2026-09-29 after condensing P1 for its first public deposit. This supersedes
+older active-run notes. P1's validated numerical snapshot is unchanged.
+
+## Latest work — 2026-09-29
+
+Lucas asked for a shorter paper, then "make the changes then we deposit a clean first
+version". P1 main text condensed from ~15,700 to ~8,700 words (PDF 31 → 27 pages; main text
+now ends on page 12 instead of 19). Rule: keep every claim, caveat, number and verdict; move
+process detail into new supplementary **N9** (subsections keyed §2–§8). All 35 references
+still cited; an automated numeric diff found no new numbers except the intended ones and no
+dropped main-text number that is absent from the supplement. Independent read-only review of
+old vs new text for dropped caveats was run before the build.
+
+**Two corrections made alongside, both aligning P1 with the 2026-09-20 P2 audit:** §8.3 and
+Figure S1 now give the EigenWorms rerun's population SD 8.35 pp (convention of the published
+95.0 ± 4.4; the old 9.34 was a sample SD) and no longer attribute the lower scores to the
+zero-gradient mechanism; Heartbeat is attributed to the port. `analysis/make_sfigures.py`
+S1 fixed (ddof=0); no other PNG changed. README status updated for the Zenodo route and a
+one-line Stage 0c pointer (also one sentence in P1 §9.1). Long form stays at `a508a28`.
+
+**Still Lucas's:** flip the repository public, upload the two files in `paper/zenodo/`
+(checksums refreshed), send the P2 email. Then tell the session the flip date and DOI.
 
 ## Latest work — 2026-09-22
 

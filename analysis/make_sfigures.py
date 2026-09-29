@@ -154,9 +154,11 @@ def s1():
     ax.axhline(PUB_MEAN, color="0.5", lw=0.8)
     ax.bar(xs, vals, color=["#1f77b4" if v > 90 else "#d62728" for v in vals],
            width=0.6)
-    mean, std = float(np.mean(vals)), float(np.std(vals, ddof=1))
+    # Population SD (ddof=0), the convention of the published 95.0 +/- 4.4 and of the
+    # upstream postprocess_results.py; corrected 2026-09-29 per the P2 audit (was ddof=1).
+    mean, std = float(np.mean(vals)), float(np.std(vals, ddof=0))
     ax.axhline(mean, color="k", lw=1.0, ls="--",
-               label=f"rerun mean {mean:.2f} ($\\sigma$ {std:.2f})")
+               label=f"rerun mean {mean:.2f} (population SD {std:.2f})")
     ax.set_xticks(xs)
     ax.set_xticklabels(PUBLISHED_SEEDS, fontsize=6.5)
     ax.set_xlabel("published seed")

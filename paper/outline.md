@@ -21,41 +21,34 @@ simulation bake-off on ultra-low-loss SiN microrings*.)
 
 ---
 
-## Draft abstract (▢-FILLED at S0.8; recompressed 2026-08-01 per round-3 review — ~250 words, three paragraphs, result at sentence two, Wu concession footnoted; both abstract-level caveats — ratio CI, integrated realization — carried)
+## Draft abstract (condensed 2026-09-29 for the first public deposit; three paragraphs, result at sentence two, Wu concession footnoted, ratio-CI and capacity caveats carried; earlier versions in Git history)
 
-> To our knowledge, no physical photonic system has yet had the parameters that define a continuous-time
-> dissipative-resonator recurrence — pole positions and inter-resonator couplings, the physics
-> that *is* the memory — trained on the device by gradient-based or gradient-estimating
-> methods.¹ We ask whether such training is feasible for a photonic state-space model on
-> ultra-low-loss silicon nitride, and answer it in simulation: **on a pre-registered
-> dissipative substrate model, both hardware-committed methods train the recurrence to within
-> margin of the exact-gradient ceiling on 8/8 seeds at realistic noise.** Every threshold was
-> frozen before the run that consumed it.
+> To our knowledge, no physical photonic system has yet had the parameters that define a
+> continuous-time dissipative-resonator recurrence — pole positions and inter-resonator couplings,
+> the physics that *is* the memory — trained on the device by gradient-based or
+> gradient-estimating methods.¹ We ask whether such training is feasible for a photonic
+> state-space model on ultra-low-loss silicon nitride, and answer it in simulation: **on a
+> pre-registered dissipative substrate model, both hardware-committed methods, physics-aware
+> training (PAT) and model-free SPSA, train the recurrence to within margin of the exact-gradient
+> reference on 8/8 seeds at realistic noise.** Every threshold was frozen before the run that
+> consumed it.
 >
 > We derive the SSM↔ring mapping and its realizable pole region, build one shared substrate
-> (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs
-> 4.6× fewer device passes than model-free SPSA. The partial energy budget assigns SPSA
-> 2.6 mJ in conversion energy and PAT 13–44 J in digital-twin energy; total training
-> energy remains unmeasured. Hamiltonian-echo
-> learning is censored — a quantified feasibility bound, the substrate's own dissipation
-> defeating the echo. A measured controllability profile (one drive trains ≈3 of 32 rings;
-> four taps recover all 32) makes the input map a first-class design axis — and the winning
-> routes' trained solutions preserve it, converging on an estimator-independent
-> damp-the-driven-rings profile whose interior contribution survives a registered
-> taps-only falsifier, narrowly.
+> (finite Q, saturating gain, amplifier noise), and run a four-method bake-off. PAT needs 4.6×
+> fewer device passes than SPSA. Hamiltonian-echo learning is censored: the substrate's own
+> dissipation defeats the echo. One input drive trains ≈3 of 32 rings and four taps recover all
+> 32; the winning routes converge on the same damp-the-driven-rings profile.
 >
-> Against the decisive baseline — calibrate offline, deploy, retrain the readout — in-situ
-> training shows no resolved advantage at five calibration-error levels spanning 5–30% after a
-> corrected command-binding rerun, or under common-mode
-> drift. Under uncorrelated
-> per-ring drift it holds a pre-registered 2.42× advantage (a threshold-crossing under a
-> frozen rule; the ratio's own CI spans [1.7, 4.6]). A registered inline-envelope follow-up finds
-> no energy-advantage window at 0.1–2 GS/s against a per-tap digital equalizer
-> (best digital/photonic ratio 0.64). Capacity remains a separate limitation: a registered ablation finds the
-> deployed equalizer's output rides on 6–8 of 32 rings, and no workload in our data
-> exercises more. One registered prediction — that
-> the damping optimum tracks task memory span — failed, and is reported as failed. The
-> pre-registration ledger, substrate model, and training code are released with the paper.
+> Against calibrating offline and deploying, in-situ training shows no resolved advantage at five
+> calibration-error levels spanning 5–30%, after a corrected command-binding rerun, or under
+> common-mode drift. Under uncorrelated per-ring
+> drift it holds a pre-registered 2.42× advantage (a threshold crossing under a frozen rule; the
+> ratio's own CI spans [1.7, 4.6]). Capacity remains a limitation: the deployed equalizer's output
+> rides on 6–8 of 32 rings, and no workload in our data exercises more. A
+> registered inline follow-up finds no energy-advantage window at 0.1–2 GS/s against a per-tap
+> digital equalizer (best digital/photonic ratio 0.64), and total training energy remains
+> unmeasured. A registered prediction that the damping optimum tracks task memory span failed.
+> The pre-registration ledger, substrate model and code are released with the paper.
 >
 > ¹ *The nearest neighbor, an in-situ-trained optical recurrent network, trains
 > interferometer weights around an optoelectronic relay; its resonators stay fixed.*

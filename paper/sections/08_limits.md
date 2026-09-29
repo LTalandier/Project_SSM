@@ -1,123 +1,77 @@
 # §8 — Limits of this model
 
-**Status:** DRAFT v1 (2026-07-08, single-session mode — not independently reviewed; disclosed).
-**Sources:** PR-4 anchor-risk register · F19 (verbatim seed) · the four verification debts
-(proposal closing note) · `shared/critic_review_s0_4_freeze.md` (independence disclosure) ·
-PR-1.1 (G3 record). **Open flags:** [CITE-*] keys resolved via `paper/references.md`; the P2 note's send (▢ PI action).
+**Status:** v2, condensed 2026-09-29 for the first public deposit (v1 at commit `a508a28`).
+§8.3 aligned with the audited P2 note (2026-09-20); review record moved to supplementary N9.8.
 
 ---
 
 ## 8.1 Robustness here means robustness to what we modelled
 
 Every robustness statement in §5 is conditioned on the substrate of §3: the methods absorb the
-imperfections *we simulated* — saturating gain at a registered operating point, Langevin ASE at
-NF 7 dB, resolved backscatter doublets, 5%-class calibration mismatch, fresh noise per pass.
-Hardware contains channels we did not model: thermal transients and self-heating at operating
-power, polarization rotation, fabrication disorder beyond the derate row, drift at cadences
-between our episode and training scales, and mode-splitting behavior that is not captured by a
-single always-on γ per process class. Any of these could reorder the §5 ranking on a real chip.
-We regard the ranking as a hypothesis the Stage-1 hardware exists to test, with PAT and SPSA
-committed precisely because they are the two routes whose chip-level robustness is already
-literature-established [CITE-Wright-2022; CITE-SPSA-photonic].
+imperfections *we simulated* — saturating gain at a registered operating point, Langevin amplifier
+noise at NF 7 dB, resolved backscatter doublets, 5%-class calibration mismatch, fresh noise per
+pass. Hardware contains channels we did not model: thermal transients and self-heating, polarization
+rotation, fabrication disorder beyond the derate row, drift at cadences between our episode and
+training scales, and mode-splitting behavior not captured by one always-on γ per process class. Any
+of these could reorder the §5 ranking on a real chip. We regard the ranking as a hypothesis for
+hardware to test, with PAT and SPSA committed because their chip-level robustness is already
+established [CITE-Wright-2022; CITE-SPSA-photonic].
 
 ## 8.2 Anchor risks and verification debts, by name
 
-The substrate's realism leans on anchors with stated residual risks: the C-2 loss class
-transfers a wide-multimode racetrack result to a single-mode registry ring (priced by the
-×2-loss derate row, §3.3); the Er:Si₃N₄ noise budget rests on a **single coupling-loss-limited
-measured NF (~7 dB)** in the flagship device paper — debt #3's original "no measured NF" premise
-was found false at the S0.3-0 recon and our NF-A = 7.0 dB was frozen to match the measurement
-(§3.2); the narrower residue (intrinsic amplifier NF not isolated) keeps the NF sensitivity
-rows registered; the recurrent adjoint pass is charged *as if realizable* with no
-demonstration in the literature (debt #4 — an inference from absence, time-stamped mid-2026);
-and the white-space claim itself is one-sided evidence from a pre-registered search, to be
-re-swept before submission (debt #1). The S0.4-0 calibration retired one internal debt (the
-drive build-up controversy resolved by measurement: ×0.42, doublet-quenched) and left one open:
-the on-resonance floor calibration under worst-case de-saturation (anchor-risk vii, §3.6),
-carried as a label — and later made concrete by the PR-18 endpoint diagnostic: three of eight
-SPSA solutions end with a ring in the hypothetically super-threshold corner (min
-$-0.06\,\kappa_i$; §3.6), an endpoint-only measurement whose Stage-1 mitigation is the
-already-computed δ-aware clamp ($r \approx 0.2547$).
+The C-2 loss class transfers a wide-multimode racetrack result to a single-mode ring, priced by the
+×2-loss derate row (§3.3). The Er:Si₃N₄ noise budget rests on a single coupling-loss-limited system
+NF of ~7 dB, with the intrinsic amplifier NF not isolated (§3.2). The recurrent adjoint pass is
+charged as if realizable with no demonstration in the literature (debt #4, an inference from
+absence as of mid-2026). The white-space claim is one-sided evidence from a pre-registered search, last refreshed by a
+bounded search on 2026-09-13 (debt #1; N3). The on-resonance clamp calibration under worst-case de-saturation remains a labelled
+risk, with the δ-aware clamp ($r \approx 0.2547$) as its computed mitigation (§3.6).
 
 ## 8.3 The benchmark anchor we do not use
 
-An early gate required reproducing a published LinOSS benchmark as an external anchor. Running
-the authors' own code on their published seeds reproduced the Heartbeat headline within its
-band; on the long-sequence EigenWorms task the rerun mean itself lands within one published
-standard deviation ($90.6$ vs $95.0 \pm 4.4$) — what fails is not the mean but the
-*dispersion* (per-seed $\sigma = 9.3$, $2.1\times$ the published value, from a bimodal
-seed population) and the mechanism behind it: a numerical-precision failure mode in the
-training loss (an absorbing zero-gradient state in fp32) that makes the published number
-seed-unstable rather than unreproducible (Fig. S1; a separate reproducibility note is in
-preparation). The gate was adjudicated purpose-served-with-anchor-void: all
-downstream accuracy references in this program are therefore **in-house BPTT-on-substrate
-ceilings** measured under our own protocol (§5.1), never transferred published numbers. We flag
-fp32-sensitivity generally: our substrate runs float64, and the eval-floor granularity of §5 is
-symbol-count-limited, not precision-limited.
+An early gate required reproducing a published LinOSS benchmark as an external anchor. Our port of
+the model reproduced the Heartbeat result within its published band. On EigenWorms, five runs of
+the authors' official code on their published seeds averaged 90.56%, against the published
+95.0 ± 4.4%, with a population standard deviation of 8.35 percentage points (Fig. S1). Five runs
+are descriptive; they do not show that the published mean or dispersion is wrong. We also found that
+the implementation's classification loss, $-\log(p_\text{true} + 10^{-8})$ on softmax
+probabilities, loses its gradient when the correct-class probability underflows. Our port shows
+finite windows of exactly zero gradient, but an archived screen of the official code found no strict traps in eight runs under its registered classifier, so this mechanism is not established as the cause of the lower scores;
+a separate note is in preparation. The gate was adjudicated purpose-served with the external anchor void (PR-1.1), and every
+accuracy reference in this program is therefore an in-house
+BPTT-on-substrate measurement under our own protocol (§5.1), never a transferred published number.
+Our substrate runs in float64.
 
 ## 8.4 Review independence
 
-Through 2026-07-06 every freeze in the ledger passed adversarial review by an independent
-reviewer session reporting to the PI, and several results in this paper exist because that
-review forced them (the multi-tap input map, the mismatch decomposition, the readout-differential
-rule). From 2026-07-07 the program ran in a single-session mode in which the same agent
-performed both execution and review, under standing PI delegation; every artifact from that
-period is so labelled in the ledger, and the S0.4b/c/S0.5 findings — including the two honest
-nulls (the offline tie; RHEL's failure) — should be read with that reduced independence in mind.
-The pre-registration discipline (thresholds frozen and committed before runs) is the structural
-mitigation — with the caveat stated plainly: from the single-session date onward the registrar
-and the registrant are the same agent, so the commit trail is self-graded until it is
-externally anchored. That anchor was treated as a precondition, not an afterthought — a
-timestamp that follows disclosure certifies nothing — and it is in place in two parts: the ledger
-head was anchored by an OpenTimestamps proof (`timestamps/head_2026-08-05.txt.ots`,
-committed before the external review recorded here), which certifies existence-by-date
-independently of who can read the repository; and the repository itself, including the
-full ledger and its complete commit history, is made public at
-`github.com/LTalandier/Project_SSM` at submission (it was first published 2026-08-02 and
-withdrawn to private on 2026-08-04 for the PI's content review, which is why the date of
-record is the submission date rather than the earlier one). Public release will make the recorded commit ordering inspectable. The timestamp
-certifies existence of the anchored material; it does not independently establish
-the actual execution times of experiments. The
-post-assembly external review recorded in the ledger (seven rounds, 2026-08-01 through
-2026-08-17) doubles as a measurement of this structure. Its first five rounds found six
-errata — control-cell numbers transplanted into headline contexts, a cross-scope ratio,
-a protocol-mixing claim — all in unregistered connective prose, none touching a
-pre-registered number, rule, or verdict. The seventh found the failure mode that
-diagnosis could not exclude: a pre-written consumption text (PR-19's no-rise branch),
-drafted for an informative outcome, was applied verbatim to a floor-degenerate one and
-presented an uninformative $N_\text{eff}$ as confirming evidence — an error inside
-registered prose (though not inside any number, rule, or verdict), and one that
-overstated the paper's *caveat* rather than its claim, which is why it survived six
-rounds; it is withdrawn by ledger amendment (§19.6c), with two same-root instances in
-connective prose and stale values inside rendered figure annotations corrected
-alongside. The discipline held where it was applied; its seams — connective prose,
-outcome branches its texts did not anticipate, and derived artifacts — are now named
-from measurement rather than assumed absent.
+Through 2026-07-06 every freeze in the ledger passed adversarial review by an independent reviewer
+session reporting to the PI, and several results exist because that review forced them (the
+multi-tap input map, the mismatch decomposition, the readout-differential rule). From 2026-07-07 the
+program ran in a single-session mode in which one agent performed both execution and review under
+standing PI delegation. Everything from that date, including the S0.4b/c and S0.5 findings and the
+two honest nulls (the offline tie; RHEL's failure), should be read with that reduced independence
+in mind. Pre-registration is the structural mitigation, with a stated caveat: once registrar and
+registrant are the same agent, the commit trail is self-graded until it is externally anchored.
+Two anchors exist. An OpenTimestamps proof of the ledger head certifies existence by date,
+independently of repository access, though not the actual execution times of experiments. The
+repository, with the full ledger and commit history, is released publicly with this preprint at
+`github.com/LTalandier/Project_SSM`, which makes the recorded commit ordering inspectable. Seven
+post-assembly review rounds and a later repository audit found errata concentrated in unregistered
+connective prose, one pre-written consumption text applied to a degenerate outcome, one
+implementation defect and one optical-time versus wall-time error. The affected claims were
+corrected or withdrawn, and the defect was repaired by a registered rerun; the record is in
+supplementary N8 and N9.8.
 
 ## 8.5 Scope limits we chose
 
-The task family is deliberately narrow (continuous-signal channel equalization plus a
-synthetic memory family; the registered secondary task is deferred), and the C-3 128-ring cell
-never gates anything. A registered long-coherent-memory follow-up (PR-19, despread-31) ran
-post-assembly and is consumed in §6/§7.2; its chief surviving lesson is methodological — a
-follow-up task's operating point must be registered against its own processing gain (the
-frozen 28 dB left the entire damping grid error-free) — and the harder-operating-point
-variant remains an open registration, not a claim. Two axes the bake-off itself held fixed were measured afterward in
-pre-registered follow-ups (§5.5): calibration-mismatch sensitivity (corrected after the
-command-binding defect was found, using the same frozen rule; supplementary N8) and drift (a literature-calibrated random walk under a deploy-then-drift protocol,
-two correlation regimes). Drift remains unmodelled *during* training at the bake-off cadence,
-and the tested drift magnitude is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than
-worst-case. The systems-advantage question — whether any of this pays once conversion overhead
-is counted — is §7's; the strongest current evidence is §5.5's mechanism triple: no advantage
-at any of five tested calibration levels spanning 5–30%, none under common-mode drift, and a
-declared pre-registered $2.42\times$ advantage specific to uncorrelated per-ring drift —
-whose real-hardware relevance rests entirely on how uncorrelated actual on-chip drift is, an
-unmeasured quantity we elevate to the sharpest Stage-1 experiment (§9). We consider stating
-that plainly to be the paper's job.
-
-The subsequent repository audit (2026-09-13; supplementary N8) found an implementation
-defect in the higher-mismatch sweep and an optical-time versus wall-time error in
-the energy interpretation. The invalid higher-mismatch comparisons were withdrawn
-and replaced by a bounded, versioned correction rerun (S0.13); all five fine
-intervals still include zero. Total-training-energy claims remain withdrawn. This
-audit and correction were implemented and checked in one session, without independent review.
+The task family is deliberately narrow — continuous-signal channel equalization plus a synthetic
+memory family, with the registered secondary task deferred — and the 128-ring C-3 cell never gates
+anything. Calibration mismatch and drift, held fixed in the bake-off, were measured afterward in
+pre-registered follow-ups (§5.5). Drift remains unmodelled *during* training at the bake-off cadence, and the tested drift
+is gentle ($\approx 1.4\,\kappa_i$ accumulated) rather than worst-case. A follow-up task's operating
+point must be registered against its own processing gain, the lesson of the degenerate memory probe
+in §6. The strongest current evidence on the advantage question is §5.5's triple: no resolved
+difference at five calibration levels spanning 5–30%, none under common-mode drift, and a declared
+2.42× advantage specific to uncorrelated per-ring drift, whose hardware relevance rests on the
+unmeasured correlation of real on-chip drift. The 2026-09-13 repository audit and its correction
+were implemented and checked in one session without independent review (N8).

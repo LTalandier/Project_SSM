@@ -4,7 +4,7 @@ A research codebase for a dissipative silicon-nitride coupled-ring recurrence,
 with PAT, SPSA, recurrent-adjoint, and Hamiltonian-echo estimators evaluated on
 one shared substrate. **No chip has been fabricated or trained in this project.**
 
-## Current status — 2026-09-13
+## Current status — 2026-09-29
 
 Stage 0 produced the P1 simulation manuscript and follow-up experiments through
 S0.12. Stage 0b ended at its first arithmetic gate: the best registered inline
@@ -23,16 +23,24 @@ P1 includes the corrected result and the negative inline envelope. Full training
 energy remains unmeasured; conversion and digital-twin component budgets remain.
 See [supplementary N8](paper/supplementary.md) for the correction trail.
 
+P1 was condensed on 2026-09-29 for its first public deposit: the main text is about half its
+earlier length, with the moved detail kept in [supplementary N9](paper/supplementary.md). A later
+zero-cost exploration of a low-Q, FSR-matched ring regime (Stage 0c, PR-22 and PR-23) found no
+validated energy window and no device-level go; it is recorded in `docs/s0c/` and
+[the results log](shared/results_log.md) and is not part of P1.
+
 - [P1 manuscript](paper/p1_manuscript.md) and [PDF with supplementary notes](paper/p1_manuscript.pdf)
-- [arXiv source ZIP](paper/submission/p1_arxiv_source.zip) and [submission instructions](paper/SUBMISSION.md)
+- [Zenodo deposit files and metadata](paper/zenodo/DEPOSIT.md)
+- [LaTeX source ZIP](paper/submission/p1_arxiv_source.zip) and [build instructions](paper/SUBMISSION.md)
 - [Corrected mismatch result](results/s0_13/reading.md)
 - [P5 negative-envelope draft](paper/p5_negative_envelope.md) (standalone publication deferred)
 - [Stage 0b result](results/s0b_0/reading.md) (restore the bundle if absent)
 - [Pre-registration and post-run errata](shared/preregistration.md)
 - [Current handoff](shared/PROJECT_HANDOFF.md)
 
-P1 is prepared for arXiv submission. The authenticated author upload and submission-day
-repository release remain pending; the repository is still private. P2 contact is separate.
+P1 is prepared for a Zenodo preprint deposit; the source ZIP also remains usable for a later
+arXiv or journal submission. The deposit and the repository's public release happen together.
+P2 author contact is separate.
 The correction used approximately €1 of cloud server time including VAT with hour rounding
 (estimate, plus small address charges); all temporary servers and addresses were removed.
 

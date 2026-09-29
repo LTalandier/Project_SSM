@@ -18,6 +18,16 @@ Escalate (don't decide autonomously):
 
 ## OPEN FOR LUCAS
 
+### E-2026-09-29-1 — P1 condensed; clean first version ready to deposit (€0)
+
+Lucas: "Ok make the changes then we deposit a clean first version." Main text halved,
+moved detail in supplementary N9, §8.3/Figure S1 aligned with the audited P2 note. PDF and
+source ZIP rebuilt and checked (fonts embedded, no overfull boxes, 181 tests, 1,065-file
+archive verifies). **Your actions:** make the repository public, upload
+`paper/submission/p1_with_supplement.pdf` and `paper/submission/p1_arxiv_source.zip` with the
+metadata in `paper/zenodo/DEPOSIT.md`, publish, and send the P2 email. Report the flip date and
+DOI so the record can be closed.
+
 ### E-2026-09-22-1 — authorized wide-coupler feasibility audit completed (€0)
 
 Lucas: "Ok continue." PR-23-D frozen at `8f58f6d`; no spend decision needed for
