@@ -1,4 +1,4 @@
-# P2 author-contact draft — 2026-09-20 — NOT SENT
+# P2 author-contact draft — revised 2026-09-29 — NOT SENT
 
 To: T. Konstantin Rusch <tkrusch@tue.ellis.eu>; Daniela Rus <rus@csail.mit.edu>
 From: Lucas Talandier <lucas.talandier@free.fr>
@@ -30,9 +30,17 @@ a numerical gradient probe and a short note separating these observations. I
 would appreciate any corrections, relevant environment details, or advice on a
 paired comparison that you consider informative.
 
-I would like to give you at least two weeks to respond before considering a
-public note, and can allow more time if useful. Nothing has been submitted as a
-standalone reproducibility note.
+I should be upfront that these observations are already public in brief. They
+appear in section 8.3 and Figure S1 of a simulation preprint I posted on
+29 September (https://zenodo.org/records/23041523), because LinOSS was the
+intended external anchor for that work, and the working note is in the project's
+public repository (https://github.com/LTalandier/Project_SSM). I have not posted
+a standalone note. I will wait at least two weeks for your response before doing
+so, can allow more time if useful, and will correct both documents if you find
+an error.
+
+The analysis was carried out with AI coding assistance (Anthropic's Claude),
+which I mention for transparency.
 
 Thank you for your work and for taking a look.
 
@@ -41,6 +49,10 @@ Independent researcher, Paris
 
 ---
 
+Revised 2026-09-29 after P1's public release: discloses that the finding already
+appears in P1 §8.3/Figure S1 and in the public repository, and adds an AI-assistance
+sentence. Attachment re-verified the same day (SHA-256 matches
+`docs/p2/bundle_checksum.json`; its audit reruns from an empty directory).
 Addresses verified 2026-09-20; primary links in
 `docs/p2/source_refresh_2026-09-20.md`. This file is a draft, not a sent message.
 The response window starts only on an actual send date. No send date is recorded.
